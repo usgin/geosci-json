@@ -2,7 +2,7 @@
   "title": "Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite",
   "bblockName": "gsmscimlLite",
   "bblockId": "usgin.bbr.geosci.gsmscimlLite",
-  "generated": "2026-05-12T22:40:24.818376+00:00",
+  "generated": "2026-05-12T22:48:02.523145+00:00",
   "result": true,
   "items": [
     {
@@ -383,7 +383,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examples/shear_displacement_structure_view_complex.json from examples"
+              "message": "Using examples/geosciml_lite_featurecollection_geologicunitview.json from examples"
             }
           ]
         },
@@ -419,7 +419,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examples/shear_displacement_structure_view_simple.json from examples"
+              "message": "Using examples/geosciml_lite_featurecollection_mixed.json from examples"
             }
           ]
         },
@@ -455,7 +455,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examples/site_observation_view_complex.json from examples"
+              "message": "Using examples/shear_displacement_structure_view_complex.json from examples"
             }
           ]
         },
@@ -491,6 +491,78 @@
           "entries": [
             {
               "isError": false,
+              "message": "Using examples/shear_displacement_structure_view_simple.json from examples"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/bbr/geosci/gsmscimlLite/example_15_1.json",
+        "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlLite/example_15_1.json",
+        "exampleIndex": 15,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": true,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using examples/site_observation_view_complex.json from examples"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/bbr/geosci/gsmscimlLite/example_16_1.json",
+        "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlLite/example_16_1.json",
+        "exampleIndex": 16,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": true,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
               "message": "Using examples/site_observation_view_simple.json from examples"
             }
           ]
@@ -512,8 +584,8 @@
   ],
   "globalErrors": {},
   "counts": {
-    "total": 14,
-    "passed": 14,
+    "total": 16,
+    "passed": 16,
     "failed": 0
   }
 }

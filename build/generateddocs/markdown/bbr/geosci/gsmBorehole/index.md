@@ -131,7 +131,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
+- [borehole_simple.json](examples/borehole_simple.json)
 - [examplegsmBoreholeMinimal.json](examples/examplegsmBoreholeMinimal.json)
+- [origin_position_simple.json](examples/origin_position_simple.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
@@ -142,6 +144,93 @@ See [examples.yaml](examples.yaml) for the full manifest.
 - Resolver: [tools/resolve_geosci_schema.py](../../tools/resolve_geosci_schema.py).
 
 ## Examples
+
+### borehole simple
+Example instance: borehole_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "Borehole",
+  "id": "ga-eromanga-1",
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [132.334, -25.902, 27.9],
+      [132.334, -25.903, -215.6]
+    ]
+  },
+  "place": null,
+  "time": null,
+  "properties": {
+    "indexData": {
+      "inclinationType": "http://resource.geoscience.gov.au/classifier/ga/inclinationtype/vertical",
+      "purpose": [
+        "http://inspire.ec.europa.eu/codelist/BoreholePurposeValue/geologicalSurvey"
+      ],
+      "boreholeLength": {
+        "type": "Quantity",
+        "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+        "label": "borehole length",
+        "uom": {"code": "m"},
+        "value": 243.5
+      }
+    }
+  }
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/context.jsonld",
+  "type": "Feature",
+  "featureType": "Borehole",
+  "id": "ga-eromanga-1",
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        132.334,
+        -25.902,
+        27.9
+      ],
+      [
+        132.334,
+        -25.903,
+        -215.6
+      ]
+    ]
+  },
+  "place": null,
+  "time": null,
+  "properties": {
+    "indexData": {
+      "inclinationType": "http://resource.geoscience.gov.au/classifier/ga/inclinationtype/vertical",
+      "purpose": [
+        "http://inspire.ec.europa.eu/codelist/BoreholePurposeValue/geologicalSurvey"
+      ],
+      "boreholeLength": {
+        "type": "Quantity",
+        "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+        "label": "borehole length",
+        "uom": {
+          "code": "m"
+        },
+        "value": 243.5
+      }
+    }
+  }
+}
+```
+
+#### ttl
+```ttl
+
+
+```
+
 
 ### examplegsmBoreholeMinimal
 Example instance: examplegsmBoreholeMinimal
@@ -166,6 +255,65 @@ Example instance: examplegsmBoreholeMinimal
   "featureType": "Borehole",
   "geometry": null,
   "properties": {}
+}
+```
+
+#### ttl
+```ttl
+
+
+```
+
+
+### origin position simple
+Example instance: origin_position_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "OriginPosition",
+  "id": "ga-eromanga-op-standalone",
+  "geometry": {"type": "Point", "coordinates": [132.334, -25.902]},
+  "place": null,
+  "time": null,
+  "properties": {
+    "elevation": {"href": "http://data.geoscience.gov.au/borehole/ga-eromanga-op/elevation", "title": "27.9 m AHD"},
+    "relatedBorehole": [
+      {"href": "http://data.geoscience.gov.au/borehole/ga-eromanga-1", "title": "BMR Eromanga 1"}
+    ]
+  }
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/context.jsonld",
+  "type": "Feature",
+  "featureType": "OriginPosition",
+  "id": "ga-eromanga-op-standalone",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      132.334,
+      -25.902
+    ]
+  },
+  "place": null,
+  "time": null,
+  "properties": {
+    "elevation": {
+      "href": "http://data.geoscience.gov.au/borehole/ga-eromanga-op/elevation",
+      "title": "27.9 m AHD"
+    },
+    "relatedBorehole": [
+      {
+        "href": "http://data.geoscience.gov.au/borehole/ga-eromanga-1",
+        "title": "BMR Eromanga 1"
+      }
+    ]
+  }
 }
 ```
 

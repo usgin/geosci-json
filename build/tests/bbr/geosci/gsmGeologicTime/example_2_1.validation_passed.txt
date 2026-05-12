@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmGeologicTime - gsmGeologicTime
-Generated 2026-05-12T22:40:18.183455+00:00
+Generated 2026-05-12T22:47:55.201661+00:00
 === Files ===
 Using examples/stratigraphic_section_lower_jurassic_GSO.json from examples
 === End Files ===

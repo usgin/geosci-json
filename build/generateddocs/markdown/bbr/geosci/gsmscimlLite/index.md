@@ -254,6 +254,8 @@ Properties (own; inherited properties listed in supertype's BB):
 - [geologic_unit_view_complex.json](examples/geologic_unit_view_complex.json)
 - [geologic_unit_view_simple.json](examples/geologic_unit_view_simple.json)
 - [geomorphologic_unit_view_simple.json](examples/geomorphologic_unit_view_simple.json)
+- [geosciml_lite_featurecollection_geologicunitview.json](examples/geosciml_lite_featurecollection_geologicunitview.json)
+- [geosciml_lite_featurecollection_mixed.json](examples/geosciml_lite_featurecollection_mixed.json)
 - [shear_displacement_structure_view_complex.json](examples/shear_displacement_structure_view_complex.json)
 - [shear_displacement_structure_view_simple.json](examples/shear_displacement_structure_view_simple.json)
 - [site_observation_view_complex.json](examples/site_observation_view_complex.json)
@@ -710,6 +712,323 @@ Example instance: geomorphologic_unit_view_simple
     "geomorphologicFeatureType_uri": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/natural",
     "unitType_uri": "http://resource.geosciml.org/classifier/cgi/geomorphologicunittype/moraine"
   }
+}
+
+```
+
+
+### geosciml lite featurecollection geologicunitview
+Example instance: geosciml_lite_featurecollection_geologicunitview
+#### json
+```json
+{
+  "type": "FeatureCollection",
+  "featureType": "GeologicUnitView",
+  "features": [
+    {
+      "type": "Feature",
+      "featureType": "GeologicUnitView",
+      "id": "gu-view-1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              149.12,
+              -35.31
+            ],
+            [
+              149.45,
+              -35.31
+            ],
+            [
+              149.45,
+              -35.58
+            ],
+            [
+              149.12,
+              -35.58
+            ],
+            [
+              149.12,
+              -35.31
+            ]
+          ]
+        ]
+      },
+      "time": null,
+      "properties": {
+        "name": "Hervey Group",
+        "description": "Terrigenous to shallow marine, red to white and green, quartzose to lithic sandstone, siltstone, shale and conglomerate.",
+        "geologicUnitType": "lithostratigraphic unit",
+        "rank": "group",
+        "lithology": "sandstone, siltstone, shale and conglomerate",
+        "geologicHistory": "Frasnian to Famennian (Late Devonian) fluvial to shallow marine deposition",
+        "numericOlderAge": 382.7,
+        "numericYoungerAge": 358.9,
+        "geologicUnitType_uri": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
+        "representativeLithology_uri": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone",
+        "representativeAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Devonian",
+        "representativeOlderAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Frasnian",
+        "representativeYoungerAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Famennian",
+        "specification_uri": "http://data.geoscience.gov.au/feature/geologicunit/hervey-group-1",
+        "genericSymbolizer": "GU_DevSS"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "GeologicUnitView",
+      "id": "gu-view-2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              149.45,
+              -35.31
+            ],
+            [
+              149.78,
+              -35.31
+            ],
+            [
+              149.78,
+              -35.58
+            ],
+            [
+              149.45,
+              -35.58
+            ],
+            [
+              149.45,
+              -35.31
+            ]
+          ]
+        ]
+      },
+      "time": null,
+      "properties": {
+        "name": "Lachlan Fold Belt Basement",
+        "description": "Deformed Ordovician turbidites and volcanic rocks forming the pre-Devonian basement of the Lachlan Orogen.",
+        "geologicUnitType": "lithotectonic unit",
+        "rank": "supergroup",
+        "lithology": "turbiditic sandstone, shale and volcanic rocks",
+        "geologicHistory": "Ordovician deep marine turbidite deposition; deformed during Silurian to Devonian Benambran Orogeny",
+        "numericOlderAge": 485.4,
+        "numericYoungerAge": 419.2,
+        "geologicUnitType_uri": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithotectonic_unit",
+        "representativeLithology_uri": "http://resource.geosciml.org/classifier/cgi/simplelithology/turbidite",
+        "representativeAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Ordovician",
+        "representativeOlderAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Ordovician",
+        "representativeYoungerAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Silurian",
+        "specification_uri": "http://data.geoscience.gov.au/feature/geologicunit/lachlan-basement-1",
+        "genericSymbolizer": "GU_OrdVol"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "GeologicUnitView",
+      "id": "gu-view-3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              148.8,
+              -35.58
+            ],
+            [
+              149.12,
+              -35.58
+            ],
+            [
+              149.12,
+              -35.85
+            ],
+            [
+              148.8,
+              -35.85
+            ],
+            [
+              148.8,
+              -35.58
+            ]
+          ]
+        ]
+      },
+      "time": null,
+      "properties": {
+        "name": "Snowy Mountains Granite",
+        "description": "Coarse-grained, porphyritic biotite granite intruded during the Silurian as part of the Lachlan Fold Belt I-type granite suite.",
+        "geologicUnitType": "lithodemic unit",
+        "rank": "pluton",
+        "lithology": "granite",
+        "geologicHistory": "Silurian magmatic intrusion (~430 Ma)",
+        "numericOlderAge": 435.0,
+        "numericYoungerAge": 425.0,
+        "geologicUnitType_uri": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithodemic_unit",
+        "representativeLithology_uri": "http://resource.geosciml.org/classifier/cgi/simplelithology/granite",
+        "representativeAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Silurian",
+        "representativeOlderAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Silurian",
+        "representativeYoungerAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Silurian",
+        "specification_uri": "http://data.geoscience.gov.au/feature/geologicunit/snowy-mountains-granite-1",
+        "genericSymbolizer": "GU_SilGran"
+      }
+    }
+  ]
+}
+
+```
+
+
+### geosciml lite featurecollection mixed
+Example instance: geosciml_lite_featurecollection_mixed
+#### json
+```json
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "featureType": "GeologicUnitView",
+      "id": "gu-view-1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              149.12,
+              -35.31
+            ],
+            [
+              149.45,
+              -35.31
+            ],
+            [
+              149.45,
+              -35.58
+            ],
+            [
+              149.12,
+              -35.58
+            ],
+            [
+              149.12,
+              -35.31
+            ]
+          ]
+        ]
+      },
+      "time": null,
+      "properties": {
+        "name": "Hervey Group",
+        "geologicUnitType": "lithostratigraphic unit",
+        "rank": "group",
+        "lithology": "sandstone, siltstone and conglomerate",
+        "geologicHistory": "Late Devonian fluvial to shallow marine deposition",
+        "geologicUnitType_uri": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
+        "representativeLithology_uri": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone",
+        "representativeAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Devonian",
+        "specification_uri": "http://data.geoscience.gov.au/feature/geologicunit/hervey-group-1"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "ShearDisplacementStructureView",
+      "id": "fault-view-1",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            149.387,
+            -35.124
+          ],
+          [
+            149.461,
+            -35.344
+          ]
+        ]
+      },
+      "time": null,
+      "properties": {
+        "name": "Lake George Fault",
+        "faultType": "normal fault",
+        "movementType": "dip-slip",
+        "geologicHistory": "Devonian to Carboniferous",
+        "faultType_uri": "http://resource.geosciml.org/classifier/cgi/faulttype/normal_fault",
+        "representativeAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Devonian",
+        "specification_uri": "http://data.geoscience.gov.au/feature/fault/lake-george-fault-1"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "ContactView",
+      "id": "contact-view-1",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            149.12,
+            -35.31
+          ],
+          [
+            149.45,
+            -35.58
+          ]
+        ]
+      },
+      "time": null,
+      "properties": {
+        "name": "Base of Devonian sequence",
+        "contactType": "unconformity",
+        "contactType_uri": "http://resource.geosciml.org/classifier/cgi/contacttype/unconformity",
+        "specification_uri": "http://data.geoscience.gov.au/feature/contact/base-devonian-1"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "BoreholeView",
+      "id": "borehole-view-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          149.252,
+          -35.401
+        ]
+      },
+      "time": null,
+      "properties": {
+        "name": "GRS-001",
+        "purpose": "mineral exploration",
+        "status": "completed",
+        "drillingMethod": "diamond core drilling",
+        "boreholeLength_m": 312.5,
+        "elevation_m": 672.3,
+        "elevation_srs": "http://www.opengis.net/def/crs/EPSG/0/5711"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "SiteObservationView",
+      "id": "obs-view-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          149.312,
+          -35.475
+        ]
+      },
+      "time": null,
+      "properties": {
+        "siteName": "field station FS-42",
+        "observedProperty": "planar orientation \u2013 strike and dip",
+        "observedValue": "045 / 32",
+        "observedValueUom": "degrees",
+        "propertyType_uri": "http://resource.geosciml.org/classifierScheme/cgi/observedproperty/planar_orientation",
+        "symbolRotation": 45
+      }
+    }
+  ]
 }
 
 ```

@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmEarthMaterial - gsmEarthMaterial
-Generated 2026-05-12T22:40:10.106084+00:00
+Generated 2026-05-12T22:47:45.096727+00:00
 === Files ===
 Using examples/fc_bolsa_quartzite_GSO.json from examples
 === End Files ===

@@ -282,6 +282,9 @@ Properties (own; inherited properties listed in supertype's BB):
 - [examplegsmGeologicStructureExtensionMinimal.json](examples/examplegsmGeologicStructureExtensionMinimal.json)
 - [fc_fault_displacement_events_GSO.json](examples/fc_fault_displacement_events_GSO.json)
 - [fc_kanna_thrust_faults_GSO.json](examples/fc_kanna_thrust_faults_GSO.json)
+- [fold_system_simple.json](examples/fold_system_simple.json)
+- [lineation_complex.json](examples/lineation_complex.json)
+- [lineation_simple.json](examples/lineation_simple.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
@@ -412,6 +415,122 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleFaultKannaV4Model.ttl. The source de
       }
     }
   ]
+}
+
+```
+
+
+### fold system simple
+Example instance: fold_system_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "FoldSystem",
+  "id": "lachlan-fold-system-1",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "purpose": "instance",
+    "periodic": true,
+    "wavelength": {
+      "type": "QuantityRange",
+      "definition": "http://resource.geosciml.org/property/wavelength",
+      "label": "wavelength",
+      "uom": {"code": "m"},
+      "value": [500.0, 2000.0]
+    }
+  }
+}
+
+```
+
+
+### lineation complex
+Example instance: lineation_complex
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "Lineation",
+  "id": "ga-lineation-525947",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "purpose": "instance",
+    "geologicHistory": [
+      {
+        "type": "Feature",
+        "featureType": "GeologicEvent",
+        "id": "ga-lineation-525947-age",
+        "geometry": null,
+        "place": null,
+        "time": null,
+        "properties": {
+          "eventProcess": [
+            "http://resource.geosciml.org/classifier/cgi/eventprocess/deformation"
+          ],
+          "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Devonian",
+          "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Carboniferous"
+        }
+      }
+    ],
+    "lineationType": "http://resource.geoscience.gov.au/classifier/cgi/lineationtype/mineral_lineation",
+    "definingElement": [
+      {
+        "type": "Category",
+        "definition": "http://resource.geoscience.gov.au/classifierScheme/cgi/definingelement",
+        "label": "aligned minerals",
+        "value": "http://resource.geoscience.gov.au/classifier/cgi/definingelement/aligned_minerals"
+      }
+    ],
+    "intensity": {
+      "type": "Category",
+      "definition": "http://resource.geoscience.gov.au/classifierScheme/cgi/intensity",
+      "label": "strong",
+      "value": "http://resource.geoscience.gov.au/classifier/cgi/intensity/strong"
+    },
+    "orientation": [
+      {
+        "plunge": {
+          "type": "QuantityRange",
+          "definition": "http://sweet.jpl.nasa.gov/2.3/reprMathOperation.owl#Plunge",
+          "label": "plunge",
+          "uom": {"code": "deg"},
+          "value": [65.0, 75.0]
+        },
+        "trend": {
+          "type": "QuantityRange",
+          "definition": "http://sweet.jpl.nasa.gov/2.3/reprMathOperation.owl#Trend",
+          "label": "trend",
+          "uom": {"code": "deg"},
+          "value": [10.0, 10.0]
+        }
+      }
+    ]
+  }
+}
+
+```
+
+
+### lineation simple
+Example instance: lineation_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "Lineation",
+  "id": "lineation-simple-1",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "purpose": "instance",
+    "lineationType": "http://resource.geoscience.gov.au/classifier/cgi/lineationtype/mineral_lineation"
+  }
 }
 
 ```

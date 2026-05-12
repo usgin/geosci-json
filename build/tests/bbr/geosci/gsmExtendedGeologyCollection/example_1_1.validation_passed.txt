@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmExtendedGeologyCollection - gsmExtendedGeologyCollection
-Generated 2026-05-12T22:40:13.001314+00:00
+Generated 2026-05-12T22:47:47.843182+00:00
 === Files ===
 Using examples/fc_extended_minimal.json from examples
 === End Files ===

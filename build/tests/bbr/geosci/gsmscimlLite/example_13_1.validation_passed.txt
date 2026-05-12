@@ -1,7 +1,7 @@
 Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite
-Generated 2026-05-12T22:40:24.817205+00:00
+Generated 2026-05-12T22:48:02.518469+00:00
 === Files ===
-Using examples/site_observation_view_complex.json from examples
+Using examples/shear_displacement_structure_view_complex.json from examples
 === End Files ===
 
 === JSON Schema ===

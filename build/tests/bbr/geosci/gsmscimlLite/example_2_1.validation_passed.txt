@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite
-Generated 2026-05-12T22:40:24.797906+00:00
+Generated 2026-05-12T22:48:02.127243+00:00
 === Files ===
 Using examples/borehole_view_simple.json from examples
 === End Files ===

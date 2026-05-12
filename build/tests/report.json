@@ -10,7 +10,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmBasicGeology - gsmBasicGeology",
       "bblockName": "gsmBasicGeology",
       "bblockId": "usgin.bbr.geosci.gsmBasicGeology",
-      "generated": "2026-05-12T22:40:03.998786+00:00",
+      "generated": "2026-05-12T22:47:36.058753+00:00",
       "result": true,
       "items": [
         {
@@ -781,7 +781,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmBorehole - gsmBorehole",
       "bblockName": "gsmBorehole",
       "bblockId": "usgin.bbr.geosci.gsmBorehole",
-      "generated": "2026-05-12T22:40:05.646834+00:00",
+      "generated": "2026-05-12T22:47:40.335738+00:00",
       "result": false,
       "items": [
         {
@@ -802,7 +802,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examples/examplegsmBoreholeMinimal.json from examples"
+                  "message": "Using examples/borehole_simple.json from examples"
                 },
                 {
                   "op": "jsonld-uplift",
@@ -838,20 +838,130 @@
               ]
             }
           ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBorehole/example_2_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBorehole/example_2_1.json",
+            "exampleIndex": 2,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": false,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/examplegsmBoreholeMinimal.json from examples"
+                },
+                {
+                  "op": "jsonld-uplift",
+                  "isError": false,
+                  "message": "JSON-LD context is present - uplifting"
+                },
+                {
+                  "op": "jsonld-create",
+                  "filename": "example_2_1.jsonld",
+                  "isError": false,
+                  "message": "Output JSON-LD example_2_1.jsonld created"
+                },
+                {
+                  "op": "ttl-create",
+                  "empty": true,
+                  "filename": "example_2_1.ttl",
+                  "size": 0,
+                  "isError": true,
+                  "message": "**Empty** output Turtle example_2_1.ttl created"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBorehole/example_3_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBorehole/example_3_1.json",
+            "exampleIndex": 3,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": false,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/origin_position_simple.json from examples"
+                },
+                {
+                  "op": "jsonld-uplift",
+                  "isError": false,
+                  "message": "JSON-LD context is present - uplifting"
+                },
+                {
+                  "op": "jsonld-create",
+                  "filename": "example_3_1.jsonld",
+                  "isError": false,
+                  "message": "Output JSON-LD example_3_1.jsonld created"
+                },
+                {
+                  "op": "ttl-create",
+                  "empty": true,
+                  "filename": "example_3_1.ttl",
+                  "size": 0,
+                  "isError": true,
+                  "message": "**Empty** output Turtle example_3_1.ttl created"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
         }
       ],
       "globalErrors": {},
       "counts": {
-        "total": 1,
+        "total": 3,
         "passed": 0,
-        "failed": 1
+        "failed": 3
       }
     },
     "usgin.bbr.geosci.gsmEarthMaterial": {
       "title": "Validation report for usgin.bbr.geosci.gsmEarthMaterial - gsmEarthMaterial",
       "bblockName": "gsmEarthMaterial",
       "bblockId": "usgin.bbr.geosci.gsmEarthMaterial",
-      "generated": "2026-05-12T22:40:10.106208+00:00",
+      "generated": "2026-05-12T22:47:45.096794+00:00",
       "result": true,
       "items": [
         {
@@ -902,7 +1012,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmExtendedGeologyCollection - gsmExtendedGeologyCollection",
       "bblockName": "gsmExtendedGeologyCollection",
       "bblockId": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
-      "generated": "2026-05-12T22:40:13.008664+00:00",
+      "generated": "2026-05-12T22:47:47.851589+00:00",
       "result": true,
       "items": [
         {
@@ -989,7 +1099,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicRelationExtension - gsmGeologicRelationExtension",
       "bblockName": "gsmGeologicRelationExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicRelationExtension",
-      "generated": "2026-05-12T22:40:13.022817+00:00",
+      "generated": "2026-05-12T22:47:47.866763+00:00",
       "result": true,
       "items": [
         {
@@ -1040,7 +1150,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicStructureExtension - gsmGeologicStructureExtension",
       "bblockName": "gsmGeologicStructureExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicStructureExtension",
-      "generated": "2026-05-12T22:40:15.957015+00:00",
+      "generated": "2026-05-12T22:47:52.845448+00:00",
       "result": true,
       "items": [
         {
@@ -1150,12 +1260,120 @@
               ]
             }
           ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmGeologicStructureExtension/example_4_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmGeologicStructureExtension/example_4_1.json",
+            "exampleIndex": 4,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/fold_system_simple.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmGeologicStructureExtension/example_5_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmGeologicStructureExtension/example_5_1.json",
+            "exampleIndex": 5,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/lineation_complex.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmGeologicStructureExtension/example_6_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmGeologicStructureExtension/example_6_1.json",
+            "exampleIndex": 6,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/lineation_simple.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
         }
       ],
       "globalErrors": {},
       "counts": {
-        "total": 3,
-        "passed": 3,
+        "total": 6,
+        "passed": 6,
         "failed": 0
       }
     },
@@ -1163,7 +1381,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicTime - gsmGeologicTime",
       "bblockName": "gsmGeologicTime",
       "bblockId": "usgin.bbr.geosci.gsmGeologicTime",
-      "generated": "2026-05-12T22:40:18.183539+00:00",
+      "generated": "2026-05-12T22:47:55.201743+00:00",
       "result": true,
       "items": [
         {
@@ -1250,7 +1468,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicUnitExtension - gsmGeologicUnitExtension",
       "bblockName": "gsmGeologicUnitExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicUnitExtension",
-      "generated": "2026-05-12T22:40:18.201707+00:00",
+      "generated": "2026-05-12T22:47:55.220279+00:00",
       "result": true,
       "items": [
         {
@@ -1409,7 +1627,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmSpecimen - gsmSpecimen",
       "bblockName": "gsmSpecimen",
       "bblockId": "usgin.bbr.geosci.gsmSpecimen",
-      "generated": "2026-05-12T22:40:22.175222+00:00",
+      "generated": "2026-05-12T22:47:59.377566+00:00",
       "result": false,
       "items": [
         {
@@ -1479,7 +1697,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite",
       "bblockName": "gsmscimlLite",
       "bblockId": "usgin.bbr.geosci.gsmscimlLite",
-      "generated": "2026-05-12T22:40:24.818376+00:00",
+      "generated": "2026-05-12T22:48:02.523145+00:00",
       "result": true,
       "items": [
         {
@@ -1860,7 +2078,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examples/shear_displacement_structure_view_complex.json from examples"
+                  "message": "Using examples/geosciml_lite_featurecollection_geologicunitview.json from examples"
                 }
               ]
             },
@@ -1896,7 +2114,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examples/shear_displacement_structure_view_simple.json from examples"
+                  "message": "Using examples/geosciml_lite_featurecollection_mixed.json from examples"
                 }
               ]
             },
@@ -1932,7 +2150,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examples/site_observation_view_complex.json from examples"
+                  "message": "Using examples/shear_displacement_structure_view_complex.json from examples"
                 }
               ]
             },
@@ -1968,6 +2186,78 @@
               "entries": [
                 {
                   "isError": false,
+                  "message": "Using examples/shear_displacement_structure_view_simple.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmscimlLite/example_15_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlLite/example_15_1.json",
+            "exampleIndex": 15,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/site_observation_view_complex.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmscimlLite/example_16_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlLite/example_16_1.json",
+            "exampleIndex": 16,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
                   "message": "Using examples/site_observation_view_simple.json from examples"
                 }
               ]
@@ -1989,8 +2279,8 @@
       ],
       "globalErrors": {},
       "counts": {
-        "total": 14,
-        "passed": 14,
+        "total": 16,
+        "passed": 16,
         "failed": 0
       }
     }
