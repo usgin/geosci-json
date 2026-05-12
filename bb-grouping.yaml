@@ -179,3 +179,32 @@ profiles:
         ref: ../gsmscimlBasic/gsmscimlBasic.json#ShearDisplacementStructure
         extensionConstraintsArray:
           stStructureDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#ShearDisplacementStructureDescription
+
+  gsmEarthMaterialCollection:
+    description: |
+      FeatureCollection profile collecting EarthMaterial features with rich
+      description content. Root featureType values are the four concrete (or
+      first-class) EarthMaterial subtypes — Mineral, OrganicMaterial,
+      RockMaterial, CompoundMaterial. None of these are «FeatureType» in the
+      UML (all are «Type»), so the profile injects the JSON-FG Feature
+      envelope around each via `wrapAsFeature: true`. The inherited
+      `gbEarthMaterialDescription` slot (from the EarthMaterial parent) is
+      constrained on RockMaterial and CompoundMaterial branches to require
+      the corresponding concrete Extension description class.
+    featureTypes:
+      - name: Mineral
+        ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#Mineral
+        wrapAsFeature: true
+      - name: OrganicMaterial
+        ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#OrganicMaterial
+        wrapAsFeature: true
+      - name: RockMaterial
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#RockMaterial
+        wrapAsFeature: true
+        extensionConstraintsArray:
+          gbEarthMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#RockMaterialDescription
+      - name: CompoundMaterial
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#CompoundMaterial
+        wrapAsFeature: true
+        extensionConstraintsArray:
+          gbEarthMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#CompoundMaterialDescription

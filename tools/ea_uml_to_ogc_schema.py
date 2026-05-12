@@ -1200,48 +1200,108 @@ def load_grouping(config_path: Path) -> tuple[dict[str, dict], dict[str, str], d
     return bbs, package_to_bb, profiles
 
 
+def _build_constraint_block(scalar_constraints: dict, array_constraints: dict) -> Optional[dict]:
+    """Build the {properties: {properties: {properties: {<slot>: ...}}}} block
+    that constrains specific slots inside the JSON-FG `properties` envelope.
+    Returns None if no constraints."""
+    inner_props: dict = OrderedDict()
+    for slot, ext_ref in (scalar_constraints or {}).items():
+        inner_props[slot] = {"$ref": ext_ref}
+    for slot, ext_ref in (array_constraints or {}).items():
+        inner_props[slot] = {"type": "array", "items": {"$ref": ext_ref}}
+    if not inner_props:
+        return None
+    return {
+        "type": "object",
+        "properties": {
+            "properties": {
+                "type": "object",
+                "properties": inner_props,
+            }
+        },
+    }
+
+
+def _build_profile_branch(entry: dict) -> dict:
+    """Produce the `then` schema for one featureType branch.
+
+    Two modes:
+      (a) entry.wrapAsFeature is false/missing: the source class is already
+          a «FeatureType», so its $anchor includes the JSON-FG envelope.
+          Compose allOf [ref, scalar+array constraints].
+      (b) entry.wrapAsFeature is true: the source class is «Type». Wrap
+          the schema with the JSON-FG Feature envelope and put the class
+          schema under properties.properties.allOf, where extra constraints
+          on inner slots can be added.
+    """
+    ref = entry["ref"]
+    scalar = entry.get("extensionConstraints", {}) or {}
+    array  = entry.get("extensionConstraintsArray", {}) or {}
+
+    if not entry.get("wrapAsFeature"):
+        # Mode (a): the anchor is already a FeatureType.
+        chain: list[dict] = [{"$ref": ref}]
+        block = _build_constraint_block(scalar, array)
+        if block is not None:
+            chain.append(block)
+        return chain[0] if len(chain) == 1 else {"allOf": chain}
+
+    # Mode (b): «Type» source class -> inject JSON-FG envelope.
+    inner: list[dict] = [{"$ref": ref}]
+    if scalar or array:
+        inner_constraint: dict = OrderedDict()
+        slot_props: dict = OrderedDict()
+        for slot, ext_ref in scalar.items():
+            slot_props[slot] = {"$ref": ext_ref}
+        for slot, ext_ref in array.items():
+            slot_props[slot] = {"type": "array", "items": {"$ref": ext_ref}}
+        inner_constraint["type"] = "object"
+        inner_constraint["properties"] = slot_props
+        inner.append(inner_constraint)
+    inner_schema = inner[0] if len(inner) == 1 else {"allOf": inner}
+
+    return {
+        "allOf": [
+            {"$ref": "https://schemas.opengis.net/json-fg/feature.json"},
+            {
+                "type": "object",
+                "required": ["featureType", "id"],
+                "properties": {"id": {"type": "string"}},
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "properties": inner_schema,
+                },
+            },
+        ],
+    }
+
+
 def build_profile_schema(profile_name: str, info: dict) -> dict:
     """Build an FC-profile schema: json-fg/featurecollection with `features`
-    items dispatched by featureType to cross-BB anchors. Each FT entry may
-    add `extensionConstraints` (scalar slots) or `extensionConstraintsArray`
-    (array slots — wraps the constraint in an items envelope)."""
+    items dispatched by featureType to cross-BB anchors. Per-entry options:
+      ref:                        $ref to the source class anchor (required)
+      wrapAsFeature:              when true, inject the JSON-FG envelope
+                                  (allOf [feature.json, required featureType/id,
+                                  properties.properties: <ref> + constraints]).
+                                  Use this when the source class is «Type»,
+                                  not «FeatureType», and lacks the FT envelope.
+      extensionConstraints:       scalar slot -> $ref (applied to
+                                  properties.properties.<slot>)
+      extensionConstraintsArray:  array slot -> $ref (constrains items)
+    """
     ft_entries = info["featureTypes"]
     ft_names = [e["name"] for e in ft_entries]
 
     branches: list[dict] = []
     for entry in ft_entries:
-        name = entry["name"]
-        ref = entry["ref"]
-        # Base allOf for this branch: the Basic anchor.
-        then_chain: list[dict] = [{"$ref": ref}]
-        # Optional Extension constraints — added as additional allOf members.
-        scalar_constraints = entry.get("extensionConstraints", {}) or {}
-        array_constraints = entry.get("extensionConstraintsArray", {}) or {}
-        inner_props: dict = OrderedDict()
-        for slot, ext_ref in scalar_constraints.items():
-            inner_props[slot] = {"$ref": ext_ref}
-        for slot, ext_ref in array_constraints.items():
-            inner_props[slot] = {
-                "type": "array",
-                "items": {"$ref": ext_ref},
-            }
-        if inner_props:
-            then_chain.append({
-                "type": "object",
-                "properties": {
-                    "properties": {
-                        "type": "object",
-                        "properties": inner_props,
-                    }
-                },
-            })
-        then_schema = then_chain[0] if len(then_chain) == 1 else {"allOf": then_chain}
         branches.append({
             "if": {
                 "required": ["featureType"],
-                "properties": {"featureType": {"const": name}},
+                "properties": {"featureType": {"const": entry["name"]}},
             },
-            "then": then_schema,
+            "then": _build_profile_branch(entry),
         })
     # else-false: featureType not in the recognised list -> fail
     branches.append({
