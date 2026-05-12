@@ -325,10 +325,13 @@ SF_SPECIMEN_DEF = {
                             "oneOf": [
                                 {"type": "null"},
                                 {"$ref": LINK_OBJECT_REF},
+                                {"$ref": "#GeologicSamplingMethod"},
                             ],
                             "description": (
-                                "Sampling method (0..1, by-reference to ISO "
-                                "19156 OM_Process)."
+                                "Sampling method (0..1). ISO 19156 types as "
+                                "OM_Process; here implemented as the GeoSciML "
+                                "GeologicSamplingMethod FeatureType, either "
+                                "by-reference (SCLinkObject) or inline."
                             ),
                         },
                         "samplingLocation": {
@@ -348,13 +351,16 @@ SF_SPECIMEN_DEF = {
                                 {"type": "null"},
                                 {
                                     "type": "array",
-                                    "items": {"$ref": "#SpecimenProcessing"},
+                                    "items": {"$ref": "#GeologicSpecimenPreparation"},
                                     "uniqueItems": True,
                                 },
                             ],
                             "description": (
-                                "Processing steps applied to the specimen "
-                                "(0..*)."
+                                "Processing / preparation steps applied to "
+                                "the specimen (0..*). ISO 19156 types as "
+                                "SpecimenProcessing; here items are the "
+                                "GeoSciML GeologicSpecimenPreparation "
+                                "DataType."
                             ),
                         },
                         "size": {
@@ -402,48 +408,10 @@ SF_SPECIMEN_DEF = {
     ],
 }
 
-SPECIMEN_PROCESSING_DEF = {
-    "$anchor": "SpecimenProcessing",
-    "description": (
-        "ISO 19156:2011 SpecimenProcessing — a processing step in the "
-        "specimen's lifecycle (e.g. drying, crushing, splitting). External "
-        "ISO types referenced are by-reference via SCLinkObject."
-    ),
-    "type": "object",
-    "properties": {
-        "method": {
-            "oneOf": [
-                {"type": "null"},
-                {"$ref": LINK_OBJECT_REF},
-            ],
-            "description": "Processing method (by-reference to OM_Process).",
-        },
-        "time": {
-            "oneOf": [
-                {"type": "null"},
-                {"$ref": LINK_OBJECT_REF},
-            ],
-            "description": "Processing time (by-reference to TM_Object).",
-        },
-        "processOperator": {
-            "oneOf": [
-                {"type": "null"},
-                {"$ref": LINK_OBJECT_REF},
-            ],
-            "description": (
-                "Party responsible for the processing step (by-reference to "
-                "CI_Responsibility)."
-            ),
-        },
-    },
-    "required": ["method"],
-}
-
 # Map of BB name -> additional $defs to merge into the library.
 EXTRA_DEFS_PER_BB: dict[str, dict] = {
     "gsmSpecimen": {
         "SF_Specimen": SF_SPECIMEN_DEF,
-        "SpecimenProcessing": SPECIMEN_PROCESSING_DEF,
     },
 }
 

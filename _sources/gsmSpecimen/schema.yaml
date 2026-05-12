@@ -575,7 +575,9 @@ $defs:
               oneOf:
               - type: 'null'
               - $ref: '#/$defs/SCLinkObject'
-              description: Sampling method (0..1, by-reference to ISO 19156 OM_Process).
+              - $ref: '#GeologicSamplingMethod'
+              description: Sampling method (0..1). ISO 19156 types as OM_Process; here implemented as the GeoSciML GeologicSamplingMethod
+                FeatureType, either by-reference (SCLinkObject) or inline.
             samplingLocation:
               oneOf:
               - type: 'null'
@@ -587,9 +589,10 @@ $defs:
               - type: 'null'
               - type: array
                 items:
-                  $ref: '#SpecimenProcessing'
+                  $ref: '#GeologicSpecimenPreparation'
                 uniqueItems: true
-              description: Processing steps applied to the specimen (0..*).
+              description: Processing / preparation steps applied to the specimen (0..*). ISO 19156 types as SpecimenProcessing;
+                here items are the GeoSciML GeologicSpecimenPreparation DataType.
             size:
               oneOf:
               - type: 'null'
@@ -617,26 +620,3 @@ $defs:
       properties:
         id:
           type: string
-  SpecimenProcessing:
-    $anchor: SpecimenProcessing
-    description: ISO 19156:2011 SpecimenProcessing — a processing step in the specimen's lifecycle (e.g. drying, crushing,
-      splitting). External ISO types referenced are by-reference via SCLinkObject.
-    type: object
-    properties:
-      method:
-        oneOf:
-        - type: 'null'
-        - $ref: '#/$defs/SCLinkObject'
-        description: Processing method (by-reference to OM_Process).
-      time:
-        oneOf:
-        - type: 'null'
-        - $ref: '#/$defs/SCLinkObject'
-        description: Processing time (by-reference to TM_Object).
-      processOperator:
-        oneOf:
-        - type: 'null'
-        - $ref: '#/$defs/SCLinkObject'
-        description: Party responsible for the processing step (by-reference to CI_Responsibility).
-    required:
-    - method

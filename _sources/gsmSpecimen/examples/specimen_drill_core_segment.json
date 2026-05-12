@@ -45,18 +45,11 @@
     },
     "samplingMethod": {
       "href": "https://example.org/methods/diamond-core-drilling",
-      "title": "Diamond core drilling (HQ size, triple tube)"
+      "title": "Diamond core drilling (HQ size, triple tube) — referencing a GeologicSamplingMethod feature"
     },
     "processingDetails": [
       {
-        "method": {
-          "href": "https://example.org/methods/core-split-and-photograph",
-          "title": "Split lengthwise + high-resolution photography"
-        },
-        "time": {
-          "href": "https://example.org/time/2024-08-12T09:00:00Z",
-          "title": "2024-08-12 morning"
-        }
+        "preparationMethod": "http://resource.geosciml.org/classifier/cgi/specimenpreparation/core-split-and-photograph"
       }
     ],
     "currentLocation": "Repository A, Drawer 17, Slot 03",
