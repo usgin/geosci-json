@@ -1,0 +1,69 @@
+
+
+{
+  "itemIdentifier": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
+  "$schema": "metaschema.yaml",
+  "name": "gsmExtendedGeologyCollection",
+  "abstract": "Extended-profile FeatureCollection. Accepts the same featureType values",
+  "status": "under-development",
+  "dateTimeAddition": "2026-05-12T00:00:00Z",
+  "itemClass": "schema",
+  "register": "usgin-geosci-bblocks-register",
+  "version": "0.1",
+  "link": "https://github.com/usgin/geosci-json",
+  "sources": [
+    {
+      "title": "GeoSciML 4.1 \u2014 FC profile composed across building blocks",
+      "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
+    }
+  ],
+  "tags": [
+    "geoscience",
+    "geosciml",
+    "profile",
+    "featurecollection"
+  ],
+  "featureTypes": [
+    "GeologicUnit",
+    "MappedFeature",
+    "Contact",
+    "Fold",
+    "Foliation",
+    "ShearDisplacementStructure"
+  ],
+  "shaclShapes": {
+    "usgin.bbr.geosci.gsmExtendedGeologyCollection": [
+      "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/rules.shacl"
+    ]
+  },
+  "isProfileOf": "FeatureCollection",
+  "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/context.jsonld",
+  "dateOfLastChange": "2026-05-12",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema.yaml",
+    "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/context.jsonld",
+  "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/",
+  "validationPassed": false,
+  "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmExtendedGeologyCollection/",
+  "description": "# gsmExtendedGeologyCollection\n\nExtended-profile FeatureCollection. Accepts the same featureType values\nas gsmBasicGeologyCollection, but each Feature additionally requires\nits description slot(s) to be concrete Extension classes. MappedFeature\nis pass-through (no Extension description slot).\n",
+  "examples": [
+    {
+      "title": "fc extended minimal",
+      "content": "Minimal Extended-profile FeatureCollection. The Extended profile dispatches on featureType into the Basic anchors with extra description-slot constraints. Each constraint only fires when the slot is present, so a minimal instance with no description content still validates and exercises the dispatcher routing.",
+      "snippets": [
+        {
+          "language": "json",
+          "ref": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/fc_extended_minimal.json",
+          "code": "{\n  \"$comment\": \"Minimal Extended-profile FeatureCollection. The Extended profile dispatches on featureType into the Basic anchors with extra description-slot constraints. Each constraint only fires when the slot is present, so a minimal instance with no description content still validates and exercises the dispatcher routing.\",\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"featureType\": \"GeologicUnit\",\n      \"id\": \"ext.minimal.gu.1\",\n      \"geometry\": null,\n      \"place\": null,\n      \"time\": null,\n      \"properties\": {\n        \"purpose\": \"typicalNorm\",\n        \"geologicUnitType\": \"http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit\"\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"featureType\": \"Contact\",\n      \"id\": \"ext.minimal.contact.1\",\n      \"geometry\": null,\n      \"place\": null,\n      \"time\": null,\n      \"properties\": {\n        \"purpose\": \"instance\",\n        \"contactType\": \"http://resource.geosciml.org/classifier/cgi/contacttype/conformable_contact\"\n      }\n    }\n  ]\n}\n",
+          "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmExtendedGeologyCollection/example_1_1.json"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\n$id: https://schemas.usgin.org/geosci-json/gsmExtendedGeologyCollection/gsmExtendedGeologyCollectionSchema.json\ndescription: 'Extended-profile FeatureCollection. Accepts the same featureType values\n\n  as gsmBasicGeologyCollection, but each Feature additionally requires\n\n  its description slot(s) to be concrete Extension classes. MappedFeature\n\n  is pass-through (no Extension description slot).'\nallOf:\n- $ref: https://schemas.opengis.net/json-fg/featurecollection.json\n- type: object\n  properties:\n    features:\n      type: array\n      items:\n        allOf:\n        - if:\n            required:\n            - featureType\n            properties:\n              featureType:\n                const: GeologicUnit\n          then:\n            allOf:\n            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnit\n            - type: object\n              properties:\n                properties:\n                  type: object\n                  properties:\n                    gbUnitDescription:\n                      type: array\n                      items:\n                        $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/gsmGeologicUnitExtensionSchema.json#GeologicUnitDescription\n                    gbMaterialDescription:\n                      type: array\n                      items:\n                        $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#CompoundMaterialDescription\n        - if:\n            required:\n            - featureType\n            properties:\n              featureType:\n                const: MappedFeature\n          then:\n            $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#MappedFeature\n        - if:\n            required:\n            - featureType\n            properties:\n              featureType:\n                const: Contact\n          then:\n            allOf:\n            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Contact\n            - type: object\n              properties:\n                properties:\n                  type: object\n                  properties:\n                    stContactDescription:\n                      $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ContactDescription\n        - if:\n            required:\n            - featureType\n            properties:\n              featureType:\n                const: Fold\n          then:\n            allOf:\n            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Fold\n            - type: object\n              properties:\n                properties:\n                  type: object\n                  properties:\n                    stFoldDescription:\n                      $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldDescription\n        - if:\n            required:\n            - featureType\n            properties:\n              featureType:\n                const: Foliation\n          then:\n            allOf:\n            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Foliation\n            - type: object\n              properties:\n                properties:\n                  type: object\n                  properties:\n                    stFoliationDescription:\n                      $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoliationDescription\n        - if:\n            required:\n            - featureType\n            properties:\n              featureType:\n                const: ShearDisplacementStructure\n          then:\n            allOf:\n            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructure\n            - type: object\n              properties:\n                properties:\n                  type: object\n                  properties:\n                    stStructureDescription:\n                      type: array\n                      items:\n                        $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ShearDisplacementStructureDescription\n        - if:\n            not:\n              required:\n              - featureType\n              properties:\n                featureType:\n                  enum:\n                  - GeologicUnit\n                  - MappedFeature\n                  - Contact\n                  - Fold\n                  - Foliation\n                  - ShearDisplacementStructure\n          then: false\n",
+  "gitRepository": "https://github.com/usgin/geosci-json",
+  "gitPath": "_sources/gsmExtendedGeologyCollection"
+}

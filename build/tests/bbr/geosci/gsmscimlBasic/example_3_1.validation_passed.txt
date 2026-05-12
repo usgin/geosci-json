@@ -1,0 +1,10 @@
+Validation report for usgin.bbr.geosci.gsmscimlBasic - gsmscimlBasic
+Generated 2026-05-12T20:52:27.903592+00:00
+=== Files ===
+Using fc_homogeneous_GSO.json from examples
+=== End Files ===
+
+=== JSON Schema ===
+Validation passed
+=== End JSON Schema ===
+

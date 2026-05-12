@@ -1,0 +1,10 @@
+Validation report for usgin.bbr.geosci.gsmSpecimen - gsmSpecimen
+Generated 2026-05-12T20:52:27.826394+00:00
+=== Files ===
+Using examplegsmSpecimenMinimal.json from examples
+=== End Files ===
+
+=== JSON Schema ===
+Validation passed
+=== End JSON Schema ===
+

@@ -1,0 +1,749 @@
+{
+  "name": "GeoSci JSON Building Blocks repository",
+  "abstract": "Repository assembling building blocks for geoscience JSON metadata, using OGC building block patterns.\n",
+  "description": "Modular JSON Schema building blocks for geoscience metadata and profiles.\n",
+  "modified": "2026-05-12T20:52:05.803299",
+  "tooling": {
+    "bblocks-postprocess": {
+      "commitId": "\"5ddf8dfdfa92574f112703863576f5cd6b579a56",
+      "shortCommitId": "\"5ddf8d",
+      "date": "2026-05-10T08:12:13+00:00\""
+    }
+  },
+  "gitRepository": "https://github.com/usgin/geosci-json",
+  "gitHubRepository": "https://github.com/usgin/geosci-json/blob/main/",
+  "baseURL": "https://usgin.github.io/geosci-json/",
+  "viewerURL": "https://usgin.github.io/geosci-json/",
+  "validationReport": "https://usgin.github.io/geosci-json/build/tests/report.html",
+  "validationReportJson": "https://usgin.github.io/geosci-json/build/tests/report.json",
+  "imports": [
+    "https://opengeospatial.github.io/bblocks/register.json"
+  ],
+  "bblocks": [
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmBasicGeologyCollection",
+      "$schema": "metaschema.yaml",
+      "name": "gsmBasicGeologyCollection",
+      "abstract": "Basic-profile FeatureCollection. Accepts GeologicUnit, MappedFeature,",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 \u2014 FC profile composed across building blocks",
+          "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "profile",
+        "featurecollection"
+      ],
+      "featureTypes": [
+        "GeologicUnit",
+        "MappedFeature",
+        "Contact",
+        "Fold",
+        "Foliation",
+        "ShearDisplacementStructure"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmBasicGeologyCollection": [
+          "https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/rules.shacl"
+        ]
+      },
+      "isProfileOf": "FeatureCollection",
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBasicGeologyCollection/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBasicGeologyCollection/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/",
+      "validationPassed": false,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmBasicGeologyCollection/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmBasicGeologyCollection/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmBasicGeologyCollection/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmBasicGeologyCollection"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmBorehole",
+      "$schema": "metaschema.yaml",
+      "name": "gsmBorehole",
+      "abstract": "Borehole feature type and supporting types (BoreholeDetails, intervals,",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+          "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "uml-derived"
+      ],
+      "umlPackages": [
+        "Borehole"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmBorehole": [
+          "https://usgin.github.io/geosci-json/_sources/gsmBorehole/rules.shacl"
+        ]
+      },
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmBorehole/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmBorehole/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmBorehole/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmBorehole/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmBorehole/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmBorehole/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmBorehole/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmBorehole"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmEarthMaterialCollection",
+      "$schema": "metaschema.yaml",
+      "name": "gsmEarthMaterialCollection",
+      "abstract": "FeatureCollection profile collecting EarthMaterial features with rich",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 \u2014 FC profile composed across building blocks",
+          "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "profile",
+        "featurecollection"
+      ],
+      "featureTypes": [
+        "Mineral",
+        "OrganicMaterial",
+        "RockMaterial",
+        "CompoundMaterial"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmEarthMaterialCollection": [
+          "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/rules.shacl"
+        ]
+      },
+      "isProfileOf": "FeatureCollection",
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialCollection/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialCollection/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/",
+      "validationPassed": false,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmEarthMaterialCollection/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmEarthMaterialCollection/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmEarthMaterialCollection/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmEarthMaterialCollection"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmEarthMaterialExtension",
+      "$schema": "metaschema.yaml",
+      "name": "gsmEarthMaterialExtension",
+      "abstract": "Detailed EarthMaterial description types: CompoundMaterialDescription,",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+          "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "uml-derived"
+      ],
+      "umlPackages": [
+        "EarthMaterialDetails"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmEarthMaterialExtension": [
+          "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/rules.shacl"
+        ]
+      },
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialExtension/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialExtension/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmEarthMaterialExtension/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmEarthMaterialExtension/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmEarthMaterialExtension/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmEarthMaterialExtension"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
+      "$schema": "metaschema.yaml",
+      "name": "gsmExtendedGeologyCollection",
+      "abstract": "Extended-profile FeatureCollection. Accepts the same featureType values",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 \u2014 FC profile composed across building blocks",
+          "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "profile",
+        "featurecollection"
+      ],
+      "featureTypes": [
+        "GeologicUnit",
+        "MappedFeature",
+        "Contact",
+        "Fold",
+        "Foliation",
+        "ShearDisplacementStructure"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmExtendedGeologyCollection": [
+          "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/rules.shacl"
+        ]
+      },
+      "isProfileOf": "FeatureCollection",
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/",
+      "validationPassed": false,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmExtendedGeologyCollection/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmExtendedGeologyCollection/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmExtendedGeologyCollection/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmExtendedGeologyCollection"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmGeologicRelationExtension",
+      "$schema": "metaschema.yaml",
+      "name": "gsmGeologicRelationExtension",
+      "abstract": "Extension package defining typed binary relations between GeologicFeature",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+          "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "uml-derived"
+      ],
+      "umlPackages": [
+        "GeologicRelation"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmGeologicRelationExtension": [
+          "https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/rules.shacl"
+        ]
+      },
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmGeologicRelationExtension/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicRelationExtension/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicRelationExtension/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicRelationExtension"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmGeologicStructureExtension",
+      "$schema": "metaschema.yaml",
+      "name": "gsmGeologicStructureExtension",
+      "abstract": "Detailed structural-geology types extending the Basic structure",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+          "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "uml-derived"
+      ],
+      "umlPackages": [
+        "GeologicStructureDetails"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmGeologicStructureExtension": [
+          "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/rules.shacl"
+        ]
+      },
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmGeologicStructureExtension/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicStructureExtension/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicStructureExtension/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicStructureExtension"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmGeologicTime",
+      "$schema": "metaschema.yaml",
+      "name": "gsmGeologicTime",
+      "abstract": "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+          "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "uml-derived"
+      ],
+      "umlPackages": [
+        "GeologicTime",
+        "GSSP",
+        "TemporalReferenceSystem",
+        "TimeScale",
+        "GeologicAgeDetails"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmGeologicTime": [
+          "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/rules.shacl"
+        ]
+      },
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmGeologicTime/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicTime/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicTime/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicTime"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmGeologicUnitExtension",
+      "$schema": "metaschema.yaml",
+      "name": "gsmGeologicUnitExtension",
+      "abstract": "GeologicUnit extension: detailed unit description structures",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+          "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "uml-derived"
+      ],
+      "umlPackages": [
+        "GeologicUnitDetails"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmGeologicUnitExtension": [
+          "https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/rules.shacl"
+        ]
+      },
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmGeologicUnitExtension/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicUnitExtension/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicUnitExtension/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicUnitExtension"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmSpecimen",
+      "$schema": "metaschema.yaml",
+      "name": "gsmSpecimen",
+      "abstract": "LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+          "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "uml-derived"
+      ],
+      "umlPackages": [
+        "LaboratoryAnalysis-Specimen",
+        "Geochronology",
+        "GeologicSpecimen",
+        "LaboratoryAnalysis"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmSpecimen": [
+          "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/rules.shacl"
+        ]
+      },
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmSpecimen/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmSpecimen/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmSpecimen/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmSpecimen"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmscimlBasic",
+      "$schema": "metaschema.yaml",
+      "name": "gsmscimlBasic",
+      "abstract": "GeoSciML 4.1 Basic application schema. Core feature types",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+          "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "uml-derived"
+      ],
+      "umlPackages": [
+        "GeoSciMLBasic",
+        "Collection",
+        "GSML_DataTypes",
+        "GeologicEvent",
+        "GeologicStructure",
+        "GeologyBasic",
+        "Geomorphology"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmscimlBasic": [
+          "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/rules.shacl"
+        ]
+      },
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmscimlBasic/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmscimlBasic/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmscimlBasic/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmscimlBasic"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "usgin.bbr.geosci.gsmscimlLite",
+      "$schema": "metaschema.yaml",
+      "name": "gsmscimlLite",
+      "abstract": "GeoSciML 4.1 Lite profile. Flattened \"View\" classes that summarise",
+      "status": "under-development",
+      "dateTimeAddition": "2026-05-12T00:00:00Z",
+      "itemClass": "schema",
+      "register": "usgin-geosci-bblocks-register",
+      "version": "0.1",
+      "link": "https://github.com/usgin/geosci-json",
+      "sources": [
+        {
+          "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+          "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+        }
+      ],
+      "tags": [
+        "geoscience",
+        "geosciml",
+        "uml-derived"
+      ],
+      "umlPackages": [
+        "GeoSciMLLite"
+      ],
+      "shaclShapes": {
+        "usgin.bbr.geosci.gsmscimlLite": [
+          "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/rules.shacl"
+        ]
+      },
+      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/context.jsonld",
+      "dateOfLastChange": "2026-05-12",
+      "schema": {
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlLite/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlLite/schema.json"
+      },
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/context.jsonld",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmscimlLite/",
+      "documentation": {
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmscimlLite/index.json"
+        },
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmscimlLite/index.md"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmscimlLite"
+        }
+      }
+    }
+  ],
+  "remoteCacheDir": "https://usgin.github.io/geosci-json/build/annotated/_cache",
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://usgin.github.io/geosci-json/build/register.json",
+      "type": "application/json",
+      "title": "This Building Blocks Register in JSON format"
+    },
+    {
+      "rel": "self",
+      "href": "https://usgin.github.io/geosci-json/build/bblocks.ttl",
+      "type": "text/turtle",
+      "title": "This Building Blocks Register in RDF Turtle format"
+    },
+    {
+      "rel": "self",
+      "href": "https://usgin.github.io/geosci-json/build/bblocks.jsonld",
+      "type": "application/ld+json",
+      "title": "This Building Blocks Register in JSON-LD format"
+    }
+  ]
+}

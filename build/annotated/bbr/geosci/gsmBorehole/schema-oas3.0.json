@@ -1,0 +1,3717 @@
+{
+  "x-defs": {
+    "feature": {
+      "title": "a JSON-FG Feature",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "type": "object",
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "Feature"
+          ]
+        },
+        "id": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "featureType": {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/featuretype"
+        },
+        "featureSchema": {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/featureschema"
+        },
+        "time": {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/time"
+        },
+        "coordRefSys": {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+        },
+        "measures": {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+        },
+        "place": {
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/place"
+            },
+            {
+              "not": {
+                "type": "object",
+                "properties": {
+                  "coordRefSys": {}
+                },
+                "required": [
+                  "coordRefSys"
+                ]
+              }
+            },
+            {
+              "not": {
+                "type": "object",
+                "properties": {
+                  "measures": {}
+                },
+                "required": [
+                  "measures"
+                ]
+              }
+            },
+            {
+              "not": {
+                "type": "object",
+                "properties": {
+                  "conformsTo": {}
+                },
+                "required": [
+                  "conformsTo"
+                ]
+              }
+            }
+          ]
+        },
+        "geometry": {
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry"
+            },
+            {
+              "not": {
+                "type": "object",
+                "properties": {
+                  "conformsTo": {}
+                },
+                "required": [
+                  "conformsTo"
+                ]
+              }
+            }
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "type": "object"
+            }
+          ],
+          "nullable": true
+        }
+      },
+      "x-schema-source": "https://schemas.opengis.net/json-fg/feature.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/feature.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema": {
+      "description": "For more granularity on how a person contributed to a Dataset, use schema:Role. The schema.org documentation does not state that the Role type is an expected data type of author, creator and contributor, but that is addressed in this blog post (http://blog.schema.org/2014/06/introducing-role.html). see https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#roles-of-people",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "default": "schema:Role",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:Role"
+            ]
+          },
+          "minItems": 1
+        },
+        "schema:roleName": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_definedTerm_schema"
+            }
+          ]
+        },
+        "schema:contributor": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "description": "IRI reference to a Person or Organization defined elsewhere"
+                }
+              },
+              "required": [
+                "@id"
+              ]
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_person_schema"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_organization_schema"
+            }
+          ]
+        }
+      },
+      "required": [
+        "@type",
+        "schema:roleName",
+        "schema:contributor"
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "Quantity": {
+      "description": "Scalar component with decimal representation and a unit of measure used to store value of a continuous quantity",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/AbstractSimpleComponent"
+        },
+        {
+          "properties": {
+            "type": {
+              "enum": [
+                "Quantity"
+              ]
+            },
+            "uom": {
+              "description": "Unit of measure used to express the value of this data component",
+              "allOf": [
+                {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/UnitReference"
+                }
+              ]
+            },
+            "constraint": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/AllowedValues"
+            },
+            "nilValues": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/NilValuesNumber"
+            },
+            "value": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/NumberOrSpecial"
+            }
+          },
+          "required": [
+            "type",
+            "definition",
+            "label",
+            "uom"
+          ]
+        }
+      ],
+      "x-schema-source": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "Category": {
+      "description": "Scalar component used to represent a categorical value as a simple token identifying a term in a code space",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/AbstractSimpleComponent"
+        },
+        {
+          "properties": {
+            "type": {
+              "enum": [
+                "Category"
+              ]
+            },
+            "codeSpace": {
+              "description": "Name of the dictionary where the possible values for this component are listed and defined",
+              "type": "string",
+              "format": "uri"
+            },
+            "constraint": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/AllowedTokens"
+            },
+            "nilValues": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/NilValuesText"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "definition",
+            "label"
+          ]
+        }
+      ],
+      "x-schema-source": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_definedTerm_schema": {
+      "description": "schema.org Defined Term schema",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:DefinedTerm"
+            ]
+          },
+          "minItems": 1
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "text label for the term that is useful to human user"
+        },
+        "schema:identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_identifier_schema"
+            }
+          ]
+        },
+        "schema:inDefinedTermSet": {
+          "type": "string",
+          "description": "Name for the controlled vocabulary responsible for this keyword."
+        },
+        "schema:termCode": {
+          "type": "string",
+          "description": "A representative code for this keyword in the controlled vocabulary. Analogous to skos:Notation"
+        }
+      },
+      "allOf": [
+        {
+          "required": [
+            "@type"
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "schema:name"
+              ]
+            },
+            {
+              "required": [
+                "schema:identifier"
+              ]
+            },
+            {
+              "required": [
+                "schema:termCode"
+              ]
+            }
+          ]
+        }
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema": {
+      "title": "SKOS Concept",
+      "description": "JSON Schema for a SKOS Concept in JSON-LD form. A unit of thought within a concept scheme. Supports labels (prefLabel, altLabel, hiddenLabel), notations, hierarchical relations (broader/narrower), associative relations (related), cross-scheme mapping properties, scheme membership, and documentary notes. Based on the W3C SKOS Reference (https://www.w3.org/TR/skos-reference/).",
+      "type": "object",
+      "properties": {
+        "@context": {
+          "description": "JSON-LD context declaring the skos namespace prefix. May be a single object or an array of strings and objects.",
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "skos": {
+                  "enum": [
+                    "http://www.w3.org/2004/02/skos/core#"
+                  ]
+                }
+              },
+              "required": [
+                "skos"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              },
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "skos": {
+                    "enum": [
+                      "http://www.w3.org/2004/02/skos/core#"
+                    ]
+                  }
+                },
+                "required": [
+                  "skos"
+                ]
+              }
+            }
+          ]
+        },
+        "@id": {
+          "type": "string",
+          "description": "URI identifier for this concept."
+        },
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "skos:Concept"
+            ]
+          },
+          "minItems": 1
+        },
+        "skos:prefLabel": {
+          "description": "Preferred lexical label for this concept. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+              }
+            }
+          ]
+        },
+        "skos:altLabel": {
+          "description": "Alternative lexical labels (acronyms, abbreviations, variants).",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:hiddenLabel": {
+          "description": "Labels accessible to free-text search but not displayed.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:notation": {
+          "description": "Classification code for this concept within a scheme.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skos:definition": {
+          "description": "Formal explanation of the meaning of this concept.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:scopeNote": {
+          "description": "Note clarifying meaning and/or intended use.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:note": {
+          "description": "General note about this concept.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:historyNote": {
+          "description": "Note about past state or use.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:changeNote": {
+          "description": "Note documenting a change.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:editorialNote": {
+          "description": "Note for editors and maintainers.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:example": {
+          "description": "Example of use of this concept.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:inScheme": {
+          "description": "Concept scheme(s) this concept belongs to.",
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "@id"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "@id"
+                ]
+              }
+            }
+          ]
+        },
+        "skos:topConceptOf": {
+          "description": "Concept scheme(s) for which this is a top concept.",
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "@id"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "@id"
+                ]
+              }
+            }
+          ]
+        },
+        "skos:broader": {
+          "description": "Broader (parent) concepts in the hierarchy. Items are inline concept objects or @id references.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/ConceptRef"
+              },
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema"
+              }
+            ]
+          }
+        },
+        "skos:narrower": {
+          "description": "Narrower (child) concepts in the hierarchy. Items are inline concept objects or @id references.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/ConceptRef"
+              },
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema"
+              }
+            ]
+          }
+        },
+        "skos:related": {
+          "description": "Associatively related concepts.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/ConceptRef"
+              },
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema"
+              }
+            ]
+          }
+        },
+        "skos:exactMatch": {
+          "description": "Concepts in other schemes with equivalent meaning.",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/ConceptRef"
+          }
+        },
+        "skos:closeMatch": {
+          "description": "Concepts in other schemes with similar meaning.",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/ConceptRef"
+          }
+        },
+        "skos:broadMatch": {
+          "description": "Broader concepts in other schemes.",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/ConceptRef"
+          }
+        },
+        "skos:narrowMatch": {
+          "description": "Narrower concepts in other schemes.",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/ConceptRef"
+          }
+        },
+        "skos:relatedMatch": {
+          "description": "Related concepts in other schemes.",
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema/$defs/ConceptRef"
+          }
+        }
+      },
+      "required": [
+        "@type",
+        "skos:prefLabel"
+      ],
+      "$defs": {
+        "ConceptRef": {
+          "type": "object",
+          "description": "A reference to a SKOS Concept by URI.",
+          "properties": {
+            "@id": {
+              "type": "string",
+              "description": "URI of the referenced concept."
+            }
+          },
+          "required": [
+            "@id"
+          ]
+        },
+        "LanguageTaggedValue": {
+          "type": "object",
+          "description": "An RDF literal value with a language tag, serialized as a JSON-LD value object.",
+          "properties": {
+            "@value": {
+              "type": "string",
+              "description": "The text content."
+            },
+            "@language": {
+              "type": "string",
+              "description": "BCP 47 language tag (e.g. en, fr, de)."
+            }
+          },
+          "required": [
+            "@value",
+            "@language"
+          ]
+        }
+      },
+      "x-jsonld-prefixes": {
+        "skos": "http://www.w3.org/2004/02/skos/core#"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/skosProperties/skosConcept/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "Geometry": {
+      "title": "GeoJSON Geometry",
+      "oneOf": [
+        {
+          "title": "GeoJSON Point",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "Point"
+              ]
+            },
+            "coordinates": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "number"
+              }
+            },
+            "bbox": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "title": "GeoJSON LineString",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "LineString"
+              ]
+            },
+            "coordinates": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "bbox": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "title": "GeoJSON Polygon",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "Polygon"
+              ]
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 4,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "bbox": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "title": "GeoJSON MultiPoint",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "MultiPoint"
+              ]
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "bbox": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "title": "GeoJSON MultiLineString",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "MultiLineString"
+              ]
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "bbox": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "title": "GeoJSON MultiPolygon",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "MultiPolygon"
+              ]
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "minItems": 4,
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "bbox": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      ],
+      "x-schema-source": "https://geojson.org/schema/Geometry.json",
+      "x-schema-id": "https://geojson.org/schema/Geometry.json",
+      "x-schema-version": "http://json-schema.org/draft-07/schema#"
+    },
+    "Point": {
+      "title": "GeoJSON Point",
+      "type": "object",
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Point"
+          ]
+        },
+        "coordinates": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "x-schema-source": "https://geojson.org/schema/Point.json",
+      "x-schema-id": "https://geojson.org/schema/Point.json",
+      "x-schema-version": "http://json-schema.org/draft-07/schema#"
+    },
+    "featuretype": {
+      "title": "the value of the 'featureType' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "type": "string",
+      "x-schema-source": "https://schemas.opengis.net/json-fg/featuretype.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/featuretype.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "featureschema": {
+      "title": "the value of the 'featureSchema' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      ],
+      "x-schema-source": "https://schemas.opengis.net/json-fg/featureschema.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/featureschema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "time": {
+      "title": "the value of the 'time' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "oneOf": [
+        {
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "date": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/time/$defs/date"
+            },
+            "timestamp": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/time/$defs/timestamp"
+            },
+            "interval": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/time/$defs/interval"
+            }
+          }
+        }
+      ],
+      "$defs": {
+        "date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "timestamp": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        },
+        "interval": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/time/$defs/date"
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      ".."
+                    ]
+                  }
+                ]
+              },
+              {
+                "oneOf": [
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/time/$defs/timestamp"
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      ".."
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "x-schema-source": "https://schemas.opengis.net/json-fg/time.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/time.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema",
+      "nullable": true
+    },
+    "coordrefsys": {
+      "title": "the value of the 'coordRefSys' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "oneOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys/$defs/single-refsys"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys/$defs/single-refsys"
+          },
+          "minItems": 2
+        }
+      ],
+      "$defs": {
+        "single-refsys": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys/$defs/refsys-simpleref"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys/$defs/refsys-byref"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys/$defs/refsys-custom"
+            }
+          ]
+        },
+        "refsys-simpleref": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refsys-byref": {
+          "type": "object",
+          "required": [
+            "type",
+            "href"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "Reference"
+              ]
+            },
+            "href": {
+              "type": "string",
+              "format": "uri-reference"
+            },
+            "epoch": {
+              "type": "number"
+            }
+          }
+        },
+        "refsys-custom": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "not": {
+                "enum": [
+                  "Reference"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-schema-source": "https://schemas.opengis.net/json-fg/coordrefsys.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/coordrefsys.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "measures": {
+      "title": "the value of the 'measures' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "x-schema-source": "https://schemas.opengis.net/json-fg/measures.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/measures.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "place": {
+      "title": "the value of the 'place' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "oneOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object"
+        }
+      ],
+      "x-schema-source": "https://schemas.opengis.net/json-fg/place.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/place.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema",
+      "nullable": true
+    },
+    "geometry": {
+      "title": "the geometries allowed as values of the 'geometry' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Point"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPoint"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/LineString"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiLineString"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Polygon"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPolygon"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/GeometryCollection"
+            }
+          ],
+          "nullable": true
+        },
+        {
+          "not": {
+            "type": "object",
+            "properties": {
+              "coordRefSys": {}
+            },
+            "required": [
+              "coordRefSys"
+            ]
+          }
+        },
+        {
+          "not": {
+            "type": "object",
+            "properties": {
+              "measures": {}
+            },
+            "required": [
+              "measures"
+            ]
+          }
+        }
+      ],
+      "x-schema-source": "https://schemas.opengis.net/json-fg/geometry.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/geometry.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_person_schema": {
+      "description": "schema for cdif profile of schema.org/Person",
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string"
+        },
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:Person"
+            ]
+          },
+          "minItems": 1
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "string label for person that is meaningful for human users, should format consistently. Recommend 'Family Name, Given name' format."
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "schema:identifier": {
+          "description": "identifier for person, recommend ORCID",
+          "anyOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_identifier_schema"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "schema:alternateName": {
+          "type": "string",
+          "description": "other labels by which the person might be known"
+        },
+        "schema:affiliation": {
+          "description": "if affiliation is present, value must be a schema:Organization.",
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_organization_schema"
+            }
+          ]
+        },
+        "schema:contactPoint": {
+          "type": "object",
+          "description": "restrict to email only. Schema.org allows telephone and postal contacts as well",
+          "properties": {
+            "@type": {
+              "default": "schema:ContactPoint",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:ContactPoint"
+                ]
+              },
+              "minItems": 1
+            },
+            "schema:email": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "schema:email"
+          ]
+        },
+        "schema:sameAs": {
+          "type": "array",
+          "description": "other identifiers for the person",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "required": [
+            "@type"
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "schema:name"
+              ]
+            },
+            {
+              "required": [
+                "schema:identifier"
+              ]
+            }
+          ]
+        }
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/person/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_organization_schema": {
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string"
+        },
+        "@type": {
+          "default": "schema:Organization",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "schema:Organization",
+                  "schema:FundingAgency",
+                  "schema:Consortium",
+                  "schema:Corporation",
+                  "schema:EducationalOrganization",
+                  "schema:FundingScheme",
+                  "schema:GovernmentOrganization",
+                  "schema:NGO",
+                  "schema:Project",
+                  "schema:ResearchOrganization"
+                ]
+              }
+            ]
+          },
+          "contains": {
+            "enum": [
+              "schema:Organization"
+            ]
+          },
+          "minItems": 1
+        },
+        "schema:additionalType": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_definedTerm_schema"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "string label for organization that is meaningful for human users"
+        },
+        "schema:alternateName": {
+          "type": "string",
+          "description": "other labels by which the organization might be known"
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "schema:identifier": {
+          "description": "identifier for organization",
+          "anyOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_identifier_schema"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "schema:sameAs": {
+          "type": "array",
+          "description": "other identifiers for the organization",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "required": [
+            "@type"
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "schema:name"
+              ]
+            },
+            {
+              "required": [
+                "schema:identifier"
+              ]
+            }
+          ]
+        }
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/organization/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "AbstractSimpleComponent": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/AbstractDataComponent"
+        },
+        {
+          "properties": {
+            "referenceFrame": {
+              "description": "Frame of reference (usually temporal or spatial) with respect to which the value of the component is expressed. A reference frame anchors a value to a real world datum.",
+              "type": "string",
+              "format": "uri-reference"
+            },
+            "axisID": {
+              "description": "Specifies the reference axis (refer to CRS axisID). The reference frame URI should also be specified unless it is inherited from parent Vector",
+              "type": "string",
+              "minLength": 1
+            },
+            "nilValues": {
+              "description": "Defines reserved values with special meaning (e.g., missing, out-of-range, etc.)"
+            },
+            "constraint": {},
+            "value": {
+              "description": "Inline value(s) for the component. This property is optional to enable structure to act as a schema for values provided separately (e.g., in a datastream)"
+            }
+          }
+        }
+      ],
+      "x-schema-source": "https://schemas.opengis.net/sweCommon/3.0/json/AbstractSimpleComponent.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "basicTypes": {
+      "$defs": {
+        "AbstractSWE": {
+          "description": "Base substitution groups for all SWE Common objects other than value objects",
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "The ID of the object, referenceable using a URI fragment",
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "UnitReference": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "description": "A human readable label for the unit",
+              "type": "string",
+              "minLength": 1
+            },
+            "symbol": {
+              "description": "The preferred unit symbol to use when presenting the data in a UI (use the UCUM code instead if no symbol is provided)",
+              "type": "string",
+              "minLength": 1
+            },
+            "code": {
+              "type": "string",
+              "minLength": 1
+            },
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "anyOf": [
+            {
+              "title": "UCUM Code",
+              "required": [
+                "code"
+              ]
+            },
+            {
+              "title": "URI",
+              "required": [
+                "href"
+              ]
+            }
+          ]
+        },
+        "AllowedTokens": {
+          "description": "Defines permitted values for the component, as an enumerated list of tokens or a regular expression pattern",
+          "type": "object",
+          "oneOf": [
+            {
+              "title": "Enum Values",
+              "properties": {
+                "type": {
+                  "enum": [
+                    "AllowedTokens"
+                  ]
+                },
+                "values": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "required": [
+                "values"
+              ]
+            },
+            {
+              "title": "Regex Pattern",
+              "properties": {
+                "type": {
+                  "enum": [
+                    "AllowedTokens"
+                  ]
+                },
+                "pattern": {
+                  "type": "string",
+                  "format": "regex",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          ]
+        },
+        "AllowedValues": {
+          "description": "Defines the permitted values for the component as an enumerated list and/or a list of inclusive ranges",
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "AllowedValues"
+              ]
+            },
+            "values": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/NumberOrSpecial"
+              }
+            },
+            "intervals": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/NumberOrSpecial"
+                }
+              }
+            },
+            "significantFigures": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 40
+            }
+          },
+          "anyOf": [
+            {
+              "title": "Enum Values",
+              "required": [
+                "values"
+              ]
+            },
+            {
+              "title": "Intervals",
+              "required": [
+                "intervals"
+              ]
+            }
+          ]
+        },
+        "AllowedTimes": {
+          "description": "Defines the permitted values for the component, as a time range or an enumerated list of time values",
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "AllowedTimes"
+              ]
+            },
+            "values": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial"
+              }
+            },
+            "intervals": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial"
+                }
+              }
+            },
+            "significantFigures": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 40
+            }
+          },
+          "anyOf": [
+            {
+              "title": "Enum Values",
+              "required": [
+                "values"
+              ]
+            },
+            {
+              "title": "Intervals",
+              "required": [
+                "intervals"
+              ]
+            }
+          ]
+        },
+        "NilValuesText": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "description": "The reason for using the reserved value",
+                "type": "string",
+                "format": "uri"
+              },
+              "value": {
+                "description": "The reserved value itself",
+                "type": "string"
+              }
+            },
+            "required": [
+              "reason",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "NilValuesInteger": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "description": "The reason for using the reserved value",
+                "type": "string",
+                "format": "uri"
+              },
+              "value": {
+                "description": "The reserved value itself",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "reason",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "NilValuesNumber": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "description": "The reason for using the reserved value",
+                "type": "string",
+                "format": "uri"
+              },
+              "value": {
+                "description": "The reserved value itself",
+                "allOf": [
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/NumberOrSpecial"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "reason",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "NilValuesTime": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "description": "The reason for using the reserved value",
+                "type": "string",
+                "format": "uri"
+              },
+              "value": {
+                "description": "The reserved value itself",
+                "allOf": [
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "reason",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "SoftNamedProperty": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/NameToken"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "NameToken": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z][A-Za-z0-9_\\-]*$"
+        },
+        "AssociationAttributeGroup": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri-reference"
+            },
+            "role": {
+              "type": "string",
+              "format": "uri"
+            },
+            "arcrole": {
+              "type": "string",
+              "format": "uri"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "href"
+          ]
+        },
+        "NumberOrSpecial": {
+          "oneOf": [
+            {
+              "title": "Number",
+              "type": "number"
+            },
+            {
+              "title": "Special Value",
+              "type": "string",
+              "enum": [
+                "NaN",
+                "Infinity",
+                "+Infinity",
+                "-Infinity"
+              ]
+            }
+          ]
+        },
+        "DateTimeNumberOrSpecial": {
+          "oneOf": [
+            {
+              "title": "Date/Time",
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/NumberOrSpecial"
+            }
+          ]
+        },
+        "ElementCount": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/AbstractSimpleComponent"
+            },
+            {
+              "properties": {
+                "constraint": {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/AllowedValues"
+                },
+                "value": {
+                  "description": "Value is optional, to enable structure to act as a schema for values provided using other encodings",
+                  "type": "integer"
+                }
+              }
+            }
+          ]
+        },
+        "EncodedValues": {
+          "oneOf": [
+            {
+              "type": "array"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/AssociationAttributeGroup"
+            }
+          ]
+        }
+      },
+      "x-schema-source": "https://schemas.opengis.net/sweCommon/3.0/json/basicTypes.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_identifier_schema": {
+      "description": "Properties for a schema.org identifier",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": [
+              "schema:PropertyValue"
+            ]
+          },
+          "minItems": 1
+        },
+        "schema:propertyID": {
+          "type": "string",
+          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+        },
+        "schema:value": {
+          "type": "string",
+          "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+        },
+        "schema:url": {
+          "type": "string",
+          "format": "uri",
+          "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+        }
+      },
+      "allOf": [
+        {
+          "required": [
+            "@type"
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "schema:value"
+              ]
+            },
+            {
+              "required": [
+                "schema:url"
+              ]
+            }
+          ]
+        }
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "geometry-object": {
+      "title": "a JSON-FG geometry",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "oneOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Point"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPoint"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/LineString"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiLineString"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Polygon"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPolygon"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/GeometryCollection"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Polyhedron"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPolyhedron"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Prism"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPrism"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CircularString"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CompoundCurve"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CurvePolygon"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiCurve"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiSurface"
+        },
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CustomGeometry"
+        }
+      ],
+      "$defs": {
+        "CustomGeometry": {
+          "title": "A custom geometry",
+          "description": "A custom geometry object type that is not one of the standard GeoJSON geometry types or one of the JSON-FG extensions. It is defined as an object with a \"type\" member that is not one of the GeoJSON or JSON-FG types. This is a mechanism to keep the schema extensible so that validation will also validate JSON-FG root objects with new geometry types that are not (yet) standardized. Readers of JSON-FG root objects that encouter an unknown geometry type should ignore it and treat it as if the value would be 'null'.",
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "not": {
+                "enum": [
+                  "Feature",
+                  "FeatureCollection",
+                  "Point",
+                  "MultiPoint",
+                  "LineString",
+                  "MultiLineString",
+                  "Polygon",
+                  "MultiPolygon",
+                  "Polyhedron",
+                  "MultiPolyhedron",
+                  "Prism",
+                  "MultiPrism",
+                  "CircularString",
+                  "CompoundCurve",
+                  "CurvePolygon",
+                  "MultiCurve",
+                  "MultiSurface",
+                  "GeometryCollection"
+                ]
+              }
+            }
+          }
+        },
+        "CustomCurve": {
+          "title": "A custom curve object",
+          "description": "A custom curve object type that is not one of the standard GeoJSON curve types or one of the JSON-FG extensions. It is defined as an object with a \"type\" member that is not one of the GeoJSON or JSON-FG types. This is a mechanism to keep the schema extensible so that validation will also validate JSON-FG root objects with new geometry types that are not (yet) standardized. Readers of JSON-FG root objects that encouter an unknown curve type should ignore it and treat it as if the value would be 'null'.",
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "not": {
+                "enum": [
+                  "LineString",
+                  "CircularString",
+                  "CompoundCurve"
+                ]
+              }
+            }
+          }
+        },
+        "CustomSurface": {
+          "title": "A custom surface object",
+          "description": "A custom surface object type that is not one of the standard GeoJSON surface types or one of the JSON-FG extensions. It is defined as an object with a \"type\" member that is not one of the GeoJSON or JSON-FG types. This is a mechanism to keep the schema extensible so that validation will also validate JSON-FG root objects with new geometry types that are not (yet) standardized. Readers of JSON-FG root objects that encouter an unknown surface type should ignore it and treat it as if the value would be 'null'.",
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "not": {
+                "enum": [
+                  "Polygon",
+                  "CurvePolygon"
+                ]
+              }
+            }
+          }
+        },
+        "Point": {
+          "title": "GeoJSON Point with additional 'coordRefSys' and 'measures' members",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Point"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "coordinates": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/position"
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "LineString": {
+          "title": "GeoJSON LineString with additional 'coordRefSys' and 'measures' members",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "LineString"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "coordinates": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/position"
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "Polygon": {
+          "title": "GeoJSON Polygon with additional 'coordRefSys' and 'measures' members",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Polygon"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 4,
+                "items": {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/position"
+                }
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "MultiPoint": {
+          "title": "GeoJSON MultiPoint with additional 'coordRefSys' and 'measures' members",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "MultiPoint"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/position"
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "MultiLineString": {
+          "title": "GeoJSON MultiLineString with additional 'coordRefSys' and 'measures' members",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "MultiLineString"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/position"
+                }
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "MultiPolygon": {
+          "title": "GeoJSON MultiPolygon with additional 'coordRefSys' and 'measures' members",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "MultiPolygon"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "minItems": 4,
+                  "items": {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/position"
+                  }
+                }
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "GeometryCollection": {
+          "title": "GeoJSON GeometryCollection with additional 'coordRefSys' and 'measures' members",
+          "type": "object",
+          "required": [
+            "type",
+            "geometries"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "GeometryCollection"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "geometries": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Point"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPoint"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/LineString"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiLineString"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Polygon"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPolygon"
+                      }
+                    ]
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "coordRefSys": {}
+                      },
+                      "required": [
+                        "coordRefSys"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "measures": {}
+                      },
+                      "required": [
+                        "measures"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "conformsTo": {}
+                      },
+                      "required": [
+                        "conformsTo"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "Polyhedron": {
+          "title": "JSON-FG Polyhedron",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Polyhedron"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "coordinates": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "array",
+                    "minItems": 4,
+                    "items": {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/position3d"
+                    }
+                  }
+                }
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox3d"
+            }
+          }
+        },
+        "MultiPolyhedron": {
+          "title": "JSON-FG MultiPolyhedron",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "MultiPolyhedron"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "array",
+                      "minItems": 4,
+                      "items": {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/position3d"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox3d"
+            }
+          }
+        },
+        "Prism": {
+          "title": "JSON-FG Prism",
+          "type": "object",
+          "required": [
+            "type",
+            "base",
+            "upper"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Prism"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "base": {
+              "allOf": [
+                {
+                  "oneOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Point"
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPoint"
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/LineString"
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiLineString"
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Polygon"
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/MultiPolygon"
+                    }
+                  ]
+                },
+                {
+                  "not": {
+                    "type": "object",
+                    "properties": {
+                      "coordRefSys": {}
+                    },
+                    "required": [
+                      "coordRefSys"
+                    ]
+                  }
+                },
+                {
+                  "not": {
+                    "type": "object",
+                    "properties": {
+                      "measures": {}
+                    },
+                    "required": [
+                      "measures"
+                    ]
+                  }
+                },
+                {
+                  "not": {
+                    "type": "object",
+                    "properties": {
+                      "conformsTo": {}
+                    },
+                    "required": [
+                      "conformsTo"
+                    ]
+                  }
+                }
+              ]
+            },
+            "lower": {
+              "type": "number"
+            },
+            "upper": {
+              "type": "number"
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox3d"
+            }
+          }
+        },
+        "MultiPrism": {
+          "title": "JSON-FG Multi-Prism",
+          "type": "object",
+          "required": [
+            "type",
+            "prisms"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "MultiPrism"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "prisms": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Prism"
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "coordRefSys": {}
+                      },
+                      "required": [
+                        "coordRefSys"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "measures": {}
+                      },
+                      "required": [
+                        "measures"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "conformsTo": {}
+                      },
+                      "required": [
+                        "conformsTo"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox3d"
+            }
+          }
+        },
+        "CircularString": {
+          "title": "JSON-FG CircularString",
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "CircularString"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "coordinates": {
+              "type": "array",
+              "oneOf": [
+                {
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                {
+                  "minItems": 5,
+                  "maxItems": 5
+                },
+                {
+                  "minItems": 7,
+                  "maxItems": 7
+                },
+                {
+                  "minItems": 9,
+                  "maxItems": 9
+                },
+                {
+                  "minItems": 11,
+                  "maxItems": 11
+                }
+              ],
+              "items": {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/position"
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "CompoundCurve": {
+          "title": "JSON-FG CompoundCurve",
+          "type": "object",
+          "required": [
+            "type",
+            "geometries"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "CompoundCurve"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "geometries": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/LineString"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CircularString"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CustomCurve"
+                      }
+                    ]
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "coordRefSys": {}
+                      },
+                      "required": [
+                        "coordRefSys"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "measures": {}
+                      },
+                      "required": [
+                        "measures"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "conformsTo": {}
+                      },
+                      "required": [
+                        "conformsTo"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "CurvePolygon": {
+          "title": "JSON-FG CurvePolygon",
+          "type": "object",
+          "required": [
+            "type",
+            "geometries"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "CurvePolygon"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "geometries": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CompoundCurve"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/LineString"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CircularString"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CustomCurve"
+                      }
+                    ]
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "coordRefSys": {}
+                      },
+                      "required": [
+                        "coordRefSys"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "measures": {}
+                      },
+                      "required": [
+                        "measures"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "conformsTo": {}
+                      },
+                      "required": [
+                        "conformsTo"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "MultiCurve": {
+          "title": "JSON-FG MultiCurve",
+          "type": "object",
+          "required": [
+            "type",
+            "geometries"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "MultiCurve"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "geometries": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CompoundCurve"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/LineString"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CircularString"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CustomCurve"
+                      }
+                    ]
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "coordRefSys": {}
+                      },
+                      "required": [
+                        "coordRefSys"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "measures": {}
+                      },
+                      "required": [
+                        "measures"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "conformsTo": {}
+                      },
+                      "required": [
+                        "conformsTo"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "MultiSurface": {
+          "title": "JSON-FG MultiSurface",
+          "type": "object",
+          "required": [
+            "type",
+            "geometries"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "MultiSurface"
+              ]
+            },
+            "coordRefSys": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/coordrefsys"
+            },
+            "measures": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/measures"
+            },
+            "geometries": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CurvePolygon"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/Polygon"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/CustomSurface"
+                      }
+                    ]
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "coordRefSys": {}
+                      },
+                      "required": [
+                        "coordRefSys"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "measures": {}
+                      },
+                      "required": [
+                        "measures"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "type": "object",
+                      "properties": {
+                        "conformsTo": {}
+                      },
+                      "required": [
+                        "conformsTo"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "bbox": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox"
+            }
+          }
+        },
+        "position": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "type": "number"
+          }
+        },
+        "position3d": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 4,
+          "items": {
+            "type": "number"
+          }
+        },
+        "bbox": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox2d"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/geometry-object/$defs/bbox3d"
+            }
+          ]
+        },
+        "bbox2d": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "number"
+          }
+        },
+        "bbox3d": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "x-schema-source": "https://schemas.opengis.net/json-fg/geometry-object.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/geometry-object.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "AbstractDataComponent": {
+      "description": "Abstract base class for all data components",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/AbstractSweIdentifiable"
+        },
+        {
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "updatable": {
+              "description": "Specifies if the value of a data component can be updated externally (i.e., is variable)",
+              "type": "boolean",
+              "default": false
+            },
+            "optional": {
+              "description": "Specifies if the data for this component can be omitted in the datastream",
+              "type": "boolean",
+              "default": false
+            },
+            "definition": {
+              "description": "The definition of the property whose value is provided by this component (semantic link)",
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      ],
+      "x-schema-source": "https://schemas.opengis.net/sweCommon/3.0/json/AbstractDataComponent.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "AbstractSweIdentifiable": {
+      "description": "Base substitution groups for all SWE Common objects with identification metadata",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/basicTypes/$defs/AbstractSWE"
+        },
+        {
+          "properties": {
+            "label": {
+              "description": "Human readable label for the object",
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "description": "Human readable description of the object",
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ],
+      "x-schema-source": "https://schemas.opengis.net/sweCommon/3.0/json/AbstractSweIdentifiable.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    }
+  },
+  "description": "Borehole feature type and supporting types (BoreholeDetails, intervals,\ncollar, log, drilling method).",
+  "$defs": {
+    "Borehole": {
+      "$anchor": "Borehole",
+      "description": "A Borehole is the generalized term for any narrow shaft drilled in the ground, either vertically, horizontally, or inclined.",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/feature"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "logElement": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "allOf": [
+                              {
+                                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                              }
+                            ]
+                          },
+                          {
+                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#BoreholeInterval"
+                          }
+                        ]
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The property logElement is an association between a Borehole and a BoreholeInterval instance to describe measured downhole intervals and their observed features.",
+                  "nullable": true
+                },
+                "downholeDrillingDetails": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#DrillingDetails"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The property downholeDrillingDetails:DrillingDetails specifies the drilling method and borehole diameter for intervals down the borehole.",
+                  "nullable": true
+                },
+                "referenceLocation": {
+                  "oneOf": [
+                    {
+                      "oneOf": [
+                        {
+                          "allOf": [
+                            {
+                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                            }
+                          ]
+                        },
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#OriginPosition"
+                        }
+                      ]
+                    }
+                  ],
+                  "description": "The property referenceLocation is an association between a Borehole and an OriginPosition corresponding to the start point of a borehole log. This may correspond to the borehole collar location (e.g., kelly bush).",
+                  "nullable": true
+                },
+                "indexData": {
+                  "oneOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#BoreholeDetails"
+                    }
+                  ],
+                  "description": "The property indexData:BoreholeDetails describes metadata about a borehole, such as the operator, the custodian, dates of drilling, etc.",
+                  "nullable": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "BoreholeDetails": {
+      "$anchor": "BoreholeDetails",
+      "description": "BoreholeDetails describes borehole-specific index data, often termed \u201cheader information\u201d. It contains metadata about the parties involved in the drilling, the storage of drilled material and other information relevant to the borehole as a whole. Properties that may vary along the borehole path are managed in DrillingDetails",
+      "type": "object",
+      "properties": {
+        "operator": {
+          "oneOf": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                },
+                {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
+                }
+              ]
+            }
+          ],
+          "description": "The operator property is an association between a BoreholeDetails and a CIT:CI_ResponsibleParty describing the organisation responsible for commissioning the borehole (as opposed to actually drilling the borehole).",
+          "nullable": true
+        },
+        "driller": {
+          "oneOf": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                },
+                {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
+                }
+              ]
+            }
+          ],
+          "description": "The driller property is an association between a BoreholeDetails and a CIT:CI_ResponsibleParty describing of the organisation responsible for drilling the borehole (as opposed to commissioning the borehole).",
+          "nullable": true
+        },
+        "dateOfDrilling": {
+          "oneOf": [
+            {
+              "allOf": [
+                {
+                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                }
+              ]
+            }
+          ],
+          "description": "The property dateOfDrilling:TM_Period describes the time period during which drilling of the borehole occurred.",
+          "nullable": true
+        },
+        "startPoint": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#BoreholeStartPointCode"
+            }
+          ],
+          "description": "The property startPoint:BoreholeStartPointCode provides a term from a controlled vocabulary indicating the named position relative to ground surface where the borehole commenced. (e.g., natural ground surface, open pit floor, underground, offshore)",
+          "nullable": true
+        },
+        "inclinationType": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#BoreholeInclinationCode"
+            }
+          ],
+          "description": "The property inclinationType:BoreholeInclinationCode contains a term from a controlled vocabulary indicating the inclination type of the borehole. Appropriate terms would include vertical; inclined up; inclined down, horizontal.",
+          "nullable": true
+        },
+        "boreholeMaterialCustodian": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
+                  }
+                ]
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The property boreholeMaterialCustodian is an association between BoreholeDetails and a CIT:CI_ResponsibleParty describing the organisation that is custodian of the drilled material recovered from the borehole.",
+          "nullable": true
+        },
+        "purpose": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#BoreholePurposeCode"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The property purpose:BoreholePurposeCode contains a term from a controlled vocabulary describing the purpose for which the borehole was drilled. e.g., site investigation, mineral exploration, hydrocarbon exploration, water resources.",
+          "nullable": true
+        },
+        "dataCustodian": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                  },
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
+                  }
+                ]
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The dataCustodian is an association between a BoreholeDetails and a CIT:CI_ResponsibleParty describing the custodian (person or organisation) that is the custodian of data pertaining to this borehole.",
+          "nullable": true
+        },
+        "boreholeLength": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/Quantity"
+            }
+          ],
+          "description": "The property boreholeLength (SWE::Quantity) contains a measurement (a value and a unit of measurement) corresponding to the \"length\" of a borehole determined by the data provider (i.e., \"length\" can have different sources, like drillers measurement, loggers measurement, survey measurement, etc.).",
+          "nullable": true
+        }
+      }
+    },
+    "BoreholeDrillingMethodCode": {
+      "$anchor": "BoreholeDrillingMethodCode",
+      "description": "This class is an indicative placeholder only for a vocabulary of terms describing the borehole drilling method. Users are encouraged to use a vocabulary of terms managed by the CGI vocabularies working group. (eg; auger, hand auger, air core, cable tool, diamond core, rotary air blast, etc)",
+      "type": "string",
+      "format": "uri"
+    },
+    "BoreholeInclinationCode": {
+      "$anchor": "BoreholeInclinationCode",
+      "description": "This class is an indicative placeholder only for a vocabulary of terms describing the general orientation of a borehole. Users are encouraged to use a vocabulary of terms managed by the CGI vocabularies working group. For example: vertical horizontal inclined up inclined down",
+      "type": "string",
+      "format": "uri"
+    },
+    "BoreholeInterval": {
+      "$anchor": "BoreholeInterval",
+      "description": "A BoreholeInterval is similar to a MappedFeature whose shape is 1-D interval and uses the SRS of the containing borehole. The \"mappedIntervalBegin\" and \"mappedIntervalEnd\" properties are alternative to the 1D geometry to overcome problems with the delivery and ease of queryability of 1D GML shapes.",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/feature"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "observationMethod": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/Category"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The observationMethod property (SWE::Category) contains a term from a controlled vocabulary that describes the method used to observe the properties of the borehole.",
+                  "nullable": true
+                },
+                "specification": {
+                  "oneOf": [
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                        }
+                      ]
+                    }
+                  ],
+                  "description": "The specification property is an association between a BoreholeInterval and a GFI_Feature, a domain feature that is sampled by the interval (e.g., a GeologicUnit). It is semantically equivalent to O&M ISO19156 \"sampledFeature\".",
+                  "nullable": true
+                },
+                "mappedIntervalBegin": {
+                  "oneOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/Quantity"
+                    }
+                  ],
+                  "description": "The property mappedIntervalBegin (SWE::Quantity) is a measurement (a value and a unit of measurement) corresponding to the measured distance of the start of the mapped interval along the path of the borehole. The measured value must be less than or equal to the mappedIntervalEnd value.",
+                  "nullable": true
+                },
+                "mappedIntervalEnd": {
+                  "oneOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/Quantity"
+                    }
+                  ],
+                  "description": "The mappedIntervalEnd property (SWE::Quantity) is a measurement (a value and a unit of measure) corresponding to the measured distance of the end of the mapped interval along the path of the borehole. The measured value must be greater than or equal to the mappedIntervalBegin value.",
+                  "nullable": true
+                },
+                "collectionIdentifier": {
+                  "oneOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                        },
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_definedTerm_schema"
+                        },
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema"
+                        }
+                      ]
+                    }
+                  ],
+                  "description": "The collectionIdentifier:ScopedName is a string unique within a scope that identifies a collection which forms a set BoreholeIntervals. This allows description of multiple downhole logs for a single borehole. The name should identify a particular log observation event.",
+                  "nullable": true
+                },
+                "shape": {
+                  "oneOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/Geometry"
+                    }
+                  ],
+                  "description": "The property shape:GM_Object is a 1-D interval (e.g., a \"from\" and \"to\", or \"top\" and \"base\" measurement) covering the same distance as mappedIntervalBegin and mappedIntervalEnd. The geometry shall use a reference to the borehole as the CRS of the containing borehole.",
+                  "nullable": true
+                },
+                "parentBorehole": {
+                  "oneOf": [
+                    {
+                      "oneOf": [
+                        {
+                          "allOf": [
+                            {
+                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                            }
+                          ]
+                        },
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#Borehole"
+                        }
+                      ]
+                    }
+                  ],
+                  "description": "The property parentBorehole is an association between a BoreholeInterval and a Borehole to which the interval belongs.",
+                  "nullable": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "BoreholePurposeCode": {
+      "$anchor": "BoreholePurposeCode",
+      "description": "Place holder for a vocabulary containing terms describing the purpose for which the borehole was drilled. eg, mineral exploration, water pumping, site evaluation, stratigraphic research, etc",
+      "type": "string",
+      "format": "uri"
+    },
+    "BoreholeStartPointCode": {
+      "$anchor": "BoreholeStartPointCode",
+      "description": "This class is an indicative placeholder only for a vocabulary of terms describing the location of the start of a borehole. Users are encouraged to use a vocabulary of terms managed by the CGI vocabularies working group. Examples may include: natural ground surface - drilling started from a natural topographic surface open pit floor or wall - drilling started from the wall of an open pit or quarry underground - drilling started from an underground location, such as a driveway, chamber or open-stope from pre-existing hole - new drill hole spudded off the wall of an existing hole",
+      "type": "string",
+      "format": "uri"
+    },
+    "DrillingDetails": {
+      "$anchor": "DrillingDetails",
+      "description": "DrillingDetails is a class that captures the description of drilling methods and hole diameters down the drilling path. Properties that apply to the Borehole as a whole are managed in BoreholeDetails.",
+      "type": "object",
+      "properties": {
+        "drillingMethod": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#BoreholeDrillingMethodCode"
+            }
+          ],
+          "description": "The drillingMethod:BoreholeDrillingMethodCode property contains a term from a controlled vocabulary indicating the drilling method used. Appropriate terms would include rotary air blast, auger, diamond core, air core, etc.",
+          "nullable": true
+        },
+        "boreholeDiameter": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/Quantity"
+            }
+          ],
+          "description": "The boreholeDiameter property (SWE::Quantity) contains a measurement (a value and a unit of measure) corresponding to the diameter of the drilled hole.",
+          "nullable": true
+        },
+        "intervalBegin": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/Quantity"
+            }
+          ],
+          "description": "The intervalBegin property (SWE::Quantity) contains a measurement (a value and a unit of measurement) that corresponds to the measured distance of the start of the interval along the path of the borehole. The measured value must be less than or equal to the intervalEnd value.",
+          "nullable": true
+        },
+        "intervalEnd": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/Quantity"
+            }
+          ],
+          "description": "The property intervalEnd (SWE::Quantity) contains a measurement (a value and a unit of measurement) of the measured distance of the end of the interval along the path of the borehole. The measured value must be greater than or equal to the intervalBegin value.",
+          "nullable": true
+        }
+      }
+    },
+    "OriginPosition": {
+      "$anchor": "OriginPosition",
+      "description": "A borehole OriginPosition is a feature corresponding to the start point of a borehole log. This may correspond to the borehole collar location (e.g., kelly bush).",
+      "allOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/feature"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "location": {
+                  "oneOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/x-defs/Point"
+                    }
+                  ],
+                  "description": "The property location contains a geometry corresponding to the location of the borehole collar.",
+                  "nullable": true
+                },
+                "elevation": {
+                  "oneOf": [
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                        }
+                      ]
+                    }
+                  ],
+                  "description": "The elevation:DirectPosition property is a compromise approach to supply elevation explicitly for location; this is to allow for software that cannot process 3-D GM_Point. Null shall be used if elevation is unknown. A DirectPosition shall have a dimension of 1, and CRS will be a \"vertical\" CRS (e.g. EPSG CRSs in the range 5600-5799).",
+                  "nullable": true
+                },
+                "relatedBorehole": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "allOf": [
+                              {
+                                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#/$defs/SCLinkObject"
+                              }
+                            ]
+                          },
+                          {
+                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.json#Borehole"
+                          }
+                        ]
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The hole that has this collar for its start point",
+                  "nullable": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "x-schema-id": "https://schemas.usgin.org/geosci-json/gsmBorehole/gsmBoreholeSchema.json",
+  "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+}

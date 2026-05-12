@@ -1,0 +1,50 @@
+{
+  "$comment": "Material collection example constructed from Loop3D-GSO GSO-ExampleRockMaterialBolsaQuartzite.ttl. Two features: a RockMaterial (Bolsa Quartzite basal arkose) and one of its Mineral constituents (Quartz). The RockMaterial branch carries a RockMaterialDescription in gbEarthMaterialDescription[]; the Mineral feature uses the inherited EarthMaterialAbstractDescription slot.",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "featureType": "RockMaterial",
+      "id": "https://w3id.org/gso/1.0/ex-materialCb#Bolsa_Quartzite_Material",
+      "geometry": null,
+      "place": null,
+      "time": null,
+      "properties": {
+        "color": [
+          {
+            "type": "Category",
+            "label": "light grey to white",
+            "definition": "http://example.org/cgi/color/light-grey"
+          }
+        ],
+        "purpose": "typicalNorm",
+        "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/arkose",
+        "gbEarthMaterialDescription": [
+          {
+            "$comment": "RockMaterialDescription — content shape, not strictly required by schema",
+            "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/arkose",
+            "consolidationDegree": {
+              "type": "Category",
+              "definition": "http://resource.geosciml.org/classifier/cgi/consolidationdegree",
+              "label": "consolidated",
+              "value": "http://resource.geosciml.org/classifier/cgi/consolidationdegree/consolidated"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "Mineral",
+      "id": "https://w3id.org/gso/1.0/ex-materialCb#Quartz_grains",
+      "geometry": null,
+      "place": null,
+      "time": null,
+      "properties": {
+        "mineralName": [
+          "http://resource.geosciml.org/classifier/cgi/mineralname/quartz"
+        ]
+      }
+    }
+  ]
+}

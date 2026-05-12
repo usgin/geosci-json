@@ -1,0 +1,2631 @@
+x-defs:
+  QuantityRange:
+    description: Decimal pair for specifying a quantity range with a unit of measure
+    type: object
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
+    - properties:
+        type:
+          enum:
+          - QuantityRange
+        uom:
+          description: Unit of measure used to express the value of this data component
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/UnitReference
+        constraint:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedValues
+        nilValues:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NilValuesNumber
+        value:
+          type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+      required:
+      - type
+      - definition
+      - label
+      - uom
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  Category:
+    description: Scalar component used to represent a categorical value as a simple
+      token identifying a term in a code space
+    type: object
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
+    - properties:
+        type:
+          enum:
+          - Category
+        codeSpace:
+          description: Name of the dictionary where the possible values for this component
+            are listed and defined
+          type: string
+          format: uri
+        constraint:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedTokens
+        nilValues:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NilValuesText
+        value:
+          type: string
+      required:
+      - type
+      - definition
+      - label
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  feature:
+    title: a JSON-FG Feature
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    type: object
+    required:
+    - type
+    - geometry
+    - properties
+    properties:
+      type:
+        enum:
+        - Feature
+      id:
+        oneOf:
+        - type: number
+        - type: string
+      featureType:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/featuretype
+      featureSchema:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/featureschema
+      time:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/time
+      coordRefSys:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+      measures:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+      place:
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/place
+        - not:
+            type: object
+            properties:
+              coordRefSys: {}
+            required:
+            - coordRefSys
+        - not:
+            type: object
+            properties:
+              measures: {}
+            required:
+            - measures
+        - not:
+            type: object
+            properties:
+              conformsTo: {}
+            required:
+            - conformsTo
+      geometry:
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry
+        - not:
+            type: object
+            properties:
+              conformsTo: {}
+            required:
+            - conformsTo
+      properties:
+        oneOf:
+        - type: object
+        nullable: true
+    x-schema-source: https://schemas.opengis.net/json-fg/feature.json
+    x-schema-id: https://schemas.opengis.net/json-fg/feature.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  Geometry:
+    title: GeoJSON Geometry
+    oneOf:
+    - title: GeoJSON Point
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON LineString
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - LineString
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON Polygon
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 4
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON MultiPoint
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON MultiLineString
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiLineString
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON MultiPolygon
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              minItems: 4
+              items:
+                type: array
+                minItems: 2
+                items:
+                  type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    x-schema-source: https://geojson.org/schema/Geometry.json
+    x-schema-id: https://geojson.org/schema/Geometry.json
+    x-schema-version: http://json-schema.org/draft-07/schema#
+  Quantity:
+    description: Scalar component with decimal representation and a unit of measure
+      used to store value of a continuous quantity
+    type: object
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
+    - properties:
+        type:
+          enum:
+          - Quantity
+        uom:
+          description: Unit of measure used to express the value of this data component
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/UnitReference
+        constraint:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedValues
+        nilValues:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NilValuesNumber
+        value:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+      required:
+      - type
+      - definition
+      - label
+      - uom
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  AbstractSimpleComponent:
+    type: object
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/AbstractDataComponent
+    - properties:
+        referenceFrame:
+          description: Frame of reference (usually temporal or spatial) with respect
+            to which the value of the component is expressed. A reference frame anchors
+            a value to a real world datum.
+          type: string
+          format: uri-reference
+        axisID:
+          description: Specifies the reference axis (refer to CRS axisID). The reference
+            frame URI should also be specified unless it is inherited from parent
+            Vector
+          type: string
+          minLength: 1
+        nilValues:
+          description: Defines reserved values with special meaning (e.g., missing,
+            out-of-range, etc.)
+        constraint: {}
+        value:
+          description: Inline value(s) for the component. This property is optional
+            to enable structure to act as a schema for values provided separately
+            (e.g., in a datastream)
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/AbstractSimpleComponent.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  basicTypes:
+    $defs:
+      AbstractSWE:
+        description: Base substitution groups for all SWE Common objects other than
+          value objects
+        type: object
+        properties:
+          id:
+            description: The ID of the object, referenceable using a URI fragment
+            type: string
+            minLength: 1
+        x-schema-version: https://json-schema.org/draft/2020-12/schema
+      UnitReference:
+        type: object
+        properties:
+          label:
+            description: A human readable label for the unit
+            type: string
+            minLength: 1
+          symbol:
+            description: The preferred unit symbol to use when presenting the data
+              in a UI (use the UCUM code instead if no symbol is provided)
+            type: string
+            minLength: 1
+          code:
+            type: string
+            minLength: 1
+          href:
+            type: string
+            format: uri
+        anyOf:
+        - title: UCUM Code
+          required:
+          - code
+        - title: URI
+          required:
+          - href
+      AllowedTokens:
+        description: Defines permitted values for the component, as an enumerated
+          list of tokens or a regular expression pattern
+        type: object
+        oneOf:
+        - title: Enum Values
+          properties:
+            type:
+              enum:
+              - AllowedTokens
+            values:
+              type: array
+              minItems: 1
+              items:
+                type: string
+                minLength: 1
+          required:
+          - values
+        - title: Regex Pattern
+          properties:
+            type:
+              enum:
+              - AllowedTokens
+            pattern:
+              type: string
+              format: regex
+              minLength: 1
+          required:
+          - pattern
+      AllowedValues:
+        description: Defines the permitted values for the component as an enumerated
+          list and/or a list of inclusive ranges
+        type: object
+        properties:
+          type:
+            enum:
+            - AllowedValues
+          values:
+            type: array
+            minItems: 1
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+          intervals:
+            type: array
+            minItems: 1
+            items:
+              type: array
+              minItems: 2
+              maxItems: 2
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+          significantFigures:
+            type: integer
+            minimum: 1
+            maximum: 40
+        anyOf:
+        - title: Enum Values
+          required:
+          - values
+        - title: Intervals
+          required:
+          - intervals
+      AllowedTimes:
+        description: Defines the permitted values for the component, as a time range
+          or an enumerated list of time values
+        type: object
+        properties:
+          type:
+            enum:
+            - AllowedTimes
+          values:
+            type: array
+            minItems: 1
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial
+          intervals:
+            type: array
+            items:
+              type: array
+              minItems: 2
+              maxItems: 2
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial
+          significantFigures:
+            type: integer
+            minimum: 1
+            maximum: 40
+        anyOf:
+        - title: Enum Values
+          required:
+          - values
+        - title: Intervals
+          required:
+          - intervals
+      NilValuesText:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            reason:
+              description: The reason for using the reserved value
+              type: string
+              format: uri
+            value:
+              description: The reserved value itself
+              type: string
+          required:
+          - reason
+          - value
+          additionalProperties: false
+      NilValuesInteger:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            reason:
+              description: The reason for using the reserved value
+              type: string
+              format: uri
+            value:
+              description: The reserved value itself
+              type: integer
+          required:
+          - reason
+          - value
+          additionalProperties: false
+      NilValuesNumber:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            reason:
+              description: The reason for using the reserved value
+              type: string
+              format: uri
+            value:
+              description: The reserved value itself
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+          required:
+          - reason
+          - value
+          additionalProperties: false
+      NilValuesTime:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            reason:
+              description: The reason for using the reserved value
+              type: string
+              format: uri
+            value:
+              description: The reserved value itself
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial
+          required:
+          - reason
+          - value
+          additionalProperties: false
+      SoftNamedProperty:
+        type: object
+        properties:
+          name:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NameToken
+        required:
+        - name
+      NameToken:
+        type: string
+        minLength: 1
+        pattern: ^[A-Za-z][A-Za-z0-9_\-]*$
+      AssociationAttributeGroup:
+        type: object
+        properties:
+          href:
+            type: string
+            format: uri-reference
+          role:
+            type: string
+            format: uri
+          arcrole:
+            type: string
+            format: uri
+          title:
+            type: string
+            minLength: 1
+        required:
+        - href
+      NumberOrSpecial:
+        oneOf:
+        - title: Number
+          type: number
+        - title: Special Value
+          type: string
+          enum:
+          - NaN
+          - Infinity
+          - +Infinity
+          - -Infinity
+      DateTimeNumberOrSpecial:
+        oneOf:
+        - title: Date/Time
+          type: string
+          format: date-time
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+      ElementCount:
+        type: object
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
+        - properties:
+            constraint:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedValues
+            value:
+              description: Value is optional, to enable structure to act as a schema
+                for values provided using other encodings
+              type: integer
+      EncodedValues:
+        oneOf:
+        - type: array
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AssociationAttributeGroup
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/basicTypes.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  featuretype:
+    title: the value of the 'featureType' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    type: string
+    x-schema-source: https://schemas.opengis.net/json-fg/featuretype.json
+    x-schema-id: https://schemas.opengis.net/json-fg/featuretype.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  featureschema:
+    title: the value of the 'featureSchema' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - type: string
+      format: uri
+    - type: object
+      additionalProperties:
+        type: string
+        format: uri
+    x-schema-source: https://schemas.opengis.net/json-fg/featureschema.json
+    x-schema-id: https://schemas.opengis.net/json-fg/featureschema.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  time:
+    title: the value of the 'time' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - type: object
+      minProperties: 1
+      properties:
+        date:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/time/$defs/date
+        timestamp:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
+        interval:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/time/$defs/interval
+    $defs:
+      date:
+        type: string
+        pattern: ^\d{4}-\d{2}-\d{2}$
+      timestamp:
+        type: string
+        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$
+      interval:
+        type: array
+        minItems: 2
+        maxItems: 2
+        items:
+          anyOf:
+          - oneOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/time/$defs/date
+            - type: string
+              enum:
+              - ..
+          - oneOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
+            - type: string
+              enum:
+              - ..
+    x-schema-source: https://schemas.opengis.net/json-fg/time.json
+    x-schema-id: https://schemas.opengis.net/json-fg/time.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+    nullable: true
+  coordrefsys:
+    title: the value of the 'coordRefSys' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/single-refsys
+    - type: array
+      items:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/single-refsys
+      minItems: 2
+    $defs:
+      single-refsys:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/refsys-simpleref
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/refsys-byref
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/refsys-custom
+      refsys-simpleref:
+        type: string
+        format: uri-reference
+      refsys-byref:
+        type: object
+        required:
+        - type
+        - href
+        properties:
+          type:
+            type: string
+            enum:
+            - Reference
+          href:
+            type: string
+            format: uri-reference
+          epoch:
+            type: number
+      refsys-custom:
+        type: object
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            not:
+              enum:
+              - Reference
+    x-schema-source: https://schemas.opengis.net/json-fg/coordrefsys.json
+    x-schema-id: https://schemas.opengis.net/json-fg/coordrefsys.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  measures:
+    title: the value of the 'measures' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      unit:
+        type: string
+      description:
+        type: string
+    required:
+    - enabled
+    x-schema-source: https://schemas.opengis.net/json-fg/measures.json
+    x-schema-id: https://schemas.opengis.net/json-fg/measures.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  place:
+    title: the value of the 'place' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object
+    x-schema-source: https://schemas.opengis.net/json-fg/place.json
+    x-schema-id: https://schemas.opengis.net/json-fg/place.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+    nullable: true
+  geometry:
+    title: the geometries allowed as values of the 'geometry' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    allOf:
+    - oneOf:
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Point
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPoint
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/LineString
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiLineString
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Polygon
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPolygon
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/GeometryCollection
+      nullable: true
+    - not:
+        type: object
+        properties:
+          coordRefSys: {}
+        required:
+        - coordRefSys
+    - not:
+        type: object
+        properties:
+          measures: {}
+        required:
+        - measures
+    x-schema-source: https://schemas.opengis.net/json-fg/geometry.json
+    x-schema-id: https://schemas.opengis.net/json-fg/geometry.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  AbstractDataComponent:
+    description: Abstract base class for all data components
+    type: object
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/AbstractSweIdentifiable
+    - properties:
+        type:
+          type: string
+        updatable:
+          description: Specifies if the value of a data component can be updated externally
+            (i.e., is variable)
+          type: boolean
+          default: false
+        optional:
+          description: Specifies if the data for this component can be omitted in
+            the datastream
+          type: boolean
+          default: false
+        definition:
+          description: The definition of the property whose value is provided by this
+            component (semantic link)
+          type: string
+          format: uri
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/AbstractDataComponent.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  geometry-object:
+    title: a JSON-FG geometry
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Point
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPoint
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/LineString
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiLineString
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Polygon
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPolygon
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/GeometryCollection
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Polyhedron
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPolyhedron
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Prism
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPrism
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CircularString
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CompoundCurve
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CurvePolygon
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiCurve
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiSurface
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CustomGeometry
+    $defs:
+      CustomGeometry:
+        title: A custom geometry
+        description: A custom geometry object type that is not one of the standard
+          GeoJSON geometry types or one of the JSON-FG extensions. It is defined as
+          an object with a "type" member that is not one of the GeoJSON or JSON-FG
+          types. This is a mechanism to keep the schema extensible so that validation
+          will also validate JSON-FG root objects with new geometry types that are
+          not (yet) standardized. Readers of JSON-FG root objects that encouter an
+          unknown geometry type should ignore it and treat it as if the value would
+          be 'null'.
+        type: object
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            not:
+              enum:
+              - Feature
+              - FeatureCollection
+              - Point
+              - MultiPoint
+              - LineString
+              - MultiLineString
+              - Polygon
+              - MultiPolygon
+              - Polyhedron
+              - MultiPolyhedron
+              - Prism
+              - MultiPrism
+              - CircularString
+              - CompoundCurve
+              - CurvePolygon
+              - MultiCurve
+              - MultiSurface
+              - GeometryCollection
+      CustomCurve:
+        title: A custom curve object
+        description: A custom curve object type that is not one of the standard GeoJSON
+          curve types or one of the JSON-FG extensions. It is defined as an object
+          with a "type" member that is not one of the GeoJSON or JSON-FG types. This
+          is a mechanism to keep the schema extensible so that validation will also
+          validate JSON-FG root objects with new geometry types that are not (yet)
+          standardized. Readers of JSON-FG root objects that encouter an unknown curve
+          type should ignore it and treat it as if the value would be 'null'.
+        type: object
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            not:
+              enum:
+              - LineString
+              - CircularString
+              - CompoundCurve
+      CustomSurface:
+        title: A custom surface object
+        description: A custom surface object type that is not one of the standard
+          GeoJSON surface types or one of the JSON-FG extensions. It is defined as
+          an object with a "type" member that is not one of the GeoJSON or JSON-FG
+          types. This is a mechanism to keep the schema extensible so that validation
+          will also validate JSON-FG root objects with new geometry types that are
+          not (yet) standardized. Readers of JSON-FG root objects that encouter an
+          unknown surface type should ignore it and treat it as if the value would
+          be 'null'.
+        type: object
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            not:
+              enum:
+              - Polygon
+              - CurvePolygon
+      Point:
+        title: GeoJSON Point with additional 'coordRefSys' and 'measures' members
+        type: object
+        required:
+        - type
+        - coordinates
+        properties:
+          type:
+            enum:
+            - Point
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          coordinates:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/position
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      LineString:
+        title: GeoJSON LineString with additional 'coordRefSys' and 'measures' members
+        type: object
+        required:
+        - type
+        - coordinates
+        properties:
+          type:
+            enum:
+            - LineString
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          coordinates:
+            type: array
+            minItems: 2
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/position
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      Polygon:
+        title: GeoJSON Polygon with additional 'coordRefSys' and 'measures' members
+        type: object
+        required:
+        - type
+        - coordinates
+        properties:
+          type:
+            enum:
+            - Polygon
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          coordinates:
+            type: array
+            items:
+              type: array
+              minItems: 4
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/position
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      MultiPoint:
+        title: GeoJSON MultiPoint with additional 'coordRefSys' and 'measures' members
+        type: object
+        required:
+        - type
+        - coordinates
+        properties:
+          type:
+            enum:
+            - MultiPoint
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          coordinates:
+            type: array
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/position
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      MultiLineString:
+        title: GeoJSON MultiLineString with additional 'coordRefSys' and 'measures'
+          members
+        type: object
+        required:
+        - type
+        - coordinates
+        properties:
+          type:
+            enum:
+            - MultiLineString
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          coordinates:
+            type: array
+            items:
+              type: array
+              minItems: 2
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/position
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      MultiPolygon:
+        title: GeoJSON MultiPolygon with additional 'coordRefSys' and 'measures' members
+        type: object
+        required:
+        - type
+        - coordinates
+        properties:
+          type:
+            enum:
+            - MultiPolygon
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          coordinates:
+            type: array
+            items:
+              type: array
+              items:
+                type: array
+                minItems: 4
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/position
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      GeometryCollection:
+        title: GeoJSON GeometryCollection with additional 'coordRefSys' and 'measures'
+          members
+        type: object
+        required:
+        - type
+        - geometries
+        properties:
+          type:
+            enum:
+            - GeometryCollection
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          geometries:
+            type: array
+            items:
+              allOf:
+              - oneOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Point
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPoint
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/LineString
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiLineString
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Polygon
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPolygon
+              - not:
+                  type: object
+                  properties:
+                    coordRefSys: {}
+                  required:
+                  - coordRefSys
+              - not:
+                  type: object
+                  properties:
+                    measures: {}
+                  required:
+                  - measures
+              - not:
+                  type: object
+                  properties:
+                    conformsTo: {}
+                  required:
+                  - conformsTo
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      Polyhedron:
+        title: JSON-FG Polyhedron
+        type: object
+        required:
+        - type
+        - coordinates
+        properties:
+          type:
+            enum:
+            - Polyhedron
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          coordinates:
+            type: array
+            minItems: 1
+            items:
+              type: array
+              minItems: 1
+              items:
+                type: array
+                minItems: 1
+                items:
+                  type: array
+                  minItems: 4
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/position3d
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox3d
+      MultiPolyhedron:
+        title: JSON-FG MultiPolyhedron
+        type: object
+        required:
+        - type
+        - coordinates
+        properties:
+          type:
+            enum:
+            - MultiPolyhedron
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          coordinates:
+            type: array
+            items:
+              type: array
+              minItems: 1
+              items:
+                type: array
+                minItems: 1
+                items:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: array
+                    minItems: 4
+                    items:
+                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/position3d
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox3d
+      Prism:
+        title: JSON-FG Prism
+        type: object
+        required:
+        - type
+        - base
+        - upper
+        properties:
+          type:
+            enum:
+            - Prism
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          base:
+            allOf:
+            - oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Point
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPoint
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/LineString
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiLineString
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Polygon
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPolygon
+            - not:
+                type: object
+                properties:
+                  coordRefSys: {}
+                required:
+                - coordRefSys
+            - not:
+                type: object
+                properties:
+                  measures: {}
+                required:
+                - measures
+            - not:
+                type: object
+                properties:
+                  conformsTo: {}
+                required:
+                - conformsTo
+          lower:
+            type: number
+          upper:
+            type: number
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox3d
+      MultiPrism:
+        title: JSON-FG Multi-Prism
+        type: object
+        required:
+        - type
+        - prisms
+        properties:
+          type:
+            enum:
+            - MultiPrism
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          prisms:
+            type: array
+            items:
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Prism
+              - not:
+                  type: object
+                  properties:
+                    coordRefSys: {}
+                  required:
+                  - coordRefSys
+              - not:
+                  type: object
+                  properties:
+                    measures: {}
+                  required:
+                  - measures
+              - not:
+                  type: object
+                  properties:
+                    conformsTo: {}
+                  required:
+                  - conformsTo
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox3d
+      CircularString:
+        title: JSON-FG CircularString
+        type: object
+        required:
+        - type
+        - coordinates
+        properties:
+          type:
+            enum:
+            - CircularString
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          coordinates:
+            type: array
+            oneOf:
+            - minItems: 3
+              maxItems: 3
+            - minItems: 5
+              maxItems: 5
+            - minItems: 7
+              maxItems: 7
+            - minItems: 9
+              maxItems: 9
+            - minItems: 11
+              maxItems: 11
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/position
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      CompoundCurve:
+        title: JSON-FG CompoundCurve
+        type: object
+        required:
+        - type
+        - geometries
+        properties:
+          type:
+            enum:
+            - CompoundCurve
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          geometries:
+            type: array
+            minItems: 1
+            items:
+              allOf:
+              - oneOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/LineString
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CircularString
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CustomCurve
+              - not:
+                  type: object
+                  properties:
+                    coordRefSys: {}
+                  required:
+                  - coordRefSys
+              - not:
+                  type: object
+                  properties:
+                    measures: {}
+                  required:
+                  - measures
+              - not:
+                  type: object
+                  properties:
+                    conformsTo: {}
+                  required:
+                  - conformsTo
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      CurvePolygon:
+        title: JSON-FG CurvePolygon
+        type: object
+        required:
+        - type
+        - geometries
+        properties:
+          type:
+            enum:
+            - CurvePolygon
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          geometries:
+            type: array
+            minItems: 1
+            items:
+              allOf:
+              - oneOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CompoundCurve
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/LineString
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CircularString
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CustomCurve
+              - not:
+                  type: object
+                  properties:
+                    coordRefSys: {}
+                  required:
+                  - coordRefSys
+              - not:
+                  type: object
+                  properties:
+                    measures: {}
+                  required:
+                  - measures
+              - not:
+                  type: object
+                  properties:
+                    conformsTo: {}
+                  required:
+                  - conformsTo
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      MultiCurve:
+        title: JSON-FG MultiCurve
+        type: object
+        required:
+        - type
+        - geometries
+        properties:
+          type:
+            enum:
+            - MultiCurve
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          geometries:
+            type: array
+            minItems: 1
+            items:
+              allOf:
+              - oneOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CompoundCurve
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/LineString
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CircularString
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CustomCurve
+              - not:
+                  type: object
+                  properties:
+                    coordRefSys: {}
+                  required:
+                  - coordRefSys
+              - not:
+                  type: object
+                  properties:
+                    measures: {}
+                  required:
+                  - measures
+              - not:
+                  type: object
+                  properties:
+                    conformsTo: {}
+                  required:
+                  - conformsTo
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      MultiSurface:
+        title: JSON-FG MultiSurface
+        type: object
+        required:
+        - type
+        - geometries
+        properties:
+          type:
+            enum:
+            - MultiSurface
+          coordRefSys:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/coordrefsys
+          measures:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/measures
+          geometries:
+            type: array
+            minItems: 1
+            items:
+              allOf:
+              - oneOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CurvePolygon
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Polygon
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/CustomSurface
+              - not:
+                  type: object
+                  properties:
+                    coordRefSys: {}
+                  required:
+                  - coordRefSys
+              - not:
+                  type: object
+                  properties:
+                    measures: {}
+                  required:
+                  - measures
+              - not:
+                  type: object
+                  properties:
+                    conformsTo: {}
+                  required:
+                  - conformsTo
+          bbox:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox
+      position:
+        type: array
+        minItems: 2
+        maxItems: 4
+        items:
+          type: number
+      position3d:
+        type: array
+        minItems: 3
+        maxItems: 4
+        items:
+          type: number
+      bbox:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox2d
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/bbox3d
+      bbox2d:
+        type: array
+        minItems: 4
+        maxItems: 4
+        items:
+          type: number
+      bbox3d:
+        type: array
+        minItems: 6
+        maxItems: 6
+        items:
+          type: number
+    x-schema-source: https://schemas.opengis.net/json-fg/geometry-object.json
+    x-schema-id: https://schemas.opengis.net/json-fg/geometry-object.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  AbstractSweIdentifiable:
+    description: Base substitution groups for all SWE Common objects with identification
+      metadata
+    type: object
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AbstractSWE
+    - properties:
+        label:
+          description: Human readable label for the object
+          type: string
+          minLength: 1
+        description:
+          description: Human readable description of the object
+          type: string
+          minLength: 1
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/AbstractSweIdentifiable.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+description: 'GeoSciML 4.1 Basic application schema. Core feature types
+
+  (GeologicFeature, MappedFeature, GeologicUnit, GeologicStructure
+
+  subtypes, GeomorphologicFeature, EarthMaterial, Contact, Fold,
+
+  Foliation, ShearDisplacementStructure, GeologicEvent) plus the
+
+  shared GSML_DataTypes and Collection containers.'
+$defs:
+  AbstractFeatureRelation:
+    $anchor: AbstractFeatureRelation
+    description: Association class placeholder to implement relation between geologic
+      features
+    type: object
+  AnthropogenicGeomorphologicFeature:
+    $anchor: AnthropogenicGeomorphologicFeature
+    description: An anthropogenic geomorphologic feature is a geomorphologic feature
+      (i.e., landform) which has been created by human activity. For example, a dredged
+      channel, midden, open pit or reclaimed land.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeomorphologicFeature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            anthropogenicGeomorphologicFeatureType:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#AnthropogenicGeomorphologicFeatureTypeTerm
+              description: 'The anthropogenicGeomorphologicFeatureType: AnthropogenicGeomorphologicFeatureTypeTerm
+                is a reference from a controlled vocabulary describing the type of
+                geomorphologic feature.'
+              nullable: true
+  AnthropogenicGeomorphologicFeatureTypeTerm:
+    $anchor: AnthropogenicGeomorphologicFeatureTypeTerm
+    description: Refers to a vocabulary of terms describing the type of anthropogenic
+      geomorphologic feature
+    type: string
+    format: uri
+  CollectionTypeTerm:
+    $anchor: CollectionTypeTerm
+    description: 'Types of collections of geological and geophysical objects. Examples:
+      "borehole collection", "geological map", "geological model", "geophysical object
+      collection" (from INSPIRE)'
+    type: string
+    format: uri
+  CompositionPart:
+    $anchor: CompositionPart
+    description: CompositionPart represents the composition of a geologic unit in
+      terms of earth material constituents (CompoundMaterial). It decomposes the material
+      making of the unit into parts having distinct roles and proportions.
+    type: object
+    properties:
+      role:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#CompositionPartRoleTerm
+        description: The property role:CompositionPartRoleTerm defines the relationship
+          of the CompoundMaterial constituent in the geologic unit, e.g. vein, interbedded
+          constituent, layers, dominant constituent.
+        nullable: true
+      proportion:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/QuantityRange
+        description: The proportion property (SWE::QuantityRange) specifies the fraction
+          of the geologic unit composed of the compound material.
+        nullable: true
+      material:
+        oneOf:
+        - oneOf:
+          - allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#CompoundMaterial
+        description: The material:EarthMaterial property contains the material description
+          of the composing part.
+        nullable: true
+  CompositionPartRoleTerm:
+    $anchor: CompositionPartRoleTerm
+    description: This class is a blank placeholder for a vocabulary of terms to describe
+      the role that a compositional part plays in a geologic unit.
+    type: string
+    format: uri
+  CompoundMaterial:
+    $anchor: CompoundMaterial
+    description: A CompoundMaterial is an EarthMaterial composed of particles made
+      of EarthMaterials, possibly including other CompoundMaterials. This class is
+      provided primarily as an extensibility point for related domain models that
+      wish to import and build on GeoSciML, and wish to define material types that
+      are compound but are not rock or rock-like material. In the context of GeoSciML
+      "RockMaterial" should be used to describe units made of rock.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#EarthMaterial
+    - type: object
+  Contact:
+    $anchor: Contact
+    description: A contact is a general concept representing any kind of surface separating
+      two geologic units, including primary boundaries such as depositional contacts,
+      all kinds of unconformities, intrusive contacts, and gradational contacts, as
+      well as faults that separate geologic units.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicStructure
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            contactType:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#ContactTypeTerm
+              description: The property contactType:ContactTypeTerm classifies the
+                contact (e.g. intrusive, unconformity, bedding surface, lithologic
+                boundary, phase boundary) and is a term from a controlled vocabulary.
+              nullable: true
+            stContactDescription:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#ContactAbstractDescription
+              description: The property stContactDescription:ContactAbstractDescription
+                provides a detailed contact description. This is a stub property in
+                GeoSciML Basic since ContactAbstractDescription is an abstract class
+                with subtypes defined in GeoSciML Extension.
+              nullable: true
+  ContactAbstractDescription:
+    $anchor: ContactAbstractDescription
+    description: An abstract class providing a link between classes in GeoSciMLBasic
+      and GeoSciMLExtended application schemas.
+    type: object
+  ContactTypeTerm:
+    $anchor: ContactTypeTerm
+    description: Refers to a vocabulary of terms describing types of geological contacts
+    type: string
+    format: uri
+  ConventionCode:
+    $anchor: ConventionCode
+    description: "Suggested values: \"dip dip direction\", \"strike dip right hand
+      rule\" (The strike and dip of planar data is listed according to the \u2018right-hand
+      rule\u2019 or, as one looks along the strike direction, the surface dips to
+      the right.) This list is an indicative list only of terms used to describe the
+      convention used for the orientation measurement. Users are encouraged to use
+      a vocabulary of terms managed by the CGI vocabularies working group outside
+      of this model."
+    type: string
+    format: uri
+  DescriptionPurpose:
+    $anchor: DescriptionPurpose
+    description: 'Codes used for the specification of the intended purpose/level of
+      abstraction for a given feature or object instance, ie the reason for the existence
+      of the GeologicFeature. Values: instance, typicalNorm, definingNorm.'
+    type: string
+    enum:
+    - definingNorm
+    - instance
+    - typicalNorm
+  DeterminationMethodTerm:
+    $anchor: DeterminationMethodTerm
+    description: This class is an empty placeholder for a vocabulary of terms describing
+      the method used to determine the measured orientation. Users are encouraged
+      to use a vocabulary of terms managed by the CGI vocabularies working group outside
+      of this model.
+    type: string
+    format: uri
+  EarthMaterial:
+    $anchor: EarthMaterial
+    description: 'The EarthMaterial class holds a description of a naturally occurring
+      substance in the Earth. EarthMaterial represents material composition or substance,
+      and is thus independent of quantity or location. Ideally, EarthMaterials are
+      defined strictly based on physical properties, but because of standard geological
+      usage, genetic interpretations enter into the description as well.  Constraint:
+      self.metadata.hierarchyLevel=feature'
+    type: object
+    properties:
+      color:
+        oneOf:
+        - type: array
+          items:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Category
+          uniqueItems: true
+        description: The color property (SWE::Category) is a term from a controlled
+          vocabulary that specifies the colour of the earth material. Color schemes
+          such as the Munsell rock and soil color schemes may be used.
+        nullable: true
+      purpose:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#DescriptionPurpose
+        description: "The purpose:DescriptionPurpose property provides a specification
+          of the intended purpose or level of abstraction for the given EarthMaterial.
+          The intent is the same a GeologicFeature\u2019s purpose and it shares the
+          same vocabulary (instance, typicalNorm, definingNorm)."
+        nullable: true
+      gbEarthMaterialDescription:
+        oneOf:
+        - type: array
+          items:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#EarthMaterialAbstractDescription
+          uniqueItems: true
+        description: The property gbEarthMaterialDescription:EarthMaterialAbstractDescription
+          provides a detailed earth material description of the part. This property
+          is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is abstract
+          with subtypes defined in GeoSciML Extension.
+        nullable: true
+  EarthMaterialAbstractDescription:
+    $anchor: EarthMaterialAbstractDescription
+    description: Abstract description class for earth material. This class is a placeholder
+      for further extension in Extension package
+    type: object
+  EventProcessTerm:
+    $anchor: EventProcessTerm
+    description: Refers to a vocabulary of terms specifying the process or processes
+      that occurred during an event. Examples include deposition, extrusion, intrusion,
+      cooling.
+    type: string
+    format: uri
+  ExposureTerm:
+    $anchor: ExposureTerm
+    description: This class is a blank placeholder for a vocabulary of terms describing
+      the nature of the expression of the mapped feature at the earth's surface (eg,
+      exposed, concealed)
+    type: string
+    format: uri
+  FaultTypeTerm:
+    $anchor: FaultTypeTerm
+    description: A vocabulary of terms describing the type of shear displacement structure
+      (eg; thrust fault, normal fault, wrench fault)
+    type: string
+    format: uri
+  Fold:
+    $anchor: Fold
+    description: A fold is formed by one or more systematically curved layers, surfaces,
+      or lines in a rock body. A fold denotes a structure formed by the deformation
+      of a geologic structure, such as a contact which the original undeformed geometry
+      is presumed, to form a structure that may be described by the translation of
+      an abstract line (the fold axis) parallel to itself along some curvilinear path
+      (the fold profile). Folds have a hinge zone (zone of maximum curvature along
+      the surface) and limbs (parts of the deformed surface not in the hinge zone).
+      Folds are described by an axial surface, hinge line, profile geometry, the solid
+      angle between the limbs, and the relationships between adjacent folded surfaces
+      if the folded structure is a Layering fabric.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicStructure
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            profileType:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#FoldProfileTypeTerm
+              description: The property profileType:FoldProfileTypeTerm contains a
+                term from a controlled vocabulary specifying the concave/convex geometry
+                of fold relative to earth surface, and relationship to younging direction
+                in folded strata if known. (e.g., antiform, synform, neutral, anticline,
+                syncline, monocline, ptygmatic).
+              nullable: true
+            stFoldDescription:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#FoldAbstractDescription
+              description: The property stFoldDescription:FoldAbstractDescription
+                provides a detailed fold description. This is a stub property in GeoSciML
+                Basic since FoldAbstractDescription is an abstract class with subtypes
+                defined in GeoSciML Extension.
+              nullable: true
+  FoldAbstractDescription:
+    $anchor: FoldAbstractDescription
+    description: An abstract class providing a link between classes in GeoSciMLBasic
+      and GeoSciMLExtended application schemas.
+    type: object
+  FoldProfileTypeTerm:
+    $anchor: FoldProfileTypeTerm
+    description: Refers to a vocabulary of terms specifying concave/convex geometry
+      of fold relative to earth surface, and relationship to younging direction in
+      folded strata if known. antiform, synform, neutral, anticline, syncline, monocline,
+      ptygmatic
+    type: string
+    format: uri
+  Foliation:
+    $anchor: Foliation
+    description: A foliation is a planar arrangement of textural or structural features
+      in any type of rock. It includes any of a wide variety of penetrative planar
+      geological structures that may be present in a rock. Examples include schistosity,
+      mylonitic foliation, penetrative bedding structure (lamination), and cleavage.
+      Following the proposed definition of gneiss by the NADM Science Language Technical
+      Team, penetrative planar foliation defined by layers &gt; 5 mm thick is considered
+      Layering.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicStructure
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            foliationType:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#FoliationTypeTerm
+              description: The foliationType:FoliationTypeTerm property specifies
+                the type of foliation from a controlled vocabulary. Examples include
+                crenulation cleavage, slaty cleavage and schistosity.
+              nullable: true
+            stFoliationDescription:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#FoliationAbstractDescription
+              description: The foliationType:FoliationTypeTerm property specifies
+                the type of foliation from a controlled vocabulary. Examples include
+                crenulation cleavage, slaty cleavage and schistosity.
+              nullable: true
+  FoliationAbstractDescription:
+    $anchor: FoliationAbstractDescription
+    description: 'An abstract class providing a link between classes in GeoSciMLBasic
+      and GeoSciMLExtended application schemas.  Constraint: only one instance of
+      each subtype class is allowed'
+    type: object
+  FoliationTypeTerm:
+    $anchor: FoliationTypeTerm
+    description: Refers to a vocabular of terms defining the type of foliation (eg,
+      crenulation cleavage, gneissic layering, slaty cleavage, schistosity, etc)
+    type: string
+    format: uri
+  GSML:
+    $anchor: GSML
+    description: 'GSML is a collection class grouping a set of features or types which
+      are members of this collection. A collectionType property provides context or
+      purpose.  Constraint: self.metadata.hierarchylevel=dataset'
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/feature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            collectionType:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#CollectionTypeTerm
+              description: The collectionType:CollectionTypeTerm property contains
+                a term from a controlled vocabulary describing the type of collection,
+                such as Geologic Map, Boreholes, 3D models.
+              nullable: true
+            member:
+              type: array
+              minItems: 1
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GSMLitem
+              uniqueItems: true
+              description: The member property is an association that links a GSML
+                instance to features and objects to be included as members of the
+                collection. A collection can be made of heterogeneous items.
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
+  GSML_GeometricDescriptionValue:
+    $anchor: GSML_GeometricDescriptionValue
+    description: GSML_GeometricDescriptionValue is a special abstract data type for
+      descriptions of planar or linear orientations of a geologic feature. Different
+      subtypes allow specifying direction by direction vector (e.g. dip/dip direction),
+      compass point (e.g. NE), or description (e.g. "toward fold hinge", "below').
+    type: object
+    properties:
+      determinationMethod:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#DeterminationMethodTerm
+        description: The determinationMethod:DeterminationMethodTerm property describes
+          the way the orientation value was determined (e.g. measured, inferred from
+          dip slope, etc.) using a reference to a controlled vocabulary.
+        nullable: true
+      descriptiveOrientation:
+        oneOf:
+        - type: string
+        description: The descriptionOrientation:Primitive::CharacterString contains
+          a textual specification of orientation, possibly referencing some local
+          geography (e.g. "toward fold hinge", "below").
+        nullable: true
+  GSML_LinearOrientation:
+    $anchor: GSML_LinearOrientation
+    description: A linear orientation is composed of a trend (the compass orientation
+      of the line) and a plunge (the angle from the horizontal). This vector may be
+      oriented (pointing in a specific direction) or not.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GSML_GeometricDescriptionValue
+    - type: object
+      properties:
+        directed:
+          oneOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#LinearDirectedCode
+          description: The directed:LinearDirectedCode property indicates if the orientation
+            represents a linear feature that is directed, e.g. clast imbrication,
+            mylonitic lineation with sense of shear, slickenlines with displacement
+            direction, rather than undirected (like a fold hinge line or intersection
+            lineations). A code list will indicate which is the directed end of the
+            linear orientation. The value of the property comes from a controlled
+            vocabulary.
+          nullable: true
+        plunge:
+          oneOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/QuantityRange
+          description: The property plunge (SWE::QuantityRange) reports the magnitude
+            of the plunge as an angle from horizontal.
+          nullable: true
+        trend:
+          oneOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/QuantityRange
+          description: The property trend (SWE::QuantityRange) reports the azimuth
+            (compass bearing) value of the linear orientation.
+          nullable: true
+  GSML_PlanarOrientation:
+    $anchor: GSML_PlanarOrientation
+    description: A planar orientation is composed of two values; the azimuth (a compass
+      point) and a dip (the angle from the horizontal). Polarity of the plane indicates
+      whether the planar orientation is associated with a directed feature that is
+      overturned, upright, vertical, etc. There are several conventions to encode
+      a planar orientation and this specification does not impose one but provides
+      a convention property to report it. It must be noted that allowance for different
+      conventions makes manipulation of the data more difficult. Therefore it is recommended
+      that user communities adopt a single measurement convention.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GSML_GeometricDescriptionValue
+    - type: object
+      properties:
+        convention:
+          oneOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#ConventionCode
+          description: The property convention:ConventionCode contains the convention
+            used for the measurement from a controlled vocabulary.
+          nullable: true
+        azimuth:
+          oneOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/QuantityRange
+          description: The azimuth (SWE::QuantityRange) property (compass point, bearing
+            etc.) contains the value of the orientation. The convention property reports
+            how azimuth is interpreted (if it is relative to a quadrant).
+          nullable: true
+        dip:
+          oneOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/QuantityRange
+          description: The dip (SWE::QuantityRange) reports the angle that the structural
+            surface (e.g. bedding, fault plane) makes with the horizontal measured
+            perpendicular to the strike of the structure and in the vertical plane
+            as a numeric value or term.
+          nullable: true
+        polarity:
+          oneOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#PlanarPolarityCode
+          description: The polarity:PolarityCode indicates whether the planar orientation
+            is associated with a directed feature that is overturned, upright, vertical
+            etc., using a controlled vocabulary.
+          nullable: true
+  GSML_QuantityRange:
+    $anchor: GSML_QuantityRange
+    description: "GSML_QuantityRange is a specialization of SWE Common QuantiytyRange
+      (OGC 08-094r1, Clause 7.2.13) where lower and upper values are made explicit.
+      SWE::QuantityRange uses an array of values (RealPair, see Clause 7.2.1) where
+      the lowest value is the first element and the highest the second. This convenience
+      data type has been created as an alternative encoding for implementations that
+      do no support encoding of arrays in a single field (e.g. DBF) or reference to
+      elements in string encoded arrays1 (eg. Filter Encoding Specification 2.0 \u2013
+      OGC 09-029r2). &nbsp;------------------------- 1 SWE RealPair is encoded as
+      space delimited lists (&lt;swe:value&gt;10 300&lt;/swe:value&gt; in XML) , which
+      demands that clients parse the string to extract each token. To build a WFS/FES
+      query that tests the first element, it requires parsing the string either using
+      string-before(swe:value,' ') or tokenize(swe:value,' '). This is cumbersome
+      at best, or not even supported by the server at worst. 09-026r2 Clause 7.4.4
+      describes the minimal XPath supports and string parsing is not present."
+    type: object
+    properties:
+      lowerValue:
+        type: number
+        description: The property lowerValue:Real contains the lower bound of the
+          range. It shall be a copy of inherited SWE::QuantityRange::value[0].
+      upperValue:
+        type: number
+        description: The property upperValue:Real contains the upper bound of the
+          range. It shall be a copy of inherited SWE::QuantityRange::value[1].
+    required:
+    - lowerValue
+    - upperValue
+  GSML_Vector:
+    $anchor: GSML_Vector
+    description: A GSML_Vector is a data type representing a linear orientation with
+      a magnitude (a quantity assigned to this vector). If the magnitude is unknown,
+      a GSML_LinearOrientation shall be used.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GSML_LinearOrientation
+    - type: object
+      properties:
+        magnitude:
+          oneOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/QuantityRange
+          description: The magnitude property (SWE::QuantityRange) reports the magnitude
+            of the vector.
+          nullable: true
+  GSMLitem:
+    $anchor: GSMLitem
+    description: GSMLItem constrains the collection members to instances of EarthMaterial,
+      GeologicFeature, GM_Object, MappedFeature, AbstractFeatureRelation and OM::SF_SamplingFeature.
+    oneOf:
+    - oneOf:
+      - allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#EarthMaterial
+    - oneOf:
+      - allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicFeature
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Geometry
+    - oneOf:
+      - allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#MappedFeature
+    - oneOf:
+      - allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#AbstractFeatureRelation
+    - allOf:
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+  GeochronologicEraTerm:
+    $anchor: GeochronologicEraTerm
+    description: Term from a Geochronological vocabulary
+    type: string
+    format: uri
+  GeologicEvent:
+    $anchor: GeologicEvent
+    description: A GeologicEvent is an identifiable event during which one or more
+      geological processes act to modify geological entities. It may have a specified
+      geologic age (numeric age or GeochologicEraTerm) and may have specified environments
+      and processes. An example might be a cratonic uplift event during which erosion,
+      sedimentation, and volcanism all take place.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicFeature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            eventProcess:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#EventProcessTerm
+                uniqueItems: true
+              description: The eventProcess:EventProcessTerm property provides a term
+                from a controlled vocabulary specifying the process or processes that
+                occurred during the event. Examples include deposition, extrusion,
+                intrusion, cooling.
+              nullable: true
+            numericAge:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#NumericAgeRange
+              description: The numericAge:NumericAgeRange property provides an age
+                in absolute year before present (BP). Present is defined by convention
+                to be January 1st 1950 (although van der Plitch & Hogg , suggests
+                this convention to be restricted to radiocarbon estimations).
+              nullable: true
+            olderNamedAge:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeochronologicEraTerm
+              description: The property olderNamedAge:GeochronologicalEraTerm defines
+                the older boundary of age of an event expressed using a geochronologic
+                era defined according to a geologic time scale as per the GeologicTime
+                schema (eg, the International Commission on Stratigraphy Chronostratigraphic
+                Chart - http://www.stratigraphy.org/index.php/ics-chart-timescale).
+              nullable: true
+            youngerNamedAge:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeochronologicEraTerm
+              description: The property youngerNamedAge:GeochronologicalEraTerm defines
+                the younger boundary of age of event expressed using a geochronologic
+                era defined according to a geologic time scale per the GeologicTime
+                schema. (eg, the International Commission on Stratigraphy Chronostratigraphic
+                Chart - http://www.stratigraphy.org/index.php/ics-chart-timescale).
+              nullable: true
+            eventEnvironment:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Category
+                uniqueItems: true
+              description: "The eventEnvironment property (SWE::Category) is a category
+                from a controlled vocabulary identifying the physical setting within
+                which a GeologicEvent takes place. Event environment is construed
+                broadly to include physical settings on the Earth surface specified
+                by climate, tectonics, physiography or geography, and settings in
+                the Earth\u2019s interior specified by pressure, temperature, chemical
+                environment, or tectonics."
+              nullable: true
+            gaEventDescription:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicEventAbstractDescription
+                uniqueItems: true
+              description: The property geEventDescription:GeologicEventAbstractDescription
+                contains a detailed event description. This is a stub property in
+                GeoSciML Basic since GeologicEventAbstractDescription is abstract
+                and with subtypes defined in GeoSciML Extension.
+              nullable: true
+  GeologicEventAbstractDescription:
+    $anchor: GeologicEventAbstractDescription
+    description: Stub property class to allow extended event related properties.
+    type: object
+  GeologicFeature:
+    $anchor: GeologicFeature
+    description: "The abstract GeologicFeature class represents a conceptual feature
+      that is hypothesized to exist coherently in the world. It corresponds with a
+      \"legend item\" from a traditional geologic map and its instance acts as the
+      \"description package\". The description package is classified according to
+      its intended purpose as a typicalNorm, definingNorm or instance. GeologicFeature
+      can be used outside the context of a map (it can lack a MappedFeature), for
+      example when describing typical norms (describing expected property from a feature)
+      or defining norms (describing properties required from a feature to be classifying
+      in a group, such as given geologic unit). A GeologicFeature appearing on a map
+      is considered as an \u201Cinstance\u201D.  Constraint: self.metadata.hierarchyLevel=(feature
+      or dataset or series)"
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/feature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            observationMethod:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Category
+                uniqueItems: true
+              description: The GeologicFeature observationMethod (SWE::Category) specifies
+                the approach to acquiring the collection of attribute values that
+                constitute an individual feature instance (e.g. point count, brunton
+                compass on site, air photo interpretation, field observation, hand
+                specimen, laboratory, aerial photography, creative imagination). ObservationMethod
+                is a convenience property that provides a simple approach to observation
+                metadata when data are reported using a feature view (as opposed to
+                observation view). This property corresponds (loosely) to ISO19115
+                Lineage.
+              nullable: true
+            purpose:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#DescriptionPurpose
+              description: 'The property purpose:DescriptionPurpose specifies the
+                intended purpose/level of abstraction for a given feature or object
+                instance. The possible values are: instance, typicalNorm, and definingNorm.'
+              nullable: true
+            classifier:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Category
+                uniqueItems: true
+              description: The classifier (SWE::Category) contains a standard description
+                or definition of the feature type (e.g., the definition of a particular
+                geologic unit in a stratigraphic lexicon).
+              nullable: true
+            relatedFeature:
+              oneOf:
+              - type: array
+                items:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicFeature
+                uniqueItems: true
+              description: A relatedFeature is a general structure used to define
+                relationships between any features or objects within GeoSciML. Relationships
+                are always binary and directional. There is always a single source
+                and a single target for a given FeatureRelation (which is abstract
+                in GeoSciML Basic). The relationship is always defined from the perspective
+                of the Source and is generally an active verb.
+              nullable: true
+            geologicHistory:
+              oneOf:
+              - type: array
+                items:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicEvent
+                uniqueItems: true
+              description: The geologicHistory is an association that relates one
+                or more GeologicEvents to a GeologicFeature to describe their age
+                or geologic history. Normally, GeoSciML uses the generic relatedFeature::GeologicRelation
+                to associate GeologicFeature with other GeologicFeatures, including
+                GeologicEvent. However, this design was deemed too complex for GeoSciML
+                Basic and is therefore only available from the GeoSciML Extension
+                package.
+              nullable: true
+            occurrence:
+              oneOf:
+              - type: array
+                items:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#MappedFeature
+                uniqueItems: true
+              description: The occurrence property is an association that links a
+                notional geologic feature with any number of mapped features (MappedFeature).
+                A geologic feature, such as a geologic unit may be linked to mapped
+                features from a number of different maps.
+              nullable: true
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
+  GeologicStructure:
+    $anchor: GeologicStructure
+    description: A geologic structure is a configuration of matter in the Earth based
+      on describable inhomogeneity, pattern, or fracture in an earth material. The
+      identity of a GeologicStructure is independent of the material that is the substrate
+      for the structure. The general GeologicFeatureRelation (available in the Extension
+      package) is used to associate penetrative GeologicStructures with GeologicUnits.
+      GeoSciML Basic only provides a limited set of core structures (Contact, Fold,
+      ShearDisplacementStructure and Foliation) with a single property to categorise
+      them. Supplemental properties and geologic structure types are available from
+      the Extension package.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicFeature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties: {}
+  GeologicUnit:
+    $anchor: GeologicUnit
+    description: 'Conceptually, a GeologicUnit may represent a body of material in
+      the Earth whose complete and precise extent is inferred to exist (e.g., North
+      American Data Model GeologicUnit, Stratigraphic unit in the sense of NACSN,
+      or International Stratigraphic Code ), or a classifier used to characterize
+      parts of the Earth (e.g. lithologic map unit like ''granitic rock'' or ''alluvial
+      deposit'', surficial units like ''till'' or ''old alluvium''). It includes both
+      formal units (i.e. formally adopted and named in an official lexicon) and informal
+      units (i.e. named but not promoted to a lexicon) and unnamed units (i.e., recognizable,
+      described and delineable in the field but not otherwise formalised). In simpler
+      terms, a geologic unit is a package of earth material (generally rock).  Constraint:
+      target of composition is only CompositionPart  Constraint: target of geologicHistory
+      is only GeologicEvent'
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicFeature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            geologicUnitType:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicUnitTypeTerm
+              description: The property geologicUnitType:GeologicUnitTypeTerm provides
+                a term from a controlled vocabulary defining the type of geologic
+                unit. Logical constraints of definition of unit and valid property
+                cardinalities should be contained in the definition. Use of the CGI
+                Geologic Unit Type vocabulary (e.g., http://resource.geosciml.org/classifierscheme/cgi/201211/geologicunittype)
+                is recommended.
+              nullable: true
+            rank:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#RankTerm
+              description: 'The property rank:RankTerm contains a term that classifies
+                the geologic unit in a generalization hierarchy from most local/smallest
+                volume to most regional/largest. Examples: group, subgroup, formation,
+                member, bed, intrusion, complex, batholith'
+              nullable: true
+            gbMaterialDescription:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#EarthMaterialAbstractDescription
+                uniqueItems: true
+              description: The property gbMaterialDescription:EarthMaterialAbstractDescription
+                is a placeholder that provides detailed material description. This
+                is a stub property in GeoSciML Basic as EarthMaterialAbstractDescription
+                is abstract with subtypes defined in GeoSciML Extension.
+              nullable: true
+            hierarchyLink:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicUnitHierarchy
+                uniqueItems: true
+              description: The property hierarchyLink is an association that links
+                a GeologicUnit with a GeologicUnitHierarchy to represent containment
+                of a part GeologicUnit within another GeologicUnit. It indicates a
+                subsidiary unit with its role and proportion with respect to the container
+                unit. For example, members are described as part of formations, or
+                different facies can be described as parts of a GeologicUnit.
+              nullable: true
+            gbUnitDescription:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicUnitAbstractDescription
+                uniqueItems: true
+              description: The property gbUnitDescription:GeologicUnitAbstractDescriptio
+                is a placeholder that provides detailed material description. This
+                is a stub property in GeoSciML Basic as GeologicUnitAbstractDescription
+                is abstract with subtypes defined in GeoSciML Extension.
+              nullable: true
+            composition:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#CompositionPart
+                uniqueItems: true
+              description: The property composition is an association that links a
+                GeologicUnit with CompositionParts to describe the material composition
+                of the GeologicUnit (e.g., a detailed, instance specific, lithologic
+                description)
+              nullable: true
+  GeologicUnitAbstractDescription:
+    $anchor: GeologicUnitAbstractDescription
+    description: Abstract description class for geologic units. This class is a placeholder
+      for further extension in Extension package
+    type: object
+  GeologicUnitHierarchy:
+    $anchor: GeologicUnitHierarchy
+    description: GeologicUnitHierarchy associates a GeologicUnit with another GeologicUnit
+      that is a proper part of that unit. Parts may be formal or notional. Formal
+      parts refer to a specific body of rock, as in formal stratigraphic members.
+      Notional parts refer to assemblages of particular EarthMaterials with particular
+      internal structure, which may be repeated in various places within a unit (e.g.
+      'turbidite sequence', 'point bar assemblage', 'leucosome veins').
+    type: object
+    properties:
+      role:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicUnitHierarchyRoleTerm
+        description: The role:GeologicUnitHierarchyRoleTerm property provides a term
+          describing the nature of the parts, e.g. facies, stratigraphic, interbeds,
+          geographic, eastern facies.
+        nullable: true
+      proportion:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/QuantityRange
+        description: The proportion property (SWE::QuantityRange) provides a quantity
+          that represents the fraction of the geologic unit formed by the part.
+        nullable: true
+      targetUnit:
+        oneOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicUnit
+        description: The property targetUnit is an association that specifies exactly
+          one GeologicUnit that is a proper part of another GeologicUnit.
+    required:
+    - targetUnit
+  GeologicUnitHierarchyRoleTerm:
+    $anchor: GeologicUnitHierarchyRoleTerm
+    description: Role of the unit in the hierarchy
+    type: string
+    format: uri
+  GeologicUnitPartRoleTerm:
+    $anchor: GeologicUnitPartRoleTerm
+    description: This class is a blank placeholder for a vocabulary of terms describing
+      the nature of the parts of a geologic unit, e.g. facies, stratigraphic, interbeds,
+      geographic, eastern facies,
+    type: string
+    format: uri
+  GeologicUnitTypeTerm:
+    $anchor: GeologicUnitTypeTerm
+    description: 'This class is an indicative placeholder only for a vocabulary of
+      terms describing the type of geologic unit. Users are encouraged to use the
+      vocabulary of unit types provided by the CGI vocabularies working group. Example
+      values: GeologicUnit AllostratigraphicUnit AlterationUnit ArtificialGround BiostratigraphicUnit
+      ChronostratigraphicUnit DeformationUnit ExcavationUnit GeophysicalUnit LithodemicUnit
+      LithogeneticUnit LithologicUnit LithostratigraphicUnit LithotectonicUnit MagnetostratigraphicUnit
+      MassMovementUnit Pedoderm PedostratigraphicUnit PolarityChronostratigraphicUnit'
+    type: string
+    format: uri
+  GeomorphologicFeature:
+    $anchor: GeomorphologicFeature
+    description: A geomorphologic feature is a kind of GeologicFeature describing
+      the shape and nature of the Earth's land surface. These landforms may be created
+      by natural Earth processes (e.g., river channel, beach, moraine or mountain)
+      or through human (anthropogenic) activity (e.g., dredged channel, reclaimed
+      land, mine waste dumps). In GeoSciML, the geomorphologic feature is modelled
+      as a feature related (through unitDescription property) to a GeologicUnit that
+      composes the form.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicFeature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            unitDescription:
+              oneOf:
+              - type: array
+                items:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicUnit
+                uniqueItems: true
+              description: The unitDescription property is an association that links
+                the geomorphologic feature to a geologic description (e.g., related
+                stratigraphic units and earth materials).
+              nullable: true
+            gmFeatureDescription:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeomorphologicUnitAbstractDescription
+                uniqueItems: true
+              description: The property gmFeatureDescription:GeomorphologicUnitAbstractDescription
+                provides a detailed morphologic description. This is a stub property
+                in GeoSciML Basic since GeomorphologicUnitAbstractDescription is an
+                abstract class with no concrete subtype in GeoSciML Basic.
+              nullable: true
+  GeomorphologicUnitAbstractDescription:
+    $anchor: GeomorphologicUnitAbstractDescription
+    description: 'Detailed geomorphologic unit description placeholder (stub class)
+      for GeomorphologicUnit  Constraint: Only one instance of each subtype is allowed'
+    type: object
+  LinearDirectedCode:
+    $anchor: LinearDirectedCode
+    description: eg, "directed" (indicates that the orientation is directed) "directed
+      down" (indicates that the linear orientation is directed below the horizon)
+      "directed up" (indicates that the linear orientation is directed above the horizon)
+      This list is an indicative example list only of terms used to describe the values
+      to use for terms related to directedness of linear orientations. Users are encouraged
+      to use a vocabulary of terms managed by the CGI vocabularies working group outside
+      of this model.
+    type: string
+    format: uri
+  LithologyTerm:
+    $anchor: LithologyTerm
+    description: Refers to a vocabulary of terms describing the lithology of the compound
+      earth material (eg, granite, sandstone, schist)
+    type: string
+    format: uri
+  MappedFeature:
+    $anchor: MappedFeature
+    description: 'A MappedFeature is part of a geological interpretation. It provides
+      a link between a notional feature (description package) and one spatial representation
+      of it, or part of it (exposures, surface traces and intercepts, etc.). The mapped
+      features are the elements that compose a map, a cross-section, a borehole log,
+      or any other representation. The mappingFrame identifies the domain being mapped
+      by the geometries. For typical geological maps, the mapping frame is the surface
+      of the earth (the 2.5D interface between the surface of the bedrock and whatever
+      sits on it; atmosphere or overburden material for bedrock maps). It can also
+      be abstract frames, such as the arbitrary plane that forms a mine level or a
+      cross-section, the 3D volume enclosing an ore body or the line that approximate
+      the path of a borehole.  Constraint: self.metadata.hierarchyLevel=(feature or
+      dataset or series)  Constraint: self.shape contained in samplingFrame.shape'
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/feature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            observationMethod:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Category
+                uniqueItems: true
+              description: The observationMethod property (SWE::Category) contains
+                an element in a list of categories (a controlled vocabulary) describing
+                how the spatial extent of the mapped feature was determined.
+              nullable: true
+            positionalAccuracy:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Quantity
+              description: The positionalAccuracy property (SWE::Quantity) provides
+                a quantitative value defining the radius of an uncertainty buffer
+                around a MappedFeature (e.g., a positionalAccuracy of 100 m for a
+                line feature defines a buffer polygon of total width 200 m centred
+                on the line). The property is equivalent to ISO19115 DQ_PositionalAccuracy.
+              nullable: true
+            resolutionRepresentativeFraction:
+              oneOf:
+              - type: integer
+              description: The property resolutionRepresentativeFraction:Integer is
+                an integer value representing the denominator of the representative
+                scale of the spatial feature. (i.e., 10000 = the spatial feature is
+                intended to be represented at 1:10,000 scale).
+              nullable: true
+            mappingFrame:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#MappingFrameTerm
+              description: The mappingFrame:MappingFrameTerm provides a term from
+                a vocabulary indicating the geometric frame on which the MappedFeature
+                is projected. In most situations, mapped features are projected on
+                the earth surface, but there are other contexts, such as a bedrock
+                surface beneath surficial cover materials, a mine level, or a cross
+                section.
+              nullable: true
+            exposure:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#ExposureTerm
+              description: The exposure:ExposureTerm property provides a term for
+                the nature of the expression of the mapped feature at the earth's
+                surface (e.g., exposed, concealed).
+              nullable: true
+            shape:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Geometry
+              description: The shape:GM_Object property contains the geometry delimiting
+                the mapped feature. Note that while in most cases, the geometry will
+                be a 2D polygon, it is not restricted to any dimension. For instance,
+                a lithological log can be represented using of 1D geometries (expressed
+                linearly from the borehole origin), or a geologic unit can be represented
+                using a 3D volume.
+              nullable: true
+            specification:
+              oneOf:
+              - allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/$defs/SCLinkObject
+              description: The specification association links an instance of MappedFeature
+                to the GFI_Feature being mapped. In a geological map, MappedFeatures
+                are used to represent GeologicFeatures, but other features from other
+                domains could be represented.
+              nullable: true
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
+  MappingFrameTerm:
+    $anchor: MappingFrameTerm
+    description: Spatial reference frame within which the MappedFeatures have been
+      observed, such as a surface of mapping. (from INSPIRE)
+    type: string
+    format: uri
+  NaturalGeomorphologicFeature:
+    $anchor: NaturalGeomorphologicFeature
+    description: A natural geomorphologic feature is a geomorphologic feature (i.e.,
+      landform) that has been created by natural Earth processes. For example, river
+      channel, beach ridge, caldera, canyon, moraine or mud flat.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeomorphologicFeature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            naturalGeomorphologicFeatureType:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#NaturalGeomorphologicFeatureTypeTerm
+              description: 'The property naturalGeomorphologicFeatureType: NaturalGeomorphologicFeatureTypeTerm
+                is a reference from a controlled vocabulary describing the type of
+                geomorphologic feature.'
+              nullable: true
+            activity:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Category
+              description: The activity property (SWE::Category) contains a category
+                term from a controlled vocabulary describing the current activity
+                status of the geomorphologic feature (e.g., currently active, dormant,
+                inactive, reactivated, etc.).
+              nullable: true
+  NaturalGeomorphologicFeatureTypeTerm:
+    $anchor: NaturalGeomorphologicFeatureTypeTerm
+    description: Refers to a vocabulary of terms describing the type of natural geomorphologic
+      feature
+    type: string
+    format: uri
+  NumericAgeRange:
+    $anchor: NumericAgeRange
+    description: The NumericAgeRange class represents an absolute age assignment using
+      numeric measurement results.
+    type: object
+    properties:
+      reportingDate:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Quantity
+        description: The reportingDate (SWE::Quantity) property reports a single time
+          coordinate value to report as representative for this NumericAge assignment.
+        nullable: true
+      olderBoundDate:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Quantity
+        description: The olderBoundDate (SWE::Quantity) property reports the older
+          bounding time coordinate in an age range.
+        nullable: true
+      youngerBoundDate:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#/x-defs/Quantity
+        description: The youngerBoundDate (SWE::Quantity) property reports the younger
+          bounding time coordinate in an age range.
+        nullable: true
+  PlanarPolarityCode:
+    $anchor: PlanarPolarityCode
+    description: 'eg: "upright", "overturned", "vertical" This list is an indicative
+      list only of terms used to describe the values to use for expressing overturned
+      or upright facing of planar orientation measurements. Users are encouraged to
+      use a vocabulary of terms managed by the CGI vocabularies working group outside
+      of this model.'
+    type: string
+    format: uri
+  RankTerm:
+    $anchor: RankTerm
+    description: This class is a blank placeholder for a vocabulary of terms describing
+      the rank of a geologic unit (eg, Group, Formation, Member, etc)
+    type: string
+    format: uri
+  RockMaterial:
+    $anchor: RockMaterial
+    description: RockMaterial is a specialized CompoundMaterial that includes consolidated
+      and unconsolidated materials (such as surficial sediments) as well as mixtures
+      of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material
+      is essentially a link to a controlled vocabulary (lithology property) and a
+      color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial
+      nesting) are available in GeoSciML Extension.
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#CompoundMaterial
+    - type: object
+      properties:
+        lithology:
+          oneOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#LithologyTerm
+          description: The lithology:LithologyTerm property provides a term identifying
+            the lithology class from a controlled vocabulary.
+          nullable: true
+  ShearDisplacementStructure:
+    $anchor: ShearDisplacementStructure
+    description: "A shear displacement structure includes all brittle to ductile style
+      structures along which displacement has occurred, from a simple, single 'planar'
+      brittle or ductile surface to a fault system comprised of tens of strands of
+      both brittle and ductile nature. This structure may have some significant thickness
+      (a deformation zone) and have an associated body of deformed rock that may be
+      considered a deformation unit (which geologicUnitType is \u2018DeformationUnit\u2019)
+      which can be associated to the ShearDisplacementStructure using GeologicFeatureRelation
+      from the GeoSciML Extension package"
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#GeologicStructure
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            faultType:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#FaultTypeTerm
+              description: The faultType:FaultTypeTerm property contains a term from
+                a controlled vocabulary describing the type of shear displacement
+                structure (e.g., thrust fault, normal fault or wrench fault).
+              nullable: true
+            stStructureDescription:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.yaml#ShearDisplacementStructureAbstractDescription
+                uniqueItems: true
+              description: The property stStructureDescription:ShearDisplacementStructureAbstractDescription
+                provides a detailed geologic structure description. This is a stub
+                property in GeoSciML Basic since ShearDisplacementStructureAbstractDescription
+                is an abstract class with subtypes defined in GeoSciML Extension.
+              nullable: true
+  ShearDisplacementStructureAbstractDescription:
+    $anchor: ShearDisplacementStructureAbstractDescription
+    description: An abstract class providing a link between classes in GeoSciMLBasic
+      and GeoSciMLExtended application schemas.
+    type: object
+  SCLinkObject:
+    title: link object
+    description: definition of a link object
+    type: object
+    required:
+    - href
+    properties:
+      href:
+        type: string
+        description: Supplies the URI to a remote resource (or resource fragment).
+      rel:
+        type: string
+        description: The type or semantics of the relation.
+      type:
+        type: string
+        description: A hint indicating what the media type of the result of dereferencing
+          the link should be.
+      hreflang:
+        type: string
+        description: A hint indicating what the language of the result of dereferencing
+          the link should be.
+      title:
+        type: string
+        description: Used to label the destination of a link such that it can be used
+          as a human-readable identifier.
+      length:
+        type: integer
+x-schema-id: https://schemas.usgin.org/geosci-json/gsmscimlBasic/gsmscimlBasicSchema.json
+x-schema-version: https://json-schema.org/draft/2020-12/schema

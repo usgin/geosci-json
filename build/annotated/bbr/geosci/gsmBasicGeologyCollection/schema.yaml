@@ -1,0 +1,76 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.usgin.org/geosci-json/gsmBasicGeologyCollection/gsmBasicGeologyCollectionSchema.json
+description: "Basic-profile FeatureCollection. Accepts GeologicUnit, MappedFeature,\nand
+  the four concrete GeologicStructure subtypes (Contact, Fold,\nFoliation, ShearDisplacementStructure).
+  Each item is validated against\nits anchor in gsmscimlBasic. EarthMaterial is omitted
+  (UML \xABType\xBB, not\n\xABFeatureType\xBB)."
+allOf:
+- $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+- type: object
+  properties:
+    features:
+      type: array
+      items:
+        allOf:
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: GeologicUnit
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnit
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: MappedFeature
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#MappedFeature
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Contact
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Contact
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Fold
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Fold
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Foliation
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Foliation
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: ShearDisplacementStructure
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructure
+        - if:
+            not:
+              required:
+              - featureType
+              properties:
+                featureType:
+                  enum:
+                  - GeologicUnit
+                  - MappedFeature
+                  - Contact
+                  - Fold
+                  - Foliation
+                  - ShearDisplacementStructure
+          then: false
