@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.usgin.org/geosci-json/gsmGeologicTime/gsmGeologicTimeSchema.json",
-  "description": "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary\npoints, TemporalReferenceSystem, plus the GeologicAgeDetails extension.\n\nValidates either a single Feature (dispatched by `featureType` to one of: GlobalStratotypePoint, GlobalStratotypeSection, StratigraphicPoint, StratigraphicSection) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "description": "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary\npoints, TemporalReferenceSystem, plus the GeologicAgeDetails extension\n(which contributes GeologicEventDescription, the concrete description\nclass used by GeologicEvent.gaEventDescription).\n\nValidates either a single Feature (dispatched by `featureType` to one of: GlobalStratotypePoint, GlobalStratotypeSection, StratigraphicPoint, StratigraphicSection) or a FeatureCollection whose `features[]` items are dispatched the same way.",
   "if": {
     "type": "object",
     "required": [
@@ -207,8 +207,8 @@
       "description": "GeologicEventDescription provides extended description of geologic events through links to GeochronologicEras in the GeologicTimescale schema.",
       "allOf": [
         {
-          "$ref": "../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEventAbstractDescription",
-          "$comment": "cross-BB supertype reference to GeologicEventAbstractDescription in BB gsmscimlBasic"
+          "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEventAbstractDescription",
+          "$comment": "cross-BB supertype reference to GeologicEventAbstractDescription in BB gsmBasicGeology"
         },
         {
           "type": "object",

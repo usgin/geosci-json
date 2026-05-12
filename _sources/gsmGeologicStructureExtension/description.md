@@ -247,21 +247,21 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#ContactAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#Fold`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#FoldAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#Foliation`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#FoliationAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GSML_LinearOrientation`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GSML_PlanarOrientation`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GSML_Vector`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicStructure`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructureAbstractDescription`
 - `../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#Mineral`
 - `../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#PhysicalDescription`
 - `../gsmGeologicTime/gsmGeologicTimeSchema.json#GeochronologicBoundary`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#ContactAbstractDescription`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#Fold`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#FoldAbstractDescription`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#Foliation`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#FoliationAbstractDescription`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GSML_LinearOrientation`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GSML_PlanarOrientation`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GSML_Vector`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicStructure`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructureAbstractDescription`
 - `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json`

@@ -16,7 +16,7 @@ runs read from cache, cutting per-example validation from minutes to seconds.
 
 Usage:
     python tools/validate_all.py                # validate every BB's examples
-    python tools/validate_all.py gsmscimlBasic  # validate one BB's examples only
+    python tools/validate_all.py gsmBasicGeology  # validate one BB's examples only
 """
 
 from __future__ import annotations
@@ -45,7 +45,6 @@ CACHE_DIR = ROOT / ".schema_cache"
 BASE = "https://schemas.usgin.org/geosci-json"
 
 PROFILE_BBS = {
-    "gsmBasicGeologyCollection",
     "gsmExtendedGeologyCollection",
     "gsmEarthMaterialCollection",
 }

@@ -16,8 +16,8 @@ $defs:
       overlies, offsets, crosscuts, folds, etc. Many other types of relationships can also be accommodated via GeologicRelation,
       for example, topological relations could be described where they are geologically significant.'
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#AbstractFeatureRelation
-      $comment: cross-BB supertype reference to AbstractFeatureRelation in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#AbstractFeatureRelation
+      $comment: cross-BB supertype reference to AbstractFeatureRelation in BB gsmBasicGeology
     - type: object
       properties:
         relationship:

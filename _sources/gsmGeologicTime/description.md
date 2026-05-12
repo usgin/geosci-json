@@ -169,7 +169,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEventAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEventAbstractDescription`
 - `https://schemas.opengis.net/json-fg/feature.json`
 - `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`

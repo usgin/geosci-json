@@ -1,6 +1,6 @@
-# gsmscimlBasic
+# gsmBasicGeology
 
-GeoSciML 4.1 building block `gsmscimlBasic`. `«FeatureType»` classes are encoded as JSON-FG-compliant features; `«DataType»` / `«CodeList»` / `«Union»` classes follow **OGC Best Practice 24-017r1** (*UML to JSON Encoding Rules*).
+GeoSciML 4.1 building block `gsmBasicGeology`. `«FeatureType»` classes are encoded as JSON-FG-compliant features; `«DataType»` / `«CodeList»` / `«Union»` classes follow **OGC Best Practice 24-017r1** (*UML to JSON Encoding Rules*).
 
 Source UML packages: `GeoSciMLBasic`, `Collection`, `GSML_DataTypes`, `GeologicEvent`, `GeologicStructure`, `GeologyBasic`, `Geomorphology`.
 
@@ -464,8 +464,13 @@ Branches (`oneOf`):
 - [contact_complex.json](examples/contact_complex.json)
 - [contact_simple.json](examples/contact_simple.json)
 - [examplegsmscimlBasicMinimal.json](examples/examplegsmscimlBasicMinimal.json)
+- [fc_contacts_complex_GSO.json](examples/fc_contacts_complex_GSO.json)
+- [fc_geologicunit_from_OGC.json](examples/fc_geologicunit_from_OGC.json)
+- [fc_geologicunits_BritishColumbia.json](examples/fc_geologicunits_BritishColumbia.json)
+- [fc_geologicunits_IsleOfWight.json](examples/fc_geologicunits_IsleOfWight.json)
 - [fc_heterogeneous_GSO.json](examples/fc_heterogeneous_GSO.json)
 - [fc_homogeneous_GSO.json](examples/fc_homogeneous_GSO.json)
+- [fc_mixed_from_OGC.json](examples/fc_mixed_from_OGC.json)
 - [fold_complex.json](examples/fold_complex.json)
 - [fold_simple.json](examples/fold_simple.json)
 - [geologic_event_from_GSO.json](examples/geologic_event_from_GSO.json)

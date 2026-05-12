@@ -85,7 +85,7 @@ allOf:
               properties:
                 properties:
                   allOf:
-                  - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial
+                  - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial
                   - type: object
                     properties:
                       gbEarthMaterialDescription:
@@ -112,7 +112,7 @@ allOf:
               properties:
                 properties:
                   allOf:
-                  - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#CompoundMaterial
+                  - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#CompoundMaterial
                   - type: object
                     properties:
                       gbEarthMaterialDescription:

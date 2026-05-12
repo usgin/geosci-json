@@ -289,8 +289,8 @@ $defs:
               - oneOf:
                 - $ref: '#/$defs/SCLinkObject'
                   $comment: by-reference link to GeologicEvent
-                - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent
-                  $comment: cross-BB inline reference to GeologicEvent in BB gsmscimlBasic
+                - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent
+                  $comment: cross-BB inline reference to GeologicEvent in BB gsmBasicGeology
               description: The interpretedAge property is an association between a GeochronologicInterpretation and a GeologicEvent
                 that describes the dated event, process and environment.
             isotopicEvent:

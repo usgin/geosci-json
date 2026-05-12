@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.usgin.org/geosci-json/gsmscimlBasic/gsmscimlBasicSchema.json",
-  "description": "GeoSciML 4.1 Basic application schema. Core feature types\n(GeologicFeature, MappedFeature, GeologicUnit, GeologicStructure\nsubtypes, GeomorphologicFeature, EarthMaterial, Contact, Fold,\nFoliation, ShearDisplacementStructure, GeologicEvent) plus the\nshared GSML_DataTypes and Collection containers.\n\nValidates either a single Feature (dispatched by `featureType` to one of: AnthropogenicGeomorphologicFeature, Contact, Fold, Foliation, GeologicEvent, GeologicUnit, MappedFeature, NaturalGeomorphologicFeature, ShearDisplacementStructure) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "$id": "https://schemas.usgin.org/geosci-json/gsmBasicGeology/gsmBasicGeologySchema.json",
+  "description": "GeoSciML 4.1 Basic application schema. Core feature types\n(GeologicFeature, MappedFeature, GeologicUnit, GeologicStructure\nsubtypes, GeomorphologicFeature, EarthMaterial, Contact, Fold,\nFoliation, ShearDisplacementStructure, GeologicEvent) plus the\nshared GSML_DataTypes and Collection containers. The merged schema\ndispatches all 9 concrete FeatureType classes\n(AnthropogenicGeomorphologicFeature, Contact, Fold, Foliation,\nGeologicEvent, GeologicUnit, MappedFeature,\nNaturalGeomorphologicFeature, ShearDisplacementStructure) and\naccepts either single Features or FeatureCollections at the root.\n\nValidates either a single Feature (dispatched by `featureType` to one of: AnthropogenicGeomorphologicFeature, Contact, Fold, Foliation, GeologicEvent, GeologicUnit, MappedFeature, NaturalGeomorphologicFeature, ShearDisplacementStructure) or a FeatureCollection whose `features[]` items are dispatched the same way.",
   "if": {
     "type": "object",
     "required": [

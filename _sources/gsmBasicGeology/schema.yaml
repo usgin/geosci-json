@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://schemas.usgin.org/geosci-json/gsmscimlBasic/gsmscimlBasicSchema.json
+$id: https://schemas.usgin.org/geosci-json/gsmBasicGeology/gsmBasicGeologySchema.json
 description: 'GeoSciML 4.1 Basic application schema. Core feature types
 
   (GeologicFeature, MappedFeature, GeologicUnit, GeologicStructure
@@ -8,7 +8,17 @@ description: 'GeoSciML 4.1 Basic application schema. Core feature types
 
   Foliation, ShearDisplacementStructure, GeologicEvent) plus the
 
-  shared GSML_DataTypes and Collection containers.
+  shared GSML_DataTypes and Collection containers. The merged schema
+
+  dispatches all 9 concrete FeatureType classes
+
+  (AnthropogenicGeomorphologicFeature, Contact, Fold, Foliation,
+
+  GeologicEvent, GeologicUnit, MappedFeature,
+
+  NaturalGeomorphologicFeature, ShearDisplacementStructure) and
+
+  accepts either single Features or FeatureCollections at the root.
 
 
   Validates either a single Feature (dispatched by `featureType` to one of: AnthropogenicGeomorphologicFeature, Contact, Fold,

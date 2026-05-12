@@ -52,7 +52,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#AbstractFeatureRelation`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#AbstractFeatureRelation`
 
 ## Examples
 

@@ -1,7 +1,7 @@
 {
   "$schema": "metaschema.yaml",
-  "itemIdentifier": "usgin.bbr.geosci.gsmscimlBasic",
-  "name": "gsmscimlBasic",
+  "itemIdentifier": "usgin.bbr.geosci.gsmBasicGeology",
+  "name": "gsmBasicGeology",
   "abstract": "GeoSciML 4.1 Basic application schema. Core feature types",
   "status": "under-development",
   "dateTimeAddition": "2026-05-12T00:00:00Z",

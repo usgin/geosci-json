@@ -15,8 +15,8 @@ $defs:
       representing the various horizons in the profile. Thickness of a weathering profile can be delivered as unitThickness
       of a GeologicUnit of geologicUnitType equal to "AlterationUnit"
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterialAbstractDescription
-      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterialAbstractDescription
+      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology
     - type: object
       properties:
         alterationType:
@@ -33,8 +33,8 @@ $defs:
               oneOf:
               - $ref: '#/$defs/SCLinkObject'
                 $comment: by-reference link to EarthMaterial
-              - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterial
-                $comment: cross-BB inline reference to EarthMaterial in BB gsmscimlBasic
+              - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial
+                $comment: cross-BB inline reference to EarthMaterial in BB gsmBasicGeology
             uniqueItems: true
           description: The property alterationProduct is an association between the AlterationDescripton and EarthMaterial
             describing the material resulting from the alteration processes, e.g. alteration minerals, saprolite, ferricrete,
@@ -64,8 +64,8 @@ $defs:
           - oneOf:
             - $ref: '#/$defs/SCLinkObject'
               $comment: by-reference link to GeologicEvent
-            - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent
-              $comment: cross-BB inline reference to GeologicEvent in BB gsmscimlBasic
+            - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent
+              $comment: cross-BB inline reference to GeologicEvent in BB gsmBasicGeology
           description: The property alterationEvent is an association between an AlterationDescription and a GeologicEvent
             describing the GeologicEvent associated with the alteration.
   AlterationTypeTerm:
@@ -80,8 +80,8 @@ $defs:
     description: ChemicalComposition is a kind of EarthMaterialDescription that delivers the chemical composition of a geological
       unit or earth material, as a list of element or oxide concentrations.
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterialAbstractDescription
-      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterialAbstractDescription
+      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology
     - type: object
       properties:
         chemicalAnalysis:
@@ -95,8 +95,8 @@ $defs:
     description: The CompoundMaterialDescription class is a kind of EarthMaterialDescription that provides an extended description
       of a compound earth material (i.e., rocks and unconsolidated solid earth materials).
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterialAbstractDescription
-      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterialAbstractDescription
+      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology
     - type: object
       properties:
         compositionCategory:
@@ -169,8 +169,8 @@ $defs:
         - oneOf:
           - $ref: '#/$defs/SCLinkObject'
             $comment: by-reference link to EarthMaterial
-          - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterial
-            $comment: cross-BB inline reference to EarthMaterial in BB gsmscimlBasic
+          - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial
+            $comment: cross-BB inline reference to EarthMaterial in BB gsmBasicGeology
         description: The constituentMaterial property is an association between a ConstituentPart and an EarthMaterial that
           specifies the EarthMaterial that is forming the ConstituentPart.
       constituentParticleGeometry:
@@ -204,8 +204,8 @@ $defs:
       throughout the rock volume at the scale of observation, and are repeated at distances that are small relative to the
       scale of the whole, such that they can be considered to pervade the whole uniformly.
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterialAbstractDescription
-      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterialAbstractDescription
+      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology
     - type: object
       properties:
         fabricType:
@@ -234,8 +234,8 @@ $defs:
       repeated at distances that are small relative to the scale of the whole, such that they can be considered to pervade
       the whole uniformly.
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterial
-      $comment: cross-BB supertype reference to EarthMaterial in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial
+      $comment: cross-BB supertype reference to EarthMaterial in BB gsmBasicGeology
     - type: object
   MetamorphicDescription:
     $anchor: MetamorphicDescription
@@ -245,8 +245,8 @@ $defs:
       if known. A MetamorphicDescription provides a link to the GeologicEvent associated to the metamorphic event.  Constraint:
       metamorphicFacies is not null or metamorphicGrade is not null'
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterialAbstractDescription
-      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterialAbstractDescription
+      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology
     - type: object
       properties:
         metamorphicFacies:
@@ -289,8 +289,8 @@ $defs:
               oneOf:
               - $ref: '#/$defs/SCLinkObject'
                 $comment: by-reference link to EarthMaterial
-              - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterial
-                $comment: cross-BB inline reference to EarthMaterial in BB gsmscimlBasic
+              - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial
+                $comment: cross-BB inline reference to EarthMaterial in BB gsmBasicGeology
             uniqueItems: true
           description: The protolithLithology is an association between a MetamorphicDescription and an EarthMaterial that
             describes the pre-metamorphic lithology for a metamorphosed CompoundMaterial.
@@ -300,8 +300,8 @@ $defs:
           - oneOf:
             - $ref: '#/$defs/SCLinkObject'
               $comment: by-reference link to GeologicEvent
-            - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent
-              $comment: cross-BB inline reference to GeologicEvent in BB gsmscimlBasic
+            - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent
+              $comment: cross-BB inline reference to GeologicEvent in BB gsmBasicGeology
           description: The metamorphicEvent property is an association between a MetamorphicDescription and a GeologicEvent
             that denotes the age, environment and process associated with a particular metamorphic assemblage in a GeologicUnit.
   Mineral:
@@ -311,8 +311,8 @@ $defs:
       mercury as a general exception to the requirement of crystallinity. Also includes crypto-crystalline materials such
       as chalcedony and amorphous silica.
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterial
-      $comment: cross-BB supertype reference to EarthMaterial in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial
+      $comment: cross-BB supertype reference to EarthMaterial in BB gsmBasicGeology
     - type: object
       properties:
         mineralName:
@@ -335,8 +335,8 @@ $defs:
       basis (as distinct from carbonates), and derived from living organisms. It includes high-carbon EarthMaterials such
       as bitumen, peat, and coal. This class is an empty placeholder for extension at a later date, or by other domain models.
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterial
-      $comment: cross-BB supertype reference to EarthMaterial in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial
+      $comment: cross-BB supertype reference to EarthMaterial in BB gsmBasicGeology
     - type: object
   Organism:
     $anchor: Organism
@@ -427,8 +427,8 @@ $defs:
       earth material (EarthMaterial ), or geologic structure (GeologicStructure) (e.g., density, porosity, magnetic susceptibility,
       remanent magnetism). These properties are modelled here as scalar numeric values (SWE::Quantity).
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterialAbstractDescription
-      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterialAbstractDescription
+      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology
     - type: object
       properties:
         propertyName:
@@ -457,8 +457,8 @@ $defs:
     $anchor: RockMaterialDescription
     description: RockMaterialDescription provides extended description of RockMaterial.
     allOf:
-    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterialAbstractDescription
-      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic
+    - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterialAbstractDescription
+      $comment: cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology
     - type: object
       properties:
         consolidationDegree:

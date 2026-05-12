@@ -199,9 +199,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterial`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#EarthMaterialAbstractDescription`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterialAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/DataRecord.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`

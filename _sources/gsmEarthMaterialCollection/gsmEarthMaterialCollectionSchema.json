@@ -125,7 +125,7 @@
                         "properties": {
                           "allOf": [
                             {
-                              "$ref": "../gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial"
+                              "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial"
                             },
                             {
                               "type": "object",
@@ -179,7 +179,7 @@
                         "properties": {
                           "allOf": [
                             {
-                              "$ref": "../gsmscimlBasic/gsmscimlBasicSchema.json#CompoundMaterial"
+                              "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#CompoundMaterial"
                             },
                             {
                               "type": "object",

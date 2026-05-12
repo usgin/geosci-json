@@ -60,8 +60,8 @@
       "description": "GeologicUnitDescription provides for extended description of the characteristics of a geologic unit.",
       "allOf": [
         {
-          "$ref": "../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnitAbstractDescription",
-          "$comment": "cross-BB supertype reference to GeologicUnitAbstractDescription in BB gsmscimlBasic"
+          "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicUnitAbstractDescription",
+          "$comment": "cross-BB supertype reference to GeologicUnitAbstractDescription in BB gsmBasicGeology"
         },
         {
           "type": "object",

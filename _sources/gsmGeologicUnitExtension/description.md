@@ -45,7 +45,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnitAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicUnitAbstractDescription`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json`
 
