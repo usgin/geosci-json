@@ -15,7 +15,7 @@ GeoSciML 4.1 building block `gsmGeologicStructureExtension`. `«FeatureType»` c
 
 Source UML packages: `GeologicStructureDetails`.
 
-Contains 7 feature types, 8 data types, 5 code lists.
+Contains 7 feature types, 9 data types, 5 code lists.
 
 ## Classes in this BB
 
@@ -41,6 +41,7 @@ Contains 7 feature types, 8 data types, 5 code lists.
 | `SeparationValue` | «DataType» | plain JSON object |
 | `ShearDisplacementStructureDescription` | «DataType» | plain JSON object |
 | `SlipComponents` | «DataType» | plain JSON object |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -243,6 +244,8 @@ Properties (own; inherited properties listed in supertype's BB):
 | `horizontalSlip` | (oneOf — see schema) | 0..1 | The property horizontalSlip:GSML_Vector contains a slip component that is horizontal and parallel to strike of the fa… |
 | `throw` | (oneOf — see schema) | 0..1 | The property throw:GSML_Vector contains the vertical component of slip. |
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -270,12 +273,15 @@ Properties (own; inherited properties listed in supertype's BB):
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicStructure`
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial`
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructureAbstractDescription`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json`
 
 ## Examples
 
 - [examplegsmGeologicStructureExtensionMinimal.json](examples/examplegsmGeologicStructureExtensionMinimal.json)
+- [fc_fault_displacement_events_GSO.json](examples/fc_fault_displacement_events_GSO.json)
+- [fc_kanna_thrust_faults_GSO.json](examples/fc_kanna_thrust_faults_GSO.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
@@ -301,6 +307,115 @@ Example instance: examplegsmGeologicStructureExtensionMinimal
 
 ```
 
+
+### fc fault displacement events GSO
+Adapted from Loop3D-GSO/Examples/GSO-ExampleFault2.ttl. The source describes multiple fault structures with associated displacement events. The fault structures themselves are gsmscimlBasic#ShearDisplacementStructure features (referenced by URL via sampledFeature-like links); the EVENTS of fault movement are gsmGeologicStructureExtension#DisplacementEvent features, which is what this BB's dispatcher accepts. Each DisplacementEvent here references the corresponding ShearDisplacementStructure in a by-reference link in `incrementalDisplacement`.
+#### json
+```json
+{
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleFault2.ttl. The source describes multiple fault structures with associated displacement events. The fault structures themselves are gsmscimlBasic#ShearDisplacementStructure features (referenced by URL via sampledFeature-like links); the EVENTS of fault movement are gsmGeologicStructureExtension#DisplacementEvent features, which is what this BB's dispatcher accepts. Each DisplacementEvent here references the corresponding ShearDisplacementStructure in a by-reference link in `incrementalDisplacement`.",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "featureType": "DisplacementEvent",
+      "id": "https://w3id.org/gso/1.0/ex-faults#FaultA_movement_event",
+      "geometry": null,
+      "place": null,
+      "time": null,
+      "properties": {
+        "purpose": "instance",
+        "eventProcess": [
+          "http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"
+        ],
+        "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Triassic",
+        "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Jurassic"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "DisplacementEvent",
+      "id": "https://w3id.org/gso/1.0/ex-faults#FaultB_movement_event",
+      "geometry": null,
+      "place": null,
+      "time": null,
+      "properties": {
+        "purpose": "instance",
+        "eventProcess": [
+          "http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"
+        ],
+        "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Jurassic",
+        "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Cretaceous"
+      }
+    }
+  ]
+}
+
+```
+
+
+### fc kanna thrust faults GSO
+Adapted from Loop3D-GSO/Examples/GSO-ExampleFaultKannaV4Model.ttl. The source defines four Thrust_Fault structures (D02_fault, Fatigue_fault, Simpson_fault, N01_fault) and their displacement events. Crosscut relationships in the TTL (gsrl:crosscuts) link Fatigue → {D02, N01, Simpson}, indicating Fatigue is the youngest. This FC encodes each fault's displacement event as a DisplacementEvent; the cross-cutting age relationships are conveyed through the olderNamedAge/youngerNamedAge ordering and noted in $comments. The fault structures themselves (ShearDisplacementStructure) live in gsmscimlBasic and are by-reference here.
+#### json
+```json
+{
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleFaultKannaV4Model.ttl. The source defines four Thrust_Fault structures (D02_fault, Fatigue_fault, Simpson_fault, N01_fault) and their displacement events. Crosscut relationships in the TTL (gsrl:crosscuts) link Fatigue → {D02, N01, Simpson}, indicating Fatigue is the youngest. This FC encodes each fault's displacement event as a DisplacementEvent; the cross-cutting age relationships are conveyed through the olderNamedAge/youngerNamedAge ordering and noted in $comments. The fault structures themselves (ShearDisplacementStructure) live in gsmscimlBasic and are by-reference here.",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "featureType": "DisplacementEvent",
+      "id": "https://w3id.org/gso/1.0/fautlKannaV4Model#D02_fault_displacement",
+      "geometry": null,
+      "place": null,
+      "time": null,
+      "properties": {
+        "purpose": "instance",
+        "eventProcess": ["http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"]
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "DisplacementEvent",
+      "id": "https://w3id.org/gso/1.0/fautlKannaV4Model#Simpson_fault_displacement",
+      "geometry": null,
+      "place": null,
+      "time": null,
+      "properties": {
+        "purpose": "instance",
+        "eventProcess": ["http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"]
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "DisplacementEvent",
+      "id": "https://w3id.org/gso/1.0/fautlKannaV4Model#N01_fault_displacement",
+      "geometry": null,
+      "place": null,
+      "time": null,
+      "properties": {
+        "purpose": "instance",
+        "eventProcess": ["http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"]
+      }
+    },
+    {
+      "$comment": "Fatigue Thrust fault is the youngest; crosscuts the other three thrusts per the source TTL.",
+      "type": "Feature",
+      "featureType": "DisplacementEvent",
+      "id": "https://w3id.org/gso/1.0/fautlKannaV4Model#Fatigue_fault_displacement",
+      "geometry": null,
+      "place": null,
+      "time": null,
+      "properties": {
+        "purpose": "instance",
+        "eventProcess": ["http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"]
+      }
+    }
+  ]
+}
+
+```
+
 ## Schema
 
 ```yaml
@@ -312,8 +427,95 @@ description: 'Detailed structural-geology types extending the Basic structure
 
   Fracture, DisplacementEvent, DisplacementValue, Lineation, Layering,
 
-  NonDirectionalStructure, etc.'
+  NonDirectionalStructure, etc.
+
+
+  Validates either a single Feature (dispatched by `featureType` to one of: DisplacementEvent,
+  FoldSystem, Joint, Layering, Lineation, NonDirectionalStructure) or a FeatureCollection
+  whose `features[]` items are dispatched the same way.'
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: DisplacementEvent
+      then:
+        $ref: '#DisplacementEvent'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: FoldSystem
+      then:
+        $ref: '#FoldSystem'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Joint
+      then:
+        $ref: '#Joint'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Layering
+      then:
+        $ref: '#Layering'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Lineation
+      then:
+        $ref: '#Lineation'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: NonDirectionalStructure
+      then:
+        $ref: '#NonDirectionalStructure'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - DisplacementEvent
+              - FoldSystem
+              - Joint
+              - Layering
+              - Lineation
+              - NonDirectionalStructure
+      then: false
   ContactDescription:
     $anchor: ContactDescription
     description: The ContactDescription provides extended descriptive properties of
@@ -898,7 +1100,8 @@ $defs:
             of slip.
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href

@@ -1,8 +1,108 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.usgin.org/geosci-json/gsmBorehole/gsmBoreholeSchema.json",
-  "description": "Borehole feature type and supporting types (BoreholeDetails, intervals,\ncollar, log, drilling method).",
+  "description": "Borehole feature type and supporting types (BoreholeDetails, intervals,\ncollar, log, drilling method).\n\nValidates either a single Feature (dispatched by `featureType` to one of: Borehole, BoreholeInterval, OriginPosition) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "if": {
+    "type": "object",
+    "required": [
+      "type"
+    ],
+    "properties": {
+      "type": {
+        "const": "FeatureCollection"
+      }
+    }
+  },
+  "then": {
+    "allOf": [
+      {
+        "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+      },
+      {
+        "type": "object",
+        "properties": {
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/_FeatureDispatch"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "else": {
+    "$ref": "#/$defs/_FeatureDispatch"
+  },
   "$defs": {
+    "_FeatureDispatch": {
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "Borehole"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#Borehole"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "BoreholeInterval"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#BoreholeInterval"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "OriginPosition"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#OriginPosition"
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "required": [
+                "featureType"
+              ],
+              "properties": {
+                "featureType": {
+                  "enum": [
+                    "Borehole",
+                    "BoreholeInterval",
+                    "OriginPosition"
+                  ]
+                }
+              }
+            }
+          },
+          "then": false
+        }
+      ]
+    },
     "Borehole": {
       "$anchor": "Borehole",
       "description": "A Borehole is the generalized term for any narrow shaft drilled in the ground, either vertically, horizontally, or inclined.",
@@ -536,7 +636,7 @@
     },
     "SCLinkObject": {
       "title": "link object",
-      "description": "definition of a link object",
+      "description": "SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json, based on RFC 8288 web linking.",
       "type": "object",
       "required": [
         "href"

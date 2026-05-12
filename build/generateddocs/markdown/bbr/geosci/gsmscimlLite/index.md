@@ -15,7 +15,7 @@ GeoSciML 4.1 building block `gsmscimlLite`. `«FeatureType»` classes are encode
 
 Source UML packages: `GeoSciMLLite`.
 
-Contains 7 feature types.
+Contains 7 feature types, 1 data type.
 
 ## Classes in this BB
 
@@ -28,6 +28,7 @@ Contains 7 feature types.
 | `GeomorphologicUnitView` | «FeatureType» | JSON-FG Feature |
 | `ShearDisplacementStructureView` | «FeatureType» | JSON-FG Feature |
 | `SiteObservationView` | «FeatureType» | JSON-FG Feature |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -233,10 +234,13 @@ Properties (own; inherited properties listed in supertype's BB):
 | `shape` | GeoJSON `Geometry` | 0..1 | The property shape:GM_Object contains the geometry of the observation site. |
 | `any` | (oneOf — see schema) | 0..1 | A data provider can add an arbitrary number of extra properties, as long as the instance is conformant to GML Simple … |
 
+### `_FeatureDispatch`
+
 ## External dependencies
 
 - `https://geojson.org/schema/Geometry.json`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 
 ## Examples
 
@@ -908,8 +912,105 @@ description: 'GeoSciML 4.1 Lite profile. Flattened "View" classes that summarise
 
   Basic/Extension content for lightweight services (GeologicUnitView,
 
-  ContactView, ShearDisplacementStructureView, BoreholeView, etc.).'
+  ContactView, ShearDisplacementStructureView, BoreholeView, etc.).
+
+
+  Validates either a single Feature (dispatched by `featureType` to one of: BoreholeView,
+  ContactView, GeologicSpecimenView, GeologicUnitView, GeomorphologicUnitView, ShearDisplacementStructureView,
+  SiteObservationView) or a FeatureCollection whose `features[]` items are dispatched
+  the same way.'
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: BoreholeView
+      then:
+        $ref: '#BoreholeView'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: ContactView
+      then:
+        $ref: '#ContactView'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GeologicSpecimenView
+      then:
+        $ref: '#GeologicSpecimenView'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GeologicUnitView
+      then:
+        $ref: '#GeologicUnitView'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GeomorphologicUnitView
+      then:
+        $ref: '#GeomorphologicUnitView'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: ShearDisplacementStructureView
+      then:
+        $ref: '#ShearDisplacementStructureView'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: SiteObservationView
+      then:
+        $ref: '#SiteObservationView'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - BoreholeView
+              - ContactView
+              - GeologicSpecimenView
+              - GeologicUnitView
+              - GeomorphologicUnitView
+              - ShearDisplacementStructureView
+              - SiteObservationView
+      then: false
   BoreholeView:
     $anchor: BoreholeView
     description: "BoreholeView is a simplified view of a GeoSciML Borehole. In GeoSciML
@@ -2152,7 +2253,8 @@ $defs:
           type: string
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href
@@ -2193,7 +2295,7 @@ None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/geosci-json/_sources/gsmscimlLite/context.jsonld)
+[context.jsonld](/github/workspace/_sources/gsmscimlLite/context.jsonld)
 
 ## Sources
 

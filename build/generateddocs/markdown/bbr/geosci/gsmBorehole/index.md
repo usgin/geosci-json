@@ -15,7 +15,7 @@ GeoSciML 4.1 building block `gsmBorehole`. `«FeatureType»` classes are encoded
 
 Source UML packages: `Borehole`.
 
-Contains 3 feature types, 2 data types, 4 code lists.
+Contains 3 feature types, 3 data types, 4 code lists.
 
 ## Classes in this BB
 
@@ -30,6 +30,7 @@ Contains 3 feature types, 2 data types, 4 code lists.
 | `BoreholeStartPointCode` | «CodeList» | URI codelist (`format: uri`) |
 | `DrillingDetails` | «DataType» | plain JSON object |
 | `OriginPosition` | «FeatureType» | JSON-FG Feature |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -105,6 +106,8 @@ Properties (own; inherited properties listed in supertype's BB):
 | `elevation` | (oneOf — see schema) | 0..1 | The elevation:DirectPosition property is a compromise approach to supply elevation explicitly for location; this is t… |
 | `relatedBorehole` | (oneOf — see schema) | 0..1 | The hole that has this collar for its start point |
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -122,6 +125,7 @@ Properties (own; inherited properties listed in supertype's BB):
 - `https://geojson.org/schema/Geometry.json`
 - `https://geojson.org/schema/Point.json`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
 
@@ -153,6 +157,24 @@ Example instance: examplegsmBoreholeMinimal
 
 ```
 
+#### jsonld
+```jsonld
+{
+  "@context": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/context.jsonld",
+  "type": "Feature",
+  "id": "borehole.minimal.1",
+  "featureType": "Borehole",
+  "geometry": null,
+  "properties": {}
+}
+```
+
+#### ttl
+```ttl
+
+
+```
+
 ## Schema
 
 ```yaml
@@ -160,8 +182,68 @@ $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.usgin.org/geosci-json/gsmBorehole/gsmBoreholeSchema.json
 description: 'Borehole feature type and supporting types (BoreholeDetails, intervals,
 
-  collar, log, drilling method).'
+  collar, log, drilling method).
+
+
+  Validates either a single Feature (dispatched by `featureType` to one of: Borehole,
+  BoreholeInterval, OriginPosition) or a FeatureCollection whose `features[]` items
+  are dispatched the same way.'
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Borehole
+      then:
+        $ref: '#Borehole'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: BoreholeInterval
+      then:
+        $ref: '#BoreholeInterval'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: OriginPosition
+      then:
+        $ref: '#OriginPosition'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - Borehole
+              - BoreholeInterval
+              - OriginPosition
+      then: false
   Borehole:
     $anchor: Borehole
     description: A Borehole is the generalized term for any narrow shaft drilled in
@@ -527,7 +609,8 @@ $defs:
           type: string
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href
@@ -564,11 +647,17 @@ Links to the schema:
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/geosci-json/_sources/gsmBorehole/context.jsonld)
+[context.jsonld](https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/context.jsonld)
 
 ## Sources
 

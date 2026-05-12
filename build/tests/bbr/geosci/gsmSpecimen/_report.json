@@ -2,8 +2,8 @@
   "title": "Validation report for usgin.bbr.geosci.gsmSpecimen - gsmSpecimen",
   "bblockName": "gsmSpecimen",
   "bblockId": "usgin.bbr.geosci.gsmSpecimen",
-  "generated": "2026-05-12T21:31:25.989596+00:00",
-  "result": true,
+  "generated": "2026-05-12T22:11:07.577002+00:00",
+  "result": false,
   "items": [
     {
       "source": {
@@ -15,7 +15,7 @@
         "snippetIndex": 1,
         "language": "application/json"
       },
-      "result": true,
+      "result": false,
       "sections": [
         {
           "name": "FILES",
@@ -23,7 +23,26 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examples/examplegsmSpecimenMinimal.json from examples"
+              "message": "Using examples/specimen_drill_core_segment.json from examples"
+            },
+            {
+              "op": "jsonld-uplift",
+              "isError": false,
+              "message": "JSON-LD context is present - uplifting"
+            },
+            {
+              "op": "jsonld-create",
+              "filename": "example_1_1.jsonld",
+              "isError": false,
+              "message": "Output JSON-LD example_1_1.jsonld created"
+            },
+            {
+              "op": "ttl-create",
+              "empty": true,
+              "filename": "example_1_1.ttl",
+              "size": 0,
+              "isError": true,
+              "message": "**Empty** output Turtle example_1_1.ttl created"
             }
           ]
         },
@@ -45,7 +64,7 @@
   "globalErrors": {},
   "counts": {
     "total": 1,
-    "passed": 1,
-    "failed": 0
+    "passed": 0,
+    "failed": 1
   }
 }

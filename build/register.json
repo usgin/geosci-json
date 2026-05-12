@@ -2,7 +2,7 @@
   "name": "GeoSci JSON Building Blocks repository",
   "abstract": "Repository assembling building blocks for geoscience JSON metadata, using OGC building block patterns.\n",
   "description": "Modular JSON Schema building blocks for geoscience metadata and profiles.\n",
-  "modified": "2026-05-12T21:26:23.348566",
+  "modified": "2026-05-12T22:03:30.693955",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"5ddf8dfdfa92574f112703863576f5cd6b579a56",
@@ -114,7 +114,7 @@
           "https://usgin.github.io/geosci-json/_sources/gsmBorehole/rules.shacl"
         ]
       },
-      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmBorehole/context.jsonld",
+      "ldContext": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/context.jsonld",
       "dateOfLastChange": "2026-05-12",
       "schema": {
         "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema.yaml",
@@ -122,8 +122,9 @@
       },
       "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmBorehole/schema.yaml",
       "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmBorehole/context.jsonld",
+      "resolvedSchemaProperties": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/resolvedProperties.json",
       "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmBorehole/",
-      "validationPassed": true,
+      "validationPassed": false,
       "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmBorehole/",
       "documentation": {
         "json-full": {
@@ -466,7 +467,7 @@
           "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/rules.shacl"
         ]
       },
-      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/context.jsonld",
+      "ldContext": "/github/workspace/_sources/gsmGeologicTime/context.jsonld",
       "dateOfLastChange": "2026-05-12",
       "schema": {
         "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema.yaml",
@@ -474,6 +475,7 @@
       },
       "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/schema.yaml",
       "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/context.jsonld",
+      "resolvedSchemaProperties": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/resolvedProperties.json",
       "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/",
       "validationPassed": true,
       "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmGeologicTime/",
@@ -552,7 +554,7 @@
       "itemIdentifier": "usgin.bbr.geosci.gsmSpecimen",
       "$schema": "metaschema.yaml",
       "name": "gsmSpecimen",
-      "abstract": "LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and",
+      "abstract": "Specimen building block. The wrapper dispatches two featureType",
       "status": "under-development",
       "dateTimeAddition": "2026-05-12T00:00:00Z",
       "itemClass": "schema",
@@ -581,7 +583,7 @@
           "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/rules.shacl"
         ]
       },
-      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/context.jsonld",
+      "ldContext": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/context.jsonld",
       "dateOfLastChange": "2026-05-12",
       "schema": {
         "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml",
@@ -589,8 +591,9 @@
       },
       "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/schema.yaml",
       "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/context.jsonld",
+      "resolvedSchemaProperties": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/resolvedProperties.json",
       "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmSpecimen/",
-      "validationPassed": true,
+      "validationPassed": false,
       "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmSpecimen/",
       "documentation": {
         "json-full": {
@@ -643,7 +646,7 @@
           "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/rules.shacl"
         ]
       },
-      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/context.jsonld",
+      "ldContext": "/github/workspace/_sources/gsmscimlBasic/context.jsonld",
       "dateOfLastChange": "2026-05-12",
       "schema": {
         "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema.yaml",
@@ -651,6 +654,7 @@
       },
       "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/schema.yaml",
       "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/context.jsonld",
+      "resolvedSchemaProperties": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/resolvedProperties.json",
       "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/",
       "validationPassed": true,
       "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmscimlBasic/",
@@ -699,7 +703,7 @@
           "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/rules.shacl"
         ]
       },
-      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/context.jsonld",
+      "ldContext": "/github/workspace/_sources/gsmscimlLite/context.jsonld",
       "dateOfLastChange": "2026-05-12",
       "schema": {
         "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlLite/schema.yaml",
@@ -707,6 +711,7 @@
       },
       "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/schema.yaml",
       "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/context.jsonld",
+      "resolvedSchemaProperties": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlLite/resolvedProperties.json",
       "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmscimlLite/",
       "validationPassed": true,
       "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmscimlLite/",

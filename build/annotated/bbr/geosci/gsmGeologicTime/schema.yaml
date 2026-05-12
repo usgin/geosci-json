@@ -2,8 +2,77 @@ $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.usgin.org/geosci-json/gsmGeologicTime/gsmGeologicTimeSchema.json
 description: 'Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary
 
-  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension.'
+  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension.
+
+
+  Validates either a single Feature (dispatched by `featureType` to one of: GlobalStratotypePoint,
+  GlobalStratotypeSection, StratigraphicPoint, StratigraphicSection) or a FeatureCollection
+  whose `features[]` items are dispatched the same way.'
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GlobalStratotypePoint
+      then:
+        $ref: '#GlobalStratotypePoint'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GlobalStratotypeSection
+      then:
+        $ref: '#GlobalStratotypeSection'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: StratigraphicPoint
+      then:
+        $ref: '#StratigraphicPoint'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: StratigraphicSection
+      then:
+        $ref: '#StratigraphicSection'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - GlobalStratotypePoint
+              - GlobalStratotypeSection
+              - StratigraphicPoint
+              - StratigraphicSection
+      then: false
   GeochronologicBoundary:
     $anchor: GeochronologicBoundary
     description: A GeochronologicBoundary is a boundary between two geochronologic
@@ -354,7 +423,8 @@ $defs:
     - referencePoint
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href

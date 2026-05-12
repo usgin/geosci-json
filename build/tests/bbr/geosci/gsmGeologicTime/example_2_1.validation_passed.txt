@@ -1,0 +1,10 @@
+Validation report for usgin.bbr.geosci.gsmGeologicTime - gsmGeologicTime
+Generated 2026-05-12T22:11:03.437091+00:00
+=== Files ===
+Using examples/stratigraphic_section_lower_jurassic_GSO.json from examples
+=== End Files ===
+
+=== JSON Schema ===
+Validation passed
+=== End JSON Schema ===
+

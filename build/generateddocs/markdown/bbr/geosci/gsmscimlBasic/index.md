@@ -15,7 +15,7 @@ GeoSciML 4.1 building block `gsmscimlBasic`. `«FeatureType»` classes are encod
 
 Source UML packages: `GeoSciMLBasic`, `Collection`, `GSML_DataTypes`, `GeologicEvent`, `GeologicStructure`, `GeologyBasic`, `Geomorphology`.
 
-Contains 13 feature types, 20 data types, 22 code lists, 1 union.
+Contains 13 feature types, 21 data types, 22 code lists, 1 union.
 
 ## Classes in this BB
 
@@ -77,6 +77,7 @@ Contains 13 feature types, 20 data types, 22 code lists, 1 union.
 | `RockMaterial` | «DataType» | plain JSON object |
 | `ShearDisplacementStructure` | «FeatureType» | JSON-FG Feature |
 | `ShearDisplacementStructureAbstractDescription` | «DataType» | plain JSON object |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -417,6 +418,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -462,6 +465,7 @@ Branches (`oneOf`):
 
 - `https://geojson.org/schema/Geometry.json`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json`
@@ -1327,8 +1331,123 @@ description: 'GeoSciML 4.1 Basic application schema. Core feature types
 
   Foliation, ShearDisplacementStructure, GeologicEvent) plus the
 
-  shared GSML_DataTypes and Collection containers.'
+  shared GSML_DataTypes and Collection containers.
+
+
+  Validates either a single Feature (dispatched by `featureType` to one of: AnthropogenicGeomorphologicFeature,
+  Contact, Fold, Foliation, GeologicEvent, GeologicUnit, MappedFeature, NaturalGeomorphologicFeature,
+  ShearDisplacementStructure) or a FeatureCollection whose `features[]` items are
+  dispatched the same way.'
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: AnthropogenicGeomorphologicFeature
+      then:
+        $ref: '#AnthropogenicGeomorphologicFeature'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Contact
+      then:
+        $ref: '#Contact'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Fold
+      then:
+        $ref: '#Fold'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Foliation
+      then:
+        $ref: '#Foliation'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GeologicEvent
+      then:
+        $ref: '#GeologicEvent'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GeologicUnit
+      then:
+        $ref: '#GeologicUnit'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: MappedFeature
+      then:
+        $ref: '#MappedFeature'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: NaturalGeomorphologicFeature
+      then:
+        $ref: '#NaturalGeomorphologicFeature'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: ShearDisplacementStructure
+      then:
+        $ref: '#ShearDisplacementStructure'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - AnthropogenicGeomorphologicFeature
+              - Contact
+              - Fold
+              - Foliation
+              - GeologicEvent
+              - GeologicUnit
+              - MappedFeature
+              - NaturalGeomorphologicFeature
+              - ShearDisplacementStructure
+      then: false
   AbstractFeatureRelation:
     $anchor: AbstractFeatureRelation
     description: Association class placeholder to implement relation between geologic
@@ -2476,7 +2595,8 @@ $defs:
     type: object
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href
@@ -2517,7 +2637,7 @@ None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/context.jsonld)
+[context.jsonld](/github/workspace/_sources/gsmscimlBasic/context.jsonld)
 
 ## Sources
 

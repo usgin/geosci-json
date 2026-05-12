@@ -1,8 +1,204 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.usgin.org/geosci-json/gsmscimlBasic/gsmscimlBasicSchema.json",
-  "description": "GeoSciML 4.1 Basic application schema. Core feature types\n(GeologicFeature, MappedFeature, GeologicUnit, GeologicStructure\nsubtypes, GeomorphologicFeature, EarthMaterial, Contact, Fold,\nFoliation, ShearDisplacementStructure, GeologicEvent) plus the\nshared GSML_DataTypes and Collection containers.",
+  "description": "GeoSciML 4.1 Basic application schema. Core feature types\n(GeologicFeature, MappedFeature, GeologicUnit, GeologicStructure\nsubtypes, GeomorphologicFeature, EarthMaterial, Contact, Fold,\nFoliation, ShearDisplacementStructure, GeologicEvent) plus the\nshared GSML_DataTypes and Collection containers.\n\nValidates either a single Feature (dispatched by `featureType` to one of: AnthropogenicGeomorphologicFeature, Contact, Fold, Foliation, GeologicEvent, GeologicUnit, MappedFeature, NaturalGeomorphologicFeature, ShearDisplacementStructure) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "if": {
+    "type": "object",
+    "required": [
+      "type"
+    ],
+    "properties": {
+      "type": {
+        "const": "FeatureCollection"
+      }
+    }
+  },
+  "then": {
+    "allOf": [
+      {
+        "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+      },
+      {
+        "type": "object",
+        "properties": {
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/_FeatureDispatch"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "else": {
+    "$ref": "#/$defs/_FeatureDispatch"
+  },
   "$defs": {
+    "_FeatureDispatch": {
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "AnthropogenicGeomorphologicFeature"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#AnthropogenicGeomorphologicFeature"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "Contact"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#Contact"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "Fold"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#Fold"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "Foliation"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#Foliation"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "GeologicEvent"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#GeologicEvent"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "GeologicUnit"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#GeologicUnit"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "MappedFeature"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#MappedFeature"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "NaturalGeomorphologicFeature"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#NaturalGeomorphologicFeature"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "ShearDisplacementStructure"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#ShearDisplacementStructure"
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "required": [
+                "featureType"
+              ],
+              "properties": {
+                "featureType": {
+                  "enum": [
+                    "AnthropogenicGeomorphologicFeature",
+                    "Contact",
+                    "Fold",
+                    "Foliation",
+                    "GeologicEvent",
+                    "GeologicUnit",
+                    "MappedFeature",
+                    "NaturalGeomorphologicFeature",
+                    "ShearDisplacementStructure"
+                  ]
+                }
+              }
+            }
+          },
+          "then": false
+        }
+      ]
+    },
     "AbstractFeatureRelation": {
       "$anchor": "AbstractFeatureRelation",
       "description": "Association class placeholder to implement relation between geologic features",
@@ -1452,7 +1648,7 @@
     },
     "SCLinkObject": {
       "title": "link object",
-      "description": "definition of a link object",
+      "description": "SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json, based on RFC 8288 web linking.",
       "type": "object",
       "required": [
         "href"

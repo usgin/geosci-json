@@ -1,5 +1,73 @@
 {
   "x-defs": {
+    "featurecollection": {
+      "title": "a JSON-FG Feature Collection",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "type": "object",
+      "required": [
+        "type",
+        "features"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "FeatureCollection"
+          ]
+        },
+        "featureType": {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/featuretype"
+        },
+        "geometryDimension": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "featureSchema": {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/featureschema"
+        },
+        "coordRefSys": {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys"
+        },
+        "measures": {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/measures"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/feature"
+              },
+              {
+                "not": {
+                  "type": "object",
+                  "properties": {
+                    "coordRefSys": {}
+                  },
+                  "required": [
+                    "coordRefSys"
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "type": "object",
+                  "properties": {
+                    "conformsTo": {}
+                  },
+                  "required": [
+                    "conformsTo"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "x-schema-source": "https://schemas.opengis.net/json-fg/featurecollection.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/featurecollection.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
     "QuantityRange": {
       "description": "Decimal pair for specifying a quantity range with a unit of measure",
       "type": "object",
@@ -460,6 +528,132 @@
       "x-schema-source": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
+    "featuretype": {
+      "title": "the value of the 'featureType' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "type": "string",
+      "x-schema-source": "https://schemas.opengis.net/json-fg/featuretype.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/featuretype.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "featureschema": {
+      "title": "the value of the 'featureSchema' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      ],
+      "x-schema-source": "https://schemas.opengis.net/json-fg/featureschema.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/featureschema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "coordrefsys": {
+      "title": "the value of the 'coordRefSys' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "oneOf": [
+        {
+          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/single-refsys"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/single-refsys"
+          },
+          "minItems": 2
+        }
+      ],
+      "$defs": {
+        "single-refsys": {
+          "oneOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/refsys-simpleref"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/refsys-byref"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/refsys-custom"
+            }
+          ]
+        },
+        "refsys-simpleref": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refsys-byref": {
+          "type": "object",
+          "required": [
+            "type",
+            "href"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "Reference"
+              ]
+            },
+            "href": {
+              "type": "string",
+              "format": "uri-reference"
+            },
+            "epoch": {
+              "type": "number"
+            }
+          }
+        },
+        "refsys-custom": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "not": {
+                "enum": [
+                  "Reference"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-schema-source": "https://schemas.opengis.net/json-fg/coordrefsys.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/coordrefsys.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "measures": {
+      "title": "the value of the 'measures' member",
+      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "x-schema-source": "https://schemas.opengis.net/json-fg/measures.json",
+      "x-schema-id": "https://schemas.opengis.net/json-fg/measures.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
     "AbstractSimpleComponent": {
       "type": "object",
       "allOf": [
@@ -887,34 +1081,6 @@
       "x-schema-source": "https://schemas.opengis.net/sweCommon/3.0/json/basicTypes.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
-    "featuretype": {
-      "title": "the value of the 'featureType' member",
-      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
-      "type": "string",
-      "x-schema-source": "https://schemas.opengis.net/json-fg/featuretype.json",
-      "x-schema-id": "https://schemas.opengis.net/json-fg/featuretype.json",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
-    },
-    "featureschema": {
-      "title": "the value of the 'featureSchema' member",
-      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
-      "oneOf": [
-        {
-          "type": "string",
-          "format": "uri"
-        },
-        {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "format": "uri"
-          }
-        }
-      ],
-      "x-schema-source": "https://schemas.opengis.net/json-fg/featureschema.json",
-      "x-schema-id": "https://schemas.opengis.net/json-fg/featureschema.json",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
-    },
     "time": {
       "title": "the value of the 'time' member",
       "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
@@ -984,104 +1150,6 @@
       "x-schema-id": "https://schemas.opengis.net/json-fg/time.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema",
       "nullable": true
-    },
-    "coordrefsys": {
-      "title": "the value of the 'coordRefSys' member",
-      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
-      "oneOf": [
-        {
-          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/single-refsys"
-        },
-        {
-          "type": "array",
-          "items": {
-            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/single-refsys"
-          },
-          "minItems": 2
-        }
-      ],
-      "$defs": {
-        "single-refsys": {
-          "oneOf": [
-            {
-              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/refsys-simpleref"
-            },
-            {
-              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/refsys-byref"
-            },
-            {
-              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/coordrefsys/$defs/refsys-custom"
-            }
-          ]
-        },
-        "refsys-simpleref": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "refsys-byref": {
-          "type": "object",
-          "required": [
-            "type",
-            "href"
-          ],
-          "properties": {
-            "type": {
-              "type": "string",
-              "enum": [
-                "Reference"
-              ]
-            },
-            "href": {
-              "type": "string",
-              "format": "uri-reference"
-            },
-            "epoch": {
-              "type": "number"
-            }
-          }
-        },
-        "refsys-custom": {
-          "type": "object",
-          "required": [
-            "type"
-          ],
-          "properties": {
-            "type": {
-              "type": "string",
-              "not": {
-                "enum": [
-                  "Reference"
-                ]
-              }
-            }
-          }
-        }
-      },
-      "x-schema-source": "https://schemas.opengis.net/json-fg/coordrefsys.json",
-      "x-schema-id": "https://schemas.opengis.net/json-fg/coordrefsys.json",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
-    },
-    "measures": {
-      "title": "the value of the 'measures' member",
-      "description": "This JSON Schema is part of JSON-FG version 1.0.0.",
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "unit": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "enabled"
-      ],
-      "x-schema-source": "https://schemas.opengis.net/json-fg/measures.json",
-      "x-schema-id": "https://schemas.opengis.net/json-fg/measures.json",
-      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
     "place": {
       "title": "the value of the 'place' member",
@@ -2285,8 +2353,224 @@
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     }
   },
-  "description": "GeoSciML 4.1 Basic application schema. Core feature types\n(GeologicFeature, MappedFeature, GeologicUnit, GeologicStructure\nsubtypes, GeomorphologicFeature, EarthMaterial, Contact, Fold,\nFoliation, ShearDisplacementStructure, GeologicEvent) plus the\nshared GSML_DataTypes and Collection containers.",
+  "description": "GeoSciML 4.1 Basic application schema. Core feature types\n(GeologicFeature, MappedFeature, GeologicUnit, GeologicStructure\nsubtypes, GeomorphologicFeature, EarthMaterial, Contact, Fold,\nFoliation, ShearDisplacementStructure, GeologicEvent) plus the\nshared GSML_DataTypes and Collection containers.\n\nValidates either a single Feature (dispatched by `featureType` to one of: AnthropogenicGeomorphologicFeature, Contact, Fold, Foliation, GeologicEvent, GeologicUnit, MappedFeature, NaturalGeomorphologicFeature, ShearDisplacementStructure) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "if": {
+    "type": "object",
+    "required": [
+      "type"
+    ],
+    "properties": {
+      "type": {
+        "enum": [
+          "FeatureCollection"
+        ]
+      }
+    }
+  },
+  "then": {
+    "allOf": [
+      {
+        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/x-defs/featurecollection"
+      },
+      {
+        "type": "object",
+        "properties": {
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/$defs/_FeatureDispatch"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "else": {
+    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#/$defs/_FeatureDispatch"
+  },
   "$defs": {
+    "_FeatureDispatch": {
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "enum": [
+                  "AnthropogenicGeomorphologicFeature"
+                ]
+              }
+            }
+          },
+          "then": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#AnthropogenicGeomorphologicFeature"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "enum": [
+                  "Contact"
+                ]
+              }
+            }
+          },
+          "then": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#Contact"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "enum": [
+                  "Fold"
+                ]
+              }
+            }
+          },
+          "then": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#Fold"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "enum": [
+                  "Foliation"
+                ]
+              }
+            }
+          },
+          "then": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#Foliation"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "enum": [
+                  "GeologicEvent"
+                ]
+              }
+            }
+          },
+          "then": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#GeologicEvent"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "enum": [
+                  "GeologicUnit"
+                ]
+              }
+            }
+          },
+          "then": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#GeologicUnit"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "enum": [
+                  "MappedFeature"
+                ]
+              }
+            }
+          },
+          "then": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#MappedFeature"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "enum": [
+                  "NaturalGeomorphologicFeature"
+                ]
+              }
+            }
+          },
+          "then": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#NaturalGeomorphologicFeature"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "enum": [
+                  "ShearDisplacementStructure"
+                ]
+              }
+            }
+          },
+          "then": {
+            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema-oas3.0.json#ShearDisplacementStructure"
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "required": [
+                "featureType"
+              ],
+              "properties": {
+                "featureType": {
+                  "enum": [
+                    "AnthropogenicGeomorphologicFeature",
+                    "Contact",
+                    "Fold",
+                    "Foliation",
+                    "GeologicEvent",
+                    "GeologicUnit",
+                    "MappedFeature",
+                    "NaturalGeomorphologicFeature",
+                    "ShearDisplacementStructure"
+                  ]
+                }
+              }
+            }
+          },
+          "then": false
+        }
+      ]
+    },
     "AbstractFeatureRelation": {
       "$anchor": "AbstractFeatureRelation",
       "description": "Association class placeholder to implement relation between geologic features",
@@ -3650,7 +3934,7 @@
     },
     "SCLinkObject": {
       "title": "link object",
-      "description": "definition of a link object",
+      "description": "SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json, based on RFC 8288 web linking.",
       "type": "object",
       "required": [
         "href"

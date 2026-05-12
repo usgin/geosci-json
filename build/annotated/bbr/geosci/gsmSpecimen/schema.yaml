@@ -1,9 +1,62 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.usgin.org/geosci-json/gsmSpecimen/gsmSpecimenSchema.json
-description: 'LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and
-
-  laboratory-analysis observation types, Geochronology results.'
+description: "Specimen building block. The wrapper dispatches two featureType\nvalues:
+  SF_Specimen (hand-curated \xABFeatureType\xBB, ISO 19156:2011\n\xA78.6 \u2014 inlines
+  SF_SamplingFeature's inherited properties since ISO\n19156 isn't in the GeoSciML
+  XMI) and ReferenceSpecimen (a GeoSciML\n\xABFeatureType\xBB from the LaboratoryAnalysis-Specimen
+  package, used\nfor named reference / type specimens). The rest of the\nLaboratoryAnalysis-Specimen
+  library (AnalyticalInstrument,\nAnalyticalSession, GeochronologicInterpretation,\nGeologicSamplingMethod,
+  GeologicSpecimenPreparation, Image, etc.)\nstays in `$defs` for cross-reference
+  from SF_Specimen and from\nother BBs.\n\nValidates either a single Feature (dispatched
+  by `featureType` to one of: SF_Specimen, ReferenceSpecimen) or a FeatureCollection
+  whose `features[]` items are dispatched the same way."
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: SF_Specimen
+      then:
+        $ref: '#SF_Specimen'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: ReferenceSpecimen
+      then:
+        $ref: '#ReferenceSpecimen'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - SF_Specimen
+              - ReferenceSpecimen
+      then: false
   AnalyticalInstrument:
     $anchor: AnalyticalInstrument
     description: The analytical instrument is the category of instrument used to perform
@@ -502,7 +555,8 @@ $defs:
     format: uri
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href
@@ -527,3 +581,115 @@ $defs:
           as a human-readable identifier.
       length:
         type: integer
+  SF_Specimen:
+    $anchor: SF_Specimen
+    description: "ISO 19156:2011 \xA78.6 SF_Specimen \u2014 a sampling feature representing
+      a physical specimen collected from a sampled feature. Implementation inlines
+      the SF_SamplingFeature parent's properties (sampledFeature, relatedObservation,
+      relatedSamplingFeature, lineage) since the parent is not separately schematised
+      here. External ISO types referenced from properties (OM_Process, OM_Observation,
+      GFI_Feature, TM_Object, LI_Lineage, SF_SamplingFeature) are by-reference only
+      via SCLinkObject."
+    allOf:
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            sampledFeature:
+              oneOf:
+              - type: 'null'
+              - type: array
+                items:
+                  $ref: '#/$defs/SCLinkObject'
+                minItems: 1
+                uniqueItems: true
+              description: Feature(s) being sampled (1..*, by-reference to ISO 19156
+                GFI_Feature). Inherited from SF_SamplingFeature.
+            relatedObservation:
+              oneOf:
+              - type: 'null'
+              - type: array
+                items:
+                  $ref: '#/$defs/SCLinkObject'
+                uniqueItems: true
+              description: Observations whose featureOfInterest is this specimen (0..*,
+                by-reference to ISO 19156 OM_Observation). Inherited from SF_SamplingFeature.
+            relatedSamplingFeature:
+              oneOf:
+              - type: 'null'
+              - type: array
+                items:
+                  $ref: '#/$defs/SCLinkObject'
+                uniqueItems: true
+              description: 'Self-association: relations to other SF_SamplingFeature
+                instances (0..*, by-reference). Inherited from SF_SamplingFeature.'
+            lineage:
+              oneOf:
+              - type: 'null'
+              - $ref: '#/$defs/SCLinkObject'
+              description: Provenance metadata (by-reference to ISO 19115 LI_Lineage).
+                Inherited from SF_SamplingFeature.
+            materialClass:
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              description: Material class of the specimen (1..1). ISO 19156 types
+                this as ScopedName; encoded here as a SWE Category to carry the vocabulary
+                URI.
+            samplingTime:
+              $ref: '#/$defs/SCLinkObject'
+              description: Time of sampling (1..1, by-reference to ISO 19108 TM_Object).
+            samplingMethod:
+              oneOf:
+              - type: 'null'
+              - $ref: '#/$defs/SCLinkObject'
+              - $ref: '#GeologicSamplingMethod'
+              description: Sampling method (0..1). ISO 19156 types as OM_Process;
+                here implemented as the GeoSciML GeologicSamplingMethod FeatureType,
+                either by-reference (SCLinkObject) or inline.
+            samplingLocation:
+              oneOf:
+              - type: 'null'
+              - $ref: https://geojson.org/schema/Geometry.json
+              description: Location where the specimen was sampled (0..1, GeoJSON
+                Geometry). Distinct from the top-level Feature geometry, which may
+                carry the specimen's current footprint.
+            processingDetails:
+              oneOf:
+              - type: 'null'
+              - type: array
+                items:
+                  $ref: '#GeologicSpecimenPreparation'
+                uniqueItems: true
+              description: Processing / preparation steps applied to the specimen
+                (0..*). ISO 19156 types as SpecimenProcessing; here items are the
+                GeoSciML GeologicSpecimenPreparation DataType.
+            size:
+              oneOf:
+              - type: 'null'
+              - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+              description: Specimen size as a SWE Quantity (0..1). ISO 19156 types
+                as Measure.
+            currentLocation:
+              oneOf:
+              - type: 'null'
+              - type: string
+              - $ref: '#/$defs/SCLinkObject'
+              description: Current physical location of the specimen (0..1). Free
+                text address, URI, or link object to a repository record.
+            specimenType:
+              oneOf:
+              - type: 'null'
+              - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              description: Specimen type classifier (0..1). ISO 19156 types as ScopedName;
+                encoded here as a SWE Category.
+          required:
+          - sampledFeature
+          - materialClass
+          - samplingTime
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string

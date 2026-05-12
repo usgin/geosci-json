@@ -1,4 +1,47 @@
 x-defs:
+  featurecollection:
+    title: a JSON-FG Feature Collection
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    type: object
+    required:
+    - type
+    - features
+    properties:
+      type:
+        enum:
+        - FeatureCollection
+      featureType:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/featuretype
+      geometryDimension:
+        type: integer
+        minimum: 0
+        maximum: 3
+      featureSchema:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/featureschema
+      coordRefSys:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/coordrefsys
+      measures:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/measures
+      features:
+        type: array
+        items:
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/feature
+          - not:
+              type: object
+              properties:
+                coordRefSys: {}
+              required:
+              - coordRefSys
+          - not:
+              type: object
+              properties:
+                conformsTo: {}
+              required:
+              - conformsTo
+    x-schema-source: https://schemas.opengis.net/json-fg/featurecollection.json
+    x-schema-id: https://schemas.opengis.net/json-fg/featurecollection.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
   feature:
     title: a JSON-FG Feature
     description: This JSON Schema is part of JSON-FG version 1.0.0.
@@ -1387,6 +1430,208 @@ x-defs:
     x-schema-source: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json
     x-schema-id: https://schemas.usgin.org/geosci-json/gsmscimlBasic/gsmscimlBasicSchema.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
+  Category:
+    description: Scalar component used to represent a categorical value as a simple
+      token identifying a term in a code space
+    type: object
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
+    - properties:
+        type:
+          enum:
+          - Category
+        codeSpace:
+          description: Name of the dictionary where the possible values for this component
+            are listed and defined
+          type: string
+          format: uri
+        constraint:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedTokens
+        nilValues:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NilValuesText
+        value:
+          type: string
+      required:
+      - type
+      - definition
+      - label
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  Geometry:
+    title: GeoJSON Geometry
+    oneOf:
+    - title: GeoJSON Point
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON LineString
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - LineString
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON Polygon
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 4
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON MultiPoint
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON MultiLineString
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiLineString
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    - title: GeoJSON MultiPolygon
+      type: object
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              minItems: 4
+              items:
+                type: array
+                minItems: 2
+                items:
+                  type: number
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+    x-schema-source: https://geojson.org/schema/Geometry.json
+    x-schema-id: https://geojson.org/schema/Geometry.json
+    x-schema-version: http://json-schema.org/draft-07/schema#
+  Quantity:
+    description: Scalar component with decimal representation and a unit of measure
+      used to store value of a continuous quantity
+    type: object
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
+    - properties:
+        type:
+          enum:
+          - Quantity
+        uom:
+          description: Unit of measure used to express the value of this data component
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/UnitReference
+        constraint:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedValues
+        nilValues:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NilValuesNumber
+        value:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+      required:
+      - type
+      - definition
+      - label
+      - uom
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
   featuretype:
     title: the value of the 'featureType' member
     description: This JSON Schema is part of JSON-FG version 1.0.0.
@@ -1407,46 +1652,6 @@ x-defs:
     x-schema-source: https://schemas.opengis.net/json-fg/featureschema.json
     x-schema-id: https://schemas.opengis.net/json-fg/featureschema.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-  time:
-    title: the value of the 'time' member
-    description: This JSON Schema is part of JSON-FG version 1.0.0.
-    oneOf:
-    - type: object
-      minProperties: 1
-      properties:
-        date:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/date
-        timestamp:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
-        interval:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/interval
-    $defs:
-      date:
-        type: string
-        pattern: ^\d{4}-\d{2}-\d{2}$
-      timestamp:
-        type: string
-        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$
-      interval:
-        type: array
-        minItems: 2
-        maxItems: 2
-        items:
-          anyOf:
-          - oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/date
-            - type: string
-              enum:
-              - ..
-          - oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
-            - type: string
-              enum:
-              - ..
-    x-schema-source: https://schemas.opengis.net/json-fg/time.json
-    x-schema-id: https://schemas.opengis.net/json-fg/time.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
-    nullable: true
   coordrefsys:
     title: the value of the 'coordRefSys' member
     description: This JSON Schema is part of JSON-FG version 1.0.0.
@@ -1509,6 +1714,46 @@ x-defs:
     x-schema-source: https://schemas.opengis.net/json-fg/measures.json
     x-schema-id: https://schemas.opengis.net/json-fg/measures.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
+  time:
+    title: the value of the 'time' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - type: object
+      minProperties: 1
+      properties:
+        date:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/date
+        timestamp:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
+        interval:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/interval
+    $defs:
+      date:
+        type: string
+        pattern: ^\d{4}-\d{2}-\d{2}$
+      timestamp:
+        type: string
+        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$
+      interval:
+        type: array
+        minItems: 2
+        maxItems: 2
+        items:
+          anyOf:
+          - oneOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/date
+            - type: string
+              enum:
+              - ..
+          - oneOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
+            - type: string
+              enum:
+              - ..
+    x-schema-source: https://schemas.opengis.net/json-fg/time.json
+    x-schema-id: https://schemas.opengis.net/json-fg/time.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+    nullable: true
   place:
     title: the value of the 'place' member
     description: This JSON Schema is part of JSON-FG version 1.0.0.
@@ -1782,207 +2027,295 @@ x-defs:
       - uom
     x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-  Category:
-    description: Scalar component used to represent a categorical value as a simple
-      token identifying a term in a code space
+  AbstractSimpleComponent:
     type: object
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/AbstractDataComponent
     - properties:
-        type:
-          enum:
-          - Category
-        codeSpace:
-          description: Name of the dictionary where the possible values for this component
-            are listed and defined
+        referenceFrame:
+          description: Frame of reference (usually temporal or spatial) with respect
+            to which the value of the component is expressed. A reference frame anchors
+            a value to a real world datum.
           type: string
-          format: uri
-        constraint:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedTokens
+          format: uri-reference
+        axisID:
+          description: Specifies the reference axis (refer to CRS axisID). The reference
+            frame URI should also be specified unless it is inherited from parent
+            Vector
+          type: string
+          minLength: 1
         nilValues:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NilValuesText
+          description: Defines reserved values with special meaning (e.g., missing,
+            out-of-range, etc.)
+        constraint: {}
         value:
-          type: string
-      required:
-      - type
-      - definition
-      - label
-    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+          description: Inline value(s) for the component. This property is optional
+            to enable structure to act as a schema for values provided separately
+            (e.g., in a datastream)
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/AbstractSimpleComponent.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-  Geometry:
-    title: GeoJSON Geometry
-    oneOf:
-    - title: GeoJSON Point
-      type: object
-      required:
-      - type
-      - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-          - Point
-        coordinates:
-          type: array
-          minItems: 2
-          items:
-            type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    - title: GeoJSON LineString
-      type: object
-      required:
-      - type
-      - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-          - LineString
-        coordinates:
-          type: array
-          minItems: 2
-          items:
+  basicTypes:
+    $defs:
+      AbstractSWE:
+        description: Base substitution groups for all SWE Common objects other than
+          value objects
+        type: object
+        properties:
+          id:
+            description: The ID of the object, referenceable using a URI fragment
+            type: string
+            minLength: 1
+        x-schema-version: https://json-schema.org/draft/2020-12/schema
+      UnitReference:
+        type: object
+        properties:
+          label:
+            description: A human readable label for the unit
+            type: string
+            minLength: 1
+          symbol:
+            description: The preferred unit symbol to use when presenting the data
+              in a UI (use the UCUM code instead if no symbol is provided)
+            type: string
+            minLength: 1
+          code:
+            type: string
+            minLength: 1
+          href:
+            type: string
+            format: uri
+        anyOf:
+        - title: UCUM Code
+          required:
+          - code
+        - title: URI
+          required:
+          - href
+      AllowedTokens:
+        description: Defines permitted values for the component, as an enumerated
+          list of tokens or a regular expression pattern
+        type: object
+        oneOf:
+        - title: Enum Values
+          properties:
+            type:
+              enum:
+              - AllowedTokens
+            values:
+              type: array
+              minItems: 1
+              items:
+                type: string
+                minLength: 1
+          required:
+          - values
+        - title: Regex Pattern
+          properties:
+            type:
+              enum:
+              - AllowedTokens
+            pattern:
+              type: string
+              format: regex
+              minLength: 1
+          required:
+          - pattern
+      AllowedValues:
+        description: Defines the permitted values for the component as an enumerated
+          list and/or a list of inclusive ranges
+        type: object
+        properties:
+          type:
+            enum:
+            - AllowedValues
+          values:
             type: array
-            minItems: 2
+            minItems: 1
             items:
-              type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    - title: GeoJSON Polygon
-      type: object
-      required:
-      - type
-      - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-          - Polygon
-        coordinates:
-          type: array
-          items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+          intervals:
             type: array
-            minItems: 4
+            minItems: 1
             items:
               type: array
               minItems: 2
+              maxItems: 2
               items:
-                type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    - title: GeoJSON MultiPoint
-      type: object
-      required:
-      - type
-      - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiPoint
-        coordinates:
-          type: array
-          items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+          significantFigures:
+            type: integer
+            minimum: 1
+            maximum: 40
+        anyOf:
+        - title: Enum Values
+          required:
+          - values
+        - title: Intervals
+          required:
+          - intervals
+      AllowedTimes:
+        description: Defines the permitted values for the component, as a time range
+          or an enumerated list of time values
+        type: object
+        properties:
+          type:
+            enum:
+            - AllowedTimes
+          values:
             type: array
-            minItems: 2
+            minItems: 1
             items:
-              type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    - title: GeoJSON MultiLineString
-      type: object
-      required:
-      - type
-      - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiLineString
-        coordinates:
-          type: array
-          items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial
+          intervals:
             type: array
-            minItems: 2
             items:
               type: array
               minItems: 2
+              maxItems: 2
               items:
-                type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    - title: GeoJSON MultiPolygon
-      type: object
-      required:
-      - type
-      - coordinates
-      properties:
-        type:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial
+          significantFigures:
+            type: integer
+            minimum: 1
+            maximum: 40
+        anyOf:
+        - title: Enum Values
+          required:
+          - values
+        - title: Intervals
+          required:
+          - intervals
+      NilValuesText:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            reason:
+              description: The reason for using the reserved value
+              type: string
+              format: uri
+            value:
+              description: The reserved value itself
+              type: string
+          required:
+          - reason
+          - value
+          additionalProperties: false
+      NilValuesInteger:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            reason:
+              description: The reason for using the reserved value
+              type: string
+              format: uri
+            value:
+              description: The reserved value itself
+              type: integer
+          required:
+          - reason
+          - value
+          additionalProperties: false
+      NilValuesNumber:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            reason:
+              description: The reason for using the reserved value
+              type: string
+              format: uri
+            value:
+              description: The reserved value itself
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+          required:
+          - reason
+          - value
+          additionalProperties: false
+      NilValuesTime:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            reason:
+              description: The reason for using the reserved value
+              type: string
+              format: uri
+            value:
+              description: The reserved value itself
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial
+          required:
+          - reason
+          - value
+          additionalProperties: false
+      SoftNamedProperty:
+        type: object
+        properties:
+          name:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NameToken
+        required:
+        - name
+      NameToken:
+        type: string
+        minLength: 1
+        pattern: ^[A-Za-z][A-Za-z0-9_\-]*$
+      AssociationAttributeGroup:
+        type: object
+        properties:
+          href:
+            type: string
+            format: uri-reference
+          role:
+            type: string
+            format: uri
+          arcrole:
+            type: string
+            format: uri
+          title:
+            type: string
+            minLength: 1
+        required:
+        - href
+      NumberOrSpecial:
+        oneOf:
+        - title: Number
+          type: number
+        - title: Special Value
           type: string
           enum:
-          - MultiPolygon
-        coordinates:
-          type: array
-          items:
-            type: array
-            items:
-              type: array
-              minItems: 4
-              items:
-                type: array
-                minItems: 2
-                items:
-                  type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    x-schema-source: https://geojson.org/schema/Geometry.json
-    x-schema-id: https://geojson.org/schema/Geometry.json
-    x-schema-version: http://json-schema.org/draft-07/schema#
-  Quantity:
-    description: Scalar component with decimal representation and a unit of measure
-      used to store value of a continuous quantity
-    type: object
-    allOf:
-    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
-    - properties:
-        type:
-          enum:
-          - Quantity
-        uom:
-          description: Unit of measure used to express the value of this data component
-          allOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/UnitReference
-        constraint:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedValues
-        nilValues:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NilValuesNumber
-        value:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
-      required:
-      - type
-      - definition
-      - label
-      - uom
-    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+          - NaN
+          - Infinity
+          - +Infinity
+          - -Infinity
+      DateTimeNumberOrSpecial:
+        oneOf:
+        - title: Date/Time
+          type: string
+          format: date-time
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+      ElementCount:
+        type: object
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
+        - properties:
+            constraint:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedValues
+            value:
+              description: Value is optional, to enable structure to act as a schema
+                for values provided using other encodings
+              type: integer
+      EncodedValues:
+        oneOf:
+        - type: array
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AssociationAttributeGroup
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/basicTypes.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
   geometry-object:
     title: a JSON-FG geometry
@@ -2682,296 +3015,6 @@ x-defs:
       schema: http://schema.org/
     x-schema-source: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-  AbstractSimpleComponent:
-    type: object
-    allOf:
-    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/AbstractDataComponent
-    - properties:
-        referenceFrame:
-          description: Frame of reference (usually temporal or spatial) with respect
-            to which the value of the component is expressed. A reference frame anchors
-            a value to a real world datum.
-          type: string
-          format: uri-reference
-        axisID:
-          description: Specifies the reference axis (refer to CRS axisID). The reference
-            frame URI should also be specified unless it is inherited from parent
-            Vector
-          type: string
-          minLength: 1
-        nilValues:
-          description: Defines reserved values with special meaning (e.g., missing,
-            out-of-range, etc.)
-        constraint: {}
-        value:
-          description: Inline value(s) for the component. This property is optional
-            to enable structure to act as a schema for values provided separately
-            (e.g., in a datastream)
-    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/AbstractSimpleComponent.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
-  basicTypes:
-    $defs:
-      AbstractSWE:
-        description: Base substitution groups for all SWE Common objects other than
-          value objects
-        type: object
-        properties:
-          id:
-            description: The ID of the object, referenceable using a URI fragment
-            type: string
-            minLength: 1
-        x-schema-version: https://json-schema.org/draft/2020-12/schema
-      UnitReference:
-        type: object
-        properties:
-          label:
-            description: A human readable label for the unit
-            type: string
-            minLength: 1
-          symbol:
-            description: The preferred unit symbol to use when presenting the data
-              in a UI (use the UCUM code instead if no symbol is provided)
-            type: string
-            minLength: 1
-          code:
-            type: string
-            minLength: 1
-          href:
-            type: string
-            format: uri
-        anyOf:
-        - title: UCUM Code
-          required:
-          - code
-        - title: URI
-          required:
-          - href
-      AllowedTokens:
-        description: Defines permitted values for the component, as an enumerated
-          list of tokens or a regular expression pattern
-        type: object
-        oneOf:
-        - title: Enum Values
-          properties:
-            type:
-              enum:
-              - AllowedTokens
-            values:
-              type: array
-              minItems: 1
-              items:
-                type: string
-                minLength: 1
-          required:
-          - values
-        - title: Regex Pattern
-          properties:
-            type:
-              enum:
-              - AllowedTokens
-            pattern:
-              type: string
-              format: regex
-              minLength: 1
-          required:
-          - pattern
-      AllowedValues:
-        description: Defines the permitted values for the component as an enumerated
-          list and/or a list of inclusive ranges
-        type: object
-        properties:
-          type:
-            enum:
-            - AllowedValues
-          values:
-            type: array
-            minItems: 1
-            items:
-              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
-          intervals:
-            type: array
-            minItems: 1
-            items:
-              type: array
-              minItems: 2
-              maxItems: 2
-              items:
-                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
-          significantFigures:
-            type: integer
-            minimum: 1
-            maximum: 40
-        anyOf:
-        - title: Enum Values
-          required:
-          - values
-        - title: Intervals
-          required:
-          - intervals
-      AllowedTimes:
-        description: Defines the permitted values for the component, as a time range
-          or an enumerated list of time values
-        type: object
-        properties:
-          type:
-            enum:
-            - AllowedTimes
-          values:
-            type: array
-            minItems: 1
-            items:
-              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial
-          intervals:
-            type: array
-            items:
-              type: array
-              minItems: 2
-              maxItems: 2
-              items:
-                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial
-          significantFigures:
-            type: integer
-            minimum: 1
-            maximum: 40
-        anyOf:
-        - title: Enum Values
-          required:
-          - values
-        - title: Intervals
-          required:
-          - intervals
-      NilValuesText:
-        type: array
-        minItems: 1
-        items:
-          type: object
-          properties:
-            reason:
-              description: The reason for using the reserved value
-              type: string
-              format: uri
-            value:
-              description: The reserved value itself
-              type: string
-          required:
-          - reason
-          - value
-          additionalProperties: false
-      NilValuesInteger:
-        type: array
-        minItems: 1
-        items:
-          type: object
-          properties:
-            reason:
-              description: The reason for using the reserved value
-              type: string
-              format: uri
-            value:
-              description: The reserved value itself
-              type: integer
-          required:
-          - reason
-          - value
-          additionalProperties: false
-      NilValuesNumber:
-        type: array
-        minItems: 1
-        items:
-          type: object
-          properties:
-            reason:
-              description: The reason for using the reserved value
-              type: string
-              format: uri
-            value:
-              description: The reserved value itself
-              allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
-          required:
-          - reason
-          - value
-          additionalProperties: false
-      NilValuesTime:
-        type: array
-        minItems: 1
-        items:
-          type: object
-          properties:
-            reason:
-              description: The reason for using the reserved value
-              type: string
-              format: uri
-            value:
-              description: The reserved value itself
-              allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/DateTimeNumberOrSpecial
-          required:
-          - reason
-          - value
-          additionalProperties: false
-      SoftNamedProperty:
-        type: object
-        properties:
-          name:
-            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NameToken
-        required:
-        - name
-      NameToken:
-        type: string
-        minLength: 1
-        pattern: ^[A-Za-z][A-Za-z0-9_\-]*$
-      AssociationAttributeGroup:
-        type: object
-        properties:
-          href:
-            type: string
-            format: uri-reference
-          role:
-            type: string
-            format: uri
-          arcrole:
-            type: string
-            format: uri
-          title:
-            type: string
-            minLength: 1
-        required:
-        - href
-      NumberOrSpecial:
-        oneOf:
-        - title: Number
-          type: number
-        - title: Special Value
-          type: string
-          enum:
-          - NaN
-          - Infinity
-          - +Infinity
-          - -Infinity
-      DateTimeNumberOrSpecial:
-        oneOf:
-        - title: Date/Time
-          type: string
-          format: date-time
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
-      ElementCount:
-        type: object
-        allOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
-        - properties:
-            constraint:
-              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedValues
-            value:
-              description: Value is optional, to enable structure to act as a schema
-                for values provided using other encodings
-              type: integer
-      EncodedValues:
-        oneOf:
-        - type: array
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AssociationAttributeGroup
-    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/basicTypes.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
   AbstractDataComponent:
     description: Abstract base class for all data components
     type: object
@@ -3014,10 +3057,66 @@ x-defs:
           minLength: 1
     x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/AbstractSweIdentifiable.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-description: 'LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and
-
-  laboratory-analysis observation types, Geochronology results.'
+description: "Specimen building block. The wrapper dispatches two featureType\nvalues:
+  SF_Specimen (hand-curated \xABFeatureType\xBB, ISO 19156:2011\n\xA78.6 \u2014 inlines
+  SF_SamplingFeature's inherited properties since ISO\n19156 isn't in the GeoSciML
+  XMI) and ReferenceSpecimen (a GeoSciML\n\xABFeatureType\xBB from the LaboratoryAnalysis-Specimen
+  package, used\nfor named reference / type specimens). The rest of the\nLaboratoryAnalysis-Specimen
+  library (AnalyticalInstrument,\nAnalyticalSession, GeochronologicInterpretation,\nGeologicSamplingMethod,
+  GeologicSpecimenPreparation, Image, etc.)\nstays in `$defs` for cross-reference
+  from SF_Specimen and from\nother BBs.\n\nValidates either a single Feature (dispatched
+  by `featureType` to one of: SF_Specimen, ReferenceSpecimen) or a FeatureCollection
+  whose `features[]` items are dispatched the same way."
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      enum:
+      - FeatureCollection
+then:
+  allOf:
+  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/featurecollection
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/$defs/_FeatureDispatch
+else:
+  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/$defs/_FeatureDispatch
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            enum:
+            - SF_Specimen
+      then:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#SF_Specimen
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            enum:
+            - ReferenceSpecimen
+      then:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#ReferenceSpecimen
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - SF_Specimen
+              - ReferenceSpecimen
+      then: false
   AnalyticalInstrument:
     $anchor: AnalyticalInstrument
     description: The analytical instrument is the category of instrument used to perform
@@ -3500,7 +3599,8 @@ $defs:
     format: uri
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href
@@ -3525,5 +3625,119 @@ $defs:
           as a human-readable identifier.
       length:
         type: integer
+  SF_Specimen:
+    $anchor: SF_Specimen
+    description: "ISO 19156:2011 \xA78.6 SF_Specimen \u2014 a sampling feature representing
+      a physical specimen collected from a sampled feature. Implementation inlines
+      the SF_SamplingFeature parent's properties (sampledFeature, relatedObservation,
+      relatedSamplingFeature, lineage) since the parent is not separately schematised
+      here. External ISO types referenced from properties (OM_Process, OM_Observation,
+      GFI_Feature, TM_Object, LI_Lineage, SF_SamplingFeature) are by-reference only
+      via SCLinkObject."
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/feature
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            sampledFeature:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/$defs/SCLinkObject
+                minItems: 1
+                uniqueItems: true
+              description: Feature(s) being sampled (1..*, by-reference to ISO 19156
+                GFI_Feature). Inherited from SF_SamplingFeature.
+              nullable: true
+            relatedObservation:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/$defs/SCLinkObject
+                uniqueItems: true
+              description: Observations whose featureOfInterest is this specimen (0..*,
+                by-reference to ISO 19156 OM_Observation). Inherited from SF_SamplingFeature.
+              nullable: true
+            relatedSamplingFeature:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/$defs/SCLinkObject
+                uniqueItems: true
+              description: 'Self-association: relations to other SF_SamplingFeature
+                instances (0..*, by-reference). Inherited from SF_SamplingFeature.'
+              nullable: true
+            lineage:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/$defs/SCLinkObject
+              description: Provenance metadata (by-reference to ISO 19115 LI_Lineage).
+                Inherited from SF_SamplingFeature.
+              nullable: true
+            materialClass:
+              description: Material class of the specimen (1..1). ISO 19156 types
+                this as ScopedName; encoded here as a SWE Category to carry the vocabulary
+                URI.
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/Category
+            samplingTime:
+              description: Time of sampling (1..1, by-reference to ISO 19108 TM_Object).
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/$defs/SCLinkObject
+            samplingMethod:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/$defs/SCLinkObject
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#GeologicSamplingMethod
+              description: Sampling method (0..1). ISO 19156 types as OM_Process;
+                here implemented as the GeoSciML GeologicSamplingMethod FeatureType,
+                either by-reference (SCLinkObject) or inline.
+              nullable: true
+            samplingLocation:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/Geometry
+              description: Location where the specimen was sampled (0..1, GeoJSON
+                Geometry). Distinct from the top-level Feature geometry, which may
+                carry the specimen's current footprint.
+              nullable: true
+            processingDetails:
+              oneOf:
+              - type: array
+                items:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#GeologicSpecimenPreparation
+                uniqueItems: true
+              description: Processing / preparation steps applied to the specimen
+                (0..*). ISO 19156 types as SpecimenProcessing; here items are the
+                GeoSciML GeologicSpecimenPreparation DataType.
+              nullable: true
+            size:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/Quantity
+              description: Specimen size as a SWE Quantity (0..1). ISO 19156 types
+                as Measure.
+              nullable: true
+            currentLocation:
+              oneOf:
+              - type: string
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/$defs/SCLinkObject
+              description: Current physical location of the specimen (0..1). Free
+                text address, URI, or link object to a repository record.
+              nullable: true
+            specimenType:
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.yaml#/x-defs/Category
+              description: Specimen type classifier (0..1). ISO 19156 types as ScopedName;
+                encoded here as a SWE Category.
+              nullable: true
+          required:
+          - sampledFeature
+          - materialClass
+          - samplingTime
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
 x-schema-id: https://schemas.usgin.org/geosci-json/gsmSpecimen/gsmSpecimenSchema.json
 x-schema-version: https://json-schema.org/draft/2020-12/schema

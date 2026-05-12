@@ -1,4 +1,47 @@
 x-defs:
+  featurecollection:
+    title: a JSON-FG Feature Collection
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    type: object
+    required:
+    - type
+    - features
+    properties:
+      type:
+        enum:
+        - FeatureCollection
+      featureType:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/featuretype
+      geometryDimension:
+        type: integer
+        minimum: 0
+        maximum: 3
+      featureSchema:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/featureschema
+      coordRefSys:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys
+      measures:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/measures
+      features:
+        type: array
+        items:
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/feature
+          - not:
+              type: object
+              properties:
+                coordRefSys: {}
+              required:
+              - coordRefSys
+          - not:
+              type: object
+              properties:
+                conformsTo: {}
+              required:
+              - conformsTo
+    x-schema-source: https://schemas.opengis.net/json-fg/featurecollection.json
+    x-schema-id: https://schemas.opengis.net/json-fg/featurecollection.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
   gsmscimlBasicSchema:
     description: 'GeoSciML 4.1 Basic application schema. Core feature types
 
@@ -1290,6 +1333,88 @@ x-defs:
       - uom
     x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
+  featuretype:
+    title: the value of the 'featureType' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    type: string
+    x-schema-source: https://schemas.opengis.net/json-fg/featuretype.json
+    x-schema-id: https://schemas.opengis.net/json-fg/featuretype.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  featureschema:
+    title: the value of the 'featureSchema' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - type: string
+      format: uri
+    - type: object
+      additionalProperties:
+        type: string
+        format: uri
+    x-schema-source: https://schemas.opengis.net/json-fg/featureschema.json
+    x-schema-id: https://schemas.opengis.net/json-fg/featureschema.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  coordrefsys:
+    title: the value of the 'coordRefSys' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/single-refsys
+    - type: array
+      items:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/single-refsys
+      minItems: 2
+    $defs:
+      single-refsys:
+        oneOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/refsys-simpleref
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/refsys-byref
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/refsys-custom
+      refsys-simpleref:
+        type: string
+        format: uri-reference
+      refsys-byref:
+        type: object
+        required:
+        - type
+        - href
+        properties:
+          type:
+            type: string
+            enum:
+            - Reference
+          href:
+            type: string
+            format: uri-reference
+          epoch:
+            type: number
+      refsys-custom:
+        type: object
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            not:
+              enum:
+              - Reference
+    x-schema-source: https://schemas.opengis.net/json-fg/coordrefsys.json
+    x-schema-id: https://schemas.opengis.net/json-fg/coordrefsys.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  measures:
+    title: the value of the 'measures' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      unit:
+        type: string
+      description:
+        type: string
+    required:
+    - enabled
+    x-schema-source: https://schemas.opengis.net/json-fg/measures.json
+    x-schema-id: https://schemas.opengis.net/json-fg/measures.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
   QuantityRange:
     description: Decimal pair for specifying a quantity range with a unit of measure
     type: object
@@ -1495,26 +1620,6 @@ x-defs:
     x-schema-source: https://geojson.org/schema/Geometry.json
     x-schema-id: https://geojson.org/schema/Geometry.json
     x-schema-version: http://json-schema.org/draft-07/schema#
-  featuretype:
-    title: the value of the 'featureType' member
-    description: This JSON Schema is part of JSON-FG version 1.0.0.
-    type: string
-    x-schema-source: https://schemas.opengis.net/json-fg/featuretype.json
-    x-schema-id: https://schemas.opengis.net/json-fg/featuretype.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
-  featureschema:
-    title: the value of the 'featureSchema' member
-    description: This JSON Schema is part of JSON-FG version 1.0.0.
-    oneOf:
-    - type: string
-      format: uri
-    - type: object
-      additionalProperties:
-        type: string
-        format: uri
-    x-schema-source: https://schemas.opengis.net/json-fg/featureschema.json
-    x-schema-id: https://schemas.opengis.net/json-fg/featureschema.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
   time:
     title: the value of the 'time' member
     description: This JSON Schema is part of JSON-FG version 1.0.0.
@@ -1555,68 +1660,6 @@ x-defs:
     x-schema-id: https://schemas.opengis.net/json-fg/time.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
     nullable: true
-  coordrefsys:
-    title: the value of the 'coordRefSys' member
-    description: This JSON Schema is part of JSON-FG version 1.0.0.
-    oneOf:
-    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/single-refsys
-    - type: array
-      items:
-        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/single-refsys
-      minItems: 2
-    $defs:
-      single-refsys:
-        oneOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/refsys-simpleref
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/refsys-byref
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys/$defs/refsys-custom
-      refsys-simpleref:
-        type: string
-        format: uri-reference
-      refsys-byref:
-        type: object
-        required:
-        - type
-        - href
-        properties:
-          type:
-            type: string
-            enum:
-            - Reference
-          href:
-            type: string
-            format: uri-reference
-          epoch:
-            type: number
-      refsys-custom:
-        type: object
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            not:
-              enum:
-              - Reference
-    x-schema-source: https://schemas.opengis.net/json-fg/coordrefsys.json
-    x-schema-id: https://schemas.opengis.net/json-fg/coordrefsys.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
-  measures:
-    title: the value of the 'measures' member
-    description: This JSON Schema is part of JSON-FG version 1.0.0.
-    type: object
-    properties:
-      enabled:
-        type: boolean
-      unit:
-        type: string
-      description:
-        type: string
-    required:
-    - enabled
-    x-schema-source: https://schemas.opengis.net/json-fg/measures.json
-    x-schema-id: https://schemas.opengis.net/json-fg/measures.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
   place:
     title: the value of the 'place' member
     description: This JSON Schema is part of JSON-FG version 1.0.0.
@@ -2648,8 +2691,82 @@ x-defs:
     x-schema-version: https://json-schema.org/draft/2020-12/schema
 description: 'Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary
 
-  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension.'
+  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension.
+
+
+  Validates either a single Feature (dispatched by `featureType` to one of: GlobalStratotypePoint,
+  GlobalStratotypeSection, StratigraphicPoint, StratigraphicSection) or a FeatureCollection
+  whose `features[]` items are dispatched the same way.'
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      enum:
+      - FeatureCollection
+then:
+  allOf:
+  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/featurecollection
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/_FeatureDispatch
+else:
+  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/_FeatureDispatch
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            enum:
+            - GlobalStratotypePoint
+      then:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GlobalStratotypePoint
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            enum:
+            - GlobalStratotypeSection
+      then:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GlobalStratotypeSection
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            enum:
+            - StratigraphicPoint
+      then:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#StratigraphicPoint
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            enum:
+            - StratigraphicSection
+      then:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#StratigraphicSection
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - GlobalStratotypePoint
+              - GlobalStratotypeSection
+              - StratigraphicPoint
+              - StratigraphicSection
+      then: false
   GeochronologicBoundary:
     $anchor: GeochronologicBoundary
     description: A GeochronologicBoundary is a boundary between two geochronologic
@@ -2999,7 +3116,8 @@ $defs:
     - referencePoint
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href

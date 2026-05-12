@@ -15,7 +15,7 @@ GeoSciML 4.1 building block `gsmGeologicTime`. `«FeatureType»` classes are enc
 
 Source UML packages: `GeologicTime`, `GSSP`, `TemporalReferenceSystem`, `TimeScale`, `GeologicAgeDetails`.
 
-Contains 4 feature types, 9 data types, 1 code list.
+Contains 4 feature types, 10 data types, 1 code list.
 
 ## Classes in this BB
 
@@ -35,6 +35,7 @@ Contains 4 feature types, 9 data types, 1 code list.
 | `TimeOrdinalEra` | «DataType» | plain JSON object |
 | `TimeOrdinalEraBoundary` | «DataType» | plain JSON object |
 | `TimeOrdinalReferenceSystem` | «DataType» | plain JSON object |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -169,6 +170,8 @@ Properties (own; inherited properties listed in supertype's BB):
 | `referencePoint` | (oneOf — see schema) | 2..* | Two reference points defining the extent of the system |
 | `component` | (oneOf — see schema) | 0..1 | TimeOrdinalEra composing the TimeOrdinalReferenceSystem |
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -179,11 +182,13 @@ Properties (own; inherited properties listed in supertype's BB):
 
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEventAbstractDescription`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
 
 ## Examples
 
 - [examplegsmGeologicTimeMinimal.json](examples/examplegsmGeologicTimeMinimal.json)
+- [stratigraphic_section_lower_jurassic_GSO.json](examples/stratigraphic_section_lower_jurassic_GSO.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
@@ -209,6 +214,29 @@ Example instance: examplegsmGeologicTimeMinimal
 
 ```
 
+
+### stratigraphic section lower jurassic GSO
+Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL defines a Series-level chronostratigraphic unit `Lower_Jurassic_Series` (gsgu:Series, hosts gstime:LowerJurassic2012). gsmGeologicTime's dispatchable FTs are stratotype-related (StratigraphicSection, StratigraphicPoint, GlobalStratotypePoint, GlobalStratotypeSection); encoding the Lower Jurassic Series here as a StratigraphicSection whose geologicDescription summarises the Series scope. The link to the ICS time-scale Era is by-reference.
+#### json
+```json
+{
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL defines a Series-level chronostratigraphic unit `Lower_Jurassic_Series` (gsgu:Series, hosts gstime:LowerJurassic2012). gsmGeologicTime's dispatchable FTs are stratotype-related (StratigraphicSection, StratigraphicPoint, GlobalStratotypePoint, GlobalStratotypeSection); encoding the Lower Jurassic Series here as a StratigraphicSection whose geologicDescription summarises the Series scope. The link to the ICS time-scale Era is by-reference.",
+  "type": "Feature",
+  "featureType": "StratigraphicSection",
+  "id": "https://w3id.org/gso/ex-timelowerjurassic#Lower_Jurassic_Series",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "name": "Lower Jurassic Series (reference section context)",
+    "purpose": "typicalNorm",
+    "geologicDescription": "Series-level chronostratigraphic unit corresponding to the Lower Jurassic Epoch (gstime:LowerJurassic2012, ICS 2017). The ICS time scale does not define stratotypes for the Geochronologic Eras it defines; this example encodes the host association between the Lower Jurassic rock-based Series and the ICS Epoch.",
+    "geologicSetting": "Global lithostratigraphic equivalent of the Lower Jurassic Epoch."
+  }
+}
+
+```
+
 ## Schema
 
 ```yaml
@@ -216,8 +244,77 @@ $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.usgin.org/geosci-json/gsmGeologicTime/gsmGeologicTimeSchema.json
 description: 'Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary
 
-  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension.'
+  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension.
+
+
+  Validates either a single Feature (dispatched by `featureType` to one of: GlobalStratotypePoint,
+  GlobalStratotypeSection, StratigraphicPoint, StratigraphicSection) or a FeatureCollection
+  whose `features[]` items are dispatched the same way.'
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GlobalStratotypePoint
+      then:
+        $ref: '#GlobalStratotypePoint'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GlobalStratotypeSection
+      then:
+        $ref: '#GlobalStratotypeSection'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: StratigraphicPoint
+      then:
+        $ref: '#StratigraphicPoint'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: StratigraphicSection
+      then:
+        $ref: '#StratigraphicSection'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - GlobalStratotypePoint
+              - GlobalStratotypeSection
+              - StratigraphicPoint
+              - StratigraphicSection
+      then: false
   GeochronologicBoundary:
     $anchor: GeochronologicBoundary
     description: A GeochronologicBoundary is a boundary between two geochronologic
@@ -568,7 +665,8 @@ $defs:
     - referencePoint
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href
@@ -609,7 +707,7 @@ None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/context.jsonld)
+[context.jsonld](/github/workspace/_sources/gsmGeologicTime/context.jsonld)
 
 ## Sources
 

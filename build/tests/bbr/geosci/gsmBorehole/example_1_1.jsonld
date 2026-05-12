@@ -1,0 +1,8 @@
+{
+  "@context": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/context.jsonld",
+  "type": "Feature",
+  "id": "borehole.minimal.1",
+  "featureType": "Borehole",
+  "geometry": null,
+  "properties": {}
+}

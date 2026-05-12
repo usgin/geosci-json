@@ -63,6 +63,9 @@ Properties (own; inherited properties listed in supertype's BB):
 ## Examples
 
 - [examplegsmGeologicUnitExtensionMinimal.json](examples/examplegsmGeologicUnitExtensionMinimal.json)
+- [geologic_unit_la_tojiza_pluton_GSO.json](examples/geologic_unit_la_tojiza_pluton_GSO.json)
+- [geologic_unit_lake_holmes_coal_measures_GSO.json](examples/geologic_unit_lake_holmes_coal_measures_GSO.json)
+- [geologic_unit_lardeau_group_GSO.json](examples/geologic_unit_lardeau_group_GSO.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
@@ -80,6 +83,109 @@ Minimal BeddingDescription instance — no required properties
 ```json
 {
   "$comment": "Minimal BeddingDescription instance \u2014 no required properties"
+}
+
+```
+
+
+### geologic unit la tojiza pluton GSO
+Adapted from Loop3D-GSO/Examples/GSO-ExampleLaTojizaPluton.ttl. The source describes the La Tojiza Pluton (intrusive geologic body) with a Cambrian boundary (toj:cambrianBoundaryLaTojiza_2) decomposed into 4 segments. The intruding rock material composition references plutonic constituents; relations to surrounding rocks (gsrl:* properties in TTL) are not encoded here for brevity. Validates as a GeologicUnit feature; lives in gsmGeologicUnitExtension to illustrate Extension-content usage.
+#### json
+```json
+{
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleLaTojizaPluton.ttl. The source describes the La Tojiza Pluton (intrusive geologic body) with a Cambrian boundary (toj:cambrianBoundaryLaTojiza_2) decomposed into 4 segments. The intruding rock material composition references plutonic constituents; relations to surrounding rocks (gsrl:* properties in TTL) are not encoded here for brevity. Validates as a GeologicUnit feature; lives in gsmGeologicUnitExtension to illustrate Extension-content usage.",
+  "type": "Feature",
+  "featureType": "GeologicUnit",
+  "id": "https://w3id.org/gso/1.0/ex-plutontojiza#LaTojiza_Pluton",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "name": "La Tojiza Pluton",
+    "purpose": "instance",
+    "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithodemic_unit",
+    "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/intrusion",
+    "composition": [
+      {
+        "role": "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/dominantConstituent",
+        "material": {
+          "href": "#material-pluton-granitic",
+          "title": "Plutonic granitic rock material (Cambrian intrusion)"
+        }
+      }
+    ]
+  }
+}
+
+```
+
+
+### geologic unit lake holmes coal measures GSO
+Adapted from Loop3D-GSO/Examples/GSO-ExampleGeosciAustraliaStratUnit.ttl. The source models Geoscience Australia's Lake Holmes Coal Measures as a gsgu:Formation with a Time_Interval finishing at 27.23 MaY (Late Oligocene). Note: this example file lives in gsmGeologicUnitExtension to illustrate Extension-content usage of GeologicUnit features; the actual validation target is gsmExtendedGeologyCollection (which dispatches featureType=GeologicUnit and requires extension descriptions) or gsmscimlBasic's library schema.
+#### json
+```json
+{
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleGeosciAustraliaStratUnit.ttl. The source models Geoscience Australia's Lake Holmes Coal Measures as a gsgu:Formation with a Time_Interval finishing at 27.23 MaY (Late Oligocene). Note: this example file lives in gsmGeologicUnitExtension to illustrate Extension-content usage of GeologicUnit features; the actual validation target is gsmExtendedGeologyCollection (which dispatches featureType=GeologicUnit and requires extension descriptions) or gsmscimlBasic's library schema.",
+  "type": "Feature",
+  "featureType": "GeologicUnit",
+  "id": "http://pid.geoscience.gov.au/feature/asc/gsml/geologicalunit/10056",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "name": "Lake Holmes Coal Measures",
+    "purpose": "typicalNorm",
+    "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
+    "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
+    "composition": [
+      {
+        "role": "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/unspecifiedPartRole",
+        "material": {
+          "href": "#material-lacustrine-mixed-clastics",
+          "title": "Lacustrine red brown and green sand, silt and clay with minor gravel, calcrete and gypsum"
+        }
+      }
+    ]
+  }
+}
+
+```
+
+
+### geologic unit lardeau group GSO
+Adapted from Loop3D-GSO/Examples/GSO-LardeauGroup.ttl. The source describes the Lardeau Group (Trout Lake area, British Columbia) — a stratigraphic group composed of Ajax fm and Sharon Creek fm (gsrl:stratUnderlies relationships) plus additional formations in the TTL. This example encodes the Group as a top-level GeologicUnit with hierarchyLink references to constituent Formation features (left as href stubs). Source reference: ResearchGate publication 237174271 (structural geology of Lardeau Group near Trout Lake).
+#### json
+```json
+{
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-LardeauGroup.ttl. The source describes the Lardeau Group (Trout Lake area, British Columbia) — a stratigraphic group composed of Ajax fm and Sharon Creek fm (gsrl:stratUnderlies relationships) plus additional formations in the TTL. This example encodes the Group as a top-level GeologicUnit with hierarchyLink references to constituent Formation features (left as href stubs). Source reference: ResearchGate publication 237174271 (structural geology of Lardeau Group near Trout Lake).",
+  "type": "Feature",
+  "featureType": "GeologicUnit",
+  "id": "https://w3id.org/gso/1.0/ex-lardeaustrat#Lardeau_Group",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "name": "Lardeau Group",
+    "purpose": "typicalNorm",
+    "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
+    "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/group",
+    "hierarchyLink": [
+      {
+        "role": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
+        "targetUnit": {
+          "href": "https://w3id.org/gso/1.0/ex-lardeaustrat#ajaxfm",
+          "title": "Ajax Formation (constituent of Lardeau Group)"
+        }
+      },
+      {
+        "role": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
+        "targetUnit": {
+          "href": "https://w3id.org/gso/1.0/ex-lardeaustrat#sharoncreekfm",
+          "title": "Sharon Creek Formation (constituent of Lardeau Group)"
+        }
+      }
+    ]
+  }
 }
 
 ```
@@ -188,7 +294,8 @@ $defs:
             of the bedding.
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href

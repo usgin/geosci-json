@@ -2,7 +2,7 @@
   "title": "Validation report for usgin.bbr.geosci.gsmGeologicStructureExtension - gsmGeologicStructureExtension",
   "bblockName": "gsmGeologicStructureExtension",
   "bblockId": "usgin.bbr.geosci.gsmGeologicStructureExtension",
-  "generated": "2026-05-12T21:31:25.898743+00:00",
+  "generated": "2026-05-12T22:11:00.908943+00:00",
   "result": true,
   "items": [
     {
@@ -40,12 +40,84 @@
           ]
         }
       ]
+    },
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/bbr/geosci/gsmGeologicStructureExtension/example_2_1.json",
+        "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmGeologicStructureExtension/example_2_1.json",
+        "exampleIndex": 2,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": true,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using examples/fc_fault_displacement_events_GSO.json from examples"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/bbr/geosci/gsmGeologicStructureExtension/example_3_1.json",
+        "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmGeologicStructureExtension/example_3_1.json",
+        "exampleIndex": 3,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": true,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using examples/fc_kanna_thrust_faults_GSO.json from examples"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
     }
   ],
   "globalErrors": {},
   "counts": {
-    "total": 1,
-    "passed": 1,
+    "total": 3,
+    "passed": 3,
     "failed": 0
   }
 }

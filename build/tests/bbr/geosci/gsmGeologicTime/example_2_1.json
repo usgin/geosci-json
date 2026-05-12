@@ -1,0 +1,15 @@
+{
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL defines a Series-level chronostratigraphic unit `Lower_Jurassic_Series` (gsgu:Series, hosts gstime:LowerJurassic2012). gsmGeologicTime's dispatchable FTs are stratotype-related (StratigraphicSection, StratigraphicPoint, GlobalStratotypePoint, GlobalStratotypeSection); encoding the Lower Jurassic Series here as a StratigraphicSection whose geologicDescription summarises the Series scope. The link to the ICS time-scale Era is by-reference.",
+  "type": "Feature",
+  "featureType": "StratigraphicSection",
+  "id": "https://w3id.org/gso/ex-timelowerjurassic#Lower_Jurassic_Series",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "name": "Lower Jurassic Series (reference section context)",
+    "purpose": "typicalNorm",
+    "geologicDescription": "Series-level chronostratigraphic unit corresponding to the Lower Jurassic Epoch (gstime:LowerJurassic2012, ICS 2017). The ICS time scale does not define stratotypes for the Geochronologic Eras it defines; this example encodes the host association between the Lower Jurassic rock-based Series and the ICS Epoch.",
+    "geologicSetting": "Global lithostratigraphic equivalent of the Lower Jurassic Epoch."
+  }
+}

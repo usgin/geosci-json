@@ -6,8 +6,95 @@ description: 'Detailed structural-geology types extending the Basic structure
 
   Fracture, DisplacementEvent, DisplacementValue, Lineation, Layering,
 
-  NonDirectionalStructure, etc.'
+  NonDirectionalStructure, etc.
+
+
+  Validates either a single Feature (dispatched by `featureType` to one of: DisplacementEvent,
+  FoldSystem, Joint, Layering, Lineation, NonDirectionalStructure) or a FeatureCollection
+  whose `features[]` items are dispatched the same way.'
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: DisplacementEvent
+      then:
+        $ref: '#DisplacementEvent'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: FoldSystem
+      then:
+        $ref: '#FoldSystem'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Joint
+      then:
+        $ref: '#Joint'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Layering
+      then:
+        $ref: '#Layering'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Lineation
+      then:
+        $ref: '#Lineation'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: NonDirectionalStructure
+      then:
+        $ref: '#NonDirectionalStructure'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - DisplacementEvent
+              - FoldSystem
+              - Joint
+              - Layering
+              - Lineation
+              - NonDirectionalStructure
+      then: false
   ContactDescription:
     $anchor: ContactDescription
     description: The ContactDescription provides extended descriptive properties of
@@ -592,7 +679,8 @@ $defs:
             of slip.
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href

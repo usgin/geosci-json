@@ -3,7 +3,7 @@
 
 `usgin.bbr.geosci.gsmSpecimen` *v0.1*
 
-LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and
+Specimen building block. The wrapper dispatches two featureType
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -15,7 +15,7 @@ GeoSciML 4.1 building block `gsmSpecimen`. `«FeatureType»` classes are encoded
 
 Source UML packages: `LaboratoryAnalysis-Specimen`, `Geochronology`, `GeologicSpecimen`, `LaboratoryAnalysis`.
 
-Contains 7 feature types, 2 data types, 7 code lists.
+Contains 8 feature types, 3 data types, 7 code lists.
 
 ## Classes in this BB
 
@@ -36,7 +36,9 @@ Contains 7 feature types, 2 data types, 7 code lists.
 | `IsotopicEventType` | «CodeList» | URI codelist (`format: uri`) |
 | `IsotopicSystemName` | «CodeList» | URI codelist (`format: uri`) |
 | `ReferenceSpecimen` | «FeatureType» | JSON-FG Feature |
+| `SF_Specimen` | «FeatureType» | JSON-FG Feature |
 | `StatisticalMethodTerm` | «CodeList» | URI codelist (`format: uri`) |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -146,6 +148,29 @@ Properties (own; inherited properties listed in supertype's BB):
 | `referenceDescription` | (oneOf — see schema) | 0..1 | The property referenceDescription is an association between a ReferenceSpecimen and a CIT:CI_Citation that references… |
 | `usedIn` | (oneOf — see schema) | 0..1 | The property usedIn is an association between a ReferenceSpecimen and an AnalyticalSession in which the reference spe… |
 
+### `SF_Specimen`
+
+ISO 19156:2011 §8.6 SF_Specimen — a sampling feature representing a physical specimen collected from a sampled feature. Implementation inlines the SF_SamplingFeature parent's properties (sampledFeature, relatedObservation, relatedSamplingFeature, lineage) since the parent is not separately schematised here. External ISO types referenced from properties (OM_Process, OM_Observation, GFI_Feature, TM_Object, LI_Lineage, SF_SamplingFeature) are by-reference only via SCLinkObject.
+
+Properties (own; inherited properties listed in supertype's BB):
+
+| Name | Type | Mult | Notes |
+| --- | --- | --- | --- |
+| `sampledFeature` | (oneOf — see schema) | 0..1 | Feature(s) being sampled (1..*, by-reference to ISO 19156 GFI_Feature). Inherited from SF_SamplingFeature. |
+| `relatedObservation` | (oneOf — see schema) | 0..1 | Observations whose featureOfInterest is this specimen (0..*, by-reference to ISO 19156 OM_Observation). Inherited fro… |
+| `relatedSamplingFeature` | (oneOf — see schema) | 0..1 | Self-association: relations to other SF_SamplingFeature instances (0..*, by-reference). Inherited from SF_SamplingFea… |
+| `lineage` | (oneOf — see schema) | 0..1 | Provenance metadata (by-reference to ISO 19115 LI_Lineage). Inherited from SF_SamplingFeature. |
+| `materialClass` | SWE 3.0 `Category` | 0..1 | Material class of the specimen (1..1). ISO 19156 types this as ScopedName; encoded here as a SWE Category to carry th… |
+| `samplingTime` | `/$defs/SCLinkObject` | 0..1 | Time of sampling (1..1, by-reference to ISO 19108 TM_Object). |
+| `samplingMethod` | (oneOf — see schema) | 0..1 | Sampling method (0..1). ISO 19156 types as OM_Process; here implemented as the GeoSciML GeologicSamplingMethod Featur… |
+| `samplingLocation` | (oneOf — see schema) | 0..1 | Location where the specimen was sampled (0..1, GeoJSON Geometry). Distinct from the top-level Feature geometry, which… |
+| `processingDetails` | (oneOf — see schema) | 0..1 | Processing / preparation steps applied to the specimen (0..*). ISO 19156 types as SpecimenProcessing; here items are … |
+| `size` | (oneOf — see schema) | 0..1 | Specimen size as a SWE Quantity (0..1). ISO 19156 types as Measure. |
+| `currentLocation` | (oneOf — see schema) | 0..1 | Current physical location of the specimen (0..1). Free text address, URI, or link object to a repository record. |
+| `specimenType` | (oneOf — see schema) | 0..1 | Specimen type classifier (0..1). ISO 19156 types as ScopedName; encoded here as a SWE Category. |
+
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -163,11 +188,15 @@ Properties (own; inherited properties listed in supertype's BB):
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent`
 - `https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json`
 - `https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.json`
+- `https://geojson.org/schema/Geometry.json`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
+- `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
+- `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
 
 ## Examples
 
-- [examplegsmSpecimenMinimal.json](examples/examplegsmSpecimenMinimal.json)
+- [specimen_drill_core_segment.json](examples/specimen_drill_core_segment.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
@@ -179,17 +208,147 @@ See [examples.yaml](examples.yaml) for the full manifest.
 
 ## Examples
 
-### examplegsmSpecimenMinimal
-Example instance: examplegsmSpecimenMinimal
+### specimen drill core segment
+SF_Specimen example — a drill-core segment from a borehole. Exercises the required SF_SamplingFeature inherited properties (sampledFeature, samplingTime, materialClass) plus optional own properties (samplingMethod, processingDetails, size, currentLocation, specimenType) and the relatedSamplingFeature self-association linking to the parent borehole interval that produced it.
 #### json
 ```json
 {
+  "$comment": "SF_Specimen example — a drill-core segment from a borehole. Exercises the required SF_SamplingFeature inherited properties (sampledFeature, samplingTime, materialClass) plus optional own properties (samplingMethod, processingDetails, size, currentLocation, specimenType) and the relatedSamplingFeature self-association linking to the parent borehole interval that produced it.",
   "type": "Feature",
-  "id": "analyticalinstrument.minimal.1",
-  "featureType": "AnalyticalInstrument",
+  "featureType": "SF_Specimen",
+  "id": "https://example.org/specimens/dc-2024-017-seg-3",
   "geometry": null,
-  "properties": {}
+  "place": null,
+  "time": null,
+  "properties": {
+    "sampledFeature": [
+      {
+        "href": "https://example.org/geologicunits/hervey-group",
+        "rel": "self",
+        "title": "Hervey Group (GeologicUnit being sampled)"
+      }
+    ],
+    "relatedSamplingFeature": [
+      {
+        "href": "https://example.org/boreholes/dc-2024-017",
+        "rel": "child-of",
+        "title": "DC-2024-017 borehole (parent sampling feature)"
+      },
+      {
+        "href": "https://example.org/boreholeintervals/dc-2024-017/142.4-143.6",
+        "rel": "child-of",
+        "title": "BoreholeInterval 142.4–143.6 m from which this core segment was retrieved"
+      }
+    ],
+    "relatedObservation": [
+      {
+        "href": "https://example.org/observations/dc-2024-017-seg-3/xrf-2024-08-12",
+        "rel": "described-by",
+        "title": "Portable-XRF major element analysis run on 2024-08-12"
+      }
+    ],
+    "materialClass": {
+      "type": "Category",
+      "label": "sandstone",
+      "definition": "http://resource.geosciml.org/classifier/cgi/simplelithology",
+      "value": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone"
+    },
+    "samplingTime": {
+      "href": "https://example.org/time/2024-08-10T11:23:00Z",
+      "title": "Recovered 2024-08-10 11:23 UTC"
+    },
+    "samplingMethod": {
+      "href": "https://example.org/methods/diamond-core-drilling",
+      "title": "Diamond core drilling (HQ size, triple tube) — referencing a GeologicSamplingMethod feature"
+    },
+    "processingDetails": [
+      {
+        "preparationMethod": "http://resource.geosciml.org/classifier/cgi/specimenpreparation/core-split-and-photograph"
+      }
+    ],
+    "currentLocation": "Repository A, Drawer 17, Slot 03",
+    "specimenType": {
+      "type": "Category",
+      "label": "core segment",
+      "definition": "http://resource.geosciml.org/classifier/cgi/specimentype",
+      "value": "http://resource.geosciml.org/classifier/cgi/specimentype/core-segment"
+    }
+  }
 }
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/context.jsonld",
+  "$comment": "SF_Specimen example \u2014 a drill-core segment from a borehole. Exercises the required SF_SamplingFeature inherited properties (sampledFeature, samplingTime, materialClass) plus optional own properties (samplingMethod, processingDetails, size, currentLocation, specimenType) and the relatedSamplingFeature self-association linking to the parent borehole interval that produced it.",
+  "type": "Feature",
+  "featureType": "SF_Specimen",
+  "id": "https://example.org/specimens/dc-2024-017-seg-3",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "sampledFeature": [
+      {
+        "href": "https://example.org/geologicunits/hervey-group",
+        "rel": "self",
+        "title": "Hervey Group (GeologicUnit being sampled)"
+      }
+    ],
+    "relatedSamplingFeature": [
+      {
+        "href": "https://example.org/boreholes/dc-2024-017",
+        "rel": "child-of",
+        "title": "DC-2024-017 borehole (parent sampling feature)"
+      },
+      {
+        "href": "https://example.org/boreholeintervals/dc-2024-017/142.4-143.6",
+        "rel": "child-of",
+        "title": "BoreholeInterval 142.4\u2013143.6 m from which this core segment was retrieved"
+      }
+    ],
+    "relatedObservation": [
+      {
+        "href": "https://example.org/observations/dc-2024-017-seg-3/xrf-2024-08-12",
+        "rel": "described-by",
+        "title": "Portable-XRF major element analysis run on 2024-08-12"
+      }
+    ],
+    "materialClass": {
+      "type": "Category",
+      "label": "sandstone",
+      "definition": "http://resource.geosciml.org/classifier/cgi/simplelithology",
+      "value": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone"
+    },
+    "samplingTime": {
+      "href": "https://example.org/time/2024-08-10T11:23:00Z",
+      "title": "Recovered 2024-08-10 11:23 UTC"
+    },
+    "samplingMethod": {
+      "href": "https://example.org/methods/diamond-core-drilling",
+      "title": "Diamond core drilling (HQ size, triple tube) \u2014 referencing a GeologicSamplingMethod feature"
+    },
+    "processingDetails": [
+      {
+        "preparationMethod": "http://resource.geosciml.org/classifier/cgi/specimenpreparation/core-split-and-photograph"
+      }
+    ],
+    "currentLocation": "Repository A, Drawer 17, Slot 03",
+    "specimenType": {
+      "type": "Category",
+      "label": "core segment",
+      "definition": "http://resource.geosciml.org/classifier/cgi/specimentype",
+      "value": "http://resource.geosciml.org/classifier/cgi/specimentype/core-segment"
+    }
+  }
+}
+```
+
+#### ttl
+```ttl
+
 
 ```
 
@@ -198,10 +357,63 @@ Example instance: examplegsmSpecimenMinimal
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.usgin.org/geosci-json/gsmSpecimen/gsmSpecimenSchema.json
-description: 'LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and
-
-  laboratory-analysis observation types, Geochronology results.'
+description: "Specimen building block. The wrapper dispatches two featureType\nvalues:
+  SF_Specimen (hand-curated \xABFeatureType\xBB, ISO 19156:2011\n\xA78.6 \u2014 inlines
+  SF_SamplingFeature's inherited properties since ISO\n19156 isn't in the GeoSciML
+  XMI) and ReferenceSpecimen (a GeoSciML\n\xABFeatureType\xBB from the LaboratoryAnalysis-Specimen
+  package, used\nfor named reference / type specimens). The rest of the\nLaboratoryAnalysis-Specimen
+  library (AnalyticalInstrument,\nAnalyticalSession, GeochronologicInterpretation,\nGeologicSamplingMethod,
+  GeologicSpecimenPreparation, Image, etc.)\nstays in `$defs` for cross-reference
+  from SF_Specimen and from\nother BBs.\n\nValidates either a single Feature (dispatched
+  by `featureType` to one of: SF_Specimen, ReferenceSpecimen) or a FeatureCollection
+  whose `features[]` items are dispatched the same way."
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: SF_Specimen
+      then:
+        $ref: '#SF_Specimen'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: ReferenceSpecimen
+      then:
+        $ref: '#ReferenceSpecimen'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - SF_Specimen
+              - ReferenceSpecimen
+      then: false
   AnalyticalInstrument:
     $anchor: AnalyticalInstrument
     description: The analytical instrument is the category of instrument used to perform
@@ -700,7 +912,8 @@ $defs:
     format: uri
   SCLinkObject:
     title: link object
-    description: definition of a link object
+    description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+      based on RFC 8288 web linking.
     type: object
     required:
     - href
@@ -725,6 +938,118 @@ $defs:
           as a human-readable identifier.
       length:
         type: integer
+  SF_Specimen:
+    $anchor: SF_Specimen
+    description: "ISO 19156:2011 \xA78.6 SF_Specimen \u2014 a sampling feature representing
+      a physical specimen collected from a sampled feature. Implementation inlines
+      the SF_SamplingFeature parent's properties (sampledFeature, relatedObservation,
+      relatedSamplingFeature, lineage) since the parent is not separately schematised
+      here. External ISO types referenced from properties (OM_Process, OM_Observation,
+      GFI_Feature, TM_Object, LI_Lineage, SF_SamplingFeature) are by-reference only
+      via SCLinkObject."
+    allOf:
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            sampledFeature:
+              oneOf:
+              - type: 'null'
+              - type: array
+                items:
+                  $ref: '#/$defs/SCLinkObject'
+                minItems: 1
+                uniqueItems: true
+              description: Feature(s) being sampled (1..*, by-reference to ISO 19156
+                GFI_Feature). Inherited from SF_SamplingFeature.
+            relatedObservation:
+              oneOf:
+              - type: 'null'
+              - type: array
+                items:
+                  $ref: '#/$defs/SCLinkObject'
+                uniqueItems: true
+              description: Observations whose featureOfInterest is this specimen (0..*,
+                by-reference to ISO 19156 OM_Observation). Inherited from SF_SamplingFeature.
+            relatedSamplingFeature:
+              oneOf:
+              - type: 'null'
+              - type: array
+                items:
+                  $ref: '#/$defs/SCLinkObject'
+                uniqueItems: true
+              description: 'Self-association: relations to other SF_SamplingFeature
+                instances (0..*, by-reference). Inherited from SF_SamplingFeature.'
+            lineage:
+              oneOf:
+              - type: 'null'
+              - $ref: '#/$defs/SCLinkObject'
+              description: Provenance metadata (by-reference to ISO 19115 LI_Lineage).
+                Inherited from SF_SamplingFeature.
+            materialClass:
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              description: Material class of the specimen (1..1). ISO 19156 types
+                this as ScopedName; encoded here as a SWE Category to carry the vocabulary
+                URI.
+            samplingTime:
+              $ref: '#/$defs/SCLinkObject'
+              description: Time of sampling (1..1, by-reference to ISO 19108 TM_Object).
+            samplingMethod:
+              oneOf:
+              - type: 'null'
+              - $ref: '#/$defs/SCLinkObject'
+              - $ref: '#GeologicSamplingMethod'
+              description: Sampling method (0..1). ISO 19156 types as OM_Process;
+                here implemented as the GeoSciML GeologicSamplingMethod FeatureType,
+                either by-reference (SCLinkObject) or inline.
+            samplingLocation:
+              oneOf:
+              - type: 'null'
+              - $ref: https://geojson.org/schema/Geometry.json
+              description: Location where the specimen was sampled (0..1, GeoJSON
+                Geometry). Distinct from the top-level Feature geometry, which may
+                carry the specimen's current footprint.
+            processingDetails:
+              oneOf:
+              - type: 'null'
+              - type: array
+                items:
+                  $ref: '#GeologicSpecimenPreparation'
+                uniqueItems: true
+              description: Processing / preparation steps applied to the specimen
+                (0..*). ISO 19156 types as SpecimenProcessing; here items are the
+                GeoSciML GeologicSpecimenPreparation DataType.
+            size:
+              oneOf:
+              - type: 'null'
+              - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+              description: Specimen size as a SWE Quantity (0..1). ISO 19156 types
+                as Measure.
+            currentLocation:
+              oneOf:
+              - type: 'null'
+              - type: string
+              - $ref: '#/$defs/SCLinkObject'
+              description: Current physical location of the specimen (0..1). Free
+                text address, URI, or link object to a repository record.
+            specimenType:
+              oneOf:
+              - type: 'null'
+              - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              description: Specimen type classifier (0..1). ISO 19156 types as ScopedName;
+                encoded here as a SWE Category.
+          required:
+          - sampledFeature
+          - materialClass
+          - samplingTime
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
 
 ```
 
@@ -737,11 +1062,16 @@ Links to the schema:
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/geosci-json/_sources/gsmSpecimen/context.jsonld)
+[context.jsonld](https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/context.jsonld)
 
 ## Sources
 

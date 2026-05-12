@@ -1,0 +1,64 @@
+{
+  "@context": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/context.jsonld",
+  "$comment": "SF_Specimen example \u2014 a drill-core segment from a borehole. Exercises the required SF_SamplingFeature inherited properties (sampledFeature, samplingTime, materialClass) plus optional own properties (samplingMethod, processingDetails, size, currentLocation, specimenType) and the relatedSamplingFeature self-association linking to the parent borehole interval that produced it.",
+  "type": "Feature",
+  "featureType": "SF_Specimen",
+  "id": "https://example.org/specimens/dc-2024-017-seg-3",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "sampledFeature": [
+      {
+        "href": "https://example.org/geologicunits/hervey-group",
+        "rel": "self",
+        "title": "Hervey Group (GeologicUnit being sampled)"
+      }
+    ],
+    "relatedSamplingFeature": [
+      {
+        "href": "https://example.org/boreholes/dc-2024-017",
+        "rel": "child-of",
+        "title": "DC-2024-017 borehole (parent sampling feature)"
+      },
+      {
+        "href": "https://example.org/boreholeintervals/dc-2024-017/142.4-143.6",
+        "rel": "child-of",
+        "title": "BoreholeInterval 142.4\u2013143.6 m from which this core segment was retrieved"
+      }
+    ],
+    "relatedObservation": [
+      {
+        "href": "https://example.org/observations/dc-2024-017-seg-3/xrf-2024-08-12",
+        "rel": "described-by",
+        "title": "Portable-XRF major element analysis run on 2024-08-12"
+      }
+    ],
+    "materialClass": {
+      "type": "Category",
+      "label": "sandstone",
+      "definition": "http://resource.geosciml.org/classifier/cgi/simplelithology",
+      "value": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone"
+    },
+    "samplingTime": {
+      "href": "https://example.org/time/2024-08-10T11:23:00Z",
+      "title": "Recovered 2024-08-10 11:23 UTC"
+    },
+    "samplingMethod": {
+      "href": "https://example.org/methods/diamond-core-drilling",
+      "title": "Diamond core drilling (HQ size, triple tube) \u2014 referencing a GeologicSamplingMethod feature"
+    },
+    "processingDetails": [
+      {
+        "preparationMethod": "http://resource.geosciml.org/classifier/cgi/specimenpreparation/core-split-and-photograph"
+      }
+    ],
+    "currentLocation": "Repository A, Drawer 17, Slot 03",
+    "specimenType": {
+      "type": "Category",
+      "label": "core segment",
+      "definition": "http://resource.geosciml.org/classifier/cgi/specimentype",
+      "value": "http://resource.geosciml.org/classifier/cgi/specimentype/core-segment"
+    }
+  }
+}
