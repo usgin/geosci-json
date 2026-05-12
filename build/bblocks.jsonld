@@ -194,7 +194,7 @@
   "name": "Building Blocks - GeoSci JSON Building Blocks repository",
   "abstract": "Repository assembling building blocks for geoscience JSON metadata, using OGC building block patterns.\n",
   "description": "Modular JSON Schema building blocks for geoscience metadata and profiles.\n",
-  "modified": "2026-05-12T23:20:55.827065",
+  "modified": "2026-05-12T23:27:49.276845",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"6b01f188cc614cc2e65f4bf86a2623f98f101dfd",

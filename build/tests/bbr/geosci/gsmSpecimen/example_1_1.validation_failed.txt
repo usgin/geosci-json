@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmSpecimen - gsmSpecimen
-Generated 2026-05-12T23:26:37.257983+00:00
+Generated 2026-05-12T23:33:13.785259+00:00
 === Files ===
 Using examples/specimen_drill_core_segment.json from examples
 JSON-LD context is present - uplifting

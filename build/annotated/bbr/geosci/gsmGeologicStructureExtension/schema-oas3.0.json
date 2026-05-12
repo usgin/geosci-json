@@ -2390,9 +2390,60 @@
             "position": {
               "oneOf": [
                 {
-                  "allOf": [
+                  "oneOf": [
                     {
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "inXSDDateTime": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "inXSDDate": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "inXSDgYearMonth": {
+                          "type": "string",
+                          "pattern": "^-?\\d{4}-\\d{2}$"
+                        },
+                        "inXSDgYear": {
+                          "type": "string",
+                          "pattern": "^-?\\d{4}$"
+                        }
+                      },
+                      "anyOf": [
+                        {
+                          "required": [
+                            "inXSDDateTime"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "inXSDDate"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "inXSDgYearMonth"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "inXSDgYear"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date"
                     }
                   ]
                 }

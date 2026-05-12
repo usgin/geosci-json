@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmGeologicUnitExtension - gsmGeologicUnitExtension
-Generated 2026-05-12T23:26:31.283417+00:00
+Generated 2026-05-12T23:33:09.330106+00:00
 === Files ===
 Using examples/geologic_unit_lardeau_group_GSO.json from examples
 === End Files ===
