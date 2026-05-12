@@ -1,5 +1,1 @@
-# Negative-test manifest for gsmEarthMaterialExtension.
-# List instances that MUST fail validation; useful for regression
-# coverage. Format mirrors examples.yaml.
-
-tests: []
+[]

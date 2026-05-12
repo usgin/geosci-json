@@ -139,14 +139,9 @@ def write_stub_artifacts(bb_dir: Path, bb_name: str) -> list[str]:
 
     tests_yaml = bb_dir / "tests.yaml"
     if not tests_yaml.exists():
-        tests_yaml.write_text(
-            f"# Negative-test manifest for {bb_name}.\n"
-            f"# List instances that MUST fail validation; useful for regression\n"
-            f"# coverage. Format mirrors examples.yaml.\n"
-            f"\n"
-            f"tests: []\n",
-            encoding="utf-8",
-        )
+        # bblocks-postprocess expects a list at the root (CDIF convention).
+        # Negative tests can be added later; empty list means none.
+        tests_yaml.write_text("[]\n", encoding="utf-8")
         written.append("tests.yaml")
 
     return written
