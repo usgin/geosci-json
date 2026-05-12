@@ -1163,13 +1163,24 @@ def build_bblock_metadata(bb_name: str, bb_description: str, packages: list[str]
     abstract = bb_description.strip().splitlines()[0] if bb_description else \
         f"GeoSciML 4.1 {bb_name} encoded as JSON Schema per OGC 24-017r1."
     return OrderedDict({
+        "$schema": "metaschema.yaml",
         "itemIdentifier": f"usgin.bbr.geosci.{bb_name}",
         "name": bb_name,
         "abstract": abstract,
         "status": "under-development",
-        "dateTimeAddition": "2026-05-12",
-        "sources": [{"title": "GeoSciML 4.1 XMI"}],
+        "dateTimeAddition": "2026-05-12T00:00:00Z",
+        "itemClass": "schema",
+        "register": "usgin-geosci-bblocks-register",
+        "version": "0.1",
+        "link": "https://github.com/usgin/geosci-json",
+        "sources": [
+            {
+                "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+                "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
+            }
+        ],
         "schema": "schema.yaml",
+        "tags": ["geoscience", "geosciml", "uml-derived"],
         "umlPackages": packages,
     })
 
@@ -1349,13 +1360,24 @@ def build_profile_metadata(profile_name: str, info: dict) -> dict:
         f"GeoSciML 4.1 FC profile {profile_name}."
     ft_names = [e["name"] for e in info["featureTypes"]]
     return OrderedDict({
+        "$schema": "metaschema.yaml",
         "itemIdentifier": f"usgin.bbr.geosci.{profile_name}",
         "name": profile_name,
         "abstract": abstract,
         "status": "under-development",
-        "dateTimeAddition": "2026-05-12",
-        "sources": [{"title": "FC profile composed across GeoSciML BBs"}],
+        "dateTimeAddition": "2026-05-12T00:00:00Z",
+        "itemClass": "schema",
+        "register": "usgin-geosci-bblocks-register",
+        "version": "0.1",
+        "link": "https://github.com/usgin/geosci-json",
+        "sources": [
+            {
+                "title": "GeoSciML 4.1 — FC profile composed across building blocks",
+                "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
+            }
+        ],
         "schema": "schema.yaml",
+        "tags": ["geoscience", "geosciml", "profile", "featurecollection"],
         "profileOf": "FeatureCollection",
         "featureTypes": ft_names,
     })

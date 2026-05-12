@@ -1,15 +1,26 @@
 {
+  "$schema": "metaschema.yaml",
   "itemIdentifier": "usgin.bbr.geosci.gsmGeologicUnitExtension",
   "name": "gsmGeologicUnitExtension",
   "abstract": "GeologicUnit extension: detailed unit description structures",
   "status": "under-development",
-  "dateTimeAddition": "2026-05-12",
+  "dateTimeAddition": "2026-05-12T00:00:00Z",
+  "itemClass": "schema",
+  "register": "usgin-geosci-bblocks-register",
+  "version": "0.1",
+  "link": "https://github.com/usgin/geosci-json",
   "sources": [
     {
-      "title": "GeoSciML 4.1 XMI"
+      "title": "GeoSciML 4.1 UML model (Enterprise Architect XMI export)",
+      "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
     }
   ],
   "schema": "schema.yaml",
+  "tags": [
+    "geoscience",
+    "geosciml",
+    "uml-derived"
+  ],
   "umlPackages": [
     "GeologicUnitDetails"
   ]

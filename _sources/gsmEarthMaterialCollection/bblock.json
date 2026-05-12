@@ -1,15 +1,27 @@
 {
+  "$schema": "metaschema.yaml",
   "itemIdentifier": "usgin.bbr.geosci.gsmEarthMaterialCollection",
   "name": "gsmEarthMaterialCollection",
   "abstract": "FeatureCollection profile collecting EarthMaterial features with rich",
   "status": "under-development",
-  "dateTimeAddition": "2026-05-12",
+  "dateTimeAddition": "2026-05-12T00:00:00Z",
+  "itemClass": "schema",
+  "register": "usgin-geosci-bblocks-register",
+  "version": "0.1",
+  "link": "https://github.com/usgin/geosci-json",
   "sources": [
     {
-      "title": "FC profile composed across GeoSciML BBs"
+      "title": "GeoSciML 4.1 \u2014 FC profile composed across building blocks",
+      "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
     }
   ],
   "schema": "schema.yaml",
+  "tags": [
+    "geoscience",
+    "geosciml",
+    "profile",
+    "featurecollection"
+  ],
   "profileOf": "FeatureCollection",
   "featureTypes": [
     "Mineral",
