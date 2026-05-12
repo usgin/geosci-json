@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.usgin.org/geosci-json/gsmSpecimen/gsmSpecimenSchema.json",
-  "description": "LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and\nlaboratory-analysis observation types, Geochronology results.\n\nValidates either a single Feature (dispatched by `featureType` to one of: AnalyticalInstrument, AnalyticalProcess, AnalyticalSession, GeochronologicInterpretation, GeologicSamplingMethod, Image, ReferenceSpecimen) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "description": "Specimen building block. Adds a hand-curated SF_Specimen\n(«FeatureType», ISO 19156:2011 §8.6) — the sole dispatchable\nfeatureType for this BB — alongside the GeoSciML\nLaboratoryAnalysis-Specimen DataType library (GeologicSpecimen,\nsampling/analysis observation types, Geochronology results) which\nstays in `$defs` for by-reference use from other BBs. SF_Specimen\ninlines its SF_SamplingFeature parent's properties (sampledFeature,\nrelatedObservation, relatedSamplingFeature, lineage) since ISO 19156\nisn't in the GeoSciML XMI.\n\nValidates either a single Feature (dispatched by `featureType` to one of: SF_Specimen) or a FeatureCollection whose `features[]` items are dispatched the same way.",
   "if": {
     "type": "object",
     "required": [
@@ -44,102 +44,12 @@
             ],
             "properties": {
               "featureType": {
-                "const": "AnalyticalInstrument"
+                "const": "SF_Specimen"
               }
             }
           },
           "then": {
-            "$ref": "#AnalyticalInstrument"
-          }
-        },
-        {
-          "if": {
-            "required": [
-              "featureType"
-            ],
-            "properties": {
-              "featureType": {
-                "const": "AnalyticalProcess"
-              }
-            }
-          },
-          "then": {
-            "$ref": "#AnalyticalProcess"
-          }
-        },
-        {
-          "if": {
-            "required": [
-              "featureType"
-            ],
-            "properties": {
-              "featureType": {
-                "const": "AnalyticalSession"
-              }
-            }
-          },
-          "then": {
-            "$ref": "#AnalyticalSession"
-          }
-        },
-        {
-          "if": {
-            "required": [
-              "featureType"
-            ],
-            "properties": {
-              "featureType": {
-                "const": "GeochronologicInterpretation"
-              }
-            }
-          },
-          "then": {
-            "$ref": "#GeochronologicInterpretation"
-          }
-        },
-        {
-          "if": {
-            "required": [
-              "featureType"
-            ],
-            "properties": {
-              "featureType": {
-                "const": "GeologicSamplingMethod"
-              }
-            }
-          },
-          "then": {
-            "$ref": "#GeologicSamplingMethod"
-          }
-        },
-        {
-          "if": {
-            "required": [
-              "featureType"
-            ],
-            "properties": {
-              "featureType": {
-                "const": "Image"
-              }
-            }
-          },
-          "then": {
-            "$ref": "#Image"
-          }
-        },
-        {
-          "if": {
-            "required": [
-              "featureType"
-            ],
-            "properties": {
-              "featureType": {
-                "const": "ReferenceSpecimen"
-              }
-            }
-          },
-          "then": {
-            "$ref": "#ReferenceSpecimen"
+            "$ref": "#SF_Specimen"
           }
         },
         {
@@ -151,13 +61,7 @@
               "properties": {
                 "featureType": {
                   "enum": [
-                    "AnalyticalInstrument",
-                    "AnalyticalProcess",
-                    "AnalyticalSession",
-                    "GeochronologicInterpretation",
-                    "GeologicSamplingMethod",
-                    "Image",
-                    "ReferenceSpecimen"
+                    "SF_Specimen"
                   ]
                 }
               }
@@ -933,6 +837,222 @@
           "type": "integer"
         }
       }
+    },
+    "SF_Specimen": {
+      "$anchor": "SF_Specimen",
+      "description": "ISO 19156:2011 §8.6 SF_Specimen — a sampling feature representing a physical specimen collected from a sampled feature. Implementation inlines the SF_SamplingFeature parent's properties (sampledFeature, relatedObservation, relatedSamplingFeature, lineage) since the parent is not separately schematised here. External ISO types referenced from properties (OM_Process, OM_Observation, GFI_Feature, TM_Object, LI_Lineage, SF_SamplingFeature) are by-reference only via SCLinkObject.",
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "sampledFeature": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject"
+                      },
+                      "minItems": 1,
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "Feature(s) being sampled (1..*, by-reference to ISO 19156 GFI_Feature). Inherited from SF_SamplingFeature."
+                },
+                "relatedObservation": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "Observations whose featureOfInterest is this specimen (0..*, by-reference to ISO 19156 OM_Observation). Inherited from SF_SamplingFeature."
+                },
+                "relatedSamplingFeature": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "Self-association: relations to other SF_SamplingFeature instances (0..*, by-reference). Inherited from SF_SamplingFeature."
+                },
+                "lineage": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#/$defs/SCLinkObject"
+                    }
+                  ],
+                  "description": "Provenance metadata (by-reference to ISO 19115 LI_Lineage). Inherited from SF_SamplingFeature."
+                },
+                "materialClass": {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json",
+                  "description": "Material class of the specimen (1..1). ISO 19156 types this as ScopedName; encoded here as a SWE Category to carry the vocabulary URI."
+                },
+                "samplingTime": {
+                  "$ref": "#/$defs/SCLinkObject",
+                  "description": "Time of sampling (1..1, by-reference to ISO 19108 TM_Object)."
+                },
+                "samplingMethod": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#/$defs/SCLinkObject"
+                    }
+                  ],
+                  "description": "Sampling method (0..1, by-reference to ISO 19156 OM_Process)."
+                },
+                "samplingLocation": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "https://geojson.org/schema/Geometry.json"
+                    }
+                  ],
+                  "description": "Location where the specimen was sampled (0..1, GeoJSON Geometry). Distinct from the top-level Feature geometry, which may carry the specimen's current footprint."
+                },
+                "processingDetails": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#SpecimenProcessing"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "Processing steps applied to the specimen (0..*)."
+                },
+                "size": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
+                    }
+                  ],
+                  "description": "Specimen size as a SWE Quantity (0..1). ISO 19156 types as Measure."
+                },
+                "currentLocation": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "$ref": "#/$defs/SCLinkObject"
+                    }
+                  ],
+                  "description": "Current physical location of the specimen (0..1). Free text address, URI, or link object to a repository record."
+                },
+                "specimenType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                    }
+                  ],
+                  "description": "Specimen type classifier (0..1). ISO 19156 types as ScopedName; encoded here as a SWE Category."
+                }
+              },
+              "required": [
+                "sampledFeature",
+                "materialClass",
+                "samplingTime"
+              ]
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "SpecimenProcessing": {
+      "$anchor": "SpecimenProcessing",
+      "description": "ISO 19156:2011 SpecimenProcessing — a processing step in the specimen's lifecycle (e.g. drying, crushing, splitting). External ISO types referenced are by-reference via SCLinkObject.",
+      "type": "object",
+      "properties": {
+        "method": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/SCLinkObject"
+            }
+          ],
+          "description": "Processing method (by-reference to OM_Process)."
+        },
+        "time": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/SCLinkObject"
+            }
+          ],
+          "description": "Processing time (by-reference to TM_Object)."
+        },
+        "processOperator": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/SCLinkObject"
+            }
+          ],
+          "description": "Party responsible for the processing step (by-reference to CI_Responsibility)."
+        }
+      },
+      "required": [
+        "method"
+      ]
     },
     "GeologicEvent": {
       "$anchor": "GeologicEvent",

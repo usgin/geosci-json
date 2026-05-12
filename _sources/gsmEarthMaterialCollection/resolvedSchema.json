@@ -304,9 +304,9 @@
         }
       ]
     },
-    "CompoundMaterial": {
-      "$anchor": "CompoundMaterial",
-      "description": "A CompoundMaterial is an EarthMaterial composed of particles made of EarthMaterials, possibly including other CompoundMaterials. This class is provided primarily as an extensibility point for related domain models that wish to import and build on GeoSciML, and wish to define material types that are compound but are not rock or rock-like material. In the context of GeoSciML \"RockMaterial\" should be used to describe units made of rock.",
+    "OrganicMaterial": {
+      "$anchor": "OrganicMaterial",
+      "description": "OrganicMaterial is an EarthMaterial that belongs to the class of chemical compounds having a reduced carbon basis (as distinct from carbonates), and derived from living organisms. It includes high-carbon EarthMaterials such as bitumen, peat, and coal. This class is an empty placeholder for extension at a later date, or by other domain models.",
       "allOf": [
         {
           "$ref": "#EarthMaterial"
@@ -349,6 +349,18 @@
       "$anchor": "EarthMaterialAbstractDescription",
       "description": "Abstract description class for earth material. This class is a placeholder for further extension in Extension package",
       "type": "object"
+    },
+    "CompoundMaterial": {
+      "$anchor": "CompoundMaterial",
+      "description": "A CompoundMaterial is an EarthMaterial composed of particles made of EarthMaterials, possibly including other CompoundMaterials. This class is provided primarily as an extensibility point for related domain models that wish to import and build on GeoSciML, and wish to define material types that are compound but are not rock or rock-like material. In the context of GeoSciML \"RockMaterial\" should be used to describe units made of rock.",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterial"
+        },
+        {
+          "type": "object"
+        }
+      ]
     },
     "RockMaterial": {
       "$anchor": "RockMaterial",
@@ -397,18 +409,6 @@
               "description": "The consolidationDegree property (SWE::Category) contains a term from a controlled vocabulary that specifies the degree to which an aggregation of EarthMaterial particles is a distinct solid material. Consolidation and induration are related concepts specified by this property. They define a continuum from unconsolidated material to very hard rock. Induration is the degree to which a consolidated material is made hard, operationally determined by how difficult it is to break a piece of the material. Consolidated materials may have varying degrees of induration."
             }
           }
-        }
-      ]
-    },
-    "OrganicMaterial": {
-      "$anchor": "OrganicMaterial",
-      "description": "OrganicMaterial is an EarthMaterial that belongs to the class of chemical compounds having a reduced carbon basis (as distinct from carbonates), and derived from living organisms. It includes high-carbon EarthMaterials such as bitumen, peat, and coal. This class is an empty placeholder for extension at a later date, or by other domain models.",
-      "allOf": [
-        {
-          "$ref": "#EarthMaterial"
-        },
-        {
-          "type": "object"
         }
       ]
     },

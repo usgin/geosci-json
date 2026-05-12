@@ -229,6 +229,157 @@
     }
   ],
   "$defs": {
+    "Contact": {
+      "$anchor": "Contact",
+      "description": "A contact is a general concept representing any kind of surface separating two geologic units, including primary boundaries such as depositional contacts, all kinds of unconformities, intrusive contacts, and gradational contacts, as well as faults that separate geologic units.",
+      "allOf": [
+        {
+          "$ref": "#GeologicStructure"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "contactType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#ContactTypeTerm"
+                    }
+                  ],
+                  "description": "The property contactType:ContactTypeTerm classifies the contact (e.g. intrusive, unconformity, bedding surface, lithologic boundary, phase boundary) and is a term from a controlled vocabulary."
+                },
+                "stContactDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#ContactAbstractDescription"
+                    }
+                  ],
+                  "description": "The property stContactDescription:ContactAbstractDescription provides a detailed contact description. This is a stub property in GeoSciML Basic since ContactAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ContactDescription": {
+      "$anchor": "ContactDescription",
+      "description": "The ContactDescription provides extended descriptive properties of a geologic contact. If the contact type is ChronostratigraphicBoundary, it can be associated with a geochronologic (i.e., time zone) boundary that may correlate with it.",
+      "allOf": [
+        {
+          "$ref": "#ContactAbstractDescription"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "contactCharacter": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "The contactCharacter (SWE::Category) contains a term from a controlled vocabulary that describes the character of the boundary (e.g. abrupt, gradational), as opposed to its type."
+            },
+            "orientation": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#GSML_PlanarOrientation"
+                }
+              ],
+              "description": "The orientation:GSML_PlanarOrientation property reports the general orientation of the contact surface."
+            },
+            "correlatesWith": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to GeochronologicBoundary"
+                    },
+                    {
+                      "$ref": "#GeochronologicBoundary"
+                    }
+                  ]
+                }
+              ],
+              "description": "The correlatesWith property is an association between ContactDescription and a GeochronologicBoundary describing a geochronologic (i.e., time zone) boundary that may correlate with it. Therefore, a contact correlation with a GeochronologicBoundary SHALL ONLY be allowed when the contactType is a ChronostratigraphicBoundary."
+            }
+          }
+        }
+      ]
+    },
+    "ShearDisplacementStructureDescription": {
+      "$anchor": "ShearDisplacementStructureDescription",
+      "description": "ShearDisplacementStructureDescription provides extended descriptive properties of a shear displacement structure (i.e., fault or shear) by extending the abstract property block ShearDisplacementStructureAbstractDescription.",
+      "allOf": [
+        {
+          "$ref": "#ShearDisplacementStructureAbstractDescription"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "deformationStyle": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#DeformationStyleTerm"
+                }
+              ],
+              "description": "The deformationStyle:DeformationStyleTerm contains a term from a vocabulary to describe the style of deformation, i.e. brittle (fault, breccia), ductile (shear), brittle-ductile, unknown."
+            },
+            "planeOrientation": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#GSML_PlanarOrientation"
+                }
+              ],
+              "description": "The property planeOrientation:GSML_PlanarOrientation contains a description of the orientation of a structure’s planar surface."
+            },
+            "stPhysicalProperty": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#PhysicalDescription"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "The property stPhysicalProperty:PhysicalDescription contains a value of generic physical properties not addressed in this model."
+            }
+          }
+        }
+      ]
+    },
     "CompoundMaterialDescription": {
       "$anchor": "CompoundMaterialDescription",
       "description": "The CompoundMaterialDescription class is a kind of EarthMaterialDescription that provides an extended description of a compound earth material (i.e., rocks and unconsolidated solid earth materials).",
@@ -302,106 +453,6 @@
                 }
               ],
               "description": "The property constituent is an association between a CompoundMaterialDescription and a ConstituentPart that makes up part of the CompoundMaterial."
-            }
-          }
-        }
-      ]
-    },
-    "ContactDescription": {
-      "$anchor": "ContactDescription",
-      "description": "The ContactDescription provides extended descriptive properties of a geologic contact. If the contact type is ChronostratigraphicBoundary, it can be associated with a geochronologic (i.e., time zone) boundary that may correlate with it.",
-      "allOf": [
-        {
-          "$ref": "#ContactAbstractDescription"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "contactCharacter": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-                  },
-                  "uniqueItems": true
-                }
-              ],
-              "description": "The contactCharacter (SWE::Category) contains a term from a controlled vocabulary that describes the character of the boundary (e.g. abrupt, gradational), as opposed to its type."
-            },
-            "orientation": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#GSML_PlanarOrientation"
-                }
-              ],
-              "description": "The orientation:GSML_PlanarOrientation property reports the general orientation of the contact surface."
-            },
-            "correlatesWith": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/SCLinkObject",
-                      "$comment": "by-reference link to GeochronologicBoundary"
-                    },
-                    {
-                      "$ref": "#GeochronologicBoundary"
-                    }
-                  ]
-                }
-              ],
-              "description": "The correlatesWith property is an association between ContactDescription and a GeochronologicBoundary describing a geochronologic (i.e., time zone) boundary that may correlate with it. Therefore, a contact correlation with a GeochronologicBoundary SHALL ONLY be allowed when the contactType is a ChronostratigraphicBoundary."
-            }
-          }
-        }
-      ]
-    },
-    "Foliation": {
-      "$anchor": "Foliation",
-      "description": "A foliation is a planar arrangement of textural or structural features in any type of rock. It includes any of a wide variety of penetrative planar geological structures that may be present in a rock. Examples include schistosity, mylonitic foliation, penetrative bedding structure (lamination), and cleavage. Following the proposed definition of gneiss by the NADM Science Language Technical Team, penetrative planar foliation defined by layers &gt; 5 mm thick is considered Layering.",
-      "allOf": [
-        {
-          "$ref": "#GeologicStructure"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "foliationType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoliationTypeTerm"
-                    }
-                  ],
-                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
-                },
-                "stFoliationDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoliationAbstractDescription"
-                    }
-                  ],
-                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
-                }
-              }
             }
           }
         }
@@ -488,52 +539,46 @@
         }
       ]
     },
-    "ShearDisplacementStructureDescription": {
-      "$anchor": "ShearDisplacementStructureDescription",
-      "description": "ShearDisplacementStructureDescription provides extended descriptive properties of a shear displacement structure (i.e., fault or shear) by extending the abstract property block ShearDisplacementStructureAbstractDescription.",
+    "ShearDisplacementStructure": {
+      "$anchor": "ShearDisplacementStructure",
+      "description": "A shear displacement structure includes all brittle to ductile style structures along which displacement has occurred, from a simple, single 'planar' brittle or ductile surface to a fault system comprised of tens of strands of both brittle and ductile nature. This structure may have some significant thickness (a deformation zone) and have an associated body of deformed rock that may be considered a deformation unit (which geologicUnitType is ‘DeformationUnit’) which can be associated to the ShearDisplacementStructure using GeologicFeatureRelation from the GeoSciML Extension package",
       "allOf": [
         {
-          "$ref": "#ShearDisplacementStructureAbstractDescription"
+          "$ref": "#GeologicStructure"
         },
         {
           "type": "object",
           "properties": {
-            "deformationStyle": {
-              "oneOf": [
-                {
-                  "type": "null"
+            "properties": {
+              "type": "object",
+              "properties": {
+                "faultType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FaultTypeTerm"
+                    }
+                  ],
+                  "description": "The faultType:FaultTypeTerm property contains a term from a controlled vocabulary describing the type of shear displacement structure (e.g., thrust fault, normal fault or wrench fault)."
                 },
-                {
-                  "$ref": "#DeformationStyleTerm"
+                "stStructureDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#ShearDisplacementStructureAbstractDescription"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The property stStructureDescription:ShearDisplacementStructureAbstractDescription provides a detailed geologic structure description. This is a stub property in GeoSciML Basic since ShearDisplacementStructureAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
                 }
-              ],
-              "description": "The deformationStyle:DeformationStyleTerm contains a term from a vocabulary to describe the style of deformation, i.e. brittle (fault, breccia), ductile (shear), brittle-ductile, unknown."
-            },
-            "planeOrientation": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#GSML_PlanarOrientation"
-                }
-              ],
-              "description": "The property planeOrientation:GSML_PlanarOrientation contains a description of the orientation of a structure’s planar surface."
-            },
-            "stPhysicalProperty": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#PhysicalDescription"
-                  },
-                  "uniqueItems": true
-                }
-              ],
-              "description": "The property stPhysicalProperty:PhysicalDescription contains a value of generic physical properties not addressed in this model."
+              }
             }
           }
         }
@@ -794,46 +839,88 @@
         }
       ]
     },
-    "FoldAbstractDescription": {
-      "$anchor": "FoldAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
-      "type": "object"
-    },
-    "PhysicalDescription": {
-      "$anchor": "PhysicalDescription",
-      "description": "PhysicalDescription is a class that describes the numeric physical properties of a geologic unit (GeologicUnit) earth material (EarthMaterial ), or geologic structure (GeologicStructure) (e.g., density, porosity, magnetic susceptibility, remanent magnetism). These properties are modelled here as scalar numeric values (SWE::Quantity).",
+    "Foliation": {
+      "$anchor": "Foliation",
+      "description": "A foliation is a planar arrangement of textural or structural features in any type of rock. It includes any of a wide variety of penetrative planar geological structures that may be present in a rock. Examples include schistosity, mylonitic foliation, penetrative bedding structure (lamination), and cleavage. Following the proposed definition of gneiss by the NADM Science Language Technical Team, penetrative planar foliation defined by layers &gt; 5 mm thick is considered Layering.",
       "allOf": [
         {
-          "$ref": "#EarthMaterialAbstractDescription"
+          "$ref": "#GeologicStructure"
         },
         {
           "type": "object",
           "properties": {
-            "propertyName": {
-              "oneOf": [
-                {
-                  "type": "null"
+            "properties": {
+              "type": "object",
+              "properties": {
+                "foliationType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoliationTypeTerm"
+                    }
+                  ],
+                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
                 },
-                {
-                  "$ref": "#PhysicalPropertyTerm"
+                "stFoliationDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoliationAbstractDescription"
+                    }
+                  ],
+                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
                 }
-              ],
-              "description": "The property propertyName:PhysicalPropertyTerm contains a term from a controlled vocabulary of physical properties of rock materials (e.g., density, porosity, magnetic susceptibility, remnant magnetism, permeability, seismic velocity)."
-            },
-            "propertyMeasure": {
-              "oneOf": [
-                {
-                  "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ShearDisplacementStructureAbstractDescription": {
+      "$anchor": "ShearDisplacementStructureAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
+      "type": "object"
+    },
+    "Fold": {
+      "$anchor": "Fold",
+      "description": "A fold is formed by one or more systematically curved layers, surfaces, or lines in a rock body. A fold denotes a structure formed by the deformation of a geologic structure, such as a contact which the original undeformed geometry is presumed, to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone). Folds are described by an axial surface, hinge line, profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric.",
+      "allOf": [
+        {
+          "$ref": "#GeologicStructure"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "profileType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoldProfileTypeTerm"
+                    }
+                  ],
+                  "description": "The property profileType:FoldProfileTypeTerm contains a term from a controlled vocabulary specifying the concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known. (e.g., antiform, synform, neutral, anticline, syncline, monocline, ptygmatic)."
                 },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
-                  },
-                  "uniqueItems": true
+                "stFoldDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoldAbstractDescription"
+                    }
+                  ],
+                  "description": "The property stFoldDescription:FoldAbstractDescription provides a detailed fold description. This is a stub property in GeoSciML Basic since FoldAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
                 }
-              ],
-              "description": "The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, unit or structure."
+              }
             }
           }
         }
@@ -842,11 +929,6 @@
     "ContactAbstractDescription": {
       "$anchor": "ContactAbstractDescription",
       "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
-      "type": "object"
-    },
-    "GeologicUnitAbstractDescription": {
-      "$anchor": "GeologicUnitAbstractDescription",
-      "description": "Abstract description class for geologic units. This class is a placeholder for further extension in Extension package",
       "type": "object"
     },
     "GSML_LinearOrientation": {
@@ -896,17 +978,28 @@
         }
       ]
     },
-    "FoliationDescription": {
-      "$anchor": "FoliationDescription",
-      "description": "FoliationDescription provides extended descriptive properties for a foliation structure.",
+    "PhysicalDescription": {
+      "$anchor": "PhysicalDescription",
+      "description": "PhysicalDescription is a class that describes the numeric physical properties of a geologic unit (GeologicUnit) earth material (EarthMaterial ), or geologic structure (GeologicStructure) (e.g., density, porosity, magnetic susceptibility, remanent magnetism). These properties are modelled here as scalar numeric values (SWE::Quantity).",
       "allOf": [
         {
-          "$ref": "#FoliationAbstractDescription"
+          "$ref": "#EarthMaterialAbstractDescription"
         },
         {
           "type": "object",
           "properties": {
-            "definingElement": {
+            "propertyName": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#PhysicalPropertyTerm"
+                }
+              ],
+              "description": "The property propertyName:PhysicalPropertyTerm contains a term from a controlled vocabulary of physical properties of rock materials (e.g., density, porosity, magnetic susceptibility, remnant magnetism, permeability, seismic velocity)."
+            },
+            "propertyMeasure": {
               "oneOf": [
                 {
                   "type": "null"
@@ -914,74 +1007,77 @@
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
                   },
                   "uniqueItems": true
                 }
               ],
-              "description": "The property definingElement (SWE::Category) contains a term from a controlled vocabulary describing the kinds of inhomogeneity in a rock body that may define a GeologicStructure. Examples include discontinuity, shaped surface, oriented particle, material boundary, and layer."
-            },
-            "continuity": {
+              "description": "The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, unit or structure."
+            }
+          }
+        }
+      ]
+    },
+    "FoldAbstractDescription": {
+      "$anchor": "FoldAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
+      "type": "object"
+    },
+    "GeochronologicBoundary": {
+      "$anchor": "GeochronologicBoundary",
+      "description": "A GeochronologicBoundary is a boundary between two geochronologic time periods.",
+      "allOf": [
+        {
+          "$ref": "#TimeOrdinalEraBoundary"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stratotype": {
               "oneOf": [
                 {
                   "type": "null"
                 },
                 {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-                  },
-                  "uniqueItems": true
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to StratigraphicPoint"
+                    },
+                    {
+                      "$ref": "#StratigraphicPoint"
+                    }
+                  ]
                 }
               ],
-              "description": "The continuity property (SWE::Category) reports a term from a controlled vocabulary to distinguish continuous vs. disjunct cleavages."
-            },
-            "intensity": {
+              "description": "The property stratotype is an association between a GeochronologicBoundary and a StratigraphicPoint that are associated with the boundary. A GeochronologicBoundary can be associated with more than one StratigraphicPoints, but only one may have GSSP ratified status. The others are proposed equivalents."
+            }
+          }
+        }
+      ]
+    },
+    "GSML_PlanarOrientation": {
+      "$anchor": "GSML_PlanarOrientation",
+      "description": "A planar orientation is composed of two values; the azimuth (a compass point) and a dip (the angle from the horizontal). Polarity of the plane indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical, etc. There are several conventions to encode a planar orientation and this specification does not impose one but provides a convention property to report it. It must be noted that allowance for different conventions makes manipulation of the data more difficult. Therefore it is recommended that user communities adopt a single measurement convention.",
+      "allOf": [
+        {
+          "$ref": "#GSML_GeometricDescriptionValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "convention": {
               "oneOf": [
                 {
                   "type": "null"
                 },
                 {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                  "$ref": "#ConventionCode"
                 }
               ],
-              "description": "The intensity property (SWE::Category) contains a term from a controlled vocabulary to describe how well the foliation is developed (e.g., weak, moderate, strong)."
+              "description": "The property convention:ConventionCode contains the convention used for the measurement from a controlled vocabulary."
             },
-            "mineralElement": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "oneOf": [
-                      {
-                        "$ref": "#/$defs/SCLinkObject",
-                        "$comment": "by-reference link to Mineral"
-                      },
-                      {
-                        "$ref": "#Mineral"
-                      }
-                    ]
-                  },
-                  "uniqueItems": true
-                }
-              ],
-              "description": "The mineralElement property is an association between FoliationDescription and a Mineral that defines that foliation."
-            },
-            "orientation": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#GSML_PlanarOrientation"
-                }
-              ],
-              "description": "The orientation:GSML_PlanarOrientation contains an estimate of the planar orientation of the foliation structure."
-            },
-            "spacing": {
+            "azimuth": {
               "oneOf": [
                 {
                   "type": "null"
@@ -990,16 +1086,33 @@
                   "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
                 }
               ],
-              "description": "The spacing property (SWE::QuantityRange) contains a linear dimension representing the thickness of foliation domains. It is also used for thickness of layers of a given composition."
+              "description": "The azimuth (SWE::QuantityRange) property (compass point, bearing etc.) contains the value of the orientation. The convention property reports how azimuth is interpreted (if it is relative to a quadrant)."
+            },
+            "dip": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The dip (SWE::QuantityRange) reports the angle that the structural surface (e.g. bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane as a numeric value or term."
+            },
+            "polarity": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#PlanarPolarityCode"
+                }
+              ],
+              "description": "The polarity:PolarityCode indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical etc., using a controlled vocabulary."
             }
           }
         }
       ]
-    },
-    "ShearDisplacementStructureAbstractDescription": {
-      "$anchor": "ShearDisplacementStructureAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
-      "type": "object"
     },
     "GeologicUnit": {
       "$anchor": "GeologicUnit",
@@ -1102,166 +1215,111 @@
         }
       ]
     },
-    "ShearDisplacementStructure": {
-      "$anchor": "ShearDisplacementStructure",
-      "description": "A shear displacement structure includes all brittle to ductile style structures along which displacement has occurred, from a simple, single 'planar' brittle or ductile surface to a fault system comprised of tens of strands of both brittle and ductile nature. This structure may have some significant thickness (a deformation zone) and have an associated body of deformed rock that may be considered a deformation unit (which geologicUnitType is ‘DeformationUnit’) which can be associated to the ShearDisplacementStructure using GeologicFeatureRelation from the GeoSciML Extension package",
-      "allOf": [
-        {
-          "$ref": "#GeologicStructure"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "faultType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FaultTypeTerm"
-                    }
-                  ],
-                  "description": "The faultType:FaultTypeTerm property contains a term from a controlled vocabulary describing the type of shear displacement structure (e.g., thrust fault, normal fault or wrench fault)."
-                },
-                "stStructureDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#ShearDisplacementStructureAbstractDescription"
-                      },
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "The property stStructureDescription:ShearDisplacementStructureAbstractDescription provides a detailed geologic structure description. This is a stub property in GeoSciML Basic since ShearDisplacementStructureAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
-                }
-              }
-            }
-          }
-        }
-      ]
+    "GeologicUnitAbstractDescription": {
+      "$anchor": "GeologicUnitAbstractDescription",
+      "description": "Abstract description class for geologic units. This class is a placeholder for further extension in Extension package",
+      "type": "object"
     },
     "EarthMaterialAbstractDescription": {
       "$anchor": "EarthMaterialAbstractDescription",
       "description": "Abstract description class for earth material. This class is a placeholder for further extension in Extension package",
       "type": "object"
     },
-    "Contact": {
-      "$anchor": "Contact",
-      "description": "A contact is a general concept representing any kind of surface separating two geologic units, including primary boundaries such as depositional contacts, all kinds of unconformities, intrusive contacts, and gradational contacts, as well as faults that separate geologic units.",
+    "FoliationDescription": {
+      "$anchor": "FoliationDescription",
+      "description": "FoliationDescription provides extended descriptive properties for a foliation structure.",
       "allOf": [
         {
-          "$ref": "#GeologicStructure"
+          "$ref": "#FoliationAbstractDescription"
         },
         {
           "type": "object",
           "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "contactType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#ContactTypeTerm"
-                    }
-                  ],
-                  "description": "The property contactType:ContactTypeTerm classifies the contact (e.g. intrusive, unconformity, bedding surface, lithologic boundary, phase boundary) and is a term from a controlled vocabulary."
-                },
-                "stContactDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#ContactAbstractDescription"
-                    }
-                  ],
-                  "description": "The property stContactDescription:ContactAbstractDescription provides a detailed contact description. This is a stub property in GeoSciML Basic since ContactAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "GeochronologicBoundary": {
-      "$anchor": "GeochronologicBoundary",
-      "description": "A GeochronologicBoundary is a boundary between two geochronologic time periods.",
-      "allOf": [
-        {
-          "$ref": "#TimeOrdinalEraBoundary"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "stratotype": {
+            "definingElement": {
               "oneOf": [
                 {
                   "type": "null"
                 },
                 {
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/SCLinkObject",
-                      "$comment": "by-reference link to StratigraphicPoint"
-                    },
-                    {
-                      "$ref": "#StratigraphicPoint"
-                    }
-                  ]
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                  },
+                  "uniqueItems": true
                 }
               ],
-              "description": "The property stratotype is an association between a GeochronologicBoundary and a StratigraphicPoint that are associated with the boundary. A GeochronologicBoundary can be associated with more than one StratigraphicPoints, but only one may have GSSP ratified status. The others are proposed equivalents."
-            }
-          }
-        }
-      ]
-    },
-    "Fold": {
-      "$anchor": "Fold",
-      "description": "A fold is formed by one or more systematically curved layers, surfaces, or lines in a rock body. A fold denotes a structure formed by the deformation of a geologic structure, such as a contact which the original undeformed geometry is presumed, to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone). Folds are described by an axial surface, hinge line, profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric.",
-      "allOf": [
-        {
-          "$ref": "#GeologicStructure"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "profileType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoldProfileTypeTerm"
-                    }
-                  ],
-                  "description": "The property profileType:FoldProfileTypeTerm contains a term from a controlled vocabulary specifying the concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known. (e.g., antiform, synform, neutral, anticline, syncline, monocline, ptygmatic)."
+              "description": "The property definingElement (SWE::Category) contains a term from a controlled vocabulary describing the kinds of inhomogeneity in a rock body that may define a GeologicStructure. Examples include discontinuity, shaped surface, oriented particle, material boundary, and layer."
+            },
+            "continuity": {
+              "oneOf": [
+                {
+                  "type": "null"
                 },
-                "stFoldDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoldAbstractDescription"
-                    }
-                  ],
-                  "description": "The property stFoldDescription:FoldAbstractDescription provides a detailed fold description. This is a stub property in GeoSciML Basic since FoldAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                  },
+                  "uniqueItems": true
                 }
-              }
+              ],
+              "description": "The continuity property (SWE::Category) reports a term from a controlled vocabulary to distinguish continuous vs. disjunct cleavages."
+            },
+            "intensity": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                }
+              ],
+              "description": "The intensity property (SWE::Category) contains a term from a controlled vocabulary to describe how well the foliation is developed (e.g., weak, moderate, strong)."
+            },
+            "mineralElement": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to Mineral"
+                      },
+                      {
+                        "$ref": "#Mineral"
+                      }
+                    ]
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "The mineralElement property is an association between FoliationDescription and a Mineral that defines that foliation."
+            },
+            "orientation": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#GSML_PlanarOrientation"
+                }
+              ],
+              "description": "The orientation:GSML_PlanarOrientation contains an estimate of the planar orientation of the foliation structure."
+            },
+            "spacing": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The spacing property (SWE::QuantityRange) contains a linear dimension representing the thickness of foliation domains. It is also used for thickness of layers of a given composition."
             }
           }
         }
@@ -1271,64 +1329,6 @@
       "$anchor": "FoliationAbstractDescription",
       "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.  Constraint: only one instance of each subtype class is allowed",
       "type": "object"
-    },
-    "GSML_PlanarOrientation": {
-      "$anchor": "GSML_PlanarOrientation",
-      "description": "A planar orientation is composed of two values; the azimuth (a compass point) and a dip (the angle from the horizontal). Polarity of the plane indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical, etc. There are several conventions to encode a planar orientation and this specification does not impose one but provides a convention property to report it. It must be noted that allowance for different conventions makes manipulation of the data more difficult. Therefore it is recommended that user communities adopt a single measurement convention.",
-      "allOf": [
-        {
-          "$ref": "#GSML_GeometricDescriptionValue"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "convention": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#ConventionCode"
-                }
-              ],
-              "description": "The property convention:ConventionCode contains the convention used for the measurement from a controlled vocabulary."
-            },
-            "azimuth": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
-                }
-              ],
-              "description": "The azimuth (SWE::QuantityRange) property (compass point, bearing etc.) contains the value of the orientation. The convention property reports how azimuth is interpreted (if it is relative to a quadrant)."
-            },
-            "dip": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
-                }
-              ],
-              "description": "The dip (SWE::QuantityRange) reports the angle that the structural surface (e.g. bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane as a numeric value or term."
-            },
-            "polarity": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#PlanarPolarityCode"
-                }
-              ],
-              "description": "The polarity:PolarityCode indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical etc., using a controlled vocabulary."
-            }
-          }
-        }
-      ]
     },
     "Mineral": {
       "$anchor": "Mineral",

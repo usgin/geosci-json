@@ -201,6 +201,259 @@ EXTERNAL_TYPE_RESOLUTION: dict[str, dict] = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Hand-curated extension definitions.
+#
+# Some classes that callers want to validate aren't in the GeoSciML 4.1 XMI
+# (they live in External packages / imported standards). Rather than try to
+# auto-import ISO 19156 / 19115 / etc. we hand-author the needed shapes and
+# inject them into the appropriate BB's $defs via EXTRA_DEFS_PER_BB.
+#
+# DISPATCHER_OVERRIDES_PER_BB lets a BB ship a different dispatcher
+# featureType list than what dispatchable_fts() would discover from the XMI.
+# Useful when the BB's "wrapper" intent is narrower than its $defs library
+# (e.g. gsmSpecimen exposes only SF_Specimen as a featureType, but the
+# library also holds AnalyticalInstrument, ReferenceSpecimen, etc. as DataType
+# defs that other features may $ref).
+# ---------------------------------------------------------------------------
+
+_GEOJSON_GEOMETRY_REF = "https://geojson.org/schema/Geometry.json"
+_SWE_CATEGORY_REF = "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+_SWE_QUANTITY_REF = "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
+
+# ISO 19156:2011 §8.6 SF_Specimen, encoded as a JSON-FG FeatureType. Includes
+# SF_SamplingFeature's inherited properties (sampledFeature, relatedObservation,
+# relatedSamplingFeature, lineage) plus SF_Specimen's own properties.
+SF_SPECIMEN_DEF = {
+    "$anchor": "SF_Specimen",
+    "description": (
+        "ISO 19156:2011 §8.6 SF_Specimen — a sampling feature representing a "
+        "physical specimen collected from a sampled feature. Implementation "
+        "inlines the SF_SamplingFeature parent's properties (sampledFeature, "
+        "relatedObservation, relatedSamplingFeature, lineage) since the parent "
+        "is not separately schematised here. External ISO types referenced "
+        "from properties (OM_Process, OM_Observation, GFI_Feature, "
+        "TM_Object, LI_Lineage, SF_SamplingFeature) are by-reference only via "
+        "SCLinkObject."
+    ),
+    "allOf": [
+        {"$ref": JSON_FG_FEATURE_REF},
+        {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "properties": {
+                        # ----- SF_SamplingFeature inherited properties -----
+                        "sampledFeature": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {
+                                    "type": "array",
+                                    "items": {"$ref": LINK_OBJECT_REF},
+                                    "minItems": 1,
+                                    "uniqueItems": True,
+                                },
+                            ],
+                            "description": (
+                                "Feature(s) being sampled (1..*, by-reference "
+                                "to ISO 19156 GFI_Feature). Inherited from "
+                                "SF_SamplingFeature."
+                            ),
+                        },
+                        "relatedObservation": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {
+                                    "type": "array",
+                                    "items": {"$ref": LINK_OBJECT_REF},
+                                    "uniqueItems": True,
+                                },
+                            ],
+                            "description": (
+                                "Observations whose featureOfInterest is this "
+                                "specimen (0..*, by-reference to ISO 19156 "
+                                "OM_Observation). Inherited from "
+                                "SF_SamplingFeature."
+                            ),
+                        },
+                        "relatedSamplingFeature": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {
+                                    "type": "array",
+                                    "items": {"$ref": LINK_OBJECT_REF},
+                                    "uniqueItems": True,
+                                },
+                            ],
+                            "description": (
+                                "Self-association: relations to other "
+                                "SF_SamplingFeature instances (0..*, "
+                                "by-reference). Inherited from "
+                                "SF_SamplingFeature."
+                            ),
+                        },
+                        "lineage": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {"$ref": LINK_OBJECT_REF},
+                            ],
+                            "description": (
+                                "Provenance metadata (by-reference to ISO "
+                                "19115 LI_Lineage). Inherited from "
+                                "SF_SamplingFeature."
+                            ),
+                        },
+                        # ----- SF_Specimen own properties -----
+                        "materialClass": {
+                            "$ref": _SWE_CATEGORY_REF,
+                            "description": (
+                                "Material class of the specimen (1..1). ISO "
+                                "19156 types this as ScopedName; encoded here "
+                                "as a SWE Category to carry the vocabulary "
+                                "URI."
+                            ),
+                        },
+                        "samplingTime": {
+                            "$ref": LINK_OBJECT_REF,
+                            "description": (
+                                "Time of sampling (1..1, by-reference to ISO "
+                                "19108 TM_Object)."
+                            ),
+                        },
+                        "samplingMethod": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {"$ref": LINK_OBJECT_REF},
+                            ],
+                            "description": (
+                                "Sampling method (0..1, by-reference to ISO "
+                                "19156 OM_Process)."
+                            ),
+                        },
+                        "samplingLocation": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {"$ref": _GEOJSON_GEOMETRY_REF},
+                            ],
+                            "description": (
+                                "Location where the specimen was sampled "
+                                "(0..1, GeoJSON Geometry). Distinct from the "
+                                "top-level Feature geometry, which may carry "
+                                "the specimen's current footprint."
+                            ),
+                        },
+                        "processingDetails": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {
+                                    "type": "array",
+                                    "items": {"$ref": "#SpecimenProcessing"},
+                                    "uniqueItems": True,
+                                },
+                            ],
+                            "description": (
+                                "Processing steps applied to the specimen "
+                                "(0..*)."
+                            ),
+                        },
+                        "size": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {"$ref": _SWE_QUANTITY_REF},
+                            ],
+                            "description": (
+                                "Specimen size as a SWE Quantity (0..1). ISO "
+                                "19156 types as Measure."
+                            ),
+                        },
+                        "currentLocation": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {"type": "string"},
+                                {"$ref": LINK_OBJECT_REF},
+                            ],
+                            "description": (
+                                "Current physical location of the specimen "
+                                "(0..1). Free text address, URI, or link "
+                                "object to a repository record."
+                            ),
+                        },
+                        "specimenType": {
+                            "oneOf": [
+                                {"type": "null"},
+                                {"$ref": _SWE_CATEGORY_REF},
+                            ],
+                            "description": (
+                                "Specimen type classifier (0..1). ISO 19156 "
+                                "types as ScopedName; encoded here as a SWE "
+                                "Category."
+                            ),
+                        },
+                    },
+                    "required": ["sampledFeature", "materialClass", "samplingTime"],
+                },
+            },
+        },
+        {
+            "required": ["featureType", "id"],
+            "properties": {"id": {"type": "string"}},
+        },
+    ],
+}
+
+SPECIMEN_PROCESSING_DEF = {
+    "$anchor": "SpecimenProcessing",
+    "description": (
+        "ISO 19156:2011 SpecimenProcessing — a processing step in the "
+        "specimen's lifecycle (e.g. drying, crushing, splitting). External "
+        "ISO types referenced are by-reference via SCLinkObject."
+    ),
+    "type": "object",
+    "properties": {
+        "method": {
+            "oneOf": [
+                {"type": "null"},
+                {"$ref": LINK_OBJECT_REF},
+            ],
+            "description": "Processing method (by-reference to OM_Process).",
+        },
+        "time": {
+            "oneOf": [
+                {"type": "null"},
+                {"$ref": LINK_OBJECT_REF},
+            ],
+            "description": "Processing time (by-reference to TM_Object).",
+        },
+        "processOperator": {
+            "oneOf": [
+                {"type": "null"},
+                {"$ref": LINK_OBJECT_REF},
+            ],
+            "description": (
+                "Party responsible for the processing step (by-reference to "
+                "CI_Responsibility)."
+            ),
+        },
+    },
+    "required": ["method"],
+}
+
+# Map of BB name -> additional $defs to merge into the library.
+EXTRA_DEFS_PER_BB: dict[str, dict] = {
+    "gsmSpecimen": {
+        "SF_Specimen": SF_SPECIMEN_DEF,
+        "SpecimenProcessing": SPECIMEN_PROCESSING_DEF,
+    },
+}
+
+# Map of BB name -> override list of dispatchable featureTypes. When set,
+# replaces the FT list auto-discovered from the XMI (dispatchable_fts()).
+DISPATCHER_OVERRIDES_PER_BB: dict[str, list[str]] = {
+    "gsmSpecimen": ["SF_Specimen"],
+}
+
+
 def _resolve_external_type(key: str) -> dict:
     """Return the schema fragment for an external ISO type identifier
     (e.g. 'iso19156:GFI_Feature'). Falls back to SCLinkObject when no
@@ -1228,6 +1481,10 @@ def build_schema(
     # Add the local SCLinkObject definition so each BB is self-contained for
     # by-reference encoding. Matches OGC team's geoscimlBasic/Lite convention.
     defs["SCLinkObject"] = SCLINK_OBJECT_DEF
+    # Merge any hand-curated extra defs for this BB (e.g. SF_Specimen for
+    # gsmSpecimen, since ISO 19156 isn't in the GeoSciML XMI).
+    for name, d in EXTRA_DEFS_PER_BB.get(bb_name, {}).items():
+        defs[name] = d
     schema: dict = OrderedDict()
     schema["$schema"] = "https://json-schema.org/draft/2020-12/schema"
     schema["$id"] = f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}Schema.json"
@@ -1505,7 +1762,11 @@ def main() -> None:
         # For BBs with concrete FeatureType classes, merge the library and the
         # Feature / FeatureCollection dispatchers into a single schema that
         # accepts either form. Pure DataType BBs emit the library as-is.
-        ft_names = dispatchable_fts(loader, pkgs)
+        # DISPATCHER_OVERRIDES_PER_BB lets a BB narrow (or otherwise replace)
+        # the auto-discovered dispatcher list, e.g. gsmSpecimen exposes only
+        # SF_Specimen while keeping the other classes available in $defs.
+        ft_names = DISPATCHER_OVERRIDES_PER_BB.get(bb_name,
+                                                   dispatchable_fts(loader, pkgs))
         if ft_names:
             final_schema = build_merged_schema(bb_name, library_schema, ft_names)
             total_dispatchers += 1

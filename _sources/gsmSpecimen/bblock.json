@@ -2,7 +2,7 @@
   "$schema": "metaschema.yaml",
   "itemIdentifier": "usgin.bbr.geosci.gsmSpecimen",
   "name": "gsmSpecimen",
-  "abstract": "LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and",
+  "abstract": "Specimen building block. Adds a hand-curated SF_Specimen",
   "status": "under-development",
   "dateTimeAddition": "2026-05-12T00:00:00Z",
   "itemClass": "schema",

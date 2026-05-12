@@ -1037,253 +1037,6 @@
         }
       }
     },
-    "FoliationAbstractDescription": {
-      "$anchor": "FoliationAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.  Constraint: only one instance of each subtype class is allowed",
-      "type": "object"
-    },
-    "Foliation": {
-      "$anchor": "Foliation",
-      "description": "A foliation is a planar arrangement of textural or structural features in any type of rock. It includes any of a wide variety of penetrative planar geological structures that may be present in a rock. Examples include schistosity, mylonitic foliation, penetrative bedding structure (lamination), and cleavage. Following the proposed definition of gneiss by the NADM Science Language Technical Team, penetrative planar foliation defined by layers &gt; 5 mm thick is considered Layering.",
-      "allOf": [
-        {
-          "$ref": "#GeologicStructure"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "foliationType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoliationTypeTerm"
-                    }
-                  ],
-                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
-                },
-                "stFoliationDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoliationAbstractDescription"
-                    }
-                  ],
-                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "GSML_Vector": {
-      "$anchor": "GSML_Vector",
-      "description": "A GSML_Vector is a data type representing a linear orientation with a magnitude (a quantity assigned to this vector). If the magnitude is unknown, a GSML_LinearOrientation shall be used.",
-      "allOf": [
-        {
-          "$ref": "#GSML_LinearOrientation"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "magnitude": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
-                }
-              ],
-              "description": "The magnitude property (SWE::QuantityRange) reports the magnitude of the vector."
-            }
-          }
-        }
-      ]
-    },
-    "GeologicStructure": {
-      "$anchor": "GeologicStructure",
-      "description": "A geologic structure is a configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in an earth material. The identity of a GeologicStructure is independent of the material that is the substrate for the structure. The general GeologicFeatureRelation (available in the Extension package) is used to associate penetrative GeologicStructures with GeologicUnits. GeoSciML Basic only provides a limited set of core structures (Contact, Fold, ShearDisplacementStructure and Foliation) with a single property to categorise them. Supplemental properties and geologic structure types are available from the Extension package.",
-      "allOf": [
-        {
-          "$ref": "#GeologicFeature"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {}
-            }
-          }
-        }
-      ]
-    },
-    "FoldAbstractDescription": {
-      "$anchor": "FoldAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
-      "type": "object"
-    },
-    "Fold": {
-      "$anchor": "Fold",
-      "description": "A fold is formed by one or more systematically curved layers, surfaces, or lines in a rock body. A fold denotes a structure formed by the deformation of a geologic structure, such as a contact which the original undeformed geometry is presumed, to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone). Folds are described by an axial surface, hinge line, profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric.",
-      "allOf": [
-        {
-          "$ref": "#GeologicStructure"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "profileType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoldProfileTypeTerm"
-                    }
-                  ],
-                  "description": "The property profileType:FoldProfileTypeTerm contains a term from a controlled vocabulary specifying the concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known. (e.g., antiform, synform, neutral, anticline, syncline, monocline, ptygmatic)."
-                },
-                "stFoldDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoldAbstractDescription"
-                    }
-                  ],
-                  "description": "The property stFoldDescription:FoldAbstractDescription provides a detailed fold description. This is a stub property in GeoSciML Basic since FoldAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "Mineral": {
-      "$anchor": "Mineral",
-      "description": "A naturally occurring inorganic element or compound having a periodically repeating arrangement of atoms and a characteristic chemical composition or range of compositions, resulting in distinctive physical properties. Includes mercury as a general exception to the requirement of crystallinity. Also includes crypto-crystalline materials such as chalcedony and amorphous silica.",
-      "allOf": [
-        {
-          "$ref": "#EarthMaterial"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "mineralName": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#MineralNameTerm"
-                  },
-                  "uniqueItems": true
-                }
-              ],
-              "description": "Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical Association. (eg: http://www.mindat.org/mineralindex.php)"
-            }
-          }
-        }
-      ]
-    },
-    "PhysicalDescription": {
-      "$anchor": "PhysicalDescription",
-      "description": "PhysicalDescription is a class that describes the numeric physical properties of a geologic unit (GeologicUnit) earth material (EarthMaterial ), or geologic structure (GeologicStructure) (e.g., density, porosity, magnetic susceptibility, remanent magnetism). These properties are modelled here as scalar numeric values (SWE::Quantity).",
-      "allOf": [
-        {
-          "$ref": "#EarthMaterialAbstractDescription"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "propertyName": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#PhysicalPropertyTerm"
-                }
-              ],
-              "description": "The property propertyName:PhysicalPropertyTerm contains a term from a controlled vocabulary of physical properties of rock materials (e.g., density, porosity, magnetic susceptibility, remnant magnetism, permeability, seismic velocity)."
-            },
-            "propertyMeasure": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
-                  },
-                  "uniqueItems": true
-                }
-              ],
-              "description": "The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, unit or structure."
-            }
-          }
-        }
-      ]
-    },
-    "ContactAbstractDescription": {
-      "$anchor": "ContactAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
-      "type": "object"
-    },
-    "EarthMaterialAbstractDescription": {
-      "$anchor": "EarthMaterialAbstractDescription",
-      "description": "Abstract description class for earth material. This class is a placeholder for further extension in Extension package",
-      "type": "object"
-    },
-    "GeochronologicBoundary": {
-      "$anchor": "GeochronologicBoundary",
-      "description": "A GeochronologicBoundary is a boundary between two geochronologic time periods.",
-      "allOf": [
-        {
-          "$ref": "#TimeOrdinalEraBoundary"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "stratotype": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/SCLinkObject",
-                      "$comment": "by-reference link to StratigraphicPoint"
-                    },
-                    {
-                      "$ref": "#StratigraphicPoint"
-                    }
-                  ]
-                }
-              ],
-              "description": "The property stratotype is an association between a GeochronologicBoundary and a StratigraphicPoint that are associated with the boundary. A GeochronologicBoundary can be associated with more than one StratigraphicPoints, but only one may have GSSP ratified status. The others are proposed equivalents."
-            }
-          }
-        }
-      ]
-    },
     "GSML_LinearOrientation": {
       "$anchor": "GSML_LinearOrientation",
       "description": "A linear orientation is composed of a trend (the compass orientation of the line) and a plunge (the angle from the horizontal). This vector may be oriented (pointing in a specific direction) or not.",
@@ -1326,6 +1079,46 @@
                 }
               ],
               "description": "The property trend (SWE::QuantityRange) reports the azimuth (compass bearing) value of the linear orientation."
+            }
+          }
+        }
+      ]
+    },
+    "PhysicalDescription": {
+      "$anchor": "PhysicalDescription",
+      "description": "PhysicalDescription is a class that describes the numeric physical properties of a geologic unit (GeologicUnit) earth material (EarthMaterial ), or geologic structure (GeologicStructure) (e.g., density, porosity, magnetic susceptibility, remanent magnetism). These properties are modelled here as scalar numeric values (SWE::Quantity).",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterialAbstractDescription"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "propertyName": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#PhysicalPropertyTerm"
+                }
+              ],
+              "description": "The property propertyName:PhysicalPropertyTerm contains a term from a controlled vocabulary of physical properties of rock materials (e.g., density, porosity, magnetic susceptibility, remnant magnetism, permeability, seismic velocity)."
+            },
+            "propertyMeasure": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, unit or structure."
             }
           }
         }
@@ -1428,33 +1221,240 @@
         }
       ]
     },
-    "RockMaterial": {
-      "$anchor": "RockMaterial",
-      "description": "RockMaterial is a specialized CompoundMaterial that includes consolidated and unconsolidated materials (such as surficial sediments) as well as mixtures of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material is essentially a link to a controlled vocabulary (lithology property) and a color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial nesting) are available in GeoSciML Extension.",
+    "FoldAbstractDescription": {
+      "$anchor": "FoldAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
+      "type": "object"
+    },
+    "FoliationAbstractDescription": {
+      "$anchor": "FoliationAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.  Constraint: only one instance of each subtype class is allowed",
+      "type": "object"
+    },
+    "GeochronologicBoundary": {
+      "$anchor": "GeochronologicBoundary",
+      "description": "A GeochronologicBoundary is a boundary between two geochronologic time periods.",
       "allOf": [
         {
-          "$ref": "#CompoundMaterial"
+          "$ref": "#TimeOrdinalEraBoundary"
         },
         {
           "type": "object",
           "properties": {
-            "lithology": {
+            "stratotype": {
               "oneOf": [
                 {
                   "type": "null"
                 },
                 {
-                  "$ref": "#LithologyTerm"
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to StratigraphicPoint"
+                    },
+                    {
+                      "$ref": "#StratigraphicPoint"
+                    }
+                  ]
                 }
               ],
-              "description": "The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary."
+              "description": "The property stratotype is an association between a GeochronologicBoundary and a StratigraphicPoint that are associated with the boundary. A GeochronologicBoundary can be associated with more than one StratigraphicPoints, but only one may have GSSP ratified status. The others are proposed equivalents."
             }
           }
         }
       ]
     },
+    "Mineral": {
+      "$anchor": "Mineral",
+      "description": "A naturally occurring inorganic element or compound having a periodically repeating arrangement of atoms and a characteristic chemical composition or range of compositions, resulting in distinctive physical properties. Includes mercury as a general exception to the requirement of crystallinity. Also includes crypto-crystalline materials such as chalcedony and amorphous silica.",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterial"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mineralName": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#MineralNameTerm"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical Association. (eg: http://www.mindat.org/mineralindex.php)"
+            }
+          }
+        }
+      ]
+    },
+    "EarthMaterial": {
+      "$anchor": "EarthMaterial",
+      "description": "The EarthMaterial class holds a description of a naturally occurring substance in the Earth. EarthMaterial represents material composition or substance, and is thus independent of quantity or location. Ideally, EarthMaterials are defined strictly based on physical properties, but because of standard geological usage, genetic interpretations enter into the description as well.  Constraint: self.metadata.hierarchyLevel=feature",
+      "type": "object",
+      "properties": {
+        "color": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The color property (SWE::Category) is a term from a controlled vocabulary that specifies the colour of the earth material. Color schemes such as the Munsell rock and soil color schemes may be used."
+        },
+        "purpose": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#DescriptionPurpose"
+            }
+          ],
+          "description": "The purpose:DescriptionPurpose property provides a specification of the intended purpose or level of abstraction for the given EarthMaterial. The intent is the same a GeologicFeature’s purpose and it shares the same vocabulary (instance, typicalNorm, definingNorm)."
+        },
+        "gbEarthMaterialDescription": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#EarthMaterialAbstractDescription"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The property gbEarthMaterialDescription:EarthMaterialAbstractDescription provides a detailed earth material description of the part. This property is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is abstract with subtypes defined in GeoSciML Extension."
+        }
+      }
+    },
     "ShearDisplacementStructureAbstractDescription": {
       "$anchor": "ShearDisplacementStructureAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
+      "type": "object"
+    },
+    "Foliation": {
+      "$anchor": "Foliation",
+      "description": "A foliation is a planar arrangement of textural or structural features in any type of rock. It includes any of a wide variety of penetrative planar geological structures that may be present in a rock. Examples include schistosity, mylonitic foliation, penetrative bedding structure (lamination), and cleavage. Following the proposed definition of gneiss by the NADM Science Language Technical Team, penetrative planar foliation defined by layers &gt; 5 mm thick is considered Layering.",
+      "allOf": [
+        {
+          "$ref": "#GeologicStructure"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "foliationType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoliationTypeTerm"
+                    }
+                  ],
+                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
+                },
+                "stFoliationDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoliationAbstractDescription"
+                    }
+                  ],
+                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GSML_Vector": {
+      "$anchor": "GSML_Vector",
+      "description": "A GSML_Vector is a data type representing a linear orientation with a magnitude (a quantity assigned to this vector). If the magnitude is unknown, a GSML_LinearOrientation shall be used.",
+      "allOf": [
+        {
+          "$ref": "#GSML_LinearOrientation"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "magnitude": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The magnitude property (SWE::QuantityRange) reports the magnitude of the vector."
+            }
+          }
+        }
+      ]
+    },
+    "Fold": {
+      "$anchor": "Fold",
+      "description": "A fold is formed by one or more systematically curved layers, surfaces, or lines in a rock body. A fold denotes a structure formed by the deformation of a geologic structure, such as a contact which the original undeformed geometry is presumed, to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone). Folds are described by an axial surface, hinge line, profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric.",
+      "allOf": [
+        {
+          "$ref": "#GeologicStructure"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "profileType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoldProfileTypeTerm"
+                    }
+                  ],
+                  "description": "The property profileType:FoldProfileTypeTerm contains a term from a controlled vocabulary specifying the concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known. (e.g., antiform, synform, neutral, anticline, syncline, monocline, ptygmatic)."
+                },
+                "stFoldDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoldAbstractDescription"
+                    }
+                  ],
+                  "description": "The property stFoldDescription:FoldAbstractDescription provides a detailed fold description. This is a stub property in GeoSciML Basic since FoldAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ContactAbstractDescription": {
+      "$anchor": "ContactAbstractDescription",
       "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
       "type": "object"
     },
@@ -1516,53 +1516,53 @@
         }
       ]
     },
-    "EarthMaterial": {
-      "$anchor": "EarthMaterial",
-      "description": "The EarthMaterial class holds a description of a naturally occurring substance in the Earth. EarthMaterial represents material composition or substance, and is thus independent of quantity or location. Ideally, EarthMaterials are defined strictly based on physical properties, but because of standard geological usage, genetic interpretations enter into the description as well.  Constraint: self.metadata.hierarchyLevel=feature",
-      "type": "object",
-      "properties": {
-        "color": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-              },
-              "uniqueItems": true
-            }
-          ],
-          "description": "The color property (SWE::Category) is a term from a controlled vocabulary that specifies the colour of the earth material. Color schemes such as the Munsell rock and soil color schemes may be used."
+    "EarthMaterialAbstractDescription": {
+      "$anchor": "EarthMaterialAbstractDescription",
+      "description": "Abstract description class for earth material. This class is a placeholder for further extension in Extension package",
+      "type": "object"
+    },
+    "GeologicStructure": {
+      "$anchor": "GeologicStructure",
+      "description": "A geologic structure is a configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in an earth material. The identity of a GeologicStructure is independent of the material that is the substrate for the structure. The general GeologicFeatureRelation (available in the Extension package) is used to associate penetrative GeologicStructures with GeologicUnits. GeoSciML Basic only provides a limited set of core structures (Contact, Fold, ShearDisplacementStructure and Foliation) with a single property to categorise them. Supplemental properties and geologic structure types are available from the Extension package.",
+      "allOf": [
+        {
+          "$ref": "#GeologicFeature"
         },
-        "purpose": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "$ref": "#DescriptionPurpose"
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {}
             }
-          ],
-          "description": "The purpose:DescriptionPurpose property provides a specification of the intended purpose or level of abstraction for the given EarthMaterial. The intent is the same a GeologicFeature’s purpose and it shares the same vocabulary (instance, typicalNorm, definingNorm)."
-        },
-        "gbEarthMaterialDescription": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#EarthMaterialAbstractDescription"
-              },
-              "uniqueItems": true
-            }
-          ],
-          "description": "The property gbEarthMaterialDescription:EarthMaterialAbstractDescription provides a detailed earth material description of the part. This property is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is abstract with subtypes defined in GeoSciML Extension."
+          }
         }
-      }
+      ]
+    },
+    "RockMaterial": {
+      "$anchor": "RockMaterial",
+      "description": "RockMaterial is a specialized CompoundMaterial that includes consolidated and unconsolidated materials (such as surficial sediments) as well as mixtures of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material is essentially a link to a controlled vocabulary (lithology property) and a color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial nesting) are available in GeoSciML Extension.",
+      "allOf": [
+        {
+          "$ref": "#CompoundMaterial"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "lithology": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#LithologyTerm"
+                }
+              ],
+              "description": "The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary."
+            }
+          }
+        }
+      ]
     }
   }
 }

@@ -49,8 +49,15 @@ bbs:
 
   gsmSpecimen:
     description: |
-      LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and
-      laboratory-analysis observation types, Geochronology results.
+      Specimen building block. Adds a hand-curated SF_Specimen
+      («FeatureType», ISO 19156:2011 §8.6) — the sole dispatchable
+      featureType for this BB — alongside the GeoSciML
+      LaboratoryAnalysis-Specimen DataType library (GeologicSpecimen,
+      sampling/analysis observation types, Geochronology results) which
+      stays in `$defs` for by-reference use from other BBs. SF_Specimen
+      inlines its SF_SamplingFeature parent's properties (sampledFeature,
+      relatedObservation, relatedSamplingFeature, lineage) since ISO 19156
+      isn't in the GeoSciML XMI.
     packages:
       - LaboratoryAnalysis-Specimen   # parent (1 class)
       - Geochronology

@@ -3,8 +3,8 @@
 # and one or more snippets pointing to example files.
 
 examples:
-  - title: examplegsmSpecimenMinimal
-    content: "Example instance: examplegsmSpecimenMinimal"
+  - title: specimen drill core segment
+    content: "SF_Specimen example — a drill-core segment from a borehole. Exercises the required SF_SamplingFeature inherited properties (sampledFeature, samplingTime, materialClass) plus optional own properties (samplingMethod, processingDetails, size, currentLocation, specimenType) and the relatedSamplingFeature self-association linking to the parent borehole interval that produced it."
     snippets:
       - language: json
-        ref: examples/examplegsmSpecimenMinimal.json
+        ref: examples/specimen_drill_core_segment.json

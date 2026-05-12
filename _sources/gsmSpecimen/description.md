@@ -4,7 +4,7 @@ GeoSciML 4.1 building block `gsmSpecimen`. `«FeatureType»` classes are encoded
 
 Source UML packages: `LaboratoryAnalysis-Specimen`, `Geochronology`, `GeologicSpecimen`, `LaboratoryAnalysis`.
 
-Contains 7 feature types, 3 data types, 7 code lists.
+Contains 8 feature types, 4 data types, 7 code lists.
 
 ## Classes in this BB
 
@@ -25,6 +25,8 @@ Contains 7 feature types, 3 data types, 7 code lists.
 | `IsotopicEventType` | «CodeList» | URI codelist (`format: uri`) |
 | `IsotopicSystemName` | «CodeList» | URI codelist (`format: uri`) |
 | `ReferenceSpecimen` | «FeatureType» | JSON-FG Feature |
+| `SF_Specimen` | «FeatureType» | JSON-FG Feature |
+| `SpecimenProcessing` | «DataType» | plain JSON object |
 | `StatisticalMethodTerm` | «CodeList» | URI codelist (`format: uri`) |
 | `_FeatureDispatch` | «DataType» | plain JSON object |
 
@@ -136,6 +138,39 @@ Properties (own; inherited properties listed in supertype's BB):
 | `referenceDescription` | (oneOf — see schema) | 0..1 | The property referenceDescription is an association between a ReferenceSpecimen and a CIT:CI_Citation that references… |
 | `usedIn` | (oneOf — see schema) | 0..1 | The property usedIn is an association between a ReferenceSpecimen and an AnalyticalSession in which the reference spe… |
 
+### `SF_Specimen`
+
+ISO 19156:2011 §8.6 SF_Specimen — a sampling feature representing a physical specimen collected from a sampled feature. Implementation inlines the SF_SamplingFeature parent's properties (sampledFeature, relatedObservation, relatedSamplingFeature, lineage) since the parent is not separately schematised here. External ISO types referenced from properties (OM_Process, OM_Observation, GFI_Feature, TM_Object, LI_Lineage, SF_SamplingFeature) are by-reference only via SCLinkObject.
+
+Properties (own; inherited properties listed in supertype's BB):
+
+| Name | Type | Mult | Notes |
+| --- | --- | --- | --- |
+| `sampledFeature` | (oneOf — see schema) | 0..1 | Feature(s) being sampled (1..*, by-reference to ISO 19156 GFI_Feature). Inherited from SF_SamplingFeature. |
+| `relatedObservation` | (oneOf — see schema) | 0..1 | Observations whose featureOfInterest is this specimen (0..*, by-reference to ISO 19156 OM_Observation). Inherited fro… |
+| `relatedSamplingFeature` | (oneOf — see schema) | 0..1 | Self-association: relations to other SF_SamplingFeature instances (0..*, by-reference). Inherited from SF_SamplingFea… |
+| `lineage` | (oneOf — see schema) | 0..1 | Provenance metadata (by-reference to ISO 19115 LI_Lineage). Inherited from SF_SamplingFeature. |
+| `materialClass` | SWE 3.0 `Category` | 0..1 | Material class of the specimen (1..1). ISO 19156 types this as ScopedName; encoded here as a SWE Category to carry th… |
+| `samplingTime` | `/$defs/SCLinkObject` | 0..1 | Time of sampling (1..1, by-reference to ISO 19108 TM_Object). |
+| `samplingMethod` | (oneOf — see schema) | 0..1 | Sampling method (0..1, by-reference to ISO 19156 OM_Process). |
+| `samplingLocation` | (oneOf — see schema) | 0..1 | Location where the specimen was sampled (0..1, GeoJSON Geometry). Distinct from the top-level Feature geometry, which… |
+| `processingDetails` | (oneOf — see schema) | 0..1 | Processing steps applied to the specimen (0..*). |
+| `size` | (oneOf — see schema) | 0..1 | Specimen size as a SWE Quantity (0..1). ISO 19156 types as Measure. |
+| `currentLocation` | (oneOf — see schema) | 0..1 | Current physical location of the specimen (0..1). Free text address, URI, or link object to a repository record. |
+| `specimenType` | (oneOf — see schema) | 0..1 | Specimen type classifier (0..1). ISO 19156 types as ScopedName; encoded here as a SWE Category. |
+
+### `SpecimenProcessing`
+
+ISO 19156:2011 SpecimenProcessing — a processing step in the specimen's lifecycle (e.g. drying, crushing, splitting). External ISO types referenced are by-reference via SCLinkObject.
+
+Properties (own; inherited properties listed in supertype's BB):
+
+| Name | Type | Mult | Notes |
+| --- | --- | --- | --- |
+| `method` | (oneOf — see schema) | 1..1 | Processing method (by-reference to OM_Process). |
+| `time` | (oneOf — see schema) | 0..1 | Processing time (by-reference to TM_Object). |
+| `processOperator` | (oneOf — see schema) | 0..1 | Party responsible for the processing step (by-reference to CI_Responsibility). |
+
 ### `_FeatureDispatch`
 
 ## Code lists
@@ -155,12 +190,15 @@ Properties (own; inherited properties listed in supertype's BB):
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent`
 - `https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json`
 - `https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.json`
+- `https://geojson.org/schema/Geometry.json`
 - `https://schemas.opengis.net/json-fg/feature.json`
 - `https://schemas.opengis.net/json-fg/featurecollection.json`
+- `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
+- `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
 
 ## Examples
 
-- [examplegsmSpecimenMinimal.json](examples/examplegsmSpecimenMinimal.json)
+- [specimen_drill_core_segment.json](examples/specimen_drill_core_segment.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
