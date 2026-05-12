@@ -3,6 +3,11 @@
 # and one or more snippets pointing to example files.
 
 examples:
+  - title: borehole complex
+    content: "Example instance: borehole_complex"
+    snippets:
+      - language: json
+        ref: examples/borehole_complex.json
   - title: borehole simple
     content: "Example instance: borehole_simple"
     snippets:

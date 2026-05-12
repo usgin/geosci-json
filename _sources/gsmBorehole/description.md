@@ -120,6 +120,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
+- [borehole_complex.json](examples/borehole_complex.json)
 - [borehole_simple.json](examples/borehole_simple.json)
 - [examplegsmBoreholeMinimal.json](examples/examplegsmBoreholeMinimal.json)
 - [origin_position_simple.json](examples/origin_position_simple.json)

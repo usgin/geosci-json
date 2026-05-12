@@ -409,8 +409,38 @@ $defs:
       position:
         oneOf:
         - type: 'null'
-        - $ref: '#/$defs/SCLinkObject'
-          $comment: External ISO 19108 TM_Instant — by-reference link
+        - oneOf:
+          - $ref: '#/$defs/SCLinkObject'
+          - type: object
+            properties:
+              inXSDDateTime:
+                type: string
+                format: date-time
+              inXSDDate:
+                type: string
+                format: date
+              inXSDgYearMonth:
+                type: string
+                pattern: ^-?\d{4}-\d{2}$
+              inXSDgYear:
+                type: string
+                pattern: ^-?\d{4}$
+            anyOf:
+            - required:
+              - inXSDDateTime
+            - required:
+              - inXSDDate
+            - required:
+              - inXSDgYearMonth
+            - required:
+              - inXSDgYear
+          - type: string
+            format: date-time
+          - type: string
+            format: date
+          $comment: ISO 19108 TM_Instant aligned to W3C OWL-Time time:Instant (https://www.w3.org/TR/owl-time/#time:Instant).
+            Accepts a SCLinkObject by-reference, an OWL-Time Instant object with one of `inXSDDateTime` / `inXSDDate` / `inXSDgYearMonth`
+            / `inXSDgYear`, or a bare ISO 8601 string as a convenience alias.
         description: A point in time corresponding to the era boundary
       positionalUncertainty:
         oneOf:

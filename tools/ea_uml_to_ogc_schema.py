@@ -175,12 +175,79 @@ EXTERNAL_TYPE_RESOLUTION: dict[str, dict] = {
     # no published JSON Schemas; emit SCLinkObject so instances must provide
     # a link to an external resource.
     "iso19108:TM_Instant": {
-        "$ref": LINK_OBJECT_REF,
-        "$comment": "External ISO 19108 TM_Instant — by-reference link",
+        "oneOf": [
+            {"$ref": LINK_OBJECT_REF},
+            # OWL-Time object form — Instant carrying an xsd:dateTime via inXSDDateTime
+            # (or inXSDDate / inXSDgYear / etc. for the various OWL-Time positional shortcuts).
+            {
+                "type": "object",
+                "properties": {
+                    "inXSDDateTime":     {"type": "string", "format": "date-time"},
+                    "inXSDDate":         {"type": "string", "format": "date"},
+                    "inXSDgYearMonth":   {"type": "string", "pattern": r"^-?\d{4}-\d{2}$"},
+                    "inXSDgYear":        {"type": "string", "pattern": r"^-?\d{4}$"},
+                },
+                "anyOf": [
+                    {"required": ["inXSDDateTime"]},
+                    {"required": ["inXSDDate"]},
+                    {"required": ["inXSDgYearMonth"]},
+                    {"required": ["inXSDgYear"]},
+                ],
+            },
+            # OWL-Time shortcut: just an ISO 8601 datetime / date string
+            {"type": "string", "format": "date-time"},
+            {"type": "string", "format": "date"},
+        ],
+        "$comment": (
+            "ISO 19108 TM_Instant aligned to W3C OWL-Time time:Instant "
+            "(https://www.w3.org/TR/owl-time/#time:Instant). Accepts a "
+            "SCLinkObject by-reference, an OWL-Time Instant object with one "
+            "of `inXSDDateTime` / `inXSDDate` / `inXSDgYearMonth` / "
+            "`inXSDgYear`, or a bare ISO 8601 string as a convenience alias."
+        ),
     },
     "iso19108:TM_Period": {
-        "$ref": LINK_OBJECT_REF,
-        "$comment": "External ISO 19108 TM_Period — by-reference link",
+        "oneOf": [
+            {"$ref": LINK_OBJECT_REF},
+            # OWL-Time object form: time:ProperInterval with time:hasBeginning / time:hasEnd
+            # pointing at Instants.
+            {
+                "type": "object",
+                "properties": {
+                    "hasBeginning": {"type": "object"},
+                    "hasEnd":       {"type": "object"},
+                },
+                "required": ["hasBeginning", "hasEnd"],
+            },
+            # OWL-Time shortcut form: time:hasBeginningDateTime / time:hasEndDateTime
+            # carrying ISO 8601 strings inline.
+            {
+                "type": "object",
+                "properties": {
+                    "hasBeginningDateTime": {"type": "string"},
+                    "hasEndDateTime":       {"type": "string"},
+                },
+                "required": ["hasBeginningDateTime", "hasEndDateTime"],
+            },
+            # Compact [startDate, endDate] tuple. NOT OWL-Time-canonical;
+            # semantically equivalent to the hasBeginningDateTime / hasEndDateTime
+            # shortcut form. Accepted for compatibility with the OGC code-sprint
+            # convention; consumers preferring OWL-Time should use the object form.
+            {
+                "type": "array",
+                "minItems": 2, "maxItems": 2,
+                "items": {"type": "string"},
+            },
+        ],
+        "$comment": (
+            "ISO 19108 TM_Period aligned to W3C OWL-Time time:ProperInterval "
+            "(https://www.w3.org/TR/owl-time/#time:ProperInterval). Canonical "
+            "encoding is the OWL-Time object with `hasBeginning`/`hasEnd` (or "
+            "the shortcut `hasBeginningDateTime`/`hasEndDateTime`). A "
+            "two-element [startDate, endDate] array is accepted as a "
+            "convenience alias (OGC code-sprint convention) but is not "
+            "OWL-Time-canonical; consumers should prefer the object form."
+        ),
     },
     "iso19107:DirectPosition": {
         "$ref": LINK_OBJECT_REF,

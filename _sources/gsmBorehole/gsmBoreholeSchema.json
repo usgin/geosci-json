@@ -250,8 +250,50 @@
               "type": "null"
             },
             {
-              "$ref": "#/$defs/SCLinkObject",
-              "$comment": "External ISO 19108 TM_Period — by-reference link"
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/SCLinkObject"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hasBeginning": {
+                      "type": "object"
+                    },
+                    "hasEnd": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "hasBeginning",
+                    "hasEnd"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hasBeginningDateTime": {
+                      "type": "string"
+                    },
+                    "hasEndDateTime": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "hasBeginningDateTime",
+                    "hasEndDateTime"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "$comment": "ISO 19108 TM_Period aligned to W3C OWL-Time time:ProperInterval (https://www.w3.org/TR/owl-time/#time:ProperInterval). Canonical encoding is the OWL-Time object with `hasBeginning`/`hasEnd` (or the shortcut `hasBeginningDateTime`/`hasEndDateTime`). A two-element [startDate, endDate] array is accepted as a convenience alias (OGC code-sprint convention) but is not OWL-Time-canonical; consumers should prefer the object form."
             }
           ],
           "description": "The property dateOfDrilling:TM_Period describes the time period during which drilling of the borehole occurred."
