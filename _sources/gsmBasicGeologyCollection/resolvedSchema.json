@@ -173,6 +173,88 @@
         }
       ]
     },
+    "Contact": {
+      "$anchor": "Contact",
+      "description": "A contact is a general concept representing any kind of surface separating two geologic units, including primary boundaries such as depositional contacts, all kinds of unconformities, intrusive contacts, and gradational contacts, as well as faults that separate geologic units.",
+      "allOf": [
+        {
+          "$ref": "#GeologicStructure"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "contactType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#ContactTypeTerm"
+                    }
+                  ],
+                  "description": "The property contactType:ContactTypeTerm classifies the contact (e.g. intrusive, unconformity, bedding surface, lithologic boundary, phase boundary) and is a term from a controlled vocabulary."
+                },
+                "stContactDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#ContactAbstractDescription"
+                    }
+                  ],
+                  "description": "The property stContactDescription:ContactAbstractDescription provides a detailed contact description. This is a stub property in GeoSciML Basic since ContactAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Foliation": {
+      "$anchor": "Foliation",
+      "description": "A foliation is a planar arrangement of textural or structural features in any type of rock. It includes any of a wide variety of penetrative planar geological structures that may be present in a rock. Examples include schistosity, mylonitic foliation, penetrative bedding structure (lamination), and cleavage. Following the proposed definition of gneiss by the NADM Science Language Technical Team, penetrative planar foliation defined by layers &gt; 5 mm thick is considered Layering.",
+      "allOf": [
+        {
+          "$ref": "#GeologicStructure"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "foliationType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoliationTypeTerm"
+                    }
+                  ],
+                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
+                },
+                "stFoliationDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoliationAbstractDescription"
+                    }
+                  ],
+                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "GeologicUnit": {
       "$anchor": "GeologicUnit",
       "description": "Conceptually, a GeologicUnit may represent a body of material in the Earth whose complete and precise extent is inferred to exist (e.g., North American Data Model GeologicUnit, Stratigraphic unit in the sense of NACSN, or International Stratigraphic Code ), or a classifier used to characterize parts of the Earth (e.g. lithologic map unit like 'granitic rock' or 'alluvial deposit', surficial units like 'till' or 'old alluvium'). It includes both formal units (i.e. formally adopted and named in an official lexicon) and informal units (i.e. named but not promoted to a lexicon) and unnamed units (i.e., recognizable, described and delineable in the field but not otherwise formalised). In simpler terms, a geologic unit is a package of earth material (generally rock).  Constraint: target of composition is only CompositionPart  Constraint: target of geologicHistory is only GeologicEvent",
@@ -267,88 +349,6 @@
                     }
                   ],
                   "description": "The property composition is an association that links a GeologicUnit with CompositionParts to describe the material composition of the GeologicUnit (e.g., a detailed, instance specific, lithologic description)"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "Contact": {
-      "$anchor": "Contact",
-      "description": "A contact is a general concept representing any kind of surface separating two geologic units, including primary boundaries such as depositional contacts, all kinds of unconformities, intrusive contacts, and gradational contacts, as well as faults that separate geologic units.",
-      "allOf": [
-        {
-          "$ref": "#GeologicStructure"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "contactType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#ContactTypeTerm"
-                    }
-                  ],
-                  "description": "The property contactType:ContactTypeTerm classifies the contact (e.g. intrusive, unconformity, bedding surface, lithologic boundary, phase boundary) and is a term from a controlled vocabulary."
-                },
-                "stContactDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#ContactAbstractDescription"
-                    }
-                  ],
-                  "description": "The property stContactDescription:ContactAbstractDescription provides a detailed contact description. This is a stub property in GeoSciML Basic since ContactAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "Foliation": {
-      "$anchor": "Foliation",
-      "description": "A foliation is a planar arrangement of textural or structural features in any type of rock. It includes any of a wide variety of penetrative planar geological structures that may be present in a rock. Examples include schistosity, mylonitic foliation, penetrative bedding structure (lamination), and cleavage. Following the proposed definition of gneiss by the NADM Science Language Technical Team, penetrative planar foliation defined by layers &gt; 5 mm thick is considered Layering.",
-      "allOf": [
-        {
-          "$ref": "#GeologicStructure"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "foliationType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoliationTypeTerm"
-                    }
-                  ],
-                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
-                },
-                "stFoliationDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoliationAbstractDescription"
-                    }
-                  ],
-                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
                 }
               }
             }

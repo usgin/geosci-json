@@ -1006,7 +1006,7 @@
     },
     "SCLinkObject": {
       "title": "link object",
-      "description": "definition of a link object",
+      "description": "SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json, based on RFC 8288 web linking.",
       "type": "object",
       "required": [
         "href"
@@ -1036,77 +1036,6 @@
           "type": "integer"
         }
       }
-    },
-    "Fold": {
-      "$anchor": "Fold",
-      "description": "A fold is formed by one or more systematically curved layers, surfaces, or lines in a rock body. A fold denotes a structure formed by the deformation of a geologic structure, such as a contact which the original undeformed geometry is presumed, to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone). Folds are described by an axial surface, hinge line, profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric.",
-      "allOf": [
-        {
-          "$ref": "#GeologicStructure"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "profileType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoldProfileTypeTerm"
-                    }
-                  ],
-                  "description": "The property profileType:FoldProfileTypeTerm contains a term from a controlled vocabulary specifying the concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known. (e.g., antiform, synform, neutral, anticline, syncline, monocline, ptygmatic)."
-                },
-                "stFoldDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoldAbstractDescription"
-                    }
-                  ],
-                  "description": "The property stFoldDescription:FoldAbstractDescription provides a detailed fold description. This is a stub property in GeoSciML Basic since FoldAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "RockMaterial": {
-      "$anchor": "RockMaterial",
-      "description": "RockMaterial is a specialized CompoundMaterial that includes consolidated and unconsolidated materials (such as surficial sediments) as well as mixtures of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material is essentially a link to a controlled vocabulary (lithology property) and a color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial nesting) are available in GeoSciML Extension.",
-      "allOf": [
-        {
-          "$ref": "#CompoundMaterial"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "lithology": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#LithologyTerm"
-                }
-              ],
-              "description": "The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary."
-            }
-          }
-        }
-      ]
-    },
-    "ShearDisplacementStructureAbstractDescription": {
-      "$anchor": "ShearDisplacementStructureAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
-      "type": "object"
     },
     "GeochronologicBoundary": {
       "$anchor": "GeochronologicBoundary",
@@ -1141,14 +1070,9 @@
         }
       ]
     },
-    "FoldAbstractDescription": {
-      "$anchor": "FoldAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
-      "type": "object"
-    },
-    "GSML_LinearOrientation": {
-      "$anchor": "GSML_LinearOrientation",
-      "description": "A linear orientation is composed of a trend (the compass orientation of the line) and a plunge (the angle from the horizontal). This vector may be oriented (pointing in a specific direction) or not.",
+    "GSML_PlanarOrientation": {
+      "$anchor": "GSML_PlanarOrientation",
+      "description": "A planar orientation is composed of two values; the azimuth (a compass point) and a dip (the angle from the horizontal). Polarity of the plane indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical, etc. There are several conventions to encode a planar orientation and this specification does not impose one but provides a convention property to report it. It must be noted that allowance for different conventions makes manipulation of the data more difficult. Therefore it is recommended that user communities adopt a single measurement convention.",
       "allOf": [
         {
           "$ref": "#GSML_GeometricDescriptionValue"
@@ -1156,18 +1080,18 @@
         {
           "type": "object",
           "properties": {
-            "directed": {
+            "convention": {
               "oneOf": [
                 {
                   "type": "null"
                 },
                 {
-                  "$ref": "#LinearDirectedCode"
+                  "$ref": "#ConventionCode"
                 }
               ],
-              "description": "The directed:LinearDirectedCode property indicates if the orientation represents a linear feature that is directed, e.g. clast imbrication, mylonitic lineation with sense of shear, slickenlines with displacement direction, rather than undirected (like a fold hinge line or intersection lineations). A code list will indicate which is the directed end of the linear orientation. The value of the property comes from a controlled vocabulary."
+              "description": "The property convention:ConventionCode contains the convention used for the measurement from a controlled vocabulary."
             },
-            "plunge": {
+            "azimuth": {
               "oneOf": [
                 {
                   "type": "null"
@@ -1176,9 +1100,9 @@
                   "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
                 }
               ],
-              "description": "The property plunge (SWE::QuantityRange) reports the magnitude of the plunge as an angle from horizontal."
+              "description": "The azimuth (SWE::QuantityRange) property (compass point, bearing etc.) contains the value of the orientation. The convention property reports how azimuth is interpreted (if it is relative to a quadrant)."
             },
-            "trend": {
+            "dip": {
               "oneOf": [
                 {
                   "type": "null"
@@ -1187,40 +1111,151 @@
                   "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
                 }
               ],
-              "description": "The property trend (SWE::QuantityRange) reports the azimuth (compass bearing) value of the linear orientation."
+              "description": "The dip (SWE::QuantityRange) reports the angle that the structural surface (e.g. bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane as a numeric value or term."
+            },
+            "polarity": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#PlanarPolarityCode"
+                }
+              ],
+              "description": "The polarity:PolarityCode indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical etc., using a controlled vocabulary."
             }
           }
         }
       ]
     },
-    "Mineral": {
-      "$anchor": "Mineral",
-      "description": "A naturally occurring inorganic element or compound having a periodically repeating arrangement of atoms and a characteristic chemical composition or range of compositions, resulting in distinctive physical properties. Includes mercury as a general exception to the requirement of crystallinity. Also includes crypto-crystalline materials such as chalcedony and amorphous silica.",
+    "ContactAbstractDescription": {
+      "$anchor": "ContactAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
+      "type": "object"
+    },
+    "RockMaterial": {
+      "$anchor": "RockMaterial",
+      "description": "RockMaterial is a specialized CompoundMaterial that includes consolidated and unconsolidated materials (such as surficial sediments) as well as mixtures of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material is essentially a link to a controlled vocabulary (lithology property) and a color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial nesting) are available in GeoSciML Extension.",
       "allOf": [
         {
-          "$ref": "#EarthMaterial"
+          "$ref": "#CompoundMaterial"
         },
         {
           "type": "object",
           "properties": {
-            "mineralName": {
+            "lithology": {
               "oneOf": [
                 {
                   "type": "null"
                 },
                 {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#MineralNameTerm"
-                  },
-                  "uniqueItems": true
+                  "$ref": "#LithologyTerm"
                 }
               ],
-              "description": "Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical Association. (eg: http://www.mindat.org/mineralindex.php)"
+              "description": "The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary."
             }
           }
         }
       ]
+    },
+    "Foliation": {
+      "$anchor": "Foliation",
+      "description": "A foliation is a planar arrangement of textural or structural features in any type of rock. It includes any of a wide variety of penetrative planar geological structures that may be present in a rock. Examples include schistosity, mylonitic foliation, penetrative bedding structure (lamination), and cleavage. Following the proposed definition of gneiss by the NADM Science Language Technical Team, penetrative planar foliation defined by layers &gt; 5 mm thick is considered Layering.",
+      "allOf": [
+        {
+          "$ref": "#GeologicStructure"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "foliationType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoliationTypeTerm"
+                    }
+                  ],
+                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
+                },
+                "stFoliationDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoliationAbstractDescription"
+                    }
+                  ],
+                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ShearDisplacementStructureAbstractDescription": {
+      "$anchor": "ShearDisplacementStructureAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
+      "type": "object"
+    },
+    "GSML_Vector": {
+      "$anchor": "GSML_Vector",
+      "description": "A GSML_Vector is a data type representing a linear orientation with a magnitude (a quantity assigned to this vector). If the magnitude is unknown, a GSML_LinearOrientation shall be used.",
+      "allOf": [
+        {
+          "$ref": "#GSML_LinearOrientation"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "magnitude": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The magnitude property (SWE::QuantityRange) reports the magnitude of the vector."
+            }
+          }
+        }
+      ]
+    },
+    "FoliationAbstractDescription": {
+      "$anchor": "FoliationAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.  Constraint: only one instance of each subtype class is allowed",
+      "type": "object"
+    },
+    "GeologicStructure": {
+      "$anchor": "GeologicStructure",
+      "description": "A geologic structure is a configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in an earth material. The identity of a GeologicStructure is independent of the material that is the substrate for the structure. The general GeologicFeatureRelation (available in the Extension package) is used to associate penetrative GeologicStructures with GeologicUnits. GeoSciML Basic only provides a limited set of core structures (Contact, Fold, ShearDisplacementStructure and Foliation) with a single property to categorise them. Supplemental properties and geologic structure types are available from the Extension package.",
+      "allOf": [
+        {
+          "$ref": "#GeologicFeature"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        }
+      ]
+    },
+    "FoldAbstractDescription": {
+      "$anchor": "FoldAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
+      "type": "object"
     },
     "GeologicEvent": {
       "$anchor": "GeologicEvent",
@@ -1319,103 +1354,9 @@
         }
       ]
     },
-    "FoliationAbstractDescription": {
-      "$anchor": "FoliationAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.  Constraint: only one instance of each subtype class is allowed",
-      "type": "object"
-    },
-    "Foliation": {
-      "$anchor": "Foliation",
-      "description": "A foliation is a planar arrangement of textural or structural features in any type of rock. It includes any of a wide variety of penetrative planar geological structures that may be present in a rock. Examples include schistosity, mylonitic foliation, penetrative bedding structure (lamination), and cleavage. Following the proposed definition of gneiss by the NADM Science Language Technical Team, penetrative planar foliation defined by layers &gt; 5 mm thick is considered Layering.",
-      "allOf": [
-        {
-          "$ref": "#GeologicStructure"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "foliationType": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoliationTypeTerm"
-                    }
-                  ],
-                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
-                },
-                "stFoliationDescription": {
-                  "oneOf": [
-                    {
-                      "type": "null"
-                    },
-                    {
-                      "$ref": "#FoliationAbstractDescription"
-                    }
-                  ],
-                  "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "GSML_Vector": {
-      "$anchor": "GSML_Vector",
-      "description": "A GSML_Vector is a data type representing a linear orientation with a magnitude (a quantity assigned to this vector). If the magnitude is unknown, a GSML_LinearOrientation shall be used.",
-      "allOf": [
-        {
-          "$ref": "#GSML_LinearOrientation"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "magnitude": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
-                }
-              ],
-              "description": "The magnitude property (SWE::QuantityRange) reports the magnitude of the vector."
-            }
-          }
-        }
-      ]
-    },
-    "GeologicStructure": {
-      "$anchor": "GeologicStructure",
-      "description": "A geologic structure is a configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in an earth material. The identity of a GeologicStructure is independent of the material that is the substrate for the structure. The general GeologicFeatureRelation (available in the Extension package) is used to associate penetrative GeologicStructures with GeologicUnits. GeoSciML Basic only provides a limited set of core structures (Contact, Fold, ShearDisplacementStructure and Foliation) with a single property to categorise them. Supplemental properties and geologic structure types are available from the Extension package.",
-      "allOf": [
-        {
-          "$ref": "#GeologicFeature"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {}
-            }
-          }
-        }
-      ]
-    },
-    "ContactAbstractDescription": {
-      "$anchor": "ContactAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
-      "type": "object"
-    },
-    "GSML_PlanarOrientation": {
-      "$anchor": "GSML_PlanarOrientation",
-      "description": "A planar orientation is composed of two values; the azimuth (a compass point) and a dip (the angle from the horizontal). Polarity of the plane indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical, etc. There are several conventions to encode a planar orientation and this specification does not impose one but provides a convention property to report it. It must be noted that allowance for different conventions makes manipulation of the data more difficult. Therefore it is recommended that user communities adopt a single measurement convention.",
+    "GSML_LinearOrientation": {
+      "$anchor": "GSML_LinearOrientation",
+      "description": "A linear orientation is composed of a trend (the compass orientation of the line) and a plunge (the angle from the horizontal). This vector may be oriented (pointing in a specific direction) or not.",
       "allOf": [
         {
           "$ref": "#GSML_GeometricDescriptionValue"
@@ -1423,18 +1364,18 @@
         {
           "type": "object",
           "properties": {
-            "convention": {
+            "directed": {
               "oneOf": [
                 {
                   "type": "null"
                 },
                 {
-                  "$ref": "#ConventionCode"
+                  "$ref": "#LinearDirectedCode"
                 }
               ],
-              "description": "The property convention:ConventionCode contains the convention used for the measurement from a controlled vocabulary."
+              "description": "The directed:LinearDirectedCode property indicates if the orientation represents a linear feature that is directed, e.g. clast imbrication, mylonitic lineation with sense of shear, slickenlines with displacement direction, rather than undirected (like a fold hinge line or intersection lineations). A code list will indicate which is the directed end of the linear orientation. The value of the property comes from a controlled vocabulary."
             },
-            "azimuth": {
+            "plunge": {
               "oneOf": [
                 {
                   "type": "null"
@@ -1443,9 +1384,9 @@
                   "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
                 }
               ],
-              "description": "The azimuth (SWE::QuantityRange) property (compass point, bearing etc.) contains the value of the orientation. The convention property reports how azimuth is interpreted (if it is relative to a quadrant)."
+              "description": "The property plunge (SWE::QuantityRange) reports the magnitude of the plunge as an angle from horizontal."
             },
-            "dip": {
+            "trend": {
               "oneOf": [
                 {
                   "type": "null"
@@ -1454,18 +1395,7 @@
                   "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
                 }
               ],
-              "description": "The dip (SWE::QuantityRange) reports the angle that the structural surface (e.g. bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane as a numeric value or term."
-            },
-            "polarity": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#PlanarPolarityCode"
-                }
-              ],
-              "description": "The polarity:PolarityCode indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical etc., using a controlled vocabulary."
+              "description": "The property trend (SWE::QuantityRange) reports the azimuth (compass bearing) value of the linear orientation."
             }
           }
         }
@@ -1506,6 +1436,76 @@
                 }
               ],
               "description": "The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, unit or structure."
+            }
+          }
+        }
+      ]
+    },
+    "Fold": {
+      "$anchor": "Fold",
+      "description": "A fold is formed by one or more systematically curved layers, surfaces, or lines in a rock body. A fold denotes a structure formed by the deformation of a geologic structure, such as a contact which the original undeformed geometry is presumed, to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone). Folds are described by an axial surface, hinge line, profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric.",
+      "allOf": [
+        {
+          "$ref": "#GeologicStructure"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "profileType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoldProfileTypeTerm"
+                    }
+                  ],
+                  "description": "The property profileType:FoldProfileTypeTerm contains a term from a controlled vocabulary specifying the concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known. (e.g., antiform, synform, neutral, anticline, syncline, monocline, ptygmatic)."
+                },
+                "stFoldDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#FoldAbstractDescription"
+                    }
+                  ],
+                  "description": "The property stFoldDescription:FoldAbstractDescription provides a detailed fold description. This is a stub property in GeoSciML Basic since FoldAbstractDescription is an abstract class with subtypes defined in GeoSciML Extension."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Mineral": {
+      "$anchor": "Mineral",
+      "description": "A naturally occurring inorganic element or compound having a periodically repeating arrangement of atoms and a characteristic chemical composition or range of compositions, resulting in distinctive physical properties. Includes mercury as a general exception to the requirement of crystallinity. Also includes crypto-crystalline materials such as chalcedony and amorphous silica.",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterial"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mineralName": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#MineralNameTerm"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical Association. (eg: http://www.mindat.org/mineralindex.php)"
             }
           }
         }

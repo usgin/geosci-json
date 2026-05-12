@@ -79,7 +79,11 @@ SWE3_MEASURE_REF = (
 # is self-contained. Matches the OGC geoscimlBasic/Lite schemas.
 SCLINK_OBJECT_DEF = {
     "title": "link object",
-    "description": "definition of a link object",
+    "description": (
+        "SCLinkObject originates from ShapeChange implementation of "
+        "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/"
+        "schemas/link.json, based on RFC 8288 web linking."
+    ),
     "type": "object",
     "required": ["href"],
     "properties": {
