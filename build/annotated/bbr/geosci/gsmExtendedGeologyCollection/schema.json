@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.usgin.org/geosci-json/gsmExtendedGeologyCollection/gsmExtendedGeologyCollectionSchema.json",
-  "description": "Extended-profile FeatureCollection. Accepts the same featureType values\nas gsmBasicGeologyCollection, but each Feature additionally requires\nits description slot(s) to be concrete Extension classes. MappedFeature\nis pass-through (no Extension description slot).",
+  "description": "Extended-profile FeatureCollection. Accepts the full set of 9 Basic\nfeatureType values (AnthropogenicGeomorphologicFeature, Contact, Fold,\nFoliation, GeologicEvent, GeologicUnit, MappedFeature,\nNaturalGeomorphologicFeature, ShearDisplacementStructure). Each\nFeature additionally requires its description slot(s) to be concrete\nExtension classes where one exists; FTs without an extension\ndescription slot (Anthropogenic / NaturalGeomorphologicFeature,\nMappedFeature) are pass-through.",
   "allOf": [
     {
       "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
@@ -20,6 +20,152 @@
                   ],
                   "properties": {
                     "featureType": {
+                      "const": "AnthropogenicGeomorphologicFeature"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Contact"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stContactDescription": {
+                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Fold"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stFoldDescription": {
+                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Foliation"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stFoliationDescription": {
+                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeologicEvent"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "gaEventDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/gsmGeologicTimeSchema.json"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
                       "const": "GeologicUnit"
                     }
                   }
@@ -27,7 +173,7 @@
                 "then": {
                   "allOf": [
                     {
-                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json"
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
                     },
                     {
                       "type": "object",
@@ -66,7 +212,7 @@
                   }
                 },
                 "then": {
-                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json"
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
                 }
               },
               {
@@ -76,93 +222,12 @@
                   ],
                   "properties": {
                     "featureType": {
-                      "const": "Contact"
+                      "const": "NaturalGeomorphologicFeature"
                     }
                   }
                 },
                 "then": {
-                  "allOf": [
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "properties": {
-                          "type": "object",
-                          "properties": {
-                            "stContactDescription": {
-                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "if": {
-                  "required": [
-                    "featureType"
-                  ],
-                  "properties": {
-                    "featureType": {
-                      "const": "Fold"
-                    }
-                  }
-                },
-                "then": {
-                  "allOf": [
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "properties": {
-                          "type": "object",
-                          "properties": {
-                            "stFoldDescription": {
-                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "if": {
-                  "required": [
-                    "featureType"
-                  ],
-                  "properties": {
-                    "featureType": {
-                      "const": "Foliation"
-                    }
-                  }
-                },
-                "then": {
-                  "allOf": [
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "properties": {
-                          "type": "object",
-                          "properties": {
-                            "stFoliationDescription": {
-                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
                 }
               },
               {
@@ -179,7 +244,7 @@
                 "then": {
                   "allOf": [
                     {
-                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json"
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
                     },
                     {
                       "type": "object",
@@ -209,11 +274,14 @@
                     "properties": {
                       "featureType": {
                         "enum": [
-                          "GeologicUnit",
-                          "MappedFeature",
+                          "AnthropogenicGeomorphologicFeature",
                           "Contact",
                           "Fold",
                           "Foliation",
+                          "GeologicEvent",
+                          "GeologicUnit",
+                          "MappedFeature",
+                          "NaturalGeomorphologicFeature",
                           "ShearDisplacementStructure"
                         ]
                       }

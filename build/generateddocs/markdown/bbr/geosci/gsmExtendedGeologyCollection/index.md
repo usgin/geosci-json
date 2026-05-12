@@ -3,7 +3,7 @@
 
 `usgin.bbr.geosci.gsmExtendedGeologyCollection` *v0.1*
 
-Extended-profile FeatureCollection. Accepts the same featureType values
+Extended-profile FeatureCollection. Accepts the full set of 9 Basic
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -11,10 +11,14 @@ Extended-profile FeatureCollection. Accepts the same featureType values
 
 # gsmExtendedGeologyCollection
 
-Extended-profile FeatureCollection. Accepts the same featureType values
-as gsmBasicGeologyCollection, but each Feature additionally requires
-its description slot(s) to be concrete Extension classes. MappedFeature
-is pass-through (no Extension description slot).
+Extended-profile FeatureCollection. Accepts the full set of 9 Basic
+featureType values (AnthropogenicGeomorphologicFeature, Contact, Fold,
+Foliation, GeologicEvent, GeologicUnit, MappedFeature,
+NaturalGeomorphologicFeature, ShearDisplacementStructure). Each
+Feature additionally requires its description slot(s) to be concrete
+Extension classes where one exists; FTs without an extension
+description slot (Anthropogenic / NaturalGeomorphologicFeature,
+MappedFeature) are pass-through.
 
 ## Examples
 
@@ -139,13 +143,21 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region,
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.usgin.org/geosci-json/gsmExtendedGeologyCollection/gsmExtendedGeologyCollectionSchema.json
-description: 'Extended-profile FeatureCollection. Accepts the same featureType values
+description: 'Extended-profile FeatureCollection. Accepts the full set of 9 Basic
 
-  as gsmBasicGeologyCollection, but each Feature additionally requires
+  featureType values (AnthropogenicGeomorphologicFeature, Contact, Fold,
 
-  its description slot(s) to be concrete Extension classes. MappedFeature
+  Foliation, GeologicEvent, GeologicUnit, MappedFeature,
 
-  is pass-through (no Extension description slot).'
+  NaturalGeomorphologicFeature, ShearDisplacementStructure). Each
+
+  Feature additionally requires its description slot(s) to be concrete
+
+  Extension classes where one exists; FTs without an extension
+
+  description slot (Anthropogenic / NaturalGeomorphologicFeature,
+
+  MappedFeature) are pass-through.'
 allOf:
 - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
 - type: object
@@ -159,10 +171,84 @@ allOf:
             - featureType
             properties:
               featureType:
+                const: AnthropogenicGeomorphologicFeature
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#AnthropogenicGeomorphologicFeature
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Contact
+          then:
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#Contact
+            - type: object
+              properties:
+                properties:
+                  type: object
+                  properties:
+                    stContactDescription:
+                      $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ContactDescription
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Fold
+          then:
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#Fold
+            - type: object
+              properties:
+                properties:
+                  type: object
+                  properties:
+                    stFoldDescription:
+                      $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldDescription
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Foliation
+          then:
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#Foliation
+            - type: object
+              properties:
+                properties:
+                  type: object
+                  properties:
+                    stFoliationDescription:
+                      $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoliationDescription
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: GeologicEvent
+          then:
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent
+            - type: object
+              properties:
+                properties:
+                  type: object
+                  properties:
+                    gaEventDescription:
+                      type: array
+                      items:
+                        $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/gsmGeologicTimeSchema.json#GeologicEventDescription
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
                 const: GeologicUnit
           then:
             allOf:
-            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnit
+            - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicUnit
             - type: object
               properties:
                 properties:
@@ -183,55 +269,15 @@ allOf:
               featureType:
                 const: MappedFeature
           then:
-            $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#MappedFeature
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#MappedFeature
         - if:
             required:
             - featureType
             properties:
               featureType:
-                const: Contact
+                const: NaturalGeomorphologicFeature
           then:
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Contact
-            - type: object
-              properties:
-                properties:
-                  type: object
-                  properties:
-                    stContactDescription:
-                      $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ContactDescription
-        - if:
-            required:
-            - featureType
-            properties:
-              featureType:
-                const: Fold
-          then:
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Fold
-            - type: object
-              properties:
-                properties:
-                  type: object
-                  properties:
-                    stFoldDescription:
-                      $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldDescription
-        - if:
-            required:
-            - featureType
-            properties:
-              featureType:
-                const: Foliation
-          then:
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Foliation
-            - type: object
-              properties:
-                properties:
-                  type: object
-                  properties:
-                    stFoliationDescription:
-                      $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoliationDescription
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#NaturalGeomorphologicFeature
         - if:
             required:
             - featureType
@@ -240,7 +286,7 @@ allOf:
                 const: ShearDisplacementStructure
           then:
             allOf:
-            - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructure
+            - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructure
             - type: object
               properties:
                 properties:
@@ -257,11 +303,14 @@ allOf:
               properties:
                 featureType:
                   enum:
-                  - GeologicUnit
-                  - MappedFeature
+                  - AnthropogenicGeomorphologicFeature
                   - Contact
                   - Fold
                   - Foliation
+                  - GeologicEvent
+                  - GeologicUnit
+                  - MappedFeature
+                  - NaturalGeomorphologicFeature
                   - ShearDisplacementStructure
           then: false
 

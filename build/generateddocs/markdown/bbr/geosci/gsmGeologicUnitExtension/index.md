@@ -56,7 +56,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnitAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicUnitAbstractDescription`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json`
 
@@ -240,9 +240,9 @@ $defs:
     description: GeologicUnitDescription provides for extended description of the
       characteristics of a geologic unit.
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnitAbstractDescription
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicUnitAbstractDescription
       $comment: cross-BB supertype reference to GeologicUnitAbstractDescription in
-        BB gsmscimlBasic
+        BB gsmBasicGeology
     - type: object
       properties:
         bodyMorphology:

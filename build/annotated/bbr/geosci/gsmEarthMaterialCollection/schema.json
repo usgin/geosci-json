@@ -125,7 +125,7 @@
                         "properties": {
                           "allOf": [
                             {
-                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json"
+                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
                             },
                             {
                               "type": "object",
@@ -179,7 +179,7 @@
                         "properties": {
                           "allOf": [
                             {
-                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json"
+                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
                             },
                             {
                               "type": "object",

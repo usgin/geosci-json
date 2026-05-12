@@ -1,25 +1,133 @@
 {
   "summary": {
-    "total": 12,
-    "passed": 10,
-    "failed": 2,
+    "total": 11,
+    "passed": 6,
+    "failed": 5,
     "result": false
   },
   "bblocks": {
-    "usgin.bbr.geosci.gsmBasicGeologyCollection": {
-      "title": "Validation report for usgin.bbr.geosci.gsmBasicGeologyCollection - gsmBasicGeologyCollection",
-      "bblockName": "gsmBasicGeologyCollection",
-      "bblockId": "usgin.bbr.geosci.gsmBasicGeologyCollection",
-      "generated": "2026-05-12T22:10:47.616309+00:00",
+    "usgin.bbr.geosci.gsmBasicGeology": {
+      "title": "Validation report for usgin.bbr.geosci.gsmBasicGeology - gsmBasicGeology",
+      "bblockName": "gsmBasicGeology",
+      "bblockId": "usgin.bbr.geosci.gsmBasicGeology",
+      "generated": "2026-05-12T22:16:20.758227+00:00",
       "result": true,
       "items": [
         {
           "source": {
             "type": "EXAMPLE",
             "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmBasicGeologyCollection/example_1_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeologyCollection/example_1_1.json",
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_1_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_1_1.json",
             "exampleIndex": 1,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/contact_complex.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_2_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_2_1.json",
+            "exampleIndex": 2,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/contact_simple.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_3_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_3_1.json",
+            "exampleIndex": 3,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/examplegsmscimlBasicMinimal.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_4_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_4_1.json",
+            "exampleIndex": 4,
             "snippetIndex": 1,
             "language": "application/json"
           },
@@ -53,9 +161,9 @@
           "source": {
             "type": "EXAMPLE",
             "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmBasicGeologyCollection/example_2_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeologyCollection/example_2_1.json",
-            "exampleIndex": 2,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_5_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_5_1.json",
+            "exampleIndex": 5,
             "snippetIndex": 1,
             "language": "application/json"
           },
@@ -89,9 +197,9 @@
           "source": {
             "type": "EXAMPLE",
             "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmBasicGeologyCollection/example_3_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeologyCollection/example_3_1.json",
-            "exampleIndex": 3,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_6_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_6_1.json",
+            "exampleIndex": 6,
             "snippetIndex": 1,
             "language": "application/json"
           },
@@ -125,9 +233,9 @@
           "source": {
             "type": "EXAMPLE",
             "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmBasicGeologyCollection/example_4_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeologyCollection/example_4_1.json",
-            "exampleIndex": 4,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_7_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_7_1.json",
+            "exampleIndex": 7,
             "snippetIndex": 1,
             "language": "application/json"
           },
@@ -161,9 +269,81 @@
           "source": {
             "type": "EXAMPLE",
             "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmBasicGeologyCollection/example_5_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeologyCollection/example_5_1.json",
-            "exampleIndex": 5,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_8_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_8_1.json",
+            "exampleIndex": 8,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/fc_heterogeneous_GSO.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_9_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_9_1.json",
+            "exampleIndex": 9,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/fc_homogeneous_GSO.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_10_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_10_1.json",
+            "exampleIndex": 10,
             "snippetIndex": 1,
             "language": "application/json"
           },
@@ -192,12 +372,408 @@
               ]
             }
           ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_11_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_11_1.json",
+            "exampleIndex": 11,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/fold_complex.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_12_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_12_1.json",
+            "exampleIndex": 12,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/fold_simple.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_13_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_13_1.json",
+            "exampleIndex": 13,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/geologic_event_from_GSO.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_14_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_14_1.json",
+            "exampleIndex": 14,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/geologic_unit_complex.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_15_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_15_1.json",
+            "exampleIndex": 15,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/geologic_unit_simple.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_16_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_16_1.json",
+            "exampleIndex": 16,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/mapped_feature_complex.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_17_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_17_1.json",
+            "exampleIndex": 17,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/mapped_feature_simple.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_18_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_18_1.json",
+            "exampleIndex": 18,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/natural_geomorphologic_feature_complex.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_19_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_19_1.json",
+            "exampleIndex": 19,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/natural_geomorphologic_feature_simple.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_20_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_20_1.json",
+            "exampleIndex": 20,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/shear_displacement_structure_complex.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmBasicGeology/example_21_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBasicGeology/example_21_1.json",
+            "exampleIndex": 21,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/shear_displacement_structure_simple.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
         }
       ],
       "globalErrors": {},
       "counts": {
-        "total": 5,
-        "passed": 5,
+        "total": 21,
+        "passed": 21,
         "failed": 0
       }
     },
@@ -205,7 +781,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmBorehole - gsmBorehole",
       "bblockName": "gsmBorehole",
       "bblockId": "usgin.bbr.geosci.gsmBorehole",
-      "generated": "2026-05-12T22:10:49.337228+00:00",
+      "generated": "2026-05-12T22:16:22.362071+00:00",
       "result": false,
       "items": [
         {
@@ -275,8 +851,8 @@
       "title": "Validation report for usgin.bbr.geosci.gsmEarthMaterialCollection - gsmEarthMaterialCollection",
       "bblockName": "gsmEarthMaterialCollection",
       "bblockId": "usgin.bbr.geosci.gsmEarthMaterialCollection",
-      "generated": "2026-05-12T22:10:55.070281+00:00",
-      "result": true,
+      "generated": "2026-05-12T22:16:25.036030+00:00",
+      "result": false,
       "items": [
         {
           "source": {
@@ -288,7 +864,7 @@
             "snippetIndex": 1,
             "language": "application/json"
           },
-          "result": true,
+          "result": false,
           "sections": [
             {
               "name": "FILES",
@@ -301,14 +877,13 @@
               ]
             },
             {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
+              "name": "UNKNOWN",
+              "title": "Unknown errors",
               "entries": [
                 {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
+                  "exception": "AttributeError",
+                  "isError": true,
+                  "message": "Traceback (most recent call last):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 967, in resolve_fragment\n    document = document[part]\n,TypeError: string indices must be integers\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 200, in validate\n    validate_json(json_doc, schema_validator)\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 44, in validate_json\n    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/exceptions.py\", line 384, in best_match\n    best = next(errors, None)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 332, in properties\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 76, in items\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 414, in if_\n    yield from validator.descend(instance, then, schema_path=\"then\")\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 332, in properties\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 294, in ref\n    scope, resolved = validator.resolver.resolve(ref)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 899, in resolve\n    return url, self._remote_cache(url)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 917, in resolve_from_url\n    return self.resolve_fragment(document, fragment)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 969, in resolve_fragment\n    raise exceptions.RefResolutionError(\n,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: 'RockMaterial'\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validate.py\", line 199, in _validate_resource\n    result = validator.validate(filename, output_filename, report,\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 221, in validate\n    'errorMessage': e.message,\n,AttributeError: 'RefResolutionError' object has no attribute 'message'\n"
                 }
               ]
             }
@@ -318,15 +893,15 @@
       "globalErrors": {},
       "counts": {
         "total": 1,
-        "passed": 1,
-        "failed": 0
+        "passed": 0,
+        "failed": 1
       }
     },
     "usgin.bbr.geosci.gsmEarthMaterialExtension": {
       "title": "Validation report for usgin.bbr.geosci.gsmEarthMaterialExtension - gsmEarthMaterialExtension",
       "bblockName": "gsmEarthMaterialExtension",
       "bblockId": "usgin.bbr.geosci.gsmEarthMaterialExtension",
-      "generated": "2026-05-12T22:10:55.109899+00:00",
+      "generated": "2026-05-12T22:16:25.076192+00:00",
       "result": true,
       "items": [
         {
@@ -377,8 +952,8 @@
       "title": "Validation report for usgin.bbr.geosci.gsmExtendedGeologyCollection - gsmExtendedGeologyCollection",
       "bblockName": "gsmExtendedGeologyCollection",
       "bblockId": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
-      "generated": "2026-05-12T22:10:58.020298+00:00",
-      "result": true,
+      "generated": "2026-05-12T22:16:27.751914+00:00",
+      "result": false,
       "items": [
         {
           "source": {
@@ -390,7 +965,7 @@
             "snippetIndex": 1,
             "language": "application/json"
           },
-          "result": true,
+          "result": false,
           "sections": [
             {
               "name": "FILES",
@@ -403,14 +978,13 @@
               ]
             },
             {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
+              "name": "UNKNOWN",
+              "title": "Unknown errors",
               "entries": [
                 {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
+                  "exception": "AttributeError",
+                  "isError": true,
+                  "message": "Traceback (most recent call last):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 967, in resolve_fragment\n    document = document[part]\n,TypeError: string indices must be integers\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 200, in validate\n    validate_json(json_doc, schema_validator)\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 44, in validate_json\n    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/exceptions.py\", line 384, in best_match\n    best = next(errors, None)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 332, in properties\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 76, in items\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 414, in if_\n    yield from validator.descend(instance, then, schema_path=\"then\")\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 294, in ref\n    scope, resolved = validator.resolver.resolve(ref)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 899, in resolve\n    return url, self._remote_cache(url)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 917, in resolve_from_url\n    return self.resolve_fragment(document, fragment)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 969, in resolve_fragment\n    raise exceptions.RefResolutionError(\n,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: 'GeologicUnit'\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validate.py\", line 199, in _validate_resource\n    result = validator.validate(filename, output_filename, report,\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 221, in validate\n    'errorMessage': e.message,\n,AttributeError: 'RefResolutionError' object has no attribute 'message'\n"
                 }
               ]
             }
@@ -426,7 +1000,7 @@
             "snippetIndex": 1,
             "language": "application/json"
           },
-          "result": true,
+          "result": false,
           "sections": [
             {
               "name": "FILES",
@@ -439,14 +1013,13 @@
               ]
             },
             {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
+              "name": "UNKNOWN",
+              "title": "Unknown errors",
               "entries": [
                 {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
+                  "exception": "AttributeError",
+                  "isError": true,
+                  "message": "Traceback (most recent call last):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 967, in resolve_fragment\n    document = document[part]\n,TypeError: string indices must be integers\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 200, in validate\n    validate_json(json_doc, schema_validator)\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 44, in validate_json\n    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/exceptions.py\", line 384, in best_match\n    best = next(errors, None)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 332, in properties\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 76, in items\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 414, in if_\n    yield from validator.descend(instance, then, schema_path=\"then\")\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 294, in ref\n    scope, resolved = validator.resolver.resolve(ref)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 899, in resolve\n    return url, self._remote_cache(url)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 917, in resolve_from_url\n    return self.resolve_fragment(document, fragment)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 969, in resolve_fragment\n    raise exceptions.RefResolutionError(\n,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: 'MappedFeature'\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validate.py\", line 199, in _validate_resource\n    result = validator.validate(filename, output_filename, report,\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 221, in validate\n    'errorMessage': e.message,\n,AttributeError: 'RefResolutionError' object has no attribute 'message'\n"
                 }
               ]
             }
@@ -456,15 +1029,15 @@
       "globalErrors": {},
       "counts": {
         "total": 2,
-        "passed": 2,
-        "failed": 0
+        "passed": 0,
+        "failed": 2
       }
     },
     "usgin.bbr.geosci.gsmGeologicRelationExtension": {
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicRelationExtension - gsmGeologicRelationExtension",
       "bblockName": "gsmGeologicRelationExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicRelationExtension",
-      "generated": "2026-05-12T22:10:58.033849+00:00",
+      "generated": "2026-05-12T22:16:27.765673+00:00",
       "result": true,
       "items": [
         {
@@ -515,8 +1088,8 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicStructureExtension - gsmGeologicStructureExtension",
       "bblockName": "gsmGeologicStructureExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicStructureExtension",
-      "generated": "2026-05-12T22:11:00.908943+00:00",
-      "result": true,
+      "generated": "2026-05-12T22:16:30.489086+00:00",
+      "result": false,
       "items": [
         {
           "source": {
@@ -528,7 +1101,7 @@
             "snippetIndex": 1,
             "language": "application/json"
           },
-          "result": true,
+          "result": false,
           "sections": [
             {
               "name": "FILES",
@@ -541,14 +1114,13 @@
               ]
             },
             {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
+              "name": "UNKNOWN",
+              "title": "Unknown errors",
               "entries": [
                 {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
+                  "exception": "AttributeError",
+                  "isError": true,
+                  "message": "Traceback (most recent call last):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 967, in resolve_fragment\n    document = document[part]\n,TypeError: string indices must be integers\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 200, in validate\n    validate_json(json_doc, schema_validator)\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 44, in validate_json\n    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/exceptions.py\", line 384, in best_match\n    best = next(errors, None)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 417, in if_\n    yield from validator.descend(instance, else_, schema_path=\"else\")\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 298, in ref\n    yield from validator.descend(instance, resolved)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 414, in if_\n    yield from validator.descend(instance, then, schema_path=\"then\")\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 298, in ref\n    yield from validator.descend(instance, resolved)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 294, in ref\n    scope, resolved = validator.resolver.resolve(ref)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 899, in resolve\n    return url, self._remote_cache(url)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 917, in resolve_from_url\n    return self.resolve_fragment(document, fragment)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 969, in resolve_fragment\n    raise exceptions.RefResolutionError(\n,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: 'GeologicEvent'\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validate.py\", line 199, in _validate_resource\n    result = validator.validate(filename, output_filename, report,\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 221, in validate\n    'errorMessage': e.message,\n,AttributeError: 'RefResolutionError' object has no attribute 'message'\n"
                 }
               ]
             }
@@ -564,7 +1136,7 @@
             "snippetIndex": 1,
             "language": "application/json"
           },
-          "result": true,
+          "result": false,
           "sections": [
             {
               "name": "FILES",
@@ -577,14 +1149,13 @@
               ]
             },
             {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
+              "name": "UNKNOWN",
+              "title": "Unknown errors",
               "entries": [
                 {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
+                  "exception": "AttributeError",
+                  "isError": true,
+                  "message": "Traceback (most recent call last):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 967, in resolve_fragment\n    document = document[part]\n,TypeError: string indices must be integers\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 200, in validate\n    validate_json(json_doc, schema_validator)\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 44, in validate_json\n    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/exceptions.py\", line 384, in best_match\n    best = next(errors, None)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 414, in if_\n    yield from validator.descend(instance, then, schema_path=\"then\")\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 332, in properties\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 76, in items\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 298, in ref\n    yield from validator.descend(instance, resolved)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 414, in if_\n    yield from validator.descend(instance, then, schema_path=\"then\")\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 298, in ref\n    yield from validator.descend(instance, resolved)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 294, in ref\n    scope, resolved = validator.resolver.resolve(ref)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 899, in resolve\n    return url, self._remote_cache(url)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 917, in resolve_from_url\n    return self.resolve_fragment(document, fragment)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 969, in resolve_fragment\n    raise exceptions.RefResolutionError(\n,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: 'GeologicEvent'\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validate.py\", line 199, in _validate_resource\n    result = validator.validate(filename, output_filename, report,\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 221, in validate\n    'errorMessage': e.message,\n,AttributeError: 'RefResolutionError' object has no attribute 'message'\n"
                 }
               ]
             }
@@ -600,7 +1171,7 @@
             "snippetIndex": 1,
             "language": "application/json"
           },
-          "result": true,
+          "result": false,
           "sections": [
             {
               "name": "FILES",
@@ -613,14 +1184,13 @@
               ]
             },
             {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
+              "name": "UNKNOWN",
+              "title": "Unknown errors",
               "entries": [
                 {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
+                  "exception": "AttributeError",
+                  "isError": true,
+                  "message": "Traceback (most recent call last):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 967, in resolve_fragment\n    document = document[part]\n,TypeError: string indices must be integers\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 200, in validate\n    validate_json(json_doc, schema_validator)\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 44, in validate_json\n    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/exceptions.py\", line 384, in best_match\n    best = next(errors, None)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 414, in if_\n    yield from validator.descend(instance, then, schema_path=\"then\")\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 332, in properties\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 76, in items\n    yield from validator.descend(\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 298, in ref\n    yield from validator.descend(instance, resolved)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 414, in if_\n    yield from validator.descend(instance, then, schema_path=\"then\")\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 298, in ref\n    yield from validator.descend(instance, resolved)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 362, in allOf\n    yield from validator.descend(instance, subschema, schema_path=index)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 305, in descend\n    for error in self.evolve(schema=schema).iter_errors(instance):\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 288, in iter_errors\n    for error in errors:\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/_validators.py\", line 294, in ref\n    scope, resolved = validator.resolver.resolve(ref)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 899, in resolve\n    return url, self._remote_cache(url)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 917, in resolve_from_url\n    return self.resolve_fragment(document, fragment)\n,  File \"/venv/lib/python3.10/site-packages/jsonschema/validators.py\", line 969, in resolve_fragment\n    raise exceptions.RefResolutionError(\n,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: 'GeologicEvent'\n,\nDuring handling of the above exception, another exception occurred:\n\n,Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validate.py\", line 199, in _validate_resource\n    result = validator.validate(filename, output_filename, report,\n,  File \"/src/ogc/bblocks/validation/json_.py\", line 221, in validate\n    'errorMessage': e.message,\n,AttributeError: 'RefResolutionError' object has no attribute 'message'\n"
                 }
               ]
             }
@@ -630,15 +1200,15 @@
       "globalErrors": {},
       "counts": {
         "total": 3,
-        "passed": 3,
-        "failed": 0
+        "passed": 0,
+        "failed": 3
       }
     },
     "usgin.bbr.geosci.gsmGeologicTime": {
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicTime - gsmGeologicTime",
       "bblockName": "gsmGeologicTime",
       "bblockId": "usgin.bbr.geosci.gsmGeologicTime",
-      "generated": "2026-05-12T22:11:03.437158+00:00",
+      "generated": "2026-05-12T22:16:32.844880+00:00",
       "result": true,
       "items": [
         {
@@ -725,7 +1295,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicUnitExtension - gsmGeologicUnitExtension",
       "bblockName": "gsmGeologicUnitExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicUnitExtension",
-      "generated": "2026-05-12T22:11:03.454072+00:00",
+      "generated": "2026-05-12T22:16:32.861815+00:00",
       "result": true,
       "items": [
         {
@@ -884,7 +1454,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmSpecimen - gsmSpecimen",
       "bblockName": "gsmSpecimen",
       "bblockId": "usgin.bbr.geosci.gsmSpecimen",
-      "generated": "2026-05-12T22:11:07.577002+00:00",
+      "generated": "2026-05-12T22:16:36.954748+00:00",
       "result": false,
       "items": [
         {
@@ -950,602 +1520,11 @@
         "failed": 1
       }
     },
-    "usgin.bbr.geosci.gsmscimlBasic": {
-      "title": "Validation report for usgin.bbr.geosci.gsmscimlBasic - gsmscimlBasic",
-      "bblockName": "gsmscimlBasic",
-      "bblockId": "usgin.bbr.geosci.gsmscimlBasic",
-      "generated": "2026-05-12T22:11:13.077743+00:00",
-      "result": true,
-      "items": [
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_1_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_1_1.json",
-            "exampleIndex": 1,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/contact_complex.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_2_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_2_1.json",
-            "exampleIndex": 2,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/contact_simple.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_3_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_3_1.json",
-            "exampleIndex": 3,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/examplegsmscimlBasicMinimal.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_4_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_4_1.json",
-            "exampleIndex": 4,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/fc_heterogeneous_GSO.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_5_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_5_1.json",
-            "exampleIndex": 5,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/fc_homogeneous_GSO.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_6_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_6_1.json",
-            "exampleIndex": 6,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/fold_complex.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_7_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_7_1.json",
-            "exampleIndex": 7,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/fold_simple.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_8_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_8_1.json",
-            "exampleIndex": 8,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/geologic_event_from_GSO.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_9_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_9_1.json",
-            "exampleIndex": 9,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/geologic_unit_complex.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_10_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_10_1.json",
-            "exampleIndex": 10,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/geologic_unit_simple.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_11_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_11_1.json",
-            "exampleIndex": 11,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/mapped_feature_complex.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_12_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_12_1.json",
-            "exampleIndex": 12,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/mapped_feature_simple.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_13_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_13_1.json",
-            "exampleIndex": 13,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/natural_geomorphologic_feature_complex.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_14_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_14_1.json",
-            "exampleIndex": 14,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/natural_geomorphologic_feature_simple.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_15_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_15_1.json",
-            "exampleIndex": 15,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/shear_displacement_structure_complex.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_16_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_16_1.json",
-            "exampleIndex": 16,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/shear_displacement_structure_simple.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "globalErrors": {},
-      "counts": {
-        "total": 16,
-        "passed": 16,
-        "failed": 0
-      }
-    },
     "usgin.bbr.geosci.gsmscimlLite": {
       "title": "Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite",
       "bblockName": "gsmscimlLite",
       "bblockId": "usgin.bbr.geosci.gsmscimlLite",
-      "generated": "2026-05-12T22:11:15.807688+00:00",
+      "generated": "2026-05-12T22:16:39.745347+00:00",
       "result": true,
       "items": [
         {

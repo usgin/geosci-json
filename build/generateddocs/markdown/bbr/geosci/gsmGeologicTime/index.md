@@ -180,7 +180,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEventAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEventAbstractDescription`
 - `https://schemas.opengis.net/json-fg/feature.json`
 - `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
@@ -244,7 +244,11 @@ $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.usgin.org/geosci-json/gsmGeologicTime/gsmGeologicTimeSchema.json
 description: 'Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary
 
-  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension.
+  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension
+
+  (which contributes GeologicEventDescription, the concrete description
+
+  class used by GeologicEvent.gaEventDescription).
 
 
   Validates either a single Feature (dispatched by `featureType` to one of: GlobalStratotypePoint,
@@ -380,9 +384,9 @@ $defs:
     description: GeologicEventDescription provides extended description of geologic
       events through links to GeochronologicEras in the GeologicTimescale schema.
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEventAbstractDescription
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEventAbstractDescription
       $comment: cross-BB supertype reference to GeologicEventAbstractDescription in
-        BB gsmscimlBasic
+        BB gsmBasicGeology
     - type: object
       properties:
         olderGeochronologicEra:

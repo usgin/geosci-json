@@ -258,21 +258,21 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#ContactAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#Fold`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#FoldAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#Foliation`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#FoliationAbstractDescription`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GSML_LinearOrientation`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GSML_PlanarOrientation`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GSML_Vector`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicStructure`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructureAbstractDescription`
 - `../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#Mineral`
 - `../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#PhysicalDescription`
 - `../gsmGeologicTime/gsmGeologicTimeSchema.json#GeochronologicBoundary`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#ContactAbstractDescription`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#Fold`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#FoldAbstractDescription`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#Foliation`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#FoliationAbstractDescription`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GSML_LinearOrientation`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GSML_PlanarOrientation`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GSML_Vector`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicStructure`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial`
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructureAbstractDescription`
 - `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json`
@@ -523,8 +523,8 @@ $defs:
       be associated with a geochronologic (i.e., time zone) boundary that may correlate
       with it.
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#ContactAbstractDescription
-      $comment: cross-BB supertype reference to ContactAbstractDescription in BB gsmscimlBasic
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#ContactAbstractDescription
+      $comment: cross-BB supertype reference to ContactAbstractDescription in BB gsmBasicGeology
     - type: object
       properties:
         contactCharacter:
@@ -540,8 +540,8 @@ $defs:
         orientation:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_PlanarOrientation
-            $comment: cross-BB inline reference to GSML_PlanarOrientation in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_PlanarOrientation
+            $comment: cross-BB inline reference to GSML_PlanarOrientation in BB gsmBasicGeology
           description: The orientation:GSML_PlanarOrientation property reports the
             general orientation of the contact surface.
         correlatesWith:
@@ -569,8 +569,8 @@ $defs:
     description: A displacement event is a description of the age, environment and
       process of a shear displacement event.
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent
-      $comment: cross-BB supertype reference to GeologicEvent in BB gsmscimlBasic
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent
+      $comment: cross-BB supertype reference to GeologicEvent in BB gsmBasicGeology
     - type: object
       properties:
         properties:
@@ -587,16 +587,16 @@ $defs:
     description: A displacement value expresses the displacement on a fault with respect
       to a planar approximation of its shape.
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructureAbstractDescription
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructureAbstractDescription
       $comment: cross-BB supertype reference to ShearDisplacementStructureAbstractDescription
-        in BB gsmscimlBasic
+        in BB gsmBasicGeology
     - type: object
       properties:
         hangingWallDirection:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_LinearOrientation
-            $comment: cross-BB inline reference to GSML_LinearOrientation in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_LinearOrientation
+            $comment: cross-BB inline reference to GSML_LinearOrientation in BB gsmBasicGeology
           description: 'The property hangingWallDirection:GSML_LinearOrientation describes
             the direction of the hanging-wall side of the fault or fault-system where
             they are steep enough to define a hanging-wall on the map trace.  Constraint:
@@ -632,8 +632,8 @@ $defs:
     $anchor: FoldDescription
     description: FoldDescription is an extended descriptive property of a fold structure.
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#FoldAbstractDescription
-      $comment: cross-BB supertype reference to FoldAbstractDescription in BB gsmscimlBasic
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#FoldAbstractDescription
+      $comment: cross-BB supertype reference to FoldAbstractDescription in BB gsmBasicGeology
     - type: object
       properties:
         amplitude:
@@ -646,8 +646,8 @@ $defs:
         axialSurfaceOrientation:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_PlanarOrientation
-            $comment: cross-BB inline reference to GSML_PlanarOrientation in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_PlanarOrientation
+            $comment: cross-BB inline reference to GSML_PlanarOrientation in BB gsmBasicGeology
           description: The property axialSurfaceOrientation:GSML_PlanarOrientation
             is used to characterize the geometry of a fold. The axial surface of a
             particular fold may be located based on observations of the folded geologic
@@ -674,8 +674,8 @@ $defs:
         hingeLineOrientation:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_LinearOrientation
-            $comment: cross-BB inline reference to GSML_LinearOrientation in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_LinearOrientation
+            $comment: cross-BB inline reference to GSML_LinearOrientation in BB gsmBasicGeology
           description: 'The property hingeLineOrientation:GSML_LinearOrientation reports
             the specification of the hinge line orientation for fold. GSML_LinearOrientation
             allows for a term value specification or a numeric specification of either
@@ -738,8 +738,8 @@ $defs:
       surface are parallel) produced by the same tectonic event. It is sometimes referred
       to as a "fold train".  Constraint: if periodic=False then count(Wavelength)=0'
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicStructure
-      $comment: cross-BB supertype reference to GeologicStructure in BB gsmscimlBasic
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicStructure
+      $comment: cross-BB supertype reference to GeologicStructure in BB gsmBasicGeology
     - type: object
       properties:
         properties:
@@ -766,8 +766,8 @@ $defs:
                   oneOf:
                   - $ref: '#/$defs/SCLinkObject'
                     $comment: by-reference link to Fold
-                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Fold
-                    $comment: cross-BB inline reference to Fold in BB gsmscimlBasic
+                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#Fold
+                    $comment: cross-BB inline reference to Fold in BB gsmBasicGeology
                 uniqueItems: true
               description: The foldSystemMember is an association between a FoldSystem
                 and the Folds that are members of that system.
@@ -776,9 +776,9 @@ $defs:
     description: FoliationDescription provides extended descriptive properties for
       a foliation structure.
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#FoliationAbstractDescription
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#FoliationAbstractDescription
       $comment: cross-BB supertype reference to FoliationAbstractDescription in BB
-        gsmscimlBasic
+        gsmBasicGeology
     - type: object
       properties:
         definingElement:
@@ -824,8 +824,8 @@ $defs:
         orientation:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_PlanarOrientation
-            $comment: cross-BB inline reference to GSML_PlanarOrientation in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_PlanarOrientation
+            $comment: cross-BB inline reference to GSML_PlanarOrientation in BB gsmBasicGeology
           description: The orientation:GSML_PlanarOrientation contains an estimate
             of the planar orientation of the foliation structure.
         spacing:
@@ -845,8 +845,8 @@ $defs:
       and measurement. The observation needs to be able to distinguish the type of
       measurement made (PropertyType)
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicStructure
-      $comment: cross-BB supertype reference to GeologicStructure in BB gsmscimlBasic
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicStructure
+      $comment: cross-BB supertype reference to GeologicStructure in BB gsmBasicGeology
     - type: object
       properties:
         properties:
@@ -869,8 +869,8 @@ $defs:
       the NADM Science Language Technical Team. The GeologicStructure characteristic
       of gneiss is layering.
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#Foliation
-      $comment: cross-BB supertype reference to Foliation in BB gsmscimlBasic
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#Foliation
+      $comment: cross-BB supertype reference to Foliation in BB gsmBasicGeology
     - type: object
       properties:
         properties:
@@ -882,8 +882,8 @@ $defs:
               - oneOf:
                 - $ref: '#/$defs/SCLinkObject'
                   $comment: by-reference link to RockMaterial
-                - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial
-                  $comment: cross-BB inline reference to RockMaterial in BB gsmscimlBasic
+                - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial
+                  $comment: cross-BB inline reference to RockMaterial in BB gsmBasicGeology
               description: The layerComposition property is an association between
                 a Layering and a RockMaterial that describes the rock material that
                 may define compositional layering.
@@ -896,8 +896,8 @@ $defs:
       lines of intersection between penetrative planar structures. Class also includes
       discrete linear structures like boudin, channel axis, tool marks.'
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicStructure
-      $comment: cross-BB supertype reference to GeologicStructure in BB gsmscimlBasic
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicStructure
+      $comment: cross-BB supertype reference to GeologicStructure in BB gsmBasicGeology
     - type: object
       properties:
         properties:
@@ -943,9 +943,9 @@ $defs:
               - type: 'null'
               - type: array
                 items:
-                  $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_LinearOrientation
+                  $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_LinearOrientation
                   $comment: cross-BB inline reference to GSML_LinearOrientation in
-                    BB gsmscimlBasic
+                    BB gsmBasicGeology
                 uniqueItems: true
               description: Orientation of the lineation
   LineationTypeTerm:
@@ -979,8 +979,8 @@ $defs:
         netSlip:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_Vector
-            $comment: cross-BB inline reference to GSML_Vector in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_Vector
+            $comment: cross-BB inline reference to GSML_Vector in BB gsmBasicGeology
           description: The property netSlip:GSML_Vector reports the value of the net
             slip, expressed as a vector.
         slipComponent:
@@ -996,8 +996,8 @@ $defs:
       e.g. herringbone crossbedding, mudcracks, graded bedding, planar lamination,
       miarolitic cavities, nebulitic structure, trace fossils, fossil molds
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicStructure
-      $comment: cross-BB supertype reference to GeologicStructure in BB gsmscimlBasic
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicStructure
+      $comment: cross-BB supertype reference to GeologicStructure in BB gsmBasicGeology
     - type: object
       properties:
         properties:
@@ -1028,8 +1028,8 @@ $defs:
         separation:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_Vector
-            $comment: cross-BB inline reference to GSML_Vector in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_Vector
+            $comment: cross-BB inline reference to GSML_Vector in BB gsmBasicGeology
           description: The property separation:GSML_Vector reports the apparent offset
             across a planar feature, reported as a vector.
   ShearDisplacementStructureDescription:
@@ -1038,9 +1038,9 @@ $defs:
       properties of a shear displacement structure (i.e., fault or shear) by extending
       the abstract property block ShearDisplacementStructureAbstractDescription.
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructureAbstractDescription
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructureAbstractDescription
       $comment: cross-BB supertype reference to ShearDisplacementStructureAbstractDescription
-        in BB gsmscimlBasic
+        in BB gsmBasicGeology
     - type: object
       properties:
         deformationStyle:
@@ -1053,8 +1053,8 @@ $defs:
         planeOrientation:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_PlanarOrientation
-            $comment: cross-BB inline reference to GSML_PlanarOrientation in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_PlanarOrientation
+            $comment: cross-BB inline reference to GSML_PlanarOrientation in BB gsmBasicGeology
           description: "The property planeOrientation:GSML_PlanarOrientation contains
             a description of the orientation of a structure\u2019s planar surface."
         stPhysicalProperty:
@@ -1080,22 +1080,22 @@ $defs:
         heave:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_Vector
-            $comment: cross-BB inline reference to GSML_Vector in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_Vector
+            $comment: cross-BB inline reference to GSML_Vector in BB gsmBasicGeology
           description: The property heave:GSML_Vector contains a component of slip
             in the horizontal, and perpendicular to the strike of the fault.
         horizontalSlip:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_Vector
-            $comment: cross-BB inline reference to GSML_Vector in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_Vector
+            $comment: cross-BB inline reference to GSML_Vector in BB gsmBasicGeology
           description: The property horizontalSlip:GSML_Vector contains a slip component
             that is horizontal and parallel to strike of the fault.
         throw:
           oneOf:
           - type: 'null'
-          - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GSML_Vector
-            $comment: cross-BB inline reference to GSML_Vector in BB gsmscimlBasic
+          - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GSML_Vector
+            $comment: cross-BB inline reference to GSML_Vector in BB gsmBasicGeology
           description: The property throw:GSML_Vector contains the vertical component
             of slip.
   SCLinkObject:

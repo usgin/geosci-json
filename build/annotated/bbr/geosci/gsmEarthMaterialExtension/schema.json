@@ -8,8 +8,8 @@
       "description": "AlterationDescription describes aspects of a geologic unit or earth material that are the result of bulk chemical, mineralogical or physical changes related to change in the physical or chemical environment. It includes weathering, supergene alteration, hydrothermal alteration and metasomatic effects not considered metamorphic. For example, a soil profile description would have to be constructed as a GeologicUnit (geologicUnitType = PedologicUnit) with unit parts representing the various horizons in the profile. Thickness of a weathering profile can be delivered as unitThickness of a GeologicUnit of geologicUnitType equal to \"AlterationUnit\"",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology"
         },
         {
           "type": "object",
@@ -39,8 +39,8 @@
                         "$comment": "by-reference link to EarthMaterial"
                       },
                       {
-                        "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-                        "$comment": "cross-BB inline reference to EarthMaterial in BB gsmscimlBasic"
+                        "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                        "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
                       }
                     ]
                   },
@@ -91,8 +91,8 @@
                       "$comment": "by-reference link to GeologicEvent"
                     },
                     {
-                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-                      "$comment": "cross-BB inline reference to GeologicEvent in BB gsmscimlBasic"
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                      "$comment": "cross-BB inline reference to GeologicEvent in BB gsmBasicGeology"
                     }
                   ]
                 }
@@ -114,8 +114,8 @@
       "description": "ChemicalComposition is a kind of EarthMaterialDescription that delivers the chemical composition of a geological unit or earth material, as a list of element or oxide concentrations.",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology"
         },
         {
           "type": "object",
@@ -140,8 +140,8 @@
       "description": "The CompoundMaterialDescription class is a kind of EarthMaterialDescription that provides an extended description of a compound earth material (i.e., rocks and unconsolidated solid earth materials).",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology"
         },
         {
           "type": "object",
@@ -253,8 +253,8 @@
                   "$comment": "by-reference link to EarthMaterial"
                 },
                 {
-                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-                  "$comment": "cross-BB inline reference to EarthMaterial in BB gsmscimlBasic"
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                  "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
                 }
               ]
             }
@@ -308,8 +308,8 @@
       "description": "The FabricDescription data type describes all types of fabrics associated with a CompoundMaterial (i.e., tectonic, metamorphic, sedimentary, igneous fabrics or textures). It denotes a pattern, defined by one or more CompoundMaterial constituents, that is present throughout a rock body when considered at some scale. FabricDescription is defined based on the average configuration of many constituents. Penetrative fabric denotes that these constituents are distributed throughout the rock volume at the scale of observation, and are repeated at distances that are small relative to the scale of the whole, such that they can be considered to pervade the whole uniformly.",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology"
         },
         {
           "type": "object",
@@ -340,8 +340,8 @@
       "description": "The fabricType:FabricTypeTerm property contains a term from a controlled vocabulary to denote the type of fabric in the CompoundMaterial (e.g., rapikivi texture, autobrecciation, spaced cleavage, porphyroblastic, cross-bedding). The fabricType describes a pattern, defined by one or more CompoundMaterial constituents, that is present throughout a rock body when considered at some scale. It is defined based on the average configuration of many constituents. Penetrative fabric denotes that these constituents are distributed throughout the rock volume at the scale of observation, and are repeated at distances that are small relative to the scale of the whole, such that they can be considered to pervade the whole uniformly.",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterial in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterial in BB gsmBasicGeology"
         },
         {
           "type": "object"
@@ -353,8 +353,8 @@
       "description": "The data type MetamorphicDescription describes the character of metamorphism applied to a CompoundMaterial or GeologicUnit using one or more properties including estimated intensity (grade; e.g. high grade, low grade), characteristic metamorphic mineral assemblages (facies; e.g., greenschist, amphibolite), peak P-T estimates, and protolith material if known. A MetamorphicDescription provides a link to the GeologicEvent associated to the metamorphic event.  Constraint: metamorphicFacies is not null or metamorphicGrade is not null",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology"
         },
         {
           "type": "object",
@@ -421,8 +421,8 @@
                         "$comment": "by-reference link to EarthMaterial"
                       },
                       {
-                        "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-                        "$comment": "cross-BB inline reference to EarthMaterial in BB gsmscimlBasic"
+                        "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                        "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
                       }
                     ]
                   },
@@ -443,8 +443,8 @@
                       "$comment": "by-reference link to GeologicEvent"
                     },
                     {
-                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-                      "$comment": "cross-BB inline reference to GeologicEvent in BB gsmscimlBasic"
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                      "$comment": "cross-BB inline reference to GeologicEvent in BB gsmBasicGeology"
                     }
                   ]
                 }
@@ -460,8 +460,8 @@
       "description": "A naturally occurring inorganic element or compound having a periodically repeating arrangement of atoms and a characteristic chemical composition or range of compositions, resulting in distinctive physical properties. Includes mercury as a general exception to the requirement of crystallinity. Also includes crypto-crystalline materials such as chalcedony and amorphous silica.",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterial in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterial in BB gsmBasicGeology"
         },
         {
           "type": "object",
@@ -496,8 +496,8 @@
       "description": "OrganicMaterial is an EarthMaterial that belongs to the class of chemical compounds having a reduced carbon basis (as distinct from carbonates), and derived from living organisms. It includes high-carbon EarthMaterials such as bitumen, peat, and coal. This class is an empty placeholder for extension at a later date, or by other domain models.",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterial in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterial in BB gsmBasicGeology"
         },
         {
           "type": "object"
@@ -609,8 +609,8 @@
       "description": "PhysicalDescription is a class that describes the numeric physical properties of a geologic unit (GeologicUnit) earth material (EarthMaterial ), or geologic structure (GeologicStructure) (e.g., density, porosity, magnetic susceptibility, remanent magnetism). These properties are modelled here as scalar numeric values (SWE::Quantity).",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology"
         },
         {
           "type": "object",
@@ -656,8 +656,8 @@
       "description": "RockMaterialDescription provides extended description of RockMaterial.",
       "allOf": [
         {
-          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmscimlBasic"
+          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+          "$comment": "cross-BB supertype reference to EarthMaterialAbstractDescription in BB gsmBasicGeology"
         },
         {
           "type": "object",

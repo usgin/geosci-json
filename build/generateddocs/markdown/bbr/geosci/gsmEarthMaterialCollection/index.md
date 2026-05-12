@@ -161,7 +161,7 @@ allOf:
               properties:
                 properties:
                   allOf:
-                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial
+                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial
                   - type: object
                     properties:
                       gbEarthMaterialDescription:
@@ -188,7 +188,7 @@ allOf:
               properties:
                 properties:
                   allOf:
-                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#CompoundMaterial
+                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#CompoundMaterial
                   - type: object
                     properties:
                       gbEarthMaterialDescription:

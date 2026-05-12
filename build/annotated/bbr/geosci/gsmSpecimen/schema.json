@@ -471,8 +471,8 @@
                           "$comment": "by-reference link to GeologicEvent"
                         },
                         {
-                          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json",
-                          "$comment": "cross-BB inline reference to GeologicEvent in BB gsmscimlBasic"
+                          "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                          "$comment": "cross-BB inline reference to GeologicEvent in BB gsmBasicGeology"
                         }
                       ]
                     }

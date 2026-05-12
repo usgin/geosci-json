@@ -63,7 +63,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#AbstractFeatureRelation`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#AbstractFeatureRelation`
 
 ## Examples
 
@@ -114,8 +114,8 @@ $defs:
       for example, topological relations could be described where they are geologically
       significant.'
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#AbstractFeatureRelation
-      $comment: cross-BB supertype reference to AbstractFeatureRelation in BB gsmscimlBasic
+    - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#AbstractFeatureRelation
+      $comment: cross-BB supertype reference to AbstractFeatureRelation in BB gsmBasicGeology
     - type: object
       properties:
         relationship:

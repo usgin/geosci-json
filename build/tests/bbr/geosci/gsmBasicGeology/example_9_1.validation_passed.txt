@@ -1,0 +1,10 @@
+Validation report for usgin.bbr.geosci.gsmBasicGeology - gsmBasicGeology
+Generated 2026-05-12T22:16:20.297608+00:00
+=== Files ===
+Using examples/fc_homogeneous_GSO.json from examples
+=== End Files ===
+
+=== JSON Schema ===
+Validation passed
+=== End JSON Schema ===
+

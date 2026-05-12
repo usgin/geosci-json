@@ -1,0 +1,76 @@
+Validation report for usgin.bbr.geosci.gsmExtendedGeologyCollection - gsmExtendedGeologyCollection
+Generated 2026-05-12T22:16:27.751856+00:00
+=== Files ===
+Using examples/fc_hammersley_fault_traces_GSO.json from examples
+=== End Files ===
+
+=== Unknown errors ===
+
+** Validation error **
+Traceback (most recent call last):
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 967, in resolve_fragment
+    document = document[part]
+,TypeError: string indices must be integers
+,
+During handling of the above exception, another exception occurred:
+
+,Traceback (most recent call last):
+,  File "/src/ogc/bblocks/validation/json_.py", line 200, in validate
+    validate_json(json_doc, schema_validator)
+,  File "/src/ogc/bblocks/validation/json_.py", line 44, in validate_json
+    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))
+,  File "/venv/lib/python3.10/site-packages/jsonschema/exceptions.py", line 384, in best_match
+    best = next(errors, None)
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 288, in iter_errors
+    for error in errors:
+,  File "/venv/lib/python3.10/site-packages/jsonschema/_validators.py", line 362, in allOf
+    yield from validator.descend(instance, subschema, schema_path=index)
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 305, in descend
+    for error in self.evolve(schema=schema).iter_errors(instance):
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 288, in iter_errors
+    for error in errors:
+,  File "/venv/lib/python3.10/site-packages/jsonschema/_validators.py", line 332, in properties
+    yield from validator.descend(
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 305, in descend
+    for error in self.evolve(schema=schema).iter_errors(instance):
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 288, in iter_errors
+    for error in errors:
+,  File "/venv/lib/python3.10/site-packages/jsonschema/_validators.py", line 76, in items
+    yield from validator.descend(
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 305, in descend
+    for error in self.evolve(schema=schema).iter_errors(instance):
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 288, in iter_errors
+    for error in errors:
+,  File "/venv/lib/python3.10/site-packages/jsonschema/_validators.py", line 362, in allOf
+    yield from validator.descend(instance, subschema, schema_path=index)
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 305, in descend
+    for error in self.evolve(schema=schema).iter_errors(instance):
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 288, in iter_errors
+    for error in errors:
+,  File "/venv/lib/python3.10/site-packages/jsonschema/_validators.py", line 414, in if_
+    yield from validator.descend(instance, then, schema_path="then")
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 305, in descend
+    for error in self.evolve(schema=schema).iter_errors(instance):
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 288, in iter_errors
+    for error in errors:
+,  File "/venv/lib/python3.10/site-packages/jsonschema/_validators.py", line 294, in ref
+    scope, resolved = validator.resolver.resolve(ref)
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 899, in resolve
+    return url, self._remote_cache(url)
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 917, in resolve_from_url
+    return self.resolve_fragment(document, fragment)
+,  File "/venv/lib/python3.10/site-packages/jsonschema/validators.py", line 969, in resolve_fragment
+    raise exceptions.RefResolutionError(
+,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: 'MappedFeature'
+,
+During handling of the above exception, another exception occurred:
+
+,Traceback (most recent call last):
+,  File "/src/ogc/bblocks/validate.py", line 199, in _validate_resource
+    result = validator.validate(filename, output_filename, report,
+,  File "/src/ogc/bblocks/validation/json_.py", line 221, in validate
+    'errorMessage': e.message,
+,AttributeError: 'RefResolutionError' object has no attribute 'message'
+
+=== End Unknown errors ===
+

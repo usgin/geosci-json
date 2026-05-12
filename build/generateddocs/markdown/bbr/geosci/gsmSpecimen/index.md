@@ -185,7 +185,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
-- `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent`
 - `https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json`
 - `https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.json`
 - `https://geojson.org/schema/Geometry.json`
@@ -656,8 +656,8 @@ $defs:
               - oneOf:
                 - $ref: '#/$defs/SCLinkObject'
                   $comment: by-reference link to GeologicEvent
-                - $ref: https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEvent
-                  $comment: cross-BB inline reference to GeologicEvent in BB gsmscimlBasic
+                - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent
+                  $comment: cross-BB inline reference to GeologicEvent in BB gsmBasicGeology
               description: The interpretedAge property is an association between a
                 GeochronologicInterpretation and a GeologicEvent that describes the
                 dated event, process and environment.
