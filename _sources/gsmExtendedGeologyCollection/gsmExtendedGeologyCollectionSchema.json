@@ -190,7 +190,7 @@
                             "gbMaterialDescription": {
                               "type": "array",
                               "items": {
-                                "$ref": "../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#CompoundMaterialDescription"
+                                "$ref": "../gsmEarthMaterial/gsmEarthMaterialSchema.json#CompoundMaterialDescription"
                               }
                             }
                           }

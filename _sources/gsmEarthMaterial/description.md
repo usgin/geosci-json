@@ -1,10 +1,10 @@
-# gsmEarthMaterialExtension
+# gsmEarthMaterial
 
-GeoSciML 4.1 building block `gsmEarthMaterialExtension`. `«FeatureType»` classes are encoded as JSON-FG-compliant features; `«DataType»` / `«CodeList»` / `«Union»` classes follow **OGC Best Practice 24-017r1** (*UML to JSON Encoding Rules*).
+GeoSciML 4.1 building block `gsmEarthMaterial`. `«FeatureType»` classes are encoded as JSON-FG-compliant features; `«DataType»` / `«CodeList»` / `«Union»` classes follow **OGC Best Practice 24-017r1** (*UML to JSON Encoding Rules*).
 
 Source UML packages: `EarthMaterialDetails`.
 
-Contains 13 data types, 6 code lists.
+Contains 14 data types, 6 code lists.
 
 ## Classes in this BB
 
@@ -29,6 +29,7 @@ Contains 13 data types, 6 code lists.
 | `PhysicalDescription` | «DataType» | plain JSON object |
 | `PhysicalPropertyTerm` | «CodeList» | URI codelist (`format: uri`) |
 | `RockMaterialDescription` | «DataType» | plain JSON object |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -186,6 +187,8 @@ Properties (own; inherited properties listed in supertype's BB):
 | --- | --- | --- | --- |
 | `consolidationDegree` | (oneOf — see schema) | 0..1 | The consolidationDegree property (SWE::Category) contains a term from a controlled vocabulary that specifies the degr… |
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -199,9 +202,13 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## External dependencies
 
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#CompoundMaterial`
 - `../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial`
 - `../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterialAbstractDescription`
 - `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent`
+- `../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial`
+- `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/DataRecord.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
@@ -209,7 +216,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
-- [examplegsmEarthMaterialExtensionMinimal.json](examples/examplegsmEarthMaterialExtensionMinimal.json)
+- [fc_bolsa_quartzite_GSO.json](examples/fc_bolsa_quartzite_GSO.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

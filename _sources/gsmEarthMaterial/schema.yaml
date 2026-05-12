@@ -1,11 +1,161 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://schemas.usgin.org/geosci-json/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json
-description: 'Detailed EarthMaterial description types: CompoundMaterialDescription,
+$id: https://schemas.usgin.org/geosci-json/gsmEarthMaterial/gsmEarthMaterialSchema.json
+description: 'EarthMaterial building block. Combines the formerly-separate
 
-  RockMaterialDescription, MetamorphicDescription, AlterationDescription,
+  gsmEarthMaterialExtension DataType library (AlterationDescription,
 
-  ChemicalComposition, PhysicalDescription, FabricDescription, etc.'
+  CompoundMaterialDescription, ChemicalComposition, FabricDescription,
+
+  MetamorphicDescription, PhysicalDescription, ParticleGeometryDescription,
+
+  RockMaterialDescription, plus the EarthMaterial subtype «Type» classes
+
+  Mineral, InorganicFluid, OrganicMaterial, Organism, ConstituentPart)
+
+  with the FC profile formerly known as gsmEarthMaterialCollection.
+
+  The merged Feature/FC dispatcher accepts four featureType values
+
+  (Mineral, OrganicMaterial, RockMaterial, CompoundMaterial), injecting
+
+  the JSON-FG Feature envelope around each «Type» class via
+
+  `wrapAsFeature`. The inherited gbEarthMaterialDescription[] slot is
+
+  constrained to RockMaterialDescription or CompoundMaterialDescription
+
+  on the corresponding branches.
+
+
+  Validates either a single Feature (dispatched by `featureType` to one of: Mineral, OrganicMaterial, RockMaterial, CompoundMaterial)
+  or a FeatureCollection whose `features[]` items are dispatched the same way.'
+if:
+  type: object
+  required:
+  - type
+  properties:
+    type:
+      const: FeatureCollection
+then:
+  allOf:
+  - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+  - type: object
+    properties:
+      features:
+        type: array
+        items:
+          $ref: '#/$defs/_FeatureDispatch'
+else:
+  $ref: '#/$defs/_FeatureDispatch'
 $defs:
+  _FeatureDispatch:
+    allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: Mineral
+      then:
+        allOf:
+        - $ref: https://schemas.opengis.net/json-fg/feature.json
+        - type: object
+          required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
+        - type: object
+          properties:
+            properties:
+              $ref: '#Mineral'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: OrganicMaterial
+      then:
+        allOf:
+        - $ref: https://schemas.opengis.net/json-fg/feature.json
+        - type: object
+          required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
+        - type: object
+          properties:
+            properties:
+              $ref: '#OrganicMaterial'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: RockMaterial
+      then:
+        allOf:
+        - $ref: https://schemas.opengis.net/json-fg/feature.json
+        - type: object
+          required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
+        - type: object
+          properties:
+            properties:
+              allOf:
+              - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial
+              - type: object
+                properties:
+                  gbEarthMaterialDescription:
+                    type: array
+                    items:
+                      $ref: '#RockMaterialDescription'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: CompoundMaterial
+      then:
+        allOf:
+        - $ref: https://schemas.opengis.net/json-fg/feature.json
+        - type: object
+          required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
+        - type: object
+          properties:
+            properties:
+              allOf:
+              - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#CompoundMaterial
+              - type: object
+                properties:
+                  gbEarthMaterialDescription:
+                    type: array
+                    items:
+                      $ref: '#CompoundMaterialDescription'
+    - if:
+        not:
+          required:
+          - featureType
+          properties:
+            featureType:
+              enum:
+              - Mineral
+              - OrganicMaterial
+              - RockMaterial
+              - CompoundMaterial
+      then: false
   AlterationDescription:
     $anchor: AlterationDescription
     description: AlterationDescription describes aspects of a geologic unit or earth material that are the result of bulk

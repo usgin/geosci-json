@@ -1,8 +1,8 @@
 {
   "$schema": "metaschema.yaml",
-  "itemIdentifier": "usgin.bbr.geosci.gsmEarthMaterialExtension",
-  "name": "gsmEarthMaterialExtension",
-  "abstract": "Detailed EarthMaterial description types: CompoundMaterialDescription,",
+  "itemIdentifier": "usgin.bbr.geosci.gsmEarthMaterial",
+  "name": "gsmEarthMaterial",
+  "abstract": "EarthMaterial building block. Combines the formerly-separate",
   "status": "under-development",
   "dateTimeAddition": "2026-05-12T00:00:00Z",
   "itemClass": "schema",

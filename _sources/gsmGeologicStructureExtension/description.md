@@ -259,8 +259,8 @@ Properties (own; inherited properties listed in supertype's BB):
 - `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicStructure`
 - `../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial`
 - `../gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructureAbstractDescription`
-- `../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#Mineral`
-- `../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#PhysicalDescription`
+- `../gsmEarthMaterial/gsmEarthMaterialSchema.json#Mineral`
+- `../gsmEarthMaterial/gsmEarthMaterialSchema.json#PhysicalDescription`
 - `../gsmGeologicTime/gsmGeologicTimeSchema.json#GeochronologicBoundary`
 - `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`

@@ -1299,7 +1299,7 @@ def dispatchable_fts(loader: EaXmiLoader, packages: set[str]) -> list[str]:
 def build_merged_schema(
     bb_name: str,
     library_schema: dict,
-    ft_names: list[str],
+    dispatch_entries: list[dict],
 ) -> dict:
     """Combine the library `$defs` and the Feature / FeatureCollection
     dispatchers into a single schema. The root discriminates on `type`:
@@ -1308,18 +1308,29 @@ def build_merged_schema(
         `_FeatureDispatch` helper def.
       - otherwise: treat as a single Feature and validate via the same
         `_FeatureDispatch` helper.
-    All class anchors live in `$defs` (alongside `_FeatureDispatch` and the
-    local `SCLinkObject`), so the if/then branches can use local `#FT`
-    anchor refs."""
-    # Build the if/then dispatcher chain. Refs are local anchors (same doc).
+
+    `dispatch_entries` is a list of dicts, each with:
+      - name (str)           the featureType discriminator value
+      - ref (str)            JSON Pointer / $ref to the target schema. Local
+                             anchors look like "#ClassName"; cross-BB look
+                             like "../<bb>/<bb>Schema.json#ClassName".
+      - wrapAsFeature (bool, optional)  inject JSON-FG envelope (use for
+                                        «Type» classes that aren't already
+                                        FeatureType-stereotyped)
+      - extensionConstraints (dict, optional)       slot -> $ref (scalar)
+      - extensionConstraintsArray (dict, optional)  slot -> $ref (array)
+
+    Entries reuse _build_profile_branch() for the `then`-schema, so all
+    wrap / constrain semantics are shared with FC-profile BBs."""
     branches: list[dict] = []
-    for ft in ft_names:
+    ft_names = [e["name"] for e in dispatch_entries]
+    for entry in dispatch_entries:
         branches.append({
             "if": {
                 "required": ["featureType"],
-                "properties": {"featureType": {"const": ft}},
+                "properties": {"featureType": {"const": entry["name"]}},
             },
-            "then": {"$ref": f"#{ft}"},
+            "then": _build_profile_branch(entry),
         })
     branches.append({
         "if": {
@@ -1509,6 +1520,11 @@ def load_grouping(config_path: Path) -> tuple[dict[str, dict], dict[str, str], d
         bbs[bb_name] = {
             "description": entry.get("description", "") or "",
             "packages": pkgs,
+            # Optional explicit dispatch config (list of dicts: name, ref,
+            # wrapAsFeature, extensionConstraints, extensionConstraintsArray).
+            # When present, replaces the auto-discovered FT list AND any
+            # Python-side DISPATCHER_OVERRIDES_PER_BB entry.
+            "dispatch": list(entry["dispatch"]) if entry.get("dispatch") else None,
         }
         for p in pkgs:
             if p in package_to_bb:
@@ -1731,18 +1747,29 @@ def main() -> None:
         classes = collect_group_classes(loader, pkgs)
         total_classes += len(classes)
 
-        # For BBs with concrete FeatureType classes, merge the library and the
-        # Feature / FeatureCollection dispatchers into a single schema that
-        # accepts either form. Pure DataType BBs emit the library as-is.
-        # DISPATCHER_OVERRIDES_PER_BB lets a BB narrow (or otherwise replace)
-        # the auto-discovered dispatcher list, e.g. gsmSpecimen exposes only
-        # SF_Specimen while keeping the other classes available in $defs.
-        ft_names = DISPATCHER_OVERRIDES_PER_BB.get(bb_name,
-                                                   dispatchable_fts(loader, pkgs))
-        if ft_names:
-            final_schema = build_merged_schema(bb_name, library_schema, ft_names)
+        # Resolve the dispatcher's featureType list in precedence order:
+        #   1. The BB entry's `dispatch:` block in bb-grouping.yaml (rich
+        #      entries with wrapAsFeature / extension constraints).
+        #   2. DISPATCHER_OVERRIDES_PER_BB (Python constants — simple name list).
+        #   3. dispatchable_fts(loader, pkgs) — auto-discovered «FeatureType»
+        #      classes from the XMI.
+        # Cases 2 and 3 produce a list of bare class-name strings; we wrap
+        # them as {"name": s, "ref": f"#{s}"} dicts so build_merged_schema can
+        # treat all sources uniformly.
+        dispatch_entries: list[dict] = []
+        rich_dispatch = info.get("dispatch")
+        if rich_dispatch:
+            dispatch_entries = rich_dispatch
+        else:
+            simple_names = DISPATCHER_OVERRIDES_PER_BB.get(
+                bb_name, dispatchable_fts(loader, pkgs))
+            dispatch_entries = [{"name": n, "ref": f"#{n}"} for n in simple_names]
+
+        if dispatch_entries:
+            final_schema = build_merged_schema(bb_name, library_schema, dispatch_entries)
             total_dispatchers += 1
-            dispatcher_note = f", merged Feature+FC dispatch ({len(ft_names)} branches)"
+            dispatcher_note = (
+                f", merged Feature+FC dispatch ({len(dispatch_entries)} branches)")
         else:
             final_schema = library_schema
             dispatcher_note = ", no FTs (library only)"

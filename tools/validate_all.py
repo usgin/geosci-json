@@ -5,7 +5,7 @@ appropriate schema for its BB.
 
 Schema choice per file:
   - profile BBs (gsmBasicGeologyCollection, gsmExtendedGeologyCollection,
-    gsmEarthMaterialCollection): validate against <bb>.json at the BB root.
+    gsmExtendedGeologyCollection): validate against <bb>Schema.json at the BB root.
   - BBs with dispatchers: pick <bb>FeatureCollection.json if the instance is a
     FeatureCollection, otherwise <bb>Feature.json.
   - BBs without dispatchers: validate against the library <bb>.json.
@@ -46,7 +46,6 @@ BASE = "https://schemas.usgin.org/geosci-json"
 
 PROFILE_BBS = {
     "gsmExtendedGeologyCollection",
-    "gsmEarthMaterialCollection",
 }
 
 

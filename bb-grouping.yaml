@@ -65,13 +65,40 @@ bbs:
       - GeologicSpecimen
       - LaboratoryAnalysis
 
-  gsmEarthMaterialExtension:
+  gsmEarthMaterial:
     description: |
-      Detailed EarthMaterial description types: CompoundMaterialDescription,
-      RockMaterialDescription, MetamorphicDescription, AlterationDescription,
-      ChemicalComposition, PhysicalDescription, FabricDescription, etc.
+      EarthMaterial building block. Combines the formerly-separate
+      gsmEarthMaterialExtension DataType library (AlterationDescription,
+      CompoundMaterialDescription, ChemicalComposition, FabricDescription,
+      MetamorphicDescription, PhysicalDescription, ParticleGeometryDescription,
+      RockMaterialDescription, plus the EarthMaterial subtype «Type» classes
+      Mineral, InorganicFluid, OrganicMaterial, Organism, ConstituentPart)
+      with the FC profile formerly known as gsmEarthMaterialCollection.
+      The merged Feature/FC dispatcher accepts four featureType values
+      (Mineral, OrganicMaterial, RockMaterial, CompoundMaterial), injecting
+      the JSON-FG Feature envelope around each «Type» class via
+      `wrapAsFeature`. The inherited gbEarthMaterialDescription[] slot is
+      constrained to RockMaterialDescription or CompoundMaterialDescription
+      on the corresponding branches.
     packages:
       - EarthMaterialDetails
+    dispatch:
+      - name: Mineral
+        ref: "#Mineral"
+        wrapAsFeature: true
+      - name: OrganicMaterial
+        ref: "#OrganicMaterial"
+        wrapAsFeature: true
+      - name: RockMaterial
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial
+        wrapAsFeature: true
+        extensionConstraintsArray:
+          gbEarthMaterialDescription: "#RockMaterialDescription"
+      - name: CompoundMaterial
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#CompoundMaterial
+        wrapAsFeature: true
+        extensionConstraintsArray:
+          gbEarthMaterialDescription: "#CompoundMaterialDescription"
 
   gsmGeologicStructureExtension:
     description: |
@@ -168,7 +195,7 @@ profiles:
         ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicUnit
         extensionConstraintsArray:
           gbUnitDescription: ../gsmGeologicUnitExtension/gsmGeologicUnitExtensionSchema.json#GeologicUnitDescription
-          gbMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#CompoundMaterialDescription
+          gbMaterialDescription: ../gsmEarthMaterial/gsmEarthMaterialSchema.json#CompoundMaterialDescription
       - name: MappedFeature
         ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#MappedFeature
       - name: NaturalGeomorphologicFeature
@@ -178,31 +205,3 @@ profiles:
         extensionConstraintsArray:
           stStructureDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ShearDisplacementStructureDescription
 
-  gsmEarthMaterialCollection:
-    description: |
-      FeatureCollection profile collecting EarthMaterial features with rich
-      description content. Root featureType values are the four concrete (or
-      first-class) EarthMaterial subtypes — Mineral, OrganicMaterial,
-      RockMaterial, CompoundMaterial. None of these are «FeatureType» in the
-      UML (all are «Type»), so the profile injects the JSON-FG Feature
-      envelope around each via `wrapAsFeature: true`. The inherited
-      `gbEarthMaterialDescription` slot (from the EarthMaterial parent) is
-      constrained on RockMaterial and CompoundMaterial branches to require
-      the corresponding concrete Extension description class.
-    featureTypes:
-      - name: Mineral
-        ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#Mineral
-        wrapAsFeature: true
-      - name: OrganicMaterial
-        ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#OrganicMaterial
-        wrapAsFeature: true
-      - name: RockMaterial
-        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial
-        wrapAsFeature: true
-        extensionConstraintsArray:
-          gbEarthMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#RockMaterialDescription
-      - name: CompoundMaterial
-        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#CompoundMaterial
-        wrapAsFeature: true
-        extensionConstraintsArray:
-          gbEarthMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#CompoundMaterialDescription
