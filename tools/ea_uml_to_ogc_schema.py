@@ -1179,7 +1179,6 @@ def build_bblock_metadata(bb_name: str, bb_description: str, packages: list[str]
                 "link": "https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi"
             }
         ],
-        "schema": "schema.yaml",
         "tags": ["geoscience", "geosciml", "uml-derived"],
         "umlPackages": packages,
     })
@@ -1376,7 +1375,6 @@ def build_profile_metadata(profile_name: str, info: dict) -> dict:
                 "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
             }
         ],
-        "schema": "schema.yaml",
         "tags": ["geoscience", "geosciml", "profile", "featurecollection"],
         "profileOf": "FeatureCollection",
         "featureTypes": ft_names,

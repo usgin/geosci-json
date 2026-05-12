@@ -15,7 +15,6 @@
       "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
     }
   ],
-  "schema": "schema.yaml",
   "tags": [
     "geoscience",
     "geosciml",
