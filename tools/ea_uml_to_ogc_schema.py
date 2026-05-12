@@ -412,10 +412,163 @@ SF_SPECIMEN_DEF = {
     ],
 }
 
+# ISO 19156 + OWL-Time + Cox/Richard geologic timescale hand-curated classes.
+# Both Geochronologic classes align to W3C OWL-Time (https://www.w3.org/TR/owl-time/)
+# per the Cox & Richard 2015 formal model for the geologic timescale and GSSP:
+#   GeochronologicEra      ≡ time:ProperInterval
+#   GeochronologicBoundary ≡ time:Instant
+#   start                  ↔ time:hasBeginning
+#   end                    ↔ time:hasEnd
+#   member                 ↔ time:intervalContains (Allen relation)
+# stratotype anchors the abstract time concepts to rock-record evidence.
+
+GEOCHRONOLOGIC_BOUNDARY_DEF = {
+    "$anchor": "GeochronologicBoundary",
+    "description": (
+        "A point in geologic time defined by a stratotype. Aligns to "
+        "time:Instant from W3C OWL-Time (https://www.w3.org/TR/owl-time/). "
+        "Cox & Richard 2015, 'A formal model for the geologic timescale and "
+        "GSSP': the boundary's instant is anchored to the rock record via "
+        "the `stratotype` property, which references a StratigraphicPoint "
+        "(typically a GSSP if ratified by ICS)."
+    ),
+    "allOf": [
+        {"$ref": JSON_FG_FEATURE_REF},
+        {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "properties": {
+                        "stratotype": {
+                            "description": (
+                                "The StratigraphicPoint that defines this "
+                                "boundary in the rock record. Inline Feature "
+                                "or by-reference SCLinkObject."
+                            ),
+                            "oneOf": [
+                                {"$ref": LINK_OBJECT_REF},
+                                {"$ref": "#StratigraphicPoint"},
+                            ],
+                        },
+                    },
+                    "required": ["stratotype"],
+                },
+            },
+        },
+        {
+            "required": ["featureType", "id"],
+            "properties": {"id": {"type": "string"}},
+        },
+    ],
+}
+
+GEOCHRONOLOGIC_ERA_DEF = {
+    "$anchor": "GeochronologicEra",
+    "description": (
+        "A named interval of geologic time (Eon, Era, Period, Epoch, Age, "
+        "biozone, etc.). Aligns to time:ProperInterval from W3C OWL-Time "
+        "(https://www.w3.org/TR/owl-time/). Cox & Richard 2015, 'A formal "
+        "model for the geologic timescale and GSSP': `start` / `end` map to "
+        "time:hasBeginning / time:hasEnd (both linking to "
+        "GeochronologicBoundary ≡ time:Instant); `member[]` expresses "
+        "sub-era containment (Allen time:intervalContains). The optional "
+        "`stratotype` anchors the era to a defining rock section."
+    ),
+    "allOf": [
+        {"$ref": JSON_FG_FEATURE_REF},
+        {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "properties": {
+                        "rank": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": (
+                                "Chronostratigraphic / geochronologic rank "
+                                "(URI from the ICS chart vocabulary or "
+                                "equivalent: Eon, Era, Period, Epoch, Age, "
+                                "biozone, etc.)."
+                            ),
+                        },
+                        "start": {
+                            "description": (
+                                "Lower boundary of this era (time:hasBeginning). "
+                                "Inline GeochronologicBoundary Feature or "
+                                "by-reference SCLinkObject."
+                            ),
+                            "oneOf": [
+                                {"$ref": LINK_OBJECT_REF},
+                                {"$ref": "#GeochronologicBoundary"},
+                            ],
+                        },
+                        "end": {
+                            "description": (
+                                "Upper boundary of this era (time:hasEnd). "
+                                "Inline GeochronologicBoundary Feature or "
+                                "by-reference SCLinkObject."
+                            ),
+                            "oneOf": [
+                                {"$ref": LINK_OBJECT_REF},
+                                {"$ref": "#GeochronologicBoundary"},
+                            ],
+                        },
+                        "member": {
+                            "description": (
+                                "Sub-eras contained within this era "
+                                "(time:intervalContains). Array of "
+                                "by-reference links or inline "
+                                "GeochronologicEra Features."
+                            ),
+                            "oneOf": [
+                                {"type": "null"},
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {"$ref": LINK_OBJECT_REF},
+                                            {"$ref": "#GeochronologicEra"},
+                                        ],
+                                    },
+                                    "uniqueItems": True,
+                                },
+                            ],
+                        },
+                        "stratotype": {
+                            "description": (
+                                "Defining stratigraphic section for this "
+                                "era (the rock-record anchor). Inline "
+                                "StratigraphicSection Feature or "
+                                "by-reference SCLinkObject."
+                            ),
+                            "oneOf": [
+                                {"type": "null"},
+                                {"$ref": LINK_OBJECT_REF},
+                                {"$ref": "#StratigraphicSection"},
+                            ],
+                        },
+                    },
+                    "required": ["rank", "start", "end"],
+                },
+            },
+        },
+        {
+            "required": ["featureType", "id"],
+            "properties": {"id": {"type": "string"}},
+        },
+    ],
+}
+
 # Map of BB name -> additional $defs to merge into the library.
 EXTRA_DEFS_PER_BB: dict[str, dict] = {
     "gsmSpecimen": {
         "SF_Specimen": SF_SPECIMEN_DEF,
+    },
+    "gsmGeologicTime": {
+        "GeochronologicBoundary": GEOCHRONOLOGIC_BOUNDARY_DEF,
+        "GeochronologicEra": GEOCHRONOLOGIC_ERA_DEF,
     },
 }
 

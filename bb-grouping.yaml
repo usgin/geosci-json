@@ -136,13 +136,35 @@ bbs:
       Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary
       points, TemporalReferenceSystem, plus the GeologicAgeDetails extension
       (which contributes GeologicEventDescription, the concrete description
-      class used by GeologicEvent.gaEventDescription).
+      class used by GeologicEvent.gaEventDescription). The dispatcher
+      additionally exposes two hand-curated featureTypes —
+      GeochronologicEra and GeochronologicBoundary — that align to W3C
+      OWL-Time (https://www.w3.org/TR/owl-time/) per Cox & Richard 2015
+      "A formal model for the geologic timescale and GSSP": Era ≡
+      time:ProperInterval and Boundary ≡ time:Instant, with start/end
+      mapping to time:hasBeginning/time:hasEnd and member to
+      time:intervalContains. Both reference the existing XMI-derived
+      StratigraphicPoint / StratigraphicSection anchors for the
+      rock-record link.
     packages:
       - GeologicTime               # parent (1 class)
       - GSSP
       - TemporalReferenceSystem
       - TimeScale
       - GeologicAgeDetails
+    dispatch:
+      - name: GeochronologicEra
+        ref: "#GeochronologicEra"
+      - name: GeochronologicBoundary
+        ref: "#GeochronologicBoundary"
+      - name: GlobalStratotypePoint
+        ref: "#GlobalStratotypePoint"
+      - name: GlobalStratotypeSection
+        ref: "#GlobalStratotypeSection"
+      - name: StratigraphicPoint
+        ref: "#StratigraphicPoint"
+      - name: StratigraphicSection
+        ref: "#StratigraphicSection"
 
 
 # ---------------------------------------------------------------------------

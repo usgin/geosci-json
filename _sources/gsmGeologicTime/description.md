@@ -30,28 +30,27 @@ Contains 4 feature types, 10 data types, 1 code list.
 
 ### `GeochronologicBoundary`
 
-A GeochronologicBoundary is a boundary between two geochronologic time periods.
-
-**Supertype**: [`TimeOrdinalEraBoundary`](#TimeOrdinalEraBoundary) (this BB).
+A point in geologic time defined by a stratotype. Aligns to time:Instant from W3C OWL-Time (https://www.w3.org/TR/owl-time/). Cox & Richard 2015, 'A formal model for the geologic timescale and GSSP': the boundary's instant is anchored to the rock record via the `stratotype` property, which references a StratigraphicPoint (typically a GSSP if ratified by ICS).
 
 Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `stratotype` | (oneOf — see schema) | 0..1 | The property stratotype is an association between a GeochronologicBoundary and a StratigraphicPoint that are associat… |
+| `stratotype` | (oneOf — see schema) | 0..1 | The StratigraphicPoint that defines this boundary in the rock record. Inline Feature or by-reference SCLinkObject. |
 
 ### `GeochronologicEra`
 
-A GeochronologicEra is a period of time between two GeochronologicBoundaries. The association of a GeochronologicEra with a stratotype is optional. In the GSSP approach recommended by ICS for the Global Geologic Timescale, Unit Stratotypes are not used. Rather, the association of an era with geologic units and sections is indirect, via the association of an era with boundaries, which are in turn tied to stratotype points, which occur within host stratotype sections.
-
-**Supertype**: [`TimeOrdinalEra`](#TimeOrdinalEra) (this BB).
+A named interval of geologic time (Eon, Era, Period, Epoch, Age, biozone, etc.). Aligns to time:ProperInterval from W3C OWL-Time (https://www.w3.org/TR/owl-time/). Cox & Richard 2015, 'A formal model for the geologic timescale and GSSP': `start` / `end` map to time:hasBeginning / time:hasEnd (both linking to GeochronologicBoundary ≡ time:Instant); `member[]` expresses sub-era containment (Allen time:intervalContains). The optional `stratotype` anchors the era to a defining rock section.
 
 Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `rank` | (oneOf — see schema) | 0..1 | The property rank:GeochronologicEraRank contains a term from a vocabulary describing the rank of the time period (e.g… |
-| `stratotype` | (oneOf — see schema) | 0..1 | The property stratotype is an association between a GeochronologicEra and StratigraphicSection that describes a type … |
+| `rank` | `string(uri)` | 0..1 | Chronostratigraphic / geochronologic rank (URI from the ICS chart vocabulary or equivalent: Eon, Era, Period, Epoch, … |
+| `start` | (oneOf — see schema) | 0..1 | Lower boundary of this era (time:hasBeginning). Inline GeochronologicBoundary Feature or by-reference SCLinkObject. |
+| `end` | (oneOf — see schema) | 0..1 | Upper boundary of this era (time:hasEnd). Inline GeochronologicBoundary Feature or by-reference SCLinkObject. |
+| `member` | (oneOf — see schema) | 0..1 | Sub-eras contained within this era (time:intervalContains). Array of by-reference links or inline GeochronologicEra F… |
+| `stratotype` | (oneOf — see schema) | 0..1 | Defining stratigraphic section for this era (the rock-record anchor). Inline StratigraphicSection Feature or by-refer… |
 
 ### `GeologicEventDescription`
 
@@ -177,6 +176,9 @@ Properties (own; inherited properties listed in supertype's BB):
 ## Examples
 
 - [examplegsmGeologicTimeMinimal.json](examples/examplegsmGeologicTimeMinimal.json)
+- [geochronologic_boundary_simple.json](examples/geochronologic_boundary_simple.json)
+- [geochronologic_era_complex.json](examples/geochronologic_era_complex.json)
+- [geochronologic_era_simple.json](examples/geochronologic_era_simple.json)
 - [stratigraphic_section_lower_jurassic_GSO.json](examples/stratigraphic_section_lower_jurassic_GSO.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
