@@ -1,0 +1,16 @@
+{
+  "itemIdentifier": "usgin.bbr.geosci.gsmscimlLite",
+  "name": "gsmscimlLite",
+  "abstract": "GeoSciML 4.1 Lite profile. Flattened \"View\" classes that summarise",
+  "status": "under-development",
+  "dateTimeAddition": "2026-05-12",
+  "sources": [
+    {
+      "title": "GeoSciML 4.1 XMI"
+    }
+  ],
+  "schema": "gsmscimlLite.json",
+  "umlPackages": [
+    "GeoSciMLLite"
+  ]
+}

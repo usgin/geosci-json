@@ -1,0 +1,16 @@
+{
+  "itemIdentifier": "usgin.bbr.geosci.gsmGeologicUnitExtension",
+  "name": "gsmGeologicUnitExtension",
+  "abstract": "GeologicUnit extension: detailed unit description structures",
+  "status": "under-development",
+  "dateTimeAddition": "2026-05-12",
+  "sources": [
+    {
+      "title": "GeoSciML 4.1 XMI"
+    }
+  ],
+  "schema": "gsmGeologicUnitExtension.json",
+  "umlPackages": [
+    "GeologicUnitDetails"
+  ]
+}

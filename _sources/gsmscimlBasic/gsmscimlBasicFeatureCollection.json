@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/gsmscimlBasic/gsmscimlBasicFeatureCollection.json",
+  "description": "FeatureCollection wrapper for the gsmscimlBasic BB. Combines json-fg/featurecollection.json with per-item dispatch via gsmscimlBasicFeature.json. Recognised featureType values for items: AnthropogenicGeomorphologicFeature, Contact, Fold, Foliation, GeologicEvent, GeologicUnit, MappedFeature, NaturalGeomorphologicFeature, ShearDisplacementStructure.",
+  "allOf": [
+    {
+      "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "gsmscimlBasicFeature.json"
+          }
+        }
+      }
+    }
+  ]
+}

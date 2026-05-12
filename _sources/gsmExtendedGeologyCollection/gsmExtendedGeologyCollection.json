@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/gsmExtendedGeologyCollection/gsmExtendedGeologyCollection.json",
+  "description": "Extended-profile FeatureCollection. Accepts the same featureType values\nas gsmBasicGeologyCollection, but each Feature additionally requires\nits description slot(s) to be concrete Extension classes. MappedFeature\nis pass-through (no Extension description slot).",
+  "allOf": [
+    {
+      "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "features": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeologicUnit"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmscimlBasic/gsmscimlBasic.json#GeologicUnit"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "gbUnitDescription": {
+                              "$ref": "../gsmGeologicUnitExtension/gsmGeologicUnitExtension.json#GeologicUnitDescription"
+                            },
+                            "gbMaterialDescription": {
+                              "$ref": "../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#CompoundMaterialDescription"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "MappedFeature"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmscimlBasic/gsmscimlBasic.json#MappedFeature"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Contact"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmscimlBasic/gsmscimlBasic.json#Contact"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stContactDescription": {
+                              "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#ContactDescription"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Fold"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmscimlBasic/gsmscimlBasic.json#Fold"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stFoldDescription": {
+                              "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#FoldDescription"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Foliation"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmscimlBasic/gsmscimlBasic.json#Foliation"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stFoliationDescription": {
+                              "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#FoliationDescription"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "ShearDisplacementStructure"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmscimlBasic/gsmscimlBasic.json#ShearDisplacementStructure"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stStructureDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#ShearDisplacementStructureDescription"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "not": {
+                    "required": [
+                      "featureType"
+                    ],
+                    "properties": {
+                      "featureType": {
+                        "enum": [
+                          "GeologicUnit",
+                          "MappedFeature",
+                          "Contact",
+                          "Fold",
+                          "Foliation",
+                          "ShearDisplacementStructure"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "then": false
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

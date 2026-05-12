@@ -119,6 +119,92 @@ ISO_PREFIX_MAP: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^OM_"), "iso19156"),
 ]
 
+# Mapping from external ISO type keys (form: "iso<doc>:<TypeName>") to JSON
+# Schema fragments. Most external types have no canonical JSON Schema, so we
+# encode them as by-reference link objects (SCLinkObject). A few metadata
+# types have published CDIF building blocks that can be inlined as a richer
+# alternative — these are emitted as `anyOf [SCLinkObject, <CDIF $ref> ...]`,
+# letting instances provide either a link or a fully-typed metadata object.
+_CDIF_BASE = (
+    "https://cross-domain-interoperability-framework.github.io/"
+    "metadataBuildingBlocks/build/annotated/bbr/metadata"
+)
+EXTERNAL_TYPE_RESOLUTION: dict[str, dict] = {
+    # ISO 19115 metadata — CI_Responsibility has a CDIF agent-in-role mapping;
+    # CI_Citation stays SCLinkObject only.
+    "iso19115:CI_Responsibility": {
+        "anyOf": [
+            {"$ref": LINK_OBJECT_REF},
+            {"$ref": f"{_CDIF_BASE}/schemaorgProperties/agentInRole/schema.json"},
+        ],
+        "$comment": "External ISO 19115 CI_Responsibility — by-reference link or inline CDIF agentInRole",
+    },
+    "iso19115:CI_Citation": {
+        "$ref": LINK_OBJECT_REF,
+        "$comment": "External ISO 19115 CI_Citation — by-reference link only",
+    },
+    # ISO 19103 composites with CDIF mappings.
+    "iso19103:ScopedName": {
+        "anyOf": [
+            {"$ref": LINK_OBJECT_REF},
+            {"$ref": f"{_CDIF_BASE}/schemaorgProperties/definedTerm/schema.json"},
+            {"$ref": f"{_CDIF_BASE}/skosProperties/skosConcept/schema.json"},
+        ],
+        "$comment": "External ISO 19103 ScopedName — link, CDIF definedTerm, or SKOS concept",
+    },
+    "iso19103:NamedValue": {
+        "anyOf": [
+            {"$ref": LINK_OBJECT_REF},
+            {"$ref": f"{_CDIF_BASE}/schemaorgProperties/variableMeasured/schema.json"},
+        ],
+        "$comment": "External ISO 19103 NamedValue — link or inline CDIF variableMeasured (schema:PropertyValue)",
+    },
+    # ISO 19108 time, 19107 geometry composites, 19156 sampling/observation —
+    # no published JSON Schemas; emit SCLinkObject so instances must provide
+    # a link to an external resource.
+    "iso19108:TM_Instant": {
+        "$ref": LINK_OBJECT_REF,
+        "$comment": "External ISO 19108 TM_Instant — by-reference link",
+    },
+    "iso19108:TM_Period": {
+        "$ref": LINK_OBJECT_REF,
+        "$comment": "External ISO 19108 TM_Period — by-reference link",
+    },
+    "iso19107:DirectPosition": {
+        "$ref": LINK_OBJECT_REF,
+        "$comment": "External ISO 19107 DirectPosition — by-reference link",
+    },
+    "iso19156:GFI_Feature": {
+        "$ref": LINK_OBJECT_REF,
+        "$comment": "External ISO 19156 GFI_Feature — by-reference link",
+    },
+    "iso19156:SF_SamplingFeature": {
+        "$ref": LINK_OBJECT_REF,
+        "$comment": "External ISO 19156 SF_SamplingFeature — by-reference link",
+    },
+    "iso19156:SF_SamplingFeatureCollection": {
+        "$ref": LINK_OBJECT_REF,
+        "$comment": "External ISO 19156 SF_SamplingFeatureCollection — by-reference link",
+    },
+    "iso19156:OM_Observation": {
+        "$ref": LINK_OBJECT_REF,
+        "$comment": "External ISO 19156 OM_Observation — by-reference link",
+    },
+}
+
+
+def _resolve_external_type(key: str) -> dict:
+    """Return the schema fragment for an external ISO type identifier
+    (e.g. 'iso19156:GFI_Feature'). Falls back to SCLinkObject when no
+    specific mapping is configured."""
+    if key in EXTERNAL_TYPE_RESOLUTION:
+        # Deep-copy to avoid downstream mutation
+        return json.loads(json.dumps(EXTERNAL_TYPE_RESOLUTION[key]))
+    return {
+        "$ref": LINK_OBJECT_REF,
+        "$comment": f"External type {key} — by-reference link (no specific mapping configured)",
+    }
+
 # Names from ISO 19103 that aren't primitives (composite types) — placeholder them.
 ISO_19103_COMPOSITES = {
     "ScopedName": "iso19103",
@@ -548,12 +634,18 @@ class Resolver:
     def __init__(
         self,
         loader: EaXmiLoader,
-        target_package: str,
+        target_packages: set[str],
+        package_to_bb: dict[str, str],
         swe_mappings: dict,
         category_codelists: dict,
     ):
         self.loader = loader
-        self.target_package = target_package
+        # Packages whose classes belong in the BB currently being generated.
+        # Classes inside any of these are emitted into the BB's local $defs and
+        # referenced as "#ClassName"; classes in other packages get a cross-BB
+        # $ref via package_to_bb.
+        self.target_packages = set(target_packages)
+        self.package_to_bb = package_to_bb
         self.swe = swe_mappings.get("external_types", {})
         # index category codelists by (class, attribute)
         self.codelists: dict[tuple[str, str], dict] = {}
@@ -598,43 +690,44 @@ class Resolver:
                 {"$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"},
             )
 
-        # 5. ISO 19103 composite (ScopedName, etc.) - placeholder
+        # 5. ISO 19103 composite (ScopedName, NamedValue, etc.)
         if t in ISO_19103_COMPOSITES:
             ns = ISO_19103_COMPOSITES[t]
-            return ResolvedType(
-                "external_iso",
-                {"$ref": f"{ns}:{t}", "$comment": "External type — needs concrete schema URL"},
-            )
+            return ResolvedType("external_iso", _resolve_external_type(f"{ns}:{t}"))
 
         # 6. ISO prefix-based imports (CI_*, TM_*, SC_*, ...)
         for pat, ns in ISO_PREFIX_MAP:
             if pat.match(t):
-                return ResolvedType(
-                    "external_iso",
-                    {"$ref": f"{ns}:{t}", "$comment": "External type — needs concrete schema URL"},
-                )
+                return ResolvedType("external_iso", _resolve_external_type(f"{ns}:{t}"))
 
         # 7. A class defined somewhere in the XMI: local or cross-BB.
         #    Apply UML tag inlineOrByReference for non-CodeList class types.
         #    CodeList types always use the URI codelist encoding (overrides tag).
         if t in self.loader.name_to_id:
             cls = self.loader.classes[self.loader.name_to_id[t]]
-            same_pkg = bool(cls.package_path and cls.package_path[-1] == self.target_package)
+            target_pkg = cls.package_path[-1] if cls.package_path else None
+            same_bb = bool(target_pkg and target_pkg in self.target_packages)
             target_stereo = (cls.stereotype or "").lower()
+
+            def _cross_bb_ref(suffix: str) -> dict:
+                bb = self.package_to_bb.get(target_pkg) if target_pkg else None
+                if not bb:
+                    return {
+                        "$ref": f"unresolved:{t}",
+                        "$comment": f"unmapped package {target_pkg!r} for class {t}",
+                    }
+                return {
+                    "$ref": f"../{bb}/{bb}.json#{t}",
+                    "$comment": f"cross-BB {suffix} to {t} in BB {bb}",
+                }
 
             # CodeList target: $ref to the local codelist class definition.
             # No codeList annotation per OGC team's convention.
             if target_stereo == "codelist":
-                ref = {"$ref": f"#{t}"} if same_pkg else {
-                    "$ref": f"../geosciml_{cls.package_path[-1]}/schema.json#{t}",
-                    "$comment": f"cross-BB reference to {t}",
-                }
+                ref = {"$ref": f"#{t}"} if same_bb else _cross_bb_ref("reference")
                 return ResolvedType("category", ref, target_class_name=t)
 
-            inline_ref = {"$ref": f"#{t}"} if same_pkg else {
-                "$ref": f"../geosciml_{cls.package_path[-1]}/schema.json#{t}",
-                "$comment": f"cross-BB inline reference to {t}",
-            }
+            inline_ref = {"$ref": f"#{t}"} if same_bb else _cross_bb_ref("inline reference")
             link_obj = {
                 "$ref": LINK_OBJECT_REF,
                 "$comment": f"by-reference link to {t}",
@@ -647,14 +740,14 @@ class Resolver:
             is_with_identity = target_stereo in ("featuretype", "type")
             if not is_with_identity:
                 return ResolvedType(
-                    "local" if same_pkg else "cross_bb",
+                    "local" if same_bb else "cross_bb",
                     inline_ref, target_class_name=t,
                 )
 
             iob = (attr.inline_or_byref or "").strip()
             if iob == "inline":
                 return ResolvedType(
-                    "local" if same_pkg else "cross_bb",
+                    "local" if same_bb else "cross_bb",
                     inline_ref, target_class_name=t,
                 )
             if iob == "byReference":
@@ -718,16 +811,30 @@ class Emitter:
     # ----- per stereotype --------------------------------------------------
 
     def _emit_codelist(self, cls: UmlClass) -> dict:
-        # OGC 24-017r1 req/codelists-basic/codelist-tag: emit the `codeList`
-        # annotation ONLY when the source UML's «CodeList» class carries a
-        # non-blank `codeList` tagged value. Otherwise produce a plain
-        # {type: string, format: uri} (matches OGC team's geoscimlBasic/Lite
-        # default — they ship without the annotation).
+        # Two paths:
+        #   (a) «CodeList» with inline UML enumeration members (attributes with
+        #       empty/missing type names): emit as a closed JSON enum per OGC
+        #       24-017r1 Table 6 «enumeration» encoding. Values are the bare
+        #       attribute names.
+        #   (b) «CodeList» with no inline members: emit {type: string, format: uri}
+        #       per req/codelists-basic. Add `codeList` annotation only when the
+        #       source UML class carries a non-blank `codeList` tagged value
+        #       (matches OGC team's geoscimlBasic/Lite convention).
         d: dict = OrderedDict()
         d["$anchor"] = cls.name
         desc = self._class_description(cls)
         if desc:
             d["description"] = desc
+
+        # An attribute with an empty type_name is the EA pattern for an
+        # enumeration literal. Treat the codelist as closed when *all* its
+        # attributes are untyped literals.
+        enum_members = [a.name for a in cls.attributes if not a.type_name]
+        if cls.attributes and len(enum_members) == len(cls.attributes):
+            d["type"] = "string"
+            d["enum"] = enum_members
+            return d
+
         d["type"] = "string"
         d["format"] = "uri"
         cl_tag = (cls.tagged_values.get("codeList") or "").strip()
@@ -888,14 +995,18 @@ class Emitter:
         return None
 
     def _supertype_ref_for(self, sup: UmlClass) -> dict:
-        same_pkg = sup.package_path and sup.package_path[-1] == self.r.target_package
-        if same_pkg:
+        pkg = sup.package_path[-1] if sup.package_path else None
+        if pkg and pkg in self.r.target_packages:
             return {"$ref": f"#{sup.name}"}
-        # Cross-BB: $ref by path; the user will resolve the eventual filename.
-        pkg = sup.package_path[-1] if sup.package_path else "unknown"
+        bb = self.r.package_to_bb.get(pkg) if pkg else None
+        if not bb:
+            return {
+                "$ref": f"unresolved:{sup.name}",
+                "$comment": f"unmapped package {pkg!r} for supertype {sup.name}",
+            }
         return {
-            "$ref": f"../geosciml_{pkg}/schema.json#{sup.name}",
-            "$comment": f"cross-BB reference to {sup.name} in package {pkg}",
+            "$ref": f"../{bb}/{bb}.json#{sup.name}",
+            "$comment": f"cross-BB supertype reference to {sup.name} in BB {bb}",
         }
 
 
@@ -904,25 +1015,125 @@ class Emitter:
 # Driver
 # ---------------------------------------------------------------------------
 
-def collect_package_classes(loader: EaXmiLoader, package_name: str) -> list[UmlClass]:
+def collect_group_classes(loader: EaXmiLoader, packages: set[str]) -> list[UmlClass]:
     out: list[UmlClass] = []
     for cls in loader.classes.values():
-        if cls.package_path and cls.package_path[-1] == package_name:
+        if cls.package_path and cls.package_path[-1] in packages:
             out.append(cls)
     out.sort(key=lambda c: c.name)
     return out
 
 
+# ---------------------------------------------------------------------------
+# Phase 2: per-BB Feature and FeatureCollection dispatcher schemas
+# ---------------------------------------------------------------------------
+
+_FC_MEMBER_ATTR_NAMES = {"member", "members", "features"}
+
+
+def _is_fc_container(cls: UmlClass) -> bool:
+    """Heuristic: a «FeatureType» class with a *..* member-like attribute is a
+    FeatureCollection container (e.g. GSML), not a dispatchable Feature. It
+    becomes the seed for the FC dispatcher schema rather than a regular FT def.
+    """
+    if (cls.stereotype or "").lower() != "featuretype":
+        return False
+    for a in cls.attributes:
+        if a.name.lower() in _FC_MEMBER_ATTR_NAMES and (a.upper > 1 or a.upper == -1):
+            return True
+    return False
+
+
+def dispatchable_fts(loader: EaXmiLoader, packages: set[str]) -> list[str]:
+    """Concrete «FeatureType» classes in the BB that are dispatchable via the
+    `featureType` discriminator: non-abstract, not an FC-container."""
+    out: list[str] = []
+    for cls in loader.classes.values():
+        if not (cls.package_path and cls.package_path[-1] in packages):
+            continue
+        if (cls.stereotype or "").lower() != "featuretype":
+            continue
+        if cls.abstract:
+            continue
+        if _is_fc_container(cls):
+            continue
+        out.append(cls.name)
+    return sorted(out)
+
+
+def build_feature_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
+    """Build <bbName>Feature.json — an if/then chain on `featureType` routing
+    each recognised value to the corresponding $anchor in <bbName>.json. An
+    unrecognised featureType fails validation (else-false clause)."""
+    branches: list[dict] = []
+    for ft in ft_names:
+        branches.append({
+            "if": {
+                "required": ["featureType"],
+                "properties": {"featureType": {"const": ft}},
+            },
+            "then": {"$ref": f"{bb_name}.json#{ft}"},
+        })
+    branches.append({
+        "if": {
+            "not": {
+                "required": ["featureType"],
+                "properties": {"featureType": {"enum": list(ft_names)}},
+            }
+        },
+        "then": False,
+    })
+    return OrderedDict([
+        ("$schema", "https://json-schema.org/draft/2020-12/schema"),
+        ("$id", f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}Feature.json"),
+        ("description",
+         f"Single-Feature dispatcher for the {bb_name} BB. Routes by the "
+         f"instance's `featureType` value to the matching $anchor in "
+         f"{bb_name}.json. Recognised featureType values: "
+         f"{', '.join(ft_names)}."),
+        ("allOf", branches),
+    ])
+
+
+def build_fc_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
+    """Build <bbName>FeatureCollection.json — composes the JSON-FG
+    FeatureCollection schema with `features.items` validated through the
+    Feature dispatcher. DRY composition: dispatch logic lives in Feature.json."""
+    return OrderedDict([
+        ("$schema", "https://json-schema.org/draft/2020-12/schema"),
+        ("$id", f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}FeatureCollection.json"),
+        ("description",
+         f"FeatureCollection wrapper for the {bb_name} BB. Combines "
+         f"json-fg/featurecollection.json with per-item dispatch via "
+         f"{bb_name}Feature.json. Recognised featureType values for items: "
+         f"{', '.join(ft_names)}."),
+        ("allOf", [
+            {"$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"},
+            {
+                "type": "object",
+                "properties": {
+                    "features": {
+                        "type": "array",
+                        "items": {"$ref": f"{bb_name}Feature.json"},
+                    }
+                },
+            },
+        ]),
+    ])
+
+
 def build_schema(
     loader: EaXmiLoader,
-    package_name: str,
+    bb_name: str,
+    packages: set[str],
+    package_to_bb: dict[str, str],
     swe_mappings: dict,
     category_codelists: dict,
-    bb_id: str,
+    bb_description: str,
 ) -> dict:
-    resolver = Resolver(loader, package_name, swe_mappings, category_codelists)
+    resolver = Resolver(loader, packages, package_to_bb, swe_mappings, category_codelists)
     emitter = Emitter(resolver, loader)
-    classes = collect_package_classes(loader, package_name)
+    classes = collect_group_classes(loader, packages)
     defs: dict = OrderedDict()
     for cls in classes:
         defs[cls.name] = emitter.emit_class(cls)
@@ -931,58 +1142,251 @@ def build_schema(
     defs["SCLinkObject"] = SCLINK_OBJECT_DEF
     schema: dict = OrderedDict()
     schema["$schema"] = "https://json-schema.org/draft/2020-12/schema"
-    schema["$id"] = f"https://schemas.usgin.org/geosci-json/{bb_id}/schema.json"
-    schema["description"] = f"GeoSciML {package_name} building block (generated)."
+    schema["$id"] = f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}.json"
+    schema["description"] = bb_description.strip() or f"GeoSciML 4.1 {bb_name} building block."
     schema["$defs"] = defs
     return schema
 
 
-def build_bblock_metadata(bb_id: str, package_name: str) -> dict:
+def build_bblock_metadata(bb_name: str, bb_description: str, packages: list[str]) -> dict:
+    abstract = bb_description.strip().splitlines()[0] if bb_description else \
+        f"GeoSciML 4.1 {bb_name} encoded as JSON Schema per OGC 24-017r1."
     return OrderedDict({
-        "itemIdentifier": f"usgin.bbr.geosci.{bb_id}",
-        "name": package_name,
-        "abstract": f"GeoSciML 4.1 {package_name} encoded as JSON Schema per OGC 24-017r1.",
+        "itemIdentifier": f"usgin.bbr.geosci.{bb_name}",
+        "name": bb_name,
+        "abstract": abstract,
         "status": "under-development",
-        "dateTimeAddition": "2026-05-11",
+        "dateTimeAddition": "2026-05-12",
         "sources": [{"title": "GeoSciML 4.1 XMI"}],
-        "schema": "schema.json",
+        "schema": f"{bb_name}.json",
+        "umlPackages": packages,
+    })
+
+
+def load_grouping(config_path: Path) -> tuple[dict[str, dict], dict[str, str], dict[str, dict]]:
+    """Returns (bbs, package_to_bb, profiles).
+
+    bbs maps bb_name -> {description, packages} for UML-driven BBs.
+    profiles maps profile_bb_name -> {description, featureTypes} for hand-
+    authored FC profile BBs (not driven by UML packages).
+    """
+    raw = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    bbs_raw = (raw or {}).get("bbs", {}) or {}
+    profiles_raw = (raw or {}).get("profiles", {}) or {}
+    bbs: dict[str, dict] = {}
+    package_to_bb: dict[str, str] = {}
+    for bb_name, entry in bbs_raw.items():
+        if not entry or "packages" not in entry:
+            continue
+        pkgs = list(entry["packages"])
+        bbs[bb_name] = {
+            "description": entry.get("description", "") or "",
+            "packages": pkgs,
+        }
+        for p in pkgs:
+            if p in package_to_bb:
+                raise ValueError(
+                    f"Package {p!r} assigned to both {package_to_bb[p]!r} and {bb_name!r}"
+                )
+            package_to_bb[p] = bb_name
+    profiles: dict[str, dict] = {}
+    for prof_name, entry in profiles_raw.items():
+        if not entry or "featureTypes" not in entry:
+            continue
+        profiles[prof_name] = {
+            "description": entry.get("description", "") or "",
+            "featureTypes": list(entry["featureTypes"]),
+        }
+    return bbs, package_to_bb, profiles
+
+
+def build_profile_schema(profile_name: str, info: dict) -> dict:
+    """Build an FC-profile schema: json-fg/featurecollection with `features`
+    items dispatched by featureType to cross-BB anchors. Each FT entry may
+    add `extensionConstraints` (scalar slots) or `extensionConstraintsArray`
+    (array slots — wraps the constraint in an items envelope)."""
+    ft_entries = info["featureTypes"]
+    ft_names = [e["name"] for e in ft_entries]
+
+    branches: list[dict] = []
+    for entry in ft_entries:
+        name = entry["name"]
+        ref = entry["ref"]
+        # Base allOf for this branch: the Basic anchor.
+        then_chain: list[dict] = [{"$ref": ref}]
+        # Optional Extension constraints — added as additional allOf members.
+        scalar_constraints = entry.get("extensionConstraints", {}) or {}
+        array_constraints = entry.get("extensionConstraintsArray", {}) or {}
+        inner_props: dict = OrderedDict()
+        for slot, ext_ref in scalar_constraints.items():
+            inner_props[slot] = {"$ref": ext_ref}
+        for slot, ext_ref in array_constraints.items():
+            inner_props[slot] = {
+                "type": "array",
+                "items": {"$ref": ext_ref},
+            }
+        if inner_props:
+            then_chain.append({
+                "type": "object",
+                "properties": {
+                    "properties": {
+                        "type": "object",
+                        "properties": inner_props,
+                    }
+                },
+            })
+        then_schema = then_chain[0] if len(then_chain) == 1 else {"allOf": then_chain}
+        branches.append({
+            "if": {
+                "required": ["featureType"],
+                "properties": {"featureType": {"const": name}},
+            },
+            "then": then_schema,
+        })
+    # else-false: featureType not in the recognised list -> fail
+    branches.append({
+        "if": {
+            "not": {
+                "required": ["featureType"],
+                "properties": {"featureType": {"enum": list(ft_names)}},
+            }
+        },
+        "then": False,
+    })
+
+    return OrderedDict([
+        ("$schema", "https://json-schema.org/draft/2020-12/schema"),
+        ("$id", f"https://schemas.usgin.org/geosci-json/{profile_name}/{profile_name}.json"),
+        ("description", info["description"].strip()),
+        ("allOf", [
+            {"$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"},
+            {
+                "type": "object",
+                "properties": {
+                    "features": {
+                        "type": "array",
+                        "items": {"allOf": branches},
+                    }
+                },
+            },
+        ]),
+    ])
+
+
+def build_profile_metadata(profile_name: str, info: dict) -> dict:
+    abstract = info["description"].strip().splitlines()[0] if info["description"] else \
+        f"GeoSciML 4.1 FC profile {profile_name}."
+    ft_names = [e["name"] for e in info["featureTypes"]]
+    return OrderedDict({
+        "itemIdentifier": f"usgin.bbr.geosci.{profile_name}",
+        "name": profile_name,
+        "abstract": abstract,
+        "status": "under-development",
+        "dateTimeAddition": "2026-05-12",
+        "sources": [{"title": "FC profile composed across GeoSciML BBs"}],
+        "schema": f"{profile_name}.json",
+        "profileOf": "FeatureCollection",
+        "featureTypes": ft_names,
     })
 
 
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[1] if __doc__ else "")
     p.add_argument("--xmi", required=True, type=Path)
-    p.add_argument("--package", required=True)
-    p.add_argument("--bb-name", default=None)
+    p.add_argument("--config", type=Path, default=Path("bb-grouping.yaml"),
+                   help="BB grouping YAML (default: bb-grouping.yaml)")
+    p.add_argument("--bb", default=None,
+                   help="Optional: regenerate only this BB by name")
     p.add_argument("--out-dir", type=Path, default=Path("_sources"))
     p.add_argument("--swe-mappings", type=Path, default=Path("swe-mappings.yaml"))
     p.add_argument("--category-codelists", type=Path,
                    default=Path("cgi-vocab-reference.yaml"))
     args = p.parse_args()
 
-    bb_name = args.bb_name or f"geosciml_{args.package}"
-    out_dir = args.out_dir / bb_name
-    out_dir.mkdir(parents=True, exist_ok=True)
-
     loader = EaXmiLoader(args.xmi)
     swe = yaml.safe_load(args.swe_mappings.read_text(encoding="utf-8"))
     cats = yaml.safe_load(args.category_codelists.read_text(encoding="utf-8"))
 
-    schema = build_schema(loader, args.package, swe, cats, bb_name)
-    (out_dir / "schema.json").write_text(
-        json.dumps(schema, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
-    (out_dir / "bblock.json").write_text(
-        json.dumps(build_bblock_metadata(bb_name, args.package), indent=2) + "\n",
-        encoding="utf-8",
-    )
-    # Tiny report
-    classes = collect_package_classes(loader, args.package)
-    print(f"Wrote {out_dir / 'schema.json'}")
-    print(f"  classes ({len(classes)}):")
-    for c in classes:
-        print(f"    - {c.name:35s} stereotype={c.stereotype:12s} abstract={c.abstract} supertypes={c.supertypes}")
+    bbs, package_to_bb, profiles = load_grouping(args.config)
+    if args.bb:
+        if args.bb in bbs:
+            targets = {args.bb: bbs[args.bb]}
+            target_profiles = {}
+        elif args.bb in profiles:
+            targets = {}
+            target_profiles = {args.bb: profiles[args.bb]}
+        else:
+            print(f"ERROR: BB {args.bb!r} not in {args.config} (neither bbs nor profiles)", file=sys.stderr)
+            sys.exit(2)
+    else:
+        targets = bbs
+        target_profiles = profiles
+
+    total_classes = 0
+    total_dispatchers = 0
+    for bb_name, info in targets.items():
+        pkgs = set(info["packages"])
+        out_dir = args.out_dir / bb_name
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+        schema = build_schema(loader, bb_name, pkgs, package_to_bb,
+                              swe, cats, info["description"])
+        (out_dir / f"{bb_name}.json").write_text(
+            json.dumps(schema, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        (out_dir / "bblock.json").write_text(
+            json.dumps(build_bblock_metadata(bb_name, info["description"], info["packages"]),
+                       indent=2) + "\n",
+            encoding="utf-8",
+        )
+
+        classes = collect_group_classes(loader, pkgs)
+        total_classes += len(classes)
+
+        # Dispatcher schemas: emit Feature.json + FeatureCollection.json when
+        # the BB has at least one dispatchable concrete FeatureType. Pure
+        # DataType BBs (no FTs) skip dispatcher emission.
+        ft_names = dispatchable_fts(loader, pkgs)
+        dispatcher_note = ""
+        if ft_names:
+            feat = build_feature_dispatcher(bb_name, ft_names)
+            (out_dir / f"{bb_name}Feature.json").write_text(
+                json.dumps(feat, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+            fc = build_fc_dispatcher(bb_name, ft_names)
+            (out_dir / f"{bb_name}FeatureCollection.json").write_text(
+                json.dumps(fc, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+            total_dispatchers += 1
+            dispatcher_note = f", {len(ft_names)} FT dispatch branches"
+        else:
+            dispatcher_note = ", no FTs (skipped Feature/FC dispatchers)"
+
+        print(f"Wrote _sources/{bb_name}/{bb_name}.json — "
+              f"{len(classes)} classes from {len(pkgs)} package(s){dispatcher_note}")
+
+    # Profile BBs: hand-configured FC profiles composed across multiple BBs.
+    for prof_name, prof_info in target_profiles.items():
+        out_dir = args.out_dir / prof_name
+        out_dir.mkdir(parents=True, exist_ok=True)
+        prof_schema = build_profile_schema(prof_name, prof_info)
+        (out_dir / f"{prof_name}.json").write_text(
+            json.dumps(prof_schema, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        (out_dir / "bblock.json").write_text(
+            json.dumps(build_profile_metadata(prof_name, prof_info), indent=2) + "\n",
+            encoding="utf-8",
+        )
+        nft = len(prof_info["featureTypes"])
+        print(f"Wrote _sources/{prof_name}/{prof_name}.json — FC profile, {nft} featureType branches")
+
+    print(f"\nTotal: {len(targets)} BB(s), {total_classes} class defs, "
+          f"{total_dispatchers} BB(s) with dispatchers, "
+          f"{len(target_profiles)} FC profile BB(s)")
 
 
 if __name__ == "__main__":

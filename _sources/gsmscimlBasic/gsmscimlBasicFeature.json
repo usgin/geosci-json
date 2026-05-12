@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/gsmscimlBasic/gsmscimlBasicFeature.json",
+  "description": "Single-Feature dispatcher for the gsmscimlBasic BB. Routes by the instance's `featureType` value to the matching $anchor in gsmscimlBasic.json. Recognised featureType values: AnthropogenicGeomorphologicFeature, Contact, Fold, Foliation, GeologicEvent, GeologicUnit, MappedFeature, NaturalGeomorphologicFeature, ShearDisplacementStructure.",
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "AnthropogenicGeomorphologicFeature"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlBasic.json#AnthropogenicGeomorphologicFeature"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "Contact"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlBasic.json#Contact"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "Fold"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlBasic.json#Fold"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "Foliation"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlBasic.json#Foliation"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "GeologicEvent"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlBasic.json#GeologicEvent"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "GeologicUnit"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlBasic.json#GeologicUnit"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "MappedFeature"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlBasic.json#MappedFeature"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "NaturalGeomorphologicFeature"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlBasic.json#NaturalGeomorphologicFeature"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "ShearDisplacementStructure"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlBasic.json#ShearDisplacementStructure"
+      }
+    },
+    {
+      "if": {
+        "not": {
+          "required": [
+            "featureType"
+          ],
+          "properties": {
+            "featureType": {
+              "enum": [
+                "AnthropogenicGeomorphologicFeature",
+                "Contact",
+                "Fold",
+                "Foliation",
+                "GeologicEvent",
+                "GeologicUnit",
+                "MappedFeature",
+                "NaturalGeomorphologicFeature",
+                "ShearDisplacementStructure"
+              ]
+            }
+          }
+        }
+      },
+      "then": false
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "itemIdentifier": "usgin.bbr.geosci.gsmSpecimen",
+  "name": "gsmSpecimen",
+  "abstract": "LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and",
+  "status": "under-development",
+  "dateTimeAddition": "2026-05-12",
+  "sources": [
+    {
+      "title": "GeoSciML 4.1 XMI"
+    }
+  ],
+  "schema": "gsmSpecimen.json",
+  "umlPackages": [
+    "LaboratoryAnalysis-Specimen",
+    "Geochronology",
+    "GeologicSpecimen",
+    "LaboratoryAnalysis"
+  ]
+}

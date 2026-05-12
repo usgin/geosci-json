@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/gsmscimlLite/gsmscimlLiteFeature.json",
+  "description": "Single-Feature dispatcher for the gsmscimlLite BB. Routes by the instance's `featureType` value to the matching $anchor in gsmscimlLite.json. Recognised featureType values: BoreholeView, ContactView, GeologicSpecimenView, GeologicUnitView, GeomorphologicUnitView, ShearDisplacementStructureView, SiteObservationView.",
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "BoreholeView"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlLite.json#BoreholeView"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "ContactView"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlLite.json#ContactView"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "GeologicSpecimenView"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlLite.json#GeologicSpecimenView"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "GeologicUnitView"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlLite.json#GeologicUnitView"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "GeomorphologicUnitView"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlLite.json#GeomorphologicUnitView"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "ShearDisplacementStructureView"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlLite.json#ShearDisplacementStructureView"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "featureType"
+        ],
+        "properties": {
+          "featureType": {
+            "const": "SiteObservationView"
+          }
+        }
+      },
+      "then": {
+        "$ref": "gsmscimlLite.json#SiteObservationView"
+      }
+    },
+    {
+      "if": {
+        "not": {
+          "required": [
+            "featureType"
+          ],
+          "properties": {
+            "featureType": {
+              "enum": [
+                "BoreholeView",
+                "ContactView",
+                "GeologicSpecimenView",
+                "GeologicUnitView",
+                "GeomorphologicUnitView",
+                "ShearDisplacementStructureView",
+                "SiteObservationView"
+              ]
+            }
+          }
+        }
+      },
+      "then": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "itemIdentifier": "usgin.bbr.geosci.gsmGeologicStructureExtension",
+  "name": "gsmGeologicStructureExtension",
+  "abstract": "Detailed structural-geology types extending the Basic structure",
+  "status": "under-development",
+  "dateTimeAddition": "2026-05-12",
+  "sources": [
+    {
+      "title": "GeoSciML 4.1 XMI"
+    }
+  ],
+  "schema": "gsmGeologicStructureExtension.json",
+  "umlPackages": [
+    "GeologicStructureDetails"
+  ]
+}

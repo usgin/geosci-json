@@ -1,0 +1,22 @@
+{
+  "itemIdentifier": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
+  "name": "gsmExtendedGeologyCollection",
+  "abstract": "Extended-profile FeatureCollection. Accepts the same featureType values",
+  "status": "under-development",
+  "dateTimeAddition": "2026-05-12",
+  "sources": [
+    {
+      "title": "FC profile composed across GeoSciML BBs"
+    }
+  ],
+  "schema": "gsmExtendedGeologyCollection.json",
+  "profileOf": "FeatureCollection",
+  "featureTypes": [
+    "GeologicUnit",
+    "MappedFeature",
+    "Contact",
+    "Fold",
+    "Foliation",
+    "ShearDisplacementStructure"
+  ]
+}

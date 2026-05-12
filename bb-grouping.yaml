@@ -1,0 +1,181 @@
+# Building-block grouping for the GeoSciML 4.1 JSON Schema refactor.
+#
+# Each top-level key is a BB name (camelCase) used as:
+#   - the directory under _sources/ (e.g. _sources/gsmscimlBasic/)
+#   - the basename of the three generated schema files:
+#       <bb>.json                  -- $defs library (no root validator)
+#       <bb>Feature.json           -- single-Feature dispatcher (if/then on featureType)
+#       <bb>FeatureCollection.json -- FeatureCollection dispatcher
+#
+# The `packages` list names UML leaf packages from geosciml4.1.xmi by their
+# last path segment. All classes whose package_path ends with one of these
+# names land in the BB.
+#
+# Cross-BB references: when a class in BB A references a class in BB B, the
+# generator emits "$ref: ../<B>/<B>.json#<ClassName>". The package-to-BB
+# inverted index is built at generator startup from this file.
+#
+# FC profile BBs (gsmBasicGeologyCollection, gsmExtendedGeologyCollection)
+# are not driven by UML packages -- they're hand-specified Phase-3 artifacts
+# that cross-reference FT anchors in the base BBs. They appear here only as
+# placeholders so the bblock-config picks them up; their schemas are
+# generated separately.
+
+bbs:
+
+  gsmscimlBasic:
+    description: |
+      GeoSciML 4.1 Basic application schema. Core feature types
+      (GeologicFeature, MappedFeature, GeologicUnit, GeologicStructure
+      subtypes, GeomorphologicFeature, EarthMaterial, Contact, Fold,
+      Foliation, ShearDisplacementStructure, GeologicEvent) plus the
+      shared GSML_DataTypes and Collection containers.
+    packages:
+      - GeoSciMLBasic        # parent app-schema package (1 class)
+      - Collection
+      - GSML_DataTypes
+      - GeologicEvent
+      - GeologicStructure
+      - GeologyBasic
+      - Geomorphology
+
+  gsmscimlLite:
+    description: |
+      GeoSciML 4.1 Lite profile. Flattened "View" classes that summarise
+      Basic/Extension content for lightweight services (GeologicUnitView,
+      ContactView, ShearDisplacementStructureView, BoreholeView, etc.).
+    packages:
+      - GeoSciMLLite
+
+  gsmSpecimen:
+    description: |
+      LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and
+      laboratory-analysis observation types, Geochronology results.
+    packages:
+      - LaboratoryAnalysis-Specimen   # parent (1 class)
+      - Geochronology
+      - GeologicSpecimen
+      - LaboratoryAnalysis
+
+  gsmEarthMaterialExtension:
+    description: |
+      Detailed EarthMaterial description types: CompoundMaterialDescription,
+      RockMaterialDescription, MetamorphicDescription, AlterationDescription,
+      ChemicalComposition, PhysicalDescription, FabricDescription, etc.
+    packages:
+      - EarthMaterialDetails
+
+  gsmGeologicStructureExtension:
+    description: |
+      Detailed structural-geology types extending the Basic structure
+      hierarchy: FoldDescription, FoliationDescription, FoldSystem, Joint,
+      Fracture, DisplacementEvent, DisplacementValue, Lineation, Layering,
+      NonDirectionalStructure, etc.
+    packages:
+      - GeologicStructureDetails
+
+  gsmGeologicUnitExtension:
+    description: |
+      GeologicUnit extension: detailed unit description structures
+      (GeologicUnitDescription, CompositionPart roles, etc.).
+    packages:
+      - GeologicUnitDetails
+
+  gsmGeologicRelationExtension:
+    description: |
+      Extension package defining typed binary relations between GeologicFeature
+      instances (intrusive, depositional, alteration, mappingframe, etc.) on
+      top of the Basic AbstractFeatureRelation skeleton.
+    packages:
+      - GeologicRelation
+
+  gsmBorehole:
+    description: |
+      Borehole feature type and supporting types (BoreholeDetails, intervals,
+      collar, log, drilling method).
+    packages:
+      - Borehole
+
+  gsmGeologicTime:
+    description: |
+      Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary
+      points, TemporalReferenceSystem, plus the GeologicAgeDetails extension.
+    packages:
+      - GeologicTime               # parent (1 class)
+      - GSSP
+      - TemporalReferenceSystem
+      - TimeScale
+      - GeologicAgeDetails
+
+
+# ---------------------------------------------------------------------------
+# FC profile BBs (Phase 3 -- hand-authored, not driven by UML packages).
+# Listed here for documentation; the generator skips entries with no `packages`
+# key.
+# ---------------------------------------------------------------------------
+
+profiles:
+
+  # Each profile is a FeatureCollection BB. `featureTypes` lists the
+  # featureType discriminator values the profile accepts. Each value has:
+  #   ref:               cross-BB $ref to the Basic anchor (always)
+  #   extensionConstraints (optional): map of {slot: extension $ref} added as
+  #     an extra allOf branch in the Extended profile to require that slot be
+  #     a concrete Extension class.
+  #
+  # The abstract Basic class GeologicStructure is expanded to its four
+  # concrete subtypes. EarthMaterial is omitted because the UML stereotype
+  # «Type» (not «FeatureType») means it lacks a JSON-FG envelope; including
+  # it would require a wrapper schema decision.
+
+  gsmBasicGeologyCollection:
+    description: |
+      Basic-profile FeatureCollection. Accepts GeologicUnit, MappedFeature,
+      and the four concrete GeologicStructure subtypes (Contact, Fold,
+      Foliation, ShearDisplacementStructure). Each item is validated against
+      its anchor in gsmscimlBasic. EarthMaterial is omitted (UML «Type», not
+      «FeatureType»).
+    featureTypes:
+      - name: GeologicUnit
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#GeologicUnit
+      - name: MappedFeature
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#MappedFeature
+      - name: Contact
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#Contact
+      - name: Fold
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#Fold
+      - name: Foliation
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#Foliation
+      - name: ShearDisplacementStructure
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#ShearDisplacementStructure
+
+  gsmExtendedGeologyCollection:
+    description: |
+      Extended-profile FeatureCollection. Accepts the same featureType values
+      as gsmBasicGeologyCollection, but each Feature additionally requires
+      its description slot(s) to be concrete Extension classes. MappedFeature
+      is pass-through (no Extension description slot).
+    featureTypes:
+      - name: GeologicUnit
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#GeologicUnit
+        extensionConstraints:
+          gbUnitDescription: ../gsmGeologicUnitExtension/gsmGeologicUnitExtension.json#GeologicUnitDescription
+          gbMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#CompoundMaterialDescription
+      - name: MappedFeature
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#MappedFeature
+      - name: Contact
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#Contact
+        extensionConstraints:
+          stContactDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#ContactDescription
+      - name: Fold
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#Fold
+        extensionConstraints:
+          stFoldDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#FoldDescription
+      - name: Foliation
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#Foliation
+        extensionConstraints:
+          stFoliationDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#FoliationDescription
+      - name: ShearDisplacementStructure
+        ref: ../gsmscimlBasic/gsmscimlBasic.json#ShearDisplacementStructure
+        extensionConstraintsArray:
+          stStructureDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#ShearDisplacementStructureDescription

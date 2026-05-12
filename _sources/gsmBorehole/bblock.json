@@ -1,0 +1,16 @@
+{
+  "itemIdentifier": "usgin.bbr.geosci.gsmBorehole",
+  "name": "gsmBorehole",
+  "abstract": "Borehole feature type and supporting types (BoreholeDetails, intervals,",
+  "status": "under-development",
+  "dateTimeAddition": "2026-05-12",
+  "sources": [
+    {
+      "title": "GeoSciML 4.1 XMI"
+    }
+  ],
+  "schema": "gsmBorehole.json",
+  "umlPackages": [
+    "Borehole"
+  ]
+}
