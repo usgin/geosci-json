@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmBasicGeologyCollection - gsmBasicGeologyCollection
-Generated 2026-05-12T21:02:11.223437+00:00
+Generated 2026-05-12T21:19:25.462437+00:00
 === Files ===
 Using fc_geologicunits_BritishColumbia.json from examples
 === End Files ===

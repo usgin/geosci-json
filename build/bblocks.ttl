@@ -16,18 +16,18 @@
 
 <https://usgin.github.io/geosci-json/build/bblocks.ttl> a prov:Entity ;
     dct:format "text/turtle" ;
-    prov:wasAttributedTo _:N4768bf9cb54b41a597b97d137b2c39df ;
+    prov:wasAttributedTo _:Nb0622acbf44a43a685771209fe730c34 ;
     prov:wasGeneratedBy [ a prov:Activity ;
-            prov:endedAtTime "2026-05-12T21:02:24.183191"^^xsd:dateTime ;
-            prov:startedAtTime "2026-05-12T21:02:23.964496"^^xsd:dateTime ;
+            prov:endedAtTime "2026-05-12T21:19:39.014421"^^xsd:dateTime ;
+            prov:startedAtTime "2026-05-12T21:19:38.773608"^^xsd:dateTime ;
             prov:used [ a prov:Entity ;
-                    dct:format "application/yaml" ;
-                    rdfs:seeAlso <file:///src/ogc/bblocks/register-context.yaml> ],
-                [ a prov:Entity ;
                     dct:format "application/json" ;
-                    dct:hasVersion "git:88df439fc43084ab6a3ee8b40a30bdc548a60f0e" ;
-                    rdfs:seeAlso <https://usgin.github.io/geosci-json/build/register.json> ] ;
-            prov:wasAssociatedWith _:N4768bf9cb54b41a597b97d137b2c39df ] .
+                    dct:hasVersion "git:01a6dd2b70736b97223d30cbf417249f1bc0fdd2" ;
+                    rdfs:seeAlso <https://usgin.github.io/geosci-json/build/register.json> ],
+                [ a prov:Entity ;
+                    dct:format "application/yaml" ;
+                    rdfs:seeAlso <file:///src/ogc/bblocks/register-context.yaml> ] ;
+            prov:wasAssociatedWith _:Nb0622acbf44a43a685771209fe730c34 ] .
 
 <bblocks://usgin.bbr.geosci.gsmBasicGeologyCollection> a skos:Concept,
         dcat:Dataset,
@@ -36,12 +36,12 @@
     rdfs:label "gsmBasicGeologyCollection" ;
     dct:abstract "Basic-profile FeatureCollection. Accepts GeologicUnit, MappedFeature,"^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
-    dct:description [ dct:format "application/json" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmBasicGeologyCollection/index.json> ],
-        [ dct:format "text/markdown" ;
+    dct:description [ dct:format "text/markdown" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmBasicGeologyCollection/index.md> ],
         [ dct:format "text/html" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmBasicGeologyCollection> ] ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmBasicGeologyCollection> ],
+        [ dct:format "application/json" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmBasicGeologyCollection/index.json> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml> ;
@@ -56,14 +56,14 @@
             dct:format "application/yaml" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBasicGeologyCollection/schema.yaml> ;
             prof:hasRole role:schema ],
-        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
-            dct:format "application/json" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBasicGeologyCollection/schema.json> ;
-            prof:hasRole role:schema ],
         [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
             dct:format "application/ld+json" ;
             prof:hasArtifact <https://usgin.github.io/github/workspace/_sources/gsmBasicGeologyCollection/context.jsonld> ;
             prof:hasRole role:mapping ],
+        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+            dct:format "application/json" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBasicGeologyCollection/schema.json> ;
+            prof:hasRole role:schema ],
         [ dct:conformsTo shacl: ;
             dct:format "text/turtle" ;
             rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmBasicGeologyCollection> ;
@@ -81,12 +81,12 @@
     rdfs:label "gsmBorehole" ;
     dct:abstract "Borehole feature type and supporting types (BoreholeDetails, intervals,"^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
-    dct:description [ dct:format "text/html" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmBorehole> ],
-        [ dct:format "application/json" ;
+    dct:description [ dct:format "application/json" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmBorehole/index.json> ],
         [ dct:format "text/markdown" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmBorehole/index.md> ] ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmBorehole/index.md> ],
+        [ dct:format "text/html" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmBorehole> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi> ;
@@ -96,22 +96,22 @@
     dcat:keyword "geoscience",
         "geosciml",
         "uml-derived" ;
-    prof:hasResource [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
-            dct:format "application/yaml" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema.yaml> ;
-            prof:hasRole role:schema ],
+    prof:hasResource [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
+            dct:format "application/ld+json" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmBorehole/context.jsonld> ;
+            prof:hasRole role:mapping ],
         [ dct:conformsTo shacl: ;
             dct:format "text/turtle" ;
             rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmBorehole> ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmBorehole/rules.shacl> ;
             prof:hasRole role:validation ],
-        [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
-            dct:format "application/ld+json" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmBorehole/context.jsonld> ;
-            prof:hasRole role:mapping ],
         [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema.json> ;
+            prof:hasRole role:schema ],
+        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+            dct:format "application/yaml" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema.yaml> ;
             prof:hasRole role:schema ] ;
     bblocks:hasSourceJsonLdContext <https://usgin.github.io/geosci-json/_sources/gsmBorehole/context.jsonld> ;
     bblocks:status <http://www.opengis.net/def/status/under-development> ;
@@ -140,11 +140,7 @@
         "geoscience",
         "geosciml",
         "profile" ;
-    prof:hasResource [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
-            dct:format "application/json" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialCollection/schema.json> ;
-            prof:hasRole role:schema ],
-        [ dct:conformsTo shacl: ;
+    prof:hasResource [ dct:conformsTo shacl: ;
             dct:format "text/turtle" ;
             rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmEarthMaterialCollection> ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/rules.shacl> ;
@@ -153,6 +149,10 @@
             dct:format "application/ld+json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/context.jsonld> ;
             prof:hasRole role:mapping ],
+        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+            dct:format "application/json" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialCollection/schema.json> ;
+            prof:hasRole role:schema ],
         [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/yaml" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialCollection/schema.yaml> ;
@@ -169,12 +169,12 @@
     rdfs:label "gsmEarthMaterialExtension" ;
     dct:abstract "Detailed EarthMaterial description types: CompoundMaterialDescription,"^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
-    dct:description [ dct:format "text/markdown" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmEarthMaterialExtension/index.md> ],
+    dct:description [ dct:format "text/html" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmEarthMaterialExtension> ],
         [ dct:format "application/json" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmEarthMaterialExtension/index.json> ],
-        [ dct:format "text/html" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmEarthMaterialExtension> ] ;
+        [ dct:format "text/markdown" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmEarthMaterialExtension/index.md> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi> ;
@@ -185,10 +185,6 @@
         "geosciml",
         "uml-derived" ;
     prof:hasResource [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
-            dct:format "application/yaml" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialExtension/schema.yaml> ;
-            prof:hasRole role:schema ],
-        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialExtension/schema.json> ;
             prof:hasRole role:schema ],
@@ -200,7 +196,11 @@
         [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
             dct:format "application/ld+json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/context.jsonld> ;
-            prof:hasRole role:mapping ] ;
+            prof:hasRole role:mapping ],
+        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+            dct:format "application/yaml" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialExtension/schema.yaml> ;
+            prof:hasRole role:schema ] ;
     bblocks:hasSourceJsonLdContext <https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/context.jsonld> ;
     bblocks:status <http://www.opengis.net/def/status/under-development> ;
     bblocks:validationPassed true .
@@ -212,10 +212,10 @@
     rdfs:label "gsmExtendedGeologyCollection" ;
     dct:abstract "Extended-profile FeatureCollection. Accepts the same featureType values"^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
-    dct:description [ dct:format "application/json" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmExtendedGeologyCollection/index.json> ],
-        [ dct:format "text/html" ;
+    dct:description [ dct:format "text/html" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmExtendedGeologyCollection> ],
+        [ dct:format "application/json" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmExtendedGeologyCollection/index.json> ],
         [ dct:format "text/markdown" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmExtendedGeologyCollection/index.md> ] ;
     dct:hasVersion "0.1" ;
@@ -228,19 +228,19 @@
         "geoscience",
         "geosciml",
         "profile" ;
-    prof:hasResource [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
-            dct:format "application/json" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema.json> ;
-            prof:hasRole role:schema ],
-        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
-            dct:format "application/yaml" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema.yaml> ;
-            prof:hasRole role:schema ],
-        [ dct:conformsTo shacl: ;
+    prof:hasResource [ dct:conformsTo shacl: ;
             dct:format "text/turtle" ;
             rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmExtendedGeologyCollection> ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/rules.shacl> ;
             prof:hasRole role:validation ],
+        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+            dct:format "application/yaml" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema.yaml> ;
+            prof:hasRole role:schema ],
+        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+            dct:format "application/json" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema.json> ;
+            prof:hasRole role:schema ],
         [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
             dct:format "application/ld+json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/context.jsonld> ;
@@ -257,12 +257,12 @@
     rdfs:label "gsmGeologicRelationExtension" ;
     dct:abstract "Extension package defining typed binary relations between GeologicFeature"^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
-    dct:description [ dct:format "text/markdown" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicRelationExtension/index.md> ],
+    dct:description [ dct:format "text/html" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicRelationExtension> ],
         [ dct:format "application/json" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicRelationExtension/index.json> ],
-        [ dct:format "text/html" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicRelationExtension> ] ;
+        [ dct:format "text/markdown" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicRelationExtension/index.md> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi> ;
@@ -273,22 +273,22 @@
         "geosciml",
         "uml-derived" ;
     prof:hasResource [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
-            dct:format "application/yaml" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema.yaml> ;
-            prof:hasRole role:schema ],
-        [ dct:conformsTo shacl: ;
-            dct:format "text/turtle" ;
-            rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmGeologicRelationExtension> ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/rules.shacl> ;
-            prof:hasRole role:validation ],
-        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema.json> ;
+            prof:hasRole role:schema ],
+        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+            dct:format "application/yaml" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema.yaml> ;
             prof:hasRole role:schema ],
         [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
             dct:format "application/ld+json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/context.jsonld> ;
-            prof:hasRole role:mapping ] ;
+            prof:hasRole role:mapping ],
+        [ dct:conformsTo shacl: ;
+            dct:format "text/turtle" ;
+            rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmGeologicRelationExtension> ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/rules.shacl> ;
+            prof:hasRole role:validation ] ;
     bblocks:hasSourceJsonLdContext <https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/context.jsonld> ;
     bblocks:status <http://www.opengis.net/def/status/under-development> ;
     bblocks:validationPassed true .
@@ -302,10 +302,10 @@
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
     dct:description [ dct:format "text/markdown" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicStructureExtension/index.md> ],
-        [ dct:format "text/html" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicStructureExtension> ],
         [ dct:format "application/json" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicStructureExtension/index.json> ] ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicStructureExtension/index.json> ],
+        [ dct:format "text/html" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicStructureExtension> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi> ;
@@ -319,6 +319,10 @@
             dct:format "application/json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema.json> ;
             prof:hasRole role:schema ],
+        [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
+            dct:format "application/ld+json" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/context.jsonld> ;
+            prof:hasRole role:mapping ],
         [ dct:conformsTo shacl: ;
             dct:format "text/turtle" ;
             rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmGeologicStructureExtension> ;
@@ -327,11 +331,7 @@
         [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/yaml" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema.yaml> ;
-            prof:hasRole role:schema ],
-        [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
-            dct:format "application/ld+json" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/context.jsonld> ;
-            prof:hasRole role:mapping ] ;
+            prof:hasRole role:schema ] ;
     bblocks:hasSourceJsonLdContext <https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/context.jsonld> ;
     bblocks:status <http://www.opengis.net/def/status/under-development> ;
     bblocks:validationPassed true .
@@ -343,12 +343,12 @@
     rdfs:label "gsmGeologicTime" ;
     dct:abstract "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary"^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
-    dct:description [ dct:format "text/html" ;
+    dct:description [ dct:format "text/markdown" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicTime/index.md> ],
+        [ dct:format "text/html" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicTime> ],
         [ dct:format "application/json" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicTime/index.json> ],
-        [ dct:format "text/markdown" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicTime/index.md> ] ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicTime/index.json> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi> ;
@@ -358,7 +358,11 @@
     dcat:keyword "geoscience",
         "geosciml",
         "uml-derived" ;
-    prof:hasResource [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
+    prof:hasResource [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+            dct:format "application/yaml" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema.yaml> ;
+            prof:hasRole role:schema ],
+        [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
             dct:format "application/ld+json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/context.jsonld> ;
             prof:hasRole role:mapping ],
@@ -370,10 +374,6 @@
         [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema.json> ;
-            prof:hasRole role:schema ],
-        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
-            dct:format "application/yaml" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema.yaml> ;
             prof:hasRole role:schema ] ;
     bblocks:hasSourceJsonLdContext <https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/context.jsonld> ;
     bblocks:status <http://www.opengis.net/def/status/under-development> ;
@@ -388,10 +388,10 @@
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
     dct:description [ dct:format "text/markdown" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmGeologicUnitExtension/index.md> ],
-        [ dct:format "text/html" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicUnitExtension> ],
         [ dct:format "application/json" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicUnitExtension/index.json> ] ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmGeologicUnitExtension/index.json> ],
+        [ dct:format "text/html" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmGeologicUnitExtension> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi> ;
@@ -401,7 +401,11 @@
     dcat:keyword "geoscience",
         "geosciml",
         "uml-derived" ;
-    prof:hasResource [ dct:conformsTo shacl: ;
+    prof:hasResource [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
+            dct:format "application/ld+json" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/context.jsonld> ;
+            prof:hasRole role:mapping ],
+        [ dct:conformsTo shacl: ;
             dct:format "text/turtle" ;
             rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmGeologicUnitExtension> ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/rules.shacl> ;
@@ -410,10 +414,6 @@
             dct:format "application/yaml" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema.yaml> ;
             prof:hasRole role:schema ],
-        [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
-            dct:format "application/ld+json" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/context.jsonld> ;
-            prof:hasRole role:mapping ],
         [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema.json> ;
@@ -429,12 +429,12 @@
     rdfs:label "gsmSpecimen" ;
     dct:abstract "LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and"^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
-    dct:description [ dct:format "text/html" ;
+    dct:description [ dct:format "application/json" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmSpecimen/index.json> ],
+        [ dct:format "text/html" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmSpecimen> ],
         [ dct:format "text/markdown" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmSpecimen/index.md> ],
-        [ dct:format "application/json" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmSpecimen/index.json> ] ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmSpecimen/index.md> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi> ;
@@ -444,23 +444,23 @@
     dcat:keyword "geoscience",
         "geosciml",
         "uml-derived" ;
-    prof:hasResource [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+    prof:hasResource [ dct:conformsTo shacl: ;
+            dct:format "text/turtle" ;
+            rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmSpecimen> ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmSpecimen/rules.shacl> ;
+            prof:hasRole role:validation ],
+        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/yaml" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml> ;
             prof:hasRole role:schema ],
-        [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
-            dct:format "application/ld+json" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmSpecimen/context.jsonld> ;
-            prof:hasRole role:mapping ],
         [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema.json> ;
             prof:hasRole role:schema ],
-        [ dct:conformsTo shacl: ;
-            dct:format "text/turtle" ;
-            rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmSpecimen> ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmSpecimen/rules.shacl> ;
-            prof:hasRole role:validation ] ;
+        [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
+            dct:format "application/ld+json" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmSpecimen/context.jsonld> ;
+            prof:hasRole role:mapping ] ;
     bblocks:hasSourceJsonLdContext <https://usgin.github.io/geosci-json/_sources/gsmSpecimen/context.jsonld> ;
     bblocks:status <http://www.opengis.net/def/status/under-development> ;
     bblocks:validationPassed true .
@@ -474,10 +474,10 @@
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
     dct:description [ dct:format "text/html" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmscimlBasic> ],
-        [ dct:format "text/markdown" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmscimlBasic/index.md> ],
         [ dct:format "application/json" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmscimlBasic/index.json> ] ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmscimlBasic/index.json> ],
+        [ dct:format "text/markdown" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmscimlBasic/index.md> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi> ;
@@ -487,7 +487,12 @@
     dcat:keyword "geoscience",
         "geosciml",
         "uml-derived" ;
-    prof:hasResource [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
+    prof:hasResource [ dct:conformsTo shacl: ;
+            dct:format "text/turtle" ;
+            rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmscimlBasic> ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/rules.shacl> ;
+            prof:hasRole role:validation ],
+        [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/yaml" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema.yaml> ;
             prof:hasRole role:schema ],
@@ -495,11 +500,6 @@
             dct:format "application/ld+json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/context.jsonld> ;
             prof:hasRole role:mapping ],
-        [ dct:conformsTo shacl: ;
-            dct:format "text/turtle" ;
-            rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmscimlBasic> ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmscimlBasic/rules.shacl> ;
-            prof:hasRole role:validation ],
         [ dct:conformsTo <https://json-schema.org/draft/2020-12/schema> ;
             dct:format "application/json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlBasic/schema.json> ;
@@ -515,12 +515,12 @@
     rdfs:label "gsmscimlLite" ;
     dct:abstract "GeoSciML 4.1 Lite profile. Flattened \"View\" classes that summarise"^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
     dct:created "2026-05-12T00:00:00+00:00"^^xsd:dateTime ;
-    dct:description [ dct:format "text/markdown" ;
+    dct:description [ dct:format "text/html" ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmscimlLite> ],
+        [ dct:format "text/markdown" ;
             rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmscimlLite/index.md> ],
         [ dct:format "application/json" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmscimlLite/index.json> ],
-        [ dct:format "text/html" ;
-            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmscimlLite> ] ;
+            rdfs:isDefinedBy <https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmscimlLite/index.json> ] ;
     dct:hasVersion "0.1" ;
     dct:modified "2026-05-12"^^xsd:date ;
     dct:source <https://github.com/usgin/geosci-json/blob/main/geosciml4.1.xmi> ;
@@ -538,15 +538,15 @@
             dct:format "application/json" ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmscimlLite/schema.json> ;
             prof:hasRole role:schema ],
+        [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
+            dct:format "application/ld+json" ;
+            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmscimlLite/context.jsonld> ;
+            prof:hasRole role:mapping ],
         [ dct:conformsTo shacl: ;
             dct:format "text/turtle" ;
             rdfs:seeAlso <bblocks://usgin.bbr.geosci.gsmscimlLite> ;
             prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmscimlLite/rules.shacl> ;
-            prof:hasRole role:validation ],
-        [ dct:conformsTo <https://www.w3.org/TR/json-ld11/> ;
-            dct:format "application/ld+json" ;
-            prof:hasArtifact <https://usgin.github.io/geosci-json/_sources/gsmscimlLite/context.jsonld> ;
-            prof:hasRole role:mapping ] ;
+            prof:hasRole role:validation ] ;
     bblocks:hasSourceJsonLdContext <https://usgin.github.io/geosci-json/_sources/gsmscimlLite/context.jsonld> ;
     bblocks:status <http://www.opengis.net/def/status/under-development> ;
     bblocks:validationPassed true .
@@ -563,7 +563,7 @@
 """^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
     dct:description """Modular JSON Schema building blocks for geoscience metadata and profiles.
 """^^<https://www.w3.org/ns/iana/media-types/text/markdown> ;
-    dct:modified "2026-05-12T20:57:05.385512"^^xsd:dateTime ;
+    dct:modified "2026-05-12T21:14:20.503486"^^xsd:dateTime ;
     owl:imports <https://opengeospatial.github.io/bblocks/register.json> ;
     skos:hasTopConcept <bblocks://usgin.bbr.geosci.gsmBasicGeologyCollection>,
         <bblocks://usgin.bbr.geosci.gsmBorehole>,
@@ -578,22 +578,22 @@
         <bblocks://usgin.bbr.geosci.gsmscimlBasic>,
         <bblocks://usgin.bbr.geosci.gsmscimlLite> ;
     skos:prefLabel "Building Blocks - GeoSci JSON Building Blocks repository" ;
-    prof:hasResource [ rdfs:label "This Building Blocks Register in JSON-LD format" ;
-            dct:type "application/ld+json" ;
+    prof:hasResource [ rdfs:label "This Building Blocks Register in RDF Turtle format" ;
+            dct:type "text/turtle" ;
             ns2:relation <http://www.iana.org/assignments/relation/self> ;
-            ns1:hasTarget <https://usgin.github.io/geosci-json/build/bblocks.jsonld> ],
+            ns1:hasTarget <https://usgin.github.io/geosci-json/build/bblocks.ttl> ],
         [ rdfs:label "This Building Blocks Register in JSON format" ;
             dct:type "application/json" ;
             ns2:relation <http://www.iana.org/assignments/relation/self> ;
             ns1:hasTarget <https://usgin.github.io/geosci-json/build/register.json> ],
-        [ rdfs:label "This Building Blocks Register in RDF Turtle format" ;
-            dct:type "text/turtle" ;
+        [ rdfs:label "This Building Blocks Register in JSON-LD format" ;
+            dct:type "application/ld+json" ;
             ns2:relation <http://www.iana.org/assignments/relation/self> ;
-            ns1:hasTarget <https://usgin.github.io/geosci-json/build/bblocks.ttl> ] ;
+            ns1:hasTarget <https://usgin.github.io/geosci-json/build/bblocks.jsonld> ] ;
     foaf:homepage <https://usgin.github.io/geosci-json/> ;
     bblocks:hasValidationReport <https://usgin.github.io/geosci-json/build/tests/report.html> .
 
-_:N4768bf9cb54b41a597b97d137b2c39df a prov:Agent,
+_:Nb0622acbf44a43a685771209fe730c34 a prov:Agent,
         schema:SoftwareApplication ;
     rdfs:label "OGC-NA tools" ;
     dct:hasVersion "0.5.28" ;

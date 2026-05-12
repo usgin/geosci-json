@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmSpecimen - gsmSpecimen
-Generated 2026-05-12T21:02:23.721997+00:00
+Generated 2026-05-12T21:19:38.526342+00:00
 === Files ===
 Using examplegsmSpecimenMinimal.json from examples
 === End Files ===
