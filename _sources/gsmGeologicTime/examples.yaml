@@ -18,13 +18,13 @@ examples:
     snippets:
       - language: json
         ref: examples/geochronologic_era_complex.json
+  - title: geochronologic era lower jurassic GSO
+    content: "Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL describes a chronostratigraphic Series (`Lower_Jurassic_Series`, gsgu:Series) that `gsoc:hosts gstime:LowerJurassic2012` — the time-side ICS Epoch. Encoded here as a GeochronologicEra (≡ time:ProperInterval per OWL-Time / Cox & Richard 2015) representing the Lower Jurassic Epoch. The Epoch is bounded by the base-of-Hettangian GSSP (= base of Jurassic, ratified at Kuhjoch, Austria) and the base-of-Bajocian (the top of Toarcian / base of Middle Jurassic). The Series rock unit from the TTL is referenced via `stratotype`. As the TTL notes, the ICS time scale does not formally define stratotypes for its Geochronologic Eras; the stratotype here is the GeoSciML-side rock-unit anchor."
+    snippets:
+      - language: json
+        ref: examples/geochronologic_era_lower_jurassic_GSO.json
   - title: geochronologic era simple
     content: "Example instance: geochronologic_era_simple"
     snippets:
       - language: json
         ref: examples/geochronologic_era_simple.json
-  - title: stratigraphic section lower jurassic GSO
-    content: "Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL defines a Series-level chronostratigraphic unit `Lower_Jurassic_Series` (gsgu:Series, hosts gstime:LowerJurassic2012). gsmGeologicTime's dispatchable FTs are stratotype-related (StratigraphicSection, StratigraphicPoint, GlobalStratotypePoint, GlobalStratotypeSection); encoding the Lower Jurassic Series here as a StratigraphicSection whose geologicDescription summarises the Series scope. The link to the ICS time-scale Era is by-reference."
-    snippets:
-      - language: json
-        ref: examples/stratigraphic_section_lower_jurassic_GSO.json

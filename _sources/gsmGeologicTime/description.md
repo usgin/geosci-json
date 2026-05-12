@@ -178,8 +178,8 @@ Properties (own; inherited properties listed in supertype's BB):
 - [examplegsmGeologicTimeMinimal.json](examples/examplegsmGeologicTimeMinimal.json)
 - [geochronologic_boundary_simple.json](examples/geochronologic_boundary_simple.json)
 - [geochronologic_era_complex.json](examples/geochronologic_era_complex.json)
+- [geochronologic_era_lower_jurassic_GSO.json](examples/geochronologic_era_lower_jurassic_GSO.json)
 - [geochronologic_era_simple.json](examples/geochronologic_era_simple.json)
-- [stratigraphic_section_lower_jurassic_GSO.json](examples/stratigraphic_section_lower_jurassic_GSO.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
