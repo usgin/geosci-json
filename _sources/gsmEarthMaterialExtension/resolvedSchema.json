@@ -695,6 +695,54 @@
         }
       }
     },
+    "EarthMaterial": {
+      "$anchor": "EarthMaterial",
+      "description": "The EarthMaterial class holds a description of a naturally occurring substance in the Earth. EarthMaterial represents material composition or substance, and is thus independent of quantity or location. Ideally, EarthMaterials are defined strictly based on physical properties, but because of standard geological usage, genetic interpretations enter into the description as well.  Constraint: self.metadata.hierarchyLevel=feature",
+      "type": "object",
+      "properties": {
+        "color": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The color property (SWE::Category) is a term from a controlled vocabulary that specifies the colour of the earth material. Color schemes such as the Munsell rock and soil color schemes may be used."
+        },
+        "purpose": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#DescriptionPurpose"
+            }
+          ],
+          "description": "The purpose:DescriptionPurpose property provides a specification of the intended purpose or level of abstraction for the given EarthMaterial. The intent is the same a GeologicFeature’s purpose and it shares the same vocabulary (instance, typicalNorm, definingNorm)."
+        },
+        "gbEarthMaterialDescription": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#EarthMaterialAbstractDescription"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The property gbEarthMaterialDescription:EarthMaterialAbstractDescription provides a detailed earth material description of the part. This property is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is abstract with subtypes defined in GeoSciML Extension."
+        }
+      }
+    },
     "EarthMaterialAbstractDescription": {
       "$anchor": "EarthMaterialAbstractDescription",
       "description": "Abstract description class for earth material. This class is a placeholder for further extension in Extension package",
@@ -796,54 +844,6 @@
           }
         }
       ]
-    },
-    "EarthMaterial": {
-      "$anchor": "EarthMaterial",
-      "description": "The EarthMaterial class holds a description of a naturally occurring substance in the Earth. EarthMaterial represents material composition or substance, and is thus independent of quantity or location. Ideally, EarthMaterials are defined strictly based on physical properties, but because of standard geological usage, genetic interpretations enter into the description as well.  Constraint: self.metadata.hierarchyLevel=feature",
-      "type": "object",
-      "properties": {
-        "color": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-              },
-              "uniqueItems": true
-            }
-          ],
-          "description": "The color property (SWE::Category) is a term from a controlled vocabulary that specifies the colour of the earth material. Color schemes such as the Munsell rock and soil color schemes may be used."
-        },
-        "purpose": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "$ref": "#DescriptionPurpose"
-            }
-          ],
-          "description": "The purpose:DescriptionPurpose property provides a specification of the intended purpose or level of abstraction for the given EarthMaterial. The intent is the same a GeologicFeature’s purpose and it shares the same vocabulary (instance, typicalNorm, definingNorm)."
-        },
-        "gbEarthMaterialDescription": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#EarthMaterialAbstractDescription"
-              },
-              "uniqueItems": true
-            }
-          ],
-          "description": "The property gbEarthMaterialDescription:EarthMaterialAbstractDescription provides a detailed earth material description of the part. This property is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is abstract with subtypes defined in GeoSciML Extension."
-        }
-      }
     }
   }
 }

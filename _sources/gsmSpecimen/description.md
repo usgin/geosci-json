@@ -4,7 +4,7 @@ GeoSciML 4.1 building block `gsmSpecimen`. `«FeatureType»` classes are encoded
 
 Source UML packages: `LaboratoryAnalysis-Specimen`, `Geochronology`, `GeologicSpecimen`, `LaboratoryAnalysis`.
 
-Contains 8 feature types, 4 data types, 7 code lists.
+Contains 8 feature types, 3 data types, 7 code lists.
 
 ## Classes in this BB
 
@@ -26,7 +26,6 @@ Contains 8 feature types, 4 data types, 7 code lists.
 | `IsotopicSystemName` | «CodeList» | URI codelist (`format: uri`) |
 | `ReferenceSpecimen` | «FeatureType» | JSON-FG Feature |
 | `SF_Specimen` | «FeatureType» | JSON-FG Feature |
-| `SpecimenProcessing` | «DataType» | plain JSON object |
 | `StatisticalMethodTerm` | «CodeList» | URI codelist (`format: uri`) |
 | `_FeatureDispatch` | «DataType» | plain JSON object |
 
@@ -152,24 +151,12 @@ Properties (own; inherited properties listed in supertype's BB):
 | `lineage` | (oneOf — see schema) | 0..1 | Provenance metadata (by-reference to ISO 19115 LI_Lineage). Inherited from SF_SamplingFeature. |
 | `materialClass` | SWE 3.0 `Category` | 0..1 | Material class of the specimen (1..1). ISO 19156 types this as ScopedName; encoded here as a SWE Category to carry th… |
 | `samplingTime` | `/$defs/SCLinkObject` | 0..1 | Time of sampling (1..1, by-reference to ISO 19108 TM_Object). |
-| `samplingMethod` | (oneOf — see schema) | 0..1 | Sampling method (0..1, by-reference to ISO 19156 OM_Process). |
+| `samplingMethod` | (oneOf — see schema) | 0..1 | Sampling method (0..1). ISO 19156 types as OM_Process; here implemented as the GeoSciML GeologicSamplingMethod Featur… |
 | `samplingLocation` | (oneOf — see schema) | 0..1 | Location where the specimen was sampled (0..1, GeoJSON Geometry). Distinct from the top-level Feature geometry, which… |
-| `processingDetails` | (oneOf — see schema) | 0..1 | Processing steps applied to the specimen (0..*). |
+| `processingDetails` | (oneOf — see schema) | 0..1 | Processing / preparation steps applied to the specimen (0..*). ISO 19156 types as SpecimenProcessing; here items are … |
 | `size` | (oneOf — see schema) | 0..1 | Specimen size as a SWE Quantity (0..1). ISO 19156 types as Measure. |
 | `currentLocation` | (oneOf — see schema) | 0..1 | Current physical location of the specimen (0..1). Free text address, URI, or link object to a repository record. |
 | `specimenType` | (oneOf — see schema) | 0..1 | Specimen type classifier (0..1). ISO 19156 types as ScopedName; encoded here as a SWE Category. |
-
-### `SpecimenProcessing`
-
-ISO 19156:2011 SpecimenProcessing — a processing step in the specimen's lifecycle (e.g. drying, crushing, splitting). External ISO types referenced are by-reference via SCLinkObject.
-
-Properties (own; inherited properties listed in supertype's BB):
-
-| Name | Type | Mult | Notes |
-| --- | --- | --- | --- |
-| `method` | (oneOf — see schema) | 1..1 | Processing method (by-reference to OM_Process). |
-| `time` | (oneOf — see schema) | 0..1 | Processing time (by-reference to TM_Object). |
-| `processOperator` | (oneOf — see schema) | 0..1 | Party responsible for the processing step (by-reference to CI_Responsibility). |
 
 ### `_FeatureDispatch`
 

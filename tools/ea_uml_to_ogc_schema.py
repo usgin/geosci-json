@@ -418,7 +418,7 @@ EXTRA_DEFS_PER_BB: dict[str, dict] = {
 # Map of BB name -> override list of dispatchable featureTypes. When set,
 # replaces the FT list auto-discovered from the XMI (dispatchable_fts()).
 DISPATCHER_OVERRIDES_PER_BB: dict[str, list[str]] = {
-    "gsmSpecimen": ["SF_Specimen"],
+    "gsmSpecimen": ["SF_Specimen", "ReferenceSpecimen"],
 }
 
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.usgin.org/geosci-json/gsmSpecimen/gsmSpecimenSchema.json",
-  "description": "Specimen building block. Adds a hand-curated SF_Specimen\n(«FeatureType», ISO 19156:2011 §8.6) — the sole dispatchable\nfeatureType for this BB — alongside the GeoSciML\nLaboratoryAnalysis-Specimen DataType library (GeologicSpecimen,\nsampling/analysis observation types, Geochronology results) which\nstays in `$defs` for by-reference use from other BBs. SF_Specimen\ninlines its SF_SamplingFeature parent's properties (sampledFeature,\nrelatedObservation, relatedSamplingFeature, lineage) since ISO 19156\nisn't in the GeoSciML XMI.\n\nValidates either a single Feature (dispatched by `featureType` to one of: SF_Specimen) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "description": "Specimen building block. The wrapper dispatches two featureType\nvalues: SF_Specimen (hand-curated «FeatureType», ISO 19156:2011\n§8.6 — inlines SF_SamplingFeature's inherited properties since ISO\n19156 isn't in the GeoSciML XMI) and ReferenceSpecimen (a GeoSciML\n«FeatureType» from the LaboratoryAnalysis-Specimen package, used\nfor named reference / type specimens). The rest of the\nLaboratoryAnalysis-Specimen library (AnalyticalInstrument,\nAnalyticalSession, GeochronologicInterpretation,\nGeologicSamplingMethod, GeologicSpecimenPreparation, Image, etc.)\nstays in `$defs` for cross-reference from SF_Specimen and from\nother BBs.\n\nValidates either a single Feature (dispatched by `featureType` to one of: SF_Specimen, ReferenceSpecimen) or a FeatureCollection whose `features[]` items are dispatched the same way.",
   "if": {
     "type": "object",
     "required": [
@@ -54,6 +54,21 @@
         },
         {
           "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "ReferenceSpecimen"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#ReferenceSpecimen"
+          }
+        },
+        {
+          "if": {
             "not": {
               "required": [
                 "featureType"
@@ -61,7 +76,8 @@
               "properties": {
                 "featureType": {
                   "enum": [
-                    "SF_Specimen"
+                    "SF_Specimen",
+                    "ReferenceSpecimen"
                   ]
                 }
               }
