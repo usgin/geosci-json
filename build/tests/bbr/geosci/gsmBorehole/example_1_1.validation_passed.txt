@@ -1,7 +1,7 @@
 Validation report for usgin.bbr.geosci.gsmBorehole - gsmBorehole
-Generated 2026-05-12T21:19:26.555627+00:00
+Generated 2026-05-12T21:31:18.034426+00:00
 === Files ===
-Using examplegsmBoreholeMinimal.json from examples
+Using examples/examplegsmBoreholeMinimal.json from examples
 === End Files ===
 
 === JSON Schema ===

@@ -67,7 +67,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
-- [examplegsmGeologicRelationExtensionMinimal.json](examplegsmGeologicRelationExtensionMinimal.json)
+- [examplegsmGeologicRelationExtensionMinimal.json](examples/examplegsmGeologicRelationExtensionMinimal.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

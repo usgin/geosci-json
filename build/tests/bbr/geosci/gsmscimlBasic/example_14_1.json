@@ -1,58 +1,18 @@
 {
   "type": "Feature",
   "featureType": "NaturalGeomorphologicFeature",
-  "id": "moraine-complex",
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [
-      [
-        [
-          148.21,
-          -36.445
-        ],
-        [
-          148.29,
-          -36.445
-        ],
-        [
-          148.29,
-          -36.51
-        ],
-        [
-          148.21,
-          -36.51
-        ],
-        [
-          148.21,
-          -36.445
-        ]
-      ]
-    ]
-  },
+  "id": "river-valley-1",
+  "geometry": null,
   "place": null,
   "time": null,
   "properties": {
-    "observationMethod": [
-      {
-        "type": "Category",
-        "definition": "http://resource.geosciml.org/classifierScheme/cgi/featureobservationmethod",
-        "label": "remote sensing interpretation",
-        "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/remote_sensing_interpretation"
-      }
-    ],
     "purpose": "instance",
-    "naturalGeomorphologicFeatureType": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/moraine",
+    "naturalGeomorphologicFeatureType": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/river_channel",
     "activity": {
       "type": "Category",
       "definition": "http://resource.geosciml.org/classifierScheme/cgi/geomorphologicactivity",
-      "label": "inactive",
-      "value": "http://resource.geosciml.org/classifier/cgi/geomorphologicactivity/inactive"
-    },
-    "unitDescription": [
-      {
-        "href": "http://data.geoscience.gov.au/feature/geologicunit/glacial-till-1",
-        "title": "Pleistocene glacial till"
-      }
-    ]
+      "label": "active",
+      "value": "http://resource.geosciml.org/classifier/cgi/geomorphologicactivity/active"
+    }
   }
 }

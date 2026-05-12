@@ -1,42 +1,43 @@
 {
   "type": "Feature",
-  "featureType": "BoreholeView",
-  "id": "borehole-view-complex",
+  "featureType": "GeologicUnitView",
+  "id": "gu-view-1",
   "geometry": {
-    "type": "Point",
+    "type": "Polygon",
     "coordinates": [
-      149.252,
-      -35.401
+      [
+        [
+          149.12,
+          -35.31
+        ],
+        [
+          149.45,
+          -35.31
+        ],
+        [
+          149.45,
+          -35.58
+        ],
+        [
+          149.12,
+          -35.58
+        ],
+        [
+          149.12,
+          -35.31
+        ]
+      ]
     ]
   },
   "time": null,
   "properties": {
-    "name": "GRS-001",
-    "description": "Mineral exploration diamond drillhole targeting the Hervey Group sandstone aquifer.",
-    "purpose": "mineral exploration, groundwater investigation",
-    "status": "completed",
-    "drillingMethod": "diamond core drilling",
-    "operator": "Regional Geological Survey",
-    "driller": "Acme Drilling Pty Ltd",
-    "drillStartDate": "2018-03-12",
-    "drillEndDate": "2018-04-02",
-    "startPoint": "natural land surface",
-    "inclinationType": "inclined down",
-    "boreholeMaterialCustodian": "Geoscience Australia Core Library, Canberra",
-    "boreholeLength_m": 312.5,
-    "elevation_m": 672.3,
-    "elevation_srs": "http://www.opengis.net/def/crs/EPSG/0/5711",
-    "positionalAccuracy": "10 m (GNSS survey)",
-    "source": "Regional Geological Survey (2018). Drillhole report GRS-001. Open file report OF-2018-07.",
-    "metadata_uri": "http://data.geoscience.gov.au/metadata/borehole/grs-001",
-    "genericSymbolizer": "BH_Diamond"
-  },
-  "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/4283",
-  "place": {
-    "type": "Point",
-    "coordinates": [
-      149.252,
-      -35.401
-    ]
+    "name": "Hervey Group",
+    "geologicUnitType": "lithostratigraphic unit",
+    "rank": "group",
+    "lithology": "sandstone, siltstone and conglomerate",
+    "geologicHistory": "Devonian (Frasnian to Famennian) fluvial to shallow marine deposition",
+    "representativeLithology_uri": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone",
+    "representativeAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Devonian",
+    "geologicUnitType_uri": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit"
   }
 }

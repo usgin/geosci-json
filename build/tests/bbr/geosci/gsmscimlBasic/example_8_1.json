@@ -1,18 +1,57 @@
 {
+  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicEvent.xml \u2014 Kanimblan Orogeny, a deformation event at 335 Ma (range 325\u2013350 Ma), Tournaisian\u2013Serpukhovian, deep crustal setting. Validates against schemas/json/4.1/geoscimlBasic.json#GeologicEvent.",
   "type": "Feature",
-  "featureType": "NaturalGeomorphologicFeature",
-  "id": "river-valley-1",
+  "id": "event.1",
+  "featureType": "GeologicEvent",
+  "conformsTo": [
+    "https://ext.iide.dev/schemas/geosciml/json/4.1/geoscimlBasic.json"
+  ],
   "geometry": null,
-  "place": null,
-  "time": null,
   "properties": {
+    "name": "Kanimblan Orogeny",
     "purpose": "instance",
-    "naturalGeomorphologicFeatureType": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/river_channel",
-    "activity": {
-      "type": "Category",
-      "definition": "http://resource.geosciml.org/classifierScheme/cgi/geomorphologicactivity",
-      "label": "active",
-      "value": "http://resource.geosciml.org/classifier/cgi/geomorphologicactivity/active"
-    }
+    "eventProcess": [
+      "http://resource.geosciml.org/classifier/cgi/eventprocess/deformation"
+    ],
+    "numericAge": {
+      "reportingDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/representativeAge",
+        "label": "representative age",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 335
+      },
+      "olderBoundDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/olderBound",
+        "label": "older bound",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 350
+      },
+      "youngerBoundDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/youngerBound",
+        "label": "younger bound",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 325
+      }
+    },
+    "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Tournaisian",
+    "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Serpukhovian",
+    "eventEnvironment": [
+      {
+        "type": "Category",
+        "definition": "http://resource.geosciml.org/classifier/cgi/eventenvironment",
+        "label": "deep crustal",
+        "codeSpace": "http://resource.geosciml.org/classifier/cgi/eventenvironment",
+        "value": "http://resource.geosciml.org/classifier/cgi/eventenvironment/deep-crustal"
+      }
+    ]
   }
 }

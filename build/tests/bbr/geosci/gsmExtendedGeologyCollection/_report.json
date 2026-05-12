@@ -2,7 +2,7 @@
   "title": "Validation report for usgin.bbr.geosci.gsmExtendedGeologyCollection - gsmExtendedGeologyCollection",
   "bblockName": "gsmExtendedGeologyCollection",
   "bblockId": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
-  "generated": "2026-05-12T21:19:38.350891+00:00",
+  "generated": "2026-05-12T21:31:25.836776+00:00",
   "result": true,
   "items": [
     {
@@ -23,7 +23,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using fc_extended_minimal.json from examples"
+              "message": "Using examples/fc_extended_minimal.json from examples"
             }
           ]
         },

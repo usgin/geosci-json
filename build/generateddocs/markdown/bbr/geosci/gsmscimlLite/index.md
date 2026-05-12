@@ -240,20 +240,20 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
-- [examplegsmscimlLiteMinimal.json](examplegsmscimlLiteMinimal.json)
-- [borehole_view_simple.json](borehole_view_simple.json)
-- [contact_view_simple.json](contact_view_simple.json)
-- [geologic_specimen_view_simple.json](geologic_specimen_view_simple.json)
-- [geologic_unit_view_simple.json](geologic_unit_view_simple.json)
-- [geomorphologic_unit_view_simple.json](geomorphologic_unit_view_simple.json)
-- [shear_displacement_structure_view_simple.json](shear_displacement_structure_view_simple.json)
-- [site_observation_view_simple.json](site_observation_view_simple.json)
-- [borehole_view_complex.json](borehole_view_complex.json)
-- [contact_view_complex.json](contact_view_complex.json)
-- [geologic_specimen_view_complex.json](geologic_specimen_view_complex.json)
-- [geologic_unit_view_complex.json](geologic_unit_view_complex.json)
-- [shear_displacement_structure_view_complex.json](shear_displacement_structure_view_complex.json)
-- [site_observation_view_complex.json](site_observation_view_complex.json)
+- [borehole_view_complex.json](examples/borehole_view_complex.json)
+- [borehole_view_simple.json](examples/borehole_view_simple.json)
+- [contact_view_complex.json](examples/contact_view_complex.json)
+- [contact_view_simple.json](examples/contact_view_simple.json)
+- [examplegsmscimlLiteMinimal.json](examples/examplegsmscimlLiteMinimal.json)
+- [geologic_specimen_view_complex.json](examples/geologic_specimen_view_complex.json)
+- [geologic_specimen_view_simple.json](examples/geologic_specimen_view_simple.json)
+- [geologic_unit_view_complex.json](examples/geologic_unit_view_complex.json)
+- [geologic_unit_view_simple.json](examples/geologic_unit_view_simple.json)
+- [geomorphologic_unit_view_simple.json](examples/geomorphologic_unit_view_simple.json)
+- [shear_displacement_structure_view_complex.json](examples/shear_displacement_structure_view_complex.json)
+- [shear_displacement_structure_view_simple.json](examples/shear_displacement_structure_view_simple.json)
+- [site_observation_view_complex.json](examples/site_observation_view_complex.json)
+- [site_observation_view_simple.json](examples/site_observation_view_simple.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
@@ -265,16 +265,51 @@ See [examples.yaml](examples.yaml) for the full manifest.
 
 ## Examples
 
-### examplegsmscimlLiteMinimal
-Example instance: examplegsmscimlLiteMinimal
+### borehole view complex
+Example instance: borehole_view_complex
 #### json
 ```json
 {
   "type": "Feature",
-  "id": "boreholeview.minimal.1",
   "featureType": "BoreholeView",
-  "geometry": null,
-  "properties": {}
+  "id": "borehole-view-complex",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      149.252,
+      -35.401
+    ]
+  },
+  "time": null,
+  "properties": {
+    "name": "GRS-001",
+    "description": "Mineral exploration diamond drillhole targeting the Hervey Group sandstone aquifer.",
+    "purpose": "mineral exploration, groundwater investigation",
+    "status": "completed",
+    "drillingMethod": "diamond core drilling",
+    "operator": "Regional Geological Survey",
+    "driller": "Acme Drilling Pty Ltd",
+    "drillStartDate": "2018-03-12",
+    "drillEndDate": "2018-04-02",
+    "startPoint": "natural land surface",
+    "inclinationType": "inclined down",
+    "boreholeMaterialCustodian": "Geoscience Australia Core Library, Canberra",
+    "boreholeLength_m": 312.5,
+    "elevation_m": 672.3,
+    "elevation_srs": "http://www.opengis.net/def/crs/EPSG/0/5711",
+    "positionalAccuracy": "10 m (GNSS survey)",
+    "source": "Regional Geological Survey (2018). Drillhole report GRS-001. Open file report OF-2018-07.",
+    "metadata_uri": "http://data.geoscience.gov.au/metadata/borehole/grs-001",
+    "genericSymbolizer": "BH_Diamond"
+  },
+  "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/4283",
+  "place": {
+    "type": "Point",
+    "coordinates": [
+      149.252,
+      -35.401
+    ]
+  }
 }
 
 ```
@@ -302,6 +337,67 @@ Example instance: borehole_view_simple
     "status": "completed",
     "drillingMethod": "diamond core drilling",
     "boreholeLength_m": 312.5
+  }
+}
+
+```
+
+
+### contact view complex
+Example instance: contact_view_complex
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "ContactView",
+  "id": "contact-view-complex",
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        149.12,
+        -35.31
+      ],
+      [
+        149.28,
+        -35.44
+      ],
+      [
+        149.45,
+        -35.58
+      ]
+    ]
+  },
+  "time": null,
+  "properties": {
+    "name": "Base of Devonian sequence",
+    "description": "Erosional unconformity between Devonian Hervey Group and Ordovician basement. Sharp contact, planar to gently undulating surface.",
+    "contactType": "disconformity",
+    "observationMethod": "field observation and aerial photograph interpretation",
+    "positionalAccuracy": "250 m",
+    "source": "Smith, J. et al. (2005). Geology of the Goulburn 1:250000 sheet. Geoscience Australia.",
+    "contactType_uri": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity",
+    "specification_uri": "http://data.geoscience.gov.au/feature/contact/base-devonian-1",
+    "metadata_uri": "http://data.geoscience.gov.au/metadata/record/67890",
+    "genericSymbolizer": "CT_Unconformity"
+  },
+  "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/4283",
+  "place": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        149.12,
+        -35.31
+      ],
+      [
+        149.28,
+        -35.44
+      ],
+      [
+        149.45,
+        -35.58
+      ]
+    ]
   }
 }
 
@@ -346,6 +442,57 @@ Example instance: contact_view_simple
 ```
 
 
+### examplegsmscimlLiteMinimal
+Example instance: examplegsmscimlLiteMinimal
+#### json
+```json
+{
+  "type": "Feature",
+  "id": "boreholeview.minimal.1",
+  "featureType": "BoreholeView",
+  "geometry": null,
+  "properties": {}
+}
+
+```
+
+
+### geologic specimen view complex
+Example instance: geologic_specimen_view_complex
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "GeologicSpecimenView",
+  "id": "specimen-view-complex",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      149.312,
+      -35.475
+    ]
+  },
+  "time": null,
+  "properties": {
+    "label": "GRS-2019-042",
+    "description": "Medium to coarse-grained, well-sorted, sub-angular quartz arenite. White to pale yellow, friable. Collected from outcrop of Hervey Group sandstone on roadcut.",
+    "specimenType": "hand specimen",
+    "materialClass": "rock",
+    "positionalAccuracy": "5 m",
+    "samplingTime": "2019-03-15",
+    "samplingMethod": "field mapping survey \u2013 hand specimen from outcrop",
+    "currentLocation": "Geoscience Australia Sample Repository, Canberra (drawer G-2019-3)",
+    "source": "Smith, J. (2019). Goulburn mapping campaign field samples.",
+    "specimenType_uri": "http://resource.geosciml.org/classifier/cgi/specimentype/hand_specimen",
+    "materialClass_uri": "http://resource.geosciml.org/classifier/cgi/materialclass/rock",
+    "metadata_uri": "http://data.geoscience.gov.au/metadata/specimen/GRS-2019-042",
+    "genericSymbolizer": "SP_HandSpecimen"
+  }
+}
+
+```
+
+
 ### geologic specimen view simple
 Example instance: geologic_specimen_view_simple
 #### json
@@ -368,6 +515,96 @@ Example instance: geologic_specimen_view_simple
     "materialClass": "rock",
     "specimenType_uri": "http://resource.geosciml.org/classifier/cgi/specimentype/hand_specimen",
     "materialClass_uri": "http://resource.geosciml.org/classifier/cgi/materialclass/rock"
+  }
+}
+
+```
+
+
+### geologic unit view complex
+Example instance: geologic_unit_view_complex
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "GeologicUnitView",
+  "id": "gu-view-complex",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          149.12,
+          -35.31
+        ],
+        [
+          149.45,
+          -35.31
+        ],
+        [
+          149.45,
+          -35.58
+        ],
+        [
+          149.12,
+          -35.58
+        ],
+        [
+          149.12,
+          -35.31
+        ]
+      ]
+    ]
+  },
+  "time": null,
+  "properties": {
+    "name": "Hervey Group",
+    "description": "Terrigenous to shallow marine, red to white and green, quartzose to lithic sandstone, siltstone, shale and conglomerate; sandstones commonly thick-bedded and massive to cross-stratified.",
+    "geologicUnitType": "lithostratigraphic unit",
+    "rank": "group",
+    "lithology": "sandstone, siltstone, shale and conglomerate (50\u201395% sandstone, 5\u201350% mudstone)",
+    "geologicHistory": "Deposited during the Frasnian to Famennian (Late Devonian) in a fluvial to shallow marine environment; subsequently deformed during Tournaisian to Serpukhovian (Early Carboniferous) Kanimblan Orogeny.",
+    "numericOlderAge": 382.7,
+    "numericYoungerAge": 323.2,
+    "observationMethod": "synthesis from multiple sources including field mapping and drill-core logging",
+    "positionalAccuracy": "250 m",
+    "source": "Raymond, O.L. (ed.) 2009. Surface Geology of Australia, 1:1 000 000 scale dataset, 2009 edition. Geoscience Australia, Canberra.",
+    "geologicUnitType_uri": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
+    "representativeLithology_uri": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone",
+    "representativeAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Devonian",
+    "representativeOlderAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Frasnian",
+    "representativeYoungerAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Famennian",
+    "specification_uri": "http://data.geoscience.gov.au/feature/geologicunit/hervey-group-1",
+    "metadata_uri": "http://data.geoscience.gov.au/metadata/record/12345",
+    "genericSymbolizer": "GU_DevSS"
+  },
+  "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/4283",
+  "place": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          149.12,
+          -35.31
+        ],
+        [
+          149.45,
+          -35.31
+        ],
+        [
+          149.45,
+          -35.58
+        ],
+        [
+          149.12,
+          -35.58
+        ],
+        [
+          149.12,
+          -35.31
+        ]
+      ]
+    ]
   }
 }
 
@@ -474,305 +711,6 @@ Example instance: geomorphologic_unit_view_simple
 ```
 
 
-### shear displacement structure view simple
-Example instance: shear_displacement_structure_view_simple
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "ShearDisplacementStructureView",
-  "id": "fault-view-1",
-  "geometry": {
-    "type": "LineString",
-    "coordinates": [
-      [
-        149.387,
-        -35.124
-      ],
-      [
-        149.461,
-        -35.344
-      ]
-    ]
-  },
-  "time": null,
-  "properties": {
-    "name": "Lake George Fault",
-    "faultType": "normal fault",
-    "faultType_uri": "http://resource.geosciml.org/classifier/cgi/faulttype/normal_fault",
-    "specification_uri": "http://data.geoscience.gov.au/feature/fault/lake-george-fault-1"
-  }
-}
-
-```
-
-
-### site observation view simple
-Example instance: site_observation_view_simple
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "SiteObservationView",
-  "id": "obs-view-1",
-  "geometry": {
-    "type": "Point",
-    "coordinates": [
-      149.312,
-      -35.475
-    ]
-  },
-  "time": null,
-  "properties": {
-    "siteName": "field station FS-42",
-    "observationName": "bedding orientation measurement",
-    "observedProperty": "planar orientation \u2013 strike and dip",
-    "observedValue": "045 / 32",
-    "observedValueUom": "degrees",
-    "symbolRotation": 45
-  }
-}
-
-```
-
-
-### borehole view complex
-Example instance: borehole_view_complex
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "BoreholeView",
-  "id": "borehole-view-complex",
-  "geometry": {
-    "type": "Point",
-    "coordinates": [
-      149.252,
-      -35.401
-    ]
-  },
-  "time": null,
-  "properties": {
-    "name": "GRS-001",
-    "description": "Mineral exploration diamond drillhole targeting the Hervey Group sandstone aquifer.",
-    "purpose": "mineral exploration, groundwater investigation",
-    "status": "completed",
-    "drillingMethod": "diamond core drilling",
-    "operator": "Regional Geological Survey",
-    "driller": "Acme Drilling Pty Ltd",
-    "drillStartDate": "2018-03-12",
-    "drillEndDate": "2018-04-02",
-    "startPoint": "natural land surface",
-    "inclinationType": "inclined down",
-    "boreholeMaterialCustodian": "Geoscience Australia Core Library, Canberra",
-    "boreholeLength_m": 312.5,
-    "elevation_m": 672.3,
-    "elevation_srs": "http://www.opengis.net/def/crs/EPSG/0/5711",
-    "positionalAccuracy": "10 m (GNSS survey)",
-    "source": "Regional Geological Survey (2018). Drillhole report GRS-001. Open file report OF-2018-07.",
-    "metadata_uri": "http://data.geoscience.gov.au/metadata/borehole/grs-001",
-    "genericSymbolizer": "BH_Diamond"
-  },
-  "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/4283",
-  "place": {
-    "type": "Point",
-    "coordinates": [
-      149.252,
-      -35.401
-    ]
-  }
-}
-
-```
-
-
-### contact view complex
-Example instance: contact_view_complex
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "ContactView",
-  "id": "contact-view-complex",
-  "geometry": {
-    "type": "LineString",
-    "coordinates": [
-      [
-        149.12,
-        -35.31
-      ],
-      [
-        149.28,
-        -35.44
-      ],
-      [
-        149.45,
-        -35.58
-      ]
-    ]
-  },
-  "time": null,
-  "properties": {
-    "name": "Base of Devonian sequence",
-    "description": "Erosional unconformity between Devonian Hervey Group and Ordovician basement. Sharp contact, planar to gently undulating surface.",
-    "contactType": "disconformity",
-    "observationMethod": "field observation and aerial photograph interpretation",
-    "positionalAccuracy": "250 m",
-    "source": "Smith, J. et al. (2005). Geology of the Goulburn 1:250000 sheet. Geoscience Australia.",
-    "contactType_uri": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity",
-    "specification_uri": "http://data.geoscience.gov.au/feature/contact/base-devonian-1",
-    "metadata_uri": "http://data.geoscience.gov.au/metadata/record/67890",
-    "genericSymbolizer": "CT_Unconformity"
-  },
-  "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/4283",
-  "place": {
-    "type": "LineString",
-    "coordinates": [
-      [
-        149.12,
-        -35.31
-      ],
-      [
-        149.28,
-        -35.44
-      ],
-      [
-        149.45,
-        -35.58
-      ]
-    ]
-  }
-}
-
-```
-
-
-### geologic specimen view complex
-Example instance: geologic_specimen_view_complex
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "GeologicSpecimenView",
-  "id": "specimen-view-complex",
-  "geometry": {
-    "type": "Point",
-    "coordinates": [
-      149.312,
-      -35.475
-    ]
-  },
-  "time": null,
-  "properties": {
-    "label": "GRS-2019-042",
-    "description": "Medium to coarse-grained, well-sorted, sub-angular quartz arenite. White to pale yellow, friable. Collected from outcrop of Hervey Group sandstone on roadcut.",
-    "specimenType": "hand specimen",
-    "materialClass": "rock",
-    "positionalAccuracy": "5 m",
-    "samplingTime": "2019-03-15",
-    "samplingMethod": "field mapping survey \u2013 hand specimen from outcrop",
-    "currentLocation": "Geoscience Australia Sample Repository, Canberra (drawer G-2019-3)",
-    "source": "Smith, J. (2019). Goulburn mapping campaign field samples.",
-    "specimenType_uri": "http://resource.geosciml.org/classifier/cgi/specimentype/hand_specimen",
-    "materialClass_uri": "http://resource.geosciml.org/classifier/cgi/materialclass/rock",
-    "metadata_uri": "http://data.geoscience.gov.au/metadata/specimen/GRS-2019-042",
-    "genericSymbolizer": "SP_HandSpecimen"
-  }
-}
-
-```
-
-
-### geologic unit view complex
-Example instance: geologic_unit_view_complex
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "GeologicUnitView",
-  "id": "gu-view-complex",
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [
-      [
-        [
-          149.12,
-          -35.31
-        ],
-        [
-          149.45,
-          -35.31
-        ],
-        [
-          149.45,
-          -35.58
-        ],
-        [
-          149.12,
-          -35.58
-        ],
-        [
-          149.12,
-          -35.31
-        ]
-      ]
-    ]
-  },
-  "time": null,
-  "properties": {
-    "name": "Hervey Group",
-    "description": "Terrigenous to shallow marine, red to white and green, quartzose to lithic sandstone, siltstone, shale and conglomerate; sandstones commonly thick-bedded and massive to cross-stratified.",
-    "geologicUnitType": "lithostratigraphic unit",
-    "rank": "group",
-    "lithology": "sandstone, siltstone, shale and conglomerate (50\u201395% sandstone, 5\u201350% mudstone)",
-    "geologicHistory": "Deposited during the Frasnian to Famennian (Late Devonian) in a fluvial to shallow marine environment; subsequently deformed during Tournaisian to Serpukhovian (Early Carboniferous) Kanimblan Orogeny.",
-    "numericOlderAge": 382.7,
-    "numericYoungerAge": 323.2,
-    "observationMethod": "synthesis from multiple sources including field mapping and drill-core logging",
-    "positionalAccuracy": "250 m",
-    "source": "Raymond, O.L. (ed.) 2009. Surface Geology of Australia, 1:1 000 000 scale dataset, 2009 edition. Geoscience Australia, Canberra.",
-    "geologicUnitType_uri": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
-    "representativeLithology_uri": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone",
-    "representativeAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Devonian",
-    "representativeOlderAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Frasnian",
-    "representativeYoungerAge_uri": "http://resource.geosciml.org/classifier/ics/ischart/Famennian",
-    "specification_uri": "http://data.geoscience.gov.au/feature/geologicunit/hervey-group-1",
-    "metadata_uri": "http://data.geoscience.gov.au/metadata/record/12345",
-    "genericSymbolizer": "GU_DevSS"
-  },
-  "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/4283",
-  "place": {
-    "type": "Polygon",
-    "coordinates": [
-      [
-        [
-          149.12,
-          -35.31
-        ],
-        [
-          149.45,
-          -35.31
-        ],
-        [
-          149.45,
-          -35.58
-        ],
-        [
-          149.12,
-          -35.58
-        ],
-        [
-          149.12,
-          -35.31
-        ]
-      ]
-    ]
-  }
-}
-
-```
-
-
 ### shear displacement structure view complex
 Example instance: shear_displacement_structure_view_complex
 #### json
@@ -853,6 +791,39 @@ Example instance: shear_displacement_structure_view_complex
 ```
 
 
+### shear displacement structure view simple
+Example instance: shear_displacement_structure_view_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "ShearDisplacementStructureView",
+  "id": "fault-view-1",
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        149.387,
+        -35.124
+      ],
+      [
+        149.461,
+        -35.344
+      ]
+    ]
+  },
+  "time": null,
+  "properties": {
+    "name": "Lake George Fault",
+    "faultType": "normal fault",
+    "faultType_uri": "http://resource.geosciml.org/classifier/cgi/faulttype/normal_fault",
+    "specification_uri": "http://data.geoscience.gov.au/feature/fault/lake-george-fault-1"
+  }
+}
+
+```
+
+
 ### site observation view complex
 Example instance: site_observation_view_complex
 #### json
@@ -894,6 +865,35 @@ Example instance: site_observation_view_complex
       149.312,
       -35.475
     ]
+  }
+}
+
+```
+
+
+### site observation view simple
+Example instance: site_observation_view_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "SiteObservationView",
+  "id": "obs-view-1",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      149.312,
+      -35.475
+    ]
+  },
+  "time": null,
+  "properties": {
+    "siteName": "field station FS-42",
+    "observationName": "bedding orientation measurement",
+    "observedProperty": "planar orientation \u2013 strike and dip",
+    "observedValue": "045 / 32",
+    "observedValueUom": "degrees",
+    "symbolRotation": 45
   }
 }
 

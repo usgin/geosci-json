@@ -56,7 +56,7 @@
       "snippets": [
         {
           "language": "json",
-          "ref": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/fc_extended_minimal.json",
+          "ref": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/examples/fc_extended_minimal.json",
           "code": "{\n  \"$comment\": \"Minimal Extended-profile FeatureCollection. The Extended profile dispatches on featureType into the Basic anchors with extra description-slot constraints. Each constraint only fires when the slot is present, so a minimal instance with no description content still validates and exercises the dispatcher routing.\",\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"featureType\": \"GeologicUnit\",\n      \"id\": \"ext.minimal.gu.1\",\n      \"geometry\": null,\n      \"place\": null,\n      \"time\": null,\n      \"properties\": {\n        \"purpose\": \"typicalNorm\",\n        \"geologicUnitType\": \"http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit\"\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"featureType\": \"Contact\",\n      \"id\": \"ext.minimal.contact.1\",\n      \"geometry\": null,\n      \"place\": null,\n      \"time\": null,\n      \"properties\": {\n        \"purpose\": \"instance\",\n        \"contactType\": \"http://resource.geosciml.org/classifier/cgi/contacttype/conformable_contact\"\n      }\n    }\n  ]\n}\n",
           "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmExtendedGeologyCollection/example_1_1.json"
         }

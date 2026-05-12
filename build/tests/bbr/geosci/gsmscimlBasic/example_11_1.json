@@ -1,43 +1,75 @@
 {
   "type": "Feature",
-  "featureType": "Fold",
-  "id": "anticline-complex",
-  "geometry": null,
-  "place": null,
+  "featureType": "MappedFeature",
+  "id": "mappedfeature-fault-complex",
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        149.387,
+        -35.124
+      ],
+      [
+        149.412,
+        -35.198
+      ],
+      [
+        149.435,
+        -35.271
+      ],
+      [
+        149.461,
+        -35.344
+      ]
+    ]
+  },
+  "place": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        149.387,
+        -35.124
+      ],
+      [
+        149.412,
+        -35.198
+      ],
+      [
+        149.435,
+        -35.271
+      ],
+      [
+        149.461,
+        -35.344
+      ]
+    ]
+  },
   "time": null,
   "properties": {
     "observationMethod": [
       {
         "type": "Category",
-        "definition": "http://resource.geosciml.org/classifierScheme/cgi/featureobservationmethod",
-        "label": "field observation",
-        "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/field_observation"
+        "definition": "http://resource.geosciml.org/classifierScheme/cgi/mappedfeatureobservationmethod",
+        "label": "inferred from aeromagnetic survey",
+        "value": "http://resource.geosciml.org/classifier/cgi/mappedfeatureobservationmethod/inferred_aeromagnetic_survey"
       }
     ],
-    "purpose": "instance",
-    "occurrence": [
-      {
-        "href": "http://data.geoscience.gov.au/mappedfeature/fold/anticline-mf-1",
-        "title": "Anticline trace \u2013 1:50000 sheet"
-      }
-    ],
-    "geologicHistory": [
-      {
-        "type": "Feature",
-        "featureType": "GeologicEvent",
-        "id": "anticline-deformation",
-        "geometry": null,
-        "place": null,
-        "time": null,
-        "properties": {
-          "eventProcess": [
-            "http://resource.geosciml.org/classifier/cgi/eventprocess/folding"
-          ],
-          "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Silurian",
-          "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Devonian"
-        }
-      }
-    ],
-    "profileType": "http://resource.geosciml.org/classifier/cgi/foldprofiletype/anticline"
-  }
+    "positionalAccuracy": {
+      "type": "Quantity",
+      "uom": {
+        "code": "m"
+      },
+      "value": 250.0,
+      "definition": "http://www.opengis.net/def/property/OGC/0/PositionalAccuracy",
+      "label": "positional accuracy"
+    },
+    "resolutionRepresentativeFraction": 250000,
+    "mappingFrame": "http://resource.geoscience.gov.au/vocabulary/mappingframe/earth-surface",
+    "exposure": "http://resource.geosciml.org/classifier/cgi/exposure/concealed",
+    "specification": {
+      "href": "http://data.geoscience.gov.au/feature/fault/lake-george-fault-1",
+      "title": "Lake George Fault"
+    }
+  },
+  "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/4283"
 }

@@ -1,37 +1,19 @@
 {
   "type": "Feature",
-  "featureType": "Contact",
-  "id": "contact-disconformity-xy",
+  "featureType": "GeologicUnit",
+  "id": "hervey-group-1",
   "geometry": null,
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
-    "classifier": [
+    "purpose": "typicalNorm",
+    "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
+    "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/group",
+    "occurrence": [
       {
-        "type": "Category",
-        "definition": "http://some.org/classifier/contactType",
-        "label": "erosional contact",
-        "value": "http://some.org/contactType/erosional-contact"
+        "href": "http://data.geoscience.gov.au/mappedfeature/polygon/6735427298",
+        "title": "Mapped occurrence on 1:250000 sheet"
       }
-    ],
-    "geologicHistory": [
-      {
-        "type": "Feature",
-        "featureType": "GeologicEvent",
-        "id": "non-deposition-xy",
-        "geometry": null,
-        "place": null,
-        "time": null,
-        "properties": {
-          "eventProcess": [
-            "http://resource.geosciml.org/classifier/cgi/eventprocess/non-deposition"
-          ],
-          "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Cambrian",
-          "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Ordovician"
-        }
-      }
-    ],
-    "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity"
+    ]
   }
 }

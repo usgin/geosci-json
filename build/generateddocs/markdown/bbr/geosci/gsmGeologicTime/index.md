@@ -183,7 +183,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
-- [examplegsmGeologicTimeMinimal.json](examplegsmGeologicTimeMinimal.json)
+- [examplegsmGeologicTimeMinimal.json](examples/examplegsmGeologicTimeMinimal.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

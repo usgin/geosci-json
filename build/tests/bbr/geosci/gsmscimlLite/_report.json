@@ -2,7 +2,7 @@
   "title": "Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite",
   "bblockName": "gsmscimlLite",
   "bblockId": "usgin.bbr.geosci.gsmscimlLite",
-  "generated": "2026-05-12T21:19:38.735415+00:00",
+  "generated": "2026-05-12T21:31:26.170327+00:00",
   "result": true,
   "items": [
     {
@@ -23,7 +23,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examplegsmscimlLiteMinimal.json from examples"
+              "message": "Using examples/borehole_view_complex.json from examples"
             }
           ]
         },
@@ -59,7 +59,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using borehole_view_simple.json from examples"
+              "message": "Using examples/borehole_view_simple.json from examples"
             }
           ]
         },
@@ -95,7 +95,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using contact_view_simple.json from examples"
+              "message": "Using examples/contact_view_complex.json from examples"
             }
           ]
         },
@@ -131,7 +131,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using geologic_specimen_view_simple.json from examples"
+              "message": "Using examples/contact_view_simple.json from examples"
             }
           ]
         },
@@ -167,7 +167,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using geologic_unit_view_simple.json from examples"
+              "message": "Using examples/examplegsmscimlLiteMinimal.json from examples"
             }
           ]
         },
@@ -203,7 +203,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using geomorphologic_unit_view_simple.json from examples"
+              "message": "Using examples/geologic_specimen_view_complex.json from examples"
             }
           ]
         },
@@ -239,7 +239,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using shear_displacement_structure_view_simple.json from examples"
+              "message": "Using examples/geologic_specimen_view_simple.json from examples"
             }
           ]
         },
@@ -275,7 +275,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using site_observation_view_simple.json from examples"
+              "message": "Using examples/geologic_unit_view_complex.json from examples"
             }
           ]
         },
@@ -311,7 +311,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using borehole_view_complex.json from examples"
+              "message": "Using examples/geologic_unit_view_simple.json from examples"
             }
           ]
         },
@@ -347,7 +347,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using contact_view_complex.json from examples"
+              "message": "Using examples/geomorphologic_unit_view_simple.json from examples"
             }
           ]
         },
@@ -383,7 +383,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using geologic_specimen_view_complex.json from examples"
+              "message": "Using examples/shear_displacement_structure_view_complex.json from examples"
             }
           ]
         },
@@ -419,7 +419,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using geologic_unit_view_complex.json from examples"
+              "message": "Using examples/shear_displacement_structure_view_simple.json from examples"
             }
           ]
         },
@@ -455,7 +455,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using shear_displacement_structure_view_complex.json from examples"
+              "message": "Using examples/site_observation_view_complex.json from examples"
             }
           ]
         },
@@ -491,7 +491,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using site_observation_view_complex.json from examples"
+              "message": "Using examples/site_observation_view_simple.json from examples"
             }
           ]
         },

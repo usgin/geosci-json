@@ -468,21 +468,22 @@ Branches (`oneOf`):
 
 ## Examples
 
-- [examplegsmscimlBasicMinimal.json](examplegsmscimlBasicMinimal.json)
-- [fc_heterogeneous_GSO.json](fc_heterogeneous_GSO.json)
-- [fc_homogeneous_GSO.json](fc_homogeneous_GSO.json)
-- [contact_simple.json](contact_simple.json)
-- [fold_simple.json](fold_simple.json)
-- [geologic_unit_simple.json](geologic_unit_simple.json)
-- [mapped_feature_simple.json](mapped_feature_simple.json)
-- [natural_geomorphologic_feature_simple.json](natural_geomorphologic_feature_simple.json)
-- [shear_displacement_structure_simple.json](shear_displacement_structure_simple.json)
-- [contact_complex.json](contact_complex.json)
-- [fold_complex.json](fold_complex.json)
-- [geologic_unit_complex.json](geologic_unit_complex.json)
-- [mapped_feature_complex.json](mapped_feature_complex.json)
-- [natural_geomorphologic_feature_complex.json](natural_geomorphologic_feature_complex.json)
-- [shear_displacement_structure_complex.json](shear_displacement_structure_complex.json)
+- [contact_complex.json](examples/contact_complex.json)
+- [contact_simple.json](examples/contact_simple.json)
+- [examplegsmscimlBasicMinimal.json](examples/examplegsmscimlBasicMinimal.json)
+- [fc_heterogeneous_GSO.json](examples/fc_heterogeneous_GSO.json)
+- [fc_homogeneous_GSO.json](examples/fc_homogeneous_GSO.json)
+- [fold_complex.json](examples/fold_complex.json)
+- [fold_simple.json](examples/fold_simple.json)
+- [geologic_event_from_GSO.json](examples/geologic_event_from_GSO.json)
+- [geologic_unit_complex.json](examples/geologic_unit_complex.json)
+- [geologic_unit_simple.json](examples/geologic_unit_simple.json)
+- [mapped_feature_complex.json](examples/mapped_feature_complex.json)
+- [mapped_feature_simple.json](examples/mapped_feature_simple.json)
+- [natural_geomorphologic_feature_complex.json](examples/natural_geomorphologic_feature_complex.json)
+- [natural_geomorphologic_feature_simple.json](examples/natural_geomorphologic_feature_simple.json)
+- [shear_displacement_structure_complex.json](examples/shear_displacement_structure_complex.json)
+- [shear_displacement_structure_simple.json](examples/shear_displacement_structure_simple.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
@@ -493,6 +494,71 @@ See [examples.yaml](examples.yaml) for the full manifest.
 - Resolver: [tools/resolve_geosci_schema.py](../../tools/resolve_geosci_schema.py).
 
 ## Examples
+
+### contact complex
+Example instance: contact_complex
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "Contact",
+  "id": "contact-disconformity-xy",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "purpose": "instance",
+    "classifier": [
+      {
+        "type": "Category",
+        "definition": "http://some.org/classifier/contactType",
+        "label": "erosional contact",
+        "value": "http://some.org/contactType/erosional-contact"
+      }
+    ],
+    "geologicHistory": [
+      {
+        "type": "Feature",
+        "featureType": "GeologicEvent",
+        "id": "non-deposition-xy",
+        "geometry": null,
+        "place": null,
+        "time": null,
+        "properties": {
+          "eventProcess": [
+            "http://resource.geosciml.org/classifier/cgi/eventprocess/non-deposition"
+          ],
+          "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Cambrian",
+          "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Ordovician"
+        }
+      }
+    ],
+    "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity"
+  }
+}
+
+```
+
+
+### contact simple
+Example instance: contact_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "Contact",
+  "id": "contact-unconformity-1",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "purpose": "instance",
+    "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/unconformity"
+  }
+}
+
+```
+
 
 ### examplegsmscimlBasicMinimal
 Example instance: examplegsmscimlBasicMinimal
@@ -672,199 +738,6 @@ Homogeneous FeatureCollection example — collection declares featureType="Geolo
 ```
 
 
-### contact simple
-Example instance: contact_simple
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "Contact",
-  "id": "contact-unconformity-1",
-  "geometry": null,
-  "place": null,
-  "time": null,
-  "properties": {
-    "purpose": "instance",
-    "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/unconformity"
-  }
-}
-
-```
-
-
-### fold simple
-Example instance: fold_simple
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "Fold",
-  "id": "anticline-1",
-  "geometry": null,
-  "place": null,
-  "time": null,
-  "properties": {
-    "purpose": "instance",
-    "profileType": "http://resource.geosciml.org/classifier/cgi/foldprofiletype/antiform"
-  }
-}
-
-```
-
-
-### geologic unit simple
-Example instance: geologic_unit_simple
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "GeologicUnit",
-  "id": "hervey-group-1",
-  "geometry": null,
-  "place": null,
-  "time": null,
-  "properties": {
-    "purpose": "typicalNorm",
-    "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
-    "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/group",
-    "occurrence": [
-      {
-        "href": "http://data.geoscience.gov.au/mappedfeature/polygon/6735427298",
-        "title": "Mapped occurrence on 1:250000 sheet"
-      }
-    ]
-  }
-}
-
-```
-
-
-### mapped feature simple
-Example instance: mapped_feature_simple
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "MappedFeature",
-  "id": "mappedfeature-gu-1",
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [
-      [
-        [149.12, -35.31],
-        [149.45, -35.31],
-        [149.45, -35.58],
-        [149.12, -35.58],
-        [149.12, -35.31]
-      ]
-    ]
-  },
-  "place": null,
-  "time": null,
-  "properties": {
-    "mappingFrame": "http://resource.geoscience.gov.au/vocabulary/mappingframe/top-of-bedrock",
-    "exposure": "http://resource.geosciml.org/classifier/cgi/exposure/exposed",
-    "specification": {
-      "href": "http://data.geoscience.gov.au/feature/geologicunit/hervey-group-1",
-      "title": "Hervey Group"
-    }
-  }
-}
-
-```
-
-
-### natural geomorphologic feature simple
-Example instance: natural_geomorphologic_feature_simple
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "NaturalGeomorphologicFeature",
-  "id": "river-valley-1",
-  "geometry": null,
-  "place": null,
-  "time": null,
-  "properties": {
-    "purpose": "instance",
-    "naturalGeomorphologicFeatureType": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/river_channel",
-    "activity": {
-      "type": "Category",
-      "definition": "http://resource.geosciml.org/classifierScheme/cgi/geomorphologicactivity",
-      "label": "active",
-      "value": "http://resource.geosciml.org/classifier/cgi/geomorphologicactivity/active"
-    }
-  }
-}
-
-```
-
-
-### shear displacement structure simple
-Example instance: shear_displacement_structure_simple
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "ShearDisplacementStructure",
-  "id": "lake-george-fault-1",
-  "geometry": null,
-  "place": null,
-  "time": null,
-  "properties": {
-    "purpose": "instance",
-    "faultType": "http://resource.geosciml.org/classifier/cgi/faulttype/normal_fault"
-  }
-}
-
-```
-
-
-### contact complex
-Example instance: contact_complex
-#### json
-```json
-{
-  "type": "Feature",
-  "featureType": "Contact",
-  "id": "contact-disconformity-xy",
-  "geometry": null,
-  "place": null,
-  "time": null,
-  "properties": {
-    "purpose": "instance",
-    "classifier": [
-      {
-        "type": "Category",
-        "definition": "http://some.org/classifier/contactType",
-        "label": "erosional contact",
-        "value": "http://some.org/contactType/erosional-contact"
-      }
-    ],
-    "geologicHistory": [
-      {
-        "type": "Feature",
-        "featureType": "GeologicEvent",
-        "id": "non-deposition-xy",
-        "geometry": null,
-        "place": null,
-        "time": null,
-        "properties": {
-          "eventProcess": [
-            "http://resource.geosciml.org/classifier/cgi/eventprocess/non-deposition"
-          ],
-          "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Cambrian",
-          "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Ordovician"
-        }
-      }
-    ],
-    "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity"
-  }
-}
-
-```
-
-
 ### fold complex
 Example instance: fold_complex
 #### json
@@ -910,6 +783,85 @@ Example instance: fold_complex
       }
     ],
     "profileType": "http://resource.geosciml.org/classifier/cgi/foldprofiletype/anticline"
+  }
+}
+
+```
+
+
+### fold simple
+Example instance: fold_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "Fold",
+  "id": "anticline-1",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "purpose": "instance",
+    "profileType": "http://resource.geosciml.org/classifier/cgi/foldprofiletype/antiform"
+  }
+}
+
+```
+
+
+### geologic event from GSO
+Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicEvent.xml — Kanimblan Orogeny, a deformation event at 335 Ma (range 325–350 Ma), Tournaisian–Serpukhovian, deep crustal setting. Validates against schemas/json/4.1/geoscimlBasic.json#GeologicEvent.
+#### json
+```json
+{
+  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicEvent.xml — Kanimblan Orogeny, a deformation event at 335 Ma (range 325–350 Ma), Tournaisian–Serpukhovian, deep crustal setting. Validates against schemas/json/4.1/geoscimlBasic.json#GeologicEvent.",
+  "type": "Feature",
+  "id": "event.1",
+  "featureType": "GeologicEvent",
+  "conformsTo": [
+    "https://ext.iide.dev/schemas/geosciml/json/4.1/geoscimlBasic.json"
+  ],
+  "geometry": null,
+  "properties": {
+    "name": "Kanimblan Orogeny",
+    "purpose": "instance",
+    "eventProcess": [
+      "http://resource.geosciml.org/classifier/cgi/eventprocess/deformation"
+    ],
+    "numericAge": {
+      "reportingDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/representativeAge",
+        "label": "representative age",
+        "uom": { "code": "Ma" },
+        "value": 335
+      },
+      "olderBoundDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/olderBound",
+        "label": "older bound",
+        "uom": { "code": "Ma" },
+        "value": 350
+      },
+      "youngerBoundDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/youngerBound",
+        "label": "younger bound",
+        "uom": { "code": "Ma" },
+        "value": 325
+      }
+    },
+    "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Tournaisian",
+    "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Serpukhovian",
+    "eventEnvironment": [
+      {
+        "type": "Category",
+        "definition": "http://resource.geosciml.org/classifier/cgi/eventenvironment",
+        "label": "deep crustal",
+        "codeSpace": "http://resource.geosciml.org/classifier/cgi/eventenvironment",
+        "value": "http://resource.geosciml.org/classifier/cgi/eventenvironment/deep-crustal"
+      }
+    ]
   }
 }
 
@@ -1070,6 +1022,33 @@ Example instance: geologic_unit_complex
 ```
 
 
+### geologic unit simple
+Example instance: geologic_unit_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "GeologicUnit",
+  "id": "hervey-group-1",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "purpose": "typicalNorm",
+    "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
+    "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/group",
+    "occurrence": [
+      {
+        "href": "http://data.geoscience.gov.au/mappedfeature/polygon/6735427298",
+        "title": "Mapped occurrence on 1:250000 sheet"
+      }
+    ]
+  }
+}
+
+```
+
+
 ### mapped feature complex
 Example instance: mapped_feature_complex
 #### json
@@ -1153,6 +1132,41 @@ Example instance: mapped_feature_complex
 ```
 
 
+### mapped feature simple
+Example instance: mapped_feature_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "MappedFeature",
+  "id": "mappedfeature-gu-1",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [149.12, -35.31],
+        [149.45, -35.31],
+        [149.45, -35.58],
+        [149.12, -35.58],
+        [149.12, -35.31]
+      ]
+    ]
+  },
+  "place": null,
+  "time": null,
+  "properties": {
+    "mappingFrame": "http://resource.geoscience.gov.au/vocabulary/mappingframe/top-of-bedrock",
+    "exposure": "http://resource.geosciml.org/classifier/cgi/exposure/exposed",
+    "specification": {
+      "href": "http://data.geoscience.gov.au/feature/geologicunit/hervey-group-1",
+      "title": "Hervey Group"
+    }
+  }
+}
+
+```
+
+
 ### natural geomorphologic feature complex
 Example instance: natural_geomorphologic_feature_complex
 #### json
@@ -1204,6 +1218,32 @@ Example instance: natural_geomorphologic_feature_complex
 ```
 
 
+### natural geomorphologic feature simple
+Example instance: natural_geomorphologic_feature_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "NaturalGeomorphologicFeature",
+  "id": "river-valley-1",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "purpose": "instance",
+    "naturalGeomorphologicFeatureType": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/river_channel",
+    "activity": {
+      "type": "Category",
+      "definition": "http://resource.geosciml.org/classifierScheme/cgi/geomorphologicactivity",
+      "label": "active",
+      "value": "http://resource.geosciml.org/classifier/cgi/geomorphologicactivity/active"
+    }
+  }
+}
+
+```
+
+
 ### shear displacement structure complex
 Example instance: shear_displacement_structure_complex
 #### json
@@ -1248,6 +1288,26 @@ Example instance: shear_displacement_structure_complex
         }
       }
     ],
+    "faultType": "http://resource.geosciml.org/classifier/cgi/faulttype/normal_fault"
+  }
+}
+
+```
+
+
+### shear displacement structure simple
+Example instance: shear_displacement_structure_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "ShearDisplacementStructure",
+  "id": "lake-george-fault-1",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "purpose": "instance",
     "faultType": "http://resource.geosciml.org/classifier/cgi/faulttype/normal_fault"
   }
 }

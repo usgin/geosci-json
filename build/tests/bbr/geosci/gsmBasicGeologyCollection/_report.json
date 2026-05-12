@@ -2,7 +2,7 @@
   "title": "Validation report for usgin.bbr.geosci.gsmBasicGeologyCollection - gsmBasicGeologyCollection",
   "bblockName": "gsmBasicGeologyCollection",
   "bblockId": "usgin.bbr.geosci.gsmBasicGeologyCollection",
-  "generated": "2026-05-12T21:19:26.516185+00:00",
+  "generated": "2026-05-12T21:31:17.999170+00:00",
   "result": true,
   "items": [
     {
@@ -23,7 +23,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using fc_contacts_complex_GSO.json from examples"
+              "message": "Using examples/fc_contacts_complex_GSO.json from examples"
             }
           ]
         },
@@ -59,7 +59,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using fc_geologicunit_from_OGC.json from examples"
+              "message": "Using examples/fc_geologicunit_from_OGC.json from examples"
             }
           ]
         },
@@ -95,7 +95,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using fc_geologicunits_BritishColumbia.json from examples"
+              "message": "Using examples/fc_geologicunits_BritishColumbia.json from examples"
             }
           ]
         },
@@ -131,7 +131,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using fc_geologicunits_IsleOfWight.json from examples"
+              "message": "Using examples/fc_geologicunits_IsleOfWight.json from examples"
             }
           ]
         },
@@ -167,7 +167,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using fc_mixed_from_OGC.json from examples"
+              "message": "Using examples/fc_mixed_from_OGC.json from examples"
             }
           ]
         },

@@ -1,7 +1,7 @@
 Validation report for usgin.bbr.geosci.gsmBasicGeologyCollection - gsmBasicGeologyCollection
-Generated 2026-05-12T21:19:25.990418+00:00
+Generated 2026-05-12T21:31:17.626303+00:00
 === Files ===
-Using fc_geologicunits_IsleOfWight.json from examples
+Using examples/fc_geologicunits_IsleOfWight.json from examples
 === End Files ===
 
 === JSON Schema ===

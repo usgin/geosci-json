@@ -10,7 +10,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmBasicGeologyCollection - gsmBasicGeologyCollection",
       "bblockName": "gsmBasicGeologyCollection",
       "bblockId": "usgin.bbr.geosci.gsmBasicGeologyCollection",
-      "generated": "2026-05-12T21:19:26.516185+00:00",
+      "generated": "2026-05-12T21:31:17.999170+00:00",
       "result": true,
       "items": [
         {
@@ -31,7 +31,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fc_contacts_complex_GSO.json from examples"
+                  "message": "Using examples/fc_contacts_complex_GSO.json from examples"
                 }
               ]
             },
@@ -67,7 +67,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fc_geologicunit_from_OGC.json from examples"
+                  "message": "Using examples/fc_geologicunit_from_OGC.json from examples"
                 }
               ]
             },
@@ -103,7 +103,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fc_geologicunits_BritishColumbia.json from examples"
+                  "message": "Using examples/fc_geologicunits_BritishColumbia.json from examples"
                 }
               ]
             },
@@ -139,7 +139,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fc_geologicunits_IsleOfWight.json from examples"
+                  "message": "Using examples/fc_geologicunits_IsleOfWight.json from examples"
                 }
               ]
             },
@@ -175,7 +175,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fc_mixed_from_OGC.json from examples"
+                  "message": "Using examples/fc_mixed_from_OGC.json from examples"
                 }
               ]
             },
@@ -205,7 +205,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmBorehole - gsmBorehole",
       "bblockName": "gsmBorehole",
       "bblockId": "usgin.bbr.geosci.gsmBorehole",
-      "generated": "2026-05-12T21:19:26.555678+00:00",
+      "generated": "2026-05-12T21:31:18.034476+00:00",
       "result": true,
       "items": [
         {
@@ -226,7 +226,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examplegsmBoreholeMinimal.json from examples"
+                  "message": "Using examples/examplegsmBoreholeMinimal.json from examples"
                 }
               ]
             },
@@ -256,7 +256,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmEarthMaterialCollection - gsmEarthMaterialCollection",
       "bblockName": "gsmEarthMaterialCollection",
       "bblockId": "usgin.bbr.geosci.gsmEarthMaterialCollection",
-      "generated": "2026-05-12T21:19:33.910249+00:00",
+      "generated": "2026-05-12T21:31:22.813774+00:00",
       "result": true,
       "items": [
         {
@@ -277,7 +277,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fc_bolsa_quartzite_GSO.json from examples"
+                  "message": "Using examples/fc_bolsa_quartzite_GSO.json from examples"
                 }
               ]
             },
@@ -307,7 +307,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmEarthMaterialExtension - gsmEarthMaterialExtension",
       "bblockName": "gsmEarthMaterialExtension",
       "bblockId": "usgin.bbr.geosci.gsmEarthMaterialExtension",
-      "generated": "2026-05-12T21:19:33.955306+00:00",
+      "generated": "2026-05-12T21:31:22.852871+00:00",
       "result": true,
       "items": [
         {
@@ -328,7 +328,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examplegsmEarthMaterialExtensionMinimal.json from examples"
+                  "message": "Using examples/examplegsmEarthMaterialExtensionMinimal.json from examples"
                 }
               ]
             },
@@ -358,7 +358,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmExtendedGeologyCollection - gsmExtendedGeologyCollection",
       "bblockName": "gsmExtendedGeologyCollection",
       "bblockId": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
-      "generated": "2026-05-12T21:19:38.350891+00:00",
+      "generated": "2026-05-12T21:31:25.836776+00:00",
       "result": true,
       "items": [
         {
@@ -379,7 +379,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fc_extended_minimal.json from examples"
+                  "message": "Using examples/fc_extended_minimal.json from examples"
                 }
               ]
             },
@@ -409,7 +409,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicRelationExtension - gsmGeologicRelationExtension",
       "bblockName": "gsmGeologicRelationExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicRelationExtension",
-      "generated": "2026-05-12T21:19:38.365613+00:00",
+      "generated": "2026-05-12T21:31:25.850082+00:00",
       "result": true,
       "items": [
         {
@@ -430,7 +430,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examplegsmGeologicRelationExtensionMinimal.json from examples"
+                  "message": "Using examples/examplegsmGeologicRelationExtensionMinimal.json from examples"
                 }
               ]
             },
@@ -460,7 +460,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicStructureExtension - gsmGeologicStructureExtension",
       "bblockName": "gsmGeologicStructureExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicStructureExtension",
-      "generated": "2026-05-12T21:19:38.421811+00:00",
+      "generated": "2026-05-12T21:31:25.898743+00:00",
       "result": true,
       "items": [
         {
@@ -481,7 +481,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examplegsmGeologicStructureExtensionMinimal.json from examples"
+                  "message": "Using examples/examplegsmGeologicStructureExtensionMinimal.json from examples"
                 }
               ]
             },
@@ -511,7 +511,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicTime - gsmGeologicTime",
       "bblockName": "gsmGeologicTime",
       "bblockId": "usgin.bbr.geosci.gsmGeologicTime",
-      "generated": "2026-05-12T21:19:38.462269+00:00",
+      "generated": "2026-05-12T21:31:25.933639+00:00",
       "result": true,
       "items": [
         {
@@ -532,7 +532,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examplegsmGeologicTimeMinimal.json from examples"
+                  "message": "Using examples/examplegsmGeologicTimeMinimal.json from examples"
                 }
               ]
             },
@@ -562,7 +562,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicUnitExtension - gsmGeologicUnitExtension",
       "bblockName": "gsmGeologicUnitExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicUnitExtension",
-      "generated": "2026-05-12T21:19:38.478756+00:00",
+      "generated": "2026-05-12T21:31:25.948435+00:00",
       "result": true,
       "items": [
         {
@@ -583,7 +583,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examplegsmGeologicUnitExtensionMinimal.json from examples"
+                  "message": "Using examples/examplegsmGeologicUnitExtensionMinimal.json from examples"
                 }
               ]
             },
@@ -613,7 +613,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmSpecimen - gsmSpecimen",
       "bblockName": "gsmSpecimen",
       "bblockId": "usgin.bbr.geosci.gsmSpecimen",
-      "generated": "2026-05-12T21:19:38.526395+00:00",
+      "generated": "2026-05-12T21:31:25.989596+00:00",
       "result": true,
       "items": [
         {
@@ -634,7 +634,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examplegsmSpecimenMinimal.json from examples"
+                  "message": "Using examples/examplegsmSpecimenMinimal.json from examples"
                 }
               ]
             },
@@ -664,7 +664,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmscimlBasic - gsmscimlBasic",
       "bblockName": "gsmscimlBasic",
       "bblockId": "usgin.bbr.geosci.gsmscimlBasic",
-      "generated": "2026-05-12T21:19:38.618113+00:00",
+      "generated": "2026-05-12T21:31:26.070349+00:00",
       "result": true,
       "items": [
         {
@@ -685,7 +685,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examplegsmscimlBasicMinimal.json from examples"
+                  "message": "Using examples/contact_complex.json from examples"
                 }
               ]
             },
@@ -721,7 +721,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fc_heterogeneous_GSO.json from examples"
+                  "message": "Using examples/contact_simple.json from examples"
                 }
               ]
             },
@@ -757,7 +757,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fc_homogeneous_GSO.json from examples"
+                  "message": "Using examples/examplegsmscimlBasicMinimal.json from examples"
                 }
               ]
             },
@@ -793,7 +793,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using contact_simple.json from examples"
+                  "message": "Using examples/fc_heterogeneous_GSO.json from examples"
                 }
               ]
             },
@@ -829,7 +829,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fold_simple.json from examples"
+                  "message": "Using examples/fc_homogeneous_GSO.json from examples"
                 }
               ]
             },
@@ -865,7 +865,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using geologic_unit_simple.json from examples"
+                  "message": "Using examples/fold_complex.json from examples"
                 }
               ]
             },
@@ -901,7 +901,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using mapped_feature_simple.json from examples"
+                  "message": "Using examples/fold_simple.json from examples"
                 }
               ]
             },
@@ -937,7 +937,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using natural_geomorphologic_feature_simple.json from examples"
+                  "message": "Using examples/geologic_event_from_GSO.json from examples"
                 }
               ]
             },
@@ -973,7 +973,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using shear_displacement_structure_simple.json from examples"
+                  "message": "Using examples/geologic_unit_complex.json from examples"
                 }
               ]
             },
@@ -1009,7 +1009,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using contact_complex.json from examples"
+                  "message": "Using examples/geologic_unit_simple.json from examples"
                 }
               ]
             },
@@ -1045,7 +1045,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using fold_complex.json from examples"
+                  "message": "Using examples/mapped_feature_complex.json from examples"
                 }
               ]
             },
@@ -1081,7 +1081,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using geologic_unit_complex.json from examples"
+                  "message": "Using examples/mapped_feature_simple.json from examples"
                 }
               ]
             },
@@ -1117,7 +1117,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using mapped_feature_complex.json from examples"
+                  "message": "Using examples/natural_geomorphologic_feature_complex.json from examples"
                 }
               ]
             },
@@ -1153,7 +1153,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using natural_geomorphologic_feature_complex.json from examples"
+                  "message": "Using examples/natural_geomorphologic_feature_simple.json from examples"
                 }
               ]
             },
@@ -1189,7 +1189,43 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using shear_displacement_structure_complex.json from examples"
+                  "message": "Using examples/shear_displacement_structure_complex.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/geosci/gsmscimlBasic/example_16_1.json",
+            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmscimlBasic/example_16_1.json",
+            "exampleIndex": 16,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/shear_displacement_structure_simple.json from examples"
                 }
               ]
             },
@@ -1210,8 +1246,8 @@
       ],
       "globalErrors": {},
       "counts": {
-        "total": 15,
-        "passed": 15,
+        "total": 16,
+        "passed": 16,
         "failed": 0
       }
     },
@@ -1219,7 +1255,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite",
       "bblockName": "gsmscimlLite",
       "bblockId": "usgin.bbr.geosci.gsmscimlLite",
-      "generated": "2026-05-12T21:19:38.735415+00:00",
+      "generated": "2026-05-12T21:31:26.170327+00:00",
       "result": true,
       "items": [
         {
@@ -1240,7 +1276,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using examplegsmscimlLiteMinimal.json from examples"
+                  "message": "Using examples/borehole_view_complex.json from examples"
                 }
               ]
             },
@@ -1276,7 +1312,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using borehole_view_simple.json from examples"
+                  "message": "Using examples/borehole_view_simple.json from examples"
                 }
               ]
             },
@@ -1312,7 +1348,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using contact_view_simple.json from examples"
+                  "message": "Using examples/contact_view_complex.json from examples"
                 }
               ]
             },
@@ -1348,7 +1384,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using geologic_specimen_view_simple.json from examples"
+                  "message": "Using examples/contact_view_simple.json from examples"
                 }
               ]
             },
@@ -1384,7 +1420,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using geologic_unit_view_simple.json from examples"
+                  "message": "Using examples/examplegsmscimlLiteMinimal.json from examples"
                 }
               ]
             },
@@ -1420,7 +1456,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using geomorphologic_unit_view_simple.json from examples"
+                  "message": "Using examples/geologic_specimen_view_complex.json from examples"
                 }
               ]
             },
@@ -1456,7 +1492,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using shear_displacement_structure_view_simple.json from examples"
+                  "message": "Using examples/geologic_specimen_view_simple.json from examples"
                 }
               ]
             },
@@ -1492,7 +1528,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using site_observation_view_simple.json from examples"
+                  "message": "Using examples/geologic_unit_view_complex.json from examples"
                 }
               ]
             },
@@ -1528,7 +1564,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using borehole_view_complex.json from examples"
+                  "message": "Using examples/geologic_unit_view_simple.json from examples"
                 }
               ]
             },
@@ -1564,7 +1600,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using contact_view_complex.json from examples"
+                  "message": "Using examples/geomorphologic_unit_view_simple.json from examples"
                 }
               ]
             },
@@ -1600,7 +1636,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using geologic_specimen_view_complex.json from examples"
+                  "message": "Using examples/shear_displacement_structure_view_complex.json from examples"
                 }
               ]
             },
@@ -1636,7 +1672,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using geologic_unit_view_complex.json from examples"
+                  "message": "Using examples/shear_displacement_structure_view_simple.json from examples"
                 }
               ]
             },
@@ -1672,7 +1708,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using shear_displacement_structure_view_complex.json from examples"
+                  "message": "Using examples/site_observation_view_complex.json from examples"
                 }
               ]
             },
@@ -1708,7 +1744,7 @@
               "entries": [
                 {
                   "isError": false,
-                  "message": "Using site_observation_view_complex.json from examples"
+                  "message": "Using examples/site_observation_view_simple.json from examples"
                 }
               ]
             },

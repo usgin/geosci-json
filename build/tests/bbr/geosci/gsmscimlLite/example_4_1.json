@@ -1,20 +1,30 @@
 {
   "type": "Feature",
-  "featureType": "GeologicSpecimenView",
-  "id": "specimen-view-1",
+  "featureType": "ContactView",
+  "id": "contact-view-1",
   "geometry": {
-    "type": "Point",
+    "type": "LineString",
     "coordinates": [
-      149.312,
-      -35.475
+      [
+        149.12,
+        -35.31
+      ],
+      [
+        149.28,
+        -35.44
+      ],
+      [
+        149.45,
+        -35.58
+      ]
     ]
   },
   "time": null,
   "properties": {
-    "label": "GRS-2019-042",
-    "specimenType": "hand specimen",
-    "materialClass": "rock",
-    "specimenType_uri": "http://resource.geosciml.org/classifier/cgi/specimentype/hand_specimen",
-    "materialClass_uri": "http://resource.geosciml.org/classifier/cgi/materialclass/rock"
+    "name": "Unconformity between Hervey Group and Lachlan Fold Belt basement",
+    "contactType": "unconformity",
+    "positionalAccuracy": "500 m",
+    "contactType_uri": "http://resource.geosciml.org/classifier/cgi/contacttype/unconformity",
+    "specification_uri": "http://data.geoscience.gov.au/feature/contact/unconformity-1"
   }
 }

@@ -2,7 +2,7 @@
   "title": "Validation report for usgin.bbr.geosci.gsmGeologicTime - gsmGeologicTime",
   "bblockName": "gsmGeologicTime",
   "bblockId": "usgin.bbr.geosci.gsmGeologicTime",
-  "generated": "2026-05-12T21:19:38.462269+00:00",
+  "generated": "2026-05-12T21:31:25.933639+00:00",
   "result": true,
   "items": [
     {
@@ -23,7 +23,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examplegsmGeologicTimeMinimal.json from examples"
+              "message": "Using examples/examplegsmGeologicTimeMinimal.json from examples"
             }
           ]
         },

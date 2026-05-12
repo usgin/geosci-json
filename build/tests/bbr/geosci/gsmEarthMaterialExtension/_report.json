@@ -2,7 +2,7 @@
   "title": "Validation report for usgin.bbr.geosci.gsmEarthMaterialExtension - gsmEarthMaterialExtension",
   "bblockName": "gsmEarthMaterialExtension",
   "bblockId": "usgin.bbr.geosci.gsmEarthMaterialExtension",
-  "generated": "2026-05-12T21:19:33.955306+00:00",
+  "generated": "2026-05-12T21:31:22.852871+00:00",
   "result": true,
   "items": [
     {
@@ -23,7 +23,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examplegsmEarthMaterialExtensionMinimal.json from examples"
+              "message": "Using examples/examplegsmEarthMaterialExtensionMinimal.json from examples"
             }
           ]
         },

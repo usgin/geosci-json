@@ -1,75 +1,58 @@
 {
   "type": "Feature",
-  "featureType": "MappedFeature",
-  "id": "mappedfeature-fault-complex",
+  "featureType": "NaturalGeomorphologicFeature",
+  "id": "moraine-complex",
   "geometry": {
-    "type": "LineString",
+    "type": "Polygon",
     "coordinates": [
       [
-        149.387,
-        -35.124
-      ],
-      [
-        149.412,
-        -35.198
-      ],
-      [
-        149.435,
-        -35.271
-      ],
-      [
-        149.461,
-        -35.344
+        [
+          148.21,
+          -36.445
+        ],
+        [
+          148.29,
+          -36.445
+        ],
+        [
+          148.29,
+          -36.51
+        ],
+        [
+          148.21,
+          -36.51
+        ],
+        [
+          148.21,
+          -36.445
+        ]
       ]
     ]
   },
-  "place": {
-    "type": "LineString",
-    "coordinates": [
-      [
-        149.387,
-        -35.124
-      ],
-      [
-        149.412,
-        -35.198
-      ],
-      [
-        149.435,
-        -35.271
-      ],
-      [
-        149.461,
-        -35.344
-      ]
-    ]
-  },
+  "place": null,
   "time": null,
   "properties": {
     "observationMethod": [
       {
         "type": "Category",
-        "definition": "http://resource.geosciml.org/classifierScheme/cgi/mappedfeatureobservationmethod",
-        "label": "inferred from aeromagnetic survey",
-        "value": "http://resource.geosciml.org/classifier/cgi/mappedfeatureobservationmethod/inferred_aeromagnetic_survey"
+        "definition": "http://resource.geosciml.org/classifierScheme/cgi/featureobservationmethod",
+        "label": "remote sensing interpretation",
+        "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/remote_sensing_interpretation"
       }
     ],
-    "positionalAccuracy": {
-      "type": "Quantity",
-      "uom": {
-        "code": "m"
-      },
-      "value": 250.0,
-      "definition": "http://www.opengis.net/def/property/OGC/0/PositionalAccuracy",
-      "label": "positional accuracy"
+    "purpose": "instance",
+    "naturalGeomorphologicFeatureType": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/moraine",
+    "activity": {
+      "type": "Category",
+      "definition": "http://resource.geosciml.org/classifierScheme/cgi/geomorphologicactivity",
+      "label": "inactive",
+      "value": "http://resource.geosciml.org/classifier/cgi/geomorphologicactivity/inactive"
     },
-    "resolutionRepresentativeFraction": 250000,
-    "mappingFrame": "http://resource.geoscience.gov.au/vocabulary/mappingframe/earth-surface",
-    "exposure": "http://resource.geosciml.org/classifier/cgi/exposure/concealed",
-    "specification": {
-      "href": "http://data.geoscience.gov.au/feature/fault/lake-george-fault-1",
-      "title": "Lake George Fault"
-    }
-  },
-  "coordRefSys": "http://www.opengis.net/def/crs/EPSG/0/4283"
+    "unitDescription": [
+      {
+        "href": "http://data.geoscience.gov.au/feature/geologicunit/glacial-till-1",
+        "title": "Pleistocene glacial till"
+      }
+    ]
+  }
 }

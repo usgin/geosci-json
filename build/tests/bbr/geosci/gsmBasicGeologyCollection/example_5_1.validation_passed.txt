@@ -1,7 +1,7 @@
 Validation report for usgin.bbr.geosci.gsmBasicGeologyCollection - gsmBasicGeologyCollection
-Generated 2026-05-12T21:19:26.516119+00:00
+Generated 2026-05-12T21:31:17.999102+00:00
 === Files ===
-Using fc_mixed_from_OGC.json from examples
+Using examples/fc_mixed_from_OGC.json from examples
 === End Files ===
 
 === JSON Schema ===

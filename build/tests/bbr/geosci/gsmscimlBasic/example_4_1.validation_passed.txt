@@ -1,7 +1,7 @@
 Validation report for usgin.bbr.geosci.gsmscimlBasic - gsmscimlBasic
-Generated 2026-05-12T21:19:38.613268+00:00
+Generated 2026-05-12T21:31:26.064862+00:00
 === Files ===
-Using contact_simple.json from examples
+Using examples/fc_heterogeneous_GSO.json from examples
 === End Files ===
 
 === JSON Schema ===
