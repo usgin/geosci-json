@@ -8,3 +8,13 @@ examples:
     snippets:
       - language: json
         ref: examples/examplegsmGeologicStructureExtensionMinimal.json
+  - title: fc fault displacement events GSO
+    content: "Adapted from Loop3D-GSO/Examples/GSO-ExampleFault2.ttl. The source describes multiple fault structures with associated displacement events. The fault structures themselves are gsmscimlBasic#ShearDisplacementStructure features (referenced by URL via sampledFeature-like links); the EVENTS of fault movement are gsmGeologicStructureExtension#DisplacementEvent features, which is what this BB's dispatcher accepts. Each DisplacementEvent here references the corresponding ShearDisplacementStructure in a by-reference link in `incrementalDisplacement`."
+    snippets:
+      - language: json
+        ref: examples/fc_fault_displacement_events_GSO.json
+  - title: fc kanna thrust faults GSO
+    content: "Adapted from Loop3D-GSO/Examples/GSO-ExampleFaultKannaV4Model.ttl. The source defines four Thrust_Fault structures (D02_fault, Fatigue_fault, Simpson_fault, N01_fault) and their displacement events. Crosscut relationships in the TTL (gsrl:crosscuts) link Fatigue → {D02, N01, Simpson}, indicating Fatigue is the youngest. This FC encodes each fault's displacement event as a DisplacementEvent; the cross-cutting age relationships are conveyed through the olderNamedAge/youngerNamedAge ordering and noted in $comments. The fault structures themselves (ShearDisplacementStructure) live in gsmscimlBasic and are by-reference here."
+    snippets:
+      - language: json
+        ref: examples/fc_kanna_thrust_faults_GSO.json

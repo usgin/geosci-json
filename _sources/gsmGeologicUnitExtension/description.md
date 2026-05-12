@@ -52,6 +52,9 @@ Properties (own; inherited properties listed in supertype's BB):
 ## Examples
 
 - [examplegsmGeologicUnitExtensionMinimal.json](examples/examplegsmGeologicUnitExtensionMinimal.json)
+- [geologic_unit_la_tojiza_pluton_GSO.json](examples/geologic_unit_la_tojiza_pluton_GSO.json)
+- [geologic_unit_lake_holmes_coal_measures_GSO.json](examples/geologic_unit_lake_holmes_coal_measures_GSO.json)
+- [geologic_unit_lardeau_group_GSO.json](examples/geologic_unit_lardeau_group_GSO.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

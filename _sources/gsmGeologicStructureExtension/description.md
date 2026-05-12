@@ -269,6 +269,8 @@ Properties (own; inherited properties listed in supertype's BB):
 ## Examples
 
 - [examplegsmGeologicStructureExtensionMinimal.json](examples/examplegsmGeologicStructureExtensionMinimal.json)
+- [fc_fault_displacement_events_GSO.json](examples/fc_fault_displacement_events_GSO.json)
+- [fc_kanna_thrust_faults_GSO.json](examples/fc_kanna_thrust_faults_GSO.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

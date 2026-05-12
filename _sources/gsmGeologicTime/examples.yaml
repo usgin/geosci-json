@@ -8,3 +8,8 @@ examples:
     snippets:
       - language: json
         ref: examples/examplegsmGeologicTimeMinimal.json
+  - title: stratigraphic section lower jurassic GSO
+    content: "Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL defines a Series-level chronostratigraphic unit `Lower_Jurassic_Series` (gsgu:Series, hosts gstime:LowerJurassic2012). gsmGeologicTime's dispatchable FTs are stratotype-related (StratigraphicSection, StratigraphicPoint, GlobalStratotypePoint, GlobalStratotypeSection); encoding the Lower Jurassic Series here as a StratigraphicSection whose geologicDescription summarises the Series scope. The link to the ICS time-scale Era is by-reference."
+    snippets:
+      - language: json
+        ref: examples/stratigraphic_section_lower_jurassic_GSO.json

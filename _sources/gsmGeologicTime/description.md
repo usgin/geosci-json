@@ -177,6 +177,7 @@ Properties (own; inherited properties listed in supertype's BB):
 ## Examples
 
 - [examplegsmGeologicTimeMinimal.json](examples/examplegsmGeologicTimeMinimal.json)
+- [stratigraphic_section_lower_jurassic_GSO.json](examples/stratigraphic_section_lower_jurassic_GSO.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
