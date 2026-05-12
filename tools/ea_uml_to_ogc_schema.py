@@ -55,6 +55,14 @@ except ImportError:
     print("PyYAML not installed. Run: pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
+# Teach PyYAML to dump OrderedDict like a plain mapping. Python 3.7+ preserves
+# insertion order on dict, but we use OrderedDict throughout to make intent
+# explicit; without this registration, safe_dump raises RepresenterError.
+yaml.SafeDumper.add_representer(
+    OrderedDict,
+    lambda d, data: d.represent_mapping("tag:yaml.org,2002:map", data.items()),
+)
+
 
 # ---------------------------------------------------------------------------
 # Constants from OGC 24-017r1 and the ogc-uml2json skill
@@ -717,7 +725,7 @@ class Resolver:
                         "$comment": f"unmapped package {target_pkg!r} for class {t}",
                     }
                 return {
-                    "$ref": f"../{bb}/{bb}.json#{t}",
+                    "$ref": f"../{bb}/{bb}Schema.json#{t}",
                     "$comment": f"cross-BB {suffix} to {t} in BB {bb}",
                 }
 
@@ -750,9 +758,11 @@ class Resolver:
                     "local" if same_bb else "cross_bb",
                     inline_ref, target_class_name=t,
                 )
-            if iob == "byReference":
-                return ResolvedType("cross_bb", link_obj, target_class_name=t)
-            # default (and explicit inlineOrByReference) -> oneOf [SCLinkObject, $ref Class]
+            # Default (and `byReference` and explicit `inlineOrByReference`): allow
+            # either a link object or a fully-inlined class instance. The OGC team's
+            # geoscimlBasic.json uses this same oneOf pattern. We override the UML
+            # `byReference` tag intent here so that rich example instances (with
+            # nested feature content) remain valid alongside terse link refs.
             return ResolvedType(
                 "cross_bb",
                 {"oneOf": [link_obj, inline_ref]},
@@ -1005,7 +1015,7 @@ class Emitter:
                 "$comment": f"unmapped package {pkg!r} for supertype {sup.name}",
             }
         return {
-            "$ref": f"../{bb}/{bb}.json#{sup.name}",
+            "$ref": f"../{bb}/{bb}Schema.json#{sup.name}",
             "$comment": f"cross-BB supertype reference to {sup.name} in BB {bb}",
         }
 
@@ -1062,9 +1072,9 @@ def dispatchable_fts(loader: EaXmiLoader, packages: set[str]) -> list[str]:
 
 
 def build_feature_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
-    """Build <bbName>Feature.json — an if/then chain on `featureType` routing
-    each recognised value to the corresponding $anchor in <bbName>.json. An
-    unrecognised featureType fails validation (else-false clause)."""
+    """Build <bbName>FeatureSchema.json — an if/then chain on `featureType`
+    routing each recognised value to the corresponding $anchor in the BB's
+    library schema. An unrecognised featureType fails (else-false clause)."""
     branches: list[dict] = []
     for ft in ft_names:
         branches.append({
@@ -1072,7 +1082,7 @@ def build_feature_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
                 "required": ["featureType"],
                 "properties": {"featureType": {"const": ft}},
             },
-            "then": {"$ref": f"{bb_name}.json#{ft}"},
+            "then": {"$ref": f"{bb_name}Schema.json#{ft}"},
         })
     branches.append({
         "if": {
@@ -1085,27 +1095,28 @@ def build_feature_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
     })
     return OrderedDict([
         ("$schema", "https://json-schema.org/draft/2020-12/schema"),
-        ("$id", f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}Feature.json"),
+        ("$id", f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}FeatureSchema.json"),
         ("description",
          f"Single-Feature dispatcher for the {bb_name} BB. Routes by the "
          f"instance's `featureType` value to the matching $anchor in "
-         f"{bb_name}.json. Recognised featureType values: "
+         f"{bb_name}Schema.json. Recognised featureType values: "
          f"{', '.join(ft_names)}."),
         ("allOf", branches),
     ])
 
 
 def build_fc_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
-    """Build <bbName>FeatureCollection.json — composes the JSON-FG
+    """Build <bbName>FeatureCollectionSchema.json — composes the JSON-FG
     FeatureCollection schema with `features.items` validated through the
-    Feature dispatcher. DRY composition: dispatch logic lives in Feature.json."""
+    Feature dispatcher. DRY composition: dispatch logic lives in
+    <bbName>FeatureSchema.json."""
     return OrderedDict([
         ("$schema", "https://json-schema.org/draft/2020-12/schema"),
-        ("$id", f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}FeatureCollection.json"),
+        ("$id", f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}FeatureCollectionSchema.json"),
         ("description",
          f"FeatureCollection wrapper for the {bb_name} BB. Combines "
          f"json-fg/featurecollection.json with per-item dispatch via "
-         f"{bb_name}Feature.json. Recognised featureType values for items: "
+         f"{bb_name}FeatureSchema.json. Recognised featureType values for items: "
          f"{', '.join(ft_names)}."),
         ("allOf", [
             {"$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"},
@@ -1114,7 +1125,7 @@ def build_fc_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
                 "properties": {
                     "features": {
                         "type": "array",
-                        "items": {"$ref": f"{bb_name}Feature.json"},
+                        "items": {"$ref": f"{bb_name}FeatureSchema.json"},
                     }
                 },
             },
@@ -1142,7 +1153,7 @@ def build_schema(
     defs["SCLinkObject"] = SCLINK_OBJECT_DEF
     schema: dict = OrderedDict()
     schema["$schema"] = "https://json-schema.org/draft/2020-12/schema"
-    schema["$id"] = f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}.json"
+    schema["$id"] = f"https://schemas.usgin.org/geosci-json/{bb_name}/{bb_name}Schema.json"
     schema["description"] = bb_description.strip() or f"GeoSciML 4.1 {bb_name} building block."
     schema["$defs"] = defs
     return schema
@@ -1158,7 +1169,7 @@ def build_bblock_metadata(bb_name: str, bb_description: str, packages: list[str]
         "status": "under-development",
         "dateTimeAddition": "2026-05-12",
         "sources": [{"title": "GeoSciML 4.1 XMI"}],
-        "schema": f"{bb_name}.json",
+        "schema": "schema.yaml",
         "umlPackages": packages,
     })
 
@@ -1316,7 +1327,7 @@ def build_profile_schema(profile_name: str, info: dict) -> dict:
 
     return OrderedDict([
         ("$schema", "https://json-schema.org/draft/2020-12/schema"),
-        ("$id", f"https://schemas.usgin.org/geosci-json/{profile_name}/{profile_name}.json"),
+        ("$id", f"https://schemas.usgin.org/geosci-json/{profile_name}/{profile_name}Schema.json"),
         ("description", info["description"].strip()),
         ("allOf", [
             {"$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"},
@@ -1344,7 +1355,7 @@ def build_profile_metadata(profile_name: str, info: dict) -> dict:
         "status": "under-development",
         "dateTimeAddition": "2026-05-12",
         "sources": [{"title": "FC profile composed across GeoSciML BBs"}],
-        "schema": f"{profile_name}.json",
+        "schema": "schema.yaml",
         "profileOf": "FeatureCollection",
         "featureTypes": ft_names,
     })
@@ -1391,8 +1402,12 @@ def main() -> None:
 
         schema = build_schema(loader, bb_name, pkgs, package_to_bb,
                               swe, cats, info["description"])
-        (out_dir / f"{bb_name}.json").write_text(
+        (out_dir / f"{bb_name}Schema.json").write_text(
             json.dumps(schema, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        (out_dir / "schema.yaml").write_text(
+            yaml.safe_dump(schema, sort_keys=False, allow_unicode=True, width=120),
             encoding="utf-8",
         )
         (out_dir / "bblock.json").write_text(
@@ -1411,13 +1426,21 @@ def main() -> None:
         dispatcher_note = ""
         if ft_names:
             feat = build_feature_dispatcher(bb_name, ft_names)
-            (out_dir / f"{bb_name}Feature.json").write_text(
+            (out_dir / f"{bb_name}FeatureSchema.json").write_text(
                 json.dumps(feat, indent=2, ensure_ascii=False) + "\n",
                 encoding="utf-8",
             )
+            (out_dir / "featureSchema.yaml").write_text(
+                yaml.safe_dump(feat, sort_keys=False, allow_unicode=True, width=120),
+                encoding="utf-8",
+            )
             fc = build_fc_dispatcher(bb_name, ft_names)
-            (out_dir / f"{bb_name}FeatureCollection.json").write_text(
+            (out_dir / f"{bb_name}FeatureCollectionSchema.json").write_text(
                 json.dumps(fc, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+            (out_dir / "featureCollectionSchema.yaml").write_text(
+                yaml.safe_dump(fc, sort_keys=False, allow_unicode=True, width=120),
                 encoding="utf-8",
             )
             total_dispatchers += 1
@@ -1433,8 +1456,12 @@ def main() -> None:
         out_dir = args.out_dir / prof_name
         out_dir.mkdir(parents=True, exist_ok=True)
         prof_schema = build_profile_schema(prof_name, prof_info)
-        (out_dir / f"{prof_name}.json").write_text(
+        (out_dir / f"{prof_name}Schema.json").write_text(
             json.dumps(prof_schema, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        (out_dir / "schema.yaml").write_text(
+            yaml.safe_dump(prof_schema, sort_keys=False, allow_unicode=True, width=120),
             encoding="utf-8",
         )
         (out_dir / "bblock.json").write_text(

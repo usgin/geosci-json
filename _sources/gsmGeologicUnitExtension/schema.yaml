@@ -1,0 +1,110 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.usgin.org/geosci-json/gsmGeologicUnitExtension/gsmGeologicUnitExtensionSchema.json
+description: 'GeologicUnit extension: detailed unit description structures
+
+  (GeologicUnitDescription, CompositionPart roles, etc.).'
+$defs:
+  BeddingDescription:
+    $anchor: BeddingDescription
+    description: BeddingDescription provides a detailed description of the bedding characteristics of a geologic unit.
+    type: object
+    properties:
+      beddingPattern:
+        oneOf:
+        - type: 'null'
+        - type: array
+          items:
+            $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+          uniqueItems: true
+        description: The property beddingPattern (SWE::Category) provides a term from a controlled vocabulary specifying patterns
+          of bedding thickness or relationships between bedding packages. (e.g., thinning upward, thickening upward).
+      beddingStyle:
+        oneOf:
+        - type: 'null'
+        - type: array
+          items:
+            $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+          uniqueItems: true
+        description: The property beddingStyle (SWE::Category) provides a term from a controlled vocabulary specifying the
+          style of bedding in a stratified geologic unit (e.g. lenticular, irregular, planar, vague, and massive).
+      beddingThickness:
+        oneOf:
+        - type: 'null'
+        - type: array
+          items:
+            $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+          uniqueItems: true
+        description: The property beddingThickness (SWE::Category) provides a term from a controlled vocabulary characterizing
+          the thickness of bedding in the unit.
+  GeologicUnitDescription:
+    $anchor: GeologicUnitDescription
+    description: GeologicUnitDescription provides for extended description of the characteristics of a geologic unit.
+    allOf:
+    - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnitAbstractDescription
+      $comment: cross-BB supertype reference to GeologicUnitAbstractDescription in BB gsmscimlBasic
+    - type: object
+      properties:
+        bodyMorphology:
+          oneOf:
+          - type: 'null'
+          - type: array
+            items:
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+            uniqueItems: true
+          description: 'The bodyMorphology property (SWE::Category) provides a term from a controlled vocabulary describing
+            the geometry or form of a GeologicUnit. Examples include: dike (dyke), cone, fan, sheet, etc. The morphology is
+            independent of the substance (EarthMaterial) that composes the GeologicUnit or process that formed it.'
+        unitComposition:
+          oneOf:
+          - type: 'null'
+          - type: array
+            items:
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+            uniqueItems: true
+          description: 'The unitComposition property (SWE::Category) provides a term from a composition-based classification
+            that requires summarising the overall character of the unit. It is not applicable at the rock material or specimen
+            level. Examples are: alkalic, subaluminous, peraluminous, I-Type, carbonate, phosphate.'
+        outcropCharacter:
+          oneOf:
+          - type: 'null'
+          - type: array
+            items:
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+            uniqueItems: true
+          description: 'The property outcropCharacter (SWE::Category) provides a term that describes the nature of outcrops
+            formed by a geologic unit. Examples are: bouldery, cliff-forming, ledge-forming, slope-forming, poorly exposed.'
+        unitThickness:
+          oneOf:
+          - type: 'null'
+          - $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+          description: The property unitThickness (SWE::QuantityRange) provides a value that represents the typical thickness
+            of the geologic unit. It is always reported as a range.
+        bedding:
+          oneOf:
+          - type: 'null'
+          - $ref: '#BeddingDescription'
+          description: The bedding:BeddingDescription property reports a description of the bedding.
+  SCLinkObject:
+    title: link object
+    description: definition of a link object
+    type: object
+    required:
+    - href
+    properties:
+      href:
+        type: string
+        description: Supplies the URI to a remote resource (or resource fragment).
+      rel:
+        type: string
+        description: The type or semantics of the relation.
+      type:
+        type: string
+        description: A hint indicating what the media type of the result of dereferencing the link should be.
+      hreflang:
+        type: string
+        description: A hint indicating what the language of the result of dereferencing the link should be.
+      title:
+        type: string
+        description: Used to label the destination of a link such that it can be used as a human-readable identifier.
+      length:
+        type: integer

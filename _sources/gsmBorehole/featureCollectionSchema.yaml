@@ -1,0 +1,12 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.usgin.org/geosci-json/gsmBorehole/gsmBoreholeFeatureCollectionSchema.json
+description: 'FeatureCollection wrapper for the gsmBorehole BB. Combines json-fg/featurecollection.json with per-item dispatch
+  via gsmBoreholeFeatureSchema.json. Recognised featureType values for items: Borehole, BoreholeInterval, OriginPosition.'
+allOf:
+- $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+- type: object
+  properties:
+    features:
+      type: array
+      items:
+        $ref: gsmBoreholeFeatureSchema.json

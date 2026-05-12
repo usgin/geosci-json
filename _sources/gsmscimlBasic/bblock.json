@@ -9,7 +9,7 @@
       "title": "GeoSciML 4.1 XMI"
     }
   ],
-  "schema": "gsmscimlBasic.json",
+  "schema": "schema.yaml",
   "umlPackages": [
     "GeoSciMLBasic",
     "Collection",

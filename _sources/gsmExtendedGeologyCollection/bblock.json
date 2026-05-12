@@ -9,7 +9,7 @@
       "title": "FC profile composed across GeoSciML BBs"
     }
   ],
-  "schema": "gsmExtendedGeologyCollection.json",
+  "schema": "schema.yaml",
   "profileOf": "FeatureCollection",
   "featureTypes": [
     "GeologicUnit",

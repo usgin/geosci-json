@@ -9,7 +9,7 @@
       "title": "FC profile composed across GeoSciML BBs"
     }
   ],
-  "schema": "gsmEarthMaterialCollection.json",
+  "schema": "schema.yaml",
   "profileOf": "FeatureCollection",
   "featureTypes": [
     "Mineral",

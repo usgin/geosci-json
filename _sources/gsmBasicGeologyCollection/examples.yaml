@@ -1,0 +1,30 @@
+# Examples manifest for this building block.
+# Each entry lists a title, descriptive content (Markdown),
+# and one or more snippets pointing to example files.
+
+examples:
+  - title: fc contacts complex GSO
+    content: "Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contacts in the worked scenario. Geologic context: the Js Formation (Jurassic sediments) unconformably overlies tilted Paleozoic strata (Os, Ss Formations) that overlie Early Proterozoic Xm metamorphic basement. A Cretaceous granite (Kg) and a Cretaceous diorite dike (Kd) intrude Js and the older units. After igneous activity, erosion exhumed the section, and Late Miocene Ms sediment was deposited on top, sealing the unconformity. The 7 contact features below capture each rock-body interface with its inferred contact type. Homogeneous FeatureCollection (collection-level featureType=\"Contact\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch)."
+    snippets:
+      - language: json
+        ref: fc_contacts_complex_GSO.json
+  - title: fc geologicunit from OGC
+    content: "Example instance: fc_geologicunit_from_OGC"
+    snippets:
+      - language: json
+        ref: fc_geologicunit_from_OGC.json
+  - title: fc geologicunits BritishColumbia
+    content: "Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the Lardeau Group of the Kootenay Terrane (southeastern British Columbia), with its three known constituent formations (Akolkolex, Index, Jowett). The Lardeau Group is a Lower Paleozoic metasedimentary–metavolcanic assemblage that has been deformed and metamorphosed to greenschist facies. The source TTL is structurally simpler than the Isle of Wight TTL — it records unit type, label, list of constituent lithologies, and parent–child relationships, but not thickness, depositional setting, age, or bibliographic sources. The FeatureCollection therefore omits those slots. Constituent proportions are not recorded in the TTL (no qualitative Dominant/Subordinate terms either), so `proportion` is left null on every CompositionPart. Homogeneous FeatureCollection (collection-level featureType=\"GeologicUnit\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch)."
+    snippets:
+      - language: json
+        ref: fc_geologicunits_BritishColumbia.json
+  - title: fc geologicunits IsleOfWight
+    content: "Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a subset of the BGS Isle of Wight stratigraphy showing the Solent Group (SOLT) with two constituent formations (BEL, BOUL) and one basal member (BMBG of BOUL). Demonstrates Group→Formation→Member hierarchy plus stratigraphic `overlies` relationships. Homogeneous FeatureCollection (collection-level featureType=\"GeologicUnit\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch). Qualitative proportions from the TTL (Dominant_Proportion / Subordinate_Proportion) are translated to approximate QuantityRange % values. Thickness measurements from the TTL are kept only as prose in `description` since Basic GeologicUnit has no thickness slot (that lives in GeoSciML Extension's GeologicUnitDescription)."
+    snippets:
+      - language: json
+        ref: fc_geologicunits_IsleOfWight.json
+  - title: fc mixed from OGC
+    content: "Example instance: fc_mixed_from_OGC"
+    snippets:
+      - language: json
+        ref: fc_mixed_from_OGC.json

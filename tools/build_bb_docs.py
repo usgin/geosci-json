@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
-Generate description.md and a minimal example per BB from its schema.json.
+Generate description.md and a minimal example per BB from its <bb>.json.
 
-For each `_sources/geosciml_<Package>/` directory:
+For each `_sources/gsm*/` directory:
   - Write `description.md` summarising classes, properties, encoding, deps.
-  - Write `examples/example<Bb>Minimal.json` — a bare valid instance.
+  - Write `examples/example<Bb>Minimal.json` — a bare valid instance
+    (only when one does not already exist).
 
-Does NOT touch existing examples/example*Complete.json files.
+Does NOT touch existing examples/*.json files.
 
 Run from repo root:
     python tools/build_bb_docs.py            # all BBs
-    python tools/build_bb_docs.py geosciml_Borehole  # one BB
+    python tools/build_bb_docs.py gsmBorehole   # one BB
 """
 
 from __future__ import annotations
@@ -47,12 +48,108 @@ def load_stereotypes(xmi_path: Path) -> None:
 
 def discover_bbs(filter_name: str | None) -> list[Path]:
     out: list[Path] = []
-    for d in sorted(SCHEMA_DIR.glob("geosciml_*")):
+    for d in sorted(SCHEMA_DIR.glob("gsm*")):
+        if not d.is_dir():
+            continue
         if filter_name and d.name != filter_name:
             continue
-        if (d / "schema.json").exists():
+        if (d / f"{d.name}Schema.json").exists():
             out.append(d)
     return out
+
+
+def _list_example_files(bb_dir: Path) -> list[Path]:
+    """Examples sit at the BB root in CDIF style. We recognise them by their
+    filename prefix (example*, fc_*, FeatureCollection_*) and exclude all
+    *Schema.json files (those are schemas, not instances)."""
+    seen: set[str] = set()
+    out: list[Path] = []
+    patterns = ("example*.json", "fc_*.json", "FeatureCollection_*.json",
+                "*_simple.json", "*_complex.json", "*_view*.json")
+    for pat in patterns:
+        for p in sorted(bb_dir.glob(pat)):
+            if p.name.endswith("Schema.json"):
+                continue
+            if p.name in seen:
+                continue
+            seen.add(p.name)
+            out.append(p)
+    return out
+
+
+def write_examples_yaml(bb_dir: Path) -> int:
+    """Write the OGC bblocks-template-style examples.yaml manifest listing
+    every example file at the BB root. Returns the count of examples.
+
+    Format follows bblocks-template's `prefixes:` + `examples:` wrapper
+    (https://github.com/opengeospatial/bblocks-template/blob/master/_sources/myFeature/examples.yaml).
+    Example file `ref` values are relative paths from the BB directory; we
+    keep CDIF's flattened-to-BB-root convention so refs are bare filenames."""
+    examples = _list_example_files(bb_dir)
+    if not examples:
+        return 0
+    lines: list[str] = []
+    lines.append("# Examples manifest for this building block.")
+    lines.append("# Each entry lists a title, descriptive content (Markdown),")
+    lines.append("# and one or more snippets pointing to example files.")
+    lines.append("")
+    lines.append("examples:")
+    for ex in examples:
+        try:
+            doc = json.loads(ex.read_text(encoding="utf-8-sig"))
+            comment = doc.get("$comment") if isinstance(doc, dict) else None
+        except Exception:
+            comment = None
+        title = ex.stem.replace("_", " ").replace("-", " ")
+        content = (comment.strip().splitlines()[0] if comment else
+                   f"Example instance: {ex.stem}")
+        content_escaped = content.replace("\\", "\\\\").replace('"', '\\"')
+        lines.append(f"  - title: {title}")
+        lines.append(f"    content: \"{content_escaped}\"")
+        lines.append(f"    snippets:")
+        lines.append(f"      - language: json")
+        lines.append(f"        ref: {ex.name}")
+    (bb_dir / "examples.yaml").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return len(examples)
+
+
+def write_stub_artifacts(bb_dir: Path, bb_name: str) -> list[str]:
+    """Write template-aligned stubs for context.jsonld, rules.shacl, tests.yaml.
+    Only writes if the file doesn't already exist (don't clobber hand edits)."""
+    written: list[str] = []
+
+    ctx_path = bb_dir / "context.jsonld"
+    if not ctx_path.exists():
+        ctx_path.write_text(
+            json.dumps({"@context": {"@version": 1.1}}, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        written.append("context.jsonld")
+
+    shacl_path = bb_dir / "rules.shacl"
+    if not shacl_path.exists():
+        shacl_path.write_text(
+            f"# SHACL rules for {bb_name}.\n"
+            f"# Placeholder — populate with shape constraints as the model is profiled.\n"
+            f"\n"
+            f"@prefix sh: <http://www.w3.org/ns/shacl#> .\n",
+            encoding="utf-8",
+        )
+        written.append("rules.shacl")
+
+    tests_yaml = bb_dir / "tests.yaml"
+    if not tests_yaml.exists():
+        tests_yaml.write_text(
+            f"# Negative-test manifest for {bb_name}.\n"
+            f"# List instances that MUST fail validation; useful for regression\n"
+            f"# coverage. Format mirrors examples.yaml.\n"
+            f"\n"
+            f"tests: []\n",
+            encoding="utf-8",
+        )
+        written.append("tests.yaml")
+
+    return written
 
 
 def classify_class(name: str, defs: dict) -> str:
@@ -207,8 +304,7 @@ def property_row(name: str, schema: dict, required: list[str]) -> str:
     return f"| `{name}` | {type_str} | {mult} | {desc} |"
 
 
-def render_description(bb_name: str, schema: dict) -> str:
-    pkg = bb_name.replace("geosciml_", "")
+def render_description(bb_name: str, schema: dict, packages: list[str] | None = None) -> str:
     defs = schema.get("$defs", {})
     # Hide the local SCLinkObject helper from docs — it's not a UML class.
     class_names = sorted(c for c in defs.keys() if c != "SCLinkObject")
@@ -221,19 +317,20 @@ def render_description(bb_name: str, schema: dict) -> str:
     n_u = sum(1 for v in classifications.values() if v == "union")
 
     if not class_names:
-        # Umbrella package with no own classes
-        return f"""# GeoSciML {pkg}
+        # Profile BB or empty umbrella — fall back to schema description
+        return f"""# {bb_name}
 
-Empty umbrella package — no classes are defined here. Other Leaf BBs nested under this Application Schema in the source UML carry the substantive content.
-
-This BB exists so the OGC bblocks register has a placeholder entry for the application schema name; downstream consumers reference the sibling Leaf BBs directly.
+{schema.get("description", "GeoSciML 4.1 building block.")}
 """
 
     out: list[str] = []
-    out.append(f"# GeoSciML {pkg}")
+    out.append(f"# {bb_name}")
     out.append("")
-    out.append(f"JSON Schema building block for the `{pkg}` package of **GeoSciML 4.1**, encoding `«FeatureType»` classes as JSON-FG-compliant features and `«DataType»` / `«CodeList»` / `«Union»` classes per **OGC Best Practice 24-017r1** (*UML to JSON Encoding Rules*).")
+    out.append(f"GeoSciML 4.1 building block `{bb_name}`. `«FeatureType»` classes are encoded as JSON-FG-compliant features; `«DataType»` / `«CodeList»` / `«Union»` classes follow **OGC Best Practice 24-017r1** (*UML to JSON Encoding Rules*).")
     out.append("")
+    if packages:
+        out.append(f"Source UML packages: {', '.join('`' + p + '`' for p in packages)}.")
+        out.append("")
     summary_bits = []
     if n_feat: summary_bits.append(f"{n_feat} feature type{'s' if n_feat != 1 else ''}")
     if n_data: summary_bits.append(f"{n_data} data type{'s' if n_data != 1 else ''}")
@@ -351,17 +448,23 @@ This BB exists so the OGC bblocks register has a placeholder entry for the appli
             out.append(f"- `{r}`")
         out.append("")
 
-    # Examples and source
+    # Examples (CDIF style: example files sit at BB root; examples.yaml lists them)
     out.append("## Examples")
     out.append("")
-    out.append(f"- [Minimal](examples/example{pkg}Minimal.json) — bare valid instance.")
-    complete_path = Path(f"_sources/{bb_name}/examples/example{pkg}Complete.json")
-    if complete_path.exists():
-        out.append(f"- [Complete](examples/example{pkg}Complete.json) — fully-populated example.")
+    bb_dir = Path(f"_sources/{bb_name}")
+    example_files = _list_example_files(bb_dir)
+    if example_files:
+        for f in example_files:
+            out.append(f"- [{f.name}]({f.name})")
+        out.append("")
+        out.append("See [examples.yaml](examples.yaml) for the full manifest.")
+    else:
+        out.append("_No examples yet._")
     out.append("")
     out.append("## Source")
     out.append("")
-    out.append(f"- UML: `geosciml4.1.xmi`, package `{pkg}`.")
+    pkgs_str = ", ".join('`' + p + '`' for p in packages) if packages else "(see bb-grouping.yaml)"
+    out.append(f"- UML: `geosciml4.1.xmi`, package(s) {pkgs_str}.")
     out.append(f"- Generator: [tools/ea_uml_to_ogc_schema.py](../../tools/ea_uml_to_ogc_schema.py).")
     out.append(f"- Resolver: [tools/resolve_geosci_schema.py](../../tools/resolve_geosci_schema.py).")
     out.append("")
@@ -372,7 +475,6 @@ This BB exists so the OGC bblocks register has a placeholder entry for the appli
 def render_minimal_example(bb_name: str, schema: dict) -> dict | None:
     """Pick the most-derived FeatureType (or first concrete class) and emit a
     bare valid instance."""
-    pkg = bb_name.replace("geosciml_", "")
     defs = schema.get("$defs", {})
     if not defs:
         return None
@@ -401,44 +503,74 @@ def render_minimal_example(bb_name: str, schema: dict) -> dict | None:
     if datatype:
         return OrderedDict([("$comment", f"Minimal {datatype} instance — no required properties")])
     if codelist:
-        # The minimal example for a codelist-only BB is just a URI value
         body = defs[codelist]
         cl = body.get("codeList", "")
         return OrderedDict([
             ("$comment", f"Minimal example of a {codelist} code value"),
-            ("value", cl + "/example-term" if cl else f"http://example.org/{pkg}/example-term"),
+            ("value", cl + "/example-term" if cl else f"http://example.org/{bb_name}/example-term"),
         ])
     return None
 
 
 # ---------------------------------------------------------------------------
 
+def load_bb_packages() -> dict[str, list[str]]:
+    """Return {bb_name: [package_names]} from bb-grouping.yaml, for description
+    headers and source attribution."""
+    try:
+        import yaml
+    except ImportError:
+        return {}
+    p = Path("bb-grouping.yaml")
+    if not p.exists():
+        return {}
+    raw = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    out: dict[str, list[str]] = {}
+    for bb, info in (raw.get("bbs", {}) or {}).items():
+        if isinstance(info, dict) and "packages" in info:
+            out[bb] = list(info["packages"])
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1])
-    ap.add_argument("bb", nargs="?", help="Single BB directory name (e.g. geosciml_Borehole)")
+    ap.add_argument("bb", nargs="?", help="Single BB directory name (e.g. gsmBorehole)")
     ap.add_argument("--xmi", type=Path, default=DEFAULT_XMI,
                     help="EA XMI source (used to read stereotype info)")
     args = ap.parse_args()
 
     load_stereotypes(args.xmi)
+    bb_pkgs = load_bb_packages()
 
     bbs = discover_bbs(args.bb)
     for d in bbs:
         bb_name = d.name
-        pkg = bb_name.replace("geosciml_", "")
-        schema = json.loads((d / "schema.json").read_text(encoding="utf-8"))
+        schema = json.loads((d / f"{bb_name}Schema.json").read_text(encoding="utf-8"))
+        packages = bb_pkgs.get(bb_name)
 
-        desc_md = render_description(bb_name, schema)
+        desc_md = render_description(bb_name, schema, packages)
         (d / "description.md").write_text(desc_md, encoding="utf-8")
 
-        min_ex = render_minimal_example(bb_name, schema)
-        if min_ex is not None:
-            ex_dir = d / "examples"
-            ex_dir.mkdir(exist_ok=True)
-            out = ex_dir / f"example{pkg}Minimal.json"
-            out.write_text(json.dumps(min_ex, indent=2) + "\n", encoding="utf-8")
+        # Auto-write a minimal example at the BB root only if no example files
+        # already exist (don't clobber curated/copied ones).
+        existing = _list_example_files(d)
+        wrote_example = False
+        if not existing:
+            min_ex = render_minimal_example(bb_name, schema)
+            if min_ex is not None:
+                out_path = d / f"example{bb_name}Minimal.json"
+                out_path.write_text(json.dumps(min_ex, indent=2) + "\n", encoding="utf-8")
+                wrote_example = True
 
-        print(f"  {bb_name}: description.md ({len(desc_md)} chars), minimal example {'written' if min_ex else 'skipped (empty BB)'}")
+        # Emit the bblocks-template-style examples.yaml manifest after any
+        # auto-writes, plus stub artifacts that match the template + CDIF layout.
+        n_examples = write_examples_yaml(d)
+        stubs = write_stub_artifacts(d, bb_name)
+
+        stub_note = (f", stubs={'+'.join(stubs)}" if stubs else "")
+        print(f"  {bb_name}: description.md ({len(desc_md)} chars), "
+              f"minimal example {'written' if wrote_example else 'skipped'}, "
+              f"examples.yaml lists {n_examples}{stub_note}")
 
 
 if __name__ == "__main__":

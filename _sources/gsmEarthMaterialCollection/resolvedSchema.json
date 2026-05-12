@@ -1,0 +1,464 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/gsmEarthMaterialCollection/gsmEarthMaterialCollectionSchema.json",
+  "description": "FeatureCollection profile collecting EarthMaterial features with rich\ndescription content. Root featureType values are the four concrete (or\nfirst-class) EarthMaterial subtypes — Mineral, OrganicMaterial,\nRockMaterial, CompoundMaterial. None of these are «FeatureType» in the\nUML (all are «Type»), so the profile injects the JSON-FG Feature\nenvelope around each via `wrapAsFeature: true`. The inherited\n`gbEarthMaterialDescription` slot (from the EarthMaterial parent) is\nconstrained on RockMaterial and CompoundMaterial branches to require\nthe corresponding concrete Extension description class.",
+  "allOf": [
+    {
+      "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "features": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Mineral"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "featureType",
+                        "id"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "$ref": "#Mineral"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "OrganicMaterial"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "featureType",
+                        "id"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "$ref": "#OrganicMaterial"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "RockMaterial"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "featureType",
+                        "id"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "allOf": [
+                            {
+                              "$ref": "#RockMaterial"
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "gbEarthMaterialDescription": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "#RockMaterialDescription"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "CompoundMaterial"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "featureType",
+                        "id"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "allOf": [
+                            {
+                              "$ref": "#CompoundMaterial"
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "gbEarthMaterialDescription": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "#CompoundMaterialDescription"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "not": {
+                    "required": [
+                      "featureType"
+                    ],
+                    "properties": {
+                      "featureType": {
+                        "enum": [
+                          "Mineral",
+                          "OrganicMaterial",
+                          "RockMaterial",
+                          "CompoundMaterial"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "then": false
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "RockMaterialDescription": {
+      "$anchor": "RockMaterialDescription",
+      "description": "RockMaterialDescription provides extended description of RockMaterial.",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterialAbstractDescription"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "consolidationDegree": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                }
+              ],
+              "description": "The consolidationDegree property (SWE::Category) contains a term from a controlled vocabulary that specifies the degree to which an aggregation of EarthMaterial particles is a distinct solid material. Consolidation and induration are related concepts specified by this property. They define a continuum from unconsolidated material to very hard rock. Induration is the degree to which a consolidated material is made hard, operationally determined by how difficult it is to break a piece of the material. Consolidated materials may have varying degrees of induration."
+            }
+          }
+        }
+      ]
+    },
+    "CompoundMaterialDescription": {
+      "$anchor": "CompoundMaterialDescription",
+      "description": "The CompoundMaterialDescription class is a kind of EarthMaterialDescription that provides an extended description of a compound earth material (i.e., rocks and unconsolidated solid earth materials).",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterialAbstractDescription"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "compositionCategory": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "The compositionCategory property (SWE::Category) provides a term from a controlled vocabulary to specify the gross compositional character of a compound material. Composition as used here is loosely construed to include both chemical composition and petrographic composition, thus multiple values may be applied to a single rock, e.g. metaluminous and alkalic, undersaturated and basic, etc. Terms would typically include broad chemical classifications such as silicate, carbonate, ferromagnesian, oxide. However, this attribute may have different terminology for different kinds of rocks - for example sandstone petrographic classification terms (e.g. feldspathic) might be placed here."
+            },
+            "geneticCategory": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "The property geneticCategory (SWE::Category) provides a term from a controlled vocabulary that represents a summary geologic history of the material. (i.e., a genetic process classifier term). Examples include igneous, sedimentary, metamorphic, shock metamorphic, volcanic, pyroclastic."
+            },
+            "particleGeometry": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#ParticleGeometryDescription"
+                }
+              ],
+              "description": "The particleGeometry:ParticleGeometryDescription contains an instance of ParticleGeometryDescription."
+            },
+            "constituent": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to ConstituentPart"
+                      },
+                      {
+                        "$ref": "#ConstituentPart"
+                      }
+                    ]
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "The property constituent is an association between a CompoundMaterialDescription and a ConstituentPart that makes up part of the CompoundMaterial."
+            }
+          }
+        }
+      ]
+    },
+    "OrganicMaterial": {
+      "$anchor": "OrganicMaterial",
+      "description": "OrganicMaterial is an EarthMaterial that belongs to the class of chemical compounds having a reduced carbon basis (as distinct from carbonates), and derived from living organisms. It includes high-carbon EarthMaterials such as bitumen, peat, and coal. This class is an empty placeholder for extension at a later date, or by other domain models.",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterial"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "Mineral": {
+      "$anchor": "Mineral",
+      "description": "A naturally occurring inorganic element or compound having a periodically repeating arrangement of atoms and a characteristic chemical composition or range of compositions, resulting in distinctive physical properties. Includes mercury as a general exception to the requirement of crystallinity. Also includes crypto-crystalline materials such as chalcedony and amorphous silica.",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterial"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mineralName": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#MineralNameTerm"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical Association. (eg: http://www.mindat.org/mineralindex.php)"
+            }
+          }
+        }
+      ]
+    },
+    "EarthMaterialAbstractDescription": {
+      "$anchor": "EarthMaterialAbstractDescription",
+      "description": "Abstract description class for earth material. This class is a placeholder for further extension in Extension package",
+      "type": "object"
+    },
+    "CompoundMaterial": {
+      "$anchor": "CompoundMaterial",
+      "description": "A CompoundMaterial is an EarthMaterial composed of particles made of EarthMaterials, possibly including other CompoundMaterials. This class is provided primarily as an extensibility point for related domain models that wish to import and build on GeoSciML, and wish to define material types that are compound but are not rock or rock-like material. In the context of GeoSciML \"RockMaterial\" should be used to describe units made of rock.",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterial"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "RockMaterial": {
+      "$anchor": "RockMaterial",
+      "description": "RockMaterial is a specialized CompoundMaterial that includes consolidated and unconsolidated materials (such as surficial sediments) as well as mixtures of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material is essentially a link to a controlled vocabulary (lithology property) and a color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial nesting) are available in GeoSciML Extension.",
+      "allOf": [
+        {
+          "$ref": "#CompoundMaterial"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "lithology": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#LithologyTerm"
+                }
+              ],
+              "description": "The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary."
+            }
+          }
+        }
+      ]
+    },
+    "EarthMaterial": {
+      "$anchor": "EarthMaterial",
+      "description": "The EarthMaterial class holds a description of a naturally occurring substance in the Earth. EarthMaterial represents material composition or substance, and is thus independent of quantity or location. Ideally, EarthMaterials are defined strictly based on physical properties, but because of standard geological usage, genetic interpretations enter into the description as well.  Constraint: self.metadata.hierarchyLevel=feature",
+      "type": "object",
+      "properties": {
+        "color": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The color property (SWE::Category) is a term from a controlled vocabulary that specifies the colour of the earth material. Color schemes such as the Munsell rock and soil color schemes may be used."
+        },
+        "purpose": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#DescriptionPurpose"
+            }
+          ],
+          "description": "The purpose:DescriptionPurpose property provides a specification of the intended purpose or level of abstraction for the given EarthMaterial. The intent is the same a GeologicFeature’s purpose and it shares the same vocabulary (instance, typicalNorm, definingNorm)."
+        },
+        "gbEarthMaterialDescription": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#EarthMaterialAbstractDescription"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The property gbEarthMaterialDescription:EarthMaterialAbstractDescription provides a detailed earth material description of the part. This property is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is abstract with subtypes defined in GeoSciML Extension."
+        }
+      }
+    }
+  }
+}

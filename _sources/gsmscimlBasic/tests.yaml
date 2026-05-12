@@ -1,0 +1,5 @@
+# Negative-test manifest for gsmscimlBasic.
+# List instances that MUST fail validation; useful for regression
+# coverage. Format mirrors examples.yaml.
+
+tests: []

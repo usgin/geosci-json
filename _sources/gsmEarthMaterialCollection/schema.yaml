@@ -1,0 +1,133 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.usgin.org/geosci-json/gsmEarthMaterialCollection/gsmEarthMaterialCollectionSchema.json
+description: 'FeatureCollection profile collecting EarthMaterial features with rich
+
+  description content. Root featureType values are the four concrete (or
+
+  first-class) EarthMaterial subtypes — Mineral, OrganicMaterial,
+
+  RockMaterial, CompoundMaterial. None of these are «FeatureType» in the
+
+  UML (all are «Type»), so the profile injects the JSON-FG Feature
+
+  envelope around each via `wrapAsFeature: true`. The inherited
+
+  `gbEarthMaterialDescription` slot (from the EarthMaterial parent) is
+
+  constrained on RockMaterial and CompoundMaterial branches to require
+
+  the corresponding concrete Extension description class.'
+allOf:
+- $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+- type: object
+  properties:
+    features:
+      type: array
+      items:
+        allOf:
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Mineral
+          then:
+            allOf:
+            - $ref: https://schemas.opengis.net/json-fg/feature.json
+            - type: object
+              required:
+              - featureType
+              - id
+              properties:
+                id:
+                  type: string
+            - type: object
+              properties:
+                properties:
+                  $ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#Mineral
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: OrganicMaterial
+          then:
+            allOf:
+            - $ref: https://schemas.opengis.net/json-fg/feature.json
+            - type: object
+              required:
+              - featureType
+              - id
+              properties:
+                id:
+                  type: string
+            - type: object
+              properties:
+                properties:
+                  $ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#OrganicMaterial
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: RockMaterial
+          then:
+            allOf:
+            - $ref: https://schemas.opengis.net/json-fg/feature.json
+            - type: object
+              required:
+              - featureType
+              - id
+              properties:
+                id:
+                  type: string
+            - type: object
+              properties:
+                properties:
+                  allOf:
+                  - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial
+                  - type: object
+                    properties:
+                      gbEarthMaterialDescription:
+                        type: array
+                        items:
+                          $ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#RockMaterialDescription
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: CompoundMaterial
+          then:
+            allOf:
+            - $ref: https://schemas.opengis.net/json-fg/feature.json
+            - type: object
+              required:
+              - featureType
+              - id
+              properties:
+                id:
+                  type: string
+            - type: object
+              properties:
+                properties:
+                  allOf:
+                  - $ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#CompoundMaterial
+                  - type: object
+                    properties:
+                      gbEarthMaterialDescription:
+                        type: array
+                        items:
+                          $ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#CompoundMaterialDescription
+        - if:
+            not:
+              required:
+              - featureType
+              properties:
+                featureType:
+                  enum:
+                  - Mineral
+                  - OrganicMaterial
+                  - RockMaterial
+                  - CompoundMaterial
+          then: false

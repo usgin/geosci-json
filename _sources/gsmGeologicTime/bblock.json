@@ -9,7 +9,7 @@
       "title": "GeoSciML 4.1 XMI"
     }
   ],
-  "schema": "gsmGeologicTime.json",
+  "schema": "schema.yaml",
   "umlPackages": [
     "GeologicTime",
     "GSSP",

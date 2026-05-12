@@ -1,0 +1,10 @@
+# Examples manifest for this building block.
+# Each entry lists a title, descriptive content (Markdown),
+# and one or more snippets pointing to example files.
+
+examples:
+  - title: fc bolsa quartzite GSO
+    content: "Material collection example constructed from Loop3D-GSO GSO-ExampleRockMaterialBolsaQuartzite.ttl. Two features: a RockMaterial (Bolsa Quartzite basal arkose) and one of its Mineral constituents (Quartz). The RockMaterial branch carries a RockMaterialDescription in gbEarthMaterialDescription[]; the Mineral feature uses the inherited EarthMaterialAbstractDescription slot."
+    snippets:
+      - language: json
+        ref: fc_bolsa_quartzite_GSO.json

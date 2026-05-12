@@ -1,0 +1,13 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.usgin.org/geosci-json/gsmSpecimen/gsmSpecimenFeatureCollectionSchema.json
+description: 'FeatureCollection wrapper for the gsmSpecimen BB. Combines json-fg/featurecollection.json with per-item dispatch
+  via gsmSpecimenFeatureSchema.json. Recognised featureType values for items: AnalyticalInstrument, AnalyticalProcess, AnalyticalSession,
+  GeochronologicInterpretation, GeologicSamplingMethod, Image, ReferenceSpecimen.'
+allOf:
+- $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+- type: object
+  properties:
+    features:
+      type: array
+      items:
+        $ref: gsmSpecimenFeatureSchema.json

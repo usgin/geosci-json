@@ -2,22 +2,17 @@
 """
 Resolve a geosci-json BB schema into a self-contained resolvedSchema.json.
 
-OGC 24-017r1 definitions-schemas use $defs at the root. The CDIF
-tools/resolve_schema.py expects a root schema with anyOf/properties and
-doesn't preserve $defs. This script does the OGC-style resolution: copies
-the source schema as-is, then inlines every cross-BB $ref pointing to a
-sibling BB's schema (`../geosciml_<X>/schema.json#<Class>`) by pulling that
-class's definition into the local $defs.
+OGC 24-017r1 definitions-schemas use $defs at the root. This script does the
+OGC-style resolution: copies the source schema as-is, then inlines every
+cross-BB $ref pointing to a sibling BB's schema (`../<bb>/<bb>.json#<Class>`)
+by pulling that class's definition into the local $defs.
 
-External public $refs (SWE 3.0, JSON-FG, GeoJSON, OGC LinkObject) are left
+External public $refs (SWE 3.0, JSON-FG, GeoJSON, CDIF property BBs) are left
 untouched — they are stable URLs.
 
-ISO placeholder $refs (`iso19xxx:TypeName`) are left untouched — they have
-no real schema to inline.
-
 Usage:
-    python tools/resolve_geosci_schema.py path/to/schema.json -o resolvedSchema.json
-    python tools/resolve_geosci_schema.py --all       # walks every _sources/geosciml_*/
+    python tools/resolve_geosci_schema.py path/to/<bb>.json -o resolvedSchema.json
+    python tools/resolve_geosci_schema.py --all       # walks every _sources/gsm*/
 """
 
 from __future__ import annotations
@@ -29,18 +24,18 @@ import re
 from pathlib import Path
 
 
-CROSS_BB_REF = re.compile(r'^\.\./(geosciml_[^/]+)/schema\.json#(.+)$')
+CROSS_BB_REF = re.compile(r'^\.\./([A-Za-z][A-Za-z0-9_]*)/([A-Za-z][A-Za-z0-9_]*)\.json#(.+)$')
 
 
-def collect_refs(node, found: set[tuple[str, str]]) -> None:
-    """Walk a JSON Schema and collect every (bb, class) tuple referenced via
-    a `../geosciml_*/schema.json#X` $ref."""
+def collect_refs(node, found: set[tuple[str, str, str]]) -> None:
+    """Walk a JSON Schema and collect every (bb_dir, file_base, class) tuple
+    referenced via a `../<bb>/<file>.json#X` $ref."""
     if isinstance(node, dict):
         for k, v in node.items():
             if k == "$ref" and isinstance(v, str):
                 m = CROSS_BB_REF.match(v)
                 if m:
-                    found.add((m.group(1), m.group(2)))
+                    found.add((m.group(1), m.group(2), m.group(3)))
             else:
                 collect_refs(v, found)
     elif isinstance(node, list):
@@ -48,14 +43,14 @@ def collect_refs(node, found: set[tuple[str, str]]) -> None:
             collect_refs(item, found)
 
 
-def rewrite_refs(node, mapping: dict[tuple[str, str], str]) -> None:
-    """Rewrite cross-BB $refs in-place: `../geosciml_X/schema.json#Cls` → `#Cls`."""
+def rewrite_refs(node, mapping: dict[tuple[str, str, str], str]) -> None:
+    """Rewrite cross-BB $refs in-place: `../<bb>/<file>.json#Cls` → `#<local>`."""
     if isinstance(node, dict):
         ref_v = node.get("$ref")
         if isinstance(ref_v, str):
             m = CROSS_BB_REF.match(ref_v)
             if m:
-                new_target = mapping.get((m.group(1), m.group(2)))
+                new_target = mapping.get((m.group(1), m.group(2), m.group(3)))
                 if new_target:
                     node["$ref"] = f"#{new_target}"
                     c = node.get("$comment", "")
@@ -73,16 +68,17 @@ def resolve_one(schema_path: Path) -> dict:
     resolved = copy.deepcopy(src)
     repo_sources = schema_path.parent.parent
 
-    # BFS: keep collecting until no new refs appear
-    seen: set[tuple[str, str]] = set()
-    pending: set[tuple[str, str]] = set()
+    seen: set[tuple[str, str, str]] = set()
+    pending: set[tuple[str, str, str]] = set()
     collect_refs(resolved, pending)
-    pending -= seen
 
     while pending:
-        bb, cls = pending.pop()
-        seen.add((bb, cls))
-        ext_path = repo_sources / bb / "schema.json"
+        ref = pending.pop()
+        if ref in seen:
+            continue
+        seen.add(ref)
+        bb_dir, file_base, cls = ref
+        ext_path = repo_sources / bb_dir / f"{file_base}.json"
         if not ext_path.exists():
             continue
         ext_schema = json.loads(ext_path.read_text(encoding="utf-8"))
@@ -90,44 +86,51 @@ def resolve_one(schema_path: Path) -> dict:
         if not ext_def:
             continue
         # Prefix to avoid local collisions
-        local_key = cls if cls not in resolved.get("$defs", {}) else f"{bb}_{cls}"
+        local_key = cls if cls not in resolved.get("$defs", {}) else f"{bb_dir}_{cls}"
         resolved.setdefault("$defs", {})[local_key] = copy.deepcopy(ext_def)
-        # Walk newly added subtree for further cross-BB refs
-        more: set[tuple[str, str]] = set()
+        more: set[tuple[str, str, str]] = set()
         collect_refs(ext_def, more)
-        for ref in more:
-            if ref not in seen:
-                pending.add(ref)
+        for r in more:
+            if r not in seen:
+                pending.add(r)
 
-    # Build mapping (bb, cls) -> local def key, then rewrite refs
-    mapping: dict[tuple[str, str], str] = {}
-    for bb, cls in seen:
-        local_key = cls if cls in resolved.get("$defs", {}) else None
-        if local_key is None:
-            # Search for the prefixed alias
-            for k in resolved.get("$defs", {}):
-                if k == f"{bb}_{cls}":
-                    local_key = k
-                    break
-        if local_key:
-            mapping[(bb, cls)] = local_key
+    # Build mapping (bb, file, cls) -> local def key, then rewrite refs.
+    mapping: dict[tuple[str, str, str], str] = {}
+    for bb_dir, file_base, cls in seen:
+        if cls in resolved.get("$defs", {}):
+            # Check it's actually the ref we resolved (not a same-name local def
+            # we accidentally aliased): the prefixed key wins when there was
+            # a collision.
+            prefixed = f"{bb_dir}_{cls}"
+            mapping[(bb_dir, file_base, cls)] = prefixed if prefixed in resolved["$defs"] else cls
     rewrite_refs(resolved, mapping)
 
     return resolved
 
 
+def _find_library_schema(bb_dir: Path) -> Path | None:
+    """Locate the BB's library schema: <bb_dir.name>Schema.json (skip
+    *FeatureSchema.json / *FeatureCollectionSchema.json dispatchers)."""
+    candidate = bb_dir / f"{bb_dir.name}Schema.json"
+    return candidate if candidate.exists() else None
+
+
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[1])
-    p.add_argument("schema", nargs="?", type=Path, help="Path to a BB schema.json")
+    p.add_argument("schema", nargs="?", type=Path, help="Path to a BB <bb>.json")
     p.add_argument("-o", "--output", type=Path,
                    help="Output path (default: <schema_dir>/resolvedSchema.json)")
     p.add_argument("--all", action="store_true",
-                   help="Resolve every BB under _sources/geosciml_*/")
+                   help="Resolve every BB under _sources/gsm*/")
     args = p.parse_args()
 
     if args.all:
-        roots = sorted(Path("_sources").glob("geosciml_*/schema.json"))
-        for sp in roots:
+        for bb_dir in sorted(Path("_sources").glob("gsm*")):
+            if not bb_dir.is_dir():
+                continue
+            sp = _find_library_schema(bb_dir)
+            if not sp:
+                continue
             out = sp.parent / "resolvedSchema.json"
             resolved = resolve_one(sp)
             out.write_text(json.dumps(resolved, indent=2, ensure_ascii=False) + "\n",

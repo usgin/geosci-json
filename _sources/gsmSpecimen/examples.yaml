@@ -1,0 +1,10 @@
+# Examples manifest for this building block.
+# Each entry lists a title, descriptive content (Markdown),
+# and one or more snippets pointing to example files.
+
+examples:
+  - title: examplegsmSpecimenMinimal
+    content: "Example instance: examplegsmSpecimenMinimal"
+    snippets:
+      - language: json
+        ref: examplegsmSpecimenMinimal.json

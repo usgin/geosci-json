@@ -9,7 +9,7 @@
       "title": "GeoSciML 4.1 XMI"
     }
   ],
-  "schema": "gsmEarthMaterialExtension.json",
+  "schema": "schema.yaml",
   "umlPackages": [
     "EarthMaterialDetails"
   ]

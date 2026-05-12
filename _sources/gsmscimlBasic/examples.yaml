@@ -1,0 +1,80 @@
+# Examples manifest for this building block.
+# Each entry lists a title, descriptive content (Markdown),
+# and one or more snippets pointing to example files.
+
+examples:
+  - title: examplegsmscimlBasicMinimal
+    content: "Example instance: examplegsmscimlBasicMinimal"
+    snippets:
+      - language: json
+        ref: examplegsmscimlBasicMinimal.json
+  - title: fc heterogeneous GSO
+    content: "Heterogeneous FeatureCollection example — collection has NO top-level featureType; each feature carries its own. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (else-branch dispatch). Members are the 5 single-feature examples in this directory, condensed inline."
+    snippets:
+      - language: json
+        ref: fc_heterogeneous_GSO.json
+  - title: fc homogeneous GSO
+    content: "Homogeneous FeatureCollection example — collection declares featureType=\"GeologicEvent\" at the top level, so every member must be a GeologicEvent. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch)."
+    snippets:
+      - language: json
+        ref: fc_homogeneous_GSO.json
+  - title: contact simple
+    content: "Example instance: contact_simple"
+    snippets:
+      - language: json
+        ref: contact_simple.json
+  - title: fold simple
+    content: "Example instance: fold_simple"
+    snippets:
+      - language: json
+        ref: fold_simple.json
+  - title: geologic unit simple
+    content: "Example instance: geologic_unit_simple"
+    snippets:
+      - language: json
+        ref: geologic_unit_simple.json
+  - title: mapped feature simple
+    content: "Example instance: mapped_feature_simple"
+    snippets:
+      - language: json
+        ref: mapped_feature_simple.json
+  - title: natural geomorphologic feature simple
+    content: "Example instance: natural_geomorphologic_feature_simple"
+    snippets:
+      - language: json
+        ref: natural_geomorphologic_feature_simple.json
+  - title: shear displacement structure simple
+    content: "Example instance: shear_displacement_structure_simple"
+    snippets:
+      - language: json
+        ref: shear_displacement_structure_simple.json
+  - title: contact complex
+    content: "Example instance: contact_complex"
+    snippets:
+      - language: json
+        ref: contact_complex.json
+  - title: fold complex
+    content: "Example instance: fold_complex"
+    snippets:
+      - language: json
+        ref: fold_complex.json
+  - title: geologic unit complex
+    content: "Example instance: geologic_unit_complex"
+    snippets:
+      - language: json
+        ref: geologic_unit_complex.json
+  - title: mapped feature complex
+    content: "Example instance: mapped_feature_complex"
+    snippets:
+      - language: json
+        ref: mapped_feature_complex.json
+  - title: natural geomorphologic feature complex
+    content: "Example instance: natural_geomorphologic_feature_complex"
+    snippets:
+      - language: json
+        ref: natural_geomorphologic_feature_complex.json
+  - title: shear displacement structure complex
+    content: "Example instance: shear_displacement_structure_complex"
+    snippets:
+      - language: json
+        ref: shear_displacement_structure_complex.json

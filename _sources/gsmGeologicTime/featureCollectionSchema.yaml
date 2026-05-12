@@ -1,0 +1,13 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.usgin.org/geosci-json/gsmGeologicTime/gsmGeologicTimeFeatureCollectionSchema.json
+description: 'FeatureCollection wrapper for the gsmGeologicTime BB. Combines json-fg/featurecollection.json with per-item
+  dispatch via gsmGeologicTimeFeatureSchema.json. Recognised featureType values for items: GlobalStratotypePoint, GlobalStratotypeSection,
+  StratigraphicPoint, StratigraphicSection.'
+allOf:
+- $ref: https://schemas.opengis.net/json-fg/featurecollection.json
+- type: object
+  properties:
+    features:
+      type: array
+      items:
+        $ref: gsmGeologicTimeFeatureSchema.json

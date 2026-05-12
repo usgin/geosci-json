@@ -137,17 +137,17 @@ profiles:
       «FeatureType»).
     featureTypes:
       - name: GeologicUnit
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#GeologicUnit
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnit
       - name: MappedFeature
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#MappedFeature
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#MappedFeature
       - name: Contact
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#Contact
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#Contact
       - name: Fold
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#Fold
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#Fold
       - name: Foliation
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#Foliation
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#Foliation
       - name: ShearDisplacementStructure
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#ShearDisplacementStructure
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructure
 
   gsmExtendedGeologyCollection:
     description: |
@@ -157,28 +157,28 @@ profiles:
       is pass-through (no Extension description slot).
     featureTypes:
       - name: GeologicUnit
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#GeologicUnit
-        extensionConstraints:
-          gbUnitDescription: ../gsmGeologicUnitExtension/gsmGeologicUnitExtension.json#GeologicUnitDescription
-          gbMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#CompoundMaterialDescription
-      - name: MappedFeature
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#MappedFeature
-      - name: Contact
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#Contact
-        extensionConstraints:
-          stContactDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#ContactDescription
-      - name: Fold
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#Fold
-        extensionConstraints:
-          stFoldDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#FoldDescription
-      - name: Foliation
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#Foliation
-        extensionConstraints:
-          stFoliationDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#FoliationDescription
-      - name: ShearDisplacementStructure
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#ShearDisplacementStructure
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicUnit
         extensionConstraintsArray:
-          stStructureDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtension.json#ShearDisplacementStructureDescription
+          gbUnitDescription: ../gsmGeologicUnitExtension/gsmGeologicUnitExtensionSchema.json#GeologicUnitDescription
+          gbMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#CompoundMaterialDescription
+      - name: MappedFeature
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#MappedFeature
+      - name: Contact
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#Contact
+        extensionConstraints:
+          stContactDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ContactDescription
+      - name: Fold
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#Fold
+        extensionConstraints:
+          stFoldDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldDescription
+      - name: Foliation
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#Foliation
+        extensionConstraints:
+          stFoliationDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoliationDescription
+      - name: ShearDisplacementStructure
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructure
+        extensionConstraintsArray:
+          stStructureDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ShearDisplacementStructureDescription
 
   gsmEarthMaterialCollection:
     description: |
@@ -193,18 +193,18 @@ profiles:
       the corresponding concrete Extension description class.
     featureTypes:
       - name: Mineral
-        ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#Mineral
+        ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#Mineral
         wrapAsFeature: true
       - name: OrganicMaterial
-        ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#OrganicMaterial
+        ref: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#OrganicMaterial
         wrapAsFeature: true
       - name: RockMaterial
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#RockMaterial
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial
         wrapAsFeature: true
         extensionConstraintsArray:
-          gbEarthMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#RockMaterialDescription
+          gbEarthMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#RockMaterialDescription
       - name: CompoundMaterial
-        ref: ../gsmscimlBasic/gsmscimlBasic.json#CompoundMaterial
+        ref: ../gsmscimlBasic/gsmscimlBasicSchema.json#CompoundMaterial
         wrapAsFeature: true
         extensionConstraintsArray:
-          gbEarthMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtension.json#CompoundMaterialDescription
+          gbEarthMaterialDescription: ../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#CompoundMaterialDescription

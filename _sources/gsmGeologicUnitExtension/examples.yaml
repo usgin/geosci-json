@@ -1,0 +1,10 @@
+# Examples manifest for this building block.
+# Each entry lists a title, descriptive content (Markdown),
+# and one or more snippets pointing to example files.
+
+examples:
+  - title: examplegsmGeologicUnitExtensionMinimal
+    content: "Minimal BeddingDescription instance — no required properties"
+    snippets:
+      - language: json
+        ref: examplegsmGeologicUnitExtensionMinimal.json
