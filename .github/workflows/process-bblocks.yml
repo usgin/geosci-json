@@ -16,6 +16,12 @@ jobs:
     if: github.run_number != 1
     name: Validate and process
     uses: opengeospatial/bblocks-postprocess/.github/workflows/validate-and-process.yml@master
+    with:
+      # First-deploy bootstrap: cross-BB $refs target gh-pages URLs that don't
+      # exist until the first successful deploy publishes them. Allow non-fatal
+      # errors so the initial deploy completes; subsequent runs will have live
+      # URLs. Flip back to true once the register is stable.
+      fail_on_error: false
     secrets:
       sparql_username: ${{ secrets.sparql_username }}
       sparql_password: ${{ secrets.sparql_password }}
