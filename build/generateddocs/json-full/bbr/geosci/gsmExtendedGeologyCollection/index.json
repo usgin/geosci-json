@@ -46,7 +46,7 @@
   "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/schema.yaml",
   "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/context.jsonld",
   "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/",
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmExtendedGeologyCollection/",
   "description": "# gsmExtendedGeologyCollection\n\nExtended-profile FeatureCollection. Accepts the same featureType values\nas gsmBasicGeologyCollection, but each Feature additionally requires\nits description slot(s) to be concrete Extension classes. MappedFeature\nis pass-through (no Extension description slot).\n",
   "examples": [

@@ -1361,7 +1361,7 @@ None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/context.jsonld)
+[context.jsonld](/github/workspace/_sources/gsmBasicGeologyCollection/context.jsonld)
 
 ## Sources
 

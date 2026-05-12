@@ -44,7 +44,7 @@
   "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/schema.yaml",
   "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/context.jsonld",
   "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/",
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmEarthMaterialCollection/",
   "description": "# gsmEarthMaterialCollection\n\nFeatureCollection profile collecting EarthMaterial features with rich\ndescription content. Root featureType values are the four concrete (or\nfirst-class) EarthMaterial subtypes \u2014 Mineral, OrganicMaterial,\nRockMaterial, CompoundMaterial. None of these are \u00abFeatureType\u00bb in the\nUML (all are \u00abType\u00bb), so the profile injects the JSON-FG Feature\nenvelope around each via `wrapAsFeature: true`. The inherited\n`gbEarthMaterialDescription` slot (from the EarthMaterial parent) is\nconstrained on RockMaterial and CompoundMaterial branches to require\nthe corresponding concrete Extension description class.\n",
   "examples": [

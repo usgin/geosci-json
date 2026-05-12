@@ -1,5 +1,5 @@
 {
-  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contacts in the worked scenario. Geologic context: the Js Formation (Jurassic sediments) unconformably overlies tilted Paleozoic strata (Os, Ss Formations) that overlie Early Proterozoic Xm metamorphic basement. A Cretaceous granite (Kg) and a Cretaceous diorite dike (Kd) intrude Js and the older units. After igneous activity, erosion exhumed the section, and Late Miocene Ms sediment was deposited on top, sealing the unconformity. The 7 contact features below capture each rock-body interface with its inferred contact type. Homogeneous FeatureCollection (collection-level featureType=\"Contact\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl \u2014 all 7 contacts in the worked scenario. Geologic context: the Js Formation (Jurassic sediments) unconformably overlies tilted Paleozoic strata (Os, Ss Formations) that overlie Early Proterozoic Xm metamorphic basement. A Cretaceous granite (Kg) and a Cretaceous diorite dike (Kd) intrude Js and the older units. After igneous activity, erosion exhumed the section, and Late Miocene Ms sediment was deposited on top, sealing the unconformity. The 7 contact features below capture each rock-body interface with its inferred contact type. Homogeneous FeatureCollection (collection-level featureType=\"Contact\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
   "type": "FeatureCollection",
   "featureType": "Contact",
   "conformsTo": [
@@ -12,7 +12,7 @@
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Js overlies Os — angular unconformity",
+        "name": "Js overlies Os \u2014 angular unconformity",
         "description": "Angular unconformable contact: Jurassic Js Formation deposited on the erosional surface of Ordovician Os Formation (sedimentary). The OsBoundary-6_2 surface in the source ontology is an Erosional Surface; tilted Paleozoic strata are truncated and the Jurassic sediments rest with angular discordance on the eroded substrate.",
         "purpose": "instance",
         "geologicHistory": [
@@ -44,8 +44,16 @@
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/OsFormation", "title": "Os Formation (Ordovician) — older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) \u2014 younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/OsFormation",
+            "title": "Os Formation (Ordovician) \u2014 older host",
+            "rel": "olderHost"
+          }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/angular_unconformity",
         "stContactDescription": null
@@ -57,7 +65,7 @@
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Js overlies Ss — angular unconformity",
+        "name": "Js overlies Ss \u2014 angular unconformity",
         "description": "Angular unconformable contact: Jurassic Js Formation deposited on the erosional surface of Silurian Ss Formation (sedimentary). The SsBoundary-6_1 surface in the source ontology is an Erosional Surface.",
         "purpose": "instance",
         "geologicHistory": [
@@ -75,8 +83,16 @@
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/SsFormation", "title": "Ss Formation (Silurian) — older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) \u2014 younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/SsFormation",
+            "title": "Ss Formation (Silurian) \u2014 older host",
+            "rel": "olderHost"
+          }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/angular_unconformity",
         "stContactDescription": null
@@ -106,8 +122,16 @@
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/XmRockBody", "title": "Xm Rock Body (Early Proterozoic gneiss) — older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) \u2014 younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/XmRockBody",
+            "title": "Xm Rock Body (Early Proterozoic gneiss) \u2014 older host",
+            "rel": "olderHost"
+          }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/nonconformity",
         "stContactDescription": null
@@ -119,7 +143,7 @@
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Kd dike intrudes Js — igneous intrusive contact",
+        "name": "Kd dike intrudes Js \u2014 igneous intrusive contact",
         "description": "Igneous intrusive contact: a Cretaceous diorite dike (Kd) cuts the Jurassic Js Formation. In the source ontology this contact is hosted on multiple rock-body boundaries (KdBoundaryInJs-3_1_4, KdBoundaryInJs-3_2_4, etc.) defining the upper and lower walls of the dike where it intrudes Js. Diorite grain size ~0.05 mm (mean).",
         "purpose": "instance",
         "geologicHistory": [
@@ -139,8 +163,16 @@
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/KdDike",      "title": "Kd Mafic Dike (Cretaceous) — younger host (intrusive)", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — older host (country rock)", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/KdDike",
+            "title": "Kd Mafic Dike (Cretaceous) \u2014 younger host (intrusive)",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) \u2014 older host (country rock)",
+            "rel": "olderHost"
+          }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/igneous_intrusive_contact",
         "stContactDescription": null
@@ -152,7 +184,7 @@
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Kg granite intrudes Js — igneous intrusive contact",
+        "name": "Kg granite intrudes Js \u2014 igneous intrusive contact",
         "description": "Igneous intrusive contact: a Cretaceous granite (Kg) pluton intrudes the Jurassic Js Formation. Source ontology hosts this contact on KgIntrusiveBoundary-4_2 and KgBoundaryIntrudesJs-4_2. Granite grain size ~5 mm (mean).",
         "purpose": "instance",
         "geologicHistory": [
@@ -172,8 +204,16 @@
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/KgGranite",   "title": "Kg Granite (Cretaceous) — younger host (intrusive)", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — older host (country rock)", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/KgGranite",
+            "title": "Kg Granite (Cretaceous) \u2014 younger host (intrusive)",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) \u2014 older host (country rock)",
+            "rel": "olderHost"
+          }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/igneous_intrusive_contact",
         "stContactDescription": null
@@ -185,7 +225,7 @@
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Ms overlies Js — disconformity",
+        "name": "Ms overlies Js \u2014 disconformity",
         "description": "Disconformable depositional contact: Late Miocene Ms Formation deposited on the eroded top surface of Jurassic Js Formation (topJs-2_1, an erosional surface). The two units are roughly parallel (no major angular discordance) but separated by a large hiatus from the Cretaceous through most of the Tertiary.",
         "purpose": "instance",
         "geologicHistory": [
@@ -217,8 +257,16 @@
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/MsFormation", "title": "Ms Formation (Late Miocene) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/MsFormation",
+            "title": "Ms Formation (Late Miocene) \u2014 younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) \u2014 older host",
+            "rel": "olderHost"
+          }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity",
         "stContactDescription": null
@@ -230,8 +278,8 @@
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Ms overlies Kg — nonconformity",
-        "description": "Nonconformable contact: Late Miocene Ms Formation deposited on an erosion surface developed across the Cretaceous Kg granite (KgBoundaryErosionSurface-2_3). Sedimentary on plutonic igneous — classical nonconformity.",
+        "name": "Ms overlies Kg \u2014 nonconformity",
+        "description": "Nonconformable contact: Late Miocene Ms Formation deposited on an erosion surface developed across the Cretaceous Kg granite (KgBoundaryErosionSurface-2_3). Sedimentary on plutonic igneous \u2014 classical nonconformity.",
         "purpose": "instance",
         "geologicHistory": [
           {
@@ -262,8 +310,16 @@
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/MsFormation", "title": "Ms Formation (Late Miocene) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/KgGranite",   "title": "Kg Granite (Cretaceous) — older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/MsFormation",
+            "title": "Ms Formation (Late Miocene) \u2014 younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/KgGranite",
+            "title": "Kg Granite (Cretaceous) \u2014 older host",
+            "rel": "olderHost"
+          }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/nonconformity",
         "stContactDescription": null

@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmEarthMaterialExtension - gsmEarthMaterialExtension
-Generated 2026-05-12T20:52:24.902272+00:00
+Generated 2026-05-12T21:02:19.633550+00:00
 === Files ===
 Using examplegsmEarthMaterialExtensionMinimal.json from examples
 === End Files ===

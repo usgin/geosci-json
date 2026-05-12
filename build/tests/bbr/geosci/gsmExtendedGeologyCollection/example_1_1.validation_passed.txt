@@ -1,0 +1,10 @@
+Validation report for usgin.bbr.geosci.gsmExtendedGeologyCollection - gsmExtendedGeologyCollection
+Generated 2026-05-12T21:02:23.552158+00:00
+=== Files ===
+Using fc_extended_minimal.json from examples
+=== End Files ===
+
+=== JSON Schema ===
+Validation passed
+=== End JSON Schema ===
+

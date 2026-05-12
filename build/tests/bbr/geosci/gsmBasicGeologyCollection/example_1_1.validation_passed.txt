@@ -1,0 +1,10 @@
+Validation report for usgin.bbr.geosci.gsmBasicGeologyCollection - gsmBasicGeologyCollection
+Generated 2026-05-12T21:02:06.786132+00:00
+=== Files ===
+Using fc_contacts_complex_GSO.json from examples
+=== End Files ===
+
+=== JSON Schema ===
+Validation passed
+=== End JSON Schema ===
+

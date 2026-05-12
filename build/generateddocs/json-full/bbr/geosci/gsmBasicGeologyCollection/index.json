@@ -37,7 +37,7 @@
     ]
   },
   "isProfileOf": "FeatureCollection",
-  "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/context.jsonld",
+  "ldContext": "/github/workspace/_sources/gsmBasicGeologyCollection/context.jsonld",
   "dateOfLastChange": "2026-05-12",
   "schema": {
     "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBasicGeologyCollection/schema.yaml",
@@ -45,8 +45,9 @@
   },
   "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/schema.yaml",
   "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/context.jsonld",
+  "resolvedSchemaProperties": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBasicGeologyCollection/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeologyCollection/",
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmBasicGeologyCollection/",
   "description": "# gsmBasicGeologyCollection\n\nBasic-profile FeatureCollection. Accepts GeologicUnit, MappedFeature,\nand the four concrete GeologicStructure subtypes (Contact, Fold,\nFoliation, ShearDisplacementStructure). Each item is validated against\nits anchor in gsmscimlBasic. EarthMaterial is omitted (UML \u00abType\u00bb, not\n\u00abFeatureType\u00bb).\n",
   "examples": [
