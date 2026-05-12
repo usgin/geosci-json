@@ -1,0 +1,32 @@
+{
+  "$comment": "Synthesised example: a GeologicAgeDescription combining a numeric age range with named geochronologic eras. Embedded inside a GeologicEvent.gaEventDescription slot.",
+  "preferredAge": {
+    "reportingDate": {
+      "type": "Quantity",
+      "definition": "http://resource.geosciml.org/concept/numericage/representativeAge",
+      "label": "preferred age",
+      "uom": {
+        "code": "Ma"
+      },
+      "value": 65.5
+    },
+    "olderBoundDate": {
+      "type": "Quantity",
+      "definition": "http://resource.geosciml.org/concept/numericage/olderBound",
+      "label": "older bound",
+      "uom": {
+        "code": "Ma"
+      },
+      "value": 66.0
+    },
+    "youngerBoundDate": {
+      "type": "Quantity",
+      "definition": "http://resource.geosciml.org/concept/numericage/youngerBound",
+      "label": "younger bound",
+      "uom": {
+        "code": "Ma"
+      },
+      "value": 65.0
+    }
+  }
+}

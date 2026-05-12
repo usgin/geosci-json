@@ -1,0 +1,99 @@
+{
+  "type": "Feature",
+  "id": "HerveyGroup.1",
+  "featureType": "GeologicUnit",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/geosciml_GeologyBasic/schema.json"
+  ],
+  "geometry": null,
+  "properties": {
+    "name": "Hervey Group",
+    "description": "Terrigenous to shallow marine, red to white and green, quartzose to lithic sandstone, siltstone, shale and conglomerate; sandstones commonly thick-bedded and massive to cross-stratified.",
+    "identifier": {
+      "codeSpace": "http://data.geoscience.gov.xx/",
+      "value": "http://data.geoscience.gov.xx/feature/asc/geologicunit/stratno/25947"
+    },
+    "occurrence": [
+      {
+        "href": "http://data.geoscience.gov.xx/mappedfeature/polygon/6735427298",
+        "title": "Hervey Group mapped polygon"
+      }
+    ],
+    "purpose": "typicalNorm",
+    "relatedFeature": [
+      {
+        "href": "http://data.geoscience.gov.xx/feature/geologicprovince/Lachlan_Orogen",
+        "title": "Lachlan Orogen"
+      }
+    ],
+    "classifier": [
+      {
+        "type": "Category",
+        "definition": "http://data.bgs.ac.uk/ref/EngineeringGeologyTheme",
+        "label": "BGS Engineering Geology theme: Strong Sandstone",
+        "codeSpace": "http://data.bgs.ac.uk/ref/EngineeringGeologyTheme",
+        "value": "http://data.bgs.ac.uk/ref/EngineeringGeologyTheme/strongSandstone"
+      }
+    ],
+    "geologicHistory": [
+      {
+        "href": "https://example.org/HerveyGroup.depositionalAge",
+        "title": "Hervey Group depositional age (Frasnian–Famennian, deposition)"
+      },
+      {
+        "href": "https://example.org/HerveyGroup.deformationAge",
+        "title": "Hervey Group deformation age (Tournaisian–Serpukhovian)"
+      }
+    ],
+    "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
+    "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/group",
+    "composition": [
+      {
+        "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/unspecifiedPartRole",
+        "material": {
+          "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/mudstone"
+        },
+        "proportion": {
+          "type": "QuantityRange",
+          "definition": "http://resource.geosciml.org/concept/proportion/range",
+          "label": "mudstone proportion (5–50 %)",
+          "uom": {
+            "code": "%"
+          },
+          "value": [
+            5.0,
+            50.0
+          ]
+        }
+      },
+      {
+        "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/unspecifiedPartRole",
+        "material": {
+          "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone"
+        },
+        "proportion": {
+          "type": "QuantityRange",
+          "definition": "http://resource.geosciml.org/concept/proportion/range",
+          "label": "sandstone proportion (50–95 %)",
+          "uom": {
+            "code": "%"
+          },
+          "value": [
+            50.0,
+            95.0
+          ]
+        }
+      }
+    ],
+    "hierarchyLink": [
+      {
+        "role": "http://resource.geosciml.org/classifier/cgi/geologicunitpartrole/constituent_unit",
+        "targetUnit": {
+          "href": "http://data.geoscience.gov.xx/feature/asc/geologicunit/stratno/33410",
+          "title": "Boulton Formation"
+        }
+      }
+    ]
+  },
+  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicUnit.xml — Hervey Group, an Australian lithostratigraphic unit (Frasnian–Famennian deposition, Tournaisian–Serpukhovian deformation)."
+}

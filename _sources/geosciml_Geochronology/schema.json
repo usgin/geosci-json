@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/geosciml_Geochronology/schema.json",
+  "description": "GeoSciML Geochronology building block (generated).",
+  "$defs": {
+    "GeochronologicInterpretation": {
+      "$anchor": "GeochronologicInterpretation",
+      "description": "A GeochronologicInterpretation is an interpretation made by a geologist of the age of a specimen made by statistical analysis of a collection of observations. A geologic specimen may have multiple geochronological interpretations made on it, each related to a different observation/result collection.",
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "interpretedAge": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/SCLinkObject",
+                          "$comment": "by-reference link to GeologicEvent"
+                        },
+                        {
+                          "$ref": "../geosciml_GeologicEvent/schema.json#GeologicEvent",
+                          "$comment": "cross-BB inline reference to GeologicEvent"
+                        }
+                      ]
+                    }
+                  ],
+                  "description": "The interpretedAge property is an association between a GeochronologicInterpretation and a GeologicEvent that describes the dated event, process and environment."
+                },
+                "isotopicEvent": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#IsotopicEventType"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The isotopicEvent:IsotopicEventType contains a term from a controlled vocabulary that describes any isotopic events that are relevant to the interpretation. e.g., closure, isotopic mixing, Pb loss, etc."
+                },
+                "isotopicSystem": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#IsotopicSystemName"
+                    }
+                  ],
+                  "description": "The property isotopicSystem:IsotopicSystemName contains a term from a controlled vocabulary that describes the isotopic system used to calculate geochronological age. A vocabulary would contain values such as: Ar-Ar, K-Ar, Nd-Sm, Pb-Pb, Rb-Sr, Re-Os, U-Pb, etc."
+                },
+                "statisticalMethod": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#StatisticalMethodTerm"
+                    }
+                  ],
+                  "description": "The property statisticalMethod:StatisticalMethodTerm contains a term from a controlled vocabulary that describes the statistical method used to interpret the results. (e.g., weighted mean, median, concordia, discordia, etc)"
+                },
+                "interpretedBy": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "iso19115:CI_Responsibility",
+                      "$comment": "External type — needs concrete schema URL"
+                    }
+                  ],
+                  "description": "The property interpretedBy is an association between a GeochronologicInterpretation and a CIT:CI_Responsability describing the party responsible for this interpretation."
+                },
+                "citation": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "iso19115:CI_Citation",
+                      "$comment": "External type — needs concrete schema URL"
+                    }
+                  ],
+                  "description": "The citation property is an association between a GeochronologicInterpretation and a CIT:CI_Citation that describes authors and other reference information for an interpreted age."
+                },
+                "preferredInterpretation": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ],
+                  "description": "The property preferredInterpretation:Primitive::Boolean indicates whether this interpretation is the preferred interpretation (i.e., the analytical data may be reinterpreted)."
+                },
+                "sourceCollection": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "iso19156:SF_SamplingFeatureCollection",
+                      "$comment": "External type — needs concrete schema URL"
+                    }
+                  ],
+                  "description": "The property sourceCollection is an association between a GeochronologicInterpretation and an OM::SF_SamplingFeatureCollection that lists a collection of OM::SF_SamplingFeature (e.g., a collection of burn spots or craters from a SHRIMP analytical session). When legacy published data for which the SamplingFeatureCollection is unknown, it may be delivered with SamplingFeatureCollection = 'unknown'."
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "IsotopicEventType": {
+      "$anchor": "IsotopicEventType",
+      "description": "Refers to a vocabulary of terms to describe any isotopic processes relevant to the geochronologic interpretation. eg:closure, isotopic mixing, Pb loss, etc",
+      "type": "string",
+      "format": "uri"
+    },
+    "IsotopicSystemName": {
+      "$anchor": "IsotopicSystemName",
+      "description": "Refers to a vocabulary of isotopic systems such as Ar-Ar, K-Ar, Nd-Sm, U-Pb, Pb-Pb, Re-Os, etc",
+      "type": "string",
+      "format": "uri"
+    },
+    "StatisticalMethodTerm": {
+      "$anchor": "StatisticalMethodTerm",
+      "description": "Refers to a vocabulary describing statistical methods used in interpret geochronologic data",
+      "type": "string",
+      "format": "uri"
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/geosciml_GeologicAgeDetails/schema.json",
+  "description": "GeoSciML GeologicAgeDetails building block (generated).",
+  "$defs": {
+    "GeologicEventDescription": {
+      "$anchor": "GeologicEventDescription",
+      "description": "GeologicEventDescription provides extended description of geologic events through links to GeochronologicEras in the GeologicTimescale schema.",
+      "allOf": [
+        {
+          "$ref": "#GeologicEventAbstractDescription"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "olderGeochronologicEra": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to GeochronologicEra"
+                    },
+                    {
+                      "$ref": "#GeochronologicEra"
+                    }
+                  ]
+                }
+              ],
+              "description": "Link to description of the GeochronologicEra that corresponds to the older estimated age of a geologic feature."
+            },
+            "youngerGeochronologicEra": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to GeochronologicEra"
+                    },
+                    {
+                      "$ref": "#GeochronologicEra"
+                    }
+                  ]
+                }
+              ],
+              "description": "Link to description of the GeochronologicEra that corresponds to the younger estimated age of a geologic feature."
+            },
+            "prototype": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/SCLinkObject",
+                  "$comment": "by-reference link to StratigraphicPoint"
+                }
+              ],
+              "description": "Reference stratigraphic point for stratigraphic events"
+            }
+          }
+        }
+      ]
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    },
+    "GeochronologicEra": {
+      "$anchor": "GeochronologicEra",
+      "description": "A GeochronologicEra is a period of time between two GeochronologicBoundaries. The association of a GeochronologicEra with a stratotype is optional. In the GSSP approach recommended by ICS for the Global Geologic Timescale, Unit Stratotypes are not used. Rather, the association of an era with geologic units and sections is indirect, via the association of an era with boundaries, which are in turn tied to stratotype points, which occur within host stratotype sections.",
+      "allOf": [
+        {
+          "$ref": "#TimeOrdinalEra"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "rank": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#GeochronologicEraRank"
+                }
+              ],
+              "description": "The property rank:GeochronologicEraRank contains a term from a vocabulary describing the rank of the time period (e.g., eon, era, period, stage)."
+            },
+            "stratotype": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/SCLinkObject",
+                  "$comment": "by-reference link to StratigraphicSection"
+                }
+              ],
+              "description": "The property stratotype is an association between a GeochronologicEra and StratigraphicSection that describes a type section that names the physical location or outcrop of a particular reference exposure of a stratigraphic sequence or stratigraphic boundary. A unit stratotype is the agreed reference point for a particular stratigraphic unit and a boundary stratotype is the reference for a particular boundary between strata (Wikipedia)."
+            }
+          }
+        }
+      ]
+    },
+    "GeologicEventAbstractDescription": {
+      "$anchor": "GeologicEventAbstractDescription",
+      "description": "Stub property class to allow extended event related properties.",
+      "type": "object"
+    },
+    "TimeOrdinalEra": {
+      "$anchor": "TimeOrdinalEra",
+      "description": "The association of an era with a stratotype is optional. In the GSSP approach recommended by ICS for the Global Geologic Timescale, Unit Stratotypes are not used. Rather, the association of an Era with geologic units and sections is indirect, via the association of an era with Boundaries, which are in turn tied to Stratotype Points, which occur within host Stratotype Sections. Note that the \"German School\" defines stratigraphic eras conceptually, without reference to stratotypes.",
+      "type": "object",
+      "properties": {
+        "end": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/SCLinkObject",
+              "$comment": "by-reference link to TimeOrdinalEraBoundary"
+            }
+          ],
+          "description": "Younger time boundary of an era"
+        },
+        "start": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/SCLinkObject",
+              "$comment": "by-reference link to TimeOrdinalEraBoundary"
+            }
+          ],
+          "description": "Older time boundary of an era"
+        },
+        "member": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SCLinkObject",
+                "$comment": "by-reference link to TimeOrdinalEra"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "Subdivisions of TimeOrdinalEra"
+        }
+      }
+    }
+  }
+}

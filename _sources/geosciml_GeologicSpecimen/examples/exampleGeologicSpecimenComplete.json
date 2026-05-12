@@ -1,0 +1,80 @@
+{
+  "type": "Feature",
+  "id": "ID000",
+  "featureType": "ReferenceSpecimen",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/geosciml_GeologicSpecimen/schema.json"
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      44.78,
+      22.0
+    ]
+  },
+  "properties": {
+    "name": "name0",
+    "description": "description0",
+    "identifier": {
+      "codeSpace": "http://www.oxygenxml.com/",
+      "value": "identifier0"
+    },
+    "type": "http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_Specimen",
+    "sampledFeature": [
+      {
+        "name": "Exeter Formation",
+        "identifier": {
+          "codeSpace": "http://usgs.gov/geolex",
+          "value": "P2057nbhj"
+        }
+      }
+    ],
+    "relatedSamplingFeature": [
+      {
+        "role": "http://vocab.org/samplingFeatureComplexRole/215hq5hq4",
+        "relatedSamplingFeature": {
+          "href": "http://boreholeindex.org/borehole/23457y",
+          "title": "Texaco Pima 01-10, TD 2578 feet"
+        }
+      }
+    ],
+    "lineage": "sampled from core, pick fresh, unaltered section",
+    "materialClass": "http://resource.geosciml.org/classifier/cgi/simplelithology/granite",
+    "samplingTime": "2015-07-10T10:11:00",
+    "samplingMethod": {
+      "method": "http://resource.geosciml.org/classifier/cgi/geologicsamplingmethod/rotary_core_drilling",
+      "parameter": [
+        {
+          "name": "core size",
+          "value": "NQ"
+        }
+      ]
+    },
+    "processingDetails": [
+      {
+        "time": "2011-07-05",
+        "processOperator": {
+          "href": "https://example.org/people/bigguy-bonehead",
+          "title": "Bigguy Bonehead (rock crusher)"
+        },
+        "preparationMethod": "http://resource.geosciml.org/classifier/cgi/geologicspecimenpreparation/pulverize_rock"
+      }
+    ],
+    "size": {
+      "value": 0.07,
+      "uom": "m"
+    },
+    "currentLocation": "USGS Core repository, Denver Federal Center, Lakewood, Colorado, USA",
+    "specimenType": "http://resource.geosciml.org/classifier/cgi/specimentype/core_segment",
+    "usedIn": [
+      {
+        "name": "U-Pb isotopic analysis for geochronology",
+        "identifier": {
+          "codeSpace": "http://labsrus.org/uageochronlab/sessions",
+          "value": "37.658"
+        }
+      }
+    ]
+  },
+  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-ReferenceSpecimen1.xml — a granite core segment from the Exeter Formation, sampled from a Texaco borehole and used in a U-Pb geochronology session. Vocab URIs substituted to canonical CGI namespace where the source used placeholder domains."
+}

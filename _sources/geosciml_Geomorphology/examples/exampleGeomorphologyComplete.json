@@ -1,0 +1,37 @@
+{
+  "type": "Feature",
+  "id": "GEOMORPH_1",
+  "featureType": "NaturalGeomorphologicFeature",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/geosciml_Geomorphology/schema.json"
+  ],
+  "geometry": null,
+  "properties": {
+    "name": "UNNAMED GLACIAL OUTWASH CHANNEL",
+    "identifier": {
+      "codeSpace": "http://data.bgs.ac.uk/",
+      "value": "http://data.bgs.ac.uk/ref/625KGeologyMap/GeomorphologicFeature/bgsn_digmap20111213000010001_625k"
+    },
+    "geologicHistory": [
+      {
+        "href": "https://example.org/EVENT_4",
+        "title": "Devensian Glaciation (water erosion, glacial outwash plain)"
+      }
+    ],
+    "unitDescription": [
+      {
+        "href": "https://example.org/testGeolUnit",
+        "title": "associated geologic unit"
+      }
+    ],
+    "naturalGeomorphologicFeatureType": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/glacial",
+    "activity": {
+      "type": "Category",
+      "definition": "http://inspire.ec.europa.eu/codelist/GeomorphologicActivityValue",
+      "label": "inactive",
+      "codeSpace": "http://inspire.ec.europa.eu/codelist/GeomorphologicActivityValue",
+      "value": "http://inspire.ec.europa.eu/codelist/GeomorphologicActivityValue/inactive"
+    }
+  },
+  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-NaturalGeomorphologicFeature.xml — a glacial outwash channel mapped by the British Geological Survey, formed during the Devensian Glaciation (Late Pleistocene)."
+}

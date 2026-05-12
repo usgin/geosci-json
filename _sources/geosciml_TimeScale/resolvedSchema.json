@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/geosciml_TimeScale/schema.json",
+  "description": "GeoSciML TimeScale building block (generated).",
+  "$defs": {
+    "GeochronologicBoundary": {
+      "$anchor": "GeochronologicBoundary",
+      "description": "A GeochronologicBoundary is a boundary between two geochronologic time periods.",
+      "allOf": [
+        {
+          "$ref": "#TimeOrdinalEraBoundary"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stratotype": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/SCLinkObject",
+                  "$comment": "by-reference link to StratigraphicPoint"
+                }
+              ],
+              "description": "The property stratotype is an association between a GeochronologicBoundary and a StratigraphicPoint that are associated with the boundary. A GeochronologicBoundary can be associated with more than one StratigraphicPoints, but only one may have GSSP ratified status. The others are proposed equivalents."
+            }
+          }
+        }
+      ]
+    },
+    "GeochronologicEra": {
+      "$anchor": "GeochronologicEra",
+      "description": "A GeochronologicEra is a period of time between two GeochronologicBoundaries. The association of a GeochronologicEra with a stratotype is optional. In the GSSP approach recommended by ICS for the Global Geologic Timescale, Unit Stratotypes are not used. Rather, the association of an era with geologic units and sections is indirect, via the association of an era with boundaries, which are in turn tied to stratotype points, which occur within host stratotype sections.",
+      "allOf": [
+        {
+          "$ref": "#TimeOrdinalEra"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "rank": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#GeochronologicEraRank"
+                }
+              ],
+              "description": "The property rank:GeochronologicEraRank contains a term from a vocabulary describing the rank of the time period (e.g., eon, era, period, stage)."
+            },
+            "stratotype": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/SCLinkObject",
+                  "$comment": "by-reference link to StratigraphicSection"
+                }
+              ],
+              "description": "The property stratotype is an association between a GeochronologicEra and StratigraphicSection that describes a type section that names the physical location or outcrop of a particular reference exposure of a stratigraphic sequence or stratigraphic boundary. A unit stratotype is the agreed reference point for a particular stratigraphic unit and a boundary stratotype is the reference for a particular boundary between strata (Wikipedia)."
+            }
+          }
+        }
+      ]
+    },
+    "GeochronologicEraRank": {
+      "$anchor": "GeochronologicEraRank",
+      "description": "This list is an indicative list only of terms used to describe the rank of time periods defined by the International Commission on Stratigraphy. Users are encouraged to use vocabulary of terms owned by the ICS or CGI vocabularies working group and managed outside of this model. For example: eon era period epoch age",
+      "type": "string",
+      "format": "uri"
+    },
+    "GeologicTimescale": {
+      "$anchor": "GeologicTimescale",
+      "description": "The classic \"Geologic Timescale\" (http://www.stratigraphy.org/index.php/ics-chart-timescale) comprising an ordered, hierarchical set of named \"eras\" is an example of an Ordinal Temporal Reference System. It may be calibrated with reference to a numeric Temporal Coordinate System, but is, in principle, defined independently.  Constraint: Structure association is with GeochronologicEra",
+      "allOf": [
+        {
+          "$ref": "#TimeOrdinalReferenceSystem"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "NumericEraBoundary": {
+      "$anchor": "NumericEraBoundary",
+      "description": "NumericEraBoundary is used for pre-Ediacaran and Pleistocene / Holocene boundaries in the standard timescale where boundaries are not defined by a material reference but as numerical values.",
+      "allOf": [
+        {
+          "$ref": "#TimeOrdinalEraBoundary"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "StandardGlobalNumericalAge": {
+      "$anchor": "StandardGlobalNumericalAge",
+      "description": "A standard numeric age point (a numeric analogue to a 'golden spike') is applicable to the formal subdivision of the Precambrian, and perhaps the Pleistocene/Holocene boundary ( http://www.stratigraphy.org/index.php/ics-chart-timescale). The boundary is not defined from a physical stratotype, although it can be influence by some, but placed at a convenient numerical value.  Constraint: value(status)==\"GSSA\"",
+      "allOf": [
+        {
+          "$ref": "#NumericEraBoundary"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    },
+    "TimeOrdinalEraBoundary": {
+      "$anchor": "TimeOrdinalEraBoundary",
+      "description": "A point in Earth's history which bounds a TimeOrdinalEra.",
+      "type": "object",
+      "properties": {
+        "position": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "iso19108:TM_Instant",
+              "$comment": "External type — needs concrete schema URL"
+            }
+          ],
+          "description": "A point in time corresponding to the era boundary"
+        },
+        "positionalUncertainty": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
+            }
+          ],
+          "description": "A measure of the uncertainty in the estimate of the point in time of the era boundary"
+        },
+        "previousEra": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SCLinkObject",
+                "$comment": "by-reference link to TimeOrdinalEra"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "Preceding era"
+        },
+        "observationalBasis": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "iso19156:OM_Observation",
+                "$comment": "External type — needs concrete schema URL"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "Observation supporting the existence of the boundary (geochronology, paleontology, etc.)"
+        },
+        "nextEra": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SCLinkObject",
+                "$comment": "by-reference link to TimeOrdinalEra"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "Succeeding era"
+        }
+      }
+    },
+    "TimeOrdinalReferenceSystem": {
+      "$anchor": "TimeOrdinalReferenceSystem",
+      "description": "A time reference system comprised of an ordered set of time periods (time ordinal eras).",
+      "type": "object",
+      "properties": {
+        "referencePoint": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/SCLinkObject",
+            "$comment": "by-reference link to TimeOrdinalEraBoundary"
+          },
+          "uniqueItems": true,
+          "description": "Two reference points defining the extent of the system"
+        },
+        "component": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SCLinkObject",
+                "$comment": "by-reference link to TimeOrdinalEra"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "TimeOrdinalEra composing the TimeOrdinalReferenceSystem"
+        }
+      },
+      "required": [
+        "referencePoint"
+      ]
+    },
+    "TimeOrdinalEra": {
+      "$anchor": "TimeOrdinalEra",
+      "description": "The association of an era with a stratotype is optional. In the GSSP approach recommended by ICS for the Global Geologic Timescale, Unit Stratotypes are not used. Rather, the association of an Era with geologic units and sections is indirect, via the association of an era with Boundaries, which are in turn tied to Stratotype Points, which occur within host Stratotype Sections. Note that the \"German School\" defines stratigraphic eras conceptually, without reference to stratotypes.",
+      "type": "object",
+      "properties": {
+        "end": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/SCLinkObject",
+              "$comment": "by-reference link to TimeOrdinalEraBoundary"
+            }
+          ],
+          "description": "Younger time boundary of an era"
+        },
+        "start": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/SCLinkObject",
+              "$comment": "by-reference link to TimeOrdinalEraBoundary"
+            }
+          ],
+          "description": "Older time boundary of an era"
+        },
+        "member": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SCLinkObject",
+                "$comment": "by-reference link to TimeOrdinalEra"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "Subdivisions of TimeOrdinalEra"
+        }
+      }
+    }
+  }
+}

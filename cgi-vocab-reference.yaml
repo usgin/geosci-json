@@ -1,0 +1,288 @@
+# GeoSciML 4.1 CGI vocabulary reference (documentation only)
+#
+# STATUS: this file is reference material — it is NOT consumed by the schema
+# generator. It records CGI vocabulary URLs we inferred for the 35
+# `SWE::Category`-typed attributes and the 47 `«CodeList»` classes during
+# initial analysis. Two reasons it's no longer read by the generator:
+#
+#   1. `SWE::Category`-typed attributes are now encoded as `$ref` to SWE 3.0
+#      `Category.json` (matches the OGC code-sprint draft, geoscimlBasic.json
+#      and geoscimlLite.json). Vocabulary URLs travel in the instance via the
+#      `definition`/`codeSpace`/`value` members of each Category object, not
+#      via a schema-level annotation.
+#
+#   2. `«CodeList»` classes are encoded as `{type: string, format: uri}` with
+#      a `codeList` annotation emitted only when the source UML class carries
+#      an explicit `codeList` tagged value (OGC 24-017r1 req/codelists-basic).
+#      GeoSciML 4.1's XMI carries zero such tags, so no annotations are
+#      emitted. To enrich a class, add a `codeList` tagged value to it in EA
+#      and re-export the XMI.
+#
+# This file remains useful as:
+#   - documentation of which CGI vocabularies cover which GeoSciML attributes
+#   - a starting list if you decide to add `codeList` UML tags later
+#   - input for external vocabulary-binding profiles (SHACL, JSON-Forms, etc.)
+#
+# Source of vocabulary list: https://www.geosciml.org/resource/vocabulary/cgi/current/
+# URL pattern: http://resource.geosciml.org/classifier/cgi/<vocab>
+#
+# Status values (per-entry, for human review):
+#   matched     — vocabulary slug clearly corresponds to attribute purpose
+#   checked, OK — match has been confirmed by review
+#   plausible   — closest available vocabulary, may not be exact fit
+#   treat as open — no fixed vocabulary; any URI accepted
+#   tbd         — no published CGI vocabulary matches; needs human decision
+
+attributes:
+
+  # === Matched: vocabulary slug aligns directly with attribute purpose ===
+
+  - class: CompoundMaterialDescription
+    attribute: compositionCategory
+    codeList: http://resource.geosciml.org/classifier/cgi/compositioncategory
+    status: matched
+
+  - class: GeologicUnitDescription
+    attribute: unitComposition
+    codeList: http://resource.geosciml.org/classifier/cgi/compositioncategory
+    status: checked, OK
+
+
+  - class: CompoundMaterialDescription
+    attribute: geneticCategory
+    codeList: http://resource.geosciml.org/classifier/cgi/geneticcategory
+    status: matched
+
+  - class: ContactDescription
+    attribute: contactCharacter
+    codeList: http://resource.geosciml.org/classifier/cgi/contacttype
+    status: checked,OK
+
+
+  - class: GeologicEvent
+    attribute: eventEnvironment
+    codeList: http://resource.geosciml.org/classifier/cgi/eventenvironment
+    status: matched
+
+  - class: BoreholeInterval
+    attribute: observationMethod
+    codeList: http://resource.geosciml.org/classifier/cgi/featureobservationmethod
+    status: checked,OK
+
+
+  - class: GeologicFeature
+    attribute: observationMethod
+    codeList: http://resource.geosciml.org/classifier/cgi/featureobservationmethod
+    status: matched
+
+  - class: MappedFeature
+    attribute: observationMethod
+    codeList: http://resource.geosciml.org/classifier/cgi/mappedfeatureobservationmethod
+    status: matched
+
+  - class: GeologicUnitDescription
+    attribute: bodyMorphology
+    codeList: http://resource.geosciml.org/classifier/cgi/geologicunitmorphology
+    status: matched
+
+  - class: MetamorphicDescription
+    attribute: metamorphicFacies
+    codeList: http://resource.geosciml.org/classifier/cgi/metamorphicfacies
+    status: matched
+
+  - class: MetamorphicDescription
+    attribute: metamorphicGrade
+    codeList: http://resource.geosciml.org/classifier/cgi/metamorphicgrade
+    status: matched
+
+  - class: ParticleGeometryDescription
+    attribute: aspectRatio
+    codeList: http://resource.geosciml.org/classifier/cgi/particleaspectratio
+    status: matched
+
+  - class: ParticleGeometryDescription
+    attribute: shape
+    codeList: http://resource.geosciml.org/classifier/cgi/particleshape
+    status: matched
+
+  - class: RockMaterialDescription
+    attribute: consolidationDegree
+    codeList: http://resource.geosciml.org/classifier/cgi/consolidationdegree
+    status: matched
+
+  # === Plausible: CGI vocab exists for general topic but exactness unclear ===
+
+  - class: AlterationDescription
+    attribute: alterationDegree
+    codeList: TBD
+    status: treat as open vocab
+
+
+  - class: AlterationDescription
+    attribute: alterationDistribution
+    codeList: TBD
+    status: treat as open.
+
+
+  # === TBD: no matching CGI vocabulary published ===
+
+  - class: BeddingDescription
+    attribute: beddingPattern
+    codeList: TBD
+    status: treat as open
+
+  - class: BeddingDescription
+    attribute: beddingStyle
+    codeList: TBD
+    status: treat as open
+
+  - class: BeddingDescription
+    attribute: beddingThickness
+    codeList: TBD
+    status: treat as open
+
+
+  - class: EarthMaterial
+    attribute: color
+    codeList: TBD
+    status: treat as open
+
+
+  - class: FoldDescription
+    attribute: geneticModel
+    codeList: TBD
+    status: treat as open
+
+  - class: FoldDescription
+    attribute: hingeLineCurvature
+    codeList: TBD
+    status: treat as open
+
+  - class: FoldDescription
+    attribute: hingeShape
+    codeList: TBD
+    status: treat as open
+
+  - class: FoldDescription
+    attribute: interLimbAngle
+    codeList: TBD
+    status: treat as open
+
+  - class: FoldDescription
+    attribute: limbShape
+    codeList: TBD
+    status: treat as open
+
+  - class: FoldDescription
+    attribute: symmetry
+    codeList: TBD
+    status: treat as open
+
+  - class: FoliationDescription
+    attribute: continuity
+    codeList: TBD
+    status: treat as open
+
+  - class: FoliationDescription
+    attribute: definingElement
+    codeList: TBD
+    status: treat as open
+
+  - class: FoliationDescription
+    attribute: intensity
+    codeList: TBD
+    status: treat as open
+
+  - class: GeologicFeature
+    attribute: classifier
+    codeList: TBD
+    status: treat as open
+
+  - class: GeologicUnitDescription
+    attribute: outcropCharacter
+    codeList: TBD
+    status: treat as open
+
+  - class: Lineation
+    attribute: definingElement
+    codeList: TBD
+    status: treat as open
+
+  - class: Lineation
+    attribute: intensity
+    codeList: TBD
+    status: treat as open
+
+  - class: NaturalGeomorphologicFeature
+    attribute: activity
+    codeList: TBD
+    status: treat as open
+
+  - class: ParticleGeometryDescription
+    attribute: sorting
+    codeList: TBD
+    status: treat as open
+
+# === CodeList class → CGI vocabulary URL ====================================
+#
+# Lookup table for the JSON Schema `codeList` annotation emitted on each
+# «CodeList»-stereotyped class. Entries are populated by name-similarity
+# matching against the CGI vocabulary catalog at
+# https://www.geosciml.org/resource/vocabulary/cgi/current/
+#
+# `treat as open` means: no CGI vocab is published for this concept; emit the
+# CodeList class with `{type: string, format: uri}` and no `codeList` member.
+# This matches the user policy for open Category attributes.
+
+codelist_classes:
+
+  # Matched against CGI catalog
+  AlterationTypeTerm:        http://resource.geosciml.org/classifier/cgi/alterationtype
+  BoreholeDrillingMethodCode: http://resource.geosciml.org/classifier/cgi/boreholedrillingmethod
+  ConstituentPartRoleTerm:   http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole
+  ContactTypeTerm:           http://resource.geosciml.org/classifier/cgi/contacttype
+  ConventionCode:            http://resource.geosciml.org/classifier/cgi/conventioncode
+  DeformationStyleTerm:      http://resource.geosciml.org/classifier/cgi/deformationstyle
+  DescriptionPurpose:        http://resource.geosciml.org/classifier/cgi/descriptionpurpose
+  DeterminationMethodTerm:   http://resource.geosciml.org/classifier/cgi/determinationmethodorientation
+  EventProcessTerm:          http://resource.geosciml.org/classifier/cgi/eventprocess
+  FaultTypeTerm:             http://resource.geosciml.org/classifier/cgi/faulttype
+  FoliationTypeTerm:         http://resource.geosciml.org/classifier/cgi/foliationtype
+  GeologicUnitPartRoleTerm:  http://resource.geosciml.org/classifier/cgi/geologicunitpartrole
+  GeologicUnitTypeTerm:      http://resource.geosciml.org/classifier/cgi/geologicunittype
+  LineationTypeTerm:         http://resource.geosciml.org/classifier/cgi/lineationtype
+  LithologyTerm:             http://resource.geosciml.org/classifier/cgi/simplelithology
+  MappingFrameTerm:          http://resource.geosciml.org/classifier/cgi/mappingframe
+  MovementSenseTerm:         http://resource.geosciml.org/classifier/cgi/faultmovementsense
+  MovementTypeTerm:          http://resource.geosciml.org/classifier/cgi/faultmovementtype
+  ParticleTypeTerm:          http://resource.geosciml.org/classifier/cgi/particletype
+  PlanarPolarityCode:        http://resource.geosciml.org/classifier/cgi/planarpolaritycode
+  RankTerm:                  http://resource.geosciml.org/classifier/cgi/stratigraphicrank
+
+  # No CGI vocab published — treat as open (emit no codeList annotation)
+  AnalyticalMethodTerm:                       treat as open
+  AnthropogenicGeomorphologicFeatureTypeTerm: treat as open
+  BoreholeInclinationCode:                    treat as open
+  BoreholePurposeCode:                        treat as open
+  BoreholeStartPointCode:                     treat as open
+  CollectionTypeTerm:                         treat as open
+  CompositionPartRoleTerm:                    treat as open
+  ExposureTerm:                               treat as open
+  FabricTypeTerm:                             treat as open
+  FoldProfileTypeTerm:                        treat as open
+  GeochronologicEraRank:                      treat as open
+  GeochronologicEraTerm:                      treat as open
+  GeologicRelationshipTerm:                   treat as open
+  GeologicSamplingMethodTerm:                 treat as open
+  GeologicSpecimenPreparationTerm:            treat as open
+  GeologicUnitHierarchyRoleTerm:              treat as open
+  InstrumentTypeTerm:                         treat as open
+  IsotopicEventType:                          treat as open
+  IsotopicSystemName:                         treat as open
+  LinearDirectedCode:                         treat as open
+  MineralNameTerm:                            treat as open
+  NaturalGeomorphologicFeatureTypeTerm:       treat as open
+  NonDirectionalStructureTypeTerm:            treat as open
+  PhysicalPropertyTerm:                       treat as open
+  RelationRoleTerm:                           treat as open
+  StatisticalMethodTerm:                      treat as open

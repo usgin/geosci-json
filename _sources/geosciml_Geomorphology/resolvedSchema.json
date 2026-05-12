@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/geosciml_Geomorphology/schema.json",
+  "description": "GeoSciML Geomorphology building block (generated).",
+  "$defs": {
+    "AnthropogenicGeomorphologicFeature": {
+      "$anchor": "AnthropogenicGeomorphologicFeature",
+      "description": "An anthropogenic geomorphologic feature is a geomorphologic feature (i.e., landform) which has been created by human activity. For example, a dredged channel, midden, open pit or reclaimed land.",
+      "allOf": [
+        {
+          "$ref": "#GeomorphologicFeature"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "anthropogenicGeomorphologicFeatureType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#AnthropogenicGeomorphologicFeatureTypeTerm"
+                    }
+                  ],
+                  "description": "The anthropogenicGeomorphologicFeatureType: AnthropogenicGeomorphologicFeatureTypeTerm is a reference from a controlled vocabulary describing the type of geomorphologic feature."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "AnthropogenicGeomorphologicFeatureTypeTerm": {
+      "$anchor": "AnthropogenicGeomorphologicFeatureTypeTerm",
+      "description": "Refers to a vocabulary of terms describing the type of anthropogenic geomorphologic feature",
+      "type": "string",
+      "format": "uri"
+    },
+    "GeomorphologicFeature": {
+      "$anchor": "GeomorphologicFeature",
+      "description": "A geomorphologic feature is a kind of GeologicFeature describing the shape and nature of the Earth's land surface. These landforms may be created by natural Earth processes (e.g., river channel, beach, moraine or mountain) or through human (anthropogenic) activity (e.g., dredged channel, reclaimed land, mine waste dumps). In GeoSciML, the geomorphologic feature is modelled as a feature related (through unitDescription property) to a GeologicUnit that composes the form.",
+      "allOf": [
+        {
+          "$ref": "#GeologicFeature"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "unitDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to GeologicUnit"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The unitDescription property is an association that links the geomorphologic feature to a geologic description (e.g., related stratigraphic units and earth materials)."
+                },
+                "gmFeatureDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#GeomorphologicUnitAbstractDescription"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The property gmFeatureDescription:GeomorphologicUnitAbstractDescription provides a detailed morphologic description. This is a stub property in GeoSciML Basic since GeomorphologicUnitAbstractDescription is an abstract class with no concrete subtype in GeoSciML Basic."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GeomorphologicUnitAbstractDescription": {
+      "$anchor": "GeomorphologicUnitAbstractDescription",
+      "description": "Detailed geomorphologic unit description placeholder (stub class) for GeomorphologicUnit  Constraint: Only one instance of each subtype is allowed",
+      "type": "object"
+    },
+    "NaturalGeomorphologicFeature": {
+      "$anchor": "NaturalGeomorphologicFeature",
+      "description": "A natural geomorphologic feature is a geomorphologic feature (i.e., landform) that has been created by natural Earth processes. For example, river channel, beach ridge, caldera, canyon, moraine or mud flat.",
+      "allOf": [
+        {
+          "$ref": "#GeomorphologicFeature"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "naturalGeomorphologicFeatureType": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#NaturalGeomorphologicFeatureTypeTerm"
+                    }
+                  ],
+                  "description": "The property naturalGeomorphologicFeatureType: NaturalGeomorphologicFeatureTypeTerm is a reference from a controlled vocabulary describing the type of geomorphologic feature."
+                },
+                "activity": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                    }
+                  ],
+                  "description": "The activity property (SWE::Category) contains a category term from a controlled vocabulary describing the current activity status of the geomorphologic feature (e.g., currently active, dormant, inactive, reactivated, etc.)."
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "NaturalGeomorphologicFeatureTypeTerm": {
+      "$anchor": "NaturalGeomorphologicFeatureTypeTerm",
+      "description": "Refers to a vocabulary of terms describing the type of natural geomorphologic feature",
+      "type": "string",
+      "format": "uri"
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    },
+    "GeologicFeature": {
+      "$anchor": "GeologicFeature",
+      "description": "The abstract GeologicFeature class represents a conceptual feature that is hypothesized to exist coherently in the world. It corresponds with a \"legend item\" from a traditional geologic map and its instance acts as the \"description package\". The description package is classified according to its intended purpose as a typicalNorm, definingNorm or instance. GeologicFeature can be used outside the context of a map (it can lack a MappedFeature), for example when describing typical norms (describing expected property from a feature) or defining norms (describing properties required from a feature to be classifying in a group, such as given geologic unit). A GeologicFeature appearing on a map is considered as an “instance”.  Constraint: self.metadata.hierarchyLevel=(feature or dataset or series)",
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "observationMethod": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The GeologicFeature observationMethod (SWE::Category) specifies the approach to acquiring the collection of attribute values that constitute an individual feature instance (e.g. point count, brunton compass on site, air photo interpretation, field observation, hand specimen, laboratory, aerial photography, creative imagination). ObservationMethod is a convenience property that provides a simple approach to observation metadata when data are reported using a feature view (as opposed to observation view). This property corresponds (loosely) to ISO19115 Lineage."
+                },
+                "purpose": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#DescriptionPurpose"
+                    }
+                  ],
+                  "description": "The property purpose:DescriptionPurpose specifies the intended purpose/level of abstraction for a given feature or object instance. The possible values are: instance, typicalNorm, and definingNorm."
+                },
+                "classifier": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The classifier (SWE::Category) contains a standard description or definition of the feature type (e.g., the definition of a particular geologic unit in a stratigraphic lexicon)."
+                },
+                "relatedFeature": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to GeologicFeature"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "A relatedFeature is a general structure used to define relationships between any features or objects within GeoSciML. Relationships are always binary and directional. There is always a single source and a single target for a given FeatureRelation (which is abstract in GeoSciML Basic). The relationship is always defined from the perspective of the Source and is generally an active verb."
+                },
+                "geologicHistory": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to GeologicEvent"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The geologicHistory is an association that relates one or more GeologicEvents to a GeologicFeature to describe their age or geologic history. Normally, GeoSciML uses the generic relatedFeature::GeologicRelation to associate GeologicFeature with other GeologicFeatures, including GeologicEvent. However, this design was deemed too complex for GeoSciML Basic and is therefore only available from the GeoSciML Extension package."
+                },
+                "occurrence": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to MappedFeature"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The occurrence property is an association that links a notional geologic feature with any number of mapped features (MappedFeature). A geologic feature, such as a geologic unit may be linked to mapped features from a number of different maps."
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

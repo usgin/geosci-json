@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/geosciml_GeologicAgeDetails/schema.json",
+  "description": "GeoSciML GeologicAgeDetails building block (generated).",
+  "$defs": {
+    "GeologicEventDescription": {
+      "$anchor": "GeologicEventDescription",
+      "description": "GeologicEventDescription provides extended description of geologic events through links to GeochronologicEras in the GeologicTimescale schema.",
+      "allOf": [
+        {
+          "$ref": "../geosciml_GeologicEvent/schema.json#GeologicEventAbstractDescription",
+          "$comment": "cross-BB reference to GeologicEventAbstractDescription in package GeologicEvent"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "olderGeochronologicEra": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to GeochronologicEra"
+                    },
+                    {
+                      "$ref": "../geosciml_TimeScale/schema.json#GeochronologicEra",
+                      "$comment": "cross-BB inline reference to GeochronologicEra"
+                    }
+                  ]
+                }
+              ],
+              "description": "Link to description of the GeochronologicEra that corresponds to the older estimated age of a geologic feature."
+            },
+            "youngerGeochronologicEra": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to GeochronologicEra"
+                    },
+                    {
+                      "$ref": "../geosciml_TimeScale/schema.json#GeochronologicEra",
+                      "$comment": "cross-BB inline reference to GeochronologicEra"
+                    }
+                  ]
+                }
+              ],
+              "description": "Link to description of the GeochronologicEra that corresponds to the younger estimated age of a geologic feature."
+            },
+            "prototype": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/SCLinkObject",
+                  "$comment": "by-reference link to StratigraphicPoint"
+                }
+              ],
+              "description": "Reference stratigraphic point for stratigraphic events"
+            }
+          }
+        }
+      ]
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

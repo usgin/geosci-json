@@ -1,0 +1,13 @@
+{
+  "itemIdentifier": "usgin.bbr.geosci.geosciml_GeologyBasic",
+  "name": "GeologyBasic",
+  "abstract": "GeoSciML 4.1 GeologyBasic encoded as JSON Schema per OGC 24-017r1.",
+  "status": "under-development",
+  "dateTimeAddition": "2026-05-11",
+  "sources": [
+    {
+      "title": "GeoSciML 4.1 XMI"
+    }
+  ],
+  "schema": "schema.json"
+}

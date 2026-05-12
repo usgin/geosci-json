@@ -1,0 +1,54 @@
+{
+  "type": "Feature",
+  "id": "geochronology.example.1",
+  "featureType": "GeochronologicInterpretation",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/geosciml_Geochronology/schema.json"
+  ],
+  "geometry": null,
+  "properties": {
+    "name": "U-Pb zircon age, Bolsa Quartzite",
+    "description": "U-Pb zircon detrital age interpretation for the Bolsa Quartzite. Reports a Cambrian maximum depositional age based on the youngest zircon population.",
+    "identifier": {
+      "codeSpace": "http://labsrus.org/uageochronlab/sessions",
+      "value": "http://labsrus.org/uageochronlab/sessions/37.658/interpretation/1"
+    },
+    "preferredInterpretation": true,
+    "appliesTo": {
+      "href": "https://example.org/units/BolsaQuartzite",
+      "title": "Bolsa Quartzite"
+    },
+    "isotopicEventType": "http://resource.geosciml.org/classifier/cgi/isotopiceventtype/crystallization",
+    "isotopicSystem": "http://resource.geosciml.org/classifier/cgi/isotopicsystem/U-Pb",
+    "numericAge": {
+      "reportingDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/representativeAge",
+        "label": "preferred age",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 510
+      },
+      "olderBoundDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/olderBound",
+        "label": "older 2σ bound",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 515
+      },
+      "youngerBoundDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/youngerBound",
+        "label": "younger 2σ bound",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 505
+      }
+    }
+  },
+  "$comment": "Synthesised example of a GeochronologicInterpretation reporting a 510 ± 5 Ma U-Pb zircon age, marked as the preferred interpretation."
+}

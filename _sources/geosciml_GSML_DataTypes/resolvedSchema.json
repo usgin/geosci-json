@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/geosciml_GSML_DataTypes/schema.json",
+  "description": "GeoSciML GSML_DataTypes building block (generated).",
+  "$defs": {
+    "ConventionCode": {
+      "$anchor": "ConventionCode",
+      "description": "Suggested values: \"dip dip direction\", \"strike dip right hand rule\" (The strike and dip of planar data is listed according to the ‘right-hand rule’ or, as one looks along the strike direction, the surface dips to the right.) This list is an indicative list only of terms used to describe the convention used for the orientation measurement. Users are encouraged to use a vocabulary of terms managed by the CGI vocabularies working group outside of this model.",
+      "type": "string",
+      "format": "uri"
+    },
+    "DeterminationMethodTerm": {
+      "$anchor": "DeterminationMethodTerm",
+      "description": "This class is an empty placeholder for a vocabulary of terms describing the method used to determine the measured orientation. Users are encouraged to use a vocabulary of terms managed by the CGI vocabularies working group outside of this model.",
+      "type": "string",
+      "format": "uri"
+    },
+    "GSML_GeometricDescriptionValue": {
+      "$anchor": "GSML_GeometricDescriptionValue",
+      "description": "GSML_GeometricDescriptionValue is a special abstract data type for descriptions of planar or linear orientations of a geologic feature. Different subtypes allow specifying direction by direction vector (e.g. dip/dip direction), compass point (e.g. NE), or description (e.g. \"toward fold hinge\", \"below').",
+      "type": "object",
+      "properties": {
+        "determinationMethod": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#DeterminationMethodTerm"
+            }
+          ],
+          "description": "The determinationMethod:DeterminationMethodTerm property describes the way the orientation value was determined (e.g. measured, inferred from dip slope, etc.) using a reference to a controlled vocabulary."
+        },
+        "descriptiveOrientation": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "description": "The descriptionOrientation:Primitive::CharacterString contains a textual specification of orientation, possibly referencing some local geography (e.g. \"toward fold hinge\", \"below\")."
+        }
+      }
+    },
+    "GSML_LinearOrientation": {
+      "$anchor": "GSML_LinearOrientation",
+      "description": "A linear orientation is composed of a trend (the compass orientation of the line) and a plunge (the angle from the horizontal). This vector may be oriented (pointing in a specific direction) or not.",
+      "allOf": [
+        {
+          "$ref": "#GSML_GeometricDescriptionValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "directed": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#LinearDirectedCode"
+                }
+              ],
+              "description": "The directed:LinearDirectedCode property indicates if the orientation represents a linear feature that is directed, e.g. clast imbrication, mylonitic lineation with sense of shear, slickenlines with displacement direction, rather than undirected (like a fold hinge line or intersection lineations). A code list will indicate which is the directed end of the linear orientation. The value of the property comes from a controlled vocabulary."
+            },
+            "plunge": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The property plunge (SWE::QuantityRange) reports the magnitude of the plunge as an angle from horizontal."
+            },
+            "trend": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The property trend (SWE::QuantityRange) reports the azimuth (compass bearing) value of the linear orientation."
+            }
+          }
+        }
+      ]
+    },
+    "GSML_PlanarOrientation": {
+      "$anchor": "GSML_PlanarOrientation",
+      "description": "A planar orientation is composed of two values; the azimuth (a compass point) and a dip (the angle from the horizontal). Polarity of the plane indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical, etc. There are several conventions to encode a planar orientation and this specification does not impose one but provides a convention property to report it. It must be noted that allowance for different conventions makes manipulation of the data more difficult. Therefore it is recommended that user communities adopt a single measurement convention.",
+      "allOf": [
+        {
+          "$ref": "#GSML_GeometricDescriptionValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "convention": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#ConventionCode"
+                }
+              ],
+              "description": "The property convention:ConventionCode contains the convention used for the measurement from a controlled vocabulary."
+            },
+            "azimuth": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The azimuth (SWE::QuantityRange) property (compass point, bearing etc.) contains the value of the orientation. The convention property reports how azimuth is interpreted (if it is relative to a quadrant)."
+            },
+            "dip": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The dip (SWE::QuantityRange) reports the angle that the structural surface (e.g. bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane as a numeric value or term."
+            },
+            "polarity": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#PlanarPolarityCode"
+                }
+              ],
+              "description": "The polarity:PolarityCode indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical etc., using a controlled vocabulary."
+            }
+          }
+        }
+      ]
+    },
+    "GSML_QuantityRange": {
+      "$anchor": "GSML_QuantityRange",
+      "description": "GSML_QuantityRange is a specialization of SWE Common QuantiytyRange (OGC 08-094r1, Clause 7.2.13) where lower and upper values are made explicit. SWE::QuantityRange uses an array of values (RealPair, see Clause 7.2.1) where the lowest value is the first element and the highest the second. This convenience data type has been created as an alternative encoding for implementations that do no support encoding of arrays in a single field (e.g. DBF) or reference to elements in string encoded arrays1 (eg. Filter Encoding Specification 2.0 – OGC 09-029r2). &nbsp;------------------------- 1 SWE RealPair is encoded as space delimited lists (&lt;swe:value&gt;10 300&lt;/swe:value&gt; in XML) , which demands that clients parse the string to extract each token. To build a WFS/FES query that tests the first element, it requires parsing the string either using string-before(swe:value,' ') or tokenize(swe:value,' '). This is cumbersome at best, or not even supported by the server at worst. 09-026r2 Clause 7.4.4 describes the minimal XPath supports and string parsing is not present.",
+      "type": "object",
+      "properties": {
+        "lowerValue": {
+          "type": "number",
+          "description": "The property lowerValue:Real contains the lower bound of the range. It shall be a copy of inherited SWE::QuantityRange::value[0]."
+        },
+        "upperValue": {
+          "type": "number",
+          "description": "The property upperValue:Real contains the upper bound of the range. It shall be a copy of inherited SWE::QuantityRange::value[1]."
+        }
+      },
+      "required": [
+        "lowerValue",
+        "upperValue"
+      ]
+    },
+    "GSML_Vector": {
+      "$anchor": "GSML_Vector",
+      "description": "A GSML_Vector is a data type representing a linear orientation with a magnitude (a quantity assigned to this vector). If the magnitude is unknown, a GSML_LinearOrientation shall be used.",
+      "allOf": [
+        {
+          "$ref": "#GSML_LinearOrientation"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "magnitude": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The magnitude property (SWE::QuantityRange) reports the magnitude of the vector."
+            }
+          }
+        }
+      ]
+    },
+    "LinearDirectedCode": {
+      "$anchor": "LinearDirectedCode",
+      "description": "eg, \"directed\" (indicates that the orientation is directed) \"directed down\" (indicates that the linear orientation is directed below the horizon) \"directed up\" (indicates that the linear orientation is directed above the horizon) This list is an indicative example list only of terms used to describe the values to use for terms related to directedness of linear orientations. Users are encouraged to use a vocabulary of terms managed by the CGI vocabularies working group outside of this model.",
+      "type": "string",
+      "format": "uri"
+    },
+    "PlanarPolarityCode": {
+      "$anchor": "PlanarPolarityCode",
+      "description": "eg: \"upright\", \"overturned\", \"vertical\" This list is an indicative list only of terms used to describe the values to use for expressing overturned or upright facing of planar orientation measurements. Users are encouraged to use a vocabulary of terms managed by the CGI vocabularies working group outside of this model.",
+      "type": "string",
+      "format": "uri"
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

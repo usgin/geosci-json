@@ -1,0 +1,55 @@
+{
+  "type": "Feature",
+  "id": "event.1",
+  "featureType": "GeologicEvent",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/geosciml_GeologicEvent/schema.json"
+  ],
+  "geometry": null,
+  "properties": {
+    "name": "Kanimblan Orogeny",
+    "eventProcess": [
+      "http://resource.geoscience.gov.xx/vocabulary/eventprocess/deformation"
+    ],
+    "numericAge": {
+      "reportingDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/representativeAge",
+        "label": "representative age",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 335
+      },
+      "olderBoundDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/olderBound",
+        "label": "older bound",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 350
+      },
+      "youngerBoundDate": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/numericage/youngerBound",
+        "label": "younger bound",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 325
+      }
+    },
+    "olderNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Tournaisian",
+    "youngerNamedAge": "http://resource.geosciml.org/classifier/ics/ischart/Serpukhovian",
+    "eventEnvironment": [
+      {
+        "type": "Category",
+        "definition": "http://resource.geosciml.org/classifier/cgi/eventenvironment",
+        "label": "deep crustal",
+        "codeSpace": "http://resource.geosciml.org/classifier/cgi/eventenvironment",
+        "value": "http://resource.geosciml.org/classifier/cgi/eventenvironment/deep-crustal"
+      }
+    ]
+  }
+}

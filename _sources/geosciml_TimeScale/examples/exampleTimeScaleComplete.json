@@ -1,0 +1,109 @@
+{
+  "type": "Feature",
+  "id": "ZappodachusZone",
+  "featureType": "GeochronologicEra",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/geosciml_TimeScale/schema.json"
+  ],
+  "geometry": null,
+  "properties": {
+    "name": "Zappodachus Zone",
+    "description": "Test geochronologic era instance document",
+    "identifier": {
+      "codeSpace": "http://resource.arizona.edu/stratigraphicLexicon",
+      "value": "http://resource.arizona.edu/chronostratigraphicUnit/2366"
+    },
+    "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/informal",
+    "start": {
+      "name": "GSSA for base of Mesoproterozoic",
+      "description": "Standard age assigned to base of Mesoproterozoic",
+      "identifier": {
+        "codeSpace": "http://resource.geosciml.org/classifier/ics/ischart/2014",
+        "value": "http://resource.geosciml.org/classifier/ics/ischart/BaseMesoproterozoic"
+      },
+      "position": "1600",
+      "positionalUncertainty": {
+        "type": "Quantity",
+        "definition": "http://resource.geosciml.org/concept/age/uncertainty",
+        "label": "no uncertainty, value is asserted",
+        "uom": {
+          "code": "Ma"
+        },
+        "value": 0.0
+      },
+      "nextEra": [
+        {
+          "href": "http://resource.geosciml.org/classifier/ics/ischart/Mesoproterozoic",
+          "title": "Mesoproterozoic"
+        },
+        {
+          "href": "http://resource.geosciml.org/classifier/ics/ischart/Calymmian",
+          "title": "Calymmian"
+        }
+      ],
+      "previousEra": [
+        {
+          "href": "http://resource.geosciml.org/classifier/ics/ischart/Paleoproterozoic",
+          "title": "Paleoproterozoic"
+        },
+        {
+          "href": "http://resource.geosciml.org/classifier/ics/ischart/Statherian",
+          "title": "Statherian"
+        }
+      ]
+    },
+    "end": {
+      "name": "Beckers Butte Tuff marker",
+      "description": "Younger boundary of the time interval is defined by eruption of Beckers Butte Tuff, a thin, widespread marker assumed to be synchronously deposited across the region",
+      "stratotype": {
+        "sampledFeature": [
+          {
+            "name": "Beckers Butte tuff, Martin Formation"
+          }
+        ],
+        "shape": {
+          "href": "http://azgs.az.gov/resource/location/3574884",
+          "title": "reference outcrop, Beckers Butte Tuff, Martin Formation"
+        }
+      }
+    },
+    "member": [
+      {
+        "href": "http://resource.geosciml.org/classifier/ics/ischart/Neoproterozoic",
+        "title": "Neoproterozoic"
+      },
+      {
+        "href": "http://resource.geosciml.org/classifier/ics/ischart/Mesoproterozoic",
+        "title": "Mesoproterozoic"
+      },
+      {
+        "href": "http://resource.geosciml.org/classifier/ics/ischart/Cambrian",
+        "title": "Cambrian"
+      }
+    ],
+    "stratotype": {
+      "sampledFeature": [
+        {
+          "href": "http://resource.usgs.gov/stratigraphicLexicon/15379",
+          "title": "Apache Group"
+        },
+        {
+          "href": "http://resource.usgs.gov/stratigraphicLexicon/985743",
+          "title": "Troy Quartzite"
+        },
+        {
+          "href": "http://resource.usgs.gov/stratigraphicLexicon/6732",
+          "title": "Bolsa Quartzite"
+        },
+        {
+          "href": "http://resource.usgs.gov/stratigraphicLexicon/78532",
+          "title": "Beckers Butte Member, Martin Formation"
+        }
+      ],
+      "shape": {
+        "href": "http://resource.usgs.gov/stratigraphicSection/geometry/347378"
+      }
+    }
+  },
+  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GeochronEraTest1.xml — a fictional 'Zappodachus Zone' chronostratigraphic unit, starting at the base of the Mesoproterozoic (1600 Ma GSSA) and ending at the Beckers Butte Tuff marker in Arizona."
+}

@@ -1,0 +1,45 @@
+{
+  "type": "Feature",
+  "id": "session.uagl.37658",
+  "featureType": "AnalyticalSession",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/geosciml_LaboratoryAnalysis/schema.json"
+  ],
+  "geometry": null,
+  "properties": {
+    "name": "U-Pb isotopic analysis for geochronology — session 37.658",
+    "identifier": {
+      "codeSpace": "http://labsrus.org/uageochronlab/sessions",
+      "value": "37.658"
+    },
+    "sessionDate": "2015-09-30",
+    "operator": {
+      "href": "https://example.org/people/lab-tech",
+      "title": "Lab technician on duty"
+    },
+    "instrument": {
+      "href": "https://example.org/instruments/laicpms-01",
+      "title": "LA-ICP-MS laboratory instrument"
+    },
+    "analyticalMethod": "http://resource.geosciml.org/classifier/cgi/analyticalmethod/LA-ICP-MS",
+    "analyses": [
+      {
+        "analyte": "U/Pb",
+        "specimen": {
+          "href": "https://example.org/specimens/ID000",
+          "title": "Granite core segment, Exeter Formation"
+        },
+        "result": {
+          "type": "Quantity",
+          "definition": "http://resource.geosciml.org/concept/upbAge/preferred",
+          "label": "preferred U-Pb age",
+          "uom": {
+            "code": "Ma"
+          },
+          "value": 510
+        }
+      }
+    ]
+  },
+  "$comment": "Synthesised example of an AnalyticalSession reporting a U-Pb age determination on a specimen referenced by URL. The session record is itself a Feature; constituent analyses are inline DataType objects."
+}

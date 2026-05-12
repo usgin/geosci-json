@@ -1,0 +1,68 @@
+{
+  "$comment": "Synthesised example: a CompoundMaterialDescription for a polymictic conglomerate, showing one constituent EarthMaterial (granite clast) and a compositional category. EarthMaterialDetails classes are «DataType» — they are embedded inside parent FeatureTypes (e.g. inside GeologicUnit.composition.material), not standalone Features.",
+  "compositionCategory": [
+    {
+      "type": "Category",
+      "definition": "http://resource.geosciml.org/classifier/cgi/compositioncategory",
+      "label": "polymictic conglomerate",
+      "codeSpace": "http://resource.geosciml.org/classifier/cgi/compositioncategory",
+      "value": "http://resource.geosciml.org/classifier/cgi/compositioncategory/polymictic_conglomerate"
+    }
+  ],
+  "geneticCategory": [
+    {
+      "type": "Category",
+      "definition": "http://resource.geosciml.org/classifier/cgi/geneticcategory",
+      "label": "sedimentary",
+      "codeSpace": "http://resource.geosciml.org/classifier/cgi/geneticcategory",
+      "value": "http://resource.geosciml.org/classifier/cgi/geneticcategory/sedimentary"
+    }
+  ],
+  "constituentPart": [
+    {
+      "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/clast",
+      "proportion": {
+        "type": "QuantityRange",
+        "definition": "http://resource.geosciml.org/concept/proportion/clast",
+        "label": "granite clast proportion",
+        "uom": {
+          "code": "%"
+        },
+        "value": [
+          30.0,
+          60.0
+        ]
+      },
+      "material": {
+        "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/granite",
+        "color": [
+          {
+            "type": "Category",
+            "definition": "http://resource.geosciml.org/classifier/cgi/color",
+            "label": "pink",
+            "codeSpace": "http://resource.geosciml.org/classifier/cgi/color",
+            "value": "http://resource.geosciml.org/classifier/cgi/color/pink"
+          }
+        ]
+      }
+    },
+    {
+      "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/matrix",
+      "proportion": {
+        "type": "QuantityRange",
+        "definition": "http://resource.geosciml.org/concept/proportion/matrix",
+        "label": "matrix proportion",
+        "uom": {
+          "code": "%"
+        },
+        "value": [
+          40.0,
+          70.0
+        ]
+      },
+      "material": {
+        "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/sandstone"
+      }
+    }
+  ]
+}

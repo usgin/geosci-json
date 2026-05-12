@@ -1,0 +1,378 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/geosciml_LaboratoryAnalysis/schema.json",
+  "description": "GeoSciML LaboratoryAnalysis building block (generated).",
+  "$defs": {
+    "AnalyticalInstrument": {
+      "$anchor": "AnalyticalInstrument",
+      "description": "The analytical instrument is the category of instrument used to perform an analytical measurement or observation.",
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#InstrumentTypeTerm"
+                    }
+                  ],
+                  "description": "The property type:InstrumentTypeTerm reports a term from a controlled vocabulary that describes the category of instrument used in an analytical session (e.g., XRF, ICPMS, SHRIMP, etc.)."
+                },
+                "model": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The property mode:Primitive::CharacterString contains a string identifying the model of instrument used. (e.g., instrument type = XRD, model = Siemens Diffraktometer D500)."
+                },
+                "serialNumber": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The property serialNumber:Primitive::CharacterString contains a string that contains the serial number of the machine used in an analytical session."
+                },
+                "commissionDate": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "iso19108:TM_Instant",
+                      "$comment": "External type — needs concrete schema URL"
+                    }
+                  ],
+                  "description": "The property commissionDate is an association between an AnalyticalInstrument and a TM_Instant corresponding to the date of the commissioning of an instrument."
+                },
+                "location": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "iso19115:CI_Responsibility",
+                      "$comment": "External type — needs concrete schema URL"
+                    }
+                  ],
+                  "description": "The property location is an association between an AnalyticalInstrument and a CIT:Responsibility describing the owner and the location of an instrument."
+                },
+                "usedIn": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to AnalyticalSession"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The property usedIn is an association between an AnalyticalInstrument and an AnalyticalSession identifying an analytical sessions which used this instrument."
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "AnalyticalMethod": {
+      "$anchor": "AnalyticalMethod",
+      "description": "The AnalyticalMethod provides the name, and published citation, of the analytical method used in an analytical session.",
+      "type": "object",
+      "properties": {
+        "methodName": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#AnalyticalMethodTerm"
+            }
+          ],
+          "description": "The property methodName:AnalyticalMethodTerm contains a term from a controlled vocabulary that describes an analytical method used in a session (e.g., XRF mass spectrometry, ICPMS, SHRIMP geochronology)."
+        },
+        "citation": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "iso19115:CI_Citation",
+              "$comment": "External type — needs concrete schema URL"
+            }
+          ],
+          "description": "The citation property is an association between an AnalyticalMethod and a CIT:CI_Citation describing a published description of a particular analytical method (e.g., a standard operating procedure document)."
+        }
+      }
+    },
+    "AnalyticalMethodTerm": {
+      "$anchor": "AnalyticalMethodTerm",
+      "description": "Refers to a vocabulary of terms describing the analytical method used in an analytical session (eg; XRF mass spectrometry, ICPMS, SHRIMP geochronology)",
+      "type": "string",
+      "format": "uri"
+    },
+    "AnalyticalProcess": {
+      "$anchor": "AnalyticalProcess",
+      "description": "An analytical process is a concrete implementation of OM::OM_Process and describes the steps and methods used in an analytical session. It links to an analytical session (data acquisition) or a computational process which produce analytical results.  Constraint: Only for use with OM_Observation/procedure",
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to AnalyticalMethod"
+                    }
+                  ],
+                  "description": "The property method is an association that links an AnalyticalProcess to an AnalyticalMethod that describes the type of analytical method used to make an observation."
+                },
+                "computation": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$comment": "Unresolved type: LI_ProcessStep",
+                      "type": "object"
+                    }
+                  ],
+                  "description": "The computation property is an association between an AnalyticalProcess and a CIT:ProcessStep that describes the computational process associated with the process."
+                },
+                "acquisition": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to AnalyticalSession"
+                    }
+                  ],
+                  "description": "The property acquisition is an association that links an AnalyticalProcess to an AnalyticalSession that describes the analytical session (e.g., laboratory session) in which an observation was made and data acquired."
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "AnalyticalSession": {
+      "$anchor": "AnalyticalSession",
+      "description": "This feature type describes the time and operator of a particular laboratory analytical session. AnalyticalSession also has associated links to the type of instrument and analytical method used, processing steps applied to data collected during a session, and instrument parameters unique to that session.",
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "time": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "iso19108:TM_Period",
+                      "$comment": "External type — needs concrete schema URL"
+                    }
+                  ],
+                  "description": "The property time is an association between an AnalyticalSession and a TM_Period describing the time period during which the analysis was performed."
+                },
+                "operator": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "iso19115:CI_Responsibility",
+                      "$comment": "External type — needs concrete schema URL"
+                    }
+                  ],
+                  "description": "The property operator is an association between an AnalyticalSession and a CIT:CI_Responsability describing the operator or organisation responsible for the analytical session."
+                },
+                "parameter": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "iso19103:NamedValue",
+                        "$comment": "External type — needs concrete schema URL"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The property parameter (OM::NamedValue) contains a name/value pair to describe arbitrary environmental or instrument setting parameters that apply to an entire analytical session (e.g., voltage, current, temperature, vacuum). The \"name\" attribute of NamedValue is a term from a controlled vocabulary."
+                },
+                "instrument": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to AnalyticalInstrument"
+                    }
+                  ],
+                  "description": "The property instrument is an association between an AnalyticalSession and an AnalyticalInstrument that describes the instrument used in the analytical session."
+                },
+                "referenceAnalyses": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to ReferenceSpecimen"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The property referenceAnalysis is an association between an AnalyticalSession and a ReferenceSpecimen that describes a reference specimen (i.e., standards, blanks) used in the analytical session."
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "Image": {
+      "$anchor": "Image",
+      "description": "The Image feature type is used to describe images of sampling features, for example, photographs of ion microprobe grain mounts.",
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "InstrumentTypeTerm": {
+      "$anchor": "InstrumentTypeTerm",
+      "description": "Refers to a vocabulary of Instrument types (eg; XRF, ICPMS, SHRIMP, etc)",
+      "type": "string",
+      "format": "uri"
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

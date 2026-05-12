@@ -1,0 +1,38 @@
+# External-type mapping for the GeoSciML 4.1 JSON Schema generator.
+#
+# When a UML attribute is typed by one of these names, the generator must
+# emit a $ref to the listed URL rather than re-deriving the type from
+# SWECommon2.0.xmi. Per OGC 24-017r1 req/core/external types pattern, and
+# per the decisions recorded in swe-types-used.md (2026-05-11).
+#
+# Category is intentionally not in this table: Category-typed attributes
+# use the OGC req/codelists-uri encoding with codeList annotations sourced
+# from cgi-vocab-reference.yaml.
+
+external_types:
+
+  Quantity:
+    ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+    rationale: |
+      Single numerical measurement with units. 14 GeoSciML attributes.
+      SWE 3.0 requires producers to populate type, definition, label, uom
+      (which were optional in SWE 2.0).
+
+  QuantityRange:
+    ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+    rationale: |
+      Numeric range [low, high]. 14 GeoSciML attributes. Note structure
+      change vs SWE 2.0: value is now a 2-element JSON array, not a
+      RealPair object.
+
+  DataRecord:
+    ref: https://schemas.opengis.net/sweCommon/3.0/json/DataRecord.json
+    rationale: |
+      Generic structured record. 1 GeoSciML attribute
+      (ChemicalComposition.chemicalAnalysis). Field set deliberately left
+      unspecified; revisit if a chemistry profile emerges.
+
+# Boolean-typed attributes in the model (FoldSystem.periodic,
+# GeochronologicInterpretation.preferredInterpretation) are ISO 19103
+# Primitive::Boolean, NOT SWE Boolean. They map to JSON `boolean` per
+# OGC 24-017r1 core/iso19103-primitive-types and need no external $ref.

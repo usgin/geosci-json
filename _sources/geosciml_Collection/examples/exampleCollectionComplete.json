@@ -1,0 +1,29 @@
+{
+  "type": "Feature",
+  "id": "collection.example.1",
+  "featureType": "GSML",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/geosciml_Collection/schema.json"
+  ],
+  "geometry": null,
+  "properties": {
+    "name": "Example geologic data collection",
+    "description": "A heterogeneous GeoSciML collection bundling two mapped features and one geologic unit by reference.",
+    "collectionType": "http://resource.geosciml.org/classifier/cgi/collectiontype/mixed",
+    "member": [
+      {
+        "href": "https://example.org/geosci-json/HerveyGroup.1",
+        "title": "Hervey Group (GeologicUnit)"
+      },
+      {
+        "href": "https://example.org/geosci-json/mappedfeature.1",
+        "title": "Mapped fold polygon (MappedFeature)"
+      },
+      {
+        "href": "https://example.org/geosci-json/fault.1",
+        "title": "Lake George Fault (ShearDisplacementStructure)"
+      }
+    ]
+  },
+  "$comment": "Synthesised example demonstrating the GSML collection envelope with a heterogeneous GSMLitem union of by-reference members. Each member is a JSON-FG Feature published elsewhere; the collection groups them by URL only."
+}

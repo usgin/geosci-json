@@ -1,0 +1,33 @@
+{
+  "$comment": "Synthesised example: a TimeOrdinalReferenceSystem defining a local ordinal chronology — three ordered eras of a fictional regional geologic time scale.",
+  "name": "Bolsa-Apache Local Ordinal Time Scale",
+  "identifier": {
+    "codeSpace": "http://example.org/arizona-localtime",
+    "value": "http://example.org/arizona-localtime/scale/1"
+  },
+  "description": "An informal ordinal-only time scale for ordering events in the Apache Group and overlying Cambrian strata of southeastern Arizona.",
+  "referencePoint": {
+    "name": "Top of Pinal Schist",
+    "description": "Boundary defined by the unconformity at the top of the Pinal Schist.",
+    "observationalBasis": [
+      {
+        "href": "https://example.org/obs/erosional-surface-mapping",
+        "title": "field mapping of erosional surface"
+      }
+    ]
+  },
+  "member": [
+    {
+      "name": "Apache Era (local)",
+      "ordinal": 1
+    },
+    {
+      "name": "Bolsa Era (local)",
+      "ordinal": 2
+    },
+    {
+      "name": "Martin Era (local)",
+      "ordinal": 3
+    }
+  ]
+}

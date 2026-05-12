@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/geosciml_GeologicSpecimen/schema.json",
+  "description": "GeoSciML GeologicSpecimen building block (generated).",
+  "$defs": {
+    "GeologicSamplingMethod": {
+      "$anchor": "GeologicSamplingMethod",
+      "description": "GeologicSamplingMethod is an implementation of OM::SF_Process to describe the method used to obtain a geologic specimen. Examples include: &#x9;diamond drilling &#x9;percussion drilling &#x9;piston core drilling &#x9;vibro core drilling &#x9;channel sampling &#x9;sea floor dredging &#x9;outcrop sampling  Constraint: Only for use with SF_Specimen/samplingMethod",
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#GeologicSamplingMethodTerm"
+                    }
+                  ],
+                  "description": "The property method:GeologicSamplingMethodTerm is a term from a controlled vocabulary that describes the process used to obtain or create a geologic specimen. e.g., diamond drilling, percussion drilling, piston core drilling, vibro core drilling, channel sampling, sea floor dredging, crushing, mineral separation, melting, outcrop sampling."
+                },
+                "parameter": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "iso19103:NamedValue",
+                        "$comment": "External type — needs concrete schema URL"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The property parameter (OM::NamedValue) contains a name/value pair to describe arbitrary parameters used in the sampling process. The \"name\" attribute of NamedValue shall be a term from a controlled vocabulary."
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "GeologicSamplingMethodTerm": {
+      "$anchor": "GeologicSamplingMethodTerm",
+      "description": "Refers to a vocabulary of terms describing the samplingProcess used to obtain or create the Specimen. eg: diamond drilling percussion drilling piston core drilling vibro core drilling channel sampling sea floor dredging crushing mineral separation melting geological hammer",
+      "type": "string",
+      "format": "uri"
+    },
+    "GeologicSpecimenPreparation": {
+      "$anchor": "GeologicSpecimenPreparation",
+      "description": "GeologicSpecimenPreparation is an extension of ISO Specimen::preparationStep to allow details of preparation steps to be delivered (e.g., filtration and mesh size, chemical additives, crushing methods, drying parameters, etc.).  Constraint: Only for use with SF_Specimen/processingDetails",
+      "type": "object",
+      "properties": {
+        "preparationMethod": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#GeologicSpecimenPreparationTerm"
+            }
+          ],
+          "description": "The preparationMethod:GeologicSpecimenPreparationTerm contains a term from a controlled vocabulary that describes the method employed for the preparation of a geologic specimen for further analysis."
+        },
+        "parameter": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "iso19103:NamedValue",
+                "$comment": "External type — needs concrete schema URL"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "The property parameter (OM::NamedValue) contains name/value pair to describe arbitrary parameters used in this preparation step (e.g., mesh size in a sieving process, type of chemical additives, parameters in a mineral separation process). The \"name\" attribute of NamedValue shall be a term from a controlled vocabulary."
+        }
+      }
+    },
+    "GeologicSpecimenPreparationTerm": {
+      "$anchor": "GeologicSpecimenPreparationTerm",
+      "description": "Refers to a vocabulary of terms to describe sample preparation applied to geologic specimens, typically in preparation for analytical processes like geochemistry or microscopy. eg: crush mineral separation thin section cut polish mount acid digestion",
+      "type": "string",
+      "format": "uri"
+    },
+    "ReferenceSpecimen": {
+      "$anchor": "ReferenceSpecimen",
+      "description": "A reference specimen is a specimen with known or accepted values of some property. The citation property describes the location of a published description of these values. Reference specimens include analytical blanks. ReferenceSpecimens are used in quality control procedures to assess method reproducibility. Analytical results from a reference specimen analysed during an AnalyticalSession are delivered in the same way as the results of other specimens analysed in that session.",
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "referenceDescription": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "iso19115:CI_Citation",
+                      "$comment": "External type — needs concrete schema URL"
+                    }
+                  ],
+                  "description": "The property referenceDescription is an association between a ReferenceSpecimen and a CIT:CI_Citation that references a citation of published analytical results for this standard reference specimen."
+                },
+                "usedIn": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to AnalyticalSession"
+                      },
+                      "uniqueItems": true
+                    }
+                  ],
+                  "description": "The property usedIn is an association between a ReferenceSpecimen and an AnalyticalSession in which the reference specimen was used."
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

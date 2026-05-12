@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/geosciml_GeologicRelation/schema.json",
+  "description": "GeoSciML GeologicRelation building block (generated).",
+  "$defs": {
+    "GeologicFeatureRelation": {
+      "$anchor": "GeologicFeatureRelation",
+      "description": "The GeologicFeatureRelation class defines the general structure used to define relationships between any GeoSciML feature types. Relationships are always binary and directional. There is always a single source and a single target. The relationship is always defined from the perspective of the Source and is generally an active verb. Example: a Source may point to an intrusive igneous rock unit. In this case, the Target would point to the appropriate host rock body and the relationship attribute would be 'intrudes'. Other appropriate relationship attributes might include: overlies, offsets, crosscuts, folds, etc. Many other types of relationships can also be accommodated via GeologicRelation, for example, topological relations could be described where they are geologically significant.",
+      "allOf": [
+        {
+          "$ref": "../geosciml_GeologyBasic/schema.json#AbstractFeatureRelation",
+          "$comment": "cross-BB reference to AbstractFeatureRelation in package GeologyBasic"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "relationship": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#GeologicRelationshipTerm"
+                }
+              ],
+              "description": "The relationship:GeologicRelationshipTerm property contains a term from a controlled vocabulary to describe the geologic relationship (e.g., stratigraphic relation, structural relation, intrusive relation)."
+            },
+            "sourceRole": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#RelationRoleTerm"
+                }
+              ],
+              "description": "The property sourceRole:RelationRoleProperty contains a term from a controlled vocabulary describing the role played by the source geologic feature or object (e.g., overlying unit, underlying unit)."
+            },
+            "targetRole": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#RelationRoleTerm"
+                }
+              ],
+              "description": "The property targetRole:RelationRoleTerm contains a term from a controlled vocabulary describing the role played by the target geologic feature or object. (e.g., overlying unit, underlying unit)"
+            }
+          }
+        }
+      ]
+    },
+    "GeologicRelationshipTerm": {
+      "$anchor": "GeologicRelationshipTerm",
+      "description": "Refers to a vocabulary of terms describing a relationships between geologic features or objects",
+      "type": "string",
+      "format": "uri"
+    },
+    "MaterialRelation": {
+      "$anchor": "MaterialRelation",
+      "description": "The MaterialRelation class describes the relationships between constituent parts in an EarthMaterial (e.g. A mineral overgrowth on a phenocryst within a granite). Example: Consider an overgrowth of albite on plagioclase in a granite. The Source would originate with the albite constituentPart description. In this case, the Target would point to the plagioclase constituentPart description and the relationship attribute would be 'overgrowth' and the sourceRole is 'overgrows'. Other appropriate role attributes might include: crosscuts, replaces, etc. for crosscutting and replacement relationships. Inverse relationships must be explicitly recorded.",
+      "type": "object",
+      "properties": {
+        "relationship": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#GeologicRelationshipTerm"
+            }
+          ],
+          "description": "The property relationship:GeologicRelationshipTerm contains a term from a controlled vocabulary to describe the geologic relationship (e.g., sedimentary relation, igneous relation)."
+        },
+        "sourceRole": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#RelationRoleTerm"
+            }
+          ],
+          "description": "The property sourceRole:RelationRoleTerm contains a term that describes the role played by the source earth material part (e.g., matrix, clast, overgrowth)."
+        },
+        "targetRole": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#RelationRoleTerm"
+            }
+          ],
+          "description": "The property targetRole:RelationRoleTerm contains a term describing the role played by the target earth material part (e.g., matrix, clast, overgrowth)."
+        }
+      }
+    },
+    "RelationRoleTerm": {
+      "$anchor": "RelationRoleTerm",
+      "description": "Refers to a vocabulary of terms describing roles played by geologic features or objects in a geologic relationship",
+      "type": "string",
+      "format": "uri"
+    },
+    "SCLinkObject": {
+      "title": "link object",
+      "description": "definition of a link object",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "Supplies the URI to a remote resource (or resource fragment)."
+        },
+        "rel": {
+          "type": "string",
+          "description": "The type or semantics of the relation."
+        },
+        "type": {
+          "type": "string",
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be."
+        },
+        "hreflang": {
+          "type": "string",
+          "description": "A hint indicating what the language of the result of dereferencing the link should be."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier."
+        },
+        "length": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
