@@ -270,8 +270,8 @@ Properties (own; inherited properties listed in supertype's BB):
 - `../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicStructure`
 - `../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial`
 - `../gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructureAbstractDescription`
-- `../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#Mineral`
-- `../gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#PhysicalDescription`
+- `../gsmEarthMaterial/gsmEarthMaterialSchema.json#Mineral`
+- `../gsmEarthMaterial/gsmEarthMaterialSchema.json#PhysicalDescription`
 - `../gsmGeologicTime/gsmGeologicTimeSchema.json#GeochronologicBoundary`
 - `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
@@ -816,8 +816,8 @@ $defs:
               oneOf:
               - $ref: '#/$defs/SCLinkObject'
                 $comment: by-reference link to Mineral
-              - $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#Mineral
-                $comment: cross-BB inline reference to Mineral in BB gsmEarthMaterialExtension
+              - $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json#Mineral
+                $comment: cross-BB inline reference to Mineral in BB gsmEarthMaterial
             uniqueItems: true
           description: The mineralElement property is an association between FoliationDescription
             and a Mineral that defines that foliation.
@@ -934,8 +934,8 @@ $defs:
                   oneOf:
                   - $ref: '#/$defs/SCLinkObject'
                     $comment: by-reference link to Mineral
-                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#Mineral
-                    $comment: cross-BB inline reference to Mineral in BB gsmEarthMaterialExtension
+                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json#Mineral
+                    $comment: cross-BB inline reference to Mineral in BB gsmEarthMaterial
                 uniqueItems: true
               description: Mineral that defines the lineation
             orientation:
@@ -1062,8 +1062,8 @@ $defs:
           - type: 'null'
           - type: array
             items:
-              $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#PhysicalDescription
-              $comment: cross-BB inline reference to PhysicalDescription in BB gsmEarthMaterialExtension
+              $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json#PhysicalDescription
+              $comment: cross-BB inline reference to PhysicalDescription in BB gsmEarthMaterial
             uniqueItems: true
           description: The property stPhysicalProperty:PhysicalDescription contains
             a value of generic physical properties not addressed in this model.

@@ -1,5 +1,5 @@
 {
-  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleFaultKannaV4Model.ttl. The source defines four Thrust_Fault structures (D02_fault, Fatigue_fault, Simpson_fault, N01_fault) and their displacement events. Crosscut relationships in the TTL (gsrl:crosscuts) link Fatigue → {D02, N01, Simpson}, indicating Fatigue is the youngest. This FC encodes each fault's displacement event as a DisplacementEvent; the cross-cutting age relationships are conveyed through the olderNamedAge/youngerNamedAge ordering and noted in $comments. The fault structures themselves (ShearDisplacementStructure) live in gsmscimlBasic and are by-reference here.",
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleFaultKannaV4Model.ttl. The source defines four Thrust_Fault structures (D02_fault, Fatigue_fault, Simpson_fault, N01_fault) and their displacement events. Crosscut relationships in the TTL (gsrl:crosscuts) link Fatigue \u2192 {D02, N01, Simpson}, indicating Fatigue is the youngest. This FC encodes each fault's displacement event as a DisplacementEvent; the cross-cutting age relationships are conveyed through the olderNamedAge/youngerNamedAge ordering and noted in $comments. The fault structures themselves (ShearDisplacementStructure) live in gsmscimlBasic and are by-reference here.",
   "type": "FeatureCollection",
   "features": [
     {
@@ -11,7 +11,9 @@
       "time": null,
       "properties": {
         "purpose": "instance",
-        "eventProcess": ["http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"]
+        "eventProcess": [
+          "http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"
+        ]
       }
     },
     {
@@ -23,7 +25,9 @@
       "time": null,
       "properties": {
         "purpose": "instance",
-        "eventProcess": ["http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"]
+        "eventProcess": [
+          "http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"
+        ]
       }
     },
     {
@@ -35,7 +39,9 @@
       "time": null,
       "properties": {
         "purpose": "instance",
-        "eventProcess": ["http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"]
+        "eventProcess": [
+          "http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"
+        ]
       }
     },
     {
@@ -48,7 +54,9 @@
       "time": null,
       "properties": {
         "purpose": "instance",
-        "eventProcess": ["http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"]
+        "eventProcess": [
+          "http://resource.geosciml.org/classifier/cgi/eventprocess/faulting"
+        ]
       }
     }
   ]

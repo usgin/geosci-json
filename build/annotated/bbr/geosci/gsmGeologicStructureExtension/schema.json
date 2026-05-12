@@ -600,8 +600,8 @@
                         "$comment": "by-reference link to Mineral"
                       },
                       {
-                        "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json",
-                        "$comment": "cross-BB inline reference to Mineral in BB gsmEarthMaterialExtension"
+                        "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json",
+                        "$comment": "cross-BB inline reference to Mineral in BB gsmEarthMaterial"
                       }
                     ]
                   },
@@ -779,8 +779,8 @@
                             "$comment": "by-reference link to Mineral"
                           },
                           {
-                            "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json",
-                            "$comment": "cross-BB inline reference to Mineral in BB gsmEarthMaterialExtension"
+                            "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json",
+                            "$comment": "cross-BB inline reference to Mineral in BB gsmEarthMaterial"
                           }
                         ]
                       },
@@ -971,8 +971,8 @@
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json",
-                    "$comment": "cross-BB inline reference to PhysicalDescription in BB gsmEarthMaterialExtension"
+                    "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json",
+                    "$comment": "cross-BB inline reference to PhysicalDescription in BB gsmEarthMaterial"
                   },
                   "uniqueItems": true
                 }

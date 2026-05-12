@@ -2,12 +2,12 @@
   "name": "GeoSci JSON Building Blocks repository",
   "abstract": "Repository assembling building blocks for geoscience JSON metadata, using OGC building block patterns.\n",
   "description": "Modular JSON Schema building blocks for geoscience metadata and profiles.\n",
-  "modified": "2026-05-12T22:13:44.362389",
+  "modified": "2026-05-12T22:37:20.479730",
   "tooling": {
     "bblocks-postprocess": {
-      "commitId": "\"5ddf8dfdfa92574f112703863576f5cd6b579a56",
-      "shortCommitId": "\"5ddf8d",
-      "date": "2026-05-10T08:12:13+00:00\""
+      "commitId": "\"6b01f188cc614cc2e65f4bf86a2623f98f101dfd",
+      "shortCommitId": "\"6b01f1",
+      "date": "2026-05-12T22:31:51+00:00\""
     }
   },
   "gitRepository": "https://github.com/usgin/geosci-json",
@@ -141,71 +141,10 @@
       }
     },
     {
-      "itemIdentifier": "usgin.bbr.geosci.gsmEarthMaterialCollection",
+      "itemIdentifier": "usgin.bbr.geosci.gsmEarthMaterial",
       "$schema": "metaschema.yaml",
-      "name": "gsmEarthMaterialCollection",
-      "abstract": "FeatureCollection profile collecting EarthMaterial features with rich",
-      "status": "under-development",
-      "dateTimeAddition": "2026-05-12T00:00:00Z",
-      "itemClass": "schema",
-      "register": "usgin-geosci-bblocks-register",
-      "version": "0.1",
-      "link": "https://github.com/usgin/geosci-json",
-      "sources": [
-        {
-          "title": "GeoSciML 4.1 \u2014 FC profile composed across building blocks",
-          "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
-        }
-      ],
-      "tags": [
-        "geoscience",
-        "geosciml",
-        "profile",
-        "featurecollection"
-      ],
-      "featureTypes": [
-        "Mineral",
-        "OrganicMaterial",
-        "RockMaterial",
-        "CompoundMaterial"
-      ],
-      "shaclShapes": {
-        "usgin.bbr.geosci.gsmEarthMaterialCollection": [
-          "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/rules.shacl"
-        ]
-      },
-      "isProfileOf": "FeatureCollection",
-      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/context.jsonld",
-      "dateOfLastChange": "2026-05-12",
-      "schema": {
-        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialCollection/schema.yaml",
-        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialCollection/schema.json"
-      },
-      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/schema.yaml",
-      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/context.jsonld",
-      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialCollection/",
-      "validationPassed": false,
-      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmEarthMaterialCollection/",
-      "documentation": {
-        "json-full": {
-          "mediatype": "application/json",
-          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmEarthMaterialCollection/index.json"
-        },
-        "markdown": {
-          "mediatype": "text/markdown",
-          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmEarthMaterialCollection/index.md"
-        },
-        "bblocks-viewer": {
-          "mediatype": "text/html",
-          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmEarthMaterialCollection"
-        }
-      }
-    },
-    {
-      "itemIdentifier": "usgin.bbr.geosci.gsmEarthMaterialExtension",
-      "$schema": "metaschema.yaml",
-      "name": "gsmEarthMaterialExtension",
-      "abstract": "Detailed EarthMaterial description types: CompoundMaterialDescription,",
+      "name": "gsmEarthMaterial",
+      "abstract": "EarthMaterial building block. Combines the formerly-separate",
       "status": "under-development",
       "dateTimeAddition": "2026-05-12T00:00:00Z",
       "itemClass": "schema",
@@ -227,33 +166,34 @@
         "EarthMaterialDetails"
       ],
       "shaclShapes": {
-        "usgin.bbr.geosci.gsmEarthMaterialExtension": [
-          "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/rules.shacl"
+        "usgin.bbr.geosci.gsmEarthMaterial": [
+          "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/rules.shacl"
         ]
       },
-      "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/context.jsonld",
+      "ldContext": "/github/workspace/_sources/gsmEarthMaterial/context.jsonld",
       "dateOfLastChange": "2026-05-12",
       "schema": {
-        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialExtension/schema.yaml",
-        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterialExtension/schema.json"
+        "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema.yaml",
+        "application/json": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema.json"
       },
-      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/schema.yaml",
-      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/context.jsonld",
-      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/",
+      "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/schema.yaml",
+      "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/context.jsonld",
+      "resolvedSchemaProperties": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/resolvedProperties.json",
+      "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/",
       "validationPassed": true,
-      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmEarthMaterialExtension/",
+      "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmEarthMaterial/",
       "documentation": {
         "json-full": {
           "mediatype": "application/json",
-          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmEarthMaterialExtension/index.json"
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/json-full/bbr/geosci/gsmEarthMaterial/index.json"
         },
         "markdown": {
           "mediatype": "text/markdown",
-          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmEarthMaterialExtension/index.md"
+          "url": "https://usgin.github.io/geosci-json/build/generateddocs/markdown/bbr/geosci/gsmEarthMaterial/index.md"
         },
         "bblocks-viewer": {
           "mediatype": "text/html",
-          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmEarthMaterialExtension"
+          "url": "https://usgin.github.io/geosci-json/bblock/usgin.bbr.geosci.gsmEarthMaterial"
         }
       }
     },
@@ -306,7 +246,7 @@
       "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/schema.yaml",
       "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/context.jsonld",
       "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmExtendedGeologyCollection/",
-      "validationPassed": false,
+      "validationPassed": true,
       "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmExtendedGeologyCollection/",
       "documentation": {
         "json-full": {
@@ -418,7 +358,7 @@
       "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/schema.yaml",
       "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/context.jsonld",
       "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/",
-      "validationPassed": false,
+      "validationPassed": true,
       "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmGeologicStructureExtension/",
       "documentation": {
         "json-full": {

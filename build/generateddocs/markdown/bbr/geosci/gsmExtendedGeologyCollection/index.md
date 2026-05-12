@@ -261,7 +261,7 @@ allOf:
                     gbMaterialDescription:
                       type: array
                       items:
-                        $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json#CompoundMaterialDescription
+                        $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json#CompoundMaterialDescription
         - if:
             required:
             - featureType

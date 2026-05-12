@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmBorehole - gsmBorehole
-Generated 2026-05-12T22:16:22.361992+00:00
+Generated 2026-05-12T22:40:05.646763+00:00
 === Files ===
 Using examples/examplegsmBoreholeMinimal.json from examples
 JSON-LD context is present - uplifting

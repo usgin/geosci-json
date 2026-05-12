@@ -64,9 +64,9 @@
     <body>
         <div class="container">
             <h1 class="title">Building blocks validation report</h1>
-            <small class="datetime">Generated at 2026-05-12T22:16:39.777788+00:00</small>
+            <small class="datetime">Generated at 2026-05-12T22:40:24.850658+00:00</small>
                 <p class="summary fw-semibold text-danger">
-                    Number of passing building blocks: 6 / 11 (54.55%)
+                    Number of passing building blocks: 8 / 10 (80%)
                 </p>
             <div class="text-end small" id="expand-collapse">
                 <a href="#" class="expand-all">Expand all</a>
@@ -720,29 +720,29 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item bblock-report" data-bblock-id="usgin.bbr.geosci.gsmEarthMaterialCollection" id="bblock-usgin.bbr.geosci.gsmEarthMaterialCollection">
+                        <div class="accordion-item bblock-report" data-bblock-id="usgin.bbr.geosci.gsmEarthMaterial" id="bblock-usgin.bbr.geosci.gsmEarthMaterial">
                             <h2 class="accordion-header bblock-title anchor-container">
-                                <button class="accordion-button " type="button"
+                                <button class="accordion-button collapsed" type="button"
                                     data-bs-toggle="collapse"
-                                    data-bs-target="#bblock-collapse-usgin\.bbr\.geosci\.gsmEarthMaterialCollection">
+                                    data-bs-target="#bblock-collapse-usgin\.bbr\.geosci\.gsmEarthMaterial">
                                     <div class="flex-fill">
-                                        gsmEarthMaterialCollection
-                                        <small class="ms-2 bblock-id">usgin.bbr.geosci.gsmEarthMaterialCollection</small>
-                                        <a class="anchor" href="#bblock-usgin.bbr.geosci.gsmEarthMaterialCollection">¶</a>
+                                        gsmEarthMaterial
+                                        <small class="ms-2 bblock-id">usgin.bbr.geosci.gsmEarthMaterial</small>
+                                        <a class="anchor" href="#bblock-usgin.bbr.geosci.gsmEarthMaterial">¶</a>
                                     </div>
 
-                                    <span class="badge text-bg-danger me-2">
-                                            Tests Failed
-                                            (0% passed)
+                                    <span class="badge text-bg-success me-2">
+                                            Passed
+                                            (100% passed)
                                     </span>
                                 </button>
                             </h2>
-                            <div class="accordion-collapse collapse show" id="bblock-collapse-usgin.bbr.geosci.gsmEarthMaterialCollection">
+                            <div class="accordion-collapse collapse " id="bblock-collapse-usgin.bbr.geosci.gsmEarthMaterial">
                                 <div class="accordion-body">
-                                        <p class="summary fw-semibold text-danger">
-                                            Test passed: 0 / 1
+                                        <p class="summary fw-semibold text-success">
+                                            Test passed: 1 / 1
                                         </p>
-                                        <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmEarthMaterialCollection-1">
+                                        <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmEarthMaterial-1">
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
@@ -752,151 +752,17 @@
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
                                                     </button>
-                                                    <a href="bbr/geosci/gsmEarthMaterialCollection/example_1_1.json" target="_blank">example_1_1.json</a>
+                                                    <a href="bbr/geosci/gsmEarthMaterial/example_1_1.json" target="_blank">example_1_1.json</a>
                                                     <span class="badge bg-secondary example">Example</span>
-                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmEarthMaterialCollection-1">¶</a>
+                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmEarthMaterial-1">¶</a>
                                                     <div class="float-end">
-                                                            <span class="badge text-bg-danger me-2">Failed</span>
+                                                            <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
                                                 <div class="card-text mt-2 validation-text collapse" id="uid-23">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/fc_bolsa_quartzite_GSO.json from examples</div>
-                                                                    <div class="font-monospace subsection-title mt-2">Unknown errors</div>
-                                                                    <div class="font-monospace entry-message section-unknown text-danger">Traceback (most recent call last):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 967, in resolve_fragment
-    document = document[part]
-,TypeError: string indices must be integers
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 200, in validate
-    validate_json(json_doc, schema_validator)
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 44, in validate_json
-    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/exceptions.py&quot;, line 384, in best_match
-    best = next(errors, None)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 332, in properties
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 76, in items
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 414, in if_
-    yield from validator.descend(instance, then, schema_path=&quot;then&quot;)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 332, in properties
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 294, in ref
-    scope, resolved = validator.resolver.resolve(ref)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 899, in resolve
-    return url, self._remote_cache(url)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 917, in resolve_from_url
-    return self.resolve_fragment(document, fragment)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 969, in resolve_fragment
-    raise exceptions.RefResolutionError(
-,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: &#x27;RockMaterial&#x27;
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validate.py&quot;, line 199, in _validate_resource
-    result = validator.validate(filename, output_filename, report,
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 221, in validate
-    &#x27;errorMessage&#x27;: e.message,
-,AttributeError: &#x27;RefResolutionError&#x27; object has no attribute &#x27;message&#x27;
-</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item bblock-report" data-bblock-id="usgin.bbr.geosci.gsmEarthMaterialExtension" id="bblock-usgin.bbr.geosci.gsmEarthMaterialExtension">
-                            <h2 class="accordion-header bblock-title anchor-container">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#bblock-collapse-usgin\.bbr\.geosci\.gsmEarthMaterialExtension">
-                                    <div class="flex-fill">
-                                        gsmEarthMaterialExtension
-                                        <small class="ms-2 bblock-id">usgin.bbr.geosci.gsmEarthMaterialExtension</small>
-                                        <a class="anchor" href="#bblock-usgin.bbr.geosci.gsmEarthMaterialExtension">¶</a>
-                                    </div>
-
-                                    <span class="badge text-bg-success me-2">
-                                            Passed
-                                            (100% passed)
-                                    </span>
-                                </button>
-                            </h2>
-                            <div class="accordion-collapse collapse " id="bblock-collapse-usgin.bbr.geosci.gsmEarthMaterialExtension">
-                                <div class="accordion-body">
-                                        <p class="summary fw-semibold text-success">
-                                            Test passed: 1 / 1
-                                        </p>
-                                        <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmEarthMaterialExtension-1">
-                                            <div class="card-body">
-                                                <div class="card-title mb-0 anchor-container">
-                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-24"
-                                                            aria-expanded="false" aria-controls="uid-24"
-                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                                        <i class="bi bi-caret-right-fill caret"></i>
-                                                        Details
-                                                    </button>
-                                                    <a href="bbr/geosci/gsmEarthMaterialExtension/example_1_1.json" target="_blank">example_1_1.json</a>
-                                                    <span class="badge bg-secondary example">Example</span>
-                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmEarthMaterialExtension-1">¶</a>
-                                                    <div class="float-end">
-                                                            <span class="badge text-bg-success me-2">Passed</span>
-                                                    </div>
-                                                </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-24">
-                                                    <div class="validation-text-inner">
-                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
-                                                                    <div class="font-monospace entry-message section-files ">Using examples/examplegsmEarthMaterialExtensionMinimal.json from examples</div>
                                                                     <div class="font-monospace subsection-title mt-2">JSON Schema</div>
                                                                     <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
                                                     </div>
@@ -908,7 +774,7 @@ During handling of the above exception, another exception occurred:
                         </div>
                         <div class="accordion-item bblock-report" data-bblock-id="usgin.bbr.geosci.gsmExtendedGeologyCollection" id="bblock-usgin.bbr.geosci.gsmExtendedGeologyCollection">
                             <h2 class="accordion-header bblock-title anchor-container">
-                                <button class="accordion-button " type="button"
+                                <button class="accordion-button collapsed" type="button"
                                     data-bs-toggle="collapse"
                                     data-bs-target="#bblock-collapse-usgin\.bbr\.geosci\.gsmExtendedGeologyCollection">
                                     <div class="flex-fill">
@@ -917,18 +783,45 @@ During handling of the above exception, another exception occurred:
                                         <a class="anchor" href="#bblock-usgin.bbr.geosci.gsmExtendedGeologyCollection">¶</a>
                                     </div>
 
-                                    <span class="badge text-bg-danger me-2">
-                                            Tests Failed
-                                            (0% passed)
+                                    <span class="badge text-bg-success me-2">
+                                            Passed
+                                            (100% passed)
                                     </span>
                                 </button>
                             </h2>
-                            <div class="accordion-collapse collapse show" id="bblock-collapse-usgin.bbr.geosci.gsmExtendedGeologyCollection">
+                            <div class="accordion-collapse collapse " id="bblock-collapse-usgin.bbr.geosci.gsmExtendedGeologyCollection">
                                 <div class="accordion-body">
-                                        <p class="summary fw-semibold text-danger">
-                                            Test passed: 0 / 2
+                                        <p class="summary fw-semibold text-success">
+                                            Test passed: 2 / 2
                                         </p>
                                         <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmExtendedGeologyCollection-1">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-24"
+                                                            aria-expanded="false" aria-controls="uid-24"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="bbr/geosci/gsmExtendedGeologyCollection/example_1_1.json" target="_blank">example_1_1.json</a>
+                                                    <span class="badge bg-secondary example">Example</span>
+                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmExtendedGeologyCollection-1">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-24">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                    <div class="font-monospace entry-message section-files ">Using examples/fc_extended_minimal.json from examples</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmExtendedGeologyCollection-2">
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
@@ -938,180 +831,19 @@ During handling of the above exception, another exception occurred:
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
                                                     </button>
-                                                    <a href="bbr/geosci/gsmExtendedGeologyCollection/example_1_1.json" target="_blank">example_1_1.json</a>
+                                                    <a href="bbr/geosci/gsmExtendedGeologyCollection/example_2_1.json" target="_blank">example_2_1.json</a>
                                                     <span class="badge bg-secondary example">Example</span>
-                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmExtendedGeologyCollection-1">¶</a>
+                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmExtendedGeologyCollection-2">¶</a>
                                                     <div class="float-end">
-                                                            <span class="badge text-bg-danger me-2">Failed</span>
+                                                            <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
                                                 <div class="card-text mt-2 validation-text collapse" id="uid-25">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
-                                                                    <div class="font-monospace entry-message section-files ">Using examples/fc_extended_minimal.json from examples</div>
-                                                                    <div class="font-monospace subsection-title mt-2">Unknown errors</div>
-                                                                    <div class="font-monospace entry-message section-unknown text-danger">Traceback (most recent call last):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 967, in resolve_fragment
-    document = document[part]
-,TypeError: string indices must be integers
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 200, in validate
-    validate_json(json_doc, schema_validator)
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 44, in validate_json
-    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/exceptions.py&quot;, line 384, in best_match
-    best = next(errors, None)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 332, in properties
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 76, in items
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 414, in if_
-    yield from validator.descend(instance, then, schema_path=&quot;then&quot;)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 294, in ref
-    scope, resolved = validator.resolver.resolve(ref)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 899, in resolve
-    return url, self._remote_cache(url)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 917, in resolve_from_url
-    return self.resolve_fragment(document, fragment)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 969, in resolve_fragment
-    raise exceptions.RefResolutionError(
-,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: &#x27;GeologicUnit&#x27;
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validate.py&quot;, line 199, in _validate_resource
-    result = validator.validate(filename, output_filename, report,
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 221, in validate
-    &#x27;errorMessage&#x27;: e.message,
-,AttributeError: &#x27;RefResolutionError&#x27; object has no attribute &#x27;message&#x27;
-</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmExtendedGeologyCollection-2">
-                                            <div class="card-body">
-                                                <div class="card-title mb-0 anchor-container">
-                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-26"
-                                                            aria-expanded="false" aria-controls="uid-26"
-                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                                        <i class="bi bi-caret-right-fill caret"></i>
-                                                        Details
-                                                    </button>
-                                                    <a href="bbr/geosci/gsmExtendedGeologyCollection/example_2_1.json" target="_blank">example_2_1.json</a>
-                                                    <span class="badge bg-secondary example">Example</span>
-                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmExtendedGeologyCollection-2">¶</a>
-                                                    <div class="float-end">
-                                                            <span class="badge text-bg-danger me-2">Failed</span>
-                                                    </div>
-                                                </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-26">
-                                                    <div class="validation-text-inner">
-                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/fc_hammersley_fault_traces_GSO.json from examples</div>
-                                                                    <div class="font-monospace subsection-title mt-2">Unknown errors</div>
-                                                                    <div class="font-monospace entry-message section-unknown text-danger">Traceback (most recent call last):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 967, in resolve_fragment
-    document = document[part]
-,TypeError: string indices must be integers
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 200, in validate
-    validate_json(json_doc, schema_validator)
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 44, in validate_json
-    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/exceptions.py&quot;, line 384, in best_match
-    best = next(errors, None)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 332, in properties
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 76, in items
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 414, in if_
-    yield from validator.descend(instance, then, schema_path=&quot;then&quot;)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 294, in ref
-    scope, resolved = validator.resolver.resolve(ref)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 899, in resolve
-    return url, self._remote_cache(url)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 917, in resolve_from_url
-    return self.resolve_fragment(document, fragment)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 969, in resolve_fragment
-    raise exceptions.RefResolutionError(
-,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: &#x27;MappedFeature&#x27;
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validate.py&quot;, line 199, in _validate_resource
-    result = validator.validate(filename, output_filename, report,
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 221, in validate
-    &#x27;errorMessage&#x27;: e.message,
-,AttributeError: &#x27;RefResolutionError&#x27; object has no attribute &#x27;message&#x27;
-</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1145,8 +877,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-27"
-                                                            aria-expanded="false" aria-controls="uid-27"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-26"
+                                                            aria-expanded="false" aria-controls="uid-26"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1158,7 +890,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-27">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-26">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/examplegsmGeologicRelationExtensionMinimal.json from examples</div>
@@ -1173,7 +905,7 @@ During handling of the above exception, another exception occurred:
                         </div>
                         <div class="accordion-item bblock-report" data-bblock-id="usgin.bbr.geosci.gsmGeologicStructureExtension" id="bblock-usgin.bbr.geosci.gsmGeologicStructureExtension">
                             <h2 class="accordion-header bblock-title anchor-container">
-                                <button class="accordion-button " type="button"
+                                <button class="accordion-button collapsed" type="button"
                                     data-bs-toggle="collapse"
                                     data-bs-target="#bblock-collapse-usgin\.bbr\.geosci\.gsmGeologicStructureExtension">
                                     <div class="flex-fill">
@@ -1182,18 +914,45 @@ During handling of the above exception, another exception occurred:
                                         <a class="anchor" href="#bblock-usgin.bbr.geosci.gsmGeologicStructureExtension">¶</a>
                                     </div>
 
-                                    <span class="badge text-bg-danger me-2">
-                                            Tests Failed
-                                            (0% passed)
+                                    <span class="badge text-bg-success me-2">
+                                            Passed
+                                            (100% passed)
                                     </span>
                                 </button>
                             </h2>
-                            <div class="accordion-collapse collapse show" id="bblock-collapse-usgin.bbr.geosci.gsmGeologicStructureExtension">
+                            <div class="accordion-collapse collapse " id="bblock-collapse-usgin.bbr.geosci.gsmGeologicStructureExtension">
                                 <div class="accordion-body">
-                                        <p class="summary fw-semibold text-danger">
-                                            Test passed: 0 / 3
+                                        <p class="summary fw-semibold text-success">
+                                            Test passed: 3 / 3
                                         </p>
                                         <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmGeologicStructureExtension-1">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-27"
+                                                            aria-expanded="false" aria-controls="uid-27"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="bbr/geosci/gsmGeologicStructureExtension/example_1_1.json" target="_blank">example_1_1.json</a>
+                                                    <span class="badge bg-secondary example">Example</span>
+                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmGeologicStructureExtension-1">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-27">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                    <div class="font-monospace entry-message section-files ">Using examples/examplegsmGeologicStructureExtensionMinimal.json from examples</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmGeologicStructureExtension-2">
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
@@ -1203,94 +962,24 @@ During handling of the above exception, another exception occurred:
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
                                                     </button>
-                                                    <a href="bbr/geosci/gsmGeologicStructureExtension/example_1_1.json" target="_blank">example_1_1.json</a>
+                                                    <a href="bbr/geosci/gsmGeologicStructureExtension/example_2_1.json" target="_blank">example_2_1.json</a>
                                                     <span class="badge bg-secondary example">Example</span>
-                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmGeologicStructureExtension-1">¶</a>
+                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmGeologicStructureExtension-2">¶</a>
                                                     <div class="float-end">
-                                                            <span class="badge text-bg-danger me-2">Failed</span>
+                                                            <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
                                                 <div class="card-text mt-2 validation-text collapse" id="uid-28">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
-                                                                    <div class="font-monospace entry-message section-files ">Using examples/examplegsmGeologicStructureExtensionMinimal.json from examples</div>
-                                                                    <div class="font-monospace subsection-title mt-2">Unknown errors</div>
-                                                                    <div class="font-monospace entry-message section-unknown text-danger">Traceback (most recent call last):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 967, in resolve_fragment
-    document = document[part]
-,TypeError: string indices must be integers
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 200, in validate
-    validate_json(json_doc, schema_validator)
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 44, in validate_json
-    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/exceptions.py&quot;, line 384, in best_match
-    best = next(errors, None)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 417, in if_
-    yield from validator.descend(instance, else_, schema_path=&quot;else&quot;)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 298, in ref
-    yield from validator.descend(instance, resolved)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 414, in if_
-    yield from validator.descend(instance, then, schema_path=&quot;then&quot;)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 298, in ref
-    yield from validator.descend(instance, resolved)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 294, in ref
-    scope, resolved = validator.resolver.resolve(ref)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 899, in resolve
-    return url, self._remote_cache(url)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 917, in resolve_from_url
-    return self.resolve_fragment(document, fragment)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 969, in resolve_fragment
-    raise exceptions.RefResolutionError(
-,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: &#x27;GeologicEvent&#x27;
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validate.py&quot;, line 199, in _validate_resource
-    result = validator.validate(filename, output_filename, report,
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 221, in validate
-    &#x27;errorMessage&#x27;: e.message,
-,AttributeError: &#x27;RefResolutionError&#x27; object has no attribute &#x27;message&#x27;
-</div>
+                                                                    <div class="font-monospace entry-message section-files ">Using examples/fc_fault_displacement_events_GSO.json from examples</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmGeologicStructureExtension-2">
+                                        <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmGeologicStructureExtension-3">
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
@@ -1300,222 +989,19 @@ During handling of the above exception, another exception occurred:
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
                                                     </button>
-                                                    <a href="bbr/geosci/gsmGeologicStructureExtension/example_2_1.json" target="_blank">example_2_1.json</a>
+                                                    <a href="bbr/geosci/gsmGeologicStructureExtension/example_3_1.json" target="_blank">example_3_1.json</a>
                                                     <span class="badge bg-secondary example">Example</span>
-                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmGeologicStructureExtension-2">¶</a>
+                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmGeologicStructureExtension-3">¶</a>
                                                     <div class="float-end">
-                                                            <span class="badge text-bg-danger me-2">Failed</span>
+                                                            <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
                                                 <div class="card-text mt-2 validation-text collapse" id="uid-29">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
-                                                                    <div class="font-monospace entry-message section-files ">Using examples/fc_fault_displacement_events_GSO.json from examples</div>
-                                                                    <div class="font-monospace subsection-title mt-2">Unknown errors</div>
-                                                                    <div class="font-monospace entry-message section-unknown text-danger">Traceback (most recent call last):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 967, in resolve_fragment
-    document = document[part]
-,TypeError: string indices must be integers
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 200, in validate
-    validate_json(json_doc, schema_validator)
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 44, in validate_json
-    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/exceptions.py&quot;, line 384, in best_match
-    best = next(errors, None)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 414, in if_
-    yield from validator.descend(instance, then, schema_path=&quot;then&quot;)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 332, in properties
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 76, in items
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 298, in ref
-    yield from validator.descend(instance, resolved)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 414, in if_
-    yield from validator.descend(instance, then, schema_path=&quot;then&quot;)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 298, in ref
-    yield from validator.descend(instance, resolved)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 294, in ref
-    scope, resolved = validator.resolver.resolve(ref)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 899, in resolve
-    return url, self._remote_cache(url)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 917, in resolve_from_url
-    return self.resolve_fragment(document, fragment)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 969, in resolve_fragment
-    raise exceptions.RefResolutionError(
-,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: &#x27;GeologicEvent&#x27;
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validate.py&quot;, line 199, in _validate_resource
-    result = validator.validate(filename, output_filename, report,
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 221, in validate
-    &#x27;errorMessage&#x27;: e.message,
-,AttributeError: &#x27;RefResolutionError&#x27; object has no attribute &#x27;message&#x27;
-</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmGeologicStructureExtension-3">
-                                            <div class="card-body">
-                                                <div class="card-title mb-0 anchor-container">
-                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-30"
-                                                            aria-expanded="false" aria-controls="uid-30"
-                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                                        <i class="bi bi-caret-right-fill caret"></i>
-                                                        Details
-                                                    </button>
-                                                    <a href="bbr/geosci/gsmGeologicStructureExtension/example_3_1.json" target="_blank">example_3_1.json</a>
-                                                    <span class="badge bg-secondary example">Example</span>
-                                                    <a class="anchor" href="#item-usgin.bbr.geosci.gsmGeologicStructureExtension-3">¶</a>
-                                                    <div class="float-end">
-                                                            <span class="badge text-bg-danger me-2">Failed</span>
-                                                    </div>
-                                                </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-30">
-                                                    <div class="validation-text-inner">
-                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/fc_kanna_thrust_faults_GSO.json from examples</div>
-                                                                    <div class="font-monospace subsection-title mt-2">Unknown errors</div>
-                                                                    <div class="font-monospace entry-message section-unknown text-danger">Traceback (most recent call last):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 967, in resolve_fragment
-    document = document[part]
-,TypeError: string indices must be integers
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 200, in validate
-    validate_json(json_doc, schema_validator)
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 44, in validate_json
-    error = jsonschema.exceptions.best_match(validator.iter_errors(instance))
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/exceptions.py&quot;, line 384, in best_match
-    best = next(errors, None)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 414, in if_
-    yield from validator.descend(instance, then, schema_path=&quot;then&quot;)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 332, in properties
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 76, in items
-    yield from validator.descend(
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 298, in ref
-    yield from validator.descend(instance, resolved)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 414, in if_
-    yield from validator.descend(instance, then, schema_path=&quot;then&quot;)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 298, in ref
-    yield from validator.descend(instance, resolved)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 362, in allOf
-    yield from validator.descend(instance, subschema, schema_path=index)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 305, in descend
-    for error in self.evolve(schema=schema).iter_errors(instance):
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 288, in iter_errors
-    for error in errors:
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/_validators.py&quot;, line 294, in ref
-    scope, resolved = validator.resolver.resolve(ref)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 899, in resolve
-    return url, self._remote_cache(url)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 917, in resolve_from_url
-    return self.resolve_fragment(document, fragment)
-,  File &quot;/venv/lib/python3.10/site-packages/jsonschema/validators.py&quot;, line 969, in resolve_fragment
-    raise exceptions.RefResolutionError(
-,jsonschema.exceptions.RefResolutionError: Unresolvable JSON pointer: &#x27;GeologicEvent&#x27;
-,
-During handling of the above exception, another exception occurred:
-
-,Traceback (most recent call last):
-,  File &quot;/src/ogc/bblocks/validate.py&quot;, line 199, in _validate_resource
-    result = validator.validate(filename, output_filename, report,
-,  File &quot;/src/ogc/bblocks/validation/json_.py&quot;, line 221, in validate
-    &#x27;errorMessage&#x27;: e.message,
-,AttributeError: &#x27;RefResolutionError&#x27; object has no attribute &#x27;message&#x27;
-</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1549,8 +1035,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-31"
-                                                            aria-expanded="false" aria-controls="uid-31"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-30"
+                                                            aria-expanded="false" aria-controls="uid-30"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1562,7 +1048,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-31">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-30">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/examplegsmGeologicTimeMinimal.json from examples</div>
@@ -1576,8 +1062,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-32"
-                                                            aria-expanded="false" aria-controls="uid-32"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-31"
+                                                            aria-expanded="false" aria-controls="uid-31"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1589,7 +1075,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-32">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-31">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/stratigraphic_section_lower_jurassic_GSO.json from examples</div>
@@ -1628,8 +1114,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-33"
-                                                            aria-expanded="false" aria-controls="uid-33"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-32"
+                                                            aria-expanded="false" aria-controls="uid-32"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1641,7 +1127,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-33">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-32">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/examplegsmGeologicUnitExtensionMinimal.json from examples</div>
@@ -1655,8 +1141,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-34"
-                                                            aria-expanded="false" aria-controls="uid-34"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-33"
+                                                            aria-expanded="false" aria-controls="uid-33"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1668,7 +1154,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-34">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-33">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/geologic_unit_la_tojiza_pluton_GSO.json from examples</div>
@@ -1682,8 +1168,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-35"
-                                                            aria-expanded="false" aria-controls="uid-35"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-34"
+                                                            aria-expanded="false" aria-controls="uid-34"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1695,7 +1181,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-35">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-34">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/geologic_unit_lake_holmes_coal_measures_GSO.json from examples</div>
@@ -1709,8 +1195,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-36"
-                                                            aria-expanded="false" aria-controls="uid-36"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-35"
+                                                            aria-expanded="false" aria-controls="uid-35"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1722,7 +1208,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-36">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-35">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/geologic_unit_lardeau_group_GSO.json from examples</div>
@@ -1761,8 +1247,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-37"
-                                                            aria-expanded="false" aria-controls="uid-37"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-36"
+                                                            aria-expanded="false" aria-controls="uid-36"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1774,7 +1260,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-danger me-2">Failed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-37">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-36">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/specimen_drill_core_segment.json from examples</div>
@@ -1816,8 +1302,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-38"
-                                                            aria-expanded="false" aria-controls="uid-38"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-37"
+                                                            aria-expanded="false" aria-controls="uid-37"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1829,7 +1315,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-38">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-37">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/borehole_view_complex.json from examples</div>
@@ -1843,8 +1329,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-39"
-                                                            aria-expanded="false" aria-controls="uid-39"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-38"
+                                                            aria-expanded="false" aria-controls="uid-38"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1856,7 +1342,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-39">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-38">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/borehole_view_simple.json from examples</div>
@@ -1870,8 +1356,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-40"
-                                                            aria-expanded="false" aria-controls="uid-40"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-39"
+                                                            aria-expanded="false" aria-controls="uid-39"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1883,7 +1369,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-40">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-39">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/contact_view_complex.json from examples</div>
@@ -1897,8 +1383,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-41"
-                                                            aria-expanded="false" aria-controls="uid-41"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-40"
+                                                            aria-expanded="false" aria-controls="uid-40"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1910,7 +1396,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-41">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-40">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/contact_view_simple.json from examples</div>
@@ -1924,8 +1410,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-42"
-                                                            aria-expanded="false" aria-controls="uid-42"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-41"
+                                                            aria-expanded="false" aria-controls="uid-41"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1937,7 +1423,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-42">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-41">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/examplegsmscimlLiteMinimal.json from examples</div>
@@ -1951,8 +1437,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-43"
-                                                            aria-expanded="false" aria-controls="uid-43"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-42"
+                                                            aria-expanded="false" aria-controls="uid-42"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1964,7 +1450,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-43">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-42">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/geologic_specimen_view_complex.json from examples</div>
@@ -1978,8 +1464,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-44"
-                                                            aria-expanded="false" aria-controls="uid-44"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-43"
+                                                            aria-expanded="false" aria-controls="uid-43"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -1991,7 +1477,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-44">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-43">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/geologic_specimen_view_simple.json from examples</div>
@@ -2005,8 +1491,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-45"
-                                                            aria-expanded="false" aria-controls="uid-45"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-44"
+                                                            aria-expanded="false" aria-controls="uid-44"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -2018,7 +1504,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-45">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-44">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/geologic_unit_view_complex.json from examples</div>
@@ -2032,8 +1518,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-46"
-                                                            aria-expanded="false" aria-controls="uid-46"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-45"
+                                                            aria-expanded="false" aria-controls="uid-45"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -2045,7 +1531,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-46">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-45">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/geologic_unit_view_simple.json from examples</div>
@@ -2059,8 +1545,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-47"
-                                                            aria-expanded="false" aria-controls="uid-47"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-46"
+                                                            aria-expanded="false" aria-controls="uid-46"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -2072,7 +1558,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-47">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-46">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/geomorphologic_unit_view_simple.json from examples</div>
@@ -2086,8 +1572,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-48"
-                                                            aria-expanded="false" aria-controls="uid-48"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-47"
+                                                            aria-expanded="false" aria-controls="uid-47"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -2099,7 +1585,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-48">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-47">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/shear_displacement_structure_view_complex.json from examples</div>
@@ -2113,8 +1599,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-49"
-                                                            aria-expanded="false" aria-controls="uid-49"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-48"
+                                                            aria-expanded="false" aria-controls="uid-48"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -2126,7 +1612,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-49">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-48">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/shear_displacement_structure_view_simple.json from examples</div>
@@ -2140,8 +1626,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-50"
-                                                            aria-expanded="false" aria-controls="uid-50"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-49"
+                                                            aria-expanded="false" aria-controls="uid-49"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -2153,7 +1639,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-50">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-49">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/site_observation_view_complex.json from examples</div>
@@ -2167,8 +1653,8 @@ During handling of the above exception, another exception occurred:
                                             <div class="card-body">
                                                 <div class="card-title mb-0 anchor-container">
                                                     <button type="button" class="btn btn-sm btn-primary collapsed"
-                                                            data-bs-toggle="collapse" data-bs-target="#uid-51"
-                                                            aria-expanded="false" aria-controls="uid-51"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-50"
+                                                            aria-expanded="false" aria-controls="uid-50"
                                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                                         <i class="bi bi-caret-right-fill caret"></i>
                                                         Details
@@ -2180,7 +1666,7 @@ During handling of the above exception, another exception occurred:
                                                             <span class="badge text-bg-success me-2">Passed</span>
                                                     </div>
                                                 </div>
-                                                <div class="card-text mt-2 validation-text collapse" id="uid-51">
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-50">
                                                     <div class="validation-text-inner">
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/site_observation_view_simple.json from examples</div>

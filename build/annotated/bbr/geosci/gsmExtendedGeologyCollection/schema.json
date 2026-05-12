@@ -190,7 +190,7 @@
                             "gbMaterialDescription": {
                               "type": "array",
                               "items": {
-                                "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterialExtension/gsmEarthMaterialExtensionSchema.json"
+                                "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json"
                               }
                             }
                           }
