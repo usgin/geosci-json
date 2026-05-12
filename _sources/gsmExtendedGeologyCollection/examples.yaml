@@ -7,4 +7,4 @@ examples:
     content: "Minimal Extended-profile FeatureCollection. The Extended profile dispatches on featureType into the Basic anchors with extra description-slot constraints. Each constraint only fires when the slot is present, so a minimal instance with no description content still validates and exercises the dispatcher routing."
     snippets:
       - language: json
-        ref: fc_extended_minimal.json
+        ref: examples/fc_extended_minimal.json

@@ -139,18 +139,14 @@ def main() -> int:
     pattern_counter: Counter[str] = Counter()
     pass_count = fail_count = 0
 
-    # Example files live at the BB root in CDIF style. They're any *.json that
-    # isn't a schema, manifest, or metadata file: skip *Schema.json, bblock.json,
-    # resolvedSchema.json. (.yaml manifests like examples.yaml are excluded by
-    # the .json glob.)
-    SCHEMA_TAILS = ("Schema.json",)
-    EXCLUDED = {"bblock.json", "resolvedSchema.json"}
+    # Example files live in the bblocks-template-style `examples/` subdir
+    # under each BB.
     for bb_dir in bbs:
         bb = bb_dir.name
-        ordered = [p for p in sorted(bb_dir.glob("*.json"))
-                   if p.name not in EXCLUDED
-                   and not any(p.name.endswith(t) for t in SCHEMA_TAILS)]
-        for f in ordered:
+        ex_dir = bb_dir / "examples"
+        if not ex_dir.exists():
+            continue
+        for f in sorted(ex_dir.glob("*.json")):
             try:
                 inst = json.loads(f.read_text(encoding="utf-8-sig"))
             except Exception as exc:

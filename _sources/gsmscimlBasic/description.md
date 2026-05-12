@@ -457,21 +457,22 @@ Branches (`oneOf`):
 
 ## Examples
 
-- [examplegsmscimlBasicMinimal.json](examplegsmscimlBasicMinimal.json)
-- [fc_heterogeneous_GSO.json](fc_heterogeneous_GSO.json)
-- [fc_homogeneous_GSO.json](fc_homogeneous_GSO.json)
-- [contact_simple.json](contact_simple.json)
-- [fold_simple.json](fold_simple.json)
-- [geologic_unit_simple.json](geologic_unit_simple.json)
-- [mapped_feature_simple.json](mapped_feature_simple.json)
-- [natural_geomorphologic_feature_simple.json](natural_geomorphologic_feature_simple.json)
-- [shear_displacement_structure_simple.json](shear_displacement_structure_simple.json)
-- [contact_complex.json](contact_complex.json)
-- [fold_complex.json](fold_complex.json)
-- [geologic_unit_complex.json](geologic_unit_complex.json)
-- [mapped_feature_complex.json](mapped_feature_complex.json)
-- [natural_geomorphologic_feature_complex.json](natural_geomorphologic_feature_complex.json)
-- [shear_displacement_structure_complex.json](shear_displacement_structure_complex.json)
+- [contact_complex.json](examples/contact_complex.json)
+- [contact_simple.json](examples/contact_simple.json)
+- [examplegsmscimlBasicMinimal.json](examples/examplegsmscimlBasicMinimal.json)
+- [fc_heterogeneous_GSO.json](examples/fc_heterogeneous_GSO.json)
+- [fc_homogeneous_GSO.json](examples/fc_homogeneous_GSO.json)
+- [fold_complex.json](examples/fold_complex.json)
+- [fold_simple.json](examples/fold_simple.json)
+- [geologic_event_from_GSO.json](examples/geologic_event_from_GSO.json)
+- [geologic_unit_complex.json](examples/geologic_unit_complex.json)
+- [geologic_unit_simple.json](examples/geologic_unit_simple.json)
+- [mapped_feature_complex.json](examples/mapped_feature_complex.json)
+- [mapped_feature_simple.json](examples/mapped_feature_simple.json)
+- [natural_geomorphologic_feature_complex.json](examples/natural_geomorphologic_feature_complex.json)
+- [natural_geomorphologic_feature_simple.json](examples/natural_geomorphologic_feature_simple.json)
+- [shear_displacement_structure_complex.json](examples/shear_displacement_structure_complex.json)
+- [shear_displacement_structure_simple.json](examples/shear_displacement_structure_simple.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

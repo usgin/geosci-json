@@ -59,22 +59,12 @@ def discover_bbs(filter_name: str | None) -> list[Path]:
 
 
 def _list_example_files(bb_dir: Path) -> list[Path]:
-    """Examples sit at the BB root in CDIF style. We recognise them by their
-    filename prefix (example*, fc_*, FeatureCollection_*) and exclude all
-    *Schema.json files (those are schemas, not instances)."""
-    seen: set[str] = set()
-    out: list[Path] = []
-    patterns = ("example*.json", "fc_*.json", "FeatureCollection_*.json",
-                "*_simple.json", "*_complex.json", "*_view*.json")
-    for pat in patterns:
-        for p in sorted(bb_dir.glob(pat)):
-            if p.name.endswith("Schema.json"):
-                continue
-            if p.name in seen:
-                continue
-            seen.add(p.name)
-            out.append(p)
-    return out
+    """Examples sit in the bblocks-template-style `examples/` subdir. Any
+    *.json there is treated as an example instance."""
+    ex_dir = bb_dir / "examples"
+    if not ex_dir.exists():
+        return []
+    return sorted(ex_dir.glob("*.json"))
 
 
 def write_examples_yaml(bb_dir: Path) -> int:
@@ -108,7 +98,7 @@ def write_examples_yaml(bb_dir: Path) -> int:
         lines.append(f"    content: \"{content_escaped}\"")
         lines.append(f"    snippets:")
         lines.append(f"      - language: json")
-        lines.append(f"        ref: {ex.name}")
+        lines.append(f"        ref: examples/{ex.name}")
     (bb_dir / "examples.yaml").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return len(examples)
 
@@ -450,7 +440,7 @@ def render_description(bb_name: str, schema: dict, packages: list[str] | None = 
     example_files = _list_example_files(bb_dir)
     if example_files:
         for f in example_files:
-            out.append(f"- [{f.name}]({f.name})")
+            out.append(f"- [{f.name}](examples/{f.name})")
         out.append("")
         out.append("See [examples.yaml](examples.yaml) for the full manifest.")
     else:
@@ -553,7 +543,9 @@ def main() -> None:
         if not existing:
             min_ex = render_minimal_example(bb_name, schema)
             if min_ex is not None:
-                out_path = d / f"example{bb_name}Minimal.json"
+                ex_dir = d / "examples"
+                ex_dir.mkdir(exist_ok=True)
+                out_path = ex_dir / f"example{bb_name}Minimal.json"
                 out_path.write_text(json.dumps(min_ex, indent=2) + "\n", encoding="utf-8")
                 wrote_example = True
 

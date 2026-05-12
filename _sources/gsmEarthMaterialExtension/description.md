@@ -209,7 +209,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
-- [examplegsmEarthMaterialExtensionMinimal.json](examplegsmEarthMaterialExtensionMinimal.json)
+- [examplegsmEarthMaterialExtensionMinimal.json](examples/examplegsmEarthMaterialExtensionMinimal.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

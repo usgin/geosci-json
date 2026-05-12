@@ -7,4 +7,4 @@ examples:
     content: "Example instance: examplegsmSpecimenMinimal"
     snippets:
       - language: json
-        ref: examplegsmSpecimenMinimal.json
+        ref: examples/examplegsmSpecimenMinimal.json

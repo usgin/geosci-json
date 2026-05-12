@@ -264,7 +264,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
-- [examplegsmGeologicStructureExtensionMinimal.json](examplegsmGeologicStructureExtensionMinimal.json)
+- [examplegsmGeologicStructureExtensionMinimal.json](examples/examplegsmGeologicStructureExtensionMinimal.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

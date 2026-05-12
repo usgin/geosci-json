@@ -7,4 +7,4 @@ examples:
     content: "Minimal BeddingDescription instance — no required properties"
     snippets:
       - language: json
-        ref: examplegsmGeologicUnitExtensionMinimal.json
+        ref: examples/examplegsmGeologicUnitExtensionMinimal.json

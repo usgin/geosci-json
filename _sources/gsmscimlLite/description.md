@@ -229,20 +229,20 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
-- [examplegsmscimlLiteMinimal.json](examplegsmscimlLiteMinimal.json)
-- [borehole_view_simple.json](borehole_view_simple.json)
-- [contact_view_simple.json](contact_view_simple.json)
-- [geologic_specimen_view_simple.json](geologic_specimen_view_simple.json)
-- [geologic_unit_view_simple.json](geologic_unit_view_simple.json)
-- [geomorphologic_unit_view_simple.json](geomorphologic_unit_view_simple.json)
-- [shear_displacement_structure_view_simple.json](shear_displacement_structure_view_simple.json)
-- [site_observation_view_simple.json](site_observation_view_simple.json)
-- [borehole_view_complex.json](borehole_view_complex.json)
-- [contact_view_complex.json](contact_view_complex.json)
-- [geologic_specimen_view_complex.json](geologic_specimen_view_complex.json)
-- [geologic_unit_view_complex.json](geologic_unit_view_complex.json)
-- [shear_displacement_structure_view_complex.json](shear_displacement_structure_view_complex.json)
-- [site_observation_view_complex.json](site_observation_view_complex.json)
+- [borehole_view_complex.json](examples/borehole_view_complex.json)
+- [borehole_view_simple.json](examples/borehole_view_simple.json)
+- [contact_view_complex.json](examples/contact_view_complex.json)
+- [contact_view_simple.json](examples/contact_view_simple.json)
+- [examplegsmscimlLiteMinimal.json](examples/examplegsmscimlLiteMinimal.json)
+- [geologic_specimen_view_complex.json](examples/geologic_specimen_view_complex.json)
+- [geologic_specimen_view_simple.json](examples/geologic_specimen_view_simple.json)
+- [geologic_unit_view_complex.json](examples/geologic_unit_view_complex.json)
+- [geologic_unit_view_simple.json](examples/geologic_unit_view_simple.json)
+- [geomorphologic_unit_view_simple.json](examples/geomorphologic_unit_view_simple.json)
+- [shear_displacement_structure_view_complex.json](examples/shear_displacement_structure_view_complex.json)
+- [shear_displacement_structure_view_simple.json](examples/shear_displacement_structure_view_simple.json)
+- [site_observation_view_complex.json](examples/site_observation_view_complex.json)
+- [site_observation_view_simple.json](examples/site_observation_view_simple.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

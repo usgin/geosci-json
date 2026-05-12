@@ -3,73 +3,73 @@
 # and one or more snippets pointing to example files.
 
 examples:
-  - title: examplegsmscimlLiteMinimal
-    content: "Example instance: examplegsmscimlLiteMinimal"
-    snippets:
-      - language: json
-        ref: examplegsmscimlLiteMinimal.json
-  - title: borehole view simple
-    content: "Example instance: borehole_view_simple"
-    snippets:
-      - language: json
-        ref: borehole_view_simple.json
-  - title: contact view simple
-    content: "Example instance: contact_view_simple"
-    snippets:
-      - language: json
-        ref: contact_view_simple.json
-  - title: geologic specimen view simple
-    content: "Example instance: geologic_specimen_view_simple"
-    snippets:
-      - language: json
-        ref: geologic_specimen_view_simple.json
-  - title: geologic unit view simple
-    content: "Example instance: geologic_unit_view_simple"
-    snippets:
-      - language: json
-        ref: geologic_unit_view_simple.json
-  - title: geomorphologic unit view simple
-    content: "Example instance: geomorphologic_unit_view_simple"
-    snippets:
-      - language: json
-        ref: geomorphologic_unit_view_simple.json
-  - title: shear displacement structure view simple
-    content: "Example instance: shear_displacement_structure_view_simple"
-    snippets:
-      - language: json
-        ref: shear_displacement_structure_view_simple.json
-  - title: site observation view simple
-    content: "Example instance: site_observation_view_simple"
-    snippets:
-      - language: json
-        ref: site_observation_view_simple.json
   - title: borehole view complex
     content: "Example instance: borehole_view_complex"
     snippets:
       - language: json
-        ref: borehole_view_complex.json
+        ref: examples/borehole_view_complex.json
+  - title: borehole view simple
+    content: "Example instance: borehole_view_simple"
+    snippets:
+      - language: json
+        ref: examples/borehole_view_simple.json
   - title: contact view complex
     content: "Example instance: contact_view_complex"
     snippets:
       - language: json
-        ref: contact_view_complex.json
+        ref: examples/contact_view_complex.json
+  - title: contact view simple
+    content: "Example instance: contact_view_simple"
+    snippets:
+      - language: json
+        ref: examples/contact_view_simple.json
+  - title: examplegsmscimlLiteMinimal
+    content: "Example instance: examplegsmscimlLiteMinimal"
+    snippets:
+      - language: json
+        ref: examples/examplegsmscimlLiteMinimal.json
   - title: geologic specimen view complex
     content: "Example instance: geologic_specimen_view_complex"
     snippets:
       - language: json
-        ref: geologic_specimen_view_complex.json
+        ref: examples/geologic_specimen_view_complex.json
+  - title: geologic specimen view simple
+    content: "Example instance: geologic_specimen_view_simple"
+    snippets:
+      - language: json
+        ref: examples/geologic_specimen_view_simple.json
   - title: geologic unit view complex
     content: "Example instance: geologic_unit_view_complex"
     snippets:
       - language: json
-        ref: geologic_unit_view_complex.json
+        ref: examples/geologic_unit_view_complex.json
+  - title: geologic unit view simple
+    content: "Example instance: geologic_unit_view_simple"
+    snippets:
+      - language: json
+        ref: examples/geologic_unit_view_simple.json
+  - title: geomorphologic unit view simple
+    content: "Example instance: geomorphologic_unit_view_simple"
+    snippets:
+      - language: json
+        ref: examples/geomorphologic_unit_view_simple.json
   - title: shear displacement structure view complex
     content: "Example instance: shear_displacement_structure_view_complex"
     snippets:
       - language: json
-        ref: shear_displacement_structure_view_complex.json
+        ref: examples/shear_displacement_structure_view_complex.json
+  - title: shear displacement structure view simple
+    content: "Example instance: shear_displacement_structure_view_simple"
+    snippets:
+      - language: json
+        ref: examples/shear_displacement_structure_view_simple.json
   - title: site observation view complex
     content: "Example instance: site_observation_view_complex"
     snippets:
       - language: json
-        ref: site_observation_view_complex.json
+        ref: examples/site_observation_view_complex.json
+  - title: site observation view simple
+    content: "Example instance: site_observation_view_simple"
+    snippets:
+      - language: json
+        ref: examples/site_observation_view_simple.json

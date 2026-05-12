@@ -7,4 +7,4 @@ examples:
     content: "Minimal AlterationDescription instance — no required properties"
     snippets:
       - language: json
-        ref: examplegsmEarthMaterialExtensionMinimal.json
+        ref: examples/examplegsmEarthMaterialExtensionMinimal.json

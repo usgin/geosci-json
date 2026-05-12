@@ -7,4 +7,4 @@ examples:
     content: "Material collection example constructed from Loop3D-GSO GSO-ExampleRockMaterialBolsaQuartzite.ttl. Two features: a RockMaterial (Bolsa Quartzite basal arkose) and one of its Mineral constituents (Quartz). The RockMaterial branch carries a RockMaterialDescription in gbEarthMaterialDescription[]; the Mineral feature uses the inherited EarthMaterialAbstractDescription slot."
     snippets:
       - language: json
-        ref: fc_bolsa_quartzite_GSO.json
+        ref: examples/fc_bolsa_quartzite_GSO.json

@@ -116,7 +116,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
-- [examplegsmBoreholeMinimal.json](examplegsmBoreholeMinimal.json)
+- [examplegsmBoreholeMinimal.json](examples/examplegsmBoreholeMinimal.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 

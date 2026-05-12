@@ -156,7 +156,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
-- [examplegsmSpecimenMinimal.json](examplegsmSpecimenMinimal.json)
+- [examplegsmSpecimenMinimal.json](examples/examplegsmSpecimenMinimal.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
