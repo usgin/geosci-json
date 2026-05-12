@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite
-Generated 2026-05-12T22:48:02.523099+00:00
+Generated 2026-05-12T23:09:31.192823+00:00
 === Files ===
 Using examples/site_observation_view_simple.json from examples
 === End Files ===

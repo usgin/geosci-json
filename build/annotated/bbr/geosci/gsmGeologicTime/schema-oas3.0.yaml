@@ -42,6 +42,69 @@ x-defs:
     x-schema-source: https://schemas.opengis.net/json-fg/featurecollection.json
     x-schema-id: https://schemas.opengis.net/json-fg/featurecollection.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
+  feature:
+    title: a JSON-FG Feature
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    type: object
+    required:
+    - type
+    - geometry
+    - properties
+    properties:
+      type:
+        enum:
+        - Feature
+      id:
+        oneOf:
+        - type: number
+        - type: string
+      featureType:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/featuretype
+      featureSchema:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/featureschema
+      time:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time
+      coordRefSys:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys
+      measures:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/measures
+      place:
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/place
+        - not:
+            type: object
+            properties:
+              coordRefSys: {}
+            required:
+            - coordRefSys
+        - not:
+            type: object
+            properties:
+              measures: {}
+            required:
+            - measures
+        - not:
+            type: object
+            properties:
+              conformsTo: {}
+            required:
+            - conformsTo
+      geometry:
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry
+        - not:
+            type: object
+            properties:
+              conformsTo: {}
+            required:
+            - conformsTo
+      properties:
+        oneOf:
+        - type: object
+        nullable: true
+    x-schema-source: https://schemas.opengis.net/json-fg/feature.json
+    x-schema-id: https://schemas.opengis.net/json-fg/feature.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
   gsmBasicGeologySchema:
     description: 'GeoSciML 4.1 Basic application schema. Core feature types
 
@@ -1379,69 +1442,6 @@ x-defs:
     x-schema-source: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json
     x-schema-id: https://schemas.usgin.org/geosci-json/gsmBasicGeology/gsmBasicGeologySchema.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-  feature:
-    title: a JSON-FG Feature
-    description: This JSON Schema is part of JSON-FG version 1.0.0.
-    type: object
-    required:
-    - type
-    - geometry
-    - properties
-    properties:
-      type:
-        enum:
-        - Feature
-      id:
-        oneOf:
-        - type: number
-        - type: string
-      featureType:
-        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/featuretype
-      featureSchema:
-        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/featureschema
-      time:
-        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time
-      coordRefSys:
-        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/coordrefsys
-      measures:
-        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/measures
-      place:
-        allOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/place
-        - not:
-            type: object
-            properties:
-              coordRefSys: {}
-            required:
-            - coordRefSys
-        - not:
-            type: object
-            properties:
-              measures: {}
-            required:
-            - measures
-        - not:
-            type: object
-            properties:
-              conformsTo: {}
-            required:
-            - conformsTo
-      geometry:
-        allOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry
-        - not:
-            type: object
-            properties:
-              conformsTo: {}
-            required:
-            - conformsTo
-      properties:
-        oneOf:
-        - type: object
-        nullable: true
-    x-schema-source: https://schemas.opengis.net/json-fg/feature.json
-    x-schema-id: https://schemas.opengis.net/json-fg/feature.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
   Quantity:
     description: Scalar component with decimal representation and a unit of measure
       used to store value of a continuous quantity
@@ -1550,6 +1550,83 @@ x-defs:
     - enabled
     x-schema-source: https://schemas.opengis.net/json-fg/measures.json
     x-schema-id: https://schemas.opengis.net/json-fg/measures.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  time:
+    title: the value of the 'time' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - type: object
+      minProperties: 1
+      properties:
+        date:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/date
+        timestamp:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
+        interval:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/interval
+    $defs:
+      date:
+        type: string
+        pattern: ^\d{4}-\d{2}-\d{2}$
+      timestamp:
+        type: string
+        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$
+      interval:
+        type: array
+        minItems: 2
+        maxItems: 2
+        items:
+          anyOf:
+          - oneOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/date
+            - type: string
+              enum:
+              - ..
+          - oneOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
+            - type: string
+              enum:
+              - ..
+    x-schema-source: https://schemas.opengis.net/json-fg/time.json
+    x-schema-id: https://schemas.opengis.net/json-fg/time.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+    nullable: true
+  place:
+    title: the value of the 'place' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    oneOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object
+    x-schema-source: https://schemas.opengis.net/json-fg/place.json
+    x-schema-id: https://schemas.opengis.net/json-fg/place.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+    nullable: true
+  geometry:
+    title: the geometries allowed as values of the 'geometry' member
+    description: This JSON Schema is part of JSON-FG version 1.0.0.
+    allOf:
+    - oneOf:
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Point
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPoint
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/LineString
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiLineString
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Polygon
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPolygon
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/GeometryCollection
+      nullable: true
+    - not:
+        type: object
+        properties:
+          coordRefSys: {}
+        required:
+        - coordRefSys
+    - not:
+        type: object
+        properties:
+          measures: {}
+        required:
+        - measures
+    x-schema-source: https://schemas.opengis.net/json-fg/geometry.json
+    x-schema-id: https://schemas.opengis.net/json-fg/geometry.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
   QuantityRange:
     description: Decimal pair for specifying a quantity range with a unit of measure
@@ -1756,83 +1833,6 @@ x-defs:
     x-schema-source: https://geojson.org/schema/Geometry.json
     x-schema-id: https://geojson.org/schema/Geometry.json
     x-schema-version: http://json-schema.org/draft-07/schema#
-  time:
-    title: the value of the 'time' member
-    description: This JSON Schema is part of JSON-FG version 1.0.0.
-    oneOf:
-    - type: object
-      minProperties: 1
-      properties:
-        date:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/date
-        timestamp:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
-        interval:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/interval
-    $defs:
-      date:
-        type: string
-        pattern: ^\d{4}-\d{2}-\d{2}$
-      timestamp:
-        type: string
-        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$
-      interval:
-        type: array
-        minItems: 2
-        maxItems: 2
-        items:
-          anyOf:
-          - oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/date
-            - type: string
-              enum:
-              - ..
-          - oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/time/$defs/timestamp
-            - type: string
-              enum:
-              - ..
-    x-schema-source: https://schemas.opengis.net/json-fg/time.json
-    x-schema-id: https://schemas.opengis.net/json-fg/time.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
-    nullable: true
-  place:
-    title: the value of the 'place' member
-    description: This JSON Schema is part of JSON-FG version 1.0.0.
-    oneOf:
-    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object
-    x-schema-source: https://schemas.opengis.net/json-fg/place.json
-    x-schema-id: https://schemas.opengis.net/json-fg/place.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
-    nullable: true
-  geometry:
-    title: the geometries allowed as values of the 'geometry' member
-    description: This JSON Schema is part of JSON-FG version 1.0.0.
-    allOf:
-    - oneOf:
-      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Point
-      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPoint
-      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/LineString
-      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiLineString
-      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/Polygon
-      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/MultiPolygon
-      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/geometry-object/$defs/GeometryCollection
-      nullable: true
-    - not:
-        type: object
-        properties:
-          coordRefSys: {}
-        required:
-        - coordRefSys
-    - not:
-        type: object
-        properties:
-          measures: {}
-        required:
-        - measures
-    x-schema-source: https://schemas.opengis.net/json-fg/geometry.json
-    x-schema-id: https://schemas.opengis.net/json-fg/geometry.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
   AbstractSimpleComponent:
     type: object
     allOf:
@@ -2825,18 +2825,19 @@ x-defs:
           minLength: 1
     x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/AbstractSweIdentifiable.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-description: 'Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary
-
-  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension
-
-  (which contributes GeologicEventDescription, the concrete description
-
-  class used by GeologicEvent.gaEventDescription).
-
-
-  Validates either a single Feature (dispatched by `featureType` to one of: GlobalStratotypePoint,
-  GlobalStratotypeSection, StratigraphicPoint, StratigraphicSection) or a FeatureCollection
-  whose `features[]` items are dispatched the same way.'
+description: "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary\npoints,
+  TemporalReferenceSystem, plus the GeologicAgeDetails extension\n(which contributes
+  GeologicEventDescription, the concrete description\nclass used by GeologicEvent.gaEventDescription).
+  The dispatcher\nadditionally exposes two hand-curated featureTypes \u2014\nGeochronologicEra
+  and GeochronologicBoundary \u2014 that align to W3C\nOWL-Time (https://www.w3.org/TR/owl-time/)
+  per Cox & Richard 2015\n\"A formal model for the geologic timescale and GSSP\":
+  Era \u2261\ntime:ProperInterval and Boundary \u2261 time:Instant, with start/end\nmapping
+  to time:hasBeginning/time:hasEnd and member to\ntime:intervalContains. Both reference
+  the existing XMI-derived\nStratigraphicPoint / StratigraphicSection anchors for
+  the\nrock-record link.\n\nValidates either a single Feature (dispatched by `featureType`
+  to one of: GeochronologicEra, GeochronologicBoundary, GlobalStratotypePoint, GlobalStratotypeSection,
+  StratigraphicPoint, StratigraphicSection) or a FeatureCollection whose `features[]`
+  items are dispatched the same way."
 if:
   type: object
   required:
@@ -2859,6 +2860,24 @@ else:
 $defs:
   _FeatureDispatch:
     allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            enum:
+            - GeochronologicEra
+      then:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicEra
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            enum:
+            - GeochronologicBoundary
+      then:
+        $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicBoundary
     - if:
         required:
         - featureType
@@ -2902,6 +2921,8 @@ $defs:
           properties:
             featureType:
               enum:
+              - GeochronologicEra
+              - GeochronologicBoundary
               - GlobalStratotypePoint
               - GlobalStratotypeSection
               - StratigraphicPoint
@@ -2909,55 +2930,93 @@ $defs:
       then: false
   GeochronologicBoundary:
     $anchor: GeochronologicBoundary
-    description: A GeochronologicBoundary is a boundary between two geochronologic
-      time periods.
+    description: 'A point in geologic time defined by a stratotype. Aligns to time:Instant
+      from W3C OWL-Time (https://www.w3.org/TR/owl-time/). Cox & Richard 2015, ''A
+      formal model for the geologic timescale and GSSP'': the boundary''s instant
+      is anchored to the rock record via the `stratotype` property, which references
+      a StratigraphicPoint (typically a GSSP if ratified by ICS).'
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEraBoundary
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/feature
     - type: object
       properties:
-        stratotype:
-          oneOf:
-          - oneOf:
-            - allOf:
+        properties:
+          type: object
+          properties:
+            stratotype:
+              description: The StratigraphicPoint that defines this boundary in the
+                rock record. Inline Feature or by-reference SCLinkObject.
+              oneOf:
               - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#StratigraphicPoint
-          description: The property stratotype is an association between a GeochronologicBoundary
-            and a StratigraphicPoint that are associated with the boundary. A GeochronologicBoundary
-            can be associated with more than one StratigraphicPoints, but only one
-            may have GSSP ratified status. The others are proposed equivalents.
-          nullable: true
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#StratigraphicPoint
+          required:
+          - stratotype
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   GeochronologicEra:
     $anchor: GeochronologicEra
-    description: A GeochronologicEra is a period of time between two GeochronologicBoundaries.
-      The association of a GeochronologicEra with a stratotype is optional. In the
-      GSSP approach recommended by ICS for the Global Geologic Timescale, Unit Stratotypes
-      are not used. Rather, the association of an era with geologic units and sections
-      is indirect, via the association of an era with boundaries, which are in turn
-      tied to stratotype points, which occur within host stratotype sections.
+    description: "A named interval of geologic time (Eon, Era, Period, Epoch, Age,
+      biozone, etc.). Aligns to time:ProperInterval from W3C OWL-Time (https://www.w3.org/TR/owl-time/).
+      Cox & Richard 2015, 'A formal model for the geologic timescale and GSSP': `start`
+      / `end` map to time:hasBeginning / time:hasEnd (both linking to GeochronologicBoundary
+      \u2261 time:Instant); `member[]` expresses sub-era containment (Allen time:intervalContains).
+      The optional `stratotype` anchors the era to a defining rock section."
     allOf:
-    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEra
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/feature
     - type: object
       properties:
-        rank:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicEraRank
-          description: The property rank:GeochronologicEraRank contains a term from
-            a vocabulary describing the rank of the time period (e.g., eon, era, period,
-            stage).
-          nullable: true
-        stratotype:
-          oneOf:
-          - oneOf:
-            - allOf:
+        properties:
+          type: object
+          properties:
+            rank:
+              type: string
+              format: uri
+              description: 'Chronostratigraphic / geochronologic rank (URI from the
+                ICS chart vocabulary or equivalent: Eon, Era, Period, Epoch, Age,
+                biozone, etc.).'
+            start:
+              description: Lower boundary of this era (time:hasBeginning). Inline
+                GeochronologicBoundary Feature or by-reference SCLinkObject.
+              oneOf:
               - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#StratigraphicSection
-          description: The property stratotype is an association between a GeochronologicEra
-            and StratigraphicSection that describes a type section that names the
-            physical location or outcrop of a particular reference exposure of a stratigraphic
-            sequence or stratigraphic boundary. A unit stratotype is the agreed reference
-            point for a particular stratigraphic unit and a boundary stratotype is
-            the reference for a particular boundary between strata (Wikipedia).
-          nullable: true
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicBoundary
+            end:
+              description: Upper boundary of this era (time:hasEnd). Inline GeochronologicBoundary
+                Feature or by-reference SCLinkObject.
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicBoundary
+            member:
+              description: Sub-eras contained within this era (time:intervalContains).
+                Array of by-reference links or inline GeochronologicEra Features.
+              oneOf:
+              - type: array
+                items:
+                  oneOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicEra
+                uniqueItems: true
+              nullable: true
+            stratotype:
+              description: Defining stratigraphic section for this era (the rock-record
+                anchor). Inline StratigraphicSection Feature or by-reference SCLinkObject.
+              oneOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#StratigraphicSection
+              nullable: true
+          required:
+          - rank
+          - start
+          - end
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   GeochronologicEraRank:
     $anchor: GeochronologicEraRank
     description: 'This list is an indicative list only of terms used to describe the

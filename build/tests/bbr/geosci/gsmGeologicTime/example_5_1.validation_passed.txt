@@ -1,7 +1,7 @@
 Validation report for usgin.bbr.geosci.gsmGeologicTime - gsmGeologicTime
-Generated 2026-05-12T23:09:21.817586+00:00
+Generated 2026-05-12T23:09:21.825650+00:00
 === Files ===
-Using examples/geochronologic_boundary_simple.json from examples
+Using examples/geochronologic_era_simple.json from examples
 === End Files ===
 
 === JSON Schema ===

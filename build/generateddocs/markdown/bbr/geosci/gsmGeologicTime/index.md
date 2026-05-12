@@ -41,28 +41,27 @@ Contains 4 feature types, 10 data types, 1 code list.
 
 ### `GeochronologicBoundary`
 
-A GeochronologicBoundary is a boundary between two geochronologic time periods.
-
-**Supertype**: [`TimeOrdinalEraBoundary`](#TimeOrdinalEraBoundary) (this BB).
+A point in geologic time defined by a stratotype. Aligns to time:Instant from W3C OWL-Time (https://www.w3.org/TR/owl-time/). Cox & Richard 2015, 'A formal model for the geologic timescale and GSSP': the boundary's instant is anchored to the rock record via the `stratotype` property, which references a StratigraphicPoint (typically a GSSP if ratified by ICS).
 
 Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `stratotype` | (oneOf — see schema) | 0..1 | The property stratotype is an association between a GeochronologicBoundary and a StratigraphicPoint that are associat… |
+| `stratotype` | (oneOf — see schema) | 0..1 | The StratigraphicPoint that defines this boundary in the rock record. Inline Feature or by-reference SCLinkObject. |
 
 ### `GeochronologicEra`
 
-A GeochronologicEra is a period of time between two GeochronologicBoundaries. The association of a GeochronologicEra with a stratotype is optional. In the GSSP approach recommended by ICS for the Global Geologic Timescale, Unit Stratotypes are not used. Rather, the association of an era with geologic units and sections is indirect, via the association of an era with boundaries, which are in turn tied to stratotype points, which occur within host stratotype sections.
-
-**Supertype**: [`TimeOrdinalEra`](#TimeOrdinalEra) (this BB).
+A named interval of geologic time (Eon, Era, Period, Epoch, Age, biozone, etc.). Aligns to time:ProperInterval from W3C OWL-Time (https://www.w3.org/TR/owl-time/). Cox & Richard 2015, 'A formal model for the geologic timescale and GSSP': `start` / `end` map to time:hasBeginning / time:hasEnd (both linking to GeochronologicBoundary ≡ time:Instant); `member[]` expresses sub-era containment (Allen time:intervalContains). The optional `stratotype` anchors the era to a defining rock section.
 
 Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `rank` | (oneOf — see schema) | 0..1 | The property rank:GeochronologicEraRank contains a term from a vocabulary describing the rank of the time period (e.g… |
-| `stratotype` | (oneOf — see schema) | 0..1 | The property stratotype is an association between a GeochronologicEra and StratigraphicSection that describes a type … |
+| `rank` | `string(uri)` | 0..1 | Chronostratigraphic / geochronologic rank (URI from the ICS chart vocabulary or equivalent: Eon, Era, Period, Epoch, … |
+| `start` | (oneOf — see schema) | 0..1 | Lower boundary of this era (time:hasBeginning). Inline GeochronologicBoundary Feature or by-reference SCLinkObject. |
+| `end` | (oneOf — see schema) | 0..1 | Upper boundary of this era (time:hasEnd). Inline GeochronologicBoundary Feature or by-reference SCLinkObject. |
+| `member` | (oneOf — see schema) | 0..1 | Sub-eras contained within this era (time:intervalContains). Array of by-reference links or inline GeochronologicEra F… |
+| `stratotype` | (oneOf — see schema) | 0..1 | Defining stratigraphic section for this era (the rock-record anchor). Inline StratigraphicSection Feature or by-refer… |
 
 ### `GeologicEventDescription`
 
@@ -188,7 +187,10 @@ Properties (own; inherited properties listed in supertype's BB):
 ## Examples
 
 - [examplegsmGeologicTimeMinimal.json](examples/examplegsmGeologicTimeMinimal.json)
-- [stratigraphic_section_lower_jurassic_GSO.json](examples/stratigraphic_section_lower_jurassic_GSO.json)
+- [geochronologic_boundary_simple.json](examples/geochronologic_boundary_simple.json)
+- [geochronologic_era_complex.json](examples/geochronologic_era_complex.json)
+- [geochronologic_era_lower_jurassic_GSO.json](examples/geochronologic_era_lower_jurassic_GSO.json)
+- [geochronologic_era_simple.json](examples/geochronologic_era_simple.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
@@ -215,23 +217,160 @@ Example instance: examplegsmGeologicTimeMinimal
 ```
 
 
-### stratigraphic section lower jurassic GSO
-Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL defines a Series-level chronostratigraphic unit `Lower_Jurassic_Series` (gsgu:Series, hosts gstime:LowerJurassic2012). gsmGeologicTime's dispatchable FTs are stratotype-related (StratigraphicSection, StratigraphicPoint, GlobalStratotypePoint, GlobalStratotypeSection); encoding the Lower Jurassic Series here as a StratigraphicSection whose geologicDescription summarises the Series scope. The link to the ICS time-scale Era is by-reference.
+### geochronologic boundary simple
+Example instance: geochronologic_boundary_simple
 #### json
 ```json
 {
-  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL defines a Series-level chronostratigraphic unit `Lower_Jurassic_Series` (gsgu:Series, hosts gstime:LowerJurassic2012). gsmGeologicTime's dispatchable FTs are stratotype-related (StratigraphicSection, StratigraphicPoint, GlobalStratotypePoint, GlobalStratotypeSection); encoding the Lower Jurassic Series here as a StratigraphicSection whose geologicDescription summarises the Series scope. The link to the ICS time-scale Era is by-reference.",
   "type": "Feature",
-  "featureType": "StratigraphicSection",
-  "id": "https://w3id.org/gso/ex-timelowerjurassic#Lower_Jurassic_Series",
+  "featureType": "GeochronologicBoundary",
+  "id": "ics-base-cambrian",
   "geometry": null,
   "place": null,
   "time": null,
   "properties": {
-    "name": "Lower Jurassic Series (reference section context)",
-    "purpose": "typicalNorm",
-    "geologicDescription": "Series-level chronostratigraphic unit corresponding to the Lower Jurassic Epoch (gstime:LowerJurassic2012, ICS 2017). The ICS time scale does not define stratotypes for the Geochronologic Eras it defines; this example encodes the host association between the Lower Jurassic rock-based Series and the ICS Epoch.",
-    "geologicSetting": "Global lithostratigraphic equivalent of the Lower Jurassic Epoch."
+    "stratotype": {
+      "type": "Feature",
+      "featureType": "StratigraphicPoint",
+      "id": "ics-base-cambrian-gssp",
+      "geometry": {"type": "Point", "coordinates": [117.0, 31.0]},
+      "place": null,
+      "time": null,
+      "properties": {
+        "primaryGuidingCriterion": "First appearance datum of trace fossil Treptichnus pedum",
+        "status": "ratified GSSP"
+      }
+    }
+  }
+}
+
+```
+
+
+### geochronologic era complex
+Example instance: geochronologic_era_complex
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "GeochronologicEra",
+  "id": "arizona-zappodachus-zone",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "rank": "http://resource.geosciml.org/classifier/ics/ischart/biozone",
+    "start": {
+      "href": "http://resource.geosciml.org/classifier/ics/ischart/BaseMesoproterozoic",
+      "title": "base of Mesoproterozoic"
+    },
+    "end": {
+      "type": "Feature",
+      "featureType": "GeochronologicBoundary",
+      "id": "beckers-butte-tuff-boundary",
+      "geometry": null,
+      "place": null,
+      "time": null,
+      "properties": {
+        "stratotype": {
+          "type": "Feature",
+          "featureType": "StratigraphicPoint",
+          "id": "beckers-butte-tuff-point",
+          "geometry": null,
+          "place": null,
+          "time": null,
+          "properties": {
+            "primaryGuidingCriterion": "eruption of Beckers Butte Tuff, a thin widespread marker assumed to be synchronously deposited across the region",
+            "status": "proposed"
+          }
+        }
+      }
+    },
+    "member": [
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Neoproterozoic", "title": "Neoproterozoic"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Mesoproterozoic", "title": "Mesoproterozoic"}
+    ],
+    "stratotype": {
+      "href": "http://resource.usgs.gov/stratigraphicSection/347378",
+      "title": "Theodore Roosevelt Dam Section, Arizona"
+    }
+  }
+}
+
+```
+
+
+### geochronologic era lower jurassic GSO
+Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL describes a chronostratigraphic Series (`Lower_Jurassic_Series`, gsgu:Series) that `gsoc:hosts gstime:LowerJurassic2012` — the time-side ICS Epoch. Encoded here as a GeochronologicEra (≡ time:ProperInterval per OWL-Time / Cox & Richard 2015) representing the Lower Jurassic Epoch. The Epoch is bounded by the base-of-Hettangian GSSP (= base of Jurassic, ratified at Kuhjoch, Austria) and the base-of-Bajocian (the top of Toarcian / base of Middle Jurassic). The Series rock unit from the TTL is referenced via `stratotype`. As the TTL notes, the ICS time scale does not formally define stratotypes for its Geochronologic Eras; the stratotype here is the GeoSciML-side rock-unit anchor.
+#### json
+```json
+{
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source TTL describes a chronostratigraphic Series (`Lower_Jurassic_Series`, gsgu:Series) that `gsoc:hosts gstime:LowerJurassic2012` — the time-side ICS Epoch. Encoded here as a GeochronologicEra (≡ time:ProperInterval per OWL-Time / Cox & Richard 2015) representing the Lower Jurassic Epoch. The Epoch is bounded by the base-of-Hettangian GSSP (= base of Jurassic, ratified at Kuhjoch, Austria) and the base-of-Bajocian (the top of Toarcian / base of Middle Jurassic). The Series rock unit from the TTL is referenced via `stratotype`. As the TTL notes, the ICS time scale does not formally define stratotypes for its Geochronologic Eras; the stratotype here is the GeoSciML-side rock-unit anchor.",
+  "type": "Feature",
+  "featureType": "GeochronologicEra",
+  "id": "http://resource.geosciml.org/classifier/ics/ischart/LowerJurassic",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "rank": "http://resource.geosciml.org/classifier/ics/ischart/Epoch",
+    "start": {
+      "href": "http://resource.geosciml.org/classifier/ics/ischart/BaseJurassic",
+      "rel": "time:hasBeginning",
+      "title": "Base of Jurassic (= base of Hettangian; ratified GSSP at Kuhjoch, Austria)"
+    },
+    "end": {
+      "href": "http://resource.geosciml.org/classifier/ics/ischart/BaseBajocian",
+      "rel": "time:hasEnd",
+      "title": "Base of Bajocian (= top of Toarcian, beginning of Middle Jurassic)"
+    },
+    "member": [
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Hettangian",   "title": "Hettangian Age"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Sinemurian",   "title": "Sinemurian Age"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Pliensbachian","title": "Pliensbachian Age"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Toarcian",     "title": "Toarcian Age"}
+    ],
+    "stratotype": {
+      "href": "https://w3id.org/gso/ex-timelowerjurassic#Lower_Jurassic_Series",
+      "rel": "isHostedBy",
+      "title": "Lower_Jurassic_Series (chronostratigraphic Series; the rock-record host of this Epoch per gsoc:hosts in the source TTL)"
+    }
+  }
+}
+
+```
+
+
+### geochronologic era simple
+Example instance: geochronologic_era_simple
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "GeochronologicEra",
+  "id": "ics-devonian",
+  "geometry": null,
+  "place": null,
+  "time": null,
+  "properties": {
+    "rank": "http://resource.geosciml.org/classifier/ics/ischart/Period",
+    "start": {
+      "href": "http://resource.geosciml.org/classifier/ics/ischart/BaseDevonian",
+      "title": "base of Devonian"
+    },
+    "end": {
+      "href": "http://resource.geosciml.org/classifier/ics/ischart/BaseDevonianTop",
+      "title": "top of Devonian"
+    },
+    "member": [
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Lochkovian", "title": "Lochkovian"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Pragian",    "title": "Pragian"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Emsian",     "title": "Emsian"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Eifelian",   "title": "Eifelian"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Givetian",   "title": "Givetian"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Frasnian",   "title": "Frasnian"},
+      {"href": "http://resource.geosciml.org/classifier/ics/ischart/Famennian",  "title": "Famennian"}
+    ]
   }
 }
 
@@ -242,18 +381,19 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleEpochLowerJurassic.ttl. The source T
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.usgin.org/geosci-json/gsmGeologicTime/gsmGeologicTimeSchema.json
-description: 'Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary
-
-  points, TemporalReferenceSystem, plus the GeologicAgeDetails extension
-
-  (which contributes GeologicEventDescription, the concrete description
-
-  class used by GeologicEvent.gaEventDescription).
-
-
-  Validates either a single Feature (dispatched by `featureType` to one of: GlobalStratotypePoint,
-  GlobalStratotypeSection, StratigraphicPoint, StratigraphicSection) or a FeatureCollection
-  whose `features[]` items are dispatched the same way.'
+description: "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary\npoints,
+  TemporalReferenceSystem, plus the GeologicAgeDetails extension\n(which contributes
+  GeologicEventDescription, the concrete description\nclass used by GeologicEvent.gaEventDescription).
+  The dispatcher\nadditionally exposes two hand-curated featureTypes \u2014\nGeochronologicEra
+  and GeochronologicBoundary \u2014 that align to W3C\nOWL-Time (https://www.w3.org/TR/owl-time/)
+  per Cox & Richard 2015\n\"A formal model for the geologic timescale and GSSP\":
+  Era \u2261\ntime:ProperInterval and Boundary \u2261 time:Instant, with start/end\nmapping
+  to time:hasBeginning/time:hasEnd and member to\ntime:intervalContains. Both reference
+  the existing XMI-derived\nStratigraphicPoint / StratigraphicSection anchors for
+  the\nrock-record link.\n\nValidates either a single Feature (dispatched by `featureType`
+  to one of: GeochronologicEra, GeochronologicBoundary, GlobalStratotypePoint, GlobalStratotypeSection,
+  StratigraphicPoint, StratigraphicSection) or a FeatureCollection whose `features[]`
+  items are dispatched the same way."
 if:
   type: object
   required:
@@ -275,6 +415,22 @@ else:
 $defs:
   _FeatureDispatch:
     allOf:
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GeochronologicEra
+      then:
+        $ref: '#GeochronologicEra'
+    - if:
+        required:
+        - featureType
+        properties:
+          featureType:
+            const: GeochronologicBoundary
+      then:
+        $ref: '#GeochronologicBoundary'
     - if:
         required:
         - featureType
@@ -314,6 +470,8 @@ $defs:
           properties:
             featureType:
               enum:
+              - GeochronologicEra
+              - GeochronologicBoundary
               - GlobalStratotypePoint
               - GlobalStratotypeSection
               - StratigraphicPoint
@@ -321,55 +479,93 @@ $defs:
       then: false
   GeochronologicBoundary:
     $anchor: GeochronologicBoundary
-    description: A GeochronologicBoundary is a boundary between two geochronologic
-      time periods.
+    description: 'A point in geologic time defined by a stratotype. Aligns to time:Instant
+      from W3C OWL-Time (https://www.w3.org/TR/owl-time/). Cox & Richard 2015, ''A
+      formal model for the geologic timescale and GSSP'': the boundary''s instant
+      is anchored to the rock record via the `stratotype` property, which references
+      a StratigraphicPoint (typically a GSSP if ratified by ICS).'
     allOf:
-    - $ref: '#TimeOrdinalEraBoundary'
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
     - type: object
       properties:
-        stratotype:
-          oneOf:
-          - type: 'null'
-          - oneOf:
-            - $ref: '#/$defs/SCLinkObject'
-              $comment: by-reference link to StratigraphicPoint
-            - $ref: '#StratigraphicPoint'
-          description: The property stratotype is an association between a GeochronologicBoundary
-            and a StratigraphicPoint that are associated with the boundary. A GeochronologicBoundary
-            can be associated with more than one StratigraphicPoints, but only one
-            may have GSSP ratified status. The others are proposed equivalents.
+        properties:
+          type: object
+          properties:
+            stratotype:
+              description: The StratigraphicPoint that defines this boundary in the
+                rock record. Inline Feature or by-reference SCLinkObject.
+              oneOf:
+              - $ref: '#/$defs/SCLinkObject'
+              - $ref: '#StratigraphicPoint'
+          required:
+          - stratotype
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   GeochronologicEra:
     $anchor: GeochronologicEra
-    description: A GeochronologicEra is a period of time between two GeochronologicBoundaries.
-      The association of a GeochronologicEra with a stratotype is optional. In the
-      GSSP approach recommended by ICS for the Global Geologic Timescale, Unit Stratotypes
-      are not used. Rather, the association of an era with geologic units and sections
-      is indirect, via the association of an era with boundaries, which are in turn
-      tied to stratotype points, which occur within host stratotype sections.
+    description: "A named interval of geologic time (Eon, Era, Period, Epoch, Age,
+      biozone, etc.). Aligns to time:ProperInterval from W3C OWL-Time (https://www.w3.org/TR/owl-time/).
+      Cox & Richard 2015, 'A formal model for the geologic timescale and GSSP': `start`
+      / `end` map to time:hasBeginning / time:hasEnd (both linking to GeochronologicBoundary
+      \u2261 time:Instant); `member[]` expresses sub-era containment (Allen time:intervalContains).
+      The optional `stratotype` anchors the era to a defining rock section."
     allOf:
-    - $ref: '#TimeOrdinalEra'
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
     - type: object
       properties:
-        rank:
-          oneOf:
-          - type: 'null'
-          - $ref: '#GeochronologicEraRank'
-          description: The property rank:GeochronologicEraRank contains a term from
-            a vocabulary describing the rank of the time period (e.g., eon, era, period,
-            stage).
-        stratotype:
-          oneOf:
-          - type: 'null'
-          - oneOf:
-            - $ref: '#/$defs/SCLinkObject'
-              $comment: by-reference link to StratigraphicSection
-            - $ref: '#StratigraphicSection'
-          description: The property stratotype is an association between a GeochronologicEra
-            and StratigraphicSection that describes a type section that names the
-            physical location or outcrop of a particular reference exposure of a stratigraphic
-            sequence or stratigraphic boundary. A unit stratotype is the agreed reference
-            point for a particular stratigraphic unit and a boundary stratotype is
-            the reference for a particular boundary between strata (Wikipedia).
+        properties:
+          type: object
+          properties:
+            rank:
+              type: string
+              format: uri
+              description: 'Chronostratigraphic / geochronologic rank (URI from the
+                ICS chart vocabulary or equivalent: Eon, Era, Period, Epoch, Age,
+                biozone, etc.).'
+            start:
+              description: Lower boundary of this era (time:hasBeginning). Inline
+                GeochronologicBoundary Feature or by-reference SCLinkObject.
+              oneOf:
+              - $ref: '#/$defs/SCLinkObject'
+              - $ref: '#GeochronologicBoundary'
+            end:
+              description: Upper boundary of this era (time:hasEnd). Inline GeochronologicBoundary
+                Feature or by-reference SCLinkObject.
+              oneOf:
+              - $ref: '#/$defs/SCLinkObject'
+              - $ref: '#GeochronologicBoundary'
+            member:
+              description: Sub-eras contained within this era (time:intervalContains).
+                Array of by-reference links or inline GeochronologicEra Features.
+              oneOf:
+              - type: 'null'
+              - type: array
+                items:
+                  oneOf:
+                  - $ref: '#/$defs/SCLinkObject'
+                  - $ref: '#GeochronologicEra'
+                uniqueItems: true
+            stratotype:
+              description: Defining stratigraphic section for this era (the rock-record
+                anchor). Inline StratigraphicSection Feature or by-reference SCLinkObject.
+              oneOf:
+              - type: 'null'
+              - $ref: '#/$defs/SCLinkObject'
+              - $ref: '#StratigraphicSection'
+          required:
+          - rank
+          - start
+          - end
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   GeochronologicEraRank:
     $anchor: GeochronologicEraRank
     description: 'This list is an indicative list only of terms used to describe the
