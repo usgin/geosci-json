@@ -243,6 +243,8 @@ Properties (own; inherited properties listed in supertype's BB):
 - [geologic_unit_view_complex.json](examples/geologic_unit_view_complex.json)
 - [geologic_unit_view_simple.json](examples/geologic_unit_view_simple.json)
 - [geomorphologic_unit_view_simple.json](examples/geomorphologic_unit_view_simple.json)
+- [geosciml_lite_featurecollection_geologicunitview.json](examples/geosciml_lite_featurecollection_geologicunitview.json)
+- [geosciml_lite_featurecollection_mixed.json](examples/geosciml_lite_featurecollection_mixed.json)
 - [shear_displacement_structure_view_complex.json](examples/shear_displacement_structure_view_complex.json)
 - [shear_displacement_structure_view_simple.json](examples/shear_displacement_structure_view_simple.json)
 - [site_observation_view_complex.json](examples/site_observation_view_complex.json)

@@ -18,3 +18,18 @@ examples:
     snippets:
       - language: json
         ref: examples/fc_kanna_thrust_faults_GSO.json
+  - title: fold system simple
+    content: "Example instance: fold_system_simple"
+    snippets:
+      - language: json
+        ref: examples/fold_system_simple.json
+  - title: lineation complex
+    content: "Example instance: lineation_complex"
+    snippets:
+      - language: json
+        ref: examples/lineation_complex.json
+  - title: lineation simple
+    content: "Example instance: lineation_simple"
+    snippets:
+      - language: json
+        ref: examples/lineation_simple.json

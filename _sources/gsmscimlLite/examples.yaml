@@ -53,6 +53,16 @@ examples:
     snippets:
       - language: json
         ref: examples/geomorphologic_unit_view_simple.json
+  - title: geosciml lite featurecollection geologicunitview
+    content: "Example instance: geosciml_lite_featurecollection_geologicunitview"
+    snippets:
+      - language: json
+        ref: examples/geosciml_lite_featurecollection_geologicunitview.json
+  - title: geosciml lite featurecollection mixed
+    content: "Example instance: geosciml_lite_featurecollection_mixed"
+    snippets:
+      - language: json
+        ref: examples/geosciml_lite_featurecollection_mixed.json
   - title: shear displacement structure view complex
     content: "Example instance: shear_displacement_structure_view_complex"
     snippets:

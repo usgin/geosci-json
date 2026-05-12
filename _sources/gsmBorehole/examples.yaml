@@ -3,8 +3,18 @@
 # and one or more snippets pointing to example files.
 
 examples:
+  - title: borehole simple
+    content: "Example instance: borehole_simple"
+    snippets:
+      - language: json
+        ref: examples/borehole_simple.json
   - title: examplegsmBoreholeMinimal
     content: "Example instance: examplegsmBoreholeMinimal"
     snippets:
       - language: json
         ref: examples/examplegsmBoreholeMinimal.json
+  - title: origin position simple
+    content: "Example instance: origin_position_simple"
+    snippets:
+      - language: json
+        ref: examples/origin_position_simple.json

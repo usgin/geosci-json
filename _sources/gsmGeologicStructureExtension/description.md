@@ -271,6 +271,9 @@ Properties (own; inherited properties listed in supertype's BB):
 - [examplegsmGeologicStructureExtensionMinimal.json](examples/examplegsmGeologicStructureExtensionMinimal.json)
 - [fc_fault_displacement_events_GSO.json](examples/fc_fault_displacement_events_GSO.json)
 - [fc_kanna_thrust_faults_GSO.json](examples/fc_kanna_thrust_faults_GSO.json)
+- [fold_system_simple.json](examples/fold_system_simple.json)
+- [lineation_complex.json](examples/lineation_complex.json)
+- [lineation_simple.json](examples/lineation_simple.json)
 
 See [examples.yaml](examples.yaml) for the full manifest.
 
