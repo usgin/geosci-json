@@ -251,6 +251,10 @@ path	@id	schema
 /_then/features/_then/properties/indexData/_oneOf/1/operator/_oneOf/1/_anyOf/1/schema:contributor/_anyOf/1/schema:sameAs		https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/person/schema.json
 /_then/features/_then/properties/indexData/_oneOf/1/driller		/github/workspace/build/annotated/bbr/geosci/gsmBorehole/schema.yaml
 /_then/features/_then/properties/indexData/_oneOf/1/dateOfDrilling		/github/workspace/build/annotated/bbr/geosci/gsmBorehole/schema.yaml
+/_then/features/_then/properties/indexData/_oneOf/1/dateOfDrilling/_oneOf/1/_oneOf/1/hasBeginning		/github/workspace/build/annotated/bbr/geosci/gsmBorehole/schema.yaml
+/_then/features/_then/properties/indexData/_oneOf/1/dateOfDrilling/_oneOf/1/_oneOf/1/hasEnd		/github/workspace/build/annotated/bbr/geosci/gsmBorehole/schema.yaml
+/_then/features/_then/properties/indexData/_oneOf/1/dateOfDrilling/_oneOf/1/_oneOf/2/hasBeginningDateTime		/github/workspace/build/annotated/bbr/geosci/gsmBorehole/schema.yaml
+/_then/features/_then/properties/indexData/_oneOf/1/dateOfDrilling/_oneOf/1/_oneOf/2/hasEndDateTime		/github/workspace/build/annotated/bbr/geosci/gsmBorehole/schema.yaml
 /_then/features/_then/properties/indexData/_oneOf/1/startPoint		/github/workspace/build/annotated/bbr/geosci/gsmBorehole/schema.yaml
 /_then/features/_then/properties/indexData/_oneOf/1/inclinationType		/github/workspace/build/annotated/bbr/geosci/gsmBorehole/schema.yaml
 /_then/features/_then/properties/indexData/_oneOf/1/boreholeMaterialCustodian		/github/workspace/build/annotated/bbr/geosci/gsmBorehole/schema.yaml

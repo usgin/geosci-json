@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmBasicGeology - gsmBasicGeology
-Generated 2026-05-12T23:08:56.949837+00:00
+Generated 2026-05-12T23:26:02.091365+00:00
 === Files ===
 Using examples/shear_displacement_structure_complex.json from examples
 === End Files ===

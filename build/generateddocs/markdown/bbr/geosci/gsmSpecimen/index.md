@@ -449,8 +449,40 @@ $defs:
             commissionDate:
               oneOf:
               - type: 'null'
-              - $ref: '#/$defs/SCLinkObject'
-                $comment: "External ISO 19108 TM_Instant \u2014 by-reference link"
+              - oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                - type: object
+                  properties:
+                    inXSDDateTime:
+                      type: string
+                      format: date-time
+                    inXSDDate:
+                      type: string
+                      format: date
+                    inXSDgYearMonth:
+                      type: string
+                      pattern: ^-?\d{4}-\d{2}$
+                    inXSDgYear:
+                      type: string
+                      pattern: ^-?\d{4}$
+                  anyOf:
+                  - required:
+                    - inXSDDateTime
+                  - required:
+                    - inXSDDate
+                  - required:
+                    - inXSDgYearMonth
+                  - required:
+                    - inXSDgYear
+                - type: string
+                  format: date-time
+                - type: string
+                  format: date
+                $comment: ISO 19108 TM_Instant aligned to W3C OWL-Time time:Instant
+                  (https://www.w3.org/TR/owl-time/#time:Instant). Accepts a SCLinkObject
+                  by-reference, an OWL-Time Instant object with one of `inXSDDateTime`
+                  / `inXSDDate` / `inXSDgYearMonth` / `inXSDgYear`, or a bare ISO
+                  8601 string as a convenience alias.
               description: The property commissionDate is an association between an
                 AnalyticalInstrument and a TM_Instant corresponding to the date of
                 the commissioning of an instrument.
@@ -576,8 +608,38 @@ $defs:
             time:
               oneOf:
               - type: 'null'
-              - $ref: '#/$defs/SCLinkObject'
-                $comment: "External ISO 19108 TM_Period \u2014 by-reference link"
+              - oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                - type: object
+                  properties:
+                    hasBeginning:
+                      type: object
+                    hasEnd:
+                      type: object
+                  required:
+                  - hasBeginning
+                  - hasEnd
+                - type: object
+                  properties:
+                    hasBeginningDateTime:
+                      type: string
+                    hasEndDateTime:
+                      type: string
+                  required:
+                  - hasBeginningDateTime
+                  - hasEndDateTime
+                - type: array
+                  minItems: 2
+                  maxItems: 2
+                  items:
+                    type: string
+                $comment: ISO 19108 TM_Period aligned to W3C OWL-Time time:ProperInterval
+                  (https://www.w3.org/TR/owl-time/#time:ProperInterval). Canonical
+                  encoding is the OWL-Time object with `hasBeginning`/`hasEnd` (or
+                  the shortcut `hasBeginningDateTime`/`hasEndDateTime`). A two-element
+                  [startDate, endDate] array is accepted as a convenience alias (OGC
+                  code-sprint convention) but is not OWL-Time-canonical; consumers
+                  should prefer the object form.
               description: The property time is an association between an AnalyticalSession
                 and a TM_Period describing the time period during which the analysis
                 was performed.

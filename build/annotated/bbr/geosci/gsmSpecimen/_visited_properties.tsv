@@ -221,6 +221,10 @@ path	@id	schema
 /_then/features/_then/properties/usedIn		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/time		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
+/_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/time/_oneOf/1/_oneOf/1/hasBeginning		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
+/_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/time/_oneOf/1/_oneOf/1/hasEnd		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
+/_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/time/_oneOf/1/_oneOf/2/hasBeginningDateTime		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
+/_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/time/_oneOf/1/_oneOf/2/hasEndDateTime		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/operator		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/operator/_oneOf/1/_anyOf/1/schema:roleName		https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/operator/_oneOf/1/_anyOf/1/schema:contributor		https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
@@ -245,6 +249,10 @@ path	@id	schema
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/properties/model		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/properties/serialNumber		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/properties/commissionDate		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
+/_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/properties/commissionDate/_oneOf/1/_oneOf/1/inXSDDateTime		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
+/_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/properties/commissionDate/_oneOf/1/_oneOf/1/inXSDDate		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
+/_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/properties/commissionDate/_oneOf/1/_oneOf/1/inXSDgYearMonth		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
+/_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/properties/commissionDate/_oneOf/1/_oneOf/1/inXSDgYear		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/properties/location		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/properties/usedIn		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml
 /_then/features/_then/properties/usedIn/_oneOf/1/_oneOf/1/properties/instrument/_oneOf/2/id		/github/workspace/build/annotated/bbr/geosci/gsmSpecimen/schema.yaml

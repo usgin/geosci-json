@@ -2792,7 +2792,7 @@
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
     "gsmGeologicTimeSchema": {
-      "description": "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary\npoints, TemporalReferenceSystem, plus the GeologicAgeDetails extension\n(which contributes GeologicEventDescription, the concrete description\nclass used by GeologicEvent.gaEventDescription).\n\nValidates either a single Feature (dispatched by `featureType` to one of: GlobalStratotypePoint, GlobalStratotypeSection, StratigraphicPoint, StratigraphicSection) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+      "description": "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary\npoints, TemporalReferenceSystem, plus the GeologicAgeDetails extension\n(which contributes GeologicEventDescription, the concrete description\nclass used by GeologicEvent.gaEventDescription). The dispatcher\nadditionally exposes two hand-curated featureTypes \u2014\nGeochronologicEra and GeochronologicBoundary \u2014 that align to W3C\nOWL-Time (https://www.w3.org/TR/owl-time/) per Cox & Richard 2015\n\"A formal model for the geologic timescale and GSSP\": Era \u2261\ntime:ProperInterval and Boundary \u2261 time:Instant, with start/end\nmapping to time:hasBeginning/time:hasEnd and member to\ntime:intervalContains. Both reference the existing XMI-derived\nStratigraphicPoint / StratigraphicSection anchors for the\nrock-record link.\n\nValidates either a single Feature (dispatched by `featureType` to one of: GeochronologicEra, GeochronologicBoundary, GlobalStratotypePoint, GlobalStratotypeSection, StratigraphicPoint, StratigraphicSection) or a FeatureCollection whose `features[]` items are dispatched the same way.",
       "if": {
         "type": "object",
         "required": [
@@ -2830,6 +2830,40 @@
       "$defs": {
         "_FeatureDispatch": {
           "allOf": [
+            {
+              "if": {
+                "required": [
+                  "featureType"
+                ],
+                "properties": {
+                  "featureType": {
+                    "enum": [
+                      "GeochronologicEra"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaGeochronologicEra"
+              }
+            },
+            {
+              "if": {
+                "required": [
+                  "featureType"
+                ],
+                "properties": {
+                  "featureType": {
+                    "enum": [
+                      "GeochronologicBoundary"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaGeochronologicBoundary"
+              }
+            },
             {
               "if": {
                 "required": [
@@ -2907,6 +2941,8 @@
                   "properties": {
                     "featureType": {
                       "enum": [
+                        "GeochronologicEra",
+                        "GeochronologicBoundary",
                         "GlobalStratotypePoint",
                         "GlobalStratotypeSection",
                         "StratigraphicPoint",
@@ -2922,33 +2958,43 @@
         },
         "GeochronologicBoundary": {
           "$anchor": "GeochronologicBoundary",
-          "description": "A GeochronologicBoundary is a boundary between two geochronologic time periods.",
+          "description": "A point in geologic time defined by a stratotype. Aligns to time:Instant from W3C OWL-Time (https://www.w3.org/TR/owl-time/). Cox & Richard 2015, 'A formal model for the geologic timescale and GSSP': the boundary's instant is anchored to the rock record via the `stratotype` property, which references a StratigraphicPoint (typically a GSSP if ratified by ICS).",
           "allOf": [
             {
-              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEraBoundary"
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/feature"
             },
             {
               "type": "object",
               "properties": {
-                "stratotype": {
-                  "oneOf": [
-                    {
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "stratotype": {
+                      "description": "The StratigraphicPoint that defines this boundary in the rock record. Inline Feature or by-reference SCLinkObject.",
                       "oneOf": [
                         {
-                          "allOf": [
-                            {
-                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject"
-                            }
-                          ]
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject"
                         },
                         {
                           "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaStratigraphicPoint"
                         }
                       ]
                     }
-                  ],
-                  "description": "The property stratotype is an association between a GeochronologicBoundary and a StratigraphicPoint that are associated with the boundary. A GeochronologicBoundary can be associated with more than one StratigraphicPoints, but only one may have GSSP ratified status. The others are proposed equivalents.",
-                  "nullable": true
+                  },
+                  "required": [
+                    "stratotype"
+                  ]
+                }
+              }
+            },
+            {
+              "required": [
+                "featureType",
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
                 }
               }
             }
@@ -2956,42 +3002,93 @@
         },
         "GeochronologicEra": {
           "$anchor": "GeochronologicEra",
-          "description": "A GeochronologicEra is a period of time between two GeochronologicBoundaries. The association of a GeochronologicEra with a stratotype is optional. In the GSSP approach recommended by ICS for the Global Geologic Timescale, Unit Stratotypes are not used. Rather, the association of an era with geologic units and sections is indirect, via the association of an era with boundaries, which are in turn tied to stratotype points, which occur within host stratotype sections.",
+          "description": "A named interval of geologic time (Eon, Era, Period, Epoch, Age, biozone, etc.). Aligns to time:ProperInterval from W3C OWL-Time (https://www.w3.org/TR/owl-time/). Cox & Richard 2015, 'A formal model for the geologic timescale and GSSP': `start` / `end` map to time:hasBeginning / time:hasEnd (both linking to GeochronologicBoundary \u2261 time:Instant); `member[]` expresses sub-era containment (Allen time:intervalContains). The optional `stratotype` anchors the era to a defining rock section.",
           "allOf": [
             {
-              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEra"
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/feature"
             },
             {
               "type": "object",
               "properties": {
-                "rank": {
-                  "oneOf": [
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaGeochronologicEraRank"
-                    }
-                  ],
-                  "description": "The property rank:GeochronologicEraRank contains a term from a vocabulary describing the rank of the time period (e.g., eon, era, period, stage).",
-                  "nullable": true
-                },
-                "stratotype": {
-                  "oneOf": [
-                    {
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "rank": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "Chronostratigraphic / geochronologic rank (URI from the ICS chart vocabulary or equivalent: Eon, Era, Period, Epoch, Age, biozone, etc.)."
+                    },
+                    "start": {
+                      "description": "Lower boundary of this era (time:hasBeginning). Inline GeochronologicBoundary Feature or by-reference SCLinkObject.",
                       "oneOf": [
                         {
-                          "allOf": [
-                            {
-                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject"
-                            }
-                          ]
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject"
+                        },
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaGeochronologicBoundary"
+                        }
+                      ]
+                    },
+                    "end": {
+                      "description": "Upper boundary of this era (time:hasEnd). Inline GeochronologicBoundary Feature or by-reference SCLinkObject.",
+                      "oneOf": [
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject"
+                        },
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaGeochronologicBoundary"
+                        }
+                      ]
+                    },
+                    "member": {
+                      "description": "Sub-eras contained within this era (time:intervalContains). Array of by-reference links or inline GeochronologicEra Features.",
+                      "oneOf": [
+                        {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject"
+                              },
+                              {
+                                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaGeochronologicEra"
+                              }
+                            ]
+                          },
+                          "uniqueItems": true
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "stratotype": {
+                      "description": "Defining stratigraphic section for this era (the rock-record anchor). Inline StratigraphicSection Feature or by-reference SCLinkObject.",
+                      "oneOf": [
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject"
                         },
                         {
                           "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmExtendedGeologyCollection/schema-oas3.0.json#/x-defs/gsmGeologicTimeSchemaStratigraphicSection"
                         }
-                      ]
+                      ],
+                      "nullable": true
                     }
-                  ],
-                  "description": "The property stratotype is an association between a GeochronologicEra and StratigraphicSection that describes a type section that names the physical location or outcrop of a particular reference exposure of a stratigraphic sequence or stratigraphic boundary. A unit stratotype is the agreed reference point for a particular stratigraphic unit and a boundary stratotype is the reference for a particular boundary between strata (Wikipedia).",
-                  "nullable": true
+                  },
+                  "required": [
+                    "rank",
+                    "start",
+                    "end"
+                  ]
+                }
+              }
+            },
+            {
+              "required": [
+                "featureType",
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
                 }
               }
             }

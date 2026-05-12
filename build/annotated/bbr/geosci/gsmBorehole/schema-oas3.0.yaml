@@ -2155,8 +2155,31 @@ $defs:
         nullable: true
       dateOfDrilling:
         oneOf:
-        - allOf:
+        - oneOf:
           - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - type: object
+            properties:
+              hasBeginning:
+                type: object
+              hasEnd:
+                type: object
+            required:
+            - hasBeginning
+            - hasEnd
+          - type: object
+            properties:
+              hasBeginningDateTime:
+                type: string
+              hasEndDateTime:
+                type: string
+            required:
+            - hasBeginningDateTime
+            - hasEndDateTime
+          - type: array
+            minItems: 2
+            maxItems: 2
+            items:
+              type: string
         description: The property dateOfDrilling:TM_Period describes the time period
           during which drilling of the borehole occurred.
         nullable: true

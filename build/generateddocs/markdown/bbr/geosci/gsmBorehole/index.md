@@ -131,6 +131,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 ## Examples
 
+- [borehole_complex.json](examples/borehole_complex.json)
 - [borehole_simple.json](examples/borehole_simple.json)
 - [examplegsmBoreholeMinimal.json](examples/examplegsmBoreholeMinimal.json)
 - [origin_position_simple.json](examples/origin_position_simple.json)
@@ -144,6 +145,334 @@ See [examples.yaml](examples.yaml) for the full manifest.
 - Resolver: [tools/resolve_geosci_schema.py](../../tools/resolve_geosci_schema.py).
 
 ## Examples
+
+### borehole complex
+Example instance: borehole_complex
+#### json
+```json
+{
+  "type": "Feature",
+  "featureType": "Borehole",
+  "id": "ga-eromanga-complex",
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [132.334, -25.902, 27.9],
+      [132.334, -25.9025, -30.65],
+      [132.334, -25.903, -215.6]
+    ]
+  },
+  "place": null,
+  "time": null,
+  "properties": {
+    "referenceLocation": {
+      "type": "Feature",
+      "featureType": "OriginPosition",
+      "id": "ga-eromanga-op",
+      "geometry": {"type": "Point", "coordinates": [132.334, -25.902]},
+      "place": null,
+      "time": null,
+      "properties": {
+        "elevation": {"href": "http://data.geoscience.gov.au/borehole/ga-eromanga-op/elevation", "title": "27.9 m AHD"},
+        "relatedBorehole": [
+          {"href": "http://data.geoscience.gov.au/borehole/ga-eromanga-complex", "title": "BMR Eromanga 1"}
+        ]
+      }
+    },
+    "indexData": {
+      "operator": {
+        "href": "http://linked.data.gov.au/org/geoscience-australia",
+        "title": "Geoscience Australia"
+      },
+      "driller": {
+        "href": "http://linked.data.gov.au/org/leander-drilling",
+        "title": "Leander Drilling"
+      },
+      "dateOfDrilling": ["1969-05-04", "1969-05-06"],
+      "startPoint": "http://resource.geoscience.gov.au/classifier/ga/locationType/onshore",
+      "inclinationType": "http://resource.geoscience.gov.au/classifier/ga/inclinationtype/vertical",
+      "purpose": [
+        "http://inspire.ec.europa.eu/codelist/BoreholePurposeValue/geologicalSurvey"
+      ],
+      "boreholeLength": {
+        "type": "Quantity",
+        "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+        "label": "borehole length",
+        "uom": {"code": "m"},
+        "value": 243.5
+      }
+    },
+    "logElement": [
+      {
+        "type": "Feature",
+        "featureType": "BoreholeInterval",
+        "id": "ga-eromanga-interval-1",
+        "geometry": null,
+        "place": null,
+        "time": null,
+        "properties": {
+          "observationMethod": [
+            {
+              "type": "Category",
+              "definition": "http://resource.geosciml.org/classifierScheme/cgi/featureobservationmethod",
+              "label": "core",
+              "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/core"
+            }
+          ],
+          "specification": {
+            "href": "http://resource.geoscience.gov.au/geologicunit/hooray-sandstone",
+            "title": "Hooray Sandstone"
+          },
+          "mappedIntervalBegin": {
+            "type": "Quantity",
+            "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+            "label": "interval begin",
+            "uom": {"code": "m"},
+            "value": 0.0
+          },
+          "mappedIntervalEnd": {
+            "type": "Quantity",
+            "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+            "label": "interval end",
+            "uom": {"code": "m"},
+            "value": 80.5
+          },
+          "parentBorehole": {
+            "href": "http://data.geoscience.gov.au/borehole/ga-eromanga-complex",
+            "title": "BMR Eromanga 1"
+          }
+        }
+      },
+      {
+        "type": "Feature",
+        "featureType": "BoreholeInterval",
+        "id": "ga-eromanga-interval-2",
+        "geometry": null,
+        "place": null,
+        "time": null,
+        "properties": {
+          "observationMethod": [
+            {
+              "type": "Category",
+              "definition": "http://resource.geosciml.org/classifierScheme/cgi/featureobservationmethod",
+              "label": "core",
+              "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/core"
+            }
+          ],
+          "specification": {
+            "href": "http://resource.geoscience.gov.au/geologicunit/eromanga-basin",
+            "title": "Eromanga Basin"
+          },
+          "mappedIntervalBegin": {
+            "type": "Quantity",
+            "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+            "label": "interval begin",
+            "uom": {"code": "m"},
+            "value": 80.5
+          },
+          "mappedIntervalEnd": {
+            "type": "Quantity",
+            "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+            "label": "interval end",
+            "uom": {"code": "m"},
+            "value": 243.5
+          },
+          "parentBorehole": {
+            "href": "http://data.geoscience.gov.au/borehole/ga-eromanga-complex",
+            "title": "BMR Eromanga 1"
+          }
+        }
+      }
+    ]
+  }
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/context.jsonld",
+  "type": "Feature",
+  "featureType": "Borehole",
+  "id": "ga-eromanga-complex",
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        132.334,
+        -25.902,
+        27.9
+      ],
+      [
+        132.334,
+        -25.9025,
+        -30.65
+      ],
+      [
+        132.334,
+        -25.903,
+        -215.6
+      ]
+    ]
+  },
+  "place": null,
+  "time": null,
+  "properties": {
+    "referenceLocation": {
+      "type": "Feature",
+      "featureType": "OriginPosition",
+      "id": "ga-eromanga-op",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          132.334,
+          -25.902
+        ]
+      },
+      "place": null,
+      "time": null,
+      "properties": {
+        "elevation": {
+          "href": "http://data.geoscience.gov.au/borehole/ga-eromanga-op/elevation",
+          "title": "27.9 m AHD"
+        },
+        "relatedBorehole": [
+          {
+            "href": "http://data.geoscience.gov.au/borehole/ga-eromanga-complex",
+            "title": "BMR Eromanga 1"
+          }
+        ]
+      }
+    },
+    "indexData": {
+      "operator": {
+        "href": "http://linked.data.gov.au/org/geoscience-australia",
+        "title": "Geoscience Australia"
+      },
+      "driller": {
+        "href": "http://linked.data.gov.au/org/leander-drilling",
+        "title": "Leander Drilling"
+      },
+      "dateOfDrilling": [
+        "1969-05-04",
+        "1969-05-06"
+      ],
+      "startPoint": "http://resource.geoscience.gov.au/classifier/ga/locationType/onshore",
+      "inclinationType": "http://resource.geoscience.gov.au/classifier/ga/inclinationtype/vertical",
+      "purpose": [
+        "http://inspire.ec.europa.eu/codelist/BoreholePurposeValue/geologicalSurvey"
+      ],
+      "boreholeLength": {
+        "type": "Quantity",
+        "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+        "label": "borehole length",
+        "uom": {
+          "code": "m"
+        },
+        "value": 243.5
+      }
+    },
+    "logElement": [
+      {
+        "type": "Feature",
+        "featureType": "BoreholeInterval",
+        "id": "ga-eromanga-interval-1",
+        "geometry": null,
+        "place": null,
+        "time": null,
+        "properties": {
+          "observationMethod": [
+            {
+              "type": "Category",
+              "definition": "http://resource.geosciml.org/classifierScheme/cgi/featureobservationmethod",
+              "label": "core",
+              "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/core"
+            }
+          ],
+          "specification": {
+            "href": "http://resource.geoscience.gov.au/geologicunit/hooray-sandstone",
+            "title": "Hooray Sandstone"
+          },
+          "mappedIntervalBegin": {
+            "type": "Quantity",
+            "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+            "label": "interval begin",
+            "uom": {
+              "code": "m"
+            },
+            "value": 0.0
+          },
+          "mappedIntervalEnd": {
+            "type": "Quantity",
+            "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+            "label": "interval end",
+            "uom": {
+              "code": "m"
+            },
+            "value": 80.5
+          },
+          "parentBorehole": {
+            "href": "http://data.geoscience.gov.au/borehole/ga-eromanga-complex",
+            "title": "BMR Eromanga 1"
+          }
+        }
+      },
+      {
+        "type": "Feature",
+        "featureType": "BoreholeInterval",
+        "id": "ga-eromanga-interval-2",
+        "geometry": null,
+        "place": null,
+        "time": null,
+        "properties": {
+          "observationMethod": [
+            {
+              "type": "Category",
+              "definition": "http://resource.geosciml.org/classifierScheme/cgi/featureobservationmethod",
+              "label": "core",
+              "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/core"
+            }
+          ],
+          "specification": {
+            "href": "http://resource.geoscience.gov.au/geologicunit/eromanga-basin",
+            "title": "Eromanga Basin"
+          },
+          "mappedIntervalBegin": {
+            "type": "Quantity",
+            "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+            "label": "interval begin",
+            "uom": {
+              "code": "m"
+            },
+            "value": 80.5
+          },
+          "mappedIntervalEnd": {
+            "type": "Quantity",
+            "definition": "http://www.opengis.net/def/property/OGC/0/SamplingDepth",
+            "label": "interval end",
+            "uom": {
+              "code": "m"
+            },
+            "value": 243.5
+          },
+          "parentBorehole": {
+            "href": "http://data.geoscience.gov.au/borehole/ga-eromanga-complex",
+            "title": "BMR Eromanga 1"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+#### ttl
+```ttl
+
+
+```
+
 
 ### borehole simple
 Example instance: borehole_simple
@@ -483,8 +812,37 @@ $defs:
       dateOfDrilling:
         oneOf:
         - type: 'null'
-        - $ref: '#/$defs/SCLinkObject'
-          $comment: "External ISO 19108 TM_Period \u2014 by-reference link"
+        - oneOf:
+          - $ref: '#/$defs/SCLinkObject'
+          - type: object
+            properties:
+              hasBeginning:
+                type: object
+              hasEnd:
+                type: object
+            required:
+            - hasBeginning
+            - hasEnd
+          - type: object
+            properties:
+              hasBeginningDateTime:
+                type: string
+              hasEndDateTime:
+                type: string
+            required:
+            - hasBeginningDateTime
+            - hasEndDateTime
+          - type: array
+            minItems: 2
+            maxItems: 2
+            items:
+              type: string
+          $comment: ISO 19108 TM_Period aligned to W3C OWL-Time time:ProperInterval
+            (https://www.w3.org/TR/owl-time/#time:ProperInterval). Canonical encoding
+            is the OWL-Time object with `hasBeginning`/`hasEnd` (or the shortcut `hasBeginningDateTime`/`hasEndDateTime`).
+            A two-element [startDate, endDate] array is accepted as a convenience
+            alias (OGC code-sprint convention) but is not OWL-Time-canonical; consumers
+            should prefer the object form.
         description: The property dateOfDrilling:TM_Period describes the time period
           during which drilling of the borehole occurred.
       startPoint:

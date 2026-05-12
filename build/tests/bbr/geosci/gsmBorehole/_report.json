@@ -2,7 +2,7 @@
   "title": "Validation report for usgin.bbr.geosci.gsmBorehole - gsmBorehole",
   "bblockName": "gsmBorehole",
   "bblockId": "usgin.bbr.geosci.gsmBorehole",
-  "generated": "2026-05-12T23:09:02.612687+00:00",
+  "generated": "2026-05-12T23:26:09.279867+00:00",
   "result": false,
   "items": [
     {
@@ -23,7 +23,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examples/borehole_simple.json from examples"
+              "message": "Using examples/borehole_complex.json from examples"
             },
             {
               "op": "jsonld-uplift",
@@ -78,7 +78,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examples/examplegsmBoreholeMinimal.json from examples"
+              "message": "Using examples/borehole_simple.json from examples"
             },
             {
               "op": "jsonld-uplift",
@@ -133,7 +133,7 @@
           "entries": [
             {
               "isError": false,
-              "message": "Using examples/origin_position_simple.json from examples"
+              "message": "Using examples/examplegsmBoreholeMinimal.json from examples"
             },
             {
               "op": "jsonld-uplift",
@@ -169,12 +169,67 @@
           ]
         }
       ]
+    },
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/bbr/geosci/gsmBorehole/example_4_1.json",
+        "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmBorehole/example_4_1.json",
+        "exampleIndex": 4,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": false,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using examples/origin_position_simple.json from examples"
+            },
+            {
+              "op": "jsonld-uplift",
+              "isError": false,
+              "message": "JSON-LD context is present - uplifting"
+            },
+            {
+              "op": "jsonld-create",
+              "filename": "example_4_1.jsonld",
+              "isError": false,
+              "message": "Output JSON-LD example_4_1.jsonld created"
+            },
+            {
+              "op": "ttl-create",
+              "empty": true,
+              "filename": "example_4_1.ttl",
+              "size": 0,
+              "isError": true,
+              "message": "**Empty** output Turtle example_4_1.ttl created"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
     }
   ],
   "globalErrors": {},
   "counts": {
-    "total": 3,
+    "total": 4,
     "passed": 0,
-    "failed": 3
+    "failed": 4
   }
 }
