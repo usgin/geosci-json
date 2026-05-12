@@ -4,7 +4,7 @@ GeoSciML 4.1 building block `gsmscimlBasic`. `«FeatureType»` classes are encod
 
 Source UML packages: `GeoSciMLBasic`, `Collection`, `GSML_DataTypes`, `GeologicEvent`, `GeologicStructure`, `GeologyBasic`, `Geomorphology`.
 
-Contains 13 feature types, 20 data types, 22 code lists, 1 union.
+Contains 13 feature types, 21 data types, 22 code lists, 1 union.
 
 ## Classes in this BB
 
@@ -66,6 +66,7 @@ Contains 13 feature types, 20 data types, 22 code lists, 1 union.
 | `RockMaterial` | «DataType» | plain JSON object |
 | `ShearDisplacementStructure` | «FeatureType» | JSON-FG Feature |
 | `ShearDisplacementStructureAbstractDescription` | «DataType» | plain JSON object |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -406,6 +407,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -451,6 +454,7 @@ Branches (`oneOf`):
 
 - `https://geojson.org/schema/Geometry.json`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json`

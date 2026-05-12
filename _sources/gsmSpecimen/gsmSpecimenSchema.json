@@ -1,8 +1,172 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.usgin.org/geosci-json/gsmSpecimen/gsmSpecimenSchema.json",
-  "description": "LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and\nlaboratory-analysis observation types, Geochronology results.",
+  "description": "LaboratoryAnalysis-Specimen package: GeologicSpecimen, sampling and\nlaboratory-analysis observation types, Geochronology results.\n\nValidates either a single Feature (dispatched by `featureType` to one of: AnalyticalInstrument, AnalyticalProcess, AnalyticalSession, GeochronologicInterpretation, GeologicSamplingMethod, Image, ReferenceSpecimen) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "if": {
+    "type": "object",
+    "required": [
+      "type"
+    ],
+    "properties": {
+      "type": {
+        "const": "FeatureCollection"
+      }
+    }
+  },
+  "then": {
+    "allOf": [
+      {
+        "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+      },
+      {
+        "type": "object",
+        "properties": {
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/_FeatureDispatch"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "else": {
+    "$ref": "#/$defs/_FeatureDispatch"
+  },
   "$defs": {
+    "_FeatureDispatch": {
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "AnalyticalInstrument"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#AnalyticalInstrument"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "AnalyticalProcess"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#AnalyticalProcess"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "AnalyticalSession"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#AnalyticalSession"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "GeochronologicInterpretation"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#GeochronologicInterpretation"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "GeologicSamplingMethod"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#GeologicSamplingMethod"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "Image"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#Image"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "ReferenceSpecimen"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#ReferenceSpecimen"
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "required": [
+                "featureType"
+              ],
+              "properties": {
+                "featureType": {
+                  "enum": [
+                    "AnalyticalInstrument",
+                    "AnalyticalProcess",
+                    "AnalyticalSession",
+                    "GeochronologicInterpretation",
+                    "GeologicSamplingMethod",
+                    "Image",
+                    "ReferenceSpecimen"
+                  ]
+                }
+              }
+            }
+          },
+          "then": false
+        }
+      ]
+    },
     "AnalyticalInstrument": {
       "$anchor": "AnalyticalInstrument",
       "description": "The analytical instrument is the category of instrument used to perform an analytical measurement or observation.",

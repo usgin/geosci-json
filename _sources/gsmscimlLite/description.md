@@ -4,7 +4,7 @@ GeoSciML 4.1 building block `gsmscimlLite`. `«FeatureType»` classes are encode
 
 Source UML packages: `GeoSciMLLite`.
 
-Contains 7 feature types.
+Contains 7 feature types, 1 data type.
 
 ## Classes in this BB
 
@@ -17,6 +17,7 @@ Contains 7 feature types.
 | `GeomorphologicUnitView` | «FeatureType» | JSON-FG Feature |
 | `ShearDisplacementStructureView` | «FeatureType» | JSON-FG Feature |
 | `SiteObservationView` | «FeatureType» | JSON-FG Feature |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -222,10 +223,13 @@ Properties (own; inherited properties listed in supertype's BB):
 | `shape` | GeoJSON `Geometry` | 0..1 | The property shape:GM_Object contains the geometry of the observation site. |
 | `any` | (oneOf — see schema) | 0..1 | A data provider can add an arbitrary number of extra properties, as long as the instance is conformant to GML Simple … |
 
+### `_FeatureDispatch`
+
 ## External dependencies
 
 - `https://geojson.org/schema/Geometry.json`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 
 ## Examples
 

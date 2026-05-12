@@ -1,8 +1,172 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.usgin.org/geosci-json/gsmscimlLite/gsmscimlLiteSchema.json",
-  "description": "GeoSciML 4.1 Lite profile. Flattened \"View\" classes that summarise\nBasic/Extension content for lightweight services (GeologicUnitView,\nContactView, ShearDisplacementStructureView, BoreholeView, etc.).",
+  "description": "GeoSciML 4.1 Lite profile. Flattened \"View\" classes that summarise\nBasic/Extension content for lightweight services (GeologicUnitView,\nContactView, ShearDisplacementStructureView, BoreholeView, etc.).\n\nValidates either a single Feature (dispatched by `featureType` to one of: BoreholeView, ContactView, GeologicSpecimenView, GeologicUnitView, GeomorphologicUnitView, ShearDisplacementStructureView, SiteObservationView) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "if": {
+    "type": "object",
+    "required": [
+      "type"
+    ],
+    "properties": {
+      "type": {
+        "const": "FeatureCollection"
+      }
+    }
+  },
+  "then": {
+    "allOf": [
+      {
+        "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+      },
+      {
+        "type": "object",
+        "properties": {
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/_FeatureDispatch"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "else": {
+    "$ref": "#/$defs/_FeatureDispatch"
+  },
   "$defs": {
+    "_FeatureDispatch": {
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "BoreholeView"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#BoreholeView"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "ContactView"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#ContactView"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "GeologicSpecimenView"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#GeologicSpecimenView"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "GeologicUnitView"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#GeologicUnitView"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "GeomorphologicUnitView"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#GeomorphologicUnitView"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "ShearDisplacementStructureView"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#ShearDisplacementStructureView"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "SiteObservationView"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#SiteObservationView"
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "required": [
+                "featureType"
+              ],
+              "properties": {
+                "featureType": {
+                  "enum": [
+                    "BoreholeView",
+                    "ContactView",
+                    "GeologicSpecimenView",
+                    "GeologicUnitView",
+                    "GeomorphologicUnitView",
+                    "ShearDisplacementStructureView",
+                    "SiteObservationView"
+                  ]
+                }
+              }
+            }
+          },
+          "then": false
+        }
+      ]
+    },
     "BoreholeView": {
       "$anchor": "BoreholeView",
       "description": "BoreholeView is a simplified view of a GeoSciML Borehole. In GeoSciML terms, this will be an instance of a Borehole feature with key property values summarised as labels (unconstrained character strings) or arbitrarily selected classifiers to be used for thematic mapping purposes. The latter are the properties suffixed with “_uri” and will contain URIs referring to controlled concepts in published vocabularies.",

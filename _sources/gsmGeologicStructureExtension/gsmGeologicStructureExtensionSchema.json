@@ -1,8 +1,156 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.usgin.org/geosci-json/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json",
-  "description": "Detailed structural-geology types extending the Basic structure\nhierarchy: FoldDescription, FoliationDescription, FoldSystem, Joint,\nFracture, DisplacementEvent, DisplacementValue, Lineation, Layering,\nNonDirectionalStructure, etc.",
+  "description": "Detailed structural-geology types extending the Basic structure\nhierarchy: FoldDescription, FoliationDescription, FoldSystem, Joint,\nFracture, DisplacementEvent, DisplacementValue, Lineation, Layering,\nNonDirectionalStructure, etc.\n\nValidates either a single Feature (dispatched by `featureType` to one of: DisplacementEvent, FoldSystem, Joint, Layering, Lineation, NonDirectionalStructure) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "if": {
+    "type": "object",
+    "required": [
+      "type"
+    ],
+    "properties": {
+      "type": {
+        "const": "FeatureCollection"
+      }
+    }
+  },
+  "then": {
+    "allOf": [
+      {
+        "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+      },
+      {
+        "type": "object",
+        "properties": {
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/_FeatureDispatch"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "else": {
+    "$ref": "#/$defs/_FeatureDispatch"
+  },
   "$defs": {
+    "_FeatureDispatch": {
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "DisplacementEvent"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#DisplacementEvent"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "FoldSystem"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#FoldSystem"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "Joint"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#Joint"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "Layering"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#Layering"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "Lineation"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#Lineation"
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "featureType"
+            ],
+            "properties": {
+              "featureType": {
+                "const": "NonDirectionalStructure"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#NonDirectionalStructure"
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "required": [
+                "featureType"
+              ],
+              "properties": {
+                "featureType": {
+                  "enum": [
+                    "DisplacementEvent",
+                    "FoldSystem",
+                    "Joint",
+                    "Layering",
+                    "Lineation",
+                    "NonDirectionalStructure"
+                  ]
+                }
+              }
+            }
+          },
+          "then": false
+        }
+      ]
+    },
     "ContactDescription": {
       "$anchor": "ContactDescription",
       "description": "The ContactDescription provides extended descriptive properties of a geologic contact. If the contact type is ChronostratigraphicBoundary, it can be associated with a geochronologic (i.e., time zone) boundary that may correlate with it.",

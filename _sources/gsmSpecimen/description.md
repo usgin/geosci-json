@@ -4,7 +4,7 @@ GeoSciML 4.1 building block `gsmSpecimen`. `«FeatureType»` classes are encoded
 
 Source UML packages: `LaboratoryAnalysis-Specimen`, `Geochronology`, `GeologicSpecimen`, `LaboratoryAnalysis`.
 
-Contains 7 feature types, 2 data types, 7 code lists.
+Contains 7 feature types, 3 data types, 7 code lists.
 
 ## Classes in this BB
 
@@ -26,6 +26,7 @@ Contains 7 feature types, 2 data types, 7 code lists.
 | `IsotopicSystemName` | «CodeList» | URI codelist (`format: uri`) |
 | `ReferenceSpecimen` | «FeatureType» | JSON-FG Feature |
 | `StatisticalMethodTerm` | «CodeList» | URI codelist (`format: uri`) |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -135,6 +136,8 @@ Properties (own; inherited properties listed in supertype's BB):
 | `referenceDescription` | (oneOf — see schema) | 0..1 | The property referenceDescription is an association between a ReferenceSpecimen and a CIT:CI_Citation that references… |
 | `usedIn` | (oneOf — see schema) | 0..1 | The property usedIn is an association between a ReferenceSpecimen and an AnalyticalSession in which the reference spe… |
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -153,6 +156,7 @@ Properties (own; inherited properties listed in supertype's BB):
 - `https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json`
 - `https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.json`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 
 ## Examples
 

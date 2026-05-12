@@ -4,7 +4,7 @@ GeoSciML 4.1 building block `gsmBorehole`. `«FeatureType»` classes are encoded
 
 Source UML packages: `Borehole`.
 
-Contains 3 feature types, 2 data types, 4 code lists.
+Contains 3 feature types, 3 data types, 4 code lists.
 
 ## Classes in this BB
 
@@ -19,6 +19,7 @@ Contains 3 feature types, 2 data types, 4 code lists.
 | `BoreholeStartPointCode` | «CodeList» | URI codelist (`format: uri`) |
 | `DrillingDetails` | «DataType» | plain JSON object |
 | `OriginPosition` | «FeatureType» | JSON-FG Feature |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -94,6 +95,8 @@ Properties (own; inherited properties listed in supertype's BB):
 | `elevation` | (oneOf — see schema) | 0..1 | The elevation:DirectPosition property is a compromise approach to supply elevation explicitly for location; this is t… |
 | `relatedBorehole` | (oneOf — see schema) | 0..1 | The hole that has this collar for its start point |
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -111,6 +114,7 @@ Properties (own; inherited properties listed in supertype's BB):
 - `https://geojson.org/schema/Geometry.json`
 - `https://geojson.org/schema/Point.json`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
 

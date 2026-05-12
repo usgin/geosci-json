@@ -4,7 +4,7 @@ GeoSciML 4.1 building block `gsmGeologicStructureExtension`. `«FeatureType»` c
 
 Source UML packages: `GeologicStructureDetails`.
 
-Contains 7 feature types, 8 data types, 5 code lists.
+Contains 7 feature types, 9 data types, 5 code lists.
 
 ## Classes in this BB
 
@@ -30,6 +30,7 @@ Contains 7 feature types, 8 data types, 5 code lists.
 | `SeparationValue` | «DataType» | plain JSON object |
 | `ShearDisplacementStructureDescription` | «DataType» | plain JSON object |
 | `SlipComponents` | «DataType» | plain JSON object |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -232,6 +233,8 @@ Properties (own; inherited properties listed in supertype's BB):
 | `horizontalSlip` | (oneOf — see schema) | 0..1 | The property horizontalSlip:GSML_Vector contains a slip component that is horizontal and parallel to strike of the fa… |
 | `throw` | (oneOf — see schema) | 0..1 | The property throw:GSML_Vector contains the vertical component of slip. |
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -259,6 +262,7 @@ Properties (own; inherited properties listed in supertype's BB):
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicStructure`
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#RockMaterial`
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#ShearDisplacementStructureAbstractDescription`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Category.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json`
 

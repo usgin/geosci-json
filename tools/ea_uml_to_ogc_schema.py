@@ -1071,6 +1071,83 @@ def dispatchable_fts(loader: EaXmiLoader, packages: set[str]) -> list[str]:
     return sorted(out)
 
 
+def build_merged_schema(
+    bb_name: str,
+    library_schema: dict,
+    ft_names: list[str],
+) -> dict:
+    """Combine the library `$defs` and the Feature / FeatureCollection
+    dispatchers into a single schema. The root discriminates on `type`:
+      - `type == "FeatureCollection"`: validate as json-fg FeatureCollection
+        with `features.items` dispatched by featureType via the internal
+        `_FeatureDispatch` helper def.
+      - otherwise: treat as a single Feature and validate via the same
+        `_FeatureDispatch` helper.
+    All class anchors live in `$defs` (alongside `_FeatureDispatch` and the
+    local `SCLinkObject`), so the if/then branches can use local `#FT`
+    anchor refs."""
+    # Build the if/then dispatcher chain. Refs are local anchors (same doc).
+    branches: list[dict] = []
+    for ft in ft_names:
+        branches.append({
+            "if": {
+                "required": ["featureType"],
+                "properties": {"featureType": {"const": ft}},
+            },
+            "then": {"$ref": f"#{ft}"},
+        })
+    branches.append({
+        "if": {
+            "not": {
+                "required": ["featureType"],
+                "properties": {"featureType": {"enum": list(ft_names)}},
+            }
+        },
+        "then": False,
+    })
+    feature_dispatch = {"allOf": branches}
+
+    # Compose new $defs: dispatcher helper first, then all library defs.
+    merged_defs: dict = OrderedDict()
+    merged_defs["_FeatureDispatch"] = feature_dispatch
+    for name, d in library_schema.get("$defs", {}).items():
+        merged_defs[name] = d
+
+    desc = library_schema.get("description", "").rstrip()
+    desc += (
+        "\n\nValidates either a single Feature (dispatched by `featureType` "
+        f"to one of: {', '.join(ft_names)}) or a FeatureCollection whose "
+        "`features[]` items are dispatched the same way."
+    )
+
+    return OrderedDict([
+        ("$schema", "https://json-schema.org/draft/2020-12/schema"),
+        ("$id", library_schema["$id"]),  # keep same canonical URL
+        ("description", desc),
+        ("if", {
+            "type": "object",
+            "required": ["type"],
+            "properties": {"type": {"const": "FeatureCollection"}},
+        }),
+        ("then", {
+            "allOf": [
+                {"$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"},
+                {
+                    "type": "object",
+                    "properties": {
+                        "features": {
+                            "type": "array",
+                            "items": {"$ref": "#/$defs/_FeatureDispatch"},
+                        }
+                    },
+                },
+            ],
+        }),
+        ("else", {"$ref": "#/$defs/_FeatureDispatch"}),
+        ("$defs", merged_defs),
+    ])
+
+
 def build_feature_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
     """Build <bbName>FeatureSchema.json — an if/then chain on `featureType`
     routing each recognised value to the corresponding $anchor in the BB's
@@ -1420,14 +1497,29 @@ def main() -> None:
         out_dir = args.out_dir / bb_name
         out_dir.mkdir(parents=True, exist_ok=True)
 
-        schema = build_schema(loader, bb_name, pkgs, package_to_bb,
-                              swe, cats, info["description"])
+        library_schema = build_schema(loader, bb_name, pkgs, package_to_bb,
+                                      swe, cats, info["description"])
+        classes = collect_group_classes(loader, pkgs)
+        total_classes += len(classes)
+
+        # For BBs with concrete FeatureType classes, merge the library and the
+        # Feature / FeatureCollection dispatchers into a single schema that
+        # accepts either form. Pure DataType BBs emit the library as-is.
+        ft_names = dispatchable_fts(loader, pkgs)
+        if ft_names:
+            final_schema = build_merged_schema(bb_name, library_schema, ft_names)
+            total_dispatchers += 1
+            dispatcher_note = f", merged Feature+FC dispatch ({len(ft_names)} branches)"
+        else:
+            final_schema = library_schema
+            dispatcher_note = ", no FTs (library only)"
+
         (out_dir / f"{bb_name}Schema.json").write_text(
-            json.dumps(schema, indent=2, ensure_ascii=False) + "\n",
+            json.dumps(final_schema, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
         (out_dir / "schema.yaml").write_text(
-            yaml.safe_dump(schema, sort_keys=False, allow_unicode=True, width=120),
+            yaml.safe_dump(final_schema, sort_keys=False, allow_unicode=True, width=120),
             encoding="utf-8",
         )
         (out_dir / "bblock.json").write_text(
@@ -1436,39 +1528,7 @@ def main() -> None:
             encoding="utf-8",
         )
 
-        classes = collect_group_classes(loader, pkgs)
-        total_classes += len(classes)
-
-        # Dispatcher schemas: emit Feature.json + FeatureCollection.json when
-        # the BB has at least one dispatchable concrete FeatureType. Pure
-        # DataType BBs (no FTs) skip dispatcher emission.
-        ft_names = dispatchable_fts(loader, pkgs)
-        dispatcher_note = ""
-        if ft_names:
-            feat = build_feature_dispatcher(bb_name, ft_names)
-            (out_dir / f"{bb_name}FeatureSchema.json").write_text(
-                json.dumps(feat, indent=2, ensure_ascii=False) + "\n",
-                encoding="utf-8",
-            )
-            (out_dir / "featureSchema.yaml").write_text(
-                yaml.safe_dump(feat, sort_keys=False, allow_unicode=True, width=120),
-                encoding="utf-8",
-            )
-            fc = build_fc_dispatcher(bb_name, ft_names)
-            (out_dir / f"{bb_name}FeatureCollectionSchema.json").write_text(
-                json.dumps(fc, indent=2, ensure_ascii=False) + "\n",
-                encoding="utf-8",
-            )
-            (out_dir / "featureCollectionSchema.yaml").write_text(
-                yaml.safe_dump(fc, sort_keys=False, allow_unicode=True, width=120),
-                encoding="utf-8",
-            )
-            total_dispatchers += 1
-            dispatcher_note = f", {len(ft_names)} FT dispatch branches"
-        else:
-            dispatcher_note = ", no FTs (skipped Feature/FC dispatchers)"
-
-        print(f"Wrote _sources/{bb_name}/{bb_name}.json — "
+        print(f"Wrote _sources/{bb_name}/{bb_name}Schema.json — "
               f"{len(classes)} classes from {len(pkgs)} package(s){dispatcher_note}")
 
     # Profile BBs: hand-configured FC profiles composed across multiple BBs.
@@ -1489,7 +1549,7 @@ def main() -> None:
             encoding="utf-8",
         )
         nft = len(prof_info["featureTypes"])
-        print(f"Wrote _sources/{prof_name}/{prof_name}.json — FC profile, {nft} featureType branches")
+        print(f"Wrote _sources/{prof_name}/{prof_name}Schema.json — FC profile, {nft} featureType branches")
 
     print(f"\nTotal: {len(targets)} BB(s), {total_classes} class defs, "
           f"{total_dispatchers} BB(s) with dispatchers, "

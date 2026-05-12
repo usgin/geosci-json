@@ -98,17 +98,9 @@ def build_registry() -> Registry:
 # ---------------------------------------------------------------------------
 # Validation per example
 
-def _has_dispatcher(bb_dir: Path) -> bool:
-    return (bb_dir / f"{bb_dir.name}FeatureSchema.json").exists()
-
-
 def pick_schema_url(bb: str, bb_dir: Path, inst: dict) -> str:
-    if bb in PROFILE_BBS:
-        return f"{BASE}/{bb}/{bb}Schema.json"
-    if _has_dispatcher(bb_dir):
-        if isinstance(inst, dict) and inst.get("type") == "FeatureCollection":
-            return f"{BASE}/{bb}/{bb}FeatureCollectionSchema.json"
-        return f"{BASE}/{bb}/{bb}FeatureSchema.json"
+    """The unified <bb>Schema.json handles both Feature and FeatureCollection
+    via a root if/then/else on `type`. Same URL for any shape."""
     return f"{BASE}/{bb}/{bb}Schema.json"
 
 

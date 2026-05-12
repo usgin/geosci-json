@@ -4,7 +4,7 @@ GeoSciML 4.1 building block `gsmGeologicTime`. `«FeatureType»` classes are enc
 
 Source UML packages: `GeologicTime`, `GSSP`, `TemporalReferenceSystem`, `TimeScale`, `GeologicAgeDetails`.
 
-Contains 4 feature types, 9 data types, 1 code list.
+Contains 4 feature types, 10 data types, 1 code list.
 
 ## Classes in this BB
 
@@ -24,6 +24,7 @@ Contains 4 feature types, 9 data types, 1 code list.
 | `TimeOrdinalEra` | «DataType» | plain JSON object |
 | `TimeOrdinalEraBoundary` | «DataType» | plain JSON object |
 | `TimeOrdinalReferenceSystem` | «DataType» | plain JSON object |
+| `_FeatureDispatch` | «DataType» | plain JSON object |
 
 ## Class details
 
@@ -158,6 +159,8 @@ Properties (own; inherited properties listed in supertype's BB):
 | `referencePoint` | (oneOf — see schema) | 2..* | Two reference points defining the extent of the system |
 | `component` | (oneOf — see schema) | 0..1 | TimeOrdinalEra composing the TimeOrdinalReferenceSystem |
 
+### `_FeatureDispatch`
+
 ## Code lists
 
 | Class | `codeList` vocab |
@@ -168,6 +171,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 - `../gsmscimlBasic/gsmscimlBasicSchema.json#GeologicEventAbstractDescription`
 - `https://schemas.opengis.net/json-fg/feature.json`
+- `https://schemas.opengis.net/json-fg/featurecollection.json`
 - `https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json`
 
 ## Examples
