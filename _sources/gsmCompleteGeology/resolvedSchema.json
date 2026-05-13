@@ -1,0 +1,587 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/gsmCompleteGeology/gsmCompleteGeologySchema.json",
+  "description": "Complete-coverage FeatureCollection profile. Superset of\ngsmExtendedGeology that additionally dispatches every Feature-shaped\nclass across the extension BBs: relations\n(GeologicFeatureRelation, MaterialRelation), materials\n(CompoundMaterial, Mineral, OrganicMaterial, RockMaterial), and\ngeologic-time anchors (GeochronologicEra, GeochronologicBoundary,\nGlobalStratotypePoint, GlobalStratotypeSection, StratigraphicPoint,\nStratigraphicSection). The same per-Basic-FT description-slot\nnarrowing and the same relatedFeature[] anyOf constraint apply.\nUse when you want a single FC schema that accepts any GeoSciML\nFeature in the model (Basic + Extension + relations + materials +\ntime anchors) at the FC's top-level features[] array.",
+  "allOf": [
+    {
+      "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "features": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "AnthropogenicGeomorphologicFeature"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#AnthropogenicGeomorphologicFeature"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Contact"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#Contact"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stContactDescription": {
+                              "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ContactDescription"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Fold"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#Fold"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stFoldDescription": {
+                              "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldDescription"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Foliation"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#Foliation"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stFoliationDescription": {
+                              "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoliationDescription"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeologicEvent"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "gaEventDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "../gsmGeologicTime/gsmGeologicTimeSchema.json#GeologicEventDescription"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeologicUnit"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicUnit"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "gbUnitDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "../gsmGeologicUnitExtension/gsmGeologicUnitExtensionSchema.json#GeologicUnitDescription"
+                              }
+                            },
+                            "gbMaterialDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "../gsmEarthMaterial/gsmEarthMaterialSchema.json#CompoundMaterialDescription"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "MappedFeature"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#MappedFeature"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "NaturalGeomorphologicFeature"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#NaturalGeomorphologicFeature"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "ShearDisplacementStructure"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructure"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stStructureDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ShearDisplacementStructureDescription"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "DisplacementEvent"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#DisplacementEvent"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "FoldSystem"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldSystem"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Joint"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Joint"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Layering"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Layering"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Lineation"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Lineation"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "NonDirectionalStructure"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#NonDirectionalStructure"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeologicFeatureRelation"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#GeologicFeatureRelation"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "MaterialRelation"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#MaterialRelation"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "CompoundMaterial"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#CompoundMaterial"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Mineral"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmEarthMaterial/gsmEarthMaterialSchema.json#Mineral"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "OrganicMaterial"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmEarthMaterial/gsmEarthMaterialSchema.json#OrganicMaterial"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "RockMaterial"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeochronologicEra"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicTime/gsmGeologicTimeSchema.json#GeochronologicEra"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeochronologicBoundary"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicTime/gsmGeologicTimeSchema.json#GeochronologicBoundary"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GlobalStratotypePoint"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicTime/gsmGeologicTimeSchema.json#GlobalStratotypePoint"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GlobalStratotypeSection"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicTime/gsmGeologicTimeSchema.json#GlobalStratotypeSection"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "StratigraphicPoint"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicTime/gsmGeologicTimeSchema.json#StratigraphicPoint"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "StratigraphicSection"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "../gsmGeologicTime/gsmGeologicTimeSchema.json#StratigraphicSection"
+                }
+              },
+              {
+                "if": {
+                  "not": {
+                    "required": [
+                      "featureType"
+                    ],
+                    "properties": {
+                      "featureType": {
+                        "enum": [
+                          "AnthropogenicGeomorphologicFeature",
+                          "Contact",
+                          "Fold",
+                          "Foliation",
+                          "GeologicEvent",
+                          "GeologicUnit",
+                          "MappedFeature",
+                          "NaturalGeomorphologicFeature",
+                          "ShearDisplacementStructure",
+                          "DisplacementEvent",
+                          "FoldSystem",
+                          "Joint",
+                          "Layering",
+                          "Lineation",
+                          "NonDirectionalStructure",
+                          "GeologicFeatureRelation",
+                          "MaterialRelation",
+                          "CompoundMaterial",
+                          "Mineral",
+                          "OrganicMaterial",
+                          "RockMaterial",
+                          "GeochronologicEra",
+                          "GeochronologicBoundary",
+                          "GlobalStratotypePoint",
+                          "GlobalStratotypeSection",
+                          "StratigraphicPoint",
+                          "StratigraphicSection"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "then": false
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

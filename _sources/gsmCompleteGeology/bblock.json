@@ -1,8 +1,8 @@
 {
   "$schema": "metaschema.yaml",
-  "itemIdentifier": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
-  "name": "gsmExtendedGeologyCollection",
-  "abstract": "Extended-profile FeatureCollection. Accepts the full set of 9 Basic",
+  "itemIdentifier": "usgin.bbr.geosci.gsmCompleteGeology",
+  "name": "gsmCompleteGeology",
+  "abstract": "Complete-coverage FeatureCollection profile. Superset of",
   "status": "under-development",
   "dateTimeAddition": "2026-05-12T00:00:00Z",
   "itemClass": "schema",
@@ -31,6 +31,24 @@
     "GeologicUnit",
     "MappedFeature",
     "NaturalGeomorphologicFeature",
-    "ShearDisplacementStructure"
+    "ShearDisplacementStructure",
+    "DisplacementEvent",
+    "FoldSystem",
+    "Joint",
+    "Layering",
+    "Lineation",
+    "NonDirectionalStructure",
+    "GeologicFeatureRelation",
+    "MaterialRelation",
+    "CompoundMaterial",
+    "Mineral",
+    "OrganicMaterial",
+    "RockMaterial",
+    "GeochronologicEra",
+    "GeochronologicBoundary",
+    "GlobalStratotypePoint",
+    "GlobalStratotypeSection",
+    "StratigraphicPoint",
+    "StratigraphicSection"
   ]
 }

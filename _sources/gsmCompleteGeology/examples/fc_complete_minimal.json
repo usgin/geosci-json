@@ -1,0 +1,66 @@
+{
+  "$comment": "Minimal FeatureCollection demonstrating the gsmCompleteGeology profile's full dispatch coverage. Includes one feature from each major dispatch category: a Basic Feature (GeologicUnit), an Extension structure Feature (FoldSystem), a Material Feature (RockMaterial), a Geologic-time Feature (GeochronologicEra), and a Relation Feature (GeologicFeatureRelation) - 5 of the 27 supported featureType values.",
+  "type": "FeatureCollection",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/gsmCompleteGeology/gsmCompleteGeologySchema.json"
+  ],
+  "features": [
+    {
+      "type": "Feature",
+      "featureType": "GeologicUnit",
+      "id": "complete.minimal.gu.1",
+      "geometry": null,
+      "properties": {
+        "name": "Example geologic unit"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "FoldSystem",
+      "id": "complete.minimal.foldsys.1",
+      "geometry": null,
+      "properties": {
+        "name": "Example fold system"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "RockMaterial",
+      "id": "complete.minimal.rock.1",
+      "geometry": null,
+      "properties": {
+        "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/arenite"
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "GeochronologicEra",
+      "id": "complete.minimal.era.1",
+      "geometry": null,
+      "properties": {
+        "rank": "http://resource.geosciml.org/classifier/ics/ischart/Period",
+        "start": {
+          "href": "#complete.minimal.boundary.older",
+          "title": "older bounding boundary"
+        },
+        "end": {
+          "href": "#complete.minimal.boundary.younger",
+          "title": "younger bounding boundary"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "featureType": "GeologicFeatureRelation",
+      "id": "complete.minimal.rel.1",
+      "geometry": null,
+      "properties": {
+        "relationship": "http://resource.geosciml.org/classifier/cgi/geologicrelationship/overlies",
+        "relatedFeature": {
+          "href": "#complete.minimal.gu.1",
+          "title": "target: Example geologic unit"
+        }
+      }
+    }
+  ]
+}

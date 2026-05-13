@@ -184,23 +184,26 @@ profiles:
   #                                 Feature envelope (use when the source class
   #                                 is «Type», not «FeatureType»)
 
-  gsmExtendedGeologyCollection:
+  gsmExtendedGeology:
     description: |
-      Extended-profile FeatureCollection. Accepts the full set of 9 Basic
-      featureType values (AnthropogenicGeomorphologicFeature, Contact, Fold,
-      Foliation, GeologicEvent, GeologicUnit, MappedFeature,
-      NaturalGeomorphologicFeature, ShearDisplacementStructure). Each
-      Feature additionally requires its description slot(s) to be concrete
-      Extension classes where one exists; FTs without an extension
-      description slot (Anthropogenic / NaturalGeomorphologicFeature,
-      MappedFeature) are pass-through. The profile also narrows every
-      feature's relatedFeature[] items: where Basic accepts
-      `oneOf [SCLinkObject, AbstractFeatureRelation]`, the Extended profile
-      additionally requires each AbstractFeatureRelation instance to be one
-      of the two concrete subtypes from gsmGeologicRelationExtension
-      (GeologicFeatureRelation or MaterialRelation), while still allowing
-      by-reference SCLinkObject.
+      Extended-profile FeatureCollection. Functionally equivalent to OGC's
+      geosciml_extension_featurecollection.json: accepts the 9 Basic
+      featureType values (AnthropogenicGeomorphologicFeature, Contact,
+      Fold, Foliation, GeologicEvent, GeologicUnit, MappedFeature,
+      NaturalGeomorphologicFeature, ShearDisplacementStructure) AND the 6
+      Extension structure featureType values (DisplacementEvent,
+      FoldSystem, Joint, Layering, Lineation, NonDirectionalStructure).
+      Each Basic Feature additionally requires its description slot(s) to
+      be the concrete Extension class where one exists; Extension FTs are
+      already concrete and validate against their own anchors. The profile
+      also narrows every feature's relatedFeature[] items: where Basic
+      accepts `oneOf [SCLinkObject, AbstractFeatureRelation]`, the
+      Extended profile additionally requires each AbstractFeatureRelation
+      instance to be one of the concrete subtypes from
+      gsmGeologicRelationExtension (GeologicFeatureRelation or
+      MaterialRelation), while still allowing by-reference SCLinkObject.
     featureTypes:
+      # 9 Basic featureTypes with Extension description-slot narrowing
       - name: AnthropogenicGeomorphologicFeature
         ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#AnthropogenicGeomorphologicFeature
       - name: Contact
@@ -232,6 +235,20 @@ profiles:
         ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructure
         extensionConstraintsArray:
           stStructureDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ShearDisplacementStructureDescription
+      # 6 Extension structure featureTypes (matches OGC's
+      # geosciml_extension_featurecollection.json dispatch set)
+      - name: DisplacementEvent
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#DisplacementEvent
+      - name: FoldSystem
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldSystem
+      - name: Joint
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Joint
+      - name: Layering
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Layering
+      - name: Lineation
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Lineation
+      - name: NonDirectionalStructure
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#NonDirectionalStructure
     # Profile-level narrowing applied to every dispatched feature's
     # relatedFeature[] slot. Basic emits items as
     # `oneOf [SCLinkObject, AbstractFeatureRelation]`; in this Extended
@@ -243,4 +260,100 @@ profiles:
         - ../gsmBasicGeology/gsmBasicGeologySchema.json#/$defs/SCLinkObject
         - ../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#GeologicFeatureRelation
         - ../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#MaterialRelation
+
+  gsmCompleteGeology:
+    description: |
+      Complete-coverage FeatureCollection profile. Superset of
+      gsmExtendedGeology that additionally dispatches every Feature-shaped
+      class across the extension BBs: relations
+      (GeologicFeatureRelation, MaterialRelation), materials
+      (CompoundMaterial, Mineral, OrganicMaterial, RockMaterial), and
+      geologic-time anchors (GeochronologicEra, GeochronologicBoundary,
+      GlobalStratotypePoint, GlobalStratotypeSection, StratigraphicPoint,
+      StratigraphicSection). The same per-Basic-FT description-slot
+      narrowing and the same relatedFeature[] anyOf constraint apply.
+      Use when you want a single FC schema that accepts any GeoSciML
+      Feature in the model (Basic + Extension + relations + materials +
+      time anchors) at the FC's top-level features[] array.
+    featureTypes:
+      # --- 9 Basic featureTypes with Extension description narrowing ---
+      - name: AnthropogenicGeomorphologicFeature
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#AnthropogenicGeomorphologicFeature
+      - name: Contact
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#Contact
+        extensionConstraints:
+          stContactDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ContactDescription
+      - name: Fold
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#Fold
+        extensionConstraints:
+          stFoldDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldDescription
+      - name: Foliation
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#Foliation
+        extensionConstraints:
+          stFoliationDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoliationDescription
+      - name: GeologicEvent
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicEvent
+        extensionConstraintsArray:
+          gaEventDescription: ../gsmGeologicTime/gsmGeologicTimeSchema.json#GeologicEventDescription
+      - name: GeologicUnit
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#GeologicUnit
+        extensionConstraintsArray:
+          gbUnitDescription: ../gsmGeologicUnitExtension/gsmGeologicUnitExtensionSchema.json#GeologicUnitDescription
+          gbMaterialDescription: ../gsmEarthMaterial/gsmEarthMaterialSchema.json#CompoundMaterialDescription
+      - name: MappedFeature
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#MappedFeature
+      - name: NaturalGeomorphologicFeature
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#NaturalGeomorphologicFeature
+      - name: ShearDisplacementStructure
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructure
+        extensionConstraintsArray:
+          stStructureDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ShearDisplacementStructureDescription
+      # --- 6 Extension structure featureTypes ---
+      - name: DisplacementEvent
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#DisplacementEvent
+      - name: FoldSystem
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldSystem
+      - name: Joint
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Joint
+      - name: Layering
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Layering
+      - name: Lineation
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Lineation
+      - name: NonDirectionalStructure
+        ref: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#NonDirectionalStructure
+      # --- 2 Relation featureTypes (GeologicFeatureRelation / MaterialRelation) ---
+      - name: GeologicFeatureRelation
+        ref: ../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#GeologicFeatureRelation
+      - name: MaterialRelation
+        ref: ../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#MaterialRelation
+      # --- 4 Material featureTypes (CompoundMaterial / Mineral / OrganicMaterial / RockMaterial) ---
+      - name: CompoundMaterial
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#CompoundMaterial
+      - name: Mineral
+        ref: ../gsmEarthMaterial/gsmEarthMaterialSchema.json#Mineral
+      - name: OrganicMaterial
+        ref: ../gsmEarthMaterial/gsmEarthMaterialSchema.json#OrganicMaterial
+      - name: RockMaterial
+        ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#RockMaterial
+      # --- 6 Geologic-time featureTypes ---
+      - name: GeochronologicEra
+        ref: ../gsmGeologicTime/gsmGeologicTimeSchema.json#GeochronologicEra
+      - name: GeochronologicBoundary
+        ref: ../gsmGeologicTime/gsmGeologicTimeSchema.json#GeochronologicBoundary
+      - name: GlobalStratotypePoint
+        ref: ../gsmGeologicTime/gsmGeologicTimeSchema.json#GlobalStratotypePoint
+      - name: GlobalStratotypeSection
+        ref: ../gsmGeologicTime/gsmGeologicTimeSchema.json#GlobalStratotypeSection
+      - name: StratigraphicPoint
+        ref: ../gsmGeologicTime/gsmGeologicTimeSchema.json#StratigraphicPoint
+      - name: StratigraphicSection
+        ref: ../gsmGeologicTime/gsmGeologicTimeSchema.json#StratigraphicSection
+    # No profile-level relatedFeature narrowing here: gsmCompleteGeology
+    # dispatches GeologicFeatureRelation and MaterialRelation as top-level
+    # features, and on those classes `relatedFeature` is a singleton target
+    # (oneOf [SCLinkObject, GeologicFeature]) rather than an array of
+    # relations. An anyOf-array narrowing applied to every feature would
+    # conflict with that singleton shape. Each feature instead validates
+    # against its own class schema. Use gsmExtendedGeology when you want
+    # the relatedFeature[] anyOf narrowing on Basic-feature collections.
 

@@ -2,7 +2,7 @@
   "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region, Western Australia). The source TTL distinguishes between fault STRUCTURES (Moona Fault, fault_A1, fault_A2, fault_3496 - typed as gsfa:High_Angle_Fault) and fault TRACES on the earth surface (faulttrace_11445, faulttrace_15546, faulttrace_3496, faulttrace_7439 - typed as gsfa:Fault and hosted by gsoc:earthsurface, isPartOf the parent fault structure). The traces correspond well to MappedFeature instances representing the surface expression of a buried/subsurface ShearDisplacementStructure. Spatial relations between traces (gsrl:spatiallyTouches, gsrl:spatiallyTruncates) and a fault-vs-contact crosscutting relation (gsrl:crosscuts) from the source TTL are encoded here as GeologicFeatureRelation Feature items in each source's relatedFeature[] array - which the gsmExtendedGeologyCollection profile narrows from the Basic AbstractFeatureRelation to anyOf [SCLinkObject, GeologicFeatureRelation, MaterialRelation]. The relation's `relatedFeature` property carries the target as an SCLinkObject (mirroring OGC's AbstractFeatureRelation shape). The Extended profile's MappedFeature branch is pass-through (no extension description slot).",
   "type": "FeatureCollection",
   "conformsTo": [
-    "https://schemas.usgin.org/geosci-json/gsmExtendedGeologyCollection/gsmExtendedGeologyCollectionSchema.json"
+    "https://schemas.usgin.org/geosci-json/gsmExtendedGeology/gsmExtendedGeologySchema.json"
   ],
   "features": [
     {

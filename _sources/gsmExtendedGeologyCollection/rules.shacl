@@ -1,4 +1,0 @@
-# SHACL rules for gsmExtendedGeologyCollection.
-# Placeholder - populate with shape constraints as the model is profiled.
-
-@prefix sh: <http://www.w3.org/ns/shacl#> .
