@@ -135,25 +135,25 @@ ISO_PREFIX_MAP: list[tuple[re.Pattern, str]] = [
 # Schema fragments. Most external types have no canonical JSON Schema, so we
 # encode them as by-reference link objects (SCLinkObject). A few metadata
 # types have published CDIF building blocks that can be inlined as a richer
-# alternative — these are emitted as `anyOf [SCLinkObject, <CDIF $ref> ...]`,
+# alternative - these are emitted as `anyOf [SCLinkObject, <CDIF $ref> ...]`,
 # letting instances provide either a link or a fully-typed metadata object.
 _CDIF_BASE = (
     "https://cross-domain-interoperability-framework.github.io/"
     "metadataBuildingBlocks/build/annotated/bbr/metadata"
 )
 EXTERNAL_TYPE_RESOLUTION: dict[str, dict] = {
-    # ISO 19115 metadata — CI_Responsibility has a CDIF agent-in-role mapping;
+    # ISO 19115 metadata - CI_Responsibility has a CDIF agent-in-role mapping;
     # CI_Citation stays SCLinkObject only.
     "iso19115:CI_Responsibility": {
         "anyOf": [
             {"$ref": LINK_OBJECT_REF},
             {"$ref": f"{_CDIF_BASE}/schemaorgProperties/agentInRole/schema.json"},
         ],
-        "$comment": "External ISO 19115 CI_Responsibility — by-reference link or inline CDIF agentInRole",
+        "$comment": "External ISO 19115 CI_Responsibility - by-reference link or inline CDIF agentInRole",
     },
     "iso19115:CI_Citation": {
         "$ref": LINK_OBJECT_REF,
-        "$comment": "External ISO 19115 CI_Citation — by-reference link only",
+        "$comment": "External ISO 19115 CI_Citation - by-reference link only",
     },
     # ISO 19103 composites with CDIF mappings.
     "iso19103:ScopedName": {
@@ -162,22 +162,22 @@ EXTERNAL_TYPE_RESOLUTION: dict[str, dict] = {
             {"$ref": f"{_CDIF_BASE}/schemaorgProperties/definedTerm/schema.json"},
             {"$ref": f"{_CDIF_BASE}/skosProperties/skosConcept/schema.json"},
         ],
-        "$comment": "External ISO 19103 ScopedName — link, CDIF definedTerm, or SKOS concept",
+        "$comment": "External ISO 19103 ScopedName - link, CDIF definedTerm, or SKOS concept",
     },
     "iso19103:NamedValue": {
         "anyOf": [
             {"$ref": LINK_OBJECT_REF},
             {"$ref": f"{_CDIF_BASE}/schemaorgProperties/variableMeasured/schema.json"},
         ],
-        "$comment": "External ISO 19103 NamedValue — link or inline CDIF variableMeasured (schema:PropertyValue)",
+        "$comment": "External ISO 19103 NamedValue - link or inline CDIF variableMeasured (schema:PropertyValue)",
     },
-    # ISO 19108 time, 19107 geometry composites, 19156 sampling/observation —
+    # ISO 19108 time, 19107 geometry composites, 19156 sampling/observation -
     # no published JSON Schemas; emit SCLinkObject so instances must provide
     # a link to an external resource.
     "iso19108:TM_Instant": {
         "oneOf": [
             {"$ref": LINK_OBJECT_REF},
-            # OWL-Time object form — Instant carrying an xsd:dateTime via inXSDDateTime
+            # OWL-Time object form - Instant carrying an xsd:dateTime via inXSDDateTime
             # (or inXSDDate / inXSDgYear / etc. for the various OWL-Time positional shortcuts).
             {
                 "type": "object",
@@ -251,23 +251,23 @@ EXTERNAL_TYPE_RESOLUTION: dict[str, dict] = {
     },
     "iso19107:DirectPosition": {
         "$ref": LINK_OBJECT_REF,
-        "$comment": "External ISO 19107 DirectPosition — by-reference link",
+        "$comment": "External ISO 19107 DirectPosition - by-reference link",
     },
     "iso19156:GFI_Feature": {
         "$ref": LINK_OBJECT_REF,
-        "$comment": "External ISO 19156 GFI_Feature — by-reference link",
+        "$comment": "External ISO 19156 GFI_Feature - by-reference link",
     },
     "iso19156:SF_SamplingFeature": {
         "$ref": LINK_OBJECT_REF,
-        "$comment": "External ISO 19156 SF_SamplingFeature — by-reference link",
+        "$comment": "External ISO 19156 SF_SamplingFeature - by-reference link",
     },
     "iso19156:SF_SamplingFeatureCollection": {
         "$ref": LINK_OBJECT_REF,
-        "$comment": "External ISO 19156 SF_SamplingFeatureCollection — by-reference link",
+        "$comment": "External ISO 19156 SF_SamplingFeatureCollection - by-reference link",
     },
     "iso19156:OM_Observation": {
         "$ref": LINK_OBJECT_REF,
-        "$comment": "External ISO 19156 OM_Observation — by-reference link",
+        "$comment": "External ISO 19156 OM_Observation - by-reference link",
     },
 }
 
@@ -298,7 +298,7 @@ _SWE_QUANTITY_REF = "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.jso
 SF_SPECIMEN_DEF = {
     "$anchor": "SF_Specimen",
     "description": (
-        "ISO 19156:2011 §8.6 SF_Specimen — a sampling feature representing a "
+        "ISO 19156:2011 §8.6 SF_Specimen - a sampling feature representing a "
         "physical specimen collected from a sampled feature. Implementation "
         "inlines the SF_SamplingFeature parent's properties (sampledFeature, "
         "relatedObservation, relatedSamplingFeature, lineage) since the parent "
@@ -317,15 +317,10 @@ SF_SPECIMEN_DEF = {
                     "properties": {
                         # ----- SF_SamplingFeature inherited properties -----
                         "sampledFeature": {
-                            "oneOf": [
-                                {"type": "null"},
-                                {
-                                    "type": "array",
-                                    "items": {"$ref": LINK_OBJECT_REF},
-                                    "minItems": 1,
-                                    "uniqueItems": True,
-                                },
-                            ],
+                            "type": "array",
+                            "items": {"$ref": LINK_OBJECT_REF},
+                            "minItems": 1,
+                            "uniqueItems": True,
                             "description": (
                                 "Feature(s) being sampled (1..*, by-reference "
                                 "to ISO 19156 GFI_Feature). Inherited from "
@@ -333,14 +328,9 @@ SF_SPECIMEN_DEF = {
                             ),
                         },
                         "relatedObservation": {
-                            "oneOf": [
-                                {"type": "null"},
-                                {
-                                    "type": "array",
-                                    "items": {"$ref": LINK_OBJECT_REF},
-                                    "uniqueItems": True,
-                                },
-                            ],
+                            "type": "array",
+                            "items": {"$ref": LINK_OBJECT_REF},
+                            "uniqueItems": True,
                             "description": (
                                 "Observations whose featureOfInterest is this "
                                 "specimen (0..*, by-reference to ISO 19156 "
@@ -349,14 +339,9 @@ SF_SPECIMEN_DEF = {
                             ),
                         },
                         "relatedSamplingFeature": {
-                            "oneOf": [
-                                {"type": "null"},
-                                {
-                                    "type": "array",
-                                    "items": {"$ref": LINK_OBJECT_REF},
-                                    "uniqueItems": True,
-                                },
-                            ],
+                            "type": "array",
+                            "items": {"$ref": LINK_OBJECT_REF},
+                            "uniqueItems": True,
                             "description": (
                                 "Self-association: relations to other "
                                 "SF_SamplingFeature instances (0..*, "
@@ -365,10 +350,7 @@ SF_SPECIMEN_DEF = {
                             ),
                         },
                         "lineage": {
-                            "oneOf": [
-                                {"type": "null"},
-                                {"$ref": LINK_OBJECT_REF},
-                            ],
+                            "$ref": LINK_OBJECT_REF,
                             "description": (
                                 "Provenance metadata (by-reference to ISO "
                                 "19115 LI_Lineage). Inherited from "
@@ -394,7 +376,6 @@ SF_SPECIMEN_DEF = {
                         },
                         "samplingMethod": {
                             "oneOf": [
-                                {"type": "null"},
                                 {"$ref": LINK_OBJECT_REF},
                                 {"$ref": "#GeologicSamplingMethod"},
                             ],
@@ -406,10 +387,7 @@ SF_SPECIMEN_DEF = {
                             ),
                         },
                         "samplingLocation": {
-                            "oneOf": [
-                                {"type": "null"},
-                                {"$ref": _GEOJSON_GEOMETRY_REF},
-                            ],
+                            "$ref": _GEOJSON_GEOMETRY_REF,
                             "description": (
                                 "Location where the specimen was sampled "
                                 "(0..1, GeoJSON Geometry). Distinct from the "
@@ -418,14 +396,9 @@ SF_SPECIMEN_DEF = {
                             ),
                         },
                         "processingDetails": {
-                            "oneOf": [
-                                {"type": "null"},
-                                {
-                                    "type": "array",
-                                    "items": {"$ref": "#GeologicSpecimenPreparation"},
-                                    "uniqueItems": True,
-                                },
-                            ],
+                            "type": "array",
+                            "items": {"$ref": "#GeologicSpecimenPreparation"},
+                            "uniqueItems": True,
                             "description": (
                                 "Processing / preparation steps applied to "
                                 "the specimen (0..*). ISO 19156 types as "
@@ -435,10 +408,7 @@ SF_SPECIMEN_DEF = {
                             ),
                         },
                         "size": {
-                            "oneOf": [
-                                {"type": "null"},
-                                {"$ref": _SWE_QUANTITY_REF},
-                            ],
+                            "$ref": _SWE_QUANTITY_REF,
                             "description": (
                                 "Specimen size as a SWE Quantity (0..1). ISO "
                                 "19156 types as Measure."
@@ -446,7 +416,6 @@ SF_SPECIMEN_DEF = {
                         },
                         "currentLocation": {
                             "oneOf": [
-                                {"type": "null"},
                                 {"type": "string"},
                                 {"$ref": LINK_OBJECT_REF},
                             ],
@@ -457,10 +426,7 @@ SF_SPECIMEN_DEF = {
                             ),
                         },
                         "specimenType": {
-                            "oneOf": [
-                                {"type": "null"},
-                                {"$ref": _SWE_CATEGORY_REF},
-                            ],
+                            "$ref": _SWE_CATEGORY_REF,
                             "description": (
                                 "Specimen type classifier (0..1). ISO 19156 "
                                 "types as ScopedName; encoded here as a SWE "
@@ -589,19 +555,14 @@ GEOCHRONOLOGIC_ERA_DEF = {
                                 "by-reference links or inline "
                                 "GeochronologicEra Features."
                             ),
-                            "oneOf": [
-                                {"type": "null"},
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "oneOf": [
-                                            {"$ref": LINK_OBJECT_REF},
-                                            {"$ref": "#GeochronologicEra"},
-                                        ],
-                                    },
-                                    "uniqueItems": True,
-                                },
-                            ],
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {"$ref": LINK_OBJECT_REF},
+                                    {"$ref": "#GeochronologicEra"},
+                                ],
+                            },
+                            "uniqueItems": True,
                         },
                         "stratotype": {
                             "description": (
@@ -611,7 +572,6 @@ GEOCHRONOLOGIC_ERA_DEF = {
                                 "by-reference SCLinkObject."
                             ),
                             "oneOf": [
-                                {"type": "null"},
                                 {"$ref": LINK_OBJECT_REF},
                                 {"$ref": "#StratigraphicSection"},
                             ],
@@ -655,10 +615,10 @@ def _resolve_external_type(key: str) -> dict:
         return json.loads(json.dumps(EXTERNAL_TYPE_RESOLUTION[key]))
     return {
         "$ref": LINK_OBJECT_REF,
-        "$comment": f"External type {key} — by-reference link (no specific mapping configured)",
+        "$comment": f"External type {key} - by-reference link (no specific mapping configured)",
     }
 
-# Names from ISO 19103 that aren't primitives (composite types) — placeholder them.
+# Names from ISO 19103 that aren't primitives (composite types) - placeholder them.
 ISO_19103_COMPOSITES = {
     "ScopedName": "iso19103",
     "GenericName": "iso19103",
@@ -727,6 +687,9 @@ class EaXmiLoader:
     def __init__(self, path: Path):
         self.path = path
         self.text = path.read_text(encoding="cp1252", errors="replace")
+        # Normalize Unicode em-dash (U+2014) and en-dash (U+2013) to ASCII
+        # hyphen-minus so generated schema/example strings stay in pure ASCII.
+        self.text = self.text.replace("\u2014", "-").replace("\u2013", "-")
         # xmi_id -> UmlClass
         self.classes: dict[str, UmlClass] = {}
         # class name -> xmi_id  (first hit wins; collisions warned)
@@ -1225,7 +1188,7 @@ class Resolver:
 
 
 # ---------------------------------------------------------------------------
-# Emitter — applies OGC 24-017r1 to produce a class's JSON Schema definition.
+# Emitter - applies OGC 24-017r1 to produce a class's JSON Schema definition.
 # ---------------------------------------------------------------------------
 
 class Emitter:
@@ -1239,12 +1202,38 @@ class Emitter:
         s = (cls.stereotype or "").lower()
         if s == "codelist":
             return self._emit_codelist(cls)
-        if s == "featuretype":
-            return self._emit_feature_type(cls)
         if s == "union":
             return self._emit_union(cls)
+        # A class is Feature-shaped if it carries «FeatureType», has an OCL
+        # constraint pinning its hierarchyLevel to feature, or transitively
+        # inherits from such a class. OGC's geoscimlBasic.json applies this
+        # to EarthMaterial/CompoundMaterial/RockMaterial (UML stereotype is
+        # `type`, but constraint `self.metadata.hierarchyLevel=feature`
+        # marks them as Features). Without this transitive check, nested
+        # `composition[].material` instances cannot be valid Features.
+        if self._is_feature_like(cls):
+            return self._emit_feature_type(cls)
         # DataType / Type / unstereotyped class
         return self._emit_object_type(cls)
+
+    def _is_feature_like(self, cls: UmlClass) -> bool:
+        """True if cls should be emitted as a JSON-FG Feature: «FeatureType»
+        stereotype, an OCL `hierarchyLevel=feature` class constraint, or
+        transitive inheritance from such a class."""
+        if (cls.stereotype or "").lower() == "featuretype":
+            return True
+        for c in self.loader.constraints_by_class.get(cls.name, []):
+            lc = c.lower()
+            if "hierarchylevel" in lc and "feature" in lc:
+                return True
+        for sup_name in cls.supertypes:
+            sup_id = self.loader.name_to_id.get(sup_name)
+            if not sup_id:
+                continue
+            sup = self.loader.classes[sup_id]
+            if self._is_feature_like(sup):
+                return True
+        return False
 
     def _class_description(self, cls: UmlClass) -> str:
         """Class doc with any class-level OCL constraints appended."""
@@ -1266,15 +1255,15 @@ class Emitter:
     # ----- per stereotype --------------------------------------------------
 
     def _emit_codelist(self, cls: UmlClass) -> dict:
-        # All «CodeList» classes — including those with inline UML enumeration
-        # members like DescriptionPurpose — emit as {type: string, format: uri}
+        # All «CodeList» classes - including those with inline UML enumeration
+        # members like DescriptionPurpose - emit as {type: string, format: uri}
         # per OGC 24-017r1 req/codelists-basic. Inline enum-member names (when
         # present in the source UML) are surfaced via the class description so
         # consumers can map labels to vocabulary URIs externally, but the
         # JSON-Schema-side constraint stays URI-shaped to match the OGC
         # code-sprint convention and the OGC sprint example instances
         # (which encode `purpose: "http://inspire.../DescriptionPurpose/instance"`
-        # — full URI form — not bare names).
+        # - full URI form - not bare names).
         d: dict = OrderedDict()
         d["$anchor"] = cls.name
         desc = self._class_description(cls)
@@ -1342,7 +1331,7 @@ class Emitter:
 
     def _build_feature_type_own_envelope(self, cls: UmlClass) -> dict:
         """Build the {type: object, properties: { properties: { ... } } }
-        envelope for a FeatureType — class-specific fields live inside the
+        envelope for a FeatureType - class-specific fields live inside the
         JSON-FG `properties` member."""
         inner_props: dict = OrderedDict()
         for a in cls.attributes:
@@ -1389,13 +1378,14 @@ class Emitter:
     # ----- attribute schema builder ----------------------------------------
 
     def _build_attribute_schema(self, owning_class: str, a: Attribute) -> dict:
-        """Per OGC team convention: optional values are wrapped as
-        oneOf [{type: null}, <inner>]; required values use the inner schema
-        directly. Array-valued attributes wrap the value type in a 'type:array'
-        envelope before applying optionality."""
+        """Per OGC team convention (geoscimlBasic.json): optional attributes
+        are not present in the instance at all when there's no value (omit-key,
+        not explicit null). The schema therefore emits the value's inner shape
+        directly without an `oneOf [{type: null}, ...]` wrap. Optionality is
+        conveyed by absence from the enclosing `required` array. Array-valued
+        attributes still get the `type: array` envelope before this rule."""
         rt = self.r.resolve(owning_class, a)
         desc = self._attribute_description(owning_class, a)
-        optional = (a.lower == 0)
 
         if a.upper > 1 or a.upper == -1:
             # array-valued
@@ -1410,13 +1400,6 @@ class Emitter:
         else:
             inner = rt.schema
 
-        if optional:
-            wrapped: dict = OrderedDict()
-            wrapped["oneOf"] = [{"type": "null"}, inner]
-            if desc:
-                wrapped["description"] = desc
-            return wrapped
-
         out: dict = OrderedDict(inner) if isinstance(inner, dict) else dict(inner)
         if desc and "description" not in out:
             out["description"] = desc
@@ -1425,13 +1408,13 @@ class Emitter:
     # ----- supertype resolution --------------------------------------------
 
     def _feature_supertype_ref(self, cls: UmlClass) -> Optional[dict]:
-        """If cls has a supertype that's a FeatureType, $ref it instead of JSON-FG."""
+        """If cls has a Feature-like supertype, $ref it instead of JSON-FG."""
         for sup_name in cls.supertypes:
             sup_id = self.loader.name_to_id.get(sup_name)
             if not sup_id:
                 continue
             sup = self.loader.classes[sup_id]
-            if (sup.stereotype or "").lower() != "featuretype":
+            if not self._is_feature_like(sup):
                 continue
             return self._supertype_ref_for(sup)
         return None
@@ -1602,7 +1585,7 @@ def build_merged_schema(
 
 
 def build_feature_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
-    """Build <bbName>FeatureSchema.json — an if/then chain on `featureType`
+    """Build <bbName>FeatureSchema.json - an if/then chain on `featureType`
     routing each recognised value to the corresponding $anchor in the BB's
     library schema. An unrecognised featureType fails (else-false clause)."""
     branches: list[dict] = []
@@ -1636,7 +1619,7 @@ def build_feature_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
 
 
 def build_fc_dispatcher(bb_name: str, ft_names: list[str]) -> dict:
-    """Build <bbName>FeatureCollectionSchema.json — composes the JSON-FG
+    """Build <bbName>FeatureCollectionSchema.json - composes the JSON-FG
     FeatureCollection schema with `features.items` validated through the
     Feature dispatcher. DRY composition: dispatch logic lives in
     <bbName>FeatureSchema.json."""
@@ -1910,7 +1893,7 @@ def build_profile_metadata(profile_name: str, info: dict) -> dict:
         "link": "https://github.com/usgin/geosci-json",
         "sources": [
             {
-                "title": "GeoSciML 4.1 — FC profile composed across building blocks",
+                "title": "GeoSciML 4.1 - FC profile composed across building blocks",
                 "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
             }
         ],
@@ -1967,8 +1950,8 @@ def main() -> None:
         # Resolve the dispatcher's featureType list in precedence order:
         #   1. The BB entry's `dispatch:` block in bb-grouping.yaml (rich
         #      entries with wrapAsFeature / extension constraints).
-        #   2. DISPATCHER_OVERRIDES_PER_BB (Python constants — simple name list).
-        #   3. dispatchable_fts(loader, pkgs) — auto-discovered «FeatureType»
+        #   2. DISPATCHER_OVERRIDES_PER_BB (Python constants - simple name list).
+        #   3. dispatchable_fts(loader, pkgs) - auto-discovered «FeatureType»
         #      classes from the XMI.
         # Cases 2 and 3 produce a list of bare class-name strings; we wrap
         # them as {"name": s, "ref": f"#{s}"} dicts so build_merged_schema can
@@ -2005,7 +1988,7 @@ def main() -> None:
             encoding="utf-8",
         )
 
-        print(f"Wrote _sources/{bb_name}/{bb_name}Schema.json — "
+        print(f"Wrote _sources/{bb_name}/{bb_name}Schema.json - "
               f"{len(classes)} classes from {len(pkgs)} package(s){dispatcher_note}")
 
     # Profile BBs: hand-configured FC profiles composed across multiple BBs.
@@ -2026,7 +2009,7 @@ def main() -> None:
             encoding="utf-8",
         )
         nft = len(prof_info["featureTypes"])
-        print(f"Wrote _sources/{prof_name}/{prof_name}Schema.json — FC profile, {nft} featureType branches")
+        print(f"Wrote _sources/{prof_name}/{prof_name}Schema.json - FC profile, {nft} featureType branches")
 
     print(f"\nTotal: {len(targets)} BB(s), {total_classes} class defs, "
           f"{total_dispatchers} BB(s) with dispatchers, "
