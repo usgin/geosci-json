@@ -937,6 +937,11 @@
         }
       }
     },
+    "EarthMaterialAbstractDescription": {
+      "$anchor": "EarthMaterialAbstractDescription",
+      "description": "Abstract description class for earth material. This class is a placeholder for further extension in Extension package",
+      "type": "object"
+    },
     "CompoundMaterial": {
       "$anchor": "CompoundMaterial",
       "description": "A CompoundMaterial is an EarthMaterial composed of particles made of EarthMaterials, possibly including other CompoundMaterials. This class is provided primarily as an extensibility point for related domain models that wish to import and build on GeoSciML, and wish to define material types that are compound but are not rock or rock-like material. In the context of GeoSciML \"RockMaterial\" should be used to describe units made of rock.",
@@ -946,6 +951,31 @@
         },
         {
           "type": "object"
+        }
+      ]
+    },
+    "RockMaterial": {
+      "$anchor": "RockMaterial",
+      "description": "RockMaterial is a specialized CompoundMaterial that includes consolidated and unconsolidated materials (such as surficial sediments) as well as mixtures of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material is essentially a link to a controlled vocabulary (lithology property) and a color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial nesting) are available in GeoSciML Extension.",
+      "allOf": [
+        {
+          "$ref": "#CompoundMaterial"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "lithology": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#LithologyTerm"
+                }
+              ],
+              "description": "The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary."
+            }
+          }
         }
       ]
     },
@@ -1093,36 +1123,6 @@
           "description": "The property gbEarthMaterialDescription:EarthMaterialAbstractDescription provides a detailed earth material description of the part. This property is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is abstract with subtypes defined in GeoSciML Extension."
         }
       }
-    },
-    "EarthMaterialAbstractDescription": {
-      "$anchor": "EarthMaterialAbstractDescription",
-      "description": "Abstract description class for earth material. This class is a placeholder for further extension in Extension package",
-      "type": "object"
-    },
-    "RockMaterial": {
-      "$anchor": "RockMaterial",
-      "description": "RockMaterial is a specialized CompoundMaterial that includes consolidated and unconsolidated materials (such as surficial sediments) as well as mixtures of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material is essentially a link to a controlled vocabulary (lithology property) and a color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial nesting) are available in GeoSciML Extension.",
-      "allOf": [
-        {
-          "$ref": "#CompoundMaterial"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "lithology": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#LithologyTerm"
-                }
-              ],
-              "description": "The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary."
-            }
-          }
-        }
-      ]
     }
   }
 }

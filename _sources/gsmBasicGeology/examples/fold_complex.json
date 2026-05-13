@@ -14,7 +14,7 @@
         "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/field_observation"
       }
     ],
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "occurrence": [
       {
         "href": "http://data.geoscience.gov.au/mappedfeature/fold/anticline-mf-1",

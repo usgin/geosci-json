@@ -6,7 +6,7 @@
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "classifier": [
       {
         "type": "Category",

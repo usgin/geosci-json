@@ -1266,30 +1266,27 @@ class Emitter:
     # ----- per stereotype --------------------------------------------------
 
     def _emit_codelist(self, cls: UmlClass) -> dict:
-        # Two paths:
-        #   (a) «CodeList» with inline UML enumeration members (attributes with
-        #       empty/missing type names): emit as a closed JSON enum per OGC
-        #       24-017r1 Table 6 «enumeration» encoding. Values are the bare
-        #       attribute names.
-        #   (b) «CodeList» with no inline members: emit {type: string, format: uri}
-        #       per req/codelists-basic. Add `codeList` annotation only when the
-        #       source UML class carries a non-blank `codeList` tagged value
-        #       (matches OGC team's geoscimlBasic/Lite convention).
+        # All «CodeList» classes — including those with inline UML enumeration
+        # members like DescriptionPurpose — emit as {type: string, format: uri}
+        # per OGC 24-017r1 req/codelists-basic. Inline enum-member names (when
+        # present in the source UML) are surfaced via the class description so
+        # consumers can map labels to vocabulary URIs externally, but the
+        # JSON-Schema-side constraint stays URI-shaped to match the OGC
+        # code-sprint convention and the OGC sprint example instances
+        # (which encode `purpose: "http://inspire.../DescriptionPurpose/instance"`
+        # — full URI form — not bare names).
         d: dict = OrderedDict()
         d["$anchor"] = cls.name
         desc = self._class_description(cls)
+        # If the UML carries inline enumeration members, surface them in the
+        # description so the allowed labels are documented even though the
+        # constraint is just `format: uri`.
+        enum_members = [a.name for a in cls.attributes if not a.type_name]
+        if enum_members:
+            label_note = f"Allowed labels: {', '.join(enum_members)}."
+            desc = (desc + "  " + label_note).strip() if desc else label_note
         if desc:
             d["description"] = desc
-
-        # An attribute with an empty type_name is the EA pattern for an
-        # enumeration literal. Treat the codelist as closed when *all* its
-        # attributes are untyped literals.
-        enum_members = [a.name for a in cls.attributes if not a.type_name]
-        if cls.attributes and len(enum_members) == len(cls.attributes):
-            d["type"] = "string"
-            d["enum"] = enum_members
-            return d
-
         d["type"] = "string"
         d["format"] = "uri"
         cl_tag = (cls.tagged_values.get("codeList") or "").strip()

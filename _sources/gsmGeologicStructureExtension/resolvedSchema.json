@@ -1037,36 +1037,6 @@
         }
       }
     },
-    "FoliationAbstractDescription": {
-      "$anchor": "FoliationAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.  Constraint: only one instance of each subtype class is allowed",
-      "type": "object"
-    },
-    "GSML_Vector": {
-      "$anchor": "GSML_Vector",
-      "description": "A GSML_Vector is a data type representing a linear orientation with a magnitude (a quantity assigned to this vector). If the magnitude is unknown, a GSML_LinearOrientation shall be used.",
-      "allOf": [
-        {
-          "$ref": "#GSML_LinearOrientation"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "magnitude": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
-                }
-              ],
-              "description": "The magnitude property (SWE::QuantityRange) reports the magnitude of the vector."
-            }
-          }
-        }
-      ]
-    },
     "GeochronologicBoundary": {
       "$anchor": "GeochronologicBoundary",
       "description": "A point in geologic time defined by a stratotype. Aligns to time:Instant from W3C OWL-Time (https://www.w3.org/TR/owl-time/). Cox & Richard 2015, 'A formal model for the geologic timescale and GSSP': the boundary's instant is anchored to the rock record via the `stratotype` property, which references a StratigraphicPoint (typically a GSSP if ratified by ICS).",
@@ -1106,24 +1076,6 @@
           "properties": {
             "id": {
               "type": "string"
-            }
-          }
-        }
-      ]
-    },
-    "GeologicStructure": {
-      "$anchor": "GeologicStructure",
-      "description": "A geologic structure is a configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in an earth material. The identity of a GeologicStructure is independent of the material that is the substrate for the structure. The general GeologicFeatureRelation (available in the Extension package) is used to associate penetrative GeologicStructures with GeologicUnits. GeoSciML Basic only provides a limited set of core structures (Contact, Fold, ShearDisplacementStructure and Foliation) with a single property to categorise them. Supplemental properties and geologic structure types are available from the Extension package.",
-      "allOf": [
-        {
-          "$ref": "#GeologicFeature"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {}
             }
           }
         }
@@ -1170,10 +1122,94 @@
         }
       ]
     },
-    "FoldAbstractDescription": {
-      "$anchor": "FoldAbstractDescription",
+    "Mineral": {
+      "$anchor": "Mineral",
+      "description": "A naturally occurring inorganic element or compound having a periodically repeating arrangement of atoms and a characteristic chemical composition or range of compositions, resulting in distinctive physical properties. Includes mercury as a general exception to the requirement of crystallinity. Also includes crypto-crystalline materials such as chalcedony and amorphous silica.",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterial"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mineralName": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#MineralNameTerm"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical Association. (eg: http://www.mindat.org/mineralindex.php)"
+            }
+          }
+        }
+      ]
+    },
+    "GSML_Vector": {
+      "$anchor": "GSML_Vector",
+      "description": "A GSML_Vector is a data type representing a linear orientation with a magnitude (a quantity assigned to this vector). If the magnitude is unknown, a GSML_LinearOrientation shall be used.",
+      "allOf": [
+        {
+          "$ref": "#GSML_LinearOrientation"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "magnitude": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The magnitude property (SWE::QuantityRange) reports the magnitude of the vector."
+            }
+          }
+        }
+      ]
+    },
+    "ShearDisplacementStructureAbstractDescription": {
+      "$anchor": "ShearDisplacementStructureAbstractDescription",
       "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
       "type": "object"
+    },
+    "FoliationAbstractDescription": {
+      "$anchor": "FoliationAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.  Constraint: only one instance of each subtype class is allowed",
+      "type": "object"
+    },
+    "RockMaterial": {
+      "$anchor": "RockMaterial",
+      "description": "RockMaterial is a specialized CompoundMaterial that includes consolidated and unconsolidated materials (such as surficial sediments) as well as mixtures of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material is essentially a link to a controlled vocabulary (lithology property) and a color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial nesting) are available in GeoSciML Extension.",
+      "allOf": [
+        {
+          "$ref": "#CompoundMaterial"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "lithology": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#LithologyTerm"
+                }
+              ],
+              "description": "The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary."
+            }
+          }
+        }
+      ]
     },
     "Foliation": {
       "$anchor": "Foliation",
@@ -1211,6 +1247,46 @@
                   "description": "The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples include crenulation cleavage, slaty cleavage and schistosity."
                 }
               }
+            }
+          }
+        }
+      ]
+    },
+    "PhysicalDescription": {
+      "$anchor": "PhysicalDescription",
+      "description": "PhysicalDescription is a class that describes the numeric physical properties of a geologic unit (GeologicUnit) earth material (EarthMaterial ), or geologic structure (GeologicStructure) (e.g., density, porosity, magnetic susceptibility, remanent magnetism). These properties are modelled here as scalar numeric values (SWE::Quantity).",
+      "allOf": [
+        {
+          "$ref": "#EarthMaterialAbstractDescription"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "propertyName": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#PhysicalPropertyTerm"
+                }
+              ],
+              "description": "The property propertyName:PhysicalPropertyTerm contains a term from a controlled vocabulary of physical properties of rock materials (e.g., density, porosity, magnetic susceptibility, remnant magnetism, permeability, seismic velocity)."
+            },
+            "propertyMeasure": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
+                  },
+                  "uniqueItems": true
+                }
+              ],
+              "description": "The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, unit or structure."
             }
           }
         }
@@ -1258,133 +1334,6 @@
                 }
               ],
               "description": "The property trend (SWE::QuantityRange) reports the azimuth (compass bearing) value of the linear orientation."
-            }
-          }
-        }
-      ]
-    },
-    "Mineral": {
-      "$anchor": "Mineral",
-      "description": "A naturally occurring inorganic element or compound having a periodically repeating arrangement of atoms and a characteristic chemical composition or range of compositions, resulting in distinctive physical properties. Includes mercury as a general exception to the requirement of crystallinity. Also includes crypto-crystalline materials such as chalcedony and amorphous silica.",
-      "allOf": [
-        {
-          "$ref": "#EarthMaterial"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "mineralName": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#MineralNameTerm"
-                  },
-                  "uniqueItems": true
-                }
-              ],
-              "description": "Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical Association. (eg: http://www.mindat.org/mineralindex.php)"
-            }
-          }
-        }
-      ]
-    },
-    "PhysicalDescription": {
-      "$anchor": "PhysicalDescription",
-      "description": "PhysicalDescription is a class that describes the numeric physical properties of a geologic unit (GeologicUnit) earth material (EarthMaterial ), or geologic structure (GeologicStructure) (e.g., density, porosity, magnetic susceptibility, remanent magnetism). These properties are modelled here as scalar numeric values (SWE::Quantity).",
-      "allOf": [
-        {
-          "$ref": "#EarthMaterialAbstractDescription"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "propertyName": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#PhysicalPropertyTerm"
-                }
-              ],
-              "description": "The property propertyName:PhysicalPropertyTerm contains a term from a controlled vocabulary of physical properties of rock materials (e.g., density, porosity, magnetic susceptibility, remnant magnetism, permeability, seismic velocity)."
-            },
-            "propertyMeasure": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
-                  },
-                  "uniqueItems": true
-                }
-              ],
-              "description": "The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, unit or structure."
-            }
-          }
-        }
-      ]
-    },
-    "GSML_PlanarOrientation": {
-      "$anchor": "GSML_PlanarOrientation",
-      "description": "A planar orientation is composed of two values; the azimuth (a compass point) and a dip (the angle from the horizontal). Polarity of the plane indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical, etc. There are several conventions to encode a planar orientation and this specification does not impose one but provides a convention property to report it. It must be noted that allowance for different conventions makes manipulation of the data more difficult. Therefore it is recommended that user communities adopt a single measurement convention.",
-      "allOf": [
-        {
-          "$ref": "#GSML_GeometricDescriptionValue"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "convention": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#ConventionCode"
-                }
-              ],
-              "description": "The property convention:ConventionCode contains the convention used for the measurement from a controlled vocabulary."
-            },
-            "azimuth": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
-                }
-              ],
-              "description": "The azimuth (SWE::QuantityRange) property (compass point, bearing etc.) contains the value of the orientation. The convention property reports how azimuth is interpreted (if it is relative to a quadrant)."
-            },
-            "dip": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
-                }
-              ],
-              "description": "The dip (SWE::QuantityRange) reports the angle that the structural surface (e.g. bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane as a numeric value or term."
-            },
-            "polarity": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#PlanarPolarityCode"
-                }
-              ],
-              "description": "The polarity:PolarityCode indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical etc., using a controlled vocabulary."
             }
           }
         }
@@ -1487,15 +1436,68 @@
         }
       ]
     },
-    "ShearDisplacementStructureAbstractDescription": {
-      "$anchor": "ShearDisplacementStructureAbstractDescription",
-      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
-      "type": "object"
-    },
     "ContactAbstractDescription": {
       "$anchor": "ContactAbstractDescription",
       "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
       "type": "object"
+    },
+    "GSML_PlanarOrientation": {
+      "$anchor": "GSML_PlanarOrientation",
+      "description": "A planar orientation is composed of two values; the azimuth (a compass point) and a dip (the angle from the horizontal). Polarity of the plane indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical, etc. There are several conventions to encode a planar orientation and this specification does not impose one but provides a convention property to report it. It must be noted that allowance for different conventions makes manipulation of the data more difficult. Therefore it is recommended that user communities adopt a single measurement convention.",
+      "allOf": [
+        {
+          "$ref": "#GSML_GeometricDescriptionValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "convention": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#ConventionCode"
+                }
+              ],
+              "description": "The property convention:ConventionCode contains the convention used for the measurement from a controlled vocabulary."
+            },
+            "azimuth": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The azimuth (SWE::QuantityRange) property (compass point, bearing etc.) contains the value of the orientation. The convention property reports how azimuth is interpreted (if it is relative to a quadrant)."
+            },
+            "dip": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
+                }
+              ],
+              "description": "The dip (SWE::QuantityRange) reports the angle that the structural surface (e.g. bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane as a numeric value or term."
+            },
+            "polarity": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#PlanarPolarityCode"
+                }
+              ],
+              "description": "The polarity:PolarityCode indicates whether the planar orientation is associated with a directed feature that is overturned, upright, vertical etc., using a controlled vocabulary."
+            }
+          }
+        }
+      ]
     },
     "EarthMaterial": {
       "$anchor": "EarthMaterial",
@@ -1545,30 +1547,28 @@
         }
       }
     },
-    "RockMaterial": {
-      "$anchor": "RockMaterial",
-      "description": "RockMaterial is a specialized CompoundMaterial that includes consolidated and unconsolidated materials (such as surficial sediments) as well as mixtures of consolidated and unconsolidated materials. In GeoSciML Basic, Rock Material is essentially a link to a controlled vocabulary (lithology property) and a color (inherited from EarthMaterial). Specific material properties (and CompoundMaterial nesting) are available in GeoSciML Extension.",
+    "GeologicStructure": {
+      "$anchor": "GeologicStructure",
+      "description": "A geologic structure is a configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in an earth material. The identity of a GeologicStructure is independent of the material that is the substrate for the structure. The general GeologicFeatureRelation (available in the Extension package) is used to associate penetrative GeologicStructures with GeologicUnits. GeoSciML Basic only provides a limited set of core structures (Contact, Fold, ShearDisplacementStructure and Foliation) with a single property to categorise them. Supplemental properties and geologic structure types are available from the Extension package.",
       "allOf": [
         {
-          "$ref": "#CompoundMaterial"
+          "$ref": "#GeologicFeature"
         },
         {
           "type": "object",
           "properties": {
-            "lithology": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#LithologyTerm"
-                }
-              ],
-              "description": "The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary."
+            "properties": {
+              "type": "object",
+              "properties": {}
             }
           }
         }
       ]
+    },
+    "FoldAbstractDescription": {
+      "$anchor": "FoldAbstractDescription",
+      "description": "An abstract class providing a link between classes in GeoSciMLBasic and GeoSciMLExtended application schemas.",
+      "type": "object"
     },
     "EarthMaterialAbstractDescription": {
       "$anchor": "EarthMaterialAbstractDescription",

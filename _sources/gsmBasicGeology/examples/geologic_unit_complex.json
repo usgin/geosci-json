@@ -20,7 +20,7 @@
         "title": "Mapped occurrence on 1:250000 sheet"
       }
     ],
-    "purpose": "typicalNorm",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/typicalNorm",
     "classifier": [
       {
         "type": "Category",

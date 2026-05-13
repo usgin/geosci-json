@@ -6,7 +6,7 @@
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "lineationType": "http://resource.geoscience.gov.au/classifier/cgi/lineationtype/mineral_lineation"
   }
 }
