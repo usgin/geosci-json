@@ -1,0 +1,14 @@
+{
+  "title": "Validation report for usgin.bbr.geosci.gsmCompleteGeology - gsmCompleteGeology",
+  "bblockName": "gsmCompleteGeology",
+  "bblockId": "usgin.bbr.geosci.gsmCompleteGeology",
+  "generated": "2026-05-13T18:12:24.631293+00:00",
+  "result": true,
+  "items": [],
+  "globalErrors": {},
+  "counts": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0
+  }
+}

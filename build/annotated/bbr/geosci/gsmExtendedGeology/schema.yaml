@@ -1,32 +1,36 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://schemas.usgin.org/geosci-json/gsmExtendedGeologyCollection/gsmExtendedGeologyCollectionSchema.json
-description: 'Extended-profile FeatureCollection. Accepts the full set of 9 Basic
+$id: https://schemas.usgin.org/geosci-json/gsmExtendedGeology/gsmExtendedGeologySchema.json
+description: 'Extended-profile FeatureCollection. Functionally equivalent to OGC''s
 
-  featureType values (AnthropogenicGeomorphologicFeature, Contact, Fold,
+  geosciml_extension_featurecollection.json: accepts the 9 Basic
 
-  Foliation, GeologicEvent, GeologicUnit, MappedFeature,
+  featureType values (AnthropogenicGeomorphologicFeature, Contact,
 
-  NaturalGeomorphologicFeature, ShearDisplacementStructure). Each
+  Fold, Foliation, GeologicEvent, GeologicUnit, MappedFeature,
 
-  Feature additionally requires its description slot(s) to be concrete
+  NaturalGeomorphologicFeature, ShearDisplacementStructure) AND the 6
 
-  Extension classes where one exists; FTs without an extension
+  Extension structure featureType values (DisplacementEvent,
 
-  description slot (Anthropogenic / NaturalGeomorphologicFeature,
+  FoldSystem, Joint, Layering, Lineation, NonDirectionalStructure).
 
-  MappedFeature) are pass-through. The profile also narrows every
+  Each Basic Feature additionally requires its description slot(s) to
 
-  feature''s relatedFeature[] items: where Basic accepts
+  be the concrete Extension class where one exists; Extension FTs are
 
-  `oneOf [SCLinkObject, AbstractFeatureRelation]`, the Extended profile
+  already concrete and validate against their own anchors. The profile
 
-  additionally requires each AbstractFeatureRelation instance to be one
+  also narrows every feature''s relatedFeature[] items: where Basic
 
-  of the two concrete subtypes from gsmGeologicRelationExtension
+  accepts `oneOf [SCLinkObject, AbstractFeatureRelation]`, the
 
-  (GeologicFeatureRelation or MaterialRelation), while still allowing
+  Extended profile additionally requires each AbstractFeatureRelation
 
-  by-reference SCLinkObject.'
+  instance to be one of the concrete subtypes from
+
+  gsmGeologicRelationExtension (GeologicFeatureRelation or
+
+  MaterialRelation), while still allowing by-reference SCLinkObject.'
 allOf:
 - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
 - type: object
@@ -166,6 +170,54 @@ allOf:
                       items:
                         $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ShearDisplacementStructureDescription
         - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: DisplacementEvent
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#DisplacementEvent
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: FoldSystem
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#FoldSystem
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Joint
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Joint
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Layering
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Layering
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: Lineation
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#Lineation
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                const: NonDirectionalStructure
+          then:
+            $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#NonDirectionalStructure
+        - if:
             not:
               required:
               - featureType
@@ -181,6 +233,12 @@ allOf:
                   - MappedFeature
                   - NaturalGeomorphologicFeature
                   - ShearDisplacementStructure
+                  - DisplacementEvent
+                  - FoldSystem
+                  - Joint
+                  - Layering
+                  - Lineation
+                  - NonDirectionalStructure
           then: false
 - type: object
   properties:

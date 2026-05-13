@@ -192,7 +192,35 @@ x-defs:
         $anchor: AbstractFeatureRelation
         description: Association class placeholder to implement relation between geologic
           features
-        type: object
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                relatedFeature:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicFeature
+                  description: A relatedFeature is a general structure used to define
+                    relationships between any features or objects within GeoSciML.
+                    Relationships are always binary and directional. There is always
+                    a single source and a single target for a given FeatureRelation
+                    (which is abstract in GeoSciML Basic). The relationship is always
+                    defined from the perspective of the Source and is generally an
+                    active verb.
+              required:
+              - relatedFeature
+          required:
+          - properties
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
       AnthropogenicGeomorphologicFeature:
         $anchor: AnthropogenicGeomorphologicFeature
         description: An anthropogenic geomorphologic feature is a geomorphologic feature
@@ -495,39 +523,6 @@ x-defs:
           etc)
         type: string
         format: uri
-      GSML:
-        $anchor: GSML
-        description: 'GSML is a collection class grouping a set of features or types
-          which are members of this collection. A collectionType property provides
-          context or purpose.  Constraint: self.metadata.hierarchylevel=dataset'
-        allOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/feature
-        - type: object
-          properties:
-            properties:
-              type: object
-              properties:
-                collectionType:
-                  description: The collectionType:CollectionTypeTerm property contains
-                    a term from a controlled vocabulary describing the type of collection,
-                    such as Geologic Map, Boreholes, 3D models.
-                  allOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCollectionTypeTerm
-                member:
-                  type: array
-                  minItems: 1
-                  items:
-                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSMLitem
-                  uniqueItems: true
-                  description: The member property is an association that links a
-                    GSML instance to features and objects to be included as members
-                    of the collection. A collection can be made of heterogeneous items.
-        - required:
-          - featureType
-          - id
-          properties:
-            id:
-              type: string
       GSML_GeometricDescriptionValue:
         $anchor: GSML_GeometricDescriptionValue
         description: GSML_GeometricDescriptionValue is a special abstract data type
@@ -634,19 +629,26 @@ x-defs:
           or tokenize(swe:value,' '). This is cumbersome at best, or not even supported
           by the server at worst. 09-026r2 Clause 7.4.4 describes the minimal XPath
           supports and string parsing is not present.
-        type: object
-        properties:
-          lowerValue:
-            type: number
-            description: The property lowerValue:Real contains the lower bound of
-              the range. It shall be a copy of inherited SWE::QuantityRange::value[0].
-          upperValue:
-            type: number
-            description: The property upperValue:Real contains the upper bound of
-              the range. It shall be a copy of inherited SWE::QuantityRange::value[1].
-        required:
-        - lowerValue
-        - upperValue
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                lowerValue:
+                  type: number
+                  description: The property lowerValue:Real contains the lower bound
+                    of the range. It shall be a copy of inherited SWE::QuantityRange::value[0].
+                upperValue:
+                  type: number
+                  description: The property upperValue:Real contains the upper bound
+                    of the range. It shall be a copy of inherited SWE::QuantityRange::value[1].
+              required:
+              - lowerValue
+              - upperValue
+          required:
+          - properties
       GSML_Vector:
         $anchor: GSML_Vector
         description: A GSML_Vector is a data type representing a linear orientation
@@ -661,30 +663,6 @@ x-defs:
                 magnitude of the vector.
               allOf:
               - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
-      GSMLitem:
-        $anchor: GSMLitem
-        description: GSMLItem constrains the collection members to instances of EarthMaterial,
-          GeologicFeature, GM_Object, MappedFeature, AbstractFeatureRelation and OM::SF_SamplingFeature.
-        oneOf:
-        - oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
-        - oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicFeature
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Geometry
-        - oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaMappedFeature
-        - oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaAbstractFeatureRelation
-        - allOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
       GeochronologicEraTerm:
         $anchor: GeochronologicEraTerm
         description: Term from a Geochronological vocabulary
@@ -816,7 +794,7 @@ x-defs:
                     oneOf:
                     - allOf:
                       - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicFeature
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaAbstractFeatureRelation
                   uniqueItems: true
                   description: A relatedFeature is a general structure used to define
                     relationships between any features or objects within GeoSciML.
@@ -1581,6 +1559,10 @@ x-defs:
         allOf:
         - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalReferenceSystem
         - type: object
+          properties:
+            properties:
+              type: object
+              properties: {}
       GlobalStratotypePoint:
         $anchor: GlobalStratotypePoint
         description: 'A type of stratigraphic point used to define a globally agreed
@@ -1612,6 +1594,10 @@ x-defs:
         allOf:
         - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEraBoundary
         - type: object
+          properties:
+            properties:
+              type: object
+              properties: {}
       StandardGlobalNumericalAge:
         $anchor: StandardGlobalNumericalAge
         description: 'A standard numeric age point (a numeric analogue to a ''golden
@@ -1623,6 +1609,10 @@ x-defs:
         allOf:
         - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaNumericEraBoundary
         - type: object
+          properties:
+            properties:
+              type: object
+              properties: {}
       StratigraphicPoint:
         $anchor: StratigraphicPoint
         description: A point in the stratigraphic record used to define a geochronologic
@@ -1705,123 +1695,158 @@ x-defs:
           which are in turn tied to Stratotype Points, which occur within host Stratotype
           Sections. Note that the "German School" defines stratigraphic eras conceptually,
           without reference to stratotypes.
-        type: object
-        properties:
-          end:
-            oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEraBoundary
-            description: Younger time boundary of an era
-          start:
-            oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEraBoundary
-            description: Older time boundary of an era
-          member:
-            type: array
-            items:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEra
-            uniqueItems: true
-            description: Subdivisions of TimeOrdinalEra
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                end:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEraBoundary
+                  description: Younger time boundary of an era
+                start:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEraBoundary
+                  description: Older time boundary of an era
+                member:
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEra
+                  uniqueItems: true
+                  description: Subdivisions of TimeOrdinalEra
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
       TimeOrdinalEraBoundary:
         $anchor: TimeOrdinalEraBoundary
         description: A point in Earth's history which bounds a TimeOrdinalEra.
-        type: object
-        properties:
-          position:
-            oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
-            - type: object
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
               properties:
-                inXSDDateTime:
-                  type: string
-                  format: date-time
-                inXSDDate:
-                  type: string
-                  format: date
-                inXSDgYearMonth:
-                  type: string
-                  pattern: ^-?\d{4}-\d{2}$
-                inXSDgYear:
-                  type: string
-                  pattern: ^-?\d{4}$
-              anyOf:
-              - required:
-                - inXSDDateTime
-              - required:
-                - inXSDDate
-              - required:
-                - inXSDgYearMonth
-              - required:
-                - inXSDgYear
-            - type: string
-              format: date-time
-            - type: string
-              format: date
-            description: A point in time corresponding to the era boundary
-          positionalUncertainty:
-            description: A measure of the uncertainty in the estimate of the point
-              in time of the era boundary
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Quantity
-          previousEra:
-            type: array
-            items:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEra
-            uniqueItems: true
-            description: Preceding era
-          observationalBasis:
-            type: array
-            items:
-              allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
-            uniqueItems: true
-            description: Observation supporting the existence of the boundary (geochronology,
-              paleontology, etc.)
-          nextEra:
-            type: array
-            items:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEra
-            uniqueItems: true
-            description: Succeeding era
+                position:
+                  oneOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
+                  - type: object
+                    properties:
+                      inXSDDateTime:
+                        type: string
+                        format: date-time
+                      inXSDDate:
+                        type: string
+                        format: date
+                      inXSDgYearMonth:
+                        type: string
+                        pattern: ^-?\d{4}-\d{2}$
+                      inXSDgYear:
+                        type: string
+                        pattern: ^-?\d{4}$
+                    anyOf:
+                    - required:
+                      - inXSDDateTime
+                    - required:
+                      - inXSDDate
+                    - required:
+                      - inXSDgYearMonth
+                    - required:
+                      - inXSDgYear
+                  - type: string
+                    format: date-time
+                  - type: string
+                    format: date
+                  description: A point in time corresponding to the era boundary
+                positionalUncertainty:
+                  description: A measure of the uncertainty in the estimate of the
+                    point in time of the era boundary
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Quantity
+                previousEra:
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEra
+                  uniqueItems: true
+                  description: Preceding era
+                observationalBasis:
+                  type: array
+                  items:
+                    allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
+                  uniqueItems: true
+                  description: Observation supporting the existence of the boundary
+                    (geochronology, paleontology, etc.)
+                nextEra:
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEra
+                  uniqueItems: true
+                  description: Succeeding era
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
       TimeOrdinalReferenceSystem:
         $anchor: TimeOrdinalReferenceSystem
         description: A time reference system comprised of an ordered set of time periods
           (time ordinal eras).
-        type: object
-        properties:
-          referencePoint:
-            type: array
-            minItems: 2
-            items:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEraBoundary
-            uniqueItems: true
-            description: Two reference points defining the extent of the system
-          component:
-            type: array
-            items:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEra
-            uniqueItems: true
-            description: TimeOrdinalEra composing the TimeOrdinalReferenceSystem
-        required:
-        - referencePoint
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                referencePoint:
+                  type: array
+                  minItems: 2
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEraBoundary
+                  uniqueItems: true
+                  description: Two reference points defining the extent of the system
+                component:
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchema/$defs/SCLinkObject
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaTimeOrdinalEra
+                  uniqueItems: true
+                  description: TimeOrdinalEra composing the TimeOrdinalReferenceSystem
+              required:
+              - referencePoint
+          required:
+          - properties
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
       SCLinkObject:
         title: link object
         description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
@@ -2172,50 +2197,62 @@ x-defs:
           part in the whole (e.g., 20%, minor, dominant); and the role that the constituent
           plays in the whole (e.g., matrix, groundmass, framework, phenocryst, xenolith,
           vein).
-        type: object
-        properties:
-          role:
-            description: "The role:ConstituentPartRoleTerm property contains a term
-              from a controlled vocabulary that describes the role a ConstituentPart
-              plays in a CompoundMaterial aggregation. The same EarthMaterial may
-              occur as different ConstituentParts playing different roles within one
-              CompoundMaterial. For example, feldspar may be present as groundmass
-              (\u201Cgroundmass\u201D is a ConstituentPart::role) and as phenocrysts
-              (\u201Cphenocryst\u201D is another ConstituentPart::role) within a single
-              igneous rock."
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaConstituentPartRoleTerm
-          proportion:
-            description: The proportion property (SWE::QuantityRange) reports the
-              fraction of the whole that is formed by a ConstituentPart in a part/whole
-              relationship. It is used for the ConstituentPart portion in a CompoundMaterial.
-              It specifies the fraction of the EarthMaterial formed by the part (e.g.,
-              20%, minor, dominant).
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
-          constituentMaterial:
-            oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
-            description: The constituentMaterial property is an association between
-              a ConstituentPart and an EarthMaterial that specifies the EarthMaterial
-              that is forming the ConstituentPart.
-          constituentParticleGeometry:
-            description: Description of geometry of individual subset of particles
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaParticleGeometryDescription
-          relatedMaterial:
-            type: array
-            items:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaConstituentPart
-            uniqueItems: true
-            description: Specifies the ConstituentPart that is playing the target
-              role in the MaterialRelation
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                role:
+                  description: "The role:ConstituentPartRoleTerm property contains
+                    a term from a controlled vocabulary that describes the role a
+                    ConstituentPart plays in a CompoundMaterial aggregation. The same
+                    EarthMaterial may occur as different ConstituentParts playing
+                    different roles within one CompoundMaterial. For example, feldspar
+                    may be present as groundmass (\u201Cgroundmass\u201D is a ConstituentPart::role)
+                    and as phenocrysts (\u201Cphenocryst\u201D is another ConstituentPart::role)
+                    within a single igneous rock."
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaConstituentPartRoleTerm
+                proportion:
+                  description: The proportion property (SWE::QuantityRange) reports
+                    the fraction of the whole that is formed by a ConstituentPart
+                    in a part/whole relationship. It is used for the ConstituentPart
+                    portion in a CompoundMaterial. It specifies the fraction of the
+                    EarthMaterial formed by the part (e.g., 20%, minor, dominant).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
+                constituentMaterial:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
+                  description: The constituentMaterial property is an association
+                    between a ConstituentPart and an EarthMaterial that specifies
+                    the EarthMaterial that is forming the ConstituentPart.
+                constituentParticleGeometry:
+                  description: Description of geometry of individual subset of particles
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaParticleGeometryDescription
+                relatedMaterial:
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaMaterialRelation
+                  uniqueItems: true
+                  description: Specifies the ConstituentPart that is playing the target
+                    role in the MaterialRelation
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
       ConstituentPartRoleTerm:
         $anchor: ConstituentPartRoleTerm
         description: Refers to a vocabulary of terms describing the role played by
@@ -2715,6 +2752,33 @@ x-defs:
     x-schema-source: https://schemas.opengis.net/json-fg/feature.json
     x-schema-id: https://schemas.opengis.net/json-fg/feature.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
+  Quantity:
+    description: Scalar component with decimal representation and a unit of measure
+      used to store value of a continuous quantity
+    type: object
+    allOf:
+    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
+    - properties:
+        type:
+          enum:
+          - Quantity
+        uom:
+          description: Unit of measure used to express the value of this data component
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/UnitReference
+        constraint:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedValues
+        nilValues:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NilValuesNumber
+        value:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
+      required:
+      - type
+      - definition
+      - label
+      - uom
+    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
   Geometry:
     title: GeoJSON Geometry
     oneOf:
@@ -2863,33 +2927,6 @@ x-defs:
     x-schema-source: https://geojson.org/schema/Geometry.json
     x-schema-id: https://geojson.org/schema/Geometry.json
     x-schema-version: http://json-schema.org/draft-07/schema#
-  Quantity:
-    description: Scalar component with decimal representation and a unit of measure
-      used to store value of a continuous quantity
-    type: object
-    allOf:
-    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/AbstractSimpleComponent
-    - properties:
-        type:
-          enum:
-          - Quantity
-        uom:
-          description: Unit of measure used to express the value of this data component
-          allOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/UnitReference
-        constraint:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/AllowedValues
-        nilValues:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NilValuesNumber
-        value:
-          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/basicTypes/$defs/NumberOrSpecial
-      required:
-      - type
-      - definition
-      - label
-      - uom
-    x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
   AbstractSimpleComponent:
     type: object
     allOf:
@@ -3206,6 +3243,152 @@ x-defs:
       - type
       - fields
     x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/DataRecord.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  gsmGeologicRelationExtensionSchema:
+    description: 'Extension package defining typed binary relations between GeologicFeature
+
+      instances (intrusive, depositional, alteration, mappingframe, etc.) on
+
+      top of the Basic AbstractFeatureRelation skeleton.'
+    $defs:
+      GeologicFeatureRelation:
+        $anchor: GeologicFeatureRelation
+        description: 'The GeologicFeatureRelation class defines the general structure
+          used to define relationships between any GeoSciML feature types. Relationships
+          are always binary and directional. There is always a single source and a
+          single target. The relationship is always defined from the perspective of
+          the Source and is generally an active verb. Example: a Source may point
+          to an intrusive igneous rock unit. In this case, the Target would point
+          to the appropriate host rock body and the relationship attribute would be
+          ''intrudes''. Other appropriate relationship attributes might include: overlies,
+          offsets, crosscuts, folds, etc. Many other types of relationships can also
+          be accommodated via GeologicRelation, for example, topological relations
+          could be described where they are geologically significant.'
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaAbstractFeatureRelation
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                relationship:
+                  description: The relationship:GeologicRelationshipTerm property
+                    contains a term from a controlled vocabulary to describe the geologic
+                    relationship (e.g., stratigraphic relation, structural relation,
+                    intrusive relation).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaGeologicRelationshipTerm
+                sourceRole:
+                  description: The property sourceRole:RelationRoleProperty contains
+                    a term from a controlled vocabulary describing the role played
+                    by the source geologic feature or object (e.g., overlying unit,
+                    underlying unit).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
+                targetRole:
+                  description: The property targetRole:RelationRoleTerm contains a
+                    term from a controlled vocabulary describing the role played by
+                    the target geologic feature or object. (e.g., overlying unit,
+                    underlying unit)
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
+      GeologicRelationshipTerm:
+        $anchor: GeologicRelationshipTerm
+        description: Refers to a vocabulary of terms describing a relationships between
+          geologic features or objects
+        type: string
+        format: uri
+      MaterialRelation:
+        $anchor: MaterialRelation
+        description: 'The MaterialRelation class describes the relationships between
+          constituent parts in an EarthMaterial (e.g. A mineral overgrowth on a phenocryst
+          within a granite). Example: Consider an overgrowth of albite on plagioclase
+          in a granite. The Source would originate with the albite constituentPart
+          description. In this case, the Target would point to the plagioclase constituentPart
+          description and the relationship attribute would be ''overgrowth'' and the
+          sourceRole is ''overgrows''. Other appropriate role attributes might include:
+          crosscuts, replaces, etc. for crosscutting and replacement relationships.
+          Inverse relationships must be explicitly recorded.'
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                relationship:
+                  description: The property relationship:GeologicRelationshipTerm
+                    contains a term from a controlled vocabulary to describe the geologic
+                    relationship (e.g., sedimentary relation, igneous relation).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaGeologicRelationshipTerm
+                sourceRole:
+                  description: The property sourceRole:RelationRoleTerm contains a
+                    term that describes the role played by the source earth material
+                    part (e.g., matrix, clast, overgrowth).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
+                targetRole:
+                  description: The property targetRole:RelationRoleTerm contains a
+                    term describing the role played by the target earth material part
+                    (e.g., matrix, clast, overgrowth).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
+                relatedMaterial:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchema/$defs/SCLinkObject
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaConstituentPart
+                  description: Specifies the ConstituentPart that is playing the target
+                    role in the MaterialRelation
+              required:
+              - relatedMaterial
+          required:
+          - properties
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
+      RelationRoleTerm:
+        $anchor: RelationRoleTerm
+        description: Refers to a vocabulary of terms describing roles played by geologic
+          features or objects in a geologic relationship
+        type: string
+        format: uri
+      SCLinkObject:
+        title: link object
+        description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+          based on RFC 8288 web linking.
+        type: object
+        required:
+        - href
+        properties:
+          href:
+            type: string
+            description: Supplies the URI to a remote resource (or resource fragment).
+          rel:
+            type: string
+            description: The type or semantics of the relation.
+          type:
+            type: string
+            description: A hint indicating what the media type of the result of dereferencing
+              the link should be.
+          hreflang:
+            type: string
+            description: A hint indicating what the language of the result of dereferencing
+              the link should be.
+          title:
+            type: string
+            description: Used to label the destination of a link such that it can
+              be used as a human-readable identifier.
+          length:
+            type: integer
+    x-schema-source: https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json
+    x-schema-id: https://schemas.usgin.org/geosci-json/gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
   time:
     title: the value of the 'time' member

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.usgin.org/geosci-json/gsmExtendedGeologyCollection/gsmExtendedGeologyCollectionSchema.json",
-  "description": "Extended-profile FeatureCollection. Accepts the full set of 9 Basic\nfeatureType values (AnthropogenicGeomorphologicFeature, Contact, Fold,\nFoliation, GeologicEvent, GeologicUnit, MappedFeature,\nNaturalGeomorphologicFeature, ShearDisplacementStructure). Each\nFeature additionally requires its description slot(s) to be concrete\nExtension classes where one exists; FTs without an extension\ndescription slot (Anthropogenic / NaturalGeomorphologicFeature,\nMappedFeature) are pass-through. The profile also narrows every\nfeature's relatedFeature[] items: where Basic accepts\n`oneOf [SCLinkObject, AbstractFeatureRelation]`, the Extended profile\nadditionally requires each AbstractFeatureRelation instance to be one\nof the two concrete subtypes from gsmGeologicRelationExtension\n(GeologicFeatureRelation or MaterialRelation), while still allowing\nby-reference SCLinkObject.",
+  "$id": "https://schemas.usgin.org/geosci-json/gsmExtendedGeology/gsmExtendedGeologySchema.json",
+  "description": "Extended-profile FeatureCollection. Functionally equivalent to OGC's\ngeosciml_extension_featurecollection.json: accepts the 9 Basic\nfeatureType values (AnthropogenicGeomorphologicFeature, Contact,\nFold, Foliation, GeologicEvent, GeologicUnit, MappedFeature,\nNaturalGeomorphologicFeature, ShearDisplacementStructure) AND the 6\nExtension structure featureType values (DisplacementEvent,\nFoldSystem, Joint, Layering, Lineation, NonDirectionalStructure).\nEach Basic Feature additionally requires its description slot(s) to\nbe the concrete Extension class where one exists; Extension FTs are\nalready concrete and validate against their own anchors. The profile\nalso narrows every feature's relatedFeature[] items: where Basic\naccepts `oneOf [SCLinkObject, AbstractFeatureRelation]`, the\nExtended profile additionally requires each AbstractFeatureRelation\ninstance to be one of the concrete subtypes from\ngsmGeologicRelationExtension (GeologicFeatureRelation or\nMaterialRelation), while still allowing by-reference SCLinkObject.",
   "allOf": [
     {
       "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
@@ -267,6 +267,96 @@
               },
               {
                 "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "DisplacementEvent"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "FoldSystem"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Joint"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Layering"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Lineation"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "NonDirectionalStructure"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
                   "not": {
                     "required": [
                       "featureType"
@@ -282,7 +372,13 @@
                           "GeologicUnit",
                           "MappedFeature",
                           "NaturalGeomorphologicFeature",
-                          "ShearDisplacementStructure"
+                          "ShearDisplacementStructure",
+                          "DisplacementEvent",
+                          "FoldSystem",
+                          "Joint",
+                          "Layering",
+                          "Lineation",
+                          "NonDirectionalStructure"
                         ]
                       }
                     }

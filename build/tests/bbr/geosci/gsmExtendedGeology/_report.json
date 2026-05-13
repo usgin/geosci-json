@@ -1,0 +1,14 @@
+{
+  "title": "Validation report for usgin.bbr.geosci.gsmExtendedGeology - gsmExtendedGeology",
+  "bblockName": "gsmExtendedGeology",
+  "bblockId": "usgin.bbr.geosci.gsmExtendedGeology",
+  "generated": "2026-05-13T18:12:31.017452+00:00",
+  "result": true,
+  "items": [],
+  "globalErrors": {},
+  "counts": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0
+  }
+}

@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmGeologicUnitExtension - gsmGeologicUnitExtension
-Generated 2026-05-13T16:56:50.296739+00:00
+Generated 2026-05-13T18:12:40.576272+00:00
 === Files ===
 Using examples/geologic_unit_lake_holmes_coal_measures_GSO.json from examples
 === End Files ===

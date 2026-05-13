@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total": 10,
-    "passed": 7,
+    "total": 11,
+    "passed": 8,
     "failed": 3,
     "result": false
   },
@@ -10,7 +10,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmBasicGeology - gsmBasicGeology",
       "bblockName": "gsmBasicGeology",
       "bblockId": "usgin.bbr.geosci.gsmBasicGeology",
-      "generated": "2026-05-13T16:56:25.426298+00:00",
+      "generated": "2026-05-13T18:12:18.536619+00:00",
       "result": true,
       "items": [
         {
@@ -781,7 +781,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmBorehole - gsmBorehole",
       "bblockName": "gsmBorehole",
       "bblockId": "usgin.bbr.geosci.gsmBorehole",
-      "generated": "2026-05-13T16:56:31.216129+00:00",
+      "generated": "2026-05-13T18:12:24.596658+00:00",
       "result": false,
       "items": [
         {
@@ -1012,11 +1012,25 @@
         "failed": 4
       }
     },
+    "usgin.bbr.geosci.gsmCompleteGeology": {
+      "title": "Validation report for usgin.bbr.geosci.gsmCompleteGeology - gsmCompleteGeology",
+      "bblockName": "gsmCompleteGeology",
+      "bblockId": "usgin.bbr.geosci.gsmCompleteGeology",
+      "generated": "2026-05-13T18:12:24.631293+00:00",
+      "result": true,
+      "items": [],
+      "globalErrors": {},
+      "counts": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0
+      }
+    },
     "usgin.bbr.geosci.gsmEarthMaterial": {
       "title": "Validation report for usgin.bbr.geosci.gsmEarthMaterial - gsmEarthMaterial",
       "bblockName": "gsmEarthMaterial",
       "bblockId": "usgin.bbr.geosci.gsmEarthMaterial",
-      "generated": "2026-05-13T16:56:37.254258+00:00",
+      "generated": "2026-05-13T18:12:30.991876+00:00",
       "result": false,
       "items": [
         {
@@ -1065,90 +1079,17 @@
         "failed": 1
       }
     },
-    "usgin.bbr.geosci.gsmExtendedGeologyCollection": {
-      "title": "Validation report for usgin.bbr.geosci.gsmExtendedGeologyCollection - gsmExtendedGeologyCollection",
-      "bblockName": "gsmExtendedGeologyCollection",
-      "bblockId": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
-      "generated": "2026-05-13T16:56:40.901307+00:00",
+    "usgin.bbr.geosci.gsmExtendedGeology": {
+      "title": "Validation report for usgin.bbr.geosci.gsmExtendedGeology - gsmExtendedGeology",
+      "bblockName": "gsmExtendedGeology",
+      "bblockId": "usgin.bbr.geosci.gsmExtendedGeology",
+      "generated": "2026-05-13T18:12:31.017452+00:00",
       "result": true,
-      "items": [
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmExtendedGeologyCollection/example_1_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmExtendedGeologyCollection/example_1_1.json",
-            "exampleIndex": 1,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/fc_extended_minimal.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "source": {
-            "type": "EXAMPLE",
-            "requireFail": false,
-            "filename": "build/tests/bbr/geosci/gsmExtendedGeologyCollection/example_2_1.json",
-            "url": "https://usgin.github.io/geosci-json/build/tests/bbr/geosci/gsmExtendedGeologyCollection/example_2_1.json",
-            "exampleIndex": 2,
-            "snippetIndex": 1,
-            "language": "application/json"
-          },
-          "result": true,
-          "sections": [
-            {
-              "name": "FILES",
-              "title": "Files",
-              "entries": [
-                {
-                  "isError": false,
-                  "message": "Using examples/fc_hammersley_fault_traces_GSO.json from examples"
-                }
-              ]
-            },
-            {
-              "name": "JSON_SCHEMA",
-              "title": "JSON Schema",
-              "entries": [
-                {
-                  "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
-                }
-              ]
-            }
-          ]
-        }
-      ],
+      "items": [],
       "globalErrors": {},
       "counts": {
-        "total": 2,
-        "passed": 2,
+        "total": 0,
+        "passed": 0,
         "failed": 0
       }
     },
@@ -1156,7 +1097,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicRelationExtension - gsmGeologicRelationExtension",
       "bblockName": "gsmGeologicRelationExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicRelationExtension",
-      "generated": "2026-05-13T16:56:40.913809+00:00",
+      "generated": "2026-05-13T18:12:31.029096+00:00",
       "result": true,
       "items": [
         {
@@ -1207,7 +1148,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicStructureExtension - gsmGeologicStructureExtension",
       "bblockName": "gsmGeologicStructureExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicStructureExtension",
-      "generated": "2026-05-13T16:56:47.287640+00:00",
+      "generated": "2026-05-13T18:12:37.492761+00:00",
       "result": true,
       "items": [
         {
@@ -1438,7 +1379,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicTime - gsmGeologicTime",
       "bblockName": "gsmGeologicTime",
       "bblockId": "usgin.bbr.geosci.gsmGeologicTime",
-      "generated": "2026-05-13T16:56:50.283808+00:00",
+      "generated": "2026-05-13T18:12:40.563156+00:00",
       "result": true,
       "items": [
         {
@@ -1633,7 +1574,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicUnitExtension - gsmGeologicUnitExtension",
       "bblockName": "gsmGeologicUnitExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicUnitExtension",
-      "generated": "2026-05-13T16:56:50.297113+00:00",
+      "generated": "2026-05-13T18:12:40.576590+00:00",
       "result": true,
       "items": [
         {
@@ -1792,7 +1733,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmSpecimen - gsmSpecimen",
       "bblockName": "gsmSpecimen",
       "bblockId": "usgin.bbr.geosci.gsmSpecimen",
-      "generated": "2026-05-13T16:56:55.574895+00:00",
+      "generated": "2026-05-13T18:12:46.060575+00:00",
       "result": false,
       "items": [
         {
@@ -1862,7 +1803,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite",
       "bblockName": "gsmscimlLite",
       "bblockId": "usgin.bbr.geosci.gsmscimlLite",
-      "generated": "2026-05-13T16:56:59.507084+00:00",
+      "generated": "2026-05-13T18:12:50.152960+00:00",
       "result": true,
       "items": [
         {

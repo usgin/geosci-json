@@ -986,7 +986,7 @@ None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](/github/workspace/_sources/gsmEarthMaterial/context.jsonld)
+[context.jsonld](https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/context.jsonld)
 
 ## Sources
 

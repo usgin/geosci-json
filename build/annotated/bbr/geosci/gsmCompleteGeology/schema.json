@@ -1,0 +1,587 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.usgin.org/geosci-json/gsmCompleteGeology/gsmCompleteGeologySchema.json",
+  "description": "Complete-coverage FeatureCollection profile. Superset of\ngsmExtendedGeology that additionally dispatches every Feature-shaped\nclass across the extension BBs: relations\n(GeologicFeatureRelation, MaterialRelation), materials\n(CompoundMaterial, Mineral, OrganicMaterial, RockMaterial), and\ngeologic-time anchors (GeochronologicEra, GeochronologicBoundary,\nGlobalStratotypePoint, GlobalStratotypeSection, StratigraphicPoint,\nStratigraphicSection). The same per-Basic-FT description-slot\nnarrowing and the same relatedFeature[] anyOf constraint apply.\nUse when you want a single FC schema that accepts any GeoSciML\nFeature in the model (Basic + Extension + relations + materials +\ntime anchors) at the FC's top-level features[] array.",
+  "allOf": [
+    {
+      "$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "features": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "AnthropogenicGeomorphologicFeature"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Contact"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stContactDescription": {
+                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Fold"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stFoldDescription": {
+                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Foliation"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stFoliationDescription": {
+                              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeologicEvent"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "gaEventDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/gsmGeologicTimeSchema.json"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeologicUnit"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "gbUnitDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicUnitExtension/gsmGeologicUnitExtensionSchema.json"
+                              }
+                            },
+                            "gbMaterialDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "MappedFeature"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "NaturalGeomorphologicFeature"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "ShearDisplacementStructure"
+                    }
+                  }
+                },
+                "then": {
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "stStructureDescription": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "DisplacementEvent"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "FoldSystem"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Joint"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Layering"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Lineation"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "NonDirectionalStructure"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeologicFeatureRelation"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "MaterialRelation"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "CompoundMaterial"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "Mineral"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "OrganicMaterial"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "RockMaterial"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeochronologicEra"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/gsmGeologicTimeSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GeochronologicBoundary"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/gsmGeologicTimeSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GlobalStratotypePoint"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/gsmGeologicTimeSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "GlobalStratotypeSection"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/gsmGeologicTimeSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "StratigraphicPoint"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/gsmGeologicTimeSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "required": [
+                    "featureType"
+                  ],
+                  "properties": {
+                    "featureType": {
+                      "const": "StratigraphicSection"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmGeologicTime/gsmGeologicTimeSchema.json"
+                }
+              },
+              {
+                "if": {
+                  "not": {
+                    "required": [
+                      "featureType"
+                    ],
+                    "properties": {
+                      "featureType": {
+                        "enum": [
+                          "AnthropogenicGeomorphologicFeature",
+                          "Contact",
+                          "Fold",
+                          "Foliation",
+                          "GeologicEvent",
+                          "GeologicUnit",
+                          "MappedFeature",
+                          "NaturalGeomorphologicFeature",
+                          "ShearDisplacementStructure",
+                          "DisplacementEvent",
+                          "FoldSystem",
+                          "Joint",
+                          "Layering",
+                          "Lineation",
+                          "NonDirectionalStructure",
+                          "GeologicFeatureRelation",
+                          "MaterialRelation",
+                          "CompoundMaterial",
+                          "Mineral",
+                          "OrganicMaterial",
+                          "RockMaterial",
+                          "GeochronologicEra",
+                          "GeochronologicBoundary",
+                          "GlobalStratotypePoint",
+                          "GlobalStratotypeSection",
+                          "StratigraphicPoint",
+                          "StratigraphicSection"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "then": false
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

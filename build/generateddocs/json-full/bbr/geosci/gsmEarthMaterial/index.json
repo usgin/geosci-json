@@ -30,7 +30,7 @@
       "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/rules.shacl"
     ]
   },
-  "ldContext": "/github/workspace/_sources/gsmEarthMaterial/context.jsonld",
+  "ldContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/context.jsonld",
   "dateOfLastChange": "2026-05-12",
   "schema": {
     "application/yaml": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema.yaml",
@@ -38,7 +38,6 @@
   },
   "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/schema.yaml",
   "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/context.jsonld",
-  "resolvedSchemaProperties": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/resolvedProperties.json",
   "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/",
   "validationPassed": false,
   "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmEarthMaterial/",

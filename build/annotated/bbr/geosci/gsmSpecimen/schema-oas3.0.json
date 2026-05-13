@@ -600,7 +600,53 @@
         "AbstractFeatureRelation": {
           "$anchor": "AbstractFeatureRelation",
           "description": "Association class placeholder to implement relation between geologic features",
-          "type": "object"
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/feature"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "relatedFeature": {
+                      "oneOf": [
+                        {
+                          "allOf": [
+                            {
+                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject"
+                            }
+                          ]
+                        },
+                        {
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchemaGeologicFeature"
+                        }
+                      ],
+                      "description": "A relatedFeature is a general structure used to define relationships between any features or objects within GeoSciML. Relationships are always binary and directional. There is always a single source and a single target for a given FeatureRelation (which is abstract in GeoSciML Basic). The relationship is always defined from the perspective of the Source and is generally an active verb."
+                    }
+                  },
+                  "required": [
+                    "relatedFeature"
+                  ]
+                }
+              },
+              "required": [
+                "properties"
+              ]
+            },
+            {
+              "required": [
+                "featureType",
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
         },
         "AnthropogenicGeomorphologicFeature": {
           "$anchor": "AnthropogenicGeomorphologicFeature",
@@ -936,53 +982,6 @@
           "type": "string",
           "format": "uri"
         },
-        "GSML": {
-          "$anchor": "GSML",
-          "description": "GSML is a collection class grouping a set of features or types which are members of this collection. A collectionType property provides context or purpose.  Constraint: self.metadata.hierarchylevel=dataset",
-          "allOf": [
-            {
-              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/feature"
-            },
-            {
-              "type": "object",
-              "properties": {
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "collectionType": {
-                      "description": "The collectionType:CollectionTypeTerm property contains a term from a controlled vocabulary describing the type of collection, such as Geologic Map, Boreholes, 3D models.",
-                      "allOf": [
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchemaCollectionTypeTerm"
-                        }
-                      ]
-                    },
-                    "member": {
-                      "type": "array",
-                      "minItems": 1,
-                      "items": {
-                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchemaGSMLitem"
-                      },
-                      "uniqueItems": true,
-                      "description": "The member property is an association that links a GSML instance to features and objects to be included as members of the collection. A collection can be made of heterogeneous items."
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "featureType",
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                }
-              }
-            }
-          ]
-        },
         "GSML_GeometricDescriptionValue": {
           "$anchor": "GSML_GeometricDescriptionValue",
           "description": "GSML_GeometricDescriptionValue is a special abstract data type for descriptions of planar or linear orientations of a geologic feature. Different subtypes allow specifying direction by direction vector (e.g. dip/dip direction), compass point (e.g. NE), or description (e.g. \"toward fold hinge\", \"below').",
@@ -1089,20 +1088,35 @@
         "GSML_QuantityRange": {
           "$anchor": "GSML_QuantityRange",
           "description": "GSML_QuantityRange is a specialization of SWE Common QuantiytyRange (OGC 08-094r1, Clause 7.2.13) where lower and upper values are made explicit. SWE::QuantityRange uses an array of values (RealPair, see Clause 7.2.1) where the lowest value is the first element and the highest the second. This convenience data type has been created as an alternative encoding for implementations that do no support encoding of arrays in a single field (e.g. DBF) or reference to elements in string encoded arrays1 (eg. Filter Encoding Specification 2.0 - OGC 09-029r2). &nbsp;------------------------- 1 SWE RealPair is encoded as space delimited lists (&lt;swe:value&gt;10 300&lt;/swe:value&gt; in XML) , which demands that clients parse the string to extract each token. To build a WFS/FES query that tests the first element, it requires parsing the string either using string-before(swe:value,' ') or tokenize(swe:value,' '). This is cumbersome at best, or not even supported by the server at worst. 09-026r2 Clause 7.4.4 describes the minimal XPath supports and string parsing is not present.",
-          "type": "object",
-          "properties": {
-            "lowerValue": {
-              "type": "number",
-              "description": "The property lowerValue:Real contains the lower bound of the range. It shall be a copy of inherited SWE::QuantityRange::value[0]."
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/QuantityRange"
             },
-            "upperValue": {
-              "type": "number",
-              "description": "The property upperValue:Real contains the upper bound of the range. It shall be a copy of inherited SWE::QuantityRange::value[1]."
+            {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "lowerValue": {
+                      "type": "number",
+                      "description": "The property lowerValue:Real contains the lower bound of the range. It shall be a copy of inherited SWE::QuantityRange::value[0]."
+                    },
+                    "upperValue": {
+                      "type": "number",
+                      "description": "The property upperValue:Real contains the upper bound of the range. It shall be a copy of inherited SWE::QuantityRange::value[1]."
+                    }
+                  },
+                  "required": [
+                    "lowerValue",
+                    "upperValue"
+                  ]
+                }
+              },
+              "required": [
+                "properties"
+              ]
             }
-          },
-          "required": [
-            "lowerValue",
-            "upperValue"
           ]
         },
         "GSML_Vector": {
@@ -1124,78 +1138,6 @@
                   ]
                 }
               }
-            }
-          ]
-        },
-        "GSMLitem": {
-          "$anchor": "GSMLitem",
-          "description": "GSMLItem constrains the collection members to instances of EarthMaterial, GeologicFeature, GM_Object, MappedFeature, AbstractFeatureRelation and OM::SF_SamplingFeature.",
-          "oneOf": [
-            {
-              "oneOf": [
-                {
-                  "allOf": [
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject"
-                    }
-                  ]
-                },
-                {
-                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchemaEarthMaterial"
-                }
-              ]
-            },
-            {
-              "oneOf": [
-                {
-                  "allOf": [
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject"
-                    }
-                  ]
-                },
-                {
-                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchemaGeologicFeature"
-                }
-              ]
-            },
-            {
-              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/Geometry"
-            },
-            {
-              "oneOf": [
-                {
-                  "allOf": [
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject"
-                    }
-                  ]
-                },
-                {
-                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchemaMappedFeature"
-                }
-              ]
-            },
-            {
-              "oneOf": [
-                {
-                  "allOf": [
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject"
-                    }
-                  ]
-                },
-                {
-                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchemaAbstractFeatureRelation"
-                }
-              ]
-            },
-            {
-              "allOf": [
-                {
-                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject"
-                }
-              ]
             }
           ]
         },
@@ -1326,7 +1268,7 @@
                             ]
                           },
                           {
-                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchemaGeologicFeature"
+                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchemaAbstractFeatureRelation"
                           }
                         ]
                       },

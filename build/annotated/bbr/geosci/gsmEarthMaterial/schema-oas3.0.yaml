@@ -255,7 +255,35 @@ x-defs:
         $anchor: AbstractFeatureRelation
         description: Association class placeholder to implement relation between geologic
           features
-        type: object
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                relatedFeature:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicFeature
+                  description: A relatedFeature is a general structure used to define
+                    relationships between any features or objects within GeoSciML.
+                    Relationships are always binary and directional. There is always
+                    a single source and a single target for a given FeatureRelation
+                    (which is abstract in GeoSciML Basic). The relationship is always
+                    defined from the perspective of the Source and is generally an
+                    active verb.
+              required:
+              - relatedFeature
+          required:
+          - properties
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
       AnthropogenicGeomorphologicFeature:
         $anchor: AnthropogenicGeomorphologicFeature
         description: An anthropogenic geomorphologic feature is a geomorphologic feature
@@ -558,39 +586,6 @@ x-defs:
           etc)
         type: string
         format: uri
-      GSML:
-        $anchor: GSML
-        description: 'GSML is a collection class grouping a set of features or types
-          which are members of this collection. A collectionType property provides
-          context or purpose.  Constraint: self.metadata.hierarchylevel=dataset'
-        allOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/feature
-        - type: object
-          properties:
-            properties:
-              type: object
-              properties:
-                collectionType:
-                  description: The collectionType:CollectionTypeTerm property contains
-                    a term from a controlled vocabulary describing the type of collection,
-                    such as Geologic Map, Boreholes, 3D models.
-                  allOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCollectionTypeTerm
-                member:
-                  type: array
-                  minItems: 1
-                  items:
-                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSMLitem
-                  uniqueItems: true
-                  description: The member property is an association that links a
-                    GSML instance to features and objects to be included as members
-                    of the collection. A collection can be made of heterogeneous items.
-        - required:
-          - featureType
-          - id
-          properties:
-            id:
-              type: string
       GSML_GeometricDescriptionValue:
         $anchor: GSML_GeometricDescriptionValue
         description: GSML_GeometricDescriptionValue is a special abstract data type
@@ -697,19 +692,26 @@ x-defs:
           or tokenize(swe:value,' '). This is cumbersome at best, or not even supported
           by the server at worst. 09-026r2 Clause 7.4.4 describes the minimal XPath
           supports and string parsing is not present.
-        type: object
-        properties:
-          lowerValue:
-            type: number
-            description: The property lowerValue:Real contains the lower bound of
-              the range. It shall be a copy of inherited SWE::QuantityRange::value[0].
-          upperValue:
-            type: number
-            description: The property upperValue:Real contains the upper bound of
-              the range. It shall be a copy of inherited SWE::QuantityRange::value[1].
-        required:
-        - lowerValue
-        - upperValue
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/QuantityRange
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                lowerValue:
+                  type: number
+                  description: The property lowerValue:Real contains the lower bound
+                    of the range. It shall be a copy of inherited SWE::QuantityRange::value[0].
+                upperValue:
+                  type: number
+                  description: The property upperValue:Real contains the upper bound
+                    of the range. It shall be a copy of inherited SWE::QuantityRange::value[1].
+              required:
+              - lowerValue
+              - upperValue
+          required:
+          - properties
       GSML_Vector:
         $anchor: GSML_Vector
         description: A GSML_Vector is a data type representing a linear orientation
@@ -724,30 +726,6 @@ x-defs:
                 magnitude of the vector.
               allOf:
               - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/QuantityRange
-      GSMLitem:
-        $anchor: GSMLitem
-        description: GSMLItem constrains the collection members to instances of EarthMaterial,
-          GeologicFeature, GM_Object, MappedFeature, AbstractFeatureRelation and OM::SF_SamplingFeature.
-        oneOf:
-        - oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
-        - oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicFeature
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Geometry
-        - oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaMappedFeature
-        - oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaAbstractFeatureRelation
-        - allOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
       GeochronologicEraTerm:
         $anchor: GeochronologicEraTerm
         description: Term from a Geochronological vocabulary
@@ -879,7 +857,7 @@ x-defs:
                     oneOf:
                     - allOf:
                       - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicFeature
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaAbstractFeatureRelation
                   uniqueItems: true
                   description: A relatedFeature is a general structure used to define
                     relationships between any features or objects within GeoSciML.
@@ -1486,25 +1464,30 @@ x-defs:
           - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaAbstractFeatureRelation
         - type: object
           properties:
-            relationship:
-              description: The relationship:GeologicRelationshipTerm property contains
-                a term from a controlled vocabulary to describe the geologic relationship
-                (e.g., stratigraphic relation, structural relation, intrusive relation).
-              allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaGeologicRelationshipTerm
-            sourceRole:
-              description: The property sourceRole:RelationRoleProperty contains a
-                term from a controlled vocabulary describing the role played by the
-                source geologic feature or object (e.g., overlying unit, underlying
-                unit).
-              allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
-            targetRole:
-              description: The property targetRole:RelationRoleTerm contains a term
-                from a controlled vocabulary describing the role played by the target
-                geologic feature or object. (e.g., overlying unit, underlying unit)
-              allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
+            properties:
+              type: object
+              properties:
+                relationship:
+                  description: The relationship:GeologicRelationshipTerm property
+                    contains a term from a controlled vocabulary to describe the geologic
+                    relationship (e.g., stratigraphic relation, structural relation,
+                    intrusive relation).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaGeologicRelationshipTerm
+                sourceRole:
+                  description: The property sourceRole:RelationRoleProperty contains
+                    a term from a controlled vocabulary describing the role played
+                    by the source geologic feature or object (e.g., overlying unit,
+                    underlying unit).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
+                targetRole:
+                  description: The property targetRole:RelationRoleTerm contains a
+                    term from a controlled vocabulary describing the role played by
+                    the target geologic feature or object. (e.g., overlying unit,
+                    underlying unit)
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
       GeologicRelationshipTerm:
         $anchor: GeologicRelationshipTerm
         description: Refers to a vocabulary of terms describing a relationships between
@@ -1522,26 +1505,49 @@ x-defs:
           sourceRole is ''overgrows''. Other appropriate role attributes might include:
           crosscuts, replaces, etc. for crosscutting and replacement relationships.
           Inverse relationships must be explicitly recorded.'
-        type: object
-        properties:
-          relationship:
-            description: The property relationship:GeologicRelationshipTerm contains
-              a term from a controlled vocabulary to describe the geologic relationship
-              (e.g., sedimentary relation, igneous relation).
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaGeologicRelationshipTerm
-          sourceRole:
-            description: The property sourceRole:RelationRoleTerm contains a term
-              that describes the role played by the source earth material part (e.g.,
-              matrix, clast, overgrowth).
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
-          targetRole:
-            description: The property targetRole:RelationRoleTerm contains a term
-              describing the role played by the target earth material part (e.g.,
-              matrix, clast, overgrowth).
-            allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                relationship:
+                  description: The property relationship:GeologicRelationshipTerm
+                    contains a term from a controlled vocabulary to describe the geologic
+                    relationship (e.g., sedimentary relation, igneous relation).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaGeologicRelationshipTerm
+                sourceRole:
+                  description: The property sourceRole:RelationRoleTerm contains a
+                    term that describes the role played by the source earth material
+                    part (e.g., matrix, clast, overgrowth).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
+                targetRole:
+                  description: The property targetRole:RelationRoleTerm contains a
+                    term describing the role played by the target earth material part
+                    (e.g., matrix, clast, overgrowth).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaRelationRoleTerm
+                relatedMaterial:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchema/$defs/SCLinkObject
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaConstituentPart
+                  description: Specifies the ConstituentPart that is playing the target
+                    role in the MaterialRelation
+              required:
+              - relatedMaterial
+          required:
+          - properties
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
       RelationRoleTerm:
         $anchor: RelationRoleTerm
         description: Refers to a vocabulary of terms describing roles played by geologic
@@ -2258,6 +2264,705 @@ x-defs:
     - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/sweCommon/$defs/AnyComponent
     - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/DataStream
     x-schema-source: https://schemas.opengis.net/sweCommon/3.0/json/sweCommon.json
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  gsmEarthMaterialSchema:
+    description: "EarthMaterial building block. Combines the formerly-separate\ngsmEarthMaterialExtension
+      DataType library (AlterationDescription,\nCompoundMaterialDescription, ChemicalComposition,
+      FabricDescription,\nMetamorphicDescription, PhysicalDescription, ParticleGeometryDescription,\nRockMaterialDescription,
+      plus the EarthMaterial subtype \xABType\xBB classes\nMineral, InorganicFluid,
+      OrganicMaterial, Organism, ConstituentPart)\nwith the FC profile formerly known
+      as gsmEarthMaterialCollection.\nThe merged Feature/FC dispatcher accepts four
+      featureType values\n(Mineral, OrganicMaterial, RockMaterial, CompoundMaterial),
+      injecting\nthe JSON-FG Feature envelope around each \xABType\xBB class via\n`wrapAsFeature`.
+      The inherited gbEarthMaterialDescription[] slot is\nconstrained to RockMaterialDescription
+      or CompoundMaterialDescription\non the corresponding branches.\n\nValidates
+      either a single Feature (dispatched by `featureType` to one of: Mineral, OrganicMaterial,
+      RockMaterial, CompoundMaterial) or a FeatureCollection whose `features[]` items
+      are dispatched the same way."
+    if:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          enum:
+          - FeatureCollection
+    then:
+      allOf:
+      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/featurecollection
+      - type: object
+        properties:
+          features:
+            type: array
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/_FeatureDispatch
+    else:
+      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/_FeatureDispatch
+    $defs:
+      _FeatureDispatch:
+        allOf:
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                enum:
+                - Mineral
+          then:
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/feature
+            - type: object
+              required:
+              - featureType
+              - id
+              properties:
+                id:
+                  type: string
+            - type: object
+              properties:
+                properties:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaMineral
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                enum:
+                - OrganicMaterial
+          then:
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/feature
+            - type: object
+              required:
+              - featureType
+              - id
+              properties:
+                id:
+                  type: string
+            - type: object
+              properties:
+                properties:
+                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaOrganicMaterial
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                enum:
+                - RockMaterial
+          then:
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/feature
+            - type: object
+              required:
+              - featureType
+              - id
+              properties:
+                id:
+                  type: string
+            - type: object
+              properties:
+                properties:
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaRockMaterial
+                  - type: object
+                    properties:
+                      gbEarthMaterialDescription:
+                        type: array
+                        items:
+                          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaRockMaterialDescription
+        - if:
+            required:
+            - featureType
+            properties:
+              featureType:
+                enum:
+                - CompoundMaterial
+          then:
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/feature
+            - type: object
+              required:
+              - featureType
+              - id
+              properties:
+                id:
+                  type: string
+            - type: object
+              properties:
+                properties:
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCompoundMaterial
+                  - type: object
+                    properties:
+                      gbEarthMaterialDescription:
+                        type: array
+                        items:
+                          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaCompoundMaterialDescription
+        - if:
+            not:
+              required:
+              - featureType
+              properties:
+                featureType:
+                  enum:
+                  - Mineral
+                  - OrganicMaterial
+                  - RockMaterial
+                  - CompoundMaterial
+          then: false
+      AlterationDescription:
+        $anchor: AlterationDescription
+        description: AlterationDescription describes aspects of a geologic unit or
+          earth material that are the result of bulk chemical, mineralogical or physical
+          changes related to change in the physical or chemical environment. It includes
+          weathering, supergene alteration, hydrothermal alteration and metasomatic
+          effects not considered metamorphic. For example, a soil profile description
+          would have to be constructed as a GeologicUnit (geologicUnitType = PedologicUnit)
+          with unit parts representing the various horizons in the profile. Thickness
+          of a weathering profile can be delivered as unitThickness of a GeologicUnit
+          of geologicUnitType equal to "AlterationUnit"
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
+        - type: object
+          properties:
+            alterationType:
+              description: The property alterationType:AlterationTypeTerm contains
+                a term from a controlled vocabulary of alteration types (e.g., potassic,
+                argillic, advanced argillic).
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaAlterationTypeTerm
+            alterationProduct:
+              type: array
+              items:
+                oneOf:
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
+              uniqueItems: true
+              description: The property alterationProduct is an association between
+                the AlterationDescripton and EarthMaterial describing the material
+                resulting from the alteration processes, e.g. alteration minerals,
+                saprolite, ferricrete, clay, calcrete, skarn, etc. Materials observed
+                in a soil profile could be identified using this property.
+            alterationDistribution:
+              type: array
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+              uniqueItems: true
+              description: The alterationDistribution (SWE::Category) property describes
+                the spatial distribution or geometry of alteration zones using a term
+                from a controlled vocabulary. e.g., patchy, spotted, banded, veins,
+                vein breccia, pervasive, disseminated, etc.
+            alterationDegree:
+              type: array
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+              uniqueItems: true
+              description: The property alterationDegree (SWE::Category) contains
+                a term from a controlled vocabulary to indicate the magnitude of observed
+                alteration.
+            alterationEvent:
+              oneOf:
+              - allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
+              - allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicEvent
+              description: The property alterationEvent is an association between
+                an AlterationDescription and a GeologicEvent describing the GeologicEvent
+                associated with the alteration.
+      AlterationTypeTerm:
+        $anchor: AlterationTypeTerm
+        description: 'Refers to a vocabulary of terms describing the dominant alteration
+          mineralogy or alteration type, in common usage. Examples include: argillic,
+          phyllic, potassic, propylitic, calc-silicate, skarn, deuteric, greisen,
+          serpenitisation, weathering, etc.'
+        type: string
+        format: uri
+      ChemicalComposition:
+        $anchor: ChemicalComposition
+        description: ChemicalComposition is a kind of EarthMaterialDescription that
+          delivers the chemical composition of a geological unit or earth material,
+          as a list of element or oxide concentrations.
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
+        - type: object
+          properties:
+            chemicalAnalysis:
+              description: The chemicalAnalysis property (SWE:DataRecord) contains
+                a collection of geochemical results in a form of a DataRecord (a collection
+                of fields composed of description and values).
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/DataRecord
+      CompoundMaterialDescription:
+        $anchor: CompoundMaterialDescription
+        description: The CompoundMaterialDescription class is a kind of EarthMaterialDescription
+          that provides an extended description of a compound earth material (i.e.,
+          rocks and unconsolidated solid earth materials).
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
+        - type: object
+          properties:
+            compositionCategory:
+              type: array
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+              uniqueItems: true
+              description: The compositionCategory property (SWE::Category) provides
+                a term from a controlled vocabulary to specify the gross compositional
+                character of a compound material. Composition as used here is loosely
+                construed to include both chemical composition and petrographic composition,
+                thus multiple values may be applied to a single rock, e.g. metaluminous
+                and alkalic, undersaturated and basic, etc. Terms would typically
+                include broad chemical classifications such as silicate, carbonate,
+                ferromagnesian, oxide. However, this attribute may have different
+                terminology for different kinds of rocks - for example sandstone petrographic
+                classification terms (e.g. feldspathic) might be placed here.
+            geneticCategory:
+              type: array
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+              uniqueItems: true
+              description: The property geneticCategory (SWE::Category) provides a
+                term from a controlled vocabulary that represents a summary geologic
+                history of the material. (i.e., a genetic process classifier term).
+                Examples include igneous, sedimentary, metamorphic, shock metamorphic,
+                volcanic, pyroclastic.
+            particleGeometry:
+              description: The particleGeometry:ParticleGeometryDescription contains
+                an instance of ParticleGeometryDescription.
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaParticleGeometryDescription
+            constituent:
+              type: array
+              items:
+                oneOf:
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaConstituentPart
+              uniqueItems: true
+              description: The property constituent is an association between a CompoundMaterialDescription
+                and a ConstituentPart that makes up part of the CompoundMaterial.
+      ConstituentPart:
+        $anchor: ConstituentPart
+        description: The ConstituentPart class describes how Earth materials may be
+          made up of other Earth materials, including the proportion of the constituent
+          part in the whole (e.g., 20%, minor, dominant); and the role that the constituent
+          plays in the whole (e.g., matrix, groundmass, framework, phenocryst, xenolith,
+          vein).
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                role:
+                  description: "The role:ConstituentPartRoleTerm property contains
+                    a term from a controlled vocabulary that describes the role a
+                    ConstituentPart plays in a CompoundMaterial aggregation. The same
+                    EarthMaterial may occur as different ConstituentParts playing
+                    different roles within one CompoundMaterial. For example, feldspar
+                    may be present as groundmass (\u201Cgroundmass\u201D is a ConstituentPart::role)
+                    and as phenocrysts (\u201Cphenocryst\u201D is another ConstituentPart::role)
+                    within a single igneous rock."
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaConstituentPartRoleTerm
+                proportion:
+                  description: The proportion property (SWE::QuantityRange) reports
+                    the fraction of the whole that is formed by a ConstituentPart
+                    in a part/whole relationship. It is used for the ConstituentPart
+                    portion in a CompoundMaterial. It specifies the fraction of the
+                    EarthMaterial formed by the part (e.g., 20%, minor, dominant).
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/QuantityRange
+                constituentMaterial:
+                  oneOf:
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
+                  - allOf:
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
+                  description: The constituentMaterial property is an association
+                    between a ConstituentPart and an EarthMaterial that specifies
+                    the EarthMaterial that is forming the ConstituentPart.
+                constituentParticleGeometry:
+                  description: Description of geometry of individual subset of particles
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaParticleGeometryDescription
+                relatedMaterial:
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmGeologicRelationExtensionSchemaMaterialRelation
+                  uniqueItems: true
+                  description: Specifies the ConstituentPart that is playing the target
+                    role in the MaterialRelation
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
+      ConstituentPartRoleTerm:
+        $anchor: ConstituentPartRoleTerm
+        description: Refers to a vocabulary of terms describing the role played by
+          a constituent part of a compound material (eg, matrix, phenocryst)
+        type: string
+        format: uri
+      FabricDescription:
+        $anchor: FabricDescription
+        description: The FabricDescription data type describes all types of fabrics
+          associated with a CompoundMaterial (i.e., tectonic, metamorphic, sedimentary,
+          igneous fabrics or textures). It denotes a pattern, defined by one or more
+          CompoundMaterial constituents, that is present throughout a rock body when
+          considered at some scale. FabricDescription is defined based on the average
+          configuration of many constituents. Penetrative fabric denotes that these
+          constituents are distributed throughout the rock volume at the scale of
+          observation, and are repeated at distances that are small relative to the
+          scale of the whole, such that they can be considered to pervade the whole
+          uniformly.
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
+        - type: object
+          properties:
+            fabricType:
+              description: The fabricType:FabricTypeTerm property contains a term
+                from a controlled vocabulary to denote the type of fabric in the CompoundMaterial
+                (e.g., rapikivi texture, autobrecciation, spaced cleavage, porphyroblastic,
+                cross-bedding). The fabricType describes a pattern, defined by one
+                or more CompoundMaterial constituents, that is present throughout
+                a rock body when considered at some scale. It is defined based on
+                the average configuration of many constituents. Penetrative fabric
+                denotes that these constituents are distributed throughout the rock
+                volume at the scale of observation, and are repeated at distances
+                that are small relative to the scale of the whole, such that they
+                can be considered to pervade the whole uniformly.
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaFabricTypeTerm
+      FabricTypeTerm:
+        $anchor: FabricTypeTerm
+        description: Refers to a vocabulary of terms describing the type of fabric
+          present
+        type: string
+        format: uri
+      InorganicFluid:
+        $anchor: InorganicFluid
+        description: The fabricType:FabricTypeTerm property contains a term from a
+          controlled vocabulary to denote the type of fabric in the CompoundMaterial
+          (e.g., rapikivi texture, autobrecciation, spaced cleavage, porphyroblastic,
+          cross-bedding). The fabricType describes a pattern, defined by one or more
+          CompoundMaterial constituents, that is present throughout a rock body when
+          considered at some scale. It is defined based on the average configuration
+          of many constituents. Penetrative fabric denotes that these constituents
+          are distributed throughout the rock volume at the scale of observation,
+          and are repeated at distances that are small relative to the scale of the
+          whole, such that they can be considered to pervade the whole uniformly.
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties: {}
+      MetamorphicDescription:
+        $anchor: MetamorphicDescription
+        description: 'The data type MetamorphicDescription describes the character
+          of metamorphism applied to a CompoundMaterial or GeologicUnit using one
+          or more properties including estimated intensity (grade; e.g. high grade,
+          low grade), characteristic metamorphic mineral assemblages (facies; e.g.,
+          greenschist, amphibolite), peak P-T estimates, and protolith material if
+          known. A MetamorphicDescription provides a link to the GeologicEvent associated
+          to the metamorphic event.  Constraint: metamorphicFacies is not null or
+          metamorphicGrade is not null'
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
+        - type: object
+          properties:
+            metamorphicFacies:
+              type: array
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+              uniqueItems: true
+              description: The metamorphicFacies property (SWE::Category) contains
+                a term from a controlled vocabulary that describes a characteristic
+                mineral assemblages indicative of certain metamorphic pressure and
+                temperature conditions. Examples include Barrovian metasedimentary
+                zones (e.g., biotite facies, kyanite facies) or assemblages developed
+                in rocks of more mafic composition (e.g., greenschist facies, amphibolite
+                facies).
+            metamorphicGrade:
+              description: The metamorphicGrade property (SWE::Category) contains
+                a term from a controlled vocabulary that indicates the intensity or
+                rank of metamorphism applied to an EarthMaterial (e.g., high metamorphic
+                grade, low metamorphic grade). It indicates in a general way the pressure-temperature
+                (PT) environment in which the metamorphism took place. The determination
+                of metamorphic grade is based on mineral assemblages (i.e., facies)
+                present in a rock that are interpreted to have crystallized in equilibrium
+                during a particular metamorphic event.
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+            peakPressureValue:
+              description: The peakPressureValue property (SWE::Quantity) reports
+                a numerical value to indicate the estimated pressure at peak metamorphic
+                conditions.
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Quantity
+            peakTemperatureValue:
+              description: The peakTemperatureValue property (SWE::Quantity) reports
+                a numerical value to indicate the estimated temperature at peak metamorphic
+                conditions.
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Quantity
+            protolithLithology:
+              type: array
+              items:
+                oneOf:
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
+              uniqueItems: true
+              description: The protolithLithology is an association between a MetamorphicDescription
+                and an EarthMaterial that describes the pre-metamorphic lithology
+                for a metamorphosed CompoundMaterial.
+            metamorphicEvent:
+              oneOf:
+              - allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchema/$defs/SCLinkObject
+              - allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicEvent
+              description: The metamorphicEvent property is an association between
+                a MetamorphicDescription and a GeologicEvent that denotes the age,
+                environment and process associated with a particular metamorphic assemblage
+                in a GeologicUnit.
+      Mineral:
+        $anchor: Mineral
+        description: A naturally occurring inorganic element or compound having a
+          periodically repeating arrangement of atoms and a characteristic chemical
+          composition or range of compositions, resulting in distinctive physical
+          properties. Includes mercury as a general exception to the requirement of
+          crystallinity. Also includes crypto-crystalline materials such as chalcedony
+          and amorphous silica.
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                mineralName:
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaMineralNameTerm
+                  uniqueItems: true
+                  description: 'Name of the mineral (eg: orthoclase) or mineral family
+                    (eg: feldspar), approved by the International Mineralogical Association.
+                    (eg: http://www.mindat.org/mineralindex.php)'
+      MineralNameTerm:
+        $anchor: MineralNameTerm
+        description: Refers to a vocabulary of mineral names
+        type: string
+        format: uri
+      OrganicMaterial:
+        $anchor: OrganicMaterial
+        description: OrganicMaterial is an EarthMaterial that belongs to the class
+          of chemical compounds having a reduced carbon basis (as distinct from carbonates),
+          and derived from living organisms. It includes high-carbon EarthMaterials
+          such as bitumen, peat, and coal. This class is an empty placeholder for
+          extension at a later date, or by other domain models.
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties: {}
+      Organism:
+        $anchor: Organism
+        description: 'Organism is a broad class to represent any living or once living
+          things. This is the connection to taxonomy/biology for fossils. This class
+          is an empty placeholder for extension at a later date, or by other domain
+          models.  Constraint: if ParticleGeometrydescription/sourceOrganism is not
+          null, then ParticleGeometryDescription/particleType = "fossil"'
+        type: object
+      ParticleGeometryDescription:
+        $anchor: ParticleGeometryDescription
+        description: ParticleGeometryDescription describes particles in a CompoundMaterial
+          independent of their relationship to each other or their orientation. It
+          is distinguished from Fabric in that the ParticleGeometryDescription remains
+          constant if the material is disaggregated into its constituent particles,
+          whereas Fabric is lost if the material is disaggregated. Properties include
+          the particle size (grainsize), particle sorting (size distribution, e.g.,
+          well sorted, poorly sorted, bimodal sorting), particle shape (surface rounding
+          or crystal face development, e.g., well rounded, euhedral, anhedral), and
+          particle aspect ratio (e.g., elongated, platy, bladed, compact, acicular).
+        type: object
+        properties:
+          particleType:
+            description: The particleType:ParticleTypeTerm provides a term from a
+              controlled vocabulary to specify the nature of individual particles
+              of each constituent in an EarthMaterial aggregation, based mostly on
+              their genesis. When applied on ParticleDescription for CompoundMaterial,
+              it would characterise all particles in aggregate. Use this property
+              on CompoundMaterial to distinguish rocks composed of crystals (crystalline
+              rocks) from rocks composed of granular particles (clasts, fragments).
+              Examples include ooliths, crystals, pore space. Constituent type is
+              determined based on the nature of the particles, and ideally is independent
+              of the relationship between particles in a compound material aggregation.
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaParticleTypeTerm
+          aspectRatio:
+            type: array
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+            uniqueItems: true
+            description: "The aspectRatio property (SWE::Category) contains a term
+              from a controlled vocabulary describing the geometry of particles based
+              on the ratios of lengths of long, intermediate and short axes of grains.
+              It equates to sphericity in sedimentary rocks (i.e., the degree to which
+              the shape of a particle approximates a sphere). The formal definition
+              is \u201CA quantitative specification based on the ratio of lengths
+              of long, intermediate and short axes of grain shape\u201D. (e.g., prolate,
+              slightly flattened, very bladed, equant, acicular, tabular)."
+          shape:
+            type: array
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+            uniqueItems: true
+            description: The shape property (SWE::Category) describes, &#x9;the development
+              of crystal faces bounding particles in crystalline compound materials,
+              and &#x9;the surface rounding of grains in sedimentary rocks. Roundness
+              is a measure of the sharpness of the edges between surfaces bounding
+              a particle The terms shall be a term from a controlled vocabulary and
+              be appropriate for the kind of compound material (e.g., for crystalline
+              rocks- euhedral, ideoblastic, subhedral, anhedral, xenoblastic; for
+              sedimentary rocks - angular, rounded).
+          size:
+            description: The property size (SWE::QuantityRange) reports the size that
+              specifies particle grainsize. Values may be reported using absolute
+              measurements (e.g., range, mean, median, mode, maximum).
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/QuantityRange
+          sorting:
+            type: array
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+            uniqueItems: true
+            description: The sorting property (SWE::Category) contains a term from
+              a vocabulary that specifies the size distribution of particles in a
+              CompoundMaterial. Terminology for sorting in sedimentary rocks is based
+              on the quantitative Graphic Standard Deviation (IGSD) scheme proposed
+              by Folk. Example for this attribute may include sedimentary terms such
+              as well sorted and poorly sorted, or igneous terms such as porphyritic,
+              equigranular, seriate.
+          sourceOrganism:
+            type: array
+            items:
+              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaOrganism
+            uniqueItems: true
+            description: The sourceOrganism property is an association between a ParticleGeometryDescription
+              and an Organism that is the source of the fossil particles (sponge spicules,
+              bivalve shells, etc.).
+      ParticleTypeTerm:
+        $anchor: ParticleTypeTerm
+        description: Refers to a vocabulary of terms describing the type of particle
+          in the compound earth material (eg, bioclast, phenocryst, pyroclast)
+        type: string
+        format: uri
+      PhysicalDescription:
+        $anchor: PhysicalDescription
+        description: PhysicalDescription is a class that describes the numeric physical
+          properties of a geologic unit (GeologicUnit) earth material (EarthMaterial
+          ), or geologic structure (GeologicStructure) (e.g., density, porosity, magnetic
+          susceptibility, remanent magnetism). These properties are modelled here
+          as scalar numeric values (SWE::Quantity).
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
+        - type: object
+          properties:
+            propertyName:
+              description: The property propertyName:PhysicalPropertyTerm contains
+                a term from a controlled vocabulary of physical properties of rock
+                materials (e.g., density, porosity, magnetic susceptibility, remnant
+                magnetism, permeability, seismic velocity).
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaPhysicalPropertyTerm
+            propertyMeasure:
+              type: array
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Quantity
+              uniqueItems: true
+              description: The propertyMeasure property (SWE::Quantity) is a scalar
+                measurement of the physical property of a rock material, unit or structure.
+      PhysicalPropertyTerm:
+        $anchor: PhysicalPropertyTerm
+        description: Refers to a vocabulary of physical property types (eg, density,
+          porosity, magnetic susceptibility, magnetic remanence, conductivity, etc)
+        type: string
+        format: uri
+      RockMaterialDescription:
+        $anchor: RockMaterialDescription
+        description: RockMaterialDescription provides extended description of RockMaterial.
+        allOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
+        - type: object
+          properties:
+            consolidationDegree:
+              description: The consolidationDegree property (SWE::Category) contains
+                a term from a controlled vocabulary that specifies the degree to which
+                an aggregation of EarthMaterial particles is a distinct solid material.
+                Consolidation and induration are related concepts specified by this
+                property. They define a continuum from unconsolidated material to
+                very hard rock. Induration is the degree to which a consolidated material
+                is made hard, operationally determined by how difficult it is to break
+                a piece of the material. Consolidated materials may have varying degrees
+                of induration.
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/schema-oas3.0.yaml#/x-defs/Category
+      SCLinkObject:
+        title: link object
+        description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,
+          based on RFC 8288 web linking.
+        type: object
+        required:
+        - href
+        properties:
+          href:
+            type: string
+            description: Supplies the URI to a remote resource (or resource fragment).
+          rel:
+            type: string
+            description: The type or semantics of the relation.
+          type:
+            type: string
+            description: A hint indicating what the media type of the result of dereferencing
+              the link should be.
+          hreflang:
+            type: string
+            description: A hint indicating what the language of the result of dereferencing
+              the link should be.
+          title:
+            type: string
+            description: Used to label the destination of a link such that it can
+              be used as a human-readable identifier.
+          length:
+            type: integer
+    x-schema-source: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json
+    x-schema-id: https://schemas.usgin.org/geosci-json/gsmEarthMaterial/gsmEarthMaterialSchema.json
     x-schema-version: https://json-schema.org/draft/2020-12/schema
   geometry-object:
     title: a JSON-FG geometry
