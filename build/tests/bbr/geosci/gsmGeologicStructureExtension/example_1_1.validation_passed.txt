@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmGeologicStructureExtension - gsmGeologicStructureExtension
-Generated 2026-05-12T23:33:02.854079+00:00
+Generated 2026-05-13T13:21:51.466136+00:00
 === Files ===
 Using examples/examplegsmGeologicStructureExtensionMinimal.json from examples
 === End Files ===

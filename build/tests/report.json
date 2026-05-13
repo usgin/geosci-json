@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 10,
-    "passed": 8,
-    "failed": 2,
+    "passed": 7,
+    "failed": 3,
     "result": false
   },
   "bblocks": {
@@ -10,7 +10,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmBasicGeology - gsmBasicGeology",
       "bblockName": "gsmBasicGeology",
       "bblockId": "usgin.bbr.geosci.gsmBasicGeology",
-      "generated": "2026-05-12T23:32:48.569674+00:00",
+      "generated": "2026-05-13T13:21:37.451913+00:00",
       "result": true,
       "items": [
         {
@@ -781,7 +781,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmBorehole - gsmBorehole",
       "bblockName": "gsmBorehole",
       "bblockId": "usgin.bbr.geosci.gsmBorehole",
-      "generated": "2026-05-12T23:32:52.990715+00:00",
+      "generated": "2026-05-13T13:21:42.307413+00:00",
       "result": false,
       "items": [
         {
@@ -1016,7 +1016,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmEarthMaterial - gsmEarthMaterial",
       "bblockName": "gsmEarthMaterial",
       "bblockId": "usgin.bbr.geosci.gsmEarthMaterial",
-      "generated": "2026-05-12T23:32:57.858338+00:00",
+      "generated": "2026-05-13T13:21:46.921269+00:00",
       "result": true,
       "items": [
         {
@@ -1067,7 +1067,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmExtendedGeologyCollection - gsmExtendedGeologyCollection",
       "bblockName": "gsmExtendedGeologyCollection",
       "bblockId": "usgin.bbr.geosci.gsmExtendedGeologyCollection",
-      "generated": "2026-05-12T23:33:00.943331+00:00",
+      "generated": "2026-05-13T13:21:49.762884+00:00",
       "result": true,
       "items": [
         {
@@ -1154,7 +1154,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicRelationExtension - gsmGeologicRelationExtension",
       "bblockName": "gsmGeologicRelationExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicRelationExtension",
-      "generated": "2026-05-12T23:33:00.957224+00:00",
+      "generated": "2026-05-13T13:21:49.777433+00:00",
       "result": true,
       "items": [
         {
@@ -1205,8 +1205,8 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicStructureExtension - gsmGeologicStructureExtension",
       "bblockName": "gsmGeologicStructureExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicStructureExtension",
-      "generated": "2026-05-12T23:33:06.629344+00:00",
-      "result": true,
+      "generated": "2026-05-13T13:21:54.754652+00:00",
+      "result": false,
       "items": [
         {
           "source": {
@@ -1326,7 +1326,7 @@
             "snippetIndex": 1,
             "language": "application/json"
           },
-          "result": true,
+          "result": false,
           "sections": [
             {
               "name": "FILES",
@@ -1344,9 +1344,11 @@
               "entries": [
                 {
                   "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']",
+                  "isError": true,
+                  "message": "ValidationError: 'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']\n\nFailed validating 'enum' in schema[1]:\n    {'$anchor': 'DescriptionPurpose',\n     'description': 'Codes used for the specification of the intended '\n                    'purpose/level of abstraction for a given feature or '\n                    'object instance, ie the reason for the existence of '\n                    'the GeologicFeature. Values: instance, typicalNorm, '\n                    'definingNorm.',\n     'enum': ['definingNorm', 'instance', 'typicalNorm'],\n     'type': 'string'}\n\nOn instance:\n    'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance'"
                 }
               ]
             }
@@ -1362,7 +1364,7 @@
             "snippetIndex": 1,
             "language": "application/json"
           },
-          "result": true,
+          "result": false,
           "sections": [
             {
               "name": "FILES",
@@ -1380,9 +1382,11 @@
               "entries": [
                 {
                   "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']",
+                  "isError": true,
+                  "message": "ValidationError: 'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']\n\nFailed validating 'enum' in schema[1]:\n    {'$anchor': 'DescriptionPurpose',\n     'description': 'Codes used for the specification of the intended '\n                    'purpose/level of abstraction for a given feature or '\n                    'object instance, ie the reason for the existence of '\n                    'the GeologicFeature. Values: instance, typicalNorm, '\n                    'definingNorm.',\n     'enum': ['definingNorm', 'instance', 'typicalNorm'],\n     'type': 'string'}\n\nOn instance:\n    'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance'"
                 }
               ]
             }
@@ -1398,7 +1402,7 @@
             "snippetIndex": 1,
             "language": "application/json"
           },
-          "result": true,
+          "result": false,
           "sections": [
             {
               "name": "FILES",
@@ -1416,9 +1420,11 @@
               "entries": [
                 {
                   "op": "validation",
-                  "result": true,
-                  "isError": false,
-                  "message": "Validation passed"
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']",
+                  "isError": true,
+                  "message": "ValidationError: 'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']\n\nFailed validating 'enum' in schema[1]:\n    {'$anchor': 'DescriptionPurpose',\n     'description': 'Codes used for the specification of the intended '\n                    'purpose/level of abstraction for a given feature or '\n                    'object instance, ie the reason for the existence of '\n                    'the GeologicFeature. Values: instance, typicalNorm, '\n                    'definingNorm.',\n     'enum': ['definingNorm', 'instance', 'typicalNorm'],\n     'type': 'string'}\n\nOn instance:\n    'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance'"
                 }
               ]
             }
@@ -1428,15 +1434,15 @@
       "globalErrors": {},
       "counts": {
         "total": 6,
-        "passed": 6,
-        "failed": 0
+        "passed": 3,
+        "failed": 3
       }
     },
     "usgin.bbr.geosci.gsmGeologicTime": {
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicTime - gsmGeologicTime",
       "bblockName": "gsmGeologicTime",
       "bblockId": "usgin.bbr.geosci.gsmGeologicTime",
-      "generated": "2026-05-12T23:33:09.312444+00:00",
+      "generated": "2026-05-13T13:21:57.115812+00:00",
       "result": true,
       "items": [
         {
@@ -1631,7 +1637,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmGeologicUnitExtension - gsmGeologicUnitExtension",
       "bblockName": "gsmGeologicUnitExtension",
       "bblockId": "usgin.bbr.geosci.gsmGeologicUnitExtension",
-      "generated": "2026-05-12T23:33:09.330158+00:00",
+      "generated": "2026-05-13T13:21:57.134569+00:00",
       "result": true,
       "items": [
         {
@@ -1790,7 +1796,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmSpecimen - gsmSpecimen",
       "bblockName": "gsmSpecimen",
       "bblockId": "usgin.bbr.geosci.gsmSpecimen",
-      "generated": "2026-05-12T23:33:13.785340+00:00",
+      "generated": "2026-05-13T13:22:01.313929+00:00",
       "result": false,
       "items": [
         {
@@ -1860,7 +1866,7 @@
       "title": "Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite",
       "bblockName": "gsmscimlLite",
       "bblockId": "usgin.bbr.geosci.gsmscimlLite",
-      "generated": "2026-05-12T23:33:17.148245+00:00",
+      "generated": "2026-05-13T13:22:04.517766+00:00",
       "result": true,
       "items": [
         {

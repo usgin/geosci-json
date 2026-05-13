@@ -14,7 +14,7 @@
         "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/synthesis_from_multiple_sources"
       }
     ],
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "occurrence": [
       {
         "href": "http://data.geoscience.gov.au/mappedfeature/line/lake-george-fault-mf-1",

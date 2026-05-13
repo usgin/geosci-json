@@ -2735,13 +2735,9 @@
     },
     "DescriptionPurpose": {
       "$anchor": "DescriptionPurpose",
-      "description": "Codes used for the specification of the intended purpose/level of abstraction for a given feature or object instance, ie the reason for the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.",
+      "description": "Codes used for the specification of the intended purpose/level of abstraction for a given feature or object instance, ie the reason for the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.  Allowed labels: definingNorm, instance, typicalNorm.",
       "type": "string",
-      "enum": [
-        "definingNorm",
-        "instance",
-        "typicalNorm"
-      ]
+      "format": "uri"
     },
     "DeterminationMethodTerm": {
       "$anchor": "DeterminationMethodTerm",

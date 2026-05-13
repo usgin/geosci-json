@@ -6,7 +6,7 @@
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "typicalNorm",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/typicalNorm",
     "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
     "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/group",
     "occurrence": [

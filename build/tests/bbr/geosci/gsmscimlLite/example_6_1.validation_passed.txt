@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite
-Generated 2026-05-12T23:33:16.777355+00:00
+Generated 2026-05-13T13:22:04.113871+00:00
 === Files ===
 Using examples/geologic_specimen_view_complex.json from examples
 === End Files ===

@@ -40,7 +40,7 @@
         "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/remote_sensing_interpretation"
       }
     ],
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "naturalGeomorphologicFeatureType": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/moraine",
     "activity": {
       "type": "Category",

@@ -516,7 +516,7 @@ Example instance: contact_complex
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "classifier": [
       {
         "type": "Category",
@@ -561,7 +561,7 @@ Example instance: contact_simple
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/unconformity"
   }
 }
@@ -2015,7 +2015,7 @@ Example instance: fold_complex
         "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/field_observation"
       }
     ],
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "occurrence": [
       {
         "href": "http://data.geoscience.gov.au/mappedfeature/fold/anticline-mf-1",
@@ -2058,7 +2058,7 @@ Example instance: fold_simple
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "profileType": "http://resource.geosciml.org/classifier/cgi/foldprofiletype/antiform"
   }
 }
@@ -2151,7 +2151,7 @@ Example instance: geologic_unit_complex
         "title": "Mapped occurrence on 1:250000 sheet"
       }
     ],
-    "purpose": "typicalNorm",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/typicalNorm",
     "classifier": [
       {
         "type": "Category",
@@ -2291,7 +2291,7 @@ Example instance: geologic_unit_simple
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "typicalNorm",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/typicalNorm",
     "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
     "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/group",
     "occurrence": [
@@ -2455,7 +2455,7 @@ Example instance: natural_geomorphologic_feature_complex
         "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/remote_sensing_interpretation"
       }
     ],
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "naturalGeomorphologicFeatureType": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/moraine",
     "activity": {
       "type": "Category",
@@ -2487,7 +2487,7 @@ Example instance: natural_geomorphologic_feature_simple
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "naturalGeomorphologicFeatureType": "http://resource.geosciml.org/classifier/cgi/geomorphologicfeaturetype/river_channel",
     "activity": {
       "type": "Category",
@@ -2521,7 +2521,7 @@ Example instance: shear_displacement_structure_complex
         "value": "http://resource.geosciml.org/classifier/cgi/featureobservationmethod/synthesis_from_multiple_sources"
       }
     ],
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "occurrence": [
       {
         "href": "http://data.geoscience.gov.au/mappedfeature/line/lake-george-fault-mf-1",
@@ -2564,7 +2564,7 @@ Example instance: shear_displacement_structure_simple
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "faultType": "http://resource.geosciml.org/classifier/cgi/faulttype/normal_fault"
   }
 }
@@ -2847,12 +2847,10 @@ $defs:
     $anchor: DescriptionPurpose
     description: 'Codes used for the specification of the intended purpose/level of
       abstraction for a given feature or object instance, ie the reason for the existence
-      of the GeologicFeature. Values: instance, typicalNorm, definingNorm.'
+      of the GeologicFeature. Values: instance, typicalNorm, definingNorm.  Allowed
+      labels: definingNorm, instance, typicalNorm.'
     type: string
-    enum:
-    - definingNorm
-    - instance
-    - typicalNorm
+    format: uri
   DeterminationMethodTerm:
     $anchor: DeterminationMethodTerm
     description: This class is an empty placeholder for a vocabulary of terms describing

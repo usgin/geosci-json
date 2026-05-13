@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmGeologicRelationExtension - gsmGeologicRelationExtension
-Generated 2026-05-12T23:33:00.957179+00:00
+Generated 2026-05-13T13:21:49.777387+00:00
 === Files ===
 Using examples/examplegsmGeologicRelationExtensionMinimal.json from examples
 === End Files ===

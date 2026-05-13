@@ -432,7 +432,7 @@ Example instance: fold_system_simple
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "periodic": true,
     "wavelength": {
       "type": "QuantityRange",
@@ -459,7 +459,7 @@ Example instance: lineation_complex
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "geologicHistory": [
       {
         "type": "Feature",
@@ -528,7 +528,7 @@ Example instance: lineation_simple
   "place": null,
   "time": null,
   "properties": {
-    "purpose": "instance",
+    "purpose": "http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance",
     "lineationType": "http://resource.geoscience.gov.au/classifier/cgi/lineationtype/mineral_lineation"
   }
 }
