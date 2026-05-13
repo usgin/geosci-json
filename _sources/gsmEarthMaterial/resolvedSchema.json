@@ -389,50 +389,74 @@
     "ConstituentPart": {
       "$anchor": "ConstituentPart",
       "description": "The ConstituentPart class describes how Earth materials may be made up of other Earth materials, including the proportion of the constituent part in the whole (e.g., 20%, minor, dominant); and the role that the constituent plays in the whole (e.g., matrix, groundmass, framework, phenocryst, xenolith, vein).",
-      "type": "object",
-      "properties": {
-        "role": {
-          "$ref": "#ConstituentPartRoleTerm",
-          "description": "The role:ConstituentPartRoleTerm property contains a term from a controlled vocabulary that describes the role a ConstituentPart plays in a CompoundMaterial aggregation. The same EarthMaterial may occur as different ConstituentParts playing different roles within one CompoundMaterial. For example, feldspar may be present as groundmass (“groundmass” is a ConstituentPart::role) and as phenocrysts (“phenocryst” is another ConstituentPart::role) within a single igneous rock."
+      "allOf": [
+        {
+          "$ref": "https://schemas.opengis.net/json-fg/feature.json"
         },
-        "proportion": {
-          "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json",
-          "description": "The proportion property (SWE::QuantityRange) reports the fraction of the whole that is formed by a ConstituentPart in a part/whole relationship. It is used for the ConstituentPart portion in a CompoundMaterial. It specifies the fraction of the EarthMaterial formed by the part (e.g., 20%, minor, dominant)."
-        },
-        "constituentMaterial": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/SCLinkObject",
-              "$comment": "by-reference link to EarthMaterial"
-            },
-            {
-              "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial",
-              "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
-            }
-          ],
-          "description": "The constituentMaterial property is an association between a ConstituentPart and an EarthMaterial that specifies the EarthMaterial that is forming the ConstituentPart."
-        },
-        "constituentParticleGeometry": {
-          "$ref": "#ParticleGeometryDescription",
-          "description": "Description of geometry of individual subset of particles"
-        },
-        "relatedMaterial": {
-          "type": "array",
-          "items": {
-            "oneOf": [
-              {
-                "$ref": "#/$defs/SCLinkObject",
-                "$comment": "by-reference link to ConstituentPart"
-              },
-              {
-                "$ref": "#ConstituentPart"
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "$ref": "#ConstituentPartRoleTerm",
+                  "description": "The role:ConstituentPartRoleTerm property contains a term from a controlled vocabulary that describes the role a ConstituentPart plays in a CompoundMaterial aggregation. The same EarthMaterial may occur as different ConstituentParts playing different roles within one CompoundMaterial. For example, feldspar may be present as groundmass (“groundmass” is a ConstituentPart::role) and as phenocrysts (“phenocryst” is another ConstituentPart::role) within a single igneous rock."
+                },
+                "proportion": {
+                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json",
+                  "description": "The proportion property (SWE::QuantityRange) reports the fraction of the whole that is formed by a ConstituentPart in a part/whole relationship. It is used for the ConstituentPart portion in a CompoundMaterial. It specifies the fraction of the EarthMaterial formed by the part (e.g., 20%, minor, dominant)."
+                },
+                "constituentMaterial": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/SCLinkObject",
+                      "$comment": "by-reference link to EarthMaterial"
+                    },
+                    {
+                      "$ref": "../gsmBasicGeology/gsmBasicGeologySchema.json#EarthMaterial",
+                      "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
+                    }
+                  ],
+                  "description": "The constituentMaterial property is an association between a ConstituentPart and an EarthMaterial that specifies the EarthMaterial that is forming the ConstituentPart."
+                },
+                "constituentParticleGeometry": {
+                  "$ref": "#ParticleGeometryDescription",
+                  "description": "Description of geometry of individual subset of particles"
+                },
+                "relatedMaterial": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/$defs/SCLinkObject",
+                        "$comment": "by-reference link to MaterialRelation"
+                      },
+                      {
+                        "$ref": "../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#MaterialRelation",
+                        "$comment": "cross-BB inline reference to MaterialRelation in BB gsmGeologicRelationExtension"
+                      }
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "description": "Specifies the ConstituentPart that is playing the target role in the MaterialRelation"
+                }
               }
-            ]
-          },
-          "uniqueItems": true,
-          "description": "Specifies the ConstituentPart that is playing the target role in the MaterialRelation"
+            }
+          }
+        },
+        {
+          "required": [
+            "featureType",
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
         }
-      }
+      ]
     },
     "ConstituentPartRoleTerm": {
       "$anchor": "ConstituentPartRoleTerm",

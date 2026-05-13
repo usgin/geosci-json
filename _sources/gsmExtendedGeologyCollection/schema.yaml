@@ -14,7 +14,19 @@ description: 'Extended-profile FeatureCollection. Accepts the full set of 9 Basi
 
   description slot (Anthropogenic / NaturalGeomorphologicFeature,
 
-  MappedFeature) are pass-through.'
+  MappedFeature) are pass-through. The profile also narrows every
+
+  feature''s relatedFeature[] items: where Basic accepts
+
+  `oneOf [SCLinkObject, AbstractFeatureRelation]`, the Extended profile
+
+  additionally requires each AbstractFeatureRelation instance to be one
+
+  of the two concrete subtypes from gsmGeologicRelationExtension
+
+  (GeologicFeatureRelation or MaterialRelation), while still allowing
+
+  by-reference SCLinkObject.'
 allOf:
 - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
 - type: object
@@ -170,3 +182,20 @@ allOf:
                   - NaturalGeomorphologicFeature
                   - ShearDisplacementStructure
           then: false
+- type: object
+  properties:
+    features:
+      type: array
+      items:
+        type: object
+        properties:
+          properties:
+            type: object
+            properties:
+              relatedFeature:
+                type: array
+                items:
+                  anyOf:
+                  - $ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#/$defs/SCLinkObject
+                  - $ref: ../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#GeologicFeatureRelation
+                  - $ref: ../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#MaterialRelation
