@@ -383,13 +383,9 @@
         },
         "DescriptionPurpose": {
           "$anchor": "DescriptionPurpose",
-          "description": "Codes used for the specification of the intended purpose/level of abstraction for a given feature or object instance, ie the reason for the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.",
+          "description": "Codes used for the specification of the intended purpose/level of abstraction for a given feature or object instance, ie the reason for the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.  Allowed labels: definingNorm, instance, typicalNorm.",
           "type": "string",
-          "enum": [
-            "definingNorm",
-            "instance",
-            "typicalNorm"
-          ]
+          "format": "uri"
         },
         "DeterminationMethodTerm": {
           "$anchor": "DeterminationMethodTerm",
@@ -3988,31 +3984,28 @@
           "type": "object",
           "properties": {
             "relationship": {
-              "oneOf": [
+              "description": "The relationship:GeologicRelationshipTerm property contains a term from a controlled vocabulary to describe the geologic relationship (e.g., stratigraphic relation, structural relation, intrusive relation).",
+              "allOf": [
                 {
                   "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.json#GeologicRelationshipTerm"
                 }
-              ],
-              "description": "The relationship:GeologicRelationshipTerm property contains a term from a controlled vocabulary to describe the geologic relationship (e.g., stratigraphic relation, structural relation, intrusive relation).",
-              "nullable": true
+              ]
             },
             "sourceRole": {
-              "oneOf": [
+              "description": "The property sourceRole:RelationRoleProperty contains a term from a controlled vocabulary describing the role played by the source geologic feature or object (e.g., overlying unit, underlying unit).",
+              "allOf": [
                 {
                   "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.json#RelationRoleTerm"
                 }
-              ],
-              "description": "The property sourceRole:RelationRoleProperty contains a term from a controlled vocabulary describing the role played by the source geologic feature or object (e.g., overlying unit, underlying unit).",
-              "nullable": true
+              ]
             },
             "targetRole": {
-              "oneOf": [
+              "description": "The property targetRole:RelationRoleTerm contains a term from a controlled vocabulary describing the role played by the target geologic feature or object. (e.g., overlying unit, underlying unit)",
+              "allOf": [
                 {
                   "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.json#RelationRoleTerm"
                 }
-              ],
-              "description": "The property targetRole:RelationRoleTerm contains a term from a controlled vocabulary describing the role played by the target geologic feature or object. (e.g., overlying unit, underlying unit)",
-              "nullable": true
+              ]
             }
           }
         }
@@ -4030,31 +4023,28 @@
       "type": "object",
       "properties": {
         "relationship": {
-          "oneOf": [
+          "description": "The property relationship:GeologicRelationshipTerm contains a term from a controlled vocabulary to describe the geologic relationship (e.g., sedimentary relation, igneous relation).",
+          "allOf": [
             {
               "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.json#GeologicRelationshipTerm"
             }
-          ],
-          "description": "The property relationship:GeologicRelationshipTerm contains a term from a controlled vocabulary to describe the geologic relationship (e.g., sedimentary relation, igneous relation).",
-          "nullable": true
+          ]
         },
         "sourceRole": {
-          "oneOf": [
+          "description": "The property sourceRole:RelationRoleTerm contains a term that describes the role played by the source earth material part (e.g., matrix, clast, overgrowth).",
+          "allOf": [
             {
               "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.json#RelationRoleTerm"
             }
-          ],
-          "description": "The property sourceRole:RelationRoleTerm contains a term that describes the role played by the source earth material part (e.g., matrix, clast, overgrowth).",
-          "nullable": true
+          ]
         },
         "targetRole": {
-          "oneOf": [
+          "description": "The property targetRole:RelationRoleTerm contains a term describing the role played by the target earth material part (e.g., matrix, clast, overgrowth).",
+          "allOf": [
             {
               "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.json#RelationRoleTerm"
             }
-          ],
-          "description": "The property targetRole:RelationRoleTerm contains a term describing the role played by the target earth material part (e.g., matrix, clast, overgrowth).",
-          "nullable": true
+          ]
         }
       }
     },

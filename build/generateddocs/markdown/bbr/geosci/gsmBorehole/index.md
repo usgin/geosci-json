@@ -733,42 +733,34 @@ $defs:
           type: object
           properties:
             logElement:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  oneOf:
-                  - $ref: '#/$defs/SCLinkObject'
-                    $comment: by-reference link to BoreholeInterval
-                  - $ref: '#BoreholeInterval'
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to BoreholeInterval
+                - $ref: '#BoreholeInterval'
+              uniqueItems: true
               description: The property logElement is an association between a Borehole
                 and a BoreholeInterval instance to describe measured downhole intervals
                 and their observed features.
             downholeDrillingDetails:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: '#DrillingDetails'
-                uniqueItems: true
+              type: array
+              items:
+                $ref: '#DrillingDetails'
+              uniqueItems: true
               description: The property downholeDrillingDetails:DrillingDetails specifies
                 the drilling method and borehole diameter for intervals down the borehole.
             referenceLocation:
               oneOf:
-              - type: 'null'
-              - oneOf:
-                - $ref: '#/$defs/SCLinkObject'
-                  $comment: by-reference link to OriginPosition
-                - $ref: '#OriginPosition'
+              - $ref: '#/$defs/SCLinkObject'
+                $comment: by-reference link to OriginPosition
+              - $ref: '#OriginPosition'
               description: The property referenceLocation is an association between
                 a Borehole and an OriginPosition corresponding to the start point
                 of a borehole log. This may correspond to the borehole collar location
                 (e.g., kelly bush).
             indexData:
-              oneOf:
-              - type: 'null'
-              - $ref: '#BoreholeDetails'
+              $ref: '#BoreholeDetails'
               description: The property indexData:BoreholeDetails describes metadata
                 about a borehole, such as the operator, the custodian, dates of drilling,
                 etc.
@@ -788,122 +780,104 @@ $defs:
     type: object
     properties:
       operator:
-        oneOf:
-        - type: 'null'
-        - anyOf:
-          - $ref: '#/$defs/SCLinkObject'
-          - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
-          $comment: "External ISO 19115 CI_Responsibility \u2014 by-reference link
-            or inline CDIF agentInRole"
+        anyOf:
+        - $ref: '#/$defs/SCLinkObject'
+        - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
+        $comment: External ISO 19115 CI_Responsibility - by-reference link or inline
+          CDIF agentInRole
         description: The operator property is an association between a BoreholeDetails
           and a CIT:CI_ResponsibleParty describing the organisation responsible for
           commissioning the borehole (as opposed to actually drilling the borehole).
       driller:
-        oneOf:
-        - type: 'null'
-        - anyOf:
-          - $ref: '#/$defs/SCLinkObject'
-          - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
-          $comment: "External ISO 19115 CI_Responsibility \u2014 by-reference link
-            or inline CDIF agentInRole"
+        anyOf:
+        - $ref: '#/$defs/SCLinkObject'
+        - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
+        $comment: External ISO 19115 CI_Responsibility - by-reference link or inline
+          CDIF agentInRole
         description: The driller property is an association between a BoreholeDetails
           and a CIT:CI_ResponsibleParty describing of the organisation responsible
           for drilling the borehole (as opposed to commissioning the borehole).
       dateOfDrilling:
         oneOf:
-        - type: 'null'
-        - oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-          - type: object
-            properties:
-              hasBeginning:
-                type: object
-              hasEnd:
-                type: object
-            required:
-            - hasBeginning
-            - hasEnd
-          - type: object
-            properties:
-              hasBeginningDateTime:
-                type: string
-              hasEndDateTime:
-                type: string
-            required:
-            - hasBeginningDateTime
-            - hasEndDateTime
-          - type: array
-            minItems: 2
-            maxItems: 2
-            items:
+        - $ref: '#/$defs/SCLinkObject'
+        - type: object
+          properties:
+            hasBeginning:
+              type: object
+            hasEnd:
+              type: object
+          required:
+          - hasBeginning
+          - hasEnd
+        - type: object
+          properties:
+            hasBeginningDateTime:
               type: string
-          $comment: ISO 19108 TM_Period aligned to W3C OWL-Time time:ProperInterval
-            (https://www.w3.org/TR/owl-time/#time:ProperInterval). Canonical encoding
-            is the OWL-Time object with `hasBeginning`/`hasEnd` (or the shortcut `hasBeginningDateTime`/`hasEndDateTime`).
-            A two-element [startDate, endDate] array is accepted as a convenience
-            alias (OGC code-sprint convention) but is not OWL-Time-canonical; consumers
-            should prefer the object form.
+            hasEndDateTime:
+              type: string
+          required:
+          - hasBeginningDateTime
+          - hasEndDateTime
+        - type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            type: string
+        $comment: ISO 19108 TM_Period aligned to W3C OWL-Time time:ProperInterval
+          (https://www.w3.org/TR/owl-time/#time:ProperInterval). Canonical encoding
+          is the OWL-Time object with `hasBeginning`/`hasEnd` (or the shortcut `hasBeginningDateTime`/`hasEndDateTime`).
+          A two-element [startDate, endDate] array is accepted as a convenience alias
+          (OGC code-sprint convention) but is not OWL-Time-canonical; consumers should
+          prefer the object form.
         description: The property dateOfDrilling:TM_Period describes the time period
           during which drilling of the borehole occurred.
       startPoint:
-        oneOf:
-        - type: 'null'
-        - $ref: '#BoreholeStartPointCode'
+        $ref: '#BoreholeStartPointCode'
         description: The property startPoint:BoreholeStartPointCode provides a term
           from a controlled vocabulary indicating the named position relative to ground
           surface where the borehole commenced. (e.g., natural ground surface, open
           pit floor, underground, offshore)
       inclinationType:
-        oneOf:
-        - type: 'null'
-        - $ref: '#BoreholeInclinationCode'
+        $ref: '#BoreholeInclinationCode'
         description: The property inclinationType:BoreholeInclinationCode contains
           a term from a controlled vocabulary indicating the inclination type of the
           borehole. Appropriate terms would include vertical; inclined up; inclined
           down, horizontal.
       boreholeMaterialCustodian:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            anyOf:
-            - $ref: '#/$defs/SCLinkObject'
-            - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
-            $comment: "External ISO 19115 CI_Responsibility \u2014 by-reference link
-              or inline CDIF agentInRole"
-          uniqueItems: true
+        type: array
+        items:
+          anyOf:
+          - $ref: '#/$defs/SCLinkObject'
+          - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
+          $comment: External ISO 19115 CI_Responsibility - by-reference link or inline
+            CDIF agentInRole
+        uniqueItems: true
         description: The property boreholeMaterialCustodian is an association between
           BoreholeDetails and a CIT:CI_ResponsibleParty describing the organisation
           that is custodian of the drilled material recovered from the borehole.
       purpose:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            $ref: '#BoreholePurposeCode'
-          uniqueItems: true
+        type: array
+        items:
+          $ref: '#BoreholePurposeCode'
+        uniqueItems: true
         description: The property purpose:BoreholePurposeCode contains a term from
           a controlled vocabulary describing the purpose for which the borehole was
           drilled. e.g., site investigation, mineral exploration, hydrocarbon exploration,
           water resources.
       dataCustodian:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            anyOf:
-            - $ref: '#/$defs/SCLinkObject'
-            - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
-            $comment: "External ISO 19115 CI_Responsibility \u2014 by-reference link
-              or inline CDIF agentInRole"
-          uniqueItems: true
+        type: array
+        items:
+          anyOf:
+          - $ref: '#/$defs/SCLinkObject'
+          - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema.json
+          $comment: External ISO 19115 CI_Responsibility - by-reference link or inline
+            CDIF agentInRole
+        uniqueItems: true
         description: The dataCustodian is an association between a BoreholeDetails
           and a CIT:CI_ResponsibleParty describing the custodian (person or organisation)
           that is the custodian of data pertaining to this borehole.
       boreholeLength:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
         description: The property boreholeLength (SWE::Quantity) contains a measurement
           (a value and a unit of measurement) corresponding to the "length" of a borehole
           determined by the data provider (i.e., "length" can have different sources,
@@ -938,59 +912,47 @@ $defs:
           type: object
           properties:
             observationMethod:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
-                uniqueItems: true
+              type: array
+              items:
+                $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              uniqueItems: true
               description: The observationMethod property (SWE::Category) contains
                 a term from a controlled vocabulary that describes the method used
                 to observe the properties of the borehole.
             specification:
-              oneOf:
-              - type: 'null'
-              - $ref: '#/$defs/SCLinkObject'
-                $comment: "External ISO 19156 GFI_Feature \u2014 by-reference link"
+              $ref: '#/$defs/SCLinkObject'
+              $comment: External ISO 19156 GFI_Feature - by-reference link
               description: The specification property is an association between a
                 BoreholeInterval and a GFI_Feature, a domain feature that is sampled
                 by the interval (e.g., a GeologicUnit). It is semantically equivalent
                 to O&M ISO19156 "sampledFeature".
             mappedIntervalBegin:
-              oneOf:
-              - type: 'null'
-              - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
               description: The property mappedIntervalBegin (SWE::Quantity) is a measurement
                 (a value and a unit of measurement) corresponding to the measured
                 distance of the start of the mapped interval along the path of the
                 borehole. The measured value must be less than or equal to the mappedIntervalEnd
                 value.
             mappedIntervalEnd:
-              oneOf:
-              - type: 'null'
-              - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
               description: The mappedIntervalEnd property (SWE::Quantity) is a measurement
                 (a value and a unit of measure) corresponding to the measured distance
                 of the end of the mapped interval along the path of the borehole.
                 The measured value must be greater than or equal to the mappedIntervalBegin
                 value.
             collectionIdentifier:
-              oneOf:
-              - type: 'null'
-              - anyOf:
-                - $ref: '#/$defs/SCLinkObject'
-                - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.json
-                - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/skosProperties/skosConcept/schema.json
-                $comment: "External ISO 19103 ScopedName \u2014 link, CDIF definedTerm,
-                  or SKOS concept"
+              anyOf:
+              - $ref: '#/$defs/SCLinkObject'
+              - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.json
+              - $ref: https://cross-domain-interoperability-framework.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/skosProperties/skosConcept/schema.json
+              $comment: External ISO 19103 ScopedName - link, CDIF definedTerm, or
+                SKOS concept
               description: The collectionIdentifier:ScopedName is a string unique
                 within a scope that identifies a collection which forms a set BoreholeIntervals.
                 This allows description of multiple downhole logs for a single borehole.
                 The name should identify a particular log observation event.
             shape:
-              oneOf:
-              - type: 'null'
-              - $ref: https://geojson.org/schema/Geometry.json
+              $ref: https://geojson.org/schema/Geometry.json
               description: The property shape:GM_Object is a 1-D interval (e.g., a
                 "from" and "to", or "top" and "base" measurement) covering the same
                 distance as mappedIntervalBegin and mappedIntervalEnd. The geometry
@@ -998,11 +960,9 @@ $defs:
                 borehole.
             parentBorehole:
               oneOf:
-              - type: 'null'
-              - oneOf:
-                - $ref: '#/$defs/SCLinkObject'
-                  $comment: by-reference link to Borehole
-                - $ref: '#Borehole'
+              - $ref: '#/$defs/SCLinkObject'
+                $comment: by-reference link to Borehole
+              - $ref: '#Borehole'
               description: The property parentBorehole is an association between a
                 BoreholeInterval and a Borehole to which the interval belongs.
     - required:
@@ -1038,32 +998,24 @@ $defs:
     type: object
     properties:
       drillingMethod:
-        oneOf:
-        - type: 'null'
-        - $ref: '#BoreholeDrillingMethodCode'
+        $ref: '#BoreholeDrillingMethodCode'
         description: The drillingMethod:BoreholeDrillingMethodCode property contains
           a term from a controlled vocabulary indicating the drilling method used.
           Appropriate terms would include rotary air blast, auger, diamond core, air
           core, etc.
       boreholeDiameter:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
         description: The boreholeDiameter property (SWE::Quantity) contains a measurement
           (a value and a unit of measure) corresponding to the diameter of the drilled
           hole.
       intervalBegin:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
         description: The intervalBegin property (SWE::Quantity) contains a measurement
           (a value and a unit of measurement) that corresponds to the measured distance
           of the start of the interval along the path of the borehole. The measured
           value must be less than or equal to the intervalEnd value.
       intervalEnd:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
         description: The property intervalEnd (SWE::Quantity) contains a measurement
           (a value and a unit of measurement) of the measured distance of the end
           of the interval along the path of the borehole. The measured value must
@@ -1081,31 +1033,25 @@ $defs:
           type: object
           properties:
             location:
-              oneOf:
-              - type: 'null'
-              - $ref: https://geojson.org/schema/Point.json
+              $ref: https://geojson.org/schema/Point.json
               description: The property location contains a geometry corresponding
                 to the location of the borehole collar.
             elevation:
-              oneOf:
-              - type: 'null'
-              - $ref: '#/$defs/SCLinkObject'
-                $comment: "External ISO 19107 DirectPosition \u2014 by-reference link"
+              $ref: '#/$defs/SCLinkObject'
+              $comment: External ISO 19107 DirectPosition - by-reference link
               description: The elevation:DirectPosition property is a compromise approach
                 to supply elevation explicitly for location; this is to allow for
                 software that cannot process 3-D GM_Point. Null shall be used if elevation
                 is unknown. A DirectPosition shall have a dimension of 1, and CRS
                 will be a "vertical" CRS (e.g. EPSG CRSs in the range 5600-5799).
             relatedBorehole:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  oneOf:
-                  - $ref: '#/$defs/SCLinkObject'
-                    $comment: by-reference link to Borehole
-                  - $ref: '#Borehole'
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to Borehole
+                - $ref: '#Borehole'
+              uniqueItems: true
               description: The hole that has this collar for its start point
     - required:
       - featureType

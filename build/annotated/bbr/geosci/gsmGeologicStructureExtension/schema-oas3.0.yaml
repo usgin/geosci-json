@@ -325,12 +325,10 @@ x-defs:
         $anchor: DescriptionPurpose
         description: 'Codes used for the specification of the intended purpose/level
           of abstraction for a given feature or object instance, ie the reason for
-          the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.'
+          the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.  Allowed
+          labels: definingNorm, instance, typicalNorm.'
         type: string
-        enum:
-        - definingNorm
-        - instance
-        - typicalNorm
+        format: uri
       DeterminationMethodTerm:
         $anchor: DeterminationMethodTerm
         description: This class is an empty placeholder for a vocabulary of terms
@@ -4893,35 +4891,29 @@ $defs:
     - type: object
       properties:
         contactCharacter:
-          oneOf:
-          - type: array
-            items:
-              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
-            uniqueItems: true
+          type: array
+          items:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
+          uniqueItems: true
           description: The contactCharacter (SWE::Category) contains a term from a
             controlled vocabulary that describes the character of the boundary (e.g.
             abrupt, gradational), as opposed to its type.
-          nullable: true
         orientation:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_PlanarOrientation
           description: The orientation:GSML_PlanarOrientation property reports the
             general orientation of the contact surface.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_PlanarOrientation
         correlatesWith:
           oneOf:
-          - oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaGeochronologicBoundary
+          - allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmGeologicTimeSchemaGeochronologicBoundary
           description: The correlatesWith property is an association between ContactDescription
             and a GeochronologicBoundary describing a geochronologic (i.e., time zone)
             boundary that may correlate with it. Therefore, a contact correlation
             with a GeochronologicBoundary SHALL ONLY be allowed when the contactType
             is a ChronostratigraphicBoundary.
-          nullable: true
   DeformationStyleTerm:
     $anchor: DeformationStyleTerm
     description: A controlled vocabulary of terms describing the style of deformation
@@ -4941,11 +4933,10 @@ $defs:
           type: object
           properties:
             incrementalDisplacement:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#DisplacementValue
               description: The incrementalDisplacement:DisplacementValue property
                 contains a DisplacementValue reporting the parameters of the displacement.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#DisplacementValue
   DisplacementValue:
     $anchor: DisplacementValue
     description: A displacement value expresses the displacement on a fault with respect
@@ -4956,41 +4947,35 @@ $defs:
     - type: object
       properties:
         hangingWallDirection:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_LinearOrientation
           description: 'The property hangingWallDirection:GSML_LinearOrientation describes
             the direction of the hanging-wall side of the fault or fault-system where
             they are steep enough to define a hanging-wall on the map trace.  Constraint:
             displacementDirection'
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_LinearOrientation
         movementSense:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#MovementSenseTerm
           description: The property movementSense:MovementSenseTerm contains a term
             from a controlled vocabulary that describes the movement sense of displacement
             along a geologic structure (e.g., dextral, sinistral).
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#MovementSenseTerm
         movementType:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#MovementTypeTerm
           description: The property movementType:MovementTypeTerm contains a term
             from a controlled vocabulary that defines the type of movement on a shear
             displacement structure (e.g. dip-slip, strike-slip).
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#MovementTypeTerm
         displacementEvent:
-          oneOf:
-          - type: array
-            items:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#DisplacementEvent
-            uniqueItems: true
+          type: array
+          items:
+            oneOf:
+            - allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#DisplacementEvent
+          uniqueItems: true
           description: The property displacementEvent is an association between a
             Displacement and a GeologicEvent that contains a description of the age,
             environment and process of a shear displacement event.
-          nullable: true
   FoldDescription:
     $anchor: FoldDescription
     description: FoldDescription is an extended descriptive property of a fold structure.
@@ -5000,16 +4985,12 @@ $defs:
     - type: object
       properties:
         amplitude:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
           description: The amplitude property (SWE::QuantityRange) reports the length
             from line segment connecting inflection points on adjacent fold limbs
             to the intervening fold hinge.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
         axialSurfaceOrientation:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_PlanarOrientation
           description: The property axialSurfaceOrientation:GSML_PlanarOrientation
             is used to characterize the geometry of a fold. The axial surface of a
             particular fold may be located based on observations of the folded geologic
@@ -5018,26 +4999,22 @@ $defs:
             which may be specified by observations at one or more locations, or generalized
             using terminology (upright, inclined, reclined, recumbent, overturned).
             Dip and Dip Direction are one approach to specifying the value.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_PlanarOrientation
         geneticModel:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
           description: The property geneticModel (SWE::Category) contains a term from
             a controlled vocabulary describing the specification of genetic model
             for fold, e.g. flexural slip, parallel.
-          nullable: true
-        hingeLineCurvature:
-          oneOf:
+          allOf:
           - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
+        hingeLineCurvature:
           description: The hingeLineCurvature property (SWE::Category) contains a
             term from a controlled vocabulary that describes the variation in orientation
             of fold hinge along trend of fold, distinguishing sheath from cylindrical
             folds (e.g. sheath, dome, basin, cylindrical.).
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
         hingeLineOrientation:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_LinearOrientation
           description: 'The property hingeLineOrientation:GSML_LinearOrientation reports
             the specification of the hinge line orientation for fold. GSML_LinearOrientation
             allows for a term value specification or a numeric specification of either
@@ -5045,39 +5022,34 @@ $defs:
             sub-vertical, steeply plunging, sub-horizontal, reclined and vertical
             for special cases in which hinge plunge is close to axial surface dip.
             0..* cardinality allows for both a numeric specification and a term specification.'
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_LinearOrientation
         hingeShape:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
           description: The property hingeShape (SWE::Category) reports a term from
             a controlled vocabulary describing the hinge shape, e.g. Rounded vs. angular
             hinge zones. This property has to do with the proportion of the wavelength
             that is considered part of hinge.
-          nullable: true
-        interLimbAngle:
-          oneOf:
+          allOf:
           - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
+        interLimbAngle:
           description: "The property interLimbAngle (SWE::Category) contains a term
             from a controlled vocabulary describing the interlimb angle using a tightness
             term (e.g. gentle (120-180\xB0), open (70-120\xB0), close (30-70\xB0),
             tight (10-30\xB0), isoclinal (0-10\xB0))."
-          nullable: true
-        limbShape:
-          oneOf:
+          allOf:
           - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
+        limbShape:
           description: The limbShape property (SWE::Category) contains a term from
             a controlled vocabulary describing the shape of the limb (e.g. straight
             vs curved limbs, kink, chevron, sinusoidal, box).
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
         span:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
           description: The span property (SWE::QuantityRange) reports a value describing
             the linear distance between inflection points in a single fold.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
         symmetry:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
           description: The symmetry property (SWE::Category) contains a term from
             a controlled vocabulary describing the concordance or discordance of bisecting
             surface and axial surface, or the ratio of length of limbs. The folded
@@ -5085,16 +5057,15 @@ $defs:
             points are defined. The definition based on bisecting surface/axial surface
             angle depends on having multiple surfaces defined such that the axial
             surface may be identified (symmetric, asymmetric).
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
         system:
           oneOf:
-          - oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#FoldSystem
+          - allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#FoldSystem
           description: The system property is an association between a FoldDescription
             and a FoldSystem that aggregates folds into a system.
-          nullable: true
   FoldSystem:
     $anchor: FoldSystem
     description: 'A FoldSystem is a collection of congruent folds (axis and axial
@@ -5109,31 +5080,26 @@ $defs:
           type: object
           properties:
             periodic:
-              oneOf:
-              - type: boolean
+              type: boolean
               description: The property periodic:Primitive::Boolean reports TRUE if
                 the hinges in a train are regularly spaced, and FALSE otherwise.
-              nullable: true
             wavelength:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
               description: The property wavelength (SWE::QuantityRange) contains a
                 quantitative description of the length between adjacent antiforms
                 (or synforms) in a fold train.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
             foldSystemMember:
-              oneOf:
-              - type: array
-                items:
-                  oneOf:
-                  - allOf:
-                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
-                  - allOf:
-                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFold
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFold
+              uniqueItems: true
               description: The foldSystemMember is an association between a FoldSystem
                 and the Folds that are members of that system.
-              nullable: true
   FoliationDescription:
     $anchor: FoliationDescription
     description: FoliationDescription provides extended descriptive properties for
@@ -5144,59 +5110,49 @@ $defs:
     - type: object
       properties:
         definingElement:
-          oneOf:
-          - type: array
-            items:
-              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
-            uniqueItems: true
+          type: array
+          items:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
+          uniqueItems: true
           description: The property definingElement (SWE::Category) contains a term
             from a controlled vocabulary describing the kinds of inhomogeneity in
             a rock body that may define a GeologicStructure. Examples include discontinuity,
             shaped surface, oriented particle, material boundary, and layer.
-          nullable: true
         continuity:
-          oneOf:
-          - type: array
-            items:
-              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
-            uniqueItems: true
+          type: array
+          items:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
+          uniqueItems: true
           description: The continuity property (SWE::Category) reports a term from
             a controlled vocabulary to distinguish continuous vs. disjunct cleavages.
-          nullable: true
         intensity:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
           description: The intensity property (SWE::Category) contains a term from
             a controlled vocabulary to describe how well the foliation is developed
             (e.g., weak, moderate, strong).
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
         mineralElement:
-          oneOf:
-          - type: array
-            items:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaMineral
-            uniqueItems: true
+          type: array
+          items:
+            oneOf:
+            - allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
+            - allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaMineral
+          uniqueItems: true
           description: The mineralElement property is an association between FoliationDescription
             and a Mineral that defines that foliation.
-          nullable: true
         orientation:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_PlanarOrientation
           description: The orientation:GSML_PlanarOrientation contains an estimate
             of the planar orientation of the foliation structure.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_PlanarOrientation
         spacing:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
           description: The spacing property (SWE::QuantityRange) contains a linear
             dimension representing the thickness of foliation domains. It is also
             used for thickness of layers of a given composition.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
   Fracture:
     $anchor: Fracture
     description: Fractures are cracks in the earth surface. If there is no displacement
@@ -5240,15 +5196,13 @@ $defs:
           properties:
             layerComposition:
               oneOf:
-              - oneOf:
-                - allOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
-                - allOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaRockMaterial
+              - allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
+              - allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaRockMaterial
               description: The layerComposition property is an association between
                 a Layering and a RockMaterial that describes the rock material that
                 may define compositional layering.
-              nullable: true
   Lineation:
     $anchor: Lineation
     description: 'GeologicStructure defined by aligned elongate elements. Lineation
@@ -5266,49 +5220,41 @@ $defs:
           type: object
           properties:
             lineationType:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#LineationTypeTerm
               description: 'Type of lineation. Examples include: flow lines, scratches,
                 striae, slickenlines, linear arrangements of elongate components in
                 sediments, elongate minerals, crinkles, and lines of intersection
                 between penetrative planar structures.'
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#LineationTypeTerm
             definingElement:
-              oneOf:
-              - type: array
-                items:
-                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
-                uniqueItems: true
+              type: array
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
+              uniqueItems: true
               description: Kinds of describable inhomogeneity in a rock body that
                 may define a GeologicStructure. Examples include Oriented Particle.
-              nullable: true
             intensity:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
               description: How well the lineation is developed. Terms such as weak,
                 moderate, strong.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/Category
             mineralElement:
-              oneOf:
-              - type: array
-                items:
-                  oneOf:
-                  - allOf:
-                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
-                  - allOf:
-                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaMineral
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/$defs/SCLinkObject
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaMineral
+              uniqueItems: true
               description: Mineral that defines the lineation
-              nullable: true
             orientation:
-              oneOf:
-              - type: array
-                items:
-                  allOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_LinearOrientation
-                uniqueItems: true
+              type: array
+              items:
+                allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_LinearOrientation
+              uniqueItems: true
               description: Orientation of the lineation
-              nullable: true
   LineationTypeTerm:
     $anchor: LineationTypeTerm
     description: 'Refers to a vocabulary of terms describing the type of lineation.
@@ -5338,18 +5284,15 @@ $defs:
     - type: object
       properties:
         netSlip:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
           description: The property netSlip:GSML_Vector reports the value of the net
             slip, expressed as a vector.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
         slipComponent:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#SlipComponents
           description: The slipComponent:SlipComponents property associates the individual
             slip components with the net slip values.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#SlipComponents
   NonDirectionalStructure:
     $anchor: NonDirectionalStructure
     description: Structures present in geology that do not have a preferred orientation
@@ -5365,12 +5308,11 @@ $defs:
           type: object
           properties:
             structureType:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#NonDirectionalStructureTypeTerm
               description: The type of non oriented structure. Examples include miarolitic
                 cavity, flame structure, load cast, shatter cone, trace fossil, fossil
                 mold
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#NonDirectionalStructureTypeTerm
   NonDirectionalStructureTypeTerm:
     $anchor: NonDirectionalStructureTypeTerm
     description: Refers to a vocabulary of terms describing types of non-directional
@@ -5387,12 +5329,10 @@ $defs:
     - type: object
       properties:
         separation:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
           description: The property separation:GSML_Vector reports the apparent offset
             across a planar feature, reported as a vector.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
   ShearDisplacementStructureDescription:
     $anchor: ShearDisplacementStructureDescription
     description: ShearDisplacementStructureDescription provides extended descriptive
@@ -5404,29 +5344,24 @@ $defs:
     - type: object
       properties:
         deformationStyle:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#DeformationStyleTerm
           description: The deformationStyle:DeformationStyleTerm contains a term from
             a vocabulary to describe the style of deformation, i.e. brittle (fault,
             breccia), ductile (shear), brittle-ductile, unknown.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#DeformationStyleTerm
         planeOrientation:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_PlanarOrientation
           description: "The property planeOrientation:GSML_PlanarOrientation contains
             a description of the orientation of a structure\u2019s planar surface."
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_PlanarOrientation
         stPhysicalProperty:
-          oneOf:
-          - type: array
-            items:
-              allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaPhysicalDescription
-            uniqueItems: true
+          type: array
+          items:
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmEarthMaterialSchemaPhysicalDescription
+          uniqueItems: true
           description: The property stPhysicalProperty:PhysicalDescription contains
             a value of generic physical properties not addressed in this model.
-          nullable: true
   SlipComponents:
     $anchor: SlipComponents
     description: SlipComponents is a kind of DisplacementValue that is a representation
@@ -5438,26 +5373,20 @@ $defs:
     - type: object
       properties:
         heave:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
           description: The property heave:GSML_Vector contains a component of slip
             in the horizontal, and perpendicular to the strike of the fault.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
         horizontalSlip:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
           description: The property horizontalSlip:GSML_Vector contains a slip component
             that is horizontal and parallel to strike of the fault.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
         throw:
-          oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
           description: The property throw:GSML_Vector contains the vertical component
             of slip.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicStructureExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGSML_Vector
   SCLinkObject:
     title: link object
     description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,

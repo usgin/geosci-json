@@ -2081,45 +2081,38 @@ $defs:
           type: object
           properties:
             logElement:
-              oneOf:
-              - type: array
-                items:
-                  oneOf:
-                  - allOf:
-                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeInterval
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeInterval
+              uniqueItems: true
               description: The property logElement is an association between a Borehole
                 and a BoreholeInterval instance to describe measured downhole intervals
                 and their observed features.
-              nullable: true
             downholeDrillingDetails:
-              oneOf:
-              - type: array
-                items:
-                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#DrillingDetails
-                uniqueItems: true
+              type: array
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#DrillingDetails
+              uniqueItems: true
               description: The property downholeDrillingDetails:DrillingDetails specifies
                 the drilling method and borehole diameter for intervals down the borehole.
-              nullable: true
             referenceLocation:
               oneOf:
-              - oneOf:
-                - allOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#OriginPosition
+              - allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#OriginPosition
               description: The property referenceLocation is an association between
                 a Borehole and an OriginPosition corresponding to the start point
                 of a borehole log. This may correspond to the borehole collar location
                 (e.g., kelly bush).
-              nullable: true
             indexData:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeDetails
               description: The property indexData:BoreholeDetails describes metadata
                 about a borehole, such as the operator, the custodian, dates of drilling,
                 etc.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeDetails
     - required:
       - featureType
       - id
@@ -2136,112 +2129,97 @@ $defs:
     type: object
     properties:
       operator:
-        oneOf:
-        - anyOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema
+        anyOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema
         description: The operator property is an association between a BoreholeDetails
           and a CIT:CI_ResponsibleParty describing the organisation responsible for
           commissioning the borehole (as opposed to actually drilling the borehole).
-        nullable: true
       driller:
-        oneOf:
-        - anyOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema
+        anyOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema
         description: The driller property is an association between a BoreholeDetails
           and a CIT:CI_ResponsibleParty describing of the organisation responsible
           for drilling the borehole (as opposed to commissioning the borehole).
-        nullable: true
       dateOfDrilling:
         oneOf:
-        - oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-          - type: object
-            properties:
-              hasBeginning:
-                type: object
-              hasEnd:
-                type: object
-            required:
-            - hasBeginning
-            - hasEnd
-          - type: object
-            properties:
-              hasBeginningDateTime:
-                type: string
-              hasEndDateTime:
-                type: string
-            required:
-            - hasBeginningDateTime
-            - hasEndDateTime
-          - type: array
-            minItems: 2
-            maxItems: 2
-            items:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+        - type: object
+          properties:
+            hasBeginning:
+              type: object
+            hasEnd:
+              type: object
+          required:
+          - hasBeginning
+          - hasEnd
+        - type: object
+          properties:
+            hasBeginningDateTime:
               type: string
+            hasEndDateTime:
+              type: string
+          required:
+          - hasBeginningDateTime
+          - hasEndDateTime
+        - type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            type: string
         description: The property dateOfDrilling:TM_Period describes the time period
           during which drilling of the borehole occurred.
-        nullable: true
       startPoint:
-        oneOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeStartPointCode
         description: The property startPoint:BoreholeStartPointCode provides a term
           from a controlled vocabulary indicating the named position relative to ground
           surface where the borehole commenced. (e.g., natural ground surface, open
           pit floor, underground, offshore)
-        nullable: true
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeStartPointCode
       inclinationType:
-        oneOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeInclinationCode
         description: The property inclinationType:BoreholeInclinationCode contains
           a term from a controlled vocabulary indicating the inclination type of the
           borehole. Appropriate terms would include vertical; inclined up; inclined
           down, horizontal.
-        nullable: true
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeInclinationCode
       boreholeMaterialCustodian:
-        oneOf:
-        - type: array
-          items:
-            anyOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema
-          uniqueItems: true
+        type: array
+        items:
+          anyOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema
+        uniqueItems: true
         description: The property boreholeMaterialCustodian is an association between
           BoreholeDetails and a CIT:CI_ResponsibleParty describing the organisation
           that is custodian of the drilled material recovered from the borehole.
-        nullable: true
       purpose:
-        oneOf:
-        - type: array
-          items:
-            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholePurposeCode
-          uniqueItems: true
+        type: array
+        items:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholePurposeCode
+        uniqueItems: true
         description: The property purpose:BoreholePurposeCode contains a term from
           a controlled vocabulary describing the purpose for which the borehole was
           drilled. e.g., site investigation, mineral exploration, hydrocarbon exploration,
           water resources.
-        nullable: true
       dataCustodian:
-        oneOf:
-        - type: array
-          items:
-            anyOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema
-          uniqueItems: true
+        type: array
+        items:
+          anyOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema
+        uniqueItems: true
         description: The dataCustodian is an association between a BoreholeDetails
           and a CIT:CI_ResponsibleParty describing the custodian (person or organisation)
           that is the custodian of data pertaining to this borehole.
-        nullable: true
       boreholeLength:
-        oneOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Quantity
         description: The property boreholeLength (SWE::Quantity) contains a measurement
           (a value and a unit of measurement) corresponding to the "length" of a borehole
           determined by the data provider (i.e., "length" can have different sources,
           like drillers measurement, loggers measurement, survey measurement, etc.).
-        nullable: true
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Quantity
   BoreholeDrillingMethodCode:
     $anchor: BoreholeDrillingMethodCode
     description: This class is an indicative placeholder only for a vocabulary of
@@ -2272,71 +2250,60 @@ $defs:
           type: object
           properties:
             observationMethod:
-              oneOf:
-              - type: array
-                items:
-                  $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Category
-                uniqueItems: true
+              type: array
+              items:
+                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Category
+              uniqueItems: true
               description: The observationMethod property (SWE::Category) contains
                 a term from a controlled vocabulary that describes the method used
                 to observe the properties of the borehole.
-              nullable: true
             specification:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
               description: The specification property is an association between a
                 BoreholeInterval and a GFI_Feature, a domain feature that is sampled
                 by the interval (e.g., a GeologicUnit). It is semantically equivalent
                 to O&M ISO19156 "sampledFeature".
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
             mappedIntervalBegin:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Quantity
               description: The property mappedIntervalBegin (SWE::Quantity) is a measurement
                 (a value and a unit of measurement) corresponding to the measured
                 distance of the start of the mapped interval along the path of the
                 borehole. The measured value must be less than or equal to the mappedIntervalEnd
                 value.
-              nullable: true
-            mappedIntervalEnd:
-              oneOf:
+              allOf:
               - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Quantity
+            mappedIntervalEnd:
               description: The mappedIntervalEnd property (SWE::Quantity) is a measurement
                 (a value and a unit of measure) corresponding to the measured distance
                 of the end of the mapped interval along the path of the borehole.
                 The measured value must be greater than or equal to the mappedIntervalBegin
                 value.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Quantity
             collectionIdentifier:
-              oneOf:
-              - anyOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_definedTerm_schema
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema
+              anyOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_definedTerm_schema
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_skosProperties_skosConcept_schema
               description: The collectionIdentifier:ScopedName is a string unique
                 within a scope that identifies a collection which forms a set BoreholeIntervals.
                 This allows description of multiple downhole logs for a single borehole.
                 The name should identify a particular log observation event.
-              nullable: true
             shape:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Geometry
               description: The property shape:GM_Object is a 1-D interval (e.g., a
                 "from" and "to", or "top" and "base" measurement) covering the same
                 distance as mappedIntervalBegin and mappedIntervalEnd. The geometry
                 shall use a reference to the borehole as the CRS of the containing
                 borehole.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Geometry
             parentBorehole:
               oneOf:
-              - oneOf:
-                - allOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#Borehole
+              - allOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#Borehole
               description: The property parentBorehole is an association between a
                 BoreholeInterval and a Borehole to which the interval belongs.
-              nullable: true
     - required:
       - featureType
       - id
@@ -2370,36 +2337,32 @@ $defs:
     type: object
     properties:
       drillingMethod:
-        oneOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeDrillingMethodCode
         description: The drillingMethod:BoreholeDrillingMethodCode property contains
           a term from a controlled vocabulary indicating the drilling method used.
           Appropriate terms would include rotary air blast, auger, diamond core, air
           core, etc.
-        nullable: true
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#BoreholeDrillingMethodCode
       boreholeDiameter:
-        oneOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Quantity
         description: The boreholeDiameter property (SWE::Quantity) contains a measurement
           (a value and a unit of measure) corresponding to the diameter of the drilled
           hole.
-        nullable: true
-      intervalBegin:
-        oneOf:
+        allOf:
         - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Quantity
+      intervalBegin:
         description: The intervalBegin property (SWE::Quantity) contains a measurement
           (a value and a unit of measurement) that corresponds to the measured distance
           of the start of the interval along the path of the borehole. The measured
           value must be less than or equal to the intervalEnd value.
-        nullable: true
-      intervalEnd:
-        oneOf:
+        allOf:
         - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Quantity
+      intervalEnd:
         description: The property intervalEnd (SWE::Quantity) contains a measurement
           (a value and a unit of measurement) of the measured distance of the end
           of the interval along the path of the borehole. The measured value must
           be greater than or equal to the intervalBegin value.
-        nullable: true
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Quantity
   OriginPosition:
     $anchor: OriginPosition
     description: A borehole OriginPosition is a feature corresponding to the start
@@ -2413,32 +2376,27 @@ $defs:
           type: object
           properties:
             location:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Point
               description: The property location contains a geometry corresponding
                 to the location of the borehole collar.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/x-defs/Point
             elevation:
-              oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
               description: The elevation:DirectPosition property is a compromise approach
                 to supply elevation explicitly for location; this is to allow for
                 software that cannot process 3-D GM_Point. Null shall be used if elevation
                 is unknown. A DirectPosition shall have a dimension of 1, and CRS
                 will be a "vertical" CRS (e.g. EPSG CRSs in the range 5600-5799).
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
             relatedBorehole:
-              oneOf:
-              - type: array
-                items:
-                  oneOf:
-                  - allOf:
-                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#Borehole
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#/$defs/SCLinkObject
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmBorehole/schema-oas3.0.yaml#Borehole
+              uniqueItems: true
               description: The hole that has this collar for its start point
-              nullable: true
     - required:
       - featureType
       - id

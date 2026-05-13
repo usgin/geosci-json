@@ -1,5 +1,5 @@
 {
-  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicEvent.xml \u2014 Kanimblan Orogeny, a deformation event at 335 Ma (range 325\u2013350 Ma), Tournaisian\u2013Serpukhovian, deep crustal setting. Validates against schemas/json/4.1/geoscimlBasic.json#GeologicEvent.",
+  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicEvent.xml - Kanimblan Orogeny, a deformation event at 335 Ma (range 325-350 Ma), Tournaisian-Serpukhovian, deep crustal setting. Validates against schemas/json/4.1/geoscimlBasic.json#GeologicEvent.",
   "type": "Feature",
   "id": "event.1",
   "featureType": "GeologicEvent",

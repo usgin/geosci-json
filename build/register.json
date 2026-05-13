@@ -2,7 +2,7 @@
   "name": "GeoSci JSON Building Blocks repository",
   "abstract": "Repository assembling building blocks for geoscience JSON metadata, using OGC building block patterns.\n",
   "description": "Modular JSON Schema building blocks for geoscience metadata and profiles.\n",
-  "modified": "2026-05-13T13:16:39.441981",
+  "modified": "2026-05-13T15:04:02.771929",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"6b01f188cc614cc2e65f4bf86a2623f98f101dfd",
@@ -210,7 +210,7 @@
       "link": "https://github.com/usgin/geosci-json",
       "sources": [
         {
-          "title": "GeoSciML 4.1 \u2014 FC profile composed across building blocks",
+          "title": "GeoSciML 4.1 - FC profile composed across building blocks",
           "link": "https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml"
         }
       ],
@@ -358,7 +358,7 @@
       "sourceSchema": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/schema.yaml",
       "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/context.jsonld",
       "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmGeologicStructureExtension/",
-      "validationPassed": false,
+      "validationPassed": true,
       "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmGeologicStructureExtension/",
       "documentation": {
         "json-full": {

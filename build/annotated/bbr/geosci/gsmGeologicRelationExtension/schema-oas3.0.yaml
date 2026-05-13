@@ -282,12 +282,10 @@ x-defs:
         $anchor: DescriptionPurpose
         description: 'Codes used for the specification of the intended purpose/level
           of abstraction for a given feature or object instance, ie the reason for
-          the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.'
+          the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.  Allowed
+          labels: definingNorm, instance, typicalNorm.'
         type: string
-        enum:
-        - definingNorm
-        - instance
-        - typicalNorm
+        format: uri
       DeterminationMethodTerm:
         $anchor: DeterminationMethodTerm
         description: This class is an empty placeholder for a vocabulary of terms
@@ -2850,26 +2848,23 @@ $defs:
     - type: object
       properties:
         relationship:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#GeologicRelationshipTerm
           description: The relationship:GeologicRelationshipTerm property contains
             a term from a controlled vocabulary to describe the geologic relationship
             (e.g., stratigraphic relation, structural relation, intrusive relation).
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#GeologicRelationshipTerm
         sourceRole:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#RelationRoleTerm
           description: The property sourceRole:RelationRoleProperty contains a term
             from a controlled vocabulary describing the role played by the source
             geologic feature or object (e.g., overlying unit, underlying unit).
-          nullable: true
-        targetRole:
-          oneOf:
+          allOf:
           - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#RelationRoleTerm
+        targetRole:
           description: The property targetRole:RelationRoleTerm contains a term from
             a controlled vocabulary describing the role played by the target geologic
             feature or object. (e.g., overlying unit, underlying unit)
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#RelationRoleTerm
   GeologicRelationshipTerm:
     $anchor: GeologicRelationshipTerm
     description: Refers to a vocabulary of terms describing a relationships between
@@ -2890,26 +2885,23 @@ $defs:
     type: object
     properties:
       relationship:
-        oneOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#GeologicRelationshipTerm
         description: The property relationship:GeologicRelationshipTerm contains a
           term from a controlled vocabulary to describe the geologic relationship
           (e.g., sedimentary relation, igneous relation).
-        nullable: true
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#GeologicRelationshipTerm
       sourceRole:
-        oneOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#RelationRoleTerm
         description: The property sourceRole:RelationRoleTerm contains a term that
           describes the role played by the source earth material part (e.g., matrix,
           clast, overgrowth).
-        nullable: true
-      targetRole:
-        oneOf:
+        allOf:
         - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#RelationRoleTerm
+      targetRole:
         description: The property targetRole:RelationRoleTerm contains a term describing
           the role played by the target earth material part (e.g., matrix, clast,
           overgrowth).
-        nullable: true
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicRelationExtension/schema-oas3.0.yaml#RelationRoleTerm
   RelationRoleTerm:
     $anchor: RelationRoleTerm
     description: Refers to a vocabulary of terms describing roles played by geologic

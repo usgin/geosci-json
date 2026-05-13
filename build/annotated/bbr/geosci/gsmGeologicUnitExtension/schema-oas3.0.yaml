@@ -309,12 +309,10 @@ x-defs:
         $anchor: DescriptionPurpose
         description: 'Codes used for the specification of the intended purpose/level
           of abstraction for a given feature or object instance, ie the reason for
-          the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.'
+          the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.  Allowed
+          labels: definingNorm, instance, typicalNorm.'
         type: string
-        enum:
-        - definingNorm
-        - instance
-        - typicalNorm
+        format: uri
       DeterminationMethodTerm:
         $anchor: DeterminationMethodTerm
         description: This class is an empty placeholder for a vocabulary of terms
@@ -2836,35 +2834,29 @@ $defs:
     type: object
     properties:
       beddingPattern:
-        oneOf:
-        - type: array
-          items:
-            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-          uniqueItems: true
+        type: array
+        items:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+        uniqueItems: true
         description: The property beddingPattern (SWE::Category) provides a term from
           a controlled vocabulary specifying patterns of bedding thickness or relationships
           between bedding packages. (e.g., thinning upward, thickening upward).
-        nullable: true
       beddingStyle:
-        oneOf:
-        - type: array
-          items:
-            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-          uniqueItems: true
+        type: array
+        items:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+        uniqueItems: true
         description: The property beddingStyle (SWE::Category) provides a term from
           a controlled vocabulary specifying the style of bedding in a stratified
           geologic unit (e.g. lenticular, irregular, planar, vague, and massive).
-        nullable: true
       beddingThickness:
-        oneOf:
-        - type: array
-          items:
-            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-          uniqueItems: true
+        type: array
+        items:
+          $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+        uniqueItems: true
         description: The property beddingThickness (SWE::Category) provides a term
           from a controlled vocabulary characterizing the thickness of bedding in
           the unit.
-        nullable: true
   GeologicUnitDescription:
     $anchor: GeologicUnitDescription
     description: GeologicUnitDescription provides for extended description of the
@@ -2875,52 +2867,44 @@ $defs:
     - type: object
       properties:
         bodyMorphology:
-          oneOf:
-          - type: array
-            items:
-              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-            uniqueItems: true
+          type: array
+          items:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+          uniqueItems: true
           description: 'The bodyMorphology property (SWE::Category) provides a term
             from a controlled vocabulary describing the geometry or form of a GeologicUnit.
             Examples include: dike (dyke), cone, fan, sheet, etc. The morphology is
             independent of the substance (EarthMaterial) that composes the GeologicUnit
             or process that formed it.'
-          nullable: true
         unitComposition:
-          oneOf:
-          - type: array
-            items:
-              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-            uniqueItems: true
+          type: array
+          items:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+          uniqueItems: true
           description: 'The unitComposition property (SWE::Category) provides a term
             from a composition-based classification that requires summarising the
             overall character of the unit. It is not applicable at the rock material
             or specimen level. Examples are: alkalic, subaluminous, peraluminous,
             I-Type, carbonate, phosphate.'
-          nullable: true
         outcropCharacter:
-          oneOf:
-          - type: array
-            items:
-              $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-            uniqueItems: true
+          type: array
+          items:
+            $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+          uniqueItems: true
           description: 'The property outcropCharacter (SWE::Category) provides a term
             that describes the nature of outcrops formed by a geologic unit. Examples
             are: bouldery, cliff-forming, ledge-forming, slope-forming, poorly exposed.'
-          nullable: true
         unitThickness:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
           description: The property unitThickness (SWE::QuantityRange) provides a
             value that represents the typical thickness of the geologic unit. It is
             always reported as a range.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
         bedding:
-          oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#BeddingDescription
           description: The bedding:BeddingDescription property reports a description
             of the bedding.
-          nullable: true
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#BeddingDescription
   SCLinkObject:
     title: link object
     description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,

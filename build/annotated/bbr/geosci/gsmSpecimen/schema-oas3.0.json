@@ -761,13 +761,9 @@
         },
         "DescriptionPurpose": {
           "$anchor": "DescriptionPurpose",
-          "description": "Codes used for the specification of the intended purpose/level of abstraction for a given feature or object instance, ie the reason for the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.",
+          "description": "Codes used for the specification of the intended purpose/level of abstraction for a given feature or object instance, ie the reason for the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.  Allowed labels: definingNorm, instance, typicalNorm.",
           "type": "string",
-          "enum": [
-            "definingNorm",
-            "instance",
-            "typicalNorm"
-          ]
+          "format": "uri"
         },
         "DeterminationMethodTerm": {
           "$anchor": "DeterminationMethodTerm",
@@ -4574,7 +4570,7 @@
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     }
   },
-  "description": "Specimen building block. The wrapper dispatches two featureType\nvalues: SF_Specimen (hand-curated \u00abFeatureType\u00bb, ISO 19156:2011\n\u00a78.6 \u2014 inlines SF_SamplingFeature's inherited properties since ISO\n19156 isn't in the GeoSciML XMI) and ReferenceSpecimen (a GeoSciML\n\u00abFeatureType\u00bb from the LaboratoryAnalysis-Specimen package, used\nfor named reference / type specimens). The rest of the\nLaboratoryAnalysis-Specimen library (AnalyticalInstrument,\nAnalyticalSession, GeochronologicInterpretation,\nGeologicSamplingMethod, GeologicSpecimenPreparation, Image, etc.)\nstays in `$defs` for cross-reference from SF_Specimen and from\nother BBs.\n\nValidates either a single Feature (dispatched by `featureType` to one of: SF_Specimen, ReferenceSpecimen) or a FeatureCollection whose `features[]` items are dispatched the same way.",
+  "description": "Specimen building block. The wrapper dispatches two featureType\nvalues: SF_Specimen (hand-curated \u00abFeatureType\u00bb, ISO 19156:2011\n\u00a78.6 - inlines SF_SamplingFeature's inherited properties since ISO\n19156 isn't in the GeoSciML XMI) and ReferenceSpecimen (a GeoSciML\n\u00abFeatureType\u00bb from the LaboratoryAnalysis-Specimen package, used\nfor named reference / type specimens). The rest of the\nLaboratoryAnalysis-Specimen library (AnalyticalInstrument,\nAnalyticalSession, GeochronologicInterpretation,\nGeologicSamplingMethod, GeologicSpecimenPreparation, Image, etc.)\nstays in `$defs` for cross-reference from SF_Specimen and from\nother BBs.\n\nValidates either a single Feature (dispatched by `featureType` to one of: SF_Specimen, ReferenceSpecimen) or a FeatureCollection whose `features[]` items are dispatched the same way.",
   "if": {
     "type": "object",
     "required": [
@@ -4680,135 +4676,109 @@
               "type": "object",
               "properties": {
                 "type": {
-                  "oneOf": [
+                  "description": "The property type:InstrumentTypeTerm reports a term from a controlled vocabulary that describes the category of instrument used in an analytical session (e.g., XRF, ICPMS, SHRIMP, etc.).",
+                  "allOf": [
                     {
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#InstrumentTypeTerm"
                     }
-                  ],
-                  "description": "The property type:InstrumentTypeTerm reports a term from a controlled vocabulary that describes the category of instrument used in an analytical session (e.g., XRF, ICPMS, SHRIMP, etc.).",
-                  "nullable": true
+                  ]
                 },
                 "model": {
-                  "oneOf": [
-                    {
-                      "type": "string"
-                    }
-                  ],
-                  "description": "The property mode:Primitive::CharacterString contains a string identifying the model of instrument used. (e.g., instrument type = XRD, model = Siemens Diffraktometer D500).",
-                  "nullable": true
+                  "type": "string",
+                  "description": "The property mode:Primitive::CharacterString contains a string identifying the model of instrument used. (e.g., instrument type = XRD, model = Siemens Diffraktometer D500)."
                 },
                 "serialNumber": {
-                  "oneOf": [
-                    {
-                      "type": "string"
-                    }
-                  ],
-                  "description": "The property serialNumber:Primitive::CharacterString contains a string that contains the serial number of the machine used in an analytical session.",
-                  "nullable": true
+                  "type": "string",
+                  "description": "The property serialNumber:Primitive::CharacterString contains a string that contains the serial number of the machine used in an analytical session."
                 },
                 "commissionDate": {
                   "oneOf": [
                     {
-                      "oneOf": [
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "inXSDDateTime": {
-                              "type": "string",
-                              "format": "date-time"
-                            },
-                            "inXSDDate": {
-                              "type": "string",
-                              "format": "date"
-                            },
-                            "inXSDgYearMonth": {
-                              "type": "string",
-                              "pattern": "^-?\\d{4}-\\d{2}$"
-                            },
-                            "inXSDgYear": {
-                              "type": "string",
-                              "pattern": "^-?\\d{4}$"
-                            }
-                          },
-                          "anyOf": [
-                            {
-                              "required": [
-                                "inXSDDateTime"
-                              ]
-                            },
-                            {
-                              "required": [
-                                "inXSDDate"
-                              ]
-                            },
-                            {
-                              "required": [
-                                "inXSDgYearMonth"
-                              ]
-                            },
-                            {
-                              "required": [
-                                "inXSDgYear"
-                              ]
-                            }
-                          ]
-                        },
-                        {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "inXSDDateTime": {
                           "type": "string",
                           "format": "date-time"
                         },
-                        {
+                        "inXSDDate": {
                           "type": "string",
                           "format": "date"
+                        },
+                        "inXSDgYearMonth": {
+                          "type": "string",
+                          "pattern": "^-?\\d{4}-\\d{2}$"
+                        },
+                        "inXSDgYear": {
+                          "type": "string",
+                          "pattern": "^-?\\d{4}$"
                         }
-                      ]
-                    }
-                  ],
-                  "description": "The property commissionDate is an association between an AnalyticalInstrument and a TM_Instant corresponding to the date of the commissioning of an instrument.",
-                  "nullable": true
-                },
-                "location": {
-                  "oneOf": [
-                    {
+                      },
                       "anyOf": [
                         {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                          "required": [
+                            "inXSDDateTime"
+                          ]
                         },
                         {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
+                          "required": [
+                            "inXSDDate"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "inXSDgYearMonth"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "inXSDgYear"
+                          ]
                         }
                       ]
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date"
                     }
                   ],
-                  "description": "The property location is an association between an AnalyticalInstrument and a CIT:Responsibility describing the owner and the location of an instrument.",
-                  "nullable": true
+                  "description": "The property commissionDate is an association between an AnalyticalInstrument and a TM_Instant corresponding to the date of the commissioning of an instrument."
+                },
+                "location": {
+                  "anyOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
+                    }
+                  ],
+                  "description": "The property location is an association between an AnalyticalInstrument and a CIT:Responsibility describing the owner and the location of an instrument."
                 },
                 "usedIn": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "oneOf": [
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "allOf": [
                           {
-                            "allOf": [
-                              {
-                                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                              }
-                            ]
-                          },
-                          {
-                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalSession"
+                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
                           }
                         ]
                       },
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "The property usedIn is an association between an AnalyticalInstrument and an AnalyticalSession identifying an analytical sessions which used this instrument.",
-                  "nullable": true
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalSession"
+                      }
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "description": "The property usedIn is an association between an AnalyticalInstrument and an AnalyticalSession identifying an analytical sessions which used this instrument."
                 }
               }
             }
@@ -4833,26 +4803,20 @@
       "type": "object",
       "properties": {
         "methodName": {
-          "oneOf": [
+          "description": "The property methodName:AnalyticalMethodTerm contains a term from a controlled vocabulary that describes an analytical method used in a session (e.g., XRF mass spectrometry, ICPMS, SHRIMP geochronology).",
+          "allOf": [
             {
               "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalMethodTerm"
             }
-          ],
-          "description": "The property methodName:AnalyticalMethodTerm contains a term from a controlled vocabulary that describes an analytical method used in a session (e.g., XRF mass spectrometry, ICPMS, SHRIMP geochronology).",
-          "nullable": true
+          ]
         },
         "citation": {
-          "oneOf": [
-            {
-              "allOf": [
-                {
-                  "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                }
-              ]
-            }
-          ],
           "description": "The citation property is an association between an AnalyticalMethod and a CIT:CI_Citation describing a published description of a particular analytical method (e.g., a standard operating procedure document).",
-          "nullable": true
+          "allOf": [
+            {
+              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+            }
+          ]
         }
       }
     },
@@ -4878,51 +4842,36 @@
                 "method": {
                   "oneOf": [
                     {
-                      "oneOf": [
+                      "allOf": [
                         {
-                          "allOf": [
-                            {
-                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                            }
-                          ]
-                        },
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalMethod"
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
                         }
                       ]
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalMethod"
                     }
                   ],
-                  "description": "The property method is an association that links an AnalyticalProcess to an AnalyticalMethod that describes the type of analytical method used to make an observation.",
-                  "nullable": true
+                  "description": "The property method is an association that links an AnalyticalProcess to an AnalyticalMethod that describes the type of analytical method used to make an observation."
                 },
                 "computation": {
-                  "oneOf": [
-                    {
-                      "type": "object"
-                    }
-                  ],
-                  "description": "The computation property is an association between an AnalyticalProcess and a CIT:ProcessStep that describes the computational process associated with the process.",
-                  "nullable": true
+                  "type": "object",
+                  "description": "The computation property is an association between an AnalyticalProcess and a CIT:ProcessStep that describes the computational process associated with the process."
                 },
                 "acquisition": {
                   "oneOf": [
                     {
-                      "oneOf": [
+                      "allOf": [
                         {
-                          "allOf": [
-                            {
-                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                            }
-                          ]
-                        },
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalSession"
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
                         }
                       ]
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalSession"
                     }
                   ],
-                  "description": "The property acquisition is an association that links an AnalyticalProcess to an AnalyticalSession that describes the analytical session (e.g., laboratory session) in which an observation was made and data acquired.",
-                  "nullable": true
+                  "description": "The property acquisition is an association that links an AnalyticalProcess to an AnalyticalSession that describes the analytical session (e.g., laboratory session) in which an observation was made and data acquired."
                 }
               }
             }
@@ -4957,133 +4906,108 @@
                 "time": {
                   "oneOf": [
                     {
-                      "oneOf": [
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "hasBeginning": {
-                              "type": "object"
-                            },
-                            "hasEnd": {
-                              "type": "object"
-                            }
-                          },
-                          "required": [
-                            "hasBeginning",
-                            "hasEnd"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "hasBeginningDateTime": {
-                              "type": "string"
-                            },
-                            "hasEndDateTime": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "hasBeginningDateTime",
-                            "hasEndDateTime"
-                          ]
-                        },
-                        {
-                          "type": "array",
-                          "minItems": 2,
-                          "maxItems": 2,
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      ]
-                    }
-                  ],
-                  "description": "The property time is an association between an AnalyticalSession and a TM_Period describing the time period during which the analysis was performed.",
-                  "nullable": true
-                },
-                "operator": {
-                  "oneOf": [
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                    },
                     {
-                      "anyOf": [
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                      "type": "object",
+                      "properties": {
+                        "hasBeginning": {
+                          "type": "object"
                         },
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
+                        "hasEnd": {
+                          "type": "object"
                         }
+                      },
+                      "required": [
+                        "hasBeginning",
+                        "hasEnd"
                       ]
-                    }
-                  ],
-                  "description": "The property operator is an association between an AnalyticalSession and a CIT:CI_Responsability describing the operator or organisation responsible for the analytical session.",
-                  "nullable": true
-                },
-                "parameter": {
-                  "oneOf": [
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "hasBeginningDateTime": {
+                          "type": "string"
+                        },
+                        "hasEndDateTime": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "hasBeginningDateTime",
+                        "hasEndDateTime"
+                      ]
+                    },
                     {
                       "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
                       "items": {
-                        "anyOf": [
-                          {
-                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                          },
-                          {
-                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_variableMeasured_schema"
-                          }
-                        ]
-                      },
-                      "uniqueItems": true
+                        "type": "string"
+                      }
                     }
                   ],
-                  "description": "The property parameter (OM::NamedValue) contains a name/value pair to describe arbitrary environmental or instrument setting parameters that apply to an entire analytical session (e.g., voltage, current, temperature, vacuum). The \"name\" attribute of NamedValue is a term from a controlled vocabulary.",
-                  "nullable": true
+                  "description": "The property time is an association between an AnalyticalSession and a TM_Period describing the time period during which the analysis was performed."
+                },
+                "operator": {
+                  "anyOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
+                    }
+                  ],
+                  "description": "The property operator is an association between an AnalyticalSession and a CIT:CI_Responsability describing the operator or organisation responsible for the analytical session."
+                },
+                "parameter": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_variableMeasured_schema"
+                      }
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "description": "The property parameter (OM::NamedValue) contains a name/value pair to describe arbitrary environmental or instrument setting parameters that apply to an entire analytical session (e.g., voltage, current, temperature, vacuum). The \"name\" attribute of NamedValue is a term from a controlled vocabulary."
                 },
                 "instrument": {
                   "oneOf": [
                     {
-                      "oneOf": [
+                      "allOf": [
                         {
-                          "allOf": [
-                            {
-                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                            }
-                          ]
-                        },
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalInstrument"
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
                         }
                       ]
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalInstrument"
                     }
                   ],
-                  "description": "The property instrument is an association between an AnalyticalSession and an AnalyticalInstrument that describes the instrument used in the analytical session.",
-                  "nullable": true
+                  "description": "The property instrument is an association between an AnalyticalSession and an AnalyticalInstrument that describes the instrument used in the analytical session."
                 },
                 "referenceAnalyses": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "oneOf": [
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "allOf": [
                           {
-                            "allOf": [
-                              {
-                                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                              }
-                            ]
-                          },
-                          {
-                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#ReferenceSpecimen"
+                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
                           }
                         ]
                       },
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "The property referenceAnalysis is an association between an AnalyticalSession and a ReferenceSpecimen that describes a reference specimen (i.e., standards, blanks) used in the analytical session.",
-                  "nullable": true
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#ReferenceSpecimen"
+                      }
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "description": "The property referenceAnalysis is an association between an AnalyticalSession and a ReferenceSpecimen that describes a reference specimen (i.e., standards, blanks) used in the analytical session."
                 }
               }
             }
@@ -5118,108 +5042,76 @@
                 "interpretedAge": {
                   "oneOf": [
                     {
-                      "oneOf": [
+                      "allOf": [
                         {
-                          "allOf": [
-                            {
-                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                            }
-                          ]
-                        },
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
                         {
-                          "allOf": [
-                            {
-                              "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchema"
-                            }
-                          ]
+                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/gsmBasicGeologySchema"
                         }
                       ]
                     }
                   ],
-                  "description": "The interpretedAge property is an association between a GeochronologicInterpretation and a GeologicEvent that describes the dated event, process and environment.",
-                  "nullable": true
+                  "description": "The interpretedAge property is an association between a GeochronologicInterpretation and a GeologicEvent that describes the dated event, process and environment."
                 },
                 "isotopicEvent": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#IsotopicEventType"
-                      },
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "The isotopicEvent:IsotopicEventType contains a term from a controlled vocabulary that describes any isotopic events that are relevant to the interpretation. e.g., closure, isotopic mixing, Pb loss, etc.",
-                  "nullable": true
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#IsotopicEventType"
+                  },
+                  "uniqueItems": true,
+                  "description": "The isotopicEvent:IsotopicEventType contains a term from a controlled vocabulary that describes any isotopic events that are relevant to the interpretation. e.g., closure, isotopic mixing, Pb loss, etc."
                 },
                 "isotopicSystem": {
-                  "oneOf": [
+                  "description": "The property isotopicSystem:IsotopicSystemName contains a term from a controlled vocabulary that describes the isotopic system used to calculate geochronological age. A vocabulary would contain values such as: Ar-Ar, K-Ar, Nd-Sm, Pb-Pb, Rb-Sr, Re-Os, U-Pb, etc.",
+                  "allOf": [
                     {
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#IsotopicSystemName"
                     }
-                  ],
-                  "description": "The property isotopicSystem:IsotopicSystemName contains a term from a controlled vocabulary that describes the isotopic system used to calculate geochronological age. A vocabulary would contain values such as: Ar-Ar, K-Ar, Nd-Sm, Pb-Pb, Rb-Sr, Re-Os, U-Pb, etc.",
-                  "nullable": true
+                  ]
                 },
                 "statisticalMethod": {
-                  "oneOf": [
+                  "description": "The property statisticalMethod:StatisticalMethodTerm contains a term from a controlled vocabulary that describes the statistical method used to interpret the results. (e.g., weighted mean, median, concordia, discordia, etc)",
+                  "allOf": [
                     {
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#StatisticalMethodTerm"
                     }
-                  ],
-                  "description": "The property statisticalMethod:StatisticalMethodTerm contains a term from a controlled vocabulary that describes the statistical method used to interpret the results. (e.g., weighted mean, median, concordia, discordia, etc)",
-                  "nullable": true
+                  ]
                 },
                 "interpretedBy": {
-                  "oneOf": [
+                  "anyOf": [
                     {
-                      "anyOf": [
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                        },
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
-                        }
-                      ]
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                    },
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_agentInRole_schema"
                     }
                   ],
-                  "description": "The property interpretedBy is an association between a GeochronologicInterpretation and a CIT:CI_Responsability describing the party responsible for this interpretation.",
-                  "nullable": true
+                  "description": "The property interpretedBy is an association between a GeochronologicInterpretation and a CIT:CI_Responsability describing the party responsible for this interpretation."
                 },
                 "citation": {
-                  "oneOf": [
-                    {
-                      "allOf": [
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                        }
-                      ]
-                    }
-                  ],
                   "description": "The citation property is an association between a GeochronologicInterpretation and a CIT:CI_Citation that describes authors and other reference information for an interpreted age.",
-                  "nullable": true
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                    }
+                  ]
                 },
                 "preferredInterpretation": {
-                  "oneOf": [
-                    {
-                      "type": "boolean"
-                    }
-                  ],
-                  "description": "The property preferredInterpretation:Primitive::Boolean indicates whether this interpretation is the preferred interpretation (i.e., the analytical data may be reinterpreted).",
-                  "nullable": true
+                  "type": "boolean",
+                  "description": "The property preferredInterpretation:Primitive::Boolean indicates whether this interpretation is the preferred interpretation (i.e., the analytical data may be reinterpreted)."
                 },
                 "sourceCollection": {
-                  "oneOf": [
-                    {
-                      "allOf": [
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                        }
-                      ]
-                    }
-                  ],
                   "description": "The property sourceCollection is an association between a GeochronologicInterpretation and an OM::SF_SamplingFeatureCollection that lists a collection of OM::SF_SamplingFeature (e.g., a collection of burn spots or craters from a SHRIMP analytical session). When legacy published data for which the SamplingFeatureCollection is unknown, it may be delivered with SamplingFeatureCollection = 'unknown'.",
-                  "nullable": true
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                    }
+                  ]
                 }
               }
             }
@@ -5252,33 +5144,27 @@
               "type": "object",
               "properties": {
                 "method": {
-                  "oneOf": [
+                  "description": "The property method:GeologicSamplingMethodTerm is a term from a controlled vocabulary that describes the process used to obtain or create a geologic specimen. e.g., diamond drilling, percussion drilling, piston core drilling, vibro core drilling, channel sampling, sea floor dredging, crushing, mineral separation, melting, outcrop sampling.",
+                  "allOf": [
                     {
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#GeologicSamplingMethodTerm"
                     }
-                  ],
-                  "description": "The property method:GeologicSamplingMethodTerm is a term from a controlled vocabulary that describes the process used to obtain or create a geologic specimen. e.g., diamond drilling, percussion drilling, piston core drilling, vibro core drilling, channel sampling, sea floor dredging, crushing, mineral separation, melting, outcrop sampling.",
-                  "nullable": true
+                  ]
                 },
                 "parameter": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "anyOf": [
-                          {
-                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                          },
-                          {
-                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_variableMeasured_schema"
-                          }
-                        ]
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
                       },
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "The property parameter (OM::NamedValue) contains a name/value pair to describe arbitrary parameters used in the sampling process. The \"name\" attribute of NamedValue shall be a term from a controlled vocabulary.",
-                  "nullable": true
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_variableMeasured_schema"
+                      }
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "description": "The property parameter (OM::NamedValue) contains a name/value pair to describe arbitrary parameters used in the sampling process. The \"name\" attribute of NamedValue shall be a term from a controlled vocabulary."
                 }
               }
             }
@@ -5309,33 +5195,27 @@
       "type": "object",
       "properties": {
         "preparationMethod": {
-          "oneOf": [
+          "description": "The preparationMethod:GeologicSpecimenPreparationTerm contains a term from a controlled vocabulary that describes the method employed for the preparation of a geologic specimen for further analysis.",
+          "allOf": [
             {
               "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#GeologicSpecimenPreparationTerm"
             }
-          ],
-          "description": "The preparationMethod:GeologicSpecimenPreparationTerm contains a term from a controlled vocabulary that describes the method employed for the preparation of a geologic specimen for further analysis.",
-          "nullable": true
+          ]
         },
         "parameter": {
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                  },
-                  {
-                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_variableMeasured_schema"
-                  }
-                ]
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
               },
-              "uniqueItems": true
-            }
-          ],
-          "description": "The property parameter (OM::NamedValue) contains name/value pair to describe arbitrary parameters used in this preparation step (e.g., mesh size in a sieving process, type of chemical additives, parameters in a mineral separation process). The \"name\" attribute of NamedValue shall be a term from a controlled vocabulary.",
-          "nullable": true
+              {
+                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/metadataBuildingBlocks_build_annotated_bbr_metadata_schemaorgProperties_variableMeasured_schema"
+              }
+            ]
+          },
+          "uniqueItems": true,
+          "description": "The property parameter (OM::NamedValue) contains name/value pair to describe arbitrary parameters used in this preparation step (e.g., mesh size in a sieving process, type of chemical additives, parameters in a mineral separation process). The \"name\" attribute of NamedValue shall be a term from a controlled vocabulary."
         }
       }
     },
@@ -5406,41 +5286,31 @@
               "type": "object",
               "properties": {
                 "referenceDescription": {
-                  "oneOf": [
-                    {
-                      "allOf": [
-                        {
-                          "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                        }
-                      ]
-                    }
-                  ],
                   "description": "The property referenceDescription is an association between a ReferenceSpecimen and a CIT:CI_Citation that references a citation of published analytical results for this standard reference specimen.",
-                  "nullable": true
+                  "allOf": [
+                    {
+                      "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                    }
+                  ]
                 },
                 "usedIn": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "oneOf": [
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "allOf": [
                           {
-                            "allOf": [
-                              {
-                                "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                              }
-                            ]
-                          },
-                          {
-                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalSession"
+                            "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
                           }
                         ]
                       },
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "The property usedIn is an association between a ReferenceSpecimen and an AnalyticalSession in which the reference specimen was used.",
-                  "nullable": true
+                      {
+                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#AnalyticalSession"
+                      }
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "description": "The property usedIn is an association between a ReferenceSpecimen and an AnalyticalSession in which the reference specimen was used."
                 }
               }
             }
@@ -5500,7 +5370,7 @@
     },
     "SF_Specimen": {
       "$anchor": "SF_Specimen",
-      "description": "ISO 19156:2011 \u00a78.6 SF_Specimen \u2014 a sampling feature representing a physical specimen collected from a sampled feature. Implementation inlines the SF_SamplingFeature parent's properties (sampledFeature, relatedObservation, relatedSamplingFeature, lineage) since the parent is not separately schematised here. External ISO types referenced from properties (OM_Process, OM_Observation, GFI_Feature, TM_Object, LI_Lineage, SF_SamplingFeature) are by-reference only via SCLinkObject.",
+      "description": "ISO 19156:2011 \u00a78.6 SF_Specimen - a sampling feature representing a physical specimen collected from a sampled feature. Implementation inlines the SF_SamplingFeature parent's properties (sampledFeature, relatedObservation, relatedSamplingFeature, lineage) since the parent is not separately schematised here. External ISO types referenced from properties (OM_Process, OM_Observation, GFI_Feature, TM_Object, LI_Lineage, SF_SamplingFeature) are by-reference only via SCLinkObject.",
       "allOf": [
         {
           "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/feature"
@@ -5512,53 +5382,37 @@
               "type": "object",
               "properties": {
                 "sampledFeature": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                      },
-                      "minItems": 1,
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "Feature(s) being sampled (1..*, by-reference to ISO 19156 GFI_Feature). Inherited from SF_SamplingFeature.",
-                  "nullable": true
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "description": "Feature(s) being sampled (1..*, by-reference to ISO 19156 GFI_Feature). Inherited from SF_SamplingFeature."
                 },
                 "relatedObservation": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                      },
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "Observations whose featureOfInterest is this specimen (0..*, by-reference to ISO 19156 OM_Observation). Inherited from SF_SamplingFeature.",
-                  "nullable": true
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                  },
+                  "uniqueItems": true,
+                  "description": "Observations whose featureOfInterest is this specimen (0..*, by-reference to ISO 19156 OM_Observation). Inherited from SF_SamplingFeature."
                 },
                 "relatedSamplingFeature": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
-                      },
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "Self-association: relations to other SF_SamplingFeature instances (0..*, by-reference). Inherited from SF_SamplingFeature.",
-                  "nullable": true
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
+                  },
+                  "uniqueItems": true,
+                  "description": "Self-association: relations to other SF_SamplingFeature instances (0..*, by-reference). Inherited from SF_SamplingFeature."
                 },
                 "lineage": {
-                  "oneOf": [
+                  "description": "Provenance metadata (by-reference to ISO 19115 LI_Lineage). Inherited from SF_SamplingFeature.",
+                  "allOf": [
                     {
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
                     }
-                  ],
-                  "description": "Provenance metadata (by-reference to ISO 19115 LI_Lineage). Inherited from SF_SamplingFeature.",
-                  "nullable": true
+                  ]
                 },
                 "materialClass": {
                   "description": "Material class of the specimen (1..1). ISO 19156 types this as ScopedName; encoded here as a SWE Category to carry the vocabulary URI.",
@@ -5585,39 +5439,31 @@
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#GeologicSamplingMethod"
                     }
                   ],
-                  "description": "Sampling method (0..1). ISO 19156 types as OM_Process; here implemented as the GeoSciML GeologicSamplingMethod FeatureType, either by-reference (SCLinkObject) or inline.",
-                  "nullable": true
+                  "description": "Sampling method (0..1). ISO 19156 types as OM_Process; here implemented as the GeoSciML GeologicSamplingMethod FeatureType, either by-reference (SCLinkObject) or inline."
                 },
                 "samplingLocation": {
-                  "oneOf": [
+                  "description": "Location where the specimen was sampled (0..1, GeoJSON Geometry). Distinct from the top-level Feature geometry, which may carry the specimen's current footprint.",
+                  "allOf": [
                     {
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/Geometry"
                     }
-                  ],
-                  "description": "Location where the specimen was sampled (0..1, GeoJSON Geometry). Distinct from the top-level Feature geometry, which may carry the specimen's current footprint.",
-                  "nullable": true
+                  ]
                 },
                 "processingDetails": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#GeologicSpecimenPreparation"
-                      },
-                      "uniqueItems": true
-                    }
-                  ],
-                  "description": "Processing / preparation steps applied to the specimen (0..*). ISO 19156 types as SpecimenProcessing; here items are the GeoSciML GeologicSpecimenPreparation DataType.",
-                  "nullable": true
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#GeologicSpecimenPreparation"
+                  },
+                  "uniqueItems": true,
+                  "description": "Processing / preparation steps applied to the specimen (0..*). ISO 19156 types as SpecimenProcessing; here items are the GeoSciML GeologicSpecimenPreparation DataType."
                 },
                 "size": {
-                  "oneOf": [
+                  "description": "Specimen size as a SWE Quantity (0..1). ISO 19156 types as Measure.",
+                  "allOf": [
                     {
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/Quantity"
                     }
-                  ],
-                  "description": "Specimen size as a SWE Quantity (0..1). ISO 19156 types as Measure.",
-                  "nullable": true
+                  ]
                 },
                 "currentLocation": {
                   "oneOf": [
@@ -5628,17 +5474,15 @@
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/$defs/SCLinkObject"
                     }
                   ],
-                  "description": "Current physical location of the specimen (0..1). Free text address, URI, or link object to a repository record.",
-                  "nullable": true
+                  "description": "Current physical location of the specimen (0..1). Free text address, URI, or link object to a repository record."
                 },
                 "specimenType": {
-                  "oneOf": [
+                  "description": "Specimen type classifier (0..1). ISO 19156 types as ScopedName; encoded here as a SWE Category.",
+                  "allOf": [
                     {
                       "$ref": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmSpecimen/schema-oas3.0.json#/x-defs/Category"
                     }
-                  ],
-                  "description": "Specimen type classifier (0..1). ISO 19156 types as ScopedName; encoded here as a SWE Category.",
-                  "nullable": true
+                  ]
                 }
               },
               "required": [

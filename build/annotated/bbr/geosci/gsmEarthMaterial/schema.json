@@ -257,86 +257,51 @@
           "type": "object",
           "properties": {
             "alterationType": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#AlterationTypeTerm"
-                }
-              ],
+              "$ref": "#AlterationTypeTerm",
               "description": "The property alterationType:AlterationTypeTerm contains a term from a controlled vocabulary of alteration types (e.g., potassic, argillic, advanced argillic)."
             },
             "alterationProduct": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "oneOf": [
-                      {
-                        "$ref": "#/$defs/SCLinkObject",
-                        "$comment": "by-reference link to EarthMaterial"
-                      },
-                      {
-                        "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
-                        "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
-                      }
-                    ]
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/SCLinkObject",
+                    "$comment": "by-reference link to EarthMaterial"
                   },
-                  "uniqueItems": true
-                }
-              ],
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                    "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
+                  }
+                ]
+              },
+              "uniqueItems": true,
               "description": "The property alterationProduct is an association between the AlterationDescripton and EarthMaterial describing the material resulting from the alteration processes, e.g. alteration minerals, saprolite, ferricrete, clay, calcrete, skarn, etc. Materials observed in a soil profile could be identified using this property."
             },
             "alterationDistribution": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-                  },
-                  "uniqueItems": true
-                }
-              ],
+              "type": "array",
+              "items": {
+                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+              },
+              "uniqueItems": true,
               "description": "The alterationDistribution (SWE::Category) property describes the spatial distribution or geometry of alteration zones using a term from a controlled vocabulary. e.g., patchy, spotted, banded, veins, vein breccia, pervasive, disseminated, etc."
             },
             "alterationDegree": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-                  },
-                  "uniqueItems": true
-                }
-              ],
+              "type": "array",
+              "items": {
+                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+              },
+              "uniqueItems": true,
               "description": "The property alterationDegree (SWE::Category) contains a term from a controlled vocabulary to indicate the magnitude of observed alteration."
             },
             "alterationEvent": {
               "oneOf": [
                 {
-                  "type": "null"
+                  "$ref": "#/$defs/SCLinkObject",
+                  "$comment": "by-reference link to GeologicEvent"
                 },
                 {
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/SCLinkObject",
-                      "$comment": "by-reference link to GeologicEvent"
-                    },
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
-                      "$comment": "cross-BB inline reference to GeologicEvent in BB gsmBasicGeology"
-                    }
-                  ]
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                  "$comment": "cross-BB inline reference to GeologicEvent in BB gsmBasicGeology"
                 }
               ],
               "description": "The property alterationEvent is an association between an AlterationDescription and a GeologicEvent describing the GeologicEvent associated with the alteration."
@@ -363,14 +328,7 @@
           "type": "object",
           "properties": {
             "chemicalAnalysis": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/DataRecord.json"
-                }
-              ],
+              "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/DataRecord.json",
               "description": "The chemicalAnalysis property (SWE:DataRecord) contains a collection of geochemical results in a form of a DataRecord (a collection of fields composed of description and values)."
             }
           }
@@ -389,137 +347,26 @@
           "type": "object",
           "properties": {
             "compositionCategory": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-                  },
-                  "uniqueItems": true
-                }
-              ],
+              "type": "array",
+              "items": {
+                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+              },
+              "uniqueItems": true,
               "description": "The compositionCategory property (SWE::Category) provides a term from a controlled vocabulary to specify the gross compositional character of a compound material. Composition as used here is loosely construed to include both chemical composition and petrographic composition, thus multiple values may be applied to a single rock, e.g. metaluminous and alkalic, undersaturated and basic, etc. Terms would typically include broad chemical classifications such as silicate, carbonate, ferromagnesian, oxide. However, this attribute may have different terminology for different kinds of rocks - for example sandstone petrographic classification terms (e.g. feldspathic) might be placed here."
             },
             "geneticCategory": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-                  },
-                  "uniqueItems": true
-                }
-              ],
+              "type": "array",
+              "items": {
+                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+              },
+              "uniqueItems": true,
               "description": "The property geneticCategory (SWE::Category) provides a term from a controlled vocabulary that represents a summary geologic history of the material. (i.e., a genetic process classifier term). Examples include igneous, sedimentary, metamorphic, shock metamorphic, volcanic, pyroclastic."
             },
             "particleGeometry": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#ParticleGeometryDescription"
-                }
-              ],
+              "$ref": "#ParticleGeometryDescription",
               "description": "The particleGeometry:ParticleGeometryDescription contains an instance of ParticleGeometryDescription."
             },
             "constituent": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "oneOf": [
-                      {
-                        "$ref": "#/$defs/SCLinkObject",
-                        "$comment": "by-reference link to ConstituentPart"
-                      },
-                      {
-                        "$ref": "#ConstituentPart"
-                      }
-                    ]
-                  },
-                  "uniqueItems": true
-                }
-              ],
-              "description": "The property constituent is an association between a CompoundMaterialDescription and a ConstituentPart that makes up part of the CompoundMaterial."
-            }
-          }
-        }
-      ]
-    },
-    "ConstituentPart": {
-      "$anchor": "ConstituentPart",
-      "description": "The ConstituentPart class describes how Earth materials may be made up of other Earth materials, including the proportion of the constituent part in the whole (e.g., 20%, minor, dominant); and the role that the constituent plays in the whole (e.g., matrix, groundmass, framework, phenocryst, xenolith, vein).",
-      "type": "object",
-      "properties": {
-        "role": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "$ref": "#ConstituentPartRoleTerm"
-            }
-          ],
-          "description": "The role:ConstituentPartRoleTerm property contains a term from a controlled vocabulary that describes the role a ConstituentPart plays in a CompoundMaterial aggregation. The same EarthMaterial may occur as different ConstituentParts playing different roles within one CompoundMaterial. For example, feldspar may be present as groundmass (\u201cgroundmass\u201d is a ConstituentPart::role) and as phenocrysts (\u201cphenocryst\u201d is another ConstituentPart::role) within a single igneous rock."
-        },
-        "proportion": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
-            }
-          ],
-          "description": "The proportion property (SWE::QuantityRange) reports the fraction of the whole that is formed by a ConstituentPart in a part/whole relationship. It is used for the ConstituentPart portion in a CompoundMaterial. It specifies the fraction of the EarthMaterial formed by the part (e.g., 20%, minor, dominant)."
-        },
-        "constituentMaterial": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "oneOf": [
-                {
-                  "$ref": "#/$defs/SCLinkObject",
-                  "$comment": "by-reference link to EarthMaterial"
-                },
-                {
-                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
-                  "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
-                }
-              ]
-            }
-          ],
-          "description": "The constituentMaterial property is an association between a ConstituentPart and an EarthMaterial that specifies the EarthMaterial that is forming the ConstituentPart."
-        },
-        "constituentParticleGeometry": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "$ref": "#ParticleGeometryDescription"
-            }
-          ],
-          "description": "Description of geometry of individual subset of particles"
-        },
-        "relatedMaterial": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
               "type": "array",
               "items": {
                 "oneOf": [
@@ -532,9 +379,57 @@
                   }
                 ]
               },
-              "uniqueItems": true
+              "uniqueItems": true,
+              "description": "The property constituent is an association between a CompoundMaterialDescription and a ConstituentPart that makes up part of the CompoundMaterial."
+            }
+          }
+        }
+      ]
+    },
+    "ConstituentPart": {
+      "$anchor": "ConstituentPart",
+      "description": "The ConstituentPart class describes how Earth materials may be made up of other Earth materials, including the proportion of the constituent part in the whole (e.g., 20%, minor, dominant); and the role that the constituent plays in the whole (e.g., matrix, groundmass, framework, phenocryst, xenolith, vein).",
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#ConstituentPartRoleTerm",
+          "description": "The role:ConstituentPartRoleTerm property contains a term from a controlled vocabulary that describes the role a ConstituentPart plays in a CompoundMaterial aggregation. The same EarthMaterial may occur as different ConstituentParts playing different roles within one CompoundMaterial. For example, feldspar may be present as groundmass (\u201cgroundmass\u201d is a ConstituentPart::role) and as phenocrysts (\u201cphenocryst\u201d is another ConstituentPart::role) within a single igneous rock."
+        },
+        "proportion": {
+          "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json",
+          "description": "The proportion property (SWE::QuantityRange) reports the fraction of the whole that is formed by a ConstituentPart in a part/whole relationship. It is used for the ConstituentPart portion in a CompoundMaterial. It specifies the fraction of the EarthMaterial formed by the part (e.g., 20%, minor, dominant)."
+        },
+        "constituentMaterial": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SCLinkObject",
+              "$comment": "by-reference link to EarthMaterial"
+            },
+            {
+              "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+              "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
             }
           ],
+          "description": "The constituentMaterial property is an association between a ConstituentPart and an EarthMaterial that specifies the EarthMaterial that is forming the ConstituentPart."
+        },
+        "constituentParticleGeometry": {
+          "$ref": "#ParticleGeometryDescription",
+          "description": "Description of geometry of individual subset of particles"
+        },
+        "relatedMaterial": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/SCLinkObject",
+                "$comment": "by-reference link to ConstituentPart"
+              },
+              {
+                "$ref": "#ConstituentPart"
+              }
+            ]
+          },
+          "uniqueItems": true,
           "description": "Specifies the ConstituentPart that is playing the target role in the MaterialRelation"
         }
       }
@@ -557,14 +452,7 @@
           "type": "object",
           "properties": {
             "fabricType": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#FabricTypeTerm"
-                }
-              ],
+              "$ref": "#FabricTypeTerm",
               "description": "The fabricType:FabricTypeTerm property contains a term from a controlled vocabulary to denote the type of fabric in the CompoundMaterial (e.g., rapikivi texture, autobrecciation, spaced cleavage, porphyroblastic, cross-bedding). The fabricType describes a pattern, defined by one or more CompoundMaterial constituents, that is present throughout a rock body when considered at some scale. It is defined based on the average configuration of many constituents. Penetrative fabric denotes that these constituents are distributed throughout the rock volume at the scale of observation, and are repeated at distances that are small relative to the scale of the whole, such that they can be considered to pervade the whole uniformly."
             }
           }
@@ -586,7 +474,13 @@
           "$comment": "cross-BB supertype reference to EarthMaterial in BB gsmBasicGeology"
         },
         {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {}
+            }
+          }
         }
       ]
     },
@@ -602,93 +496,51 @@
           "type": "object",
           "properties": {
             "metamorphicFacies": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-                  },
-                  "uniqueItems": true
-                }
-              ],
+              "type": "array",
+              "items": {
+                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+              },
+              "uniqueItems": true,
               "description": "The metamorphicFacies property (SWE::Category) contains a term from a controlled vocabulary that describes a characteristic mineral assemblages indicative of certain metamorphic pressure and temperature conditions. Examples include Barrovian metasedimentary zones (e.g., biotite facies, kyanite facies) or assemblages developed in rocks of more mafic composition (e.g., greenschist facies, amphibolite facies)."
             },
             "metamorphicGrade": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-                }
-              ],
+              "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json",
               "description": "The metamorphicGrade property (SWE::Category) contains a term from a controlled vocabulary that indicates the intensity or rank of metamorphism applied to an EarthMaterial (e.g., high metamorphic grade, low metamorphic grade). It indicates in a general way the pressure-temperature (PT) environment in which the metamorphism took place. The determination of metamorphic grade is based on mineral assemblages (i.e., facies) present in a rock that are interpreted to have crystallized in equilibrium during a particular metamorphic event."
             },
             "peakPressureValue": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
-                }
-              ],
+              "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json",
               "description": "The peakPressureValue property (SWE::Quantity) reports a numerical value to indicate the estimated pressure at peak metamorphic conditions."
             },
             "peakTemperatureValue": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
-                }
-              ],
+              "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json",
               "description": "The peakTemperatureValue property (SWE::Quantity) reports a numerical value to indicate the estimated temperature at peak metamorphic conditions."
             },
             "protolithLithology": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "oneOf": [
-                      {
-                        "$ref": "#/$defs/SCLinkObject",
-                        "$comment": "by-reference link to EarthMaterial"
-                      },
-                      {
-                        "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
-                        "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
-                      }
-                    ]
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/SCLinkObject",
+                    "$comment": "by-reference link to EarthMaterial"
                   },
-                  "uniqueItems": true
-                }
-              ],
+                  {
+                    "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                    "$comment": "cross-BB inline reference to EarthMaterial in BB gsmBasicGeology"
+                  }
+                ]
+              },
+              "uniqueItems": true,
               "description": "The protolithLithology is an association between a MetamorphicDescription and an EarthMaterial that describes the pre-metamorphic lithology for a metamorphosed CompoundMaterial."
             },
             "metamorphicEvent": {
               "oneOf": [
                 {
-                  "type": "null"
+                  "$ref": "#/$defs/SCLinkObject",
+                  "$comment": "by-reference link to GeologicEvent"
                 },
                 {
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/SCLinkObject",
-                      "$comment": "by-reference link to GeologicEvent"
-                    },
-                    {
-                      "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
-                      "$comment": "cross-BB inline reference to GeologicEvent in BB gsmBasicGeology"
-                    }
-                  ]
+                  "$ref": "https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json",
+                  "$comment": "cross-BB inline reference to GeologicEvent in BB gsmBasicGeology"
                 }
               ],
               "description": "The metamorphicEvent property is an association between a MetamorphicDescription and a GeologicEvent that denotes the age, environment and process associated with a particular metamorphic assemblage in a GeologicUnit."
@@ -708,20 +560,18 @@
         {
           "type": "object",
           "properties": {
-            "mineralName": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "mineralName": {
                   "type": "array",
                   "items": {
                     "$ref": "#MineralNameTerm"
                   },
-                  "uniqueItems": true
+                  "uniqueItems": true,
+                  "description": "Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical Association. (eg: http://www.mindat.org/mineralindex.php)"
                 }
-              ],
-              "description": "Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical Association. (eg: http://www.mindat.org/mineralindex.php)"
+              }
             }
           }
         }
@@ -742,7 +592,13 @@
           "$comment": "cross-BB supertype reference to EarthMaterial in BB gsmBasicGeology"
         },
         {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {}
+            }
+          }
         }
       ]
     },
@@ -757,85 +613,43 @@
       "type": "object",
       "properties": {
         "particleType": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "$ref": "#ParticleTypeTerm"
-            }
-          ],
+          "$ref": "#ParticleTypeTerm",
           "description": "The particleType:ParticleTypeTerm provides a term from a controlled vocabulary to specify the nature of individual particles of each constituent in an EarthMaterial aggregation, based mostly on their genesis. When applied on ParticleDescription for CompoundMaterial, it would characterise all particles in aggregate. Use this property on CompoundMaterial to distinguish rocks composed of crystals (crystalline rocks) from rocks composed of granular particles (clasts, fragments). Examples include ooliths, crystals, pore space. Constituent type is determined based on the nature of the particles, and ideally is independent of the relationship between particles in a compound material aggregation."
         },
         "aspectRatio": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-              },
-              "uniqueItems": true
-            }
-          ],
+          "type": "array",
+          "items": {
+            "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+          },
+          "uniqueItems": true,
           "description": "The aspectRatio property (SWE::Category) contains a term from a controlled vocabulary describing the geometry of particles based on the ratios of lengths of long, intermediate and short axes of grains. It equates to sphericity in sedimentary rocks (i.e., the degree to which the shape of a particle approximates a sphere). The formal definition is \u201cA quantitative specification based on the ratio of lengths of long, intermediate and short axes of grain shape\u201d. (e.g., prolate, slightly flattened, very bladed, equant, acicular, tabular)."
         },
         "shape": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-              },
-              "uniqueItems": true
-            }
-          ],
+          "type": "array",
+          "items": {
+            "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+          },
+          "uniqueItems": true,
           "description": "The shape property (SWE::Category) describes, &#x9;the development of crystal faces bounding particles in crystalline compound materials, and &#x9;the surface rounding of grains in sedimentary rocks. Roundness is a measure of the sharpness of the edges between surfaces bounding a particle The terms shall be a term from a controlled vocabulary and be appropriate for the kind of compound material (e.g., for crystalline rocks- euhedral, ideoblastic, subhedral, anhedral, xenoblastic; for sedimentary rocks - angular, rounded)."
         },
         "size": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json"
-            }
-          ],
+          "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json",
           "description": "The property size (SWE::QuantityRange) reports the size that specifies particle grainsize. Values may be reported using absolute measurements (e.g., range, mean, median, mode, maximum)."
         },
         "sorting": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-              },
-              "uniqueItems": true
-            }
-          ],
+          "type": "array",
+          "items": {
+            "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
+          },
+          "uniqueItems": true,
           "description": "The sorting property (SWE::Category) contains a term from a vocabulary that specifies the size distribution of particles in a CompoundMaterial. Terminology for sorting in sedimentary rocks is based on the quantitative Graphic Standard Deviation (IGSD) scheme proposed by Folk. Example for this attribute may include sedimentary terms such as well sorted and poorly sorted, or igneous terms such as porphyritic, equigranular, seriate."
         },
         "sourceOrganism": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#Organism"
-              },
-              "uniqueItems": true
-            }
-          ],
+          "type": "array",
+          "items": {
+            "$ref": "#Organism"
+          },
+          "uniqueItems": true,
           "description": "The sourceOrganism property is an association between a ParticleGeometryDescription and an Organism that is the source of the fossil particles (sponge spicules, bivalve shells, etc.)."
         }
       }
@@ -858,29 +672,15 @@
           "type": "object",
           "properties": {
             "propertyName": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "#PhysicalPropertyTerm"
-                }
-              ],
+              "$ref": "#PhysicalPropertyTerm",
               "description": "The property propertyName:PhysicalPropertyTerm contains a term from a controlled vocabulary of physical properties of rock materials (e.g., density, porosity, magnetic susceptibility, remnant magnetism, permeability, seismic velocity)."
             },
             "propertyMeasure": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
-                  },
-                  "uniqueItems": true
-                }
-              ],
+              "type": "array",
+              "items": {
+                "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json"
+              },
+              "uniqueItems": true,
               "description": "The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, unit or structure."
             }
           }
@@ -905,14 +705,7 @@
           "type": "object",
           "properties": {
             "consolidationDegree": {
-              "oneOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json"
-                }
-              ],
+              "$ref": "https://schemas.opengis.net/sweCommon/3.0/json/Category.json",
               "description": "The consolidationDegree property (SWE::Category) contains a term from a controlled vocabulary that specifies the degree to which an aggregation of EarthMaterial particles is a distinct solid material. Consolidation and induration are related concepts specified by this property. They define a continuum from unconsolidated material to very hard rock. Induration is the degree to which a consolidated material is made hard, operationally determined by how difficult it is to break a piece of the material. Consolidated materials may have varying degrees of induration."
             }
           }

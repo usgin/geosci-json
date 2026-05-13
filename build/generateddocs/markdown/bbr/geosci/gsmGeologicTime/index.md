@@ -384,8 +384,8 @@ $id: https://schemas.usgin.org/geosci-json/gsmGeologicTime/gsmGeologicTimeSchema
 description: "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary\npoints,
   TemporalReferenceSystem, plus the GeologicAgeDetails extension\n(which contributes
   GeologicEventDescription, the concrete description\nclass used by GeologicEvent.gaEventDescription).
-  The dispatcher\nadditionally exposes two hand-curated featureTypes \u2014\nGeochronologicEra
-  and GeochronologicBoundary \u2014 that align to W3C\nOWL-Time (https://www.w3.org/TR/owl-time/)
+  The dispatcher\nadditionally exposes two hand-curated featureTypes -\nGeochronologicEra
+  and GeochronologicBoundary - that align to W3C\nOWL-Time (https://www.w3.org/TR/owl-time/)
   per Cox & Richard 2015\n\"A formal model for the geologic timescale and GSSP\":
   Era \u2261\ntime:ProperInterval and Boundary \u2261 time:Instant, with start/end\nmapping
   to time:hasBeginning/time:hasEnd and member to\ntime:intervalContains. Both reference
@@ -541,19 +541,16 @@ $defs:
             member:
               description: Sub-eras contained within this era (time:intervalContains).
                 Array of by-reference links or inline GeochronologicEra Features.
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  oneOf:
-                  - $ref: '#/$defs/SCLinkObject'
-                  - $ref: '#GeochronologicEra'
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                - $ref: '#GeochronologicEra'
+              uniqueItems: true
             stratotype:
               description: Defining stratigraphic section for this era (the rock-record
                 anchor). Inline StratigraphicSection Feature or by-reference SCLinkObject.
               oneOf:
-              - type: 'null'
               - $ref: '#/$defs/SCLinkObject'
               - $ref: '#StratigraphicSection'
           required:
@@ -587,29 +584,23 @@ $defs:
       properties:
         olderGeochronologicEra:
           oneOf:
-          - type: 'null'
-          - oneOf:
-            - $ref: '#/$defs/SCLinkObject'
-              $comment: by-reference link to GeochronologicEra
-            - $ref: '#GeochronologicEra'
+          - $ref: '#/$defs/SCLinkObject'
+            $comment: by-reference link to GeochronologicEra
+          - $ref: '#GeochronologicEra'
           description: Link to description of the GeochronologicEra that corresponds
             to the older estimated age of a geologic feature.
         youngerGeochronologicEra:
           oneOf:
-          - type: 'null'
-          - oneOf:
-            - $ref: '#/$defs/SCLinkObject'
-              $comment: by-reference link to GeochronologicEra
-            - $ref: '#GeochronologicEra'
+          - $ref: '#/$defs/SCLinkObject'
+            $comment: by-reference link to GeochronologicEra
+          - $ref: '#GeochronologicEra'
           description: Link to description of the GeochronologicEra that corresponds
             to the younger estimated age of a geologic feature.
         prototype:
           oneOf:
-          - type: 'null'
-          - oneOf:
-            - $ref: '#/$defs/SCLinkObject'
-              $comment: by-reference link to StratigraphicPoint
-            - $ref: '#StratigraphicPoint'
+          - $ref: '#/$defs/SCLinkObject'
+            $comment: by-reference link to StratigraphicPoint
+          - $ref: '#StratigraphicPoint'
           description: Reference stratigraphic point for stratigraphic events
   GeologicTimescale:
     $anchor: GeologicTimescale
@@ -674,26 +665,20 @@ $defs:
           type: object
           properties:
             primaryGuidingCriterion:
-              oneOf:
-              - type: 'null'
-              - type: string
+              type: string
               description: The property primaryGuidingCriterion:Primitive::CharacterString
                 contains a description of the primary criterion used to establish
                 the stratigraphic point.
             additionalCorrelationProperty:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  type: string
-                uniqueItems: true
+              type: array
+              items:
+                type: string
+              uniqueItems: true
               description: The property additionnalCorrelationProperty:Primitive::CharacterString
                 contains any additional criteria used to establish the stratigraphic
                 point.
             status:
-              oneOf:
-              - type: 'null'
-              - type: string
+              type: string
               description: The property status:Primitive::CharacterString contains
                 a description of the status of stratigraphic point (e.g., formally
                 accepted, etc.).
@@ -716,29 +701,21 @@ $defs:
           type: object
           properties:
             geologicSetting:
-              oneOf:
-              - type: 'null'
-              - type: string
+              type: string
               description: The property geologicSetting:Primitive::CharacterString
                 contains a description of the geologic setting of the stratigraphic
                 section.
             geologicDescription:
-              oneOf:
-              - type: 'null'
-              - type: string
+              type: string
               description: The geologicDescription:Primitive::CharacterString contains
                 a description of the geology of the stratigraphic section (e.g., lithology,
                 paleontology, paleogeography, etc.).
             accessibility:
-              oneOf:
-              - type: 'null'
-              - type: string
+              type: string
               description: The property accessibility:Primitive::CharacterString contains
                 a description of the ability to access the stratigraphic section.
             conservation:
-              oneOf:
-              - type: 'null'
-              - type: string
+              type: string
               description: The property conservation:Primitive::CharacterString contains
                 a description of measures to conserve the stratigraphic section.
     - required:
@@ -760,30 +737,24 @@ $defs:
     properties:
       end:
         oneOf:
-        - type: 'null'
-        - oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-            $comment: by-reference link to TimeOrdinalEraBoundary
-          - $ref: '#TimeOrdinalEraBoundary'
+        - $ref: '#/$defs/SCLinkObject'
+          $comment: by-reference link to TimeOrdinalEraBoundary
+        - $ref: '#TimeOrdinalEraBoundary'
         description: Younger time boundary of an era
       start:
         oneOf:
-        - type: 'null'
-        - oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-            $comment: by-reference link to TimeOrdinalEraBoundary
-          - $ref: '#TimeOrdinalEraBoundary'
+        - $ref: '#/$defs/SCLinkObject'
+          $comment: by-reference link to TimeOrdinalEraBoundary
+        - $ref: '#TimeOrdinalEraBoundary'
         description: Older time boundary of an era
       member:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            oneOf:
-            - $ref: '#/$defs/SCLinkObject'
-              $comment: by-reference link to TimeOrdinalEra
-            - $ref: '#TimeOrdinalEra'
-          uniqueItems: true
+        type: array
+        items:
+          oneOf:
+          - $ref: '#/$defs/SCLinkObject'
+            $comment: by-reference link to TimeOrdinalEra
+          - $ref: '#TimeOrdinalEra'
+        uniqueItems: true
         description: Subdivisions of TimeOrdinalEra
   TimeOrdinalEraBoundary:
     $anchor: TimeOrdinalEraBoundary
@@ -792,78 +763,68 @@ $defs:
     properties:
       position:
         oneOf:
-        - type: 'null'
-        - oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-          - type: object
-            properties:
-              inXSDDateTime:
-                type: string
-                format: date-time
-              inXSDDate:
-                type: string
-                format: date
-              inXSDgYearMonth:
-                type: string
-                pattern: ^-?\d{4}-\d{2}$
-              inXSDgYear:
-                type: string
-                pattern: ^-?\d{4}$
-            anyOf:
-            - required:
-              - inXSDDateTime
-            - required:
-              - inXSDDate
-            - required:
-              - inXSDgYearMonth
-            - required:
-              - inXSDgYear
-          - type: string
-            format: date-time
-          - type: string
-            format: date
-          $comment: ISO 19108 TM_Instant aligned to W3C OWL-Time time:Instant (https://www.w3.org/TR/owl-time/#time:Instant).
-            Accepts a SCLinkObject by-reference, an OWL-Time Instant object with one
-            of `inXSDDateTime` / `inXSDDate` / `inXSDgYearMonth` / `inXSDgYear`, or
-            a bare ISO 8601 string as a convenience alias.
+        - $ref: '#/$defs/SCLinkObject'
+        - type: object
+          properties:
+            inXSDDateTime:
+              type: string
+              format: date-time
+            inXSDDate:
+              type: string
+              format: date
+            inXSDgYearMonth:
+              type: string
+              pattern: ^-?\d{4}-\d{2}$
+            inXSDgYear:
+              type: string
+              pattern: ^-?\d{4}$
+          anyOf:
+          - required:
+            - inXSDDateTime
+          - required:
+            - inXSDDate
+          - required:
+            - inXSDgYearMonth
+          - required:
+            - inXSDgYear
+        - type: string
+          format: date-time
+        - type: string
+          format: date
+        $comment: ISO 19108 TM_Instant aligned to W3C OWL-Time time:Instant (https://www.w3.org/TR/owl-time/#time:Instant).
+          Accepts a SCLinkObject by-reference, an OWL-Time Instant object with one
+          of `inXSDDateTime` / `inXSDDate` / `inXSDgYearMonth` / `inXSDgYear`, or
+          a bare ISO 8601 string as a convenience alias.
         description: A point in time corresponding to the era boundary
       positionalUncertainty:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
         description: A measure of the uncertainty in the estimate of the point in
           time of the era boundary
       previousEra:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            oneOf:
-            - $ref: '#/$defs/SCLinkObject'
-              $comment: by-reference link to TimeOrdinalEra
-            - $ref: '#TimeOrdinalEra'
-          uniqueItems: true
+        type: array
+        items:
+          oneOf:
+          - $ref: '#/$defs/SCLinkObject'
+            $comment: by-reference link to TimeOrdinalEra
+          - $ref: '#TimeOrdinalEra'
+        uniqueItems: true
         description: Preceding era
       observationalBasis:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            $ref: '#/$defs/SCLinkObject'
-            $comment: "External ISO 19156 OM_Observation \u2014 by-reference link"
-          uniqueItems: true
+        type: array
+        items:
+          $ref: '#/$defs/SCLinkObject'
+          $comment: External ISO 19156 OM_Observation - by-reference link
+        uniqueItems: true
         description: Observation supporting the existence of the boundary (geochronology,
           paleontology, etc.)
       nextEra:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            oneOf:
-            - $ref: '#/$defs/SCLinkObject'
-              $comment: by-reference link to TimeOrdinalEra
-            - $ref: '#TimeOrdinalEra'
-          uniqueItems: true
+        type: array
+        items:
+          oneOf:
+          - $ref: '#/$defs/SCLinkObject'
+            $comment: by-reference link to TimeOrdinalEra
+          - $ref: '#TimeOrdinalEra'
+        uniqueItems: true
         description: Succeeding era
   TimeOrdinalReferenceSystem:
     $anchor: TimeOrdinalReferenceSystem
@@ -882,15 +843,13 @@ $defs:
         uniqueItems: true
         description: Two reference points defining the extent of the system
       component:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            oneOf:
-            - $ref: '#/$defs/SCLinkObject'
-              $comment: by-reference link to TimeOrdinalEra
-            - $ref: '#TimeOrdinalEra'
-          uniqueItems: true
+        type: array
+        items:
+          oneOf:
+          - $ref: '#/$defs/SCLinkObject'
+            $comment: by-reference link to TimeOrdinalEra
+          - $ref: '#TimeOrdinalEra'
+        uniqueItems: true
         description: TimeOrdinalEra composing the TimeOrdinalReferenceSystem
     required:
     - referencePoint

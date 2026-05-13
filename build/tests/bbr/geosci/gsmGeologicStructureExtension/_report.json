@@ -2,8 +2,8 @@
   "title": "Validation report for usgin.bbr.geosci.gsmGeologicStructureExtension - gsmGeologicStructureExtension",
   "bblockName": "gsmGeologicStructureExtension",
   "bblockId": "usgin.bbr.geosci.gsmGeologicStructureExtension",
-  "generated": "2026-05-13T13:21:54.754652+00:00",
-  "result": false,
+  "generated": "2026-05-13T15:09:20.655408+00:00",
+  "result": true,
   "items": [
     {
       "source": {
@@ -123,7 +123,7 @@
         "snippetIndex": 1,
         "language": "application/json"
       },
-      "result": false,
+      "result": true,
       "sections": [
         {
           "name": "FILES",
@@ -141,11 +141,9 @@
           "entries": [
             {
               "op": "validation",
-              "result": false,
-              "exception": "ValidationError",
-              "errorMessage": "'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']",
-              "isError": true,
-              "message": "ValidationError: 'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']\n\nFailed validating 'enum' in schema[1]:\n    {'$anchor': 'DescriptionPurpose',\n     'description': 'Codes used for the specification of the intended '\n                    'purpose/level of abstraction for a given feature or '\n                    'object instance, ie the reason for the existence of '\n                    'the GeologicFeature. Values: instance, typicalNorm, '\n                    'definingNorm.',\n     'enum': ['definingNorm', 'instance', 'typicalNorm'],\n     'type': 'string'}\n\nOn instance:\n    'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance'"
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
             }
           ]
         }
@@ -161,7 +159,7 @@
         "snippetIndex": 1,
         "language": "application/json"
       },
-      "result": false,
+      "result": true,
       "sections": [
         {
           "name": "FILES",
@@ -179,11 +177,9 @@
           "entries": [
             {
               "op": "validation",
-              "result": false,
-              "exception": "ValidationError",
-              "errorMessage": "'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']",
-              "isError": true,
-              "message": "ValidationError: 'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']\n\nFailed validating 'enum' in schema[1]:\n    {'$anchor': 'DescriptionPurpose',\n     'description': 'Codes used for the specification of the intended '\n                    'purpose/level of abstraction for a given feature or '\n                    'object instance, ie the reason for the existence of '\n                    'the GeologicFeature. Values: instance, typicalNorm, '\n                    'definingNorm.',\n     'enum': ['definingNorm', 'instance', 'typicalNorm'],\n     'type': 'string'}\n\nOn instance:\n    'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance'"
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
             }
           ]
         }
@@ -199,7 +195,7 @@
         "snippetIndex": 1,
         "language": "application/json"
       },
-      "result": false,
+      "result": true,
       "sections": [
         {
           "name": "FILES",
@@ -217,11 +213,9 @@
           "entries": [
             {
               "op": "validation",
-              "result": false,
-              "exception": "ValidationError",
-              "errorMessage": "'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']",
-              "isError": true,
-              "message": "ValidationError: 'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance' is not one of ['definingNorm', 'instance', 'typicalNorm']\n\nFailed validating 'enum' in schema[1]:\n    {'$anchor': 'DescriptionPurpose',\n     'description': 'Codes used for the specification of the intended '\n                    'purpose/level of abstraction for a given feature or '\n                    'object instance, ie the reason for the existence of '\n                    'the GeologicFeature. Values: instance, typicalNorm, '\n                    'definingNorm.',\n     'enum': ['definingNorm', 'instance', 'typicalNorm'],\n     'type': 'string'}\n\nOn instance:\n    'http://inspire.ec.europa.eu/codelist/DescriptionPurpose/instance'"
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
             }
           ]
         }
@@ -231,7 +225,7 @@
   "globalErrors": {},
   "counts": {
     "total": 6,
-    "passed": 3,
-    "failed": 3
+    "passed": 6,
+    "failed": 0
   }
 }

@@ -634,11 +634,18 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl - all 7 contacts
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/OsFormation", "title": "Os Formation (Ordovician) - older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) - younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/OsFormation",
+            "title": "Os Formation (Ordovician) - older host",
+            "rel": "olderHost"
+          }
         ],
-        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/angular_unconformity",
-        "stContactDescription": null
+        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/angular_unconformity"
       }
     },
     {
@@ -665,11 +672,18 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl - all 7 contacts
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/SsFormation", "title": "Ss Formation (Silurian) - older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) - younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/SsFormation",
+            "title": "Ss Formation (Silurian) - older host",
+            "rel": "olderHost"
+          }
         ],
-        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/angular_unconformity",
-        "stContactDescription": null
+        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/angular_unconformity"
       }
     },
     {
@@ -696,11 +710,18 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl - all 7 contacts
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/XmRockBody", "title": "Xm Rock Body (Early Proterozoic gneiss) - older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) - younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/XmRockBody",
+            "title": "Xm Rock Body (Early Proterozoic gneiss) - older host",
+            "rel": "olderHost"
+          }
         ],
-        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/nonconformity",
-        "stContactDescription": null
+        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/nonconformity"
       }
     },
     {
@@ -729,11 +750,18 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl - all 7 contacts
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/KdDike",      "title": "Kd Mafic Dike (Cretaceous) - younger host (intrusive)", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - older host (country rock)", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/KdDike",
+            "title": "Kd Mafic Dike (Cretaceous) - younger host (intrusive)",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) - older host (country rock)",
+            "rel": "olderHost"
+          }
         ],
-        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/igneous_intrusive_contact",
-        "stContactDescription": null
+        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/igneous_intrusive_contact"
       }
     },
     {
@@ -762,11 +790,18 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl - all 7 contacts
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/KgGranite",   "title": "Kg Granite (Cretaceous) - younger host (intrusive)", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - older host (country rock)", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/KgGranite",
+            "title": "Kg Granite (Cretaceous) - younger host (intrusive)",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) - older host (country rock)",
+            "rel": "olderHost"
+          }
         ],
-        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/igneous_intrusive_contact",
-        "stContactDescription": null
+        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/igneous_intrusive_contact"
       }
     },
     {
@@ -807,11 +842,18 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl - all 7 contacts
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/MsFormation", "title": "Ms Formation (Late Miocene) - younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/MsFormation",
+            "title": "Ms Formation (Late Miocene) - younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/JsFormation",
+            "title": "Js Formation (Jurassic) - older host",
+            "rel": "olderHost"
+          }
         ],
-        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity",
-        "stContactDescription": null
+        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity"
       }
     },
     {
@@ -852,11 +894,18 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl - all 7 contacts
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/MsFormation", "title": "Ms Formation (Late Miocene) - younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/KgGranite",   "title": "Kg Granite (Cretaceous) - older host", "rel": "olderHost" }
+          {
+            "href": "https://example.org/loop3d/MsFormation",
+            "title": "Ms Formation (Late Miocene) - younger host",
+            "rel": "youngerHost"
+          },
+          {
+            "href": "https://example.org/loop3d/KgGranite",
+            "title": "Kg Granite (Cretaceous) - older host",
+            "rel": "olderHost"
+          }
         ],
-        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/nonconformity",
-        "stContactDescription": null
+        "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/nonconformity"
       }
     }
   ]
@@ -1024,15 +1073,27 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl - the La
         "hierarchyLink": [
           {
             "role": "http://resource.geosciml.org/classifier/cgi/geologicunitpartrole/constituent_unit",
-            "targetUnit": { "href": "#AkolkolexFormation", "title": "Akolkolex Formation", "rel": "containsFormation" }
+            "targetUnit": {
+              "href": "#AkolkolexFormation",
+              "title": "Akolkolex Formation",
+              "rel": "containsFormation"
+            }
           },
           {
             "role": "http://resource.geosciml.org/classifier/cgi/geologicunitpartrole/constituent_unit",
-            "targetUnit": { "href": "#IndexFormation",     "title": "Index Formation",     "rel": "containsFormation" }
+            "targetUnit": {
+              "href": "#IndexFormation",
+              "title": "Index Formation",
+              "rel": "containsFormation"
+            }
           },
           {
             "role": "http://resource.geosciml.org/classifier/cgi/geologicunitpartrole/constituent_unit",
-            "targetUnit": { "href": "#JowettFormation",    "title": "Jowett Formation",    "rel": "containsFormation" }
+            "targetUnit": {
+              "href": "#JowettFormation",
+              "title": "Jowett Formation",
+              "rel": "containsFormation"
+            }
           }
         ]
       }
@@ -1050,24 +1111,36 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl - the La
         "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
         "composition": [
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/arenite"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "AkolkolexFormation-arenite",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/arenite"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/quartzite"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "AkolkolexFormation-quartzite",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/quartzite"
+              }
+            }
           }
         ],
         "relatedFeature": [
-          { "href": "#LardeauGroup", "title": "Lardeau Group - Akolkolex is a constituent formation", "rel": "isPartOf" }
+          {
+            "href": "#LardeauGroup",
+            "title": "Lardeau Group - Akolkolex is a constituent formation",
+            "rel": "isPartOf"
+          }
         ]
       }
     },
@@ -1084,80 +1157,120 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl - the La
         "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
         "composition": [
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/arenite"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "IndexFormation-arenite",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/arenite"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/chemical_sedimentary_material"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "IndexFormation-chemical_sedimentary_material",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/chemical_sedimentary_material"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/limestone"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "IndexFormation-limestone",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/limestone"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/marble"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "IndexFormation-marble",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/marble"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/metamorphic_rock"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "IndexFormation-metamorphic_rock",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/metamorphic_rock"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/metasomatic_rock"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "IndexFormation-metasomatic_rock",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/metasomatic_rock"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/phyllite"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "IndexFormation-phyllite",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/phyllite"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/quartzite"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "IndexFormation-quartzite",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/quartzite"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/schist"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "IndexFormation-schist",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/schist"
+              }
+            }
           }
         ],
         "relatedFeature": [
-          { "href": "#LardeauGroup", "title": "Lardeau Group - Index is a constituent formation", "rel": "isPartOf" }
+          {
+            "href": "#LardeauGroup",
+            "title": "Lardeau Group - Index is a constituent formation",
+            "rel": "isPartOf"
+          }
         ]
       }
     },
@@ -1174,24 +1287,36 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl - the La
         "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
         "composition": [
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/metasomatic_rock"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "JowettFormation-metasomatic_rock",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/metasomatic_rock"
+              }
+            }
           },
           {
-            "role": null,
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/schist"
-            },
-            "proportion": null
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "JowettFormation-schist",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/schist"
+              }
+            }
           }
         ],
         "relatedFeature": [
-          { "href": "#LardeauGroup", "title": "Lardeau Group - Jowett is a constituent formation", "rel": "isPartOf" }
+          {
+            "href": "#LardeauGroup",
+            "title": "Lardeau Group - Jowett is a constituent formation",
+            "rel": "isPartOf"
+          }
         ]
       }
     }
@@ -1251,29 +1376,51 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl - a subs
           {
             "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/interbedded_part",
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/mudstone"
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "SOLT-mudstone",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/mudstone"
+              }
             },
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/dominant",
               "label": "qualitative - dominant proportion; numeric range 50-95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
-              "uom": { "code": "%" },
-              "value": [50, 95]
+              "uom": {
+                "code": "%"
+              },
+              "value": [
+                50,
+                95
+              ]
             }
           },
           {
             "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/interbedded_part",
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/limestone"
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "SOLT-limestone",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/limestone"
+              }
             },
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/subordinate",
               "label": "qualitative - subordinate proportion; numeric range 5-25 % is a placeholder. Source TTL records only the qualitative term gsoc:Subordinate_Proportion, with no measured percentage.",
-              "uom": { "code": "%" },
-              "value": [5, 25]
+              "uom": {
+                "code": "%"
+              },
+              "value": [
+                5,
+                25
+              ]
             }
           }
         ],
@@ -1381,29 +1528,51 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl - a subs
           {
             "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/interbedded_part",
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/limestone"
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "BEL-limestone",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/limestone"
+              }
             },
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/dominant",
               "label": "qualitative - dominant proportion; numeric range 50-95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
-              "uom": { "code": "%" },
-              "value": [50, 95]
+              "uom": {
+                "code": "%"
+              },
+              "value": [
+                50,
+                95
+              ]
             }
           },
           {
             "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/interbedded_part",
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/mudstone"
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "BEL-mudstone",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/mudstone"
+              }
             },
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/subordinate",
               "label": "qualitative - subordinate proportion; numeric range 5-25 % is a placeholder. Source TTL records only the qualitative term gsoc:Subordinate_Proportion, with no measured percentage.",
-              "uom": { "code": "%" },
-              "value": [5, 25]
+              "uom": {
+                "code": "%"
+              },
+              "value": [
+                5,
+                25
+              ]
             }
           }
         ],
@@ -1484,15 +1653,26 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl - a subs
           {
             "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/main_body",
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/mudstone"
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "BOUL-mudstone",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/mudstone"
+              }
             },
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/dominant",
               "label": "qualitative - dominant proportion; numeric range 50-95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
-              "uom": { "code": "%" },
-              "value": [50, 95]
+              "uom": {
+                "code": "%"
+              },
+              "value": [
+                50,
+                95
+              ]
             }
           }
         ],
@@ -1583,29 +1763,51 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl - a subs
           {
             "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/interbedded_part",
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/mudstone"
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "BMBG-mudstone",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/mudstone"
+              }
             },
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/dominant",
               "label": "qualitative - dominant proportion; numeric range 50-95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
-              "uom": { "code": "%" },
-              "value": [50, 95]
+              "uom": {
+                "code": "%"
+              },
+              "value": [
+                50,
+                95
+              ]
             }
           },
           {
             "role": "http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole/interbedded_part",
             "material": {
-              "properties": { "purpose": "typicalNorm" },
-              "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/limestone"
+              "type": "Feature",
+              "featureType": "RockMaterial",
+              "id": "BMBG-limestone",
+              "geometry": null,
+              "properties": {
+                "purpose": "typicalNorm",
+                "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/limestone"
+              }
             },
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/subordinate",
               "label": "qualitative - subordinate proportion; numeric range 5-25 % is a placeholder. Source TTL records only the qualitative term gsoc:Subordinate_Proportion, with no measured percentage.",
-              "uom": { "code": "%" },
-              "value": [5, 25]
+              "uom": {
+                "code": "%"
+              },
+              "value": [
+                5,
+                25
+              ]
             }
           }
         ],
@@ -2729,9 +2931,7 @@ $defs:
           type: object
           properties:
             anthropogenicGeomorphologicFeatureType:
-              oneOf:
-              - type: 'null'
-              - $ref: '#AnthropogenicGeomorphologicFeatureTypeTerm'
+              $ref: '#AnthropogenicGeomorphologicFeatureTypeTerm'
               description: 'The anthropogenicGeomorphologicFeatureType: AnthropogenicGeomorphologicFeatureTypeTerm
                 is a reference from a controlled vocabulary describing the type of
                 geomorphologic feature.'
@@ -2756,25 +2956,19 @@ $defs:
     type: object
     properties:
       role:
-        oneOf:
-        - type: 'null'
-        - $ref: '#CompositionPartRoleTerm'
+        $ref: '#CompositionPartRoleTerm'
         description: The property role:CompositionPartRoleTerm defines the relationship
           of the CompoundMaterial constituent in the geologic unit, e.g. vein, interbedded
           constituent, layers, dominant constituent.
       proportion:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
         description: The proportion property (SWE::QuantityRange) specifies the fraction
           of the geologic unit composed of the compound material.
       material:
         oneOf:
-        - type: 'null'
-        - oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-            $comment: by-reference link to CompoundMaterial
-          - $ref: '#CompoundMaterial'
+        - $ref: '#/$defs/SCLinkObject'
+          $comment: by-reference link to CompoundMaterial
+        - $ref: '#CompoundMaterial'
         description: The material:EarthMaterial property contains the material description
           of the composing part.
   CompositionPartRoleTerm:
@@ -2794,6 +2988,10 @@ $defs:
     allOf:
     - $ref: '#EarthMaterial'
     - type: object
+      properties:
+        properties:
+          type: object
+          properties: {}
   Contact:
     $anchor: Contact
     description: A contact is a general concept representing any kind of surface separating
@@ -2808,16 +3006,12 @@ $defs:
           type: object
           properties:
             contactType:
-              oneOf:
-              - type: 'null'
-              - $ref: '#ContactTypeTerm'
+              $ref: '#ContactTypeTerm'
               description: The property contactType:ContactTypeTerm classifies the
                 contact (e.g. intrusive, unconformity, bedding surface, lithologic
                 boundary, phase boundary) and is a term from a controlled vocabulary.
             stContactDescription:
-              oneOf:
-              - type: 'null'
-              - $ref: '#ContactAbstractDescription'
+              $ref: '#ContactAbstractDescription'
               description: The property stContactDescription:ContactAbstractDescription
                 provides a detailed contact description. This is a stub property in
                 GeoSciML Basic since ContactAbstractDescription is an abstract class
@@ -2867,37 +3061,42 @@ $defs:
       defined strictly based on physical properties, but because of standard geological
       usage, genetic interpretations enter into the description as well.  Constraint:
       self.metadata.hierarchyLevel=feature'
-    type: object
-    properties:
-      color:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
-          uniqueItems: true
-        description: The color property (SWE::Category) is a term from a controlled
-          vocabulary that specifies the colour of the earth material. Color schemes
-          such as the Munsell rock and soil color schemes may be used.
-      purpose:
-        oneOf:
-        - type: 'null'
-        - $ref: '#DescriptionPurpose'
-        description: "The purpose:DescriptionPurpose property provides a specification
-          of the intended purpose or level of abstraction for the given EarthMaterial.
-          The intent is the same a GeologicFeature\u2019s purpose and it shares the
-          same vocabulary (instance, typicalNorm, definingNorm)."
-      gbEarthMaterialDescription:
-        oneOf:
-        - type: 'null'
-        - type: array
-          items:
-            $ref: '#EarthMaterialAbstractDescription'
-          uniqueItems: true
-        description: The property gbEarthMaterialDescription:EarthMaterialAbstractDescription
-          provides a detailed earth material description of the part. This property
-          is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is abstract
-          with subtypes defined in GeoSciML Extension.
+    allOf:
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            color:
+              type: array
+              items:
+                $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              uniqueItems: true
+              description: The color property (SWE::Category) is a term from a controlled
+                vocabulary that specifies the colour of the earth material. Color
+                schemes such as the Munsell rock and soil color schemes may be used.
+            purpose:
+              $ref: '#DescriptionPurpose'
+              description: "The purpose:DescriptionPurpose property provides a specification
+                of the intended purpose or level of abstraction for the given EarthMaterial.
+                The intent is the same a GeologicFeature\u2019s purpose and it shares
+                the same vocabulary (instance, typicalNorm, definingNorm)."
+            gbEarthMaterialDescription:
+              type: array
+              items:
+                $ref: '#EarthMaterialAbstractDescription'
+              uniqueItems: true
+              description: The property gbEarthMaterialDescription:EarthMaterialAbstractDescription
+                provides a detailed earth material description of the part. This property
+                is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is
+                abstract with subtypes defined in GeoSciML Extension.
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   EarthMaterialAbstractDescription:
     $anchor: EarthMaterialAbstractDescription
     description: Abstract description class for earth material. This class is a placeholder
@@ -2943,18 +3142,14 @@ $defs:
           type: object
           properties:
             profileType:
-              oneOf:
-              - type: 'null'
-              - $ref: '#FoldProfileTypeTerm'
+              $ref: '#FoldProfileTypeTerm'
               description: The property profileType:FoldProfileTypeTerm contains a
                 term from a controlled vocabulary specifying the concave/convex geometry
                 of fold relative to earth surface, and relationship to younging direction
                 in folded strata if known. (e.g., antiform, synform, neutral, anticline,
                 syncline, monocline, ptygmatic).
             stFoldDescription:
-              oneOf:
-              - type: 'null'
-              - $ref: '#FoldAbstractDescription'
+              $ref: '#FoldAbstractDescription'
               description: The property stFoldDescription:FoldAbstractDescription
                 provides a detailed fold description. This is a stub property in GeoSciML
                 Basic since FoldAbstractDescription is an abstract class with subtypes
@@ -2989,16 +3184,12 @@ $defs:
           type: object
           properties:
             foliationType:
-              oneOf:
-              - type: 'null'
-              - $ref: '#FoliationTypeTerm'
+              $ref: '#FoliationTypeTerm'
               description: The foliationType:FoliationTypeTerm property specifies
                 the type of foliation from a controlled vocabulary. Examples include
                 crenulation cleavage, slaty cleavage and schistosity.
             stFoliationDescription:
-              oneOf:
-              - type: 'null'
-              - $ref: '#FoliationAbstractDescription'
+              $ref: '#FoliationAbstractDescription'
               description: The foliationType:FoliationTypeTerm property specifies
                 the type of foliation from a controlled vocabulary. Examples include
                 crenulation cleavage, slaty cleavage and schistosity.
@@ -3027,9 +3218,7 @@ $defs:
           type: object
           properties:
             collectionType:
-              oneOf:
-              - type: 'null'
-              - $ref: '#CollectionTypeTerm'
+              $ref: '#CollectionTypeTerm'
               description: The collectionType:CollectionTypeTerm property contains
                 a term from a controlled vocabulary describing the type of collection,
                 such as Geologic Map, Boreholes, 3D models.
@@ -3057,16 +3246,12 @@ $defs:
     type: object
     properties:
       determinationMethod:
-        oneOf:
-        - type: 'null'
-        - $ref: '#DeterminationMethodTerm'
+        $ref: '#DeterminationMethodTerm'
         description: The determinationMethod:DeterminationMethodTerm property describes
           the way the orientation value was determined (e.g. measured, inferred from
           dip slope, etc.) using a reference to a controlled vocabulary.
       descriptiveOrientation:
-        oneOf:
-        - type: 'null'
-        - type: string
+        type: string
         description: The descriptionOrientation:Primitive::CharacterString contains
           a textual specification of orientation, possibly referencing some local
           geography (e.g. "toward fold hinge", "below").
@@ -3080,9 +3265,7 @@ $defs:
     - type: object
       properties:
         directed:
-          oneOf:
-          - type: 'null'
-          - $ref: '#LinearDirectedCode'
+          $ref: '#LinearDirectedCode'
           description: The directed:LinearDirectedCode property indicates if the orientation
             represents a linear feature that is directed, e.g. clast imbrication,
             mylonitic lineation with sense of shear, slickenlines with displacement
@@ -3091,15 +3274,11 @@ $defs:
             linear orientation. The value of the property comes from a controlled
             vocabulary.
         plunge:
-          oneOf:
-          - type: 'null'
-          - $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+          $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
           description: The property plunge (SWE::QuantityRange) reports the magnitude
             of the plunge as an angle from horizontal.
         trend:
-          oneOf:
-          - type: 'null'
-          - $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+          $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
           description: The property trend (SWE::QuantityRange) reports the azimuth
             (compass bearing) value of the linear orientation.
   GSML_PlanarOrientation:
@@ -3117,49 +3296,41 @@ $defs:
     - type: object
       properties:
         convention:
-          oneOf:
-          - type: 'null'
-          - $ref: '#ConventionCode'
+          $ref: '#ConventionCode'
           description: The property convention:ConventionCode contains the convention
             used for the measurement from a controlled vocabulary.
         azimuth:
-          oneOf:
-          - type: 'null'
-          - $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+          $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
           description: The azimuth (SWE::QuantityRange) property (compass point, bearing
             etc.) contains the value of the orientation. The convention property reports
             how azimuth is interpreted (if it is relative to a quadrant).
         dip:
-          oneOf:
-          - type: 'null'
-          - $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+          $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
           description: The dip (SWE::QuantityRange) reports the angle that the structural
             surface (e.g. bedding, fault plane) makes with the horizontal measured
             perpendicular to the strike of the structure and in the vertical plane
             as a numeric value or term.
         polarity:
-          oneOf:
-          - type: 'null'
-          - $ref: '#PlanarPolarityCode'
+          $ref: '#PlanarPolarityCode'
           description: The polarity:PolarityCode indicates whether the planar orientation
             is associated with a directed feature that is overturned, upright, vertical
             etc., using a controlled vocabulary.
   GSML_QuantityRange:
     $anchor: GSML_QuantityRange
-    description: "GSML_QuantityRange is a specialization of SWE Common QuantiytyRange
+    description: GSML_QuantityRange is a specialization of SWE Common QuantiytyRange
       (OGC 08-094r1, Clause 7.2.13) where lower and upper values are made explicit.
       SWE::QuantityRange uses an array of values (RealPair, see Clause 7.2.1) where
       the lowest value is the first element and the highest the second. This convenience
       data type has been created as an alternative encoding for implementations that
       do no support encoding of arrays in a single field (e.g. DBF) or reference to
-      elements in string encoded arrays1 (eg. Filter Encoding Specification 2.0 \u2013
+      elements in string encoded arrays1 (eg. Filter Encoding Specification 2.0 -
       OGC 09-029r2). &nbsp;------------------------- 1 SWE RealPair is encoded as
       space delimited lists (&lt;swe:value&gt;10 300&lt;/swe:value&gt; in XML) , which
       demands that clients parse the string to extract each token. To build a WFS/FES
       query that tests the first element, it requires parsing the string either using
       string-before(swe:value,' ') or tokenize(swe:value,' '). This is cumbersome
       at best, or not even supported by the server at worst. 09-026r2 Clause 7.4.4
-      describes the minimal XPath supports and string parsing is not present."
+      describes the minimal XPath supports and string parsing is not present.
     type: object
     properties:
       lowerValue:
@@ -3183,9 +3354,7 @@ $defs:
     - type: object
       properties:
         magnitude:
-          oneOf:
-          - type: 'null'
-          - $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+          $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
           description: The magnitude property (SWE::QuantityRange) reports the magnitude
             of the vector.
   GSMLitem:
@@ -3211,7 +3380,7 @@ $defs:
         $comment: by-reference link to AbstractFeatureRelation
       - $ref: '#AbstractFeatureRelation'
     - $ref: '#/$defs/SCLinkObject'
-      $comment: "External ISO 19156 SF_SamplingFeature \u2014 by-reference link"
+      $comment: External ISO 19156 SF_SamplingFeature - by-reference link
   GeochronologicEraTerm:
     $anchor: GeochronologicEraTerm
     description: Term from a Geochronological vocabulary
@@ -3232,49 +3401,39 @@ $defs:
           type: object
           properties:
             eventProcess:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: '#EventProcessTerm'
-                uniqueItems: true
+              type: array
+              items:
+                $ref: '#EventProcessTerm'
+              uniqueItems: true
               description: The eventProcess:EventProcessTerm property provides a term
                 from a controlled vocabulary specifying the process or processes that
                 occurred during the event. Examples include deposition, extrusion,
                 intrusion, cooling.
             numericAge:
-              oneOf:
-              - type: 'null'
-              - $ref: '#NumericAgeRange'
+              $ref: '#NumericAgeRange'
               description: The numericAge:NumericAgeRange property provides an age
                 in absolute year before present (BP). Present is defined by convention
                 to be January 1st 1950 (although van der Plitch & Hogg , suggests
                 this convention to be restricted to radiocarbon estimations).
             olderNamedAge:
-              oneOf:
-              - type: 'null'
-              - $ref: '#GeochronologicEraTerm'
+              $ref: '#GeochronologicEraTerm'
               description: The property olderNamedAge:GeochronologicalEraTerm defines
                 the older boundary of age of an event expressed using a geochronologic
                 era defined according to a geologic time scale as per the GeologicTime
                 schema (eg, the International Commission on Stratigraphy Chronostratigraphic
                 Chart - http://www.stratigraphy.org/index.php/ics-chart-timescale).
             youngerNamedAge:
-              oneOf:
-              - type: 'null'
-              - $ref: '#GeochronologicEraTerm'
+              $ref: '#GeochronologicEraTerm'
               description: The property youngerNamedAge:GeochronologicalEraTerm defines
                 the younger boundary of age of event expressed using a geochronologic
                 era defined according to a geologic time scale per the GeologicTime
                 schema. (eg, the International Commission on Stratigraphy Chronostratigraphic
                 Chart - http://www.stratigraphy.org/index.php/ics-chart-timescale).
             eventEnvironment:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
-                uniqueItems: true
+              type: array
+              items:
+                $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              uniqueItems: true
               description: "The eventEnvironment property (SWE::Category) is a category
                 from a controlled vocabulary identifying the physical setting within
                 which a GeologicEvent takes place. Event environment is construed
@@ -3283,12 +3442,10 @@ $defs:
                 the Earth\u2019s interior specified by pressure, temperature, chemical
                 environment, or tectonics."
             gaEventDescription:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: '#GeologicEventAbstractDescription'
-                uniqueItems: true
+              type: array
+              items:
+                $ref: '#GeologicEventAbstractDescription'
+              uniqueItems: true
               description: The property geEventDescription:GeologicEventAbstractDescription
                 contains a detailed event description. This is a stub property in
                 GeoSciML Basic since GeologicEventAbstractDescription is abstract
@@ -3318,12 +3475,10 @@ $defs:
           type: object
           properties:
             observationMethod:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
-                uniqueItems: true
+              type: array
+              items:
+                $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              uniqueItems: true
               description: The GeologicFeature observationMethod (SWE::Category) specifies
                 the approach to acquiring the collection of attribute values that
                 constitute an individual feature instance (e.g. point count, brunton
@@ -3334,32 +3489,26 @@ $defs:
                 observation view). This property corresponds (loosely) to ISO19115
                 Lineage.
             purpose:
-              oneOf:
-              - type: 'null'
-              - $ref: '#DescriptionPurpose'
+              $ref: '#DescriptionPurpose'
               description: 'The property purpose:DescriptionPurpose specifies the
                 intended purpose/level of abstraction for a given feature or object
                 instance. The possible values are: instance, typicalNorm, and definingNorm.'
             classifier:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
-                uniqueItems: true
+              type: array
+              items:
+                $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              uniqueItems: true
               description: The classifier (SWE::Category) contains a standard description
                 or definition of the feature type (e.g., the definition of a particular
                 geologic unit in a stratigraphic lexicon).
             relatedFeature:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  oneOf:
-                  - $ref: '#/$defs/SCLinkObject'
-                    $comment: by-reference link to GeologicFeature
-                  - $ref: '#GeologicFeature'
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to GeologicFeature
+                - $ref: '#GeologicFeature'
+              uniqueItems: true
               description: A relatedFeature is a general structure used to define
                 relationships between any features or objects within GeoSciML. Relationships
                 are always binary and directional. There is always a single source
@@ -3367,15 +3516,13 @@ $defs:
                 in GeoSciML Basic). The relationship is always defined from the perspective
                 of the Source and is generally an active verb.
             geologicHistory:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  oneOf:
-                  - $ref: '#/$defs/SCLinkObject'
-                    $comment: by-reference link to GeologicEvent
-                  - $ref: '#GeologicEvent'
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to GeologicEvent
+                - $ref: '#GeologicEvent'
+              uniqueItems: true
               description: The geologicHistory is an association that relates one
                 or more GeologicEvents to a GeologicFeature to describe their age
                 or geologic history. Normally, GeoSciML uses the generic relatedFeature::GeologicRelation
@@ -3384,15 +3531,13 @@ $defs:
                 Basic and is therefore only available from the GeoSciML Extension
                 package.
             occurrence:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  oneOf:
-                  - $ref: '#/$defs/SCLinkObject'
-                    $comment: by-reference link to MappedFeature
-                  - $ref: '#MappedFeature'
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to MappedFeature
+                - $ref: '#MappedFeature'
+              uniqueItems: true
               description: The occurrence property is an association that links a
                 notional geologic feature with any number of mapped features (MappedFeature).
                 A geologic feature, such as a geologic unit may be linked to mapped
@@ -3443,9 +3588,7 @@ $defs:
           type: object
           properties:
             geologicUnitType:
-              oneOf:
-              - type: 'null'
-              - $ref: '#GeologicUnitTypeTerm'
+              $ref: '#GeologicUnitTypeTerm'
               description: The property geologicUnitType:GeologicUnitTypeTerm provides
                 a term from a controlled vocabulary defining the type of geologic
                 unit. Logical constraints of definition of unit and valid property
@@ -3453,31 +3596,25 @@ $defs:
                 Geologic Unit Type vocabulary (e.g., http://resource.geosciml.org/classifierscheme/cgi/201211/geologicunittype)
                 is recommended.
             rank:
-              oneOf:
-              - type: 'null'
-              - $ref: '#RankTerm'
+              $ref: '#RankTerm'
               description: 'The property rank:RankTerm contains a term that classifies
                 the geologic unit in a generalization hierarchy from most local/smallest
                 volume to most regional/largest. Examples: group, subgroup, formation,
                 member, bed, intrusion, complex, batholith'
             gbMaterialDescription:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: '#EarthMaterialAbstractDescription'
-                uniqueItems: true
+              type: array
+              items:
+                $ref: '#EarthMaterialAbstractDescription'
+              uniqueItems: true
               description: The property gbMaterialDescription:EarthMaterialAbstractDescription
                 is a placeholder that provides detailed material description. This
                 is a stub property in GeoSciML Basic as EarthMaterialAbstractDescription
                 is abstract with subtypes defined in GeoSciML Extension.
             hierarchyLink:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: '#GeologicUnitHierarchy'
-                uniqueItems: true
+              type: array
+              items:
+                $ref: '#GeologicUnitHierarchy'
+              uniqueItems: true
               description: The property hierarchyLink is an association that links
                 a GeologicUnit with a GeologicUnitHierarchy to represent containment
                 of a part GeologicUnit within another GeologicUnit. It indicates a
@@ -3485,23 +3622,19 @@ $defs:
                 unit. For example, members are described as part of formations, or
                 different facies can be described as parts of a GeologicUnit.
             gbUnitDescription:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: '#GeologicUnitAbstractDescription'
-                uniqueItems: true
+              type: array
+              items:
+                $ref: '#GeologicUnitAbstractDescription'
+              uniqueItems: true
               description: The property gbUnitDescription:GeologicUnitAbstractDescriptio
                 is a placeholder that provides detailed material description. This
                 is a stub property in GeoSciML Basic as GeologicUnitAbstractDescription
                 is abstract with subtypes defined in GeoSciML Extension.
             composition:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: '#CompositionPart'
-                uniqueItems: true
+              type: array
+              items:
+                $ref: '#CompositionPart'
+              uniqueItems: true
               description: The property composition is an association that links a
                 GeologicUnit with CompositionParts to describe the material composition
                 of the GeologicUnit (e.g., a detailed, instance specific, lithologic
@@ -3522,16 +3655,12 @@ $defs:
     type: object
     properties:
       role:
-        oneOf:
-        - type: 'null'
-        - $ref: '#GeologicUnitHierarchyRoleTerm'
+        $ref: '#GeologicUnitHierarchyRoleTerm'
         description: The role:GeologicUnitHierarchyRoleTerm property provides a term
           describing the nature of the parts, e.g. facies, stratigraphic, interbeds,
           geographic, eastern facies.
       proportion:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
         description: The proportion property (SWE::QuantityRange) provides a quantity
           that represents the fraction of the geologic unit formed by the part.
       targetUnit:
@@ -3583,25 +3712,21 @@ $defs:
           type: object
           properties:
             unitDescription:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  oneOf:
-                  - $ref: '#/$defs/SCLinkObject'
-                    $comment: by-reference link to GeologicUnit
-                  - $ref: '#GeologicUnit'
-                uniqueItems: true
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to GeologicUnit
+                - $ref: '#GeologicUnit'
+              uniqueItems: true
               description: The unitDescription property is an association that links
                 the geomorphologic feature to a geologic description (e.g., related
                 stratigraphic units and earth materials).
             gmFeatureDescription:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: '#GeomorphologicUnitAbstractDescription'
-                uniqueItems: true
+              type: array
+              items:
+                $ref: '#GeomorphologicUnitAbstractDescription'
+              uniqueItems: true
               description: The property gmFeatureDescription:GeomorphologicUnitAbstractDescription
                 provides a detailed morphologic description. This is a stub property
                 in GeoSciML Basic since GeomorphologicUnitAbstractDescription is an
@@ -3650,36 +3775,28 @@ $defs:
           type: object
           properties:
             observationMethod:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
-                uniqueItems: true
+              type: array
+              items:
+                $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              uniqueItems: true
               description: The observationMethod property (SWE::Category) contains
                 an element in a list of categories (a controlled vocabulary) describing
                 how the spatial extent of the mapped feature was determined.
             positionalAccuracy:
-              oneOf:
-              - type: 'null'
-              - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
               description: The positionalAccuracy property (SWE::Quantity) provides
                 a quantitative value defining the radius of an uncertainty buffer
                 around a MappedFeature (e.g., a positionalAccuracy of 100 m for a
                 line feature defines a buffer polygon of total width 200 m centred
                 on the line). The property is equivalent to ISO19115 DQ_PositionalAccuracy.
             resolutionRepresentativeFraction:
-              oneOf:
-              - type: 'null'
-              - type: integer
+              type: integer
               description: The property resolutionRepresentativeFraction:Integer is
                 an integer value representing the denominator of the representative
                 scale of the spatial feature. (i.e., 10000 = the spatial feature is
                 intended to be represented at 1:10,000 scale).
             mappingFrame:
-              oneOf:
-              - type: 'null'
-              - $ref: '#MappingFrameTerm'
+              $ref: '#MappingFrameTerm'
               description: The mappingFrame:MappingFrameTerm provides a term from
                 a vocabulary indicating the geometric frame on which the MappedFeature
                 is projected. In most situations, mapped features are projected on
@@ -3687,16 +3804,12 @@ $defs:
                 surface beneath surficial cover materials, a mine level, or a cross
                 section.
             exposure:
-              oneOf:
-              - type: 'null'
-              - $ref: '#ExposureTerm'
+              $ref: '#ExposureTerm'
               description: The exposure:ExposureTerm property provides a term for
                 the nature of the expression of the mapped feature at the earth's
                 surface (e.g., exposed, concealed).
             shape:
-              oneOf:
-              - type: 'null'
-              - $ref: https://geojson.org/schema/Geometry.json
+              $ref: https://geojson.org/schema/Geometry.json
               description: The shape:GM_Object property contains the geometry delimiting
                 the mapped feature. Note that while in most cases, the geometry will
                 be a 2D polygon, it is not restricted to any dimension. For instance,
@@ -3704,10 +3817,8 @@ $defs:
                 linearly from the borehole origin), or a geologic unit can be represented
                 using a 3D volume.
             specification:
-              oneOf:
-              - type: 'null'
-              - $ref: '#/$defs/SCLinkObject'
-                $comment: "External ISO 19156 GFI_Feature \u2014 by-reference link"
+              $ref: '#/$defs/SCLinkObject'
+              $comment: External ISO 19156 GFI_Feature - by-reference link
               description: The specification association links an instance of MappedFeature
                 to the GFI_Feature being mapped. In a geological map, MappedFeatures
                 are used to represent GeologicFeatures, but other features from other
@@ -3737,16 +3848,12 @@ $defs:
           type: object
           properties:
             naturalGeomorphologicFeatureType:
-              oneOf:
-              - type: 'null'
-              - $ref: '#NaturalGeomorphologicFeatureTypeTerm'
+              $ref: '#NaturalGeomorphologicFeatureTypeTerm'
               description: 'The property naturalGeomorphologicFeatureType: NaturalGeomorphologicFeatureTypeTerm
                 is a reference from a controlled vocabulary describing the type of
                 geomorphologic feature.'
             activity:
-              oneOf:
-              - type: 'null'
-              - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Category.json
               description: The activity property (SWE::Category) contains a category
                 term from a controlled vocabulary describing the current activity
                 status of the geomorphologic feature (e.g., currently active, dormant,
@@ -3764,21 +3871,15 @@ $defs:
     type: object
     properties:
       reportingDate:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
         description: The reportingDate (SWE::Quantity) property reports a single time
           coordinate value to report as representative for this NumericAge assignment.
       olderBoundDate:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
         description: The olderBoundDate (SWE::Quantity) property reports the older
           bounding time coordinate in an age range.
       youngerBoundDate:
-        oneOf:
-        - type: 'null'
-        - $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+        $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
         description: The youngerBoundDate (SWE::Quantity) property reports the younger
           bounding time coordinate in an age range.
   PlanarPolarityCode:
@@ -3808,12 +3909,13 @@ $defs:
     - $ref: '#CompoundMaterial'
     - type: object
       properties:
-        lithology:
-          oneOf:
-          - type: 'null'
-          - $ref: '#LithologyTerm'
-          description: The lithology:LithologyTerm property provides a term identifying
-            the lithology class from a controlled vocabulary.
+        properties:
+          type: object
+          properties:
+            lithology:
+              $ref: '#LithologyTerm'
+              description: The lithology:LithologyTerm property provides a term identifying
+                the lithology class from a controlled vocabulary.
   ShearDisplacementStructure:
     $anchor: ShearDisplacementStructure
     description: "A shear displacement structure includes all brittle to ductile style
@@ -3832,19 +3934,15 @@ $defs:
           type: object
           properties:
             faultType:
-              oneOf:
-              - type: 'null'
-              - $ref: '#FaultTypeTerm'
+              $ref: '#FaultTypeTerm'
               description: The faultType:FaultTypeTerm property contains a term from
                 a controlled vocabulary describing the type of shear displacement
                 structure (e.g., thrust fault, normal fault or wrench fault).
             stStructureDescription:
-              oneOf:
-              - type: 'null'
-              - type: array
-                items:
-                  $ref: '#ShearDisplacementStructureAbstractDescription'
-                uniqueItems: true
+              type: array
+              items:
+                $ref: '#ShearDisplacementStructureAbstractDescription'
+              uniqueItems: true
               description: The property stStructureDescription:ShearDisplacementStructureAbstractDescription
                 provides a detailed geologic structure description. This is a stub
                 property in GeoSciML Basic since ShearDisplacementStructureAbstractDescription

@@ -119,23 +119,17 @@ $defs:
     - type: object
       properties:
         relationship:
-          oneOf:
-          - type: 'null'
-          - $ref: '#GeologicRelationshipTerm'
+          $ref: '#GeologicRelationshipTerm'
           description: The relationship:GeologicRelationshipTerm property contains
             a term from a controlled vocabulary to describe the geologic relationship
             (e.g., stratigraphic relation, structural relation, intrusive relation).
         sourceRole:
-          oneOf:
-          - type: 'null'
-          - $ref: '#RelationRoleTerm'
+          $ref: '#RelationRoleTerm'
           description: The property sourceRole:RelationRoleProperty contains a term
             from a controlled vocabulary describing the role played by the source
             geologic feature or object (e.g., overlying unit, underlying unit).
         targetRole:
-          oneOf:
-          - type: 'null'
-          - $ref: '#RelationRoleTerm'
+          $ref: '#RelationRoleTerm'
           description: The property targetRole:RelationRoleTerm contains a term from
             a controlled vocabulary describing the role played by the target geologic
             feature or object. (e.g., overlying unit, underlying unit)
@@ -159,23 +153,17 @@ $defs:
     type: object
     properties:
       relationship:
-        oneOf:
-        - type: 'null'
-        - $ref: '#GeologicRelationshipTerm'
+        $ref: '#GeologicRelationshipTerm'
         description: The property relationship:GeologicRelationshipTerm contains a
           term from a controlled vocabulary to describe the geologic relationship
           (e.g., sedimentary relation, igneous relation).
       sourceRole:
-        oneOf:
-        - type: 'null'
-        - $ref: '#RelationRoleTerm'
+        $ref: '#RelationRoleTerm'
         description: The property sourceRole:RelationRoleTerm contains a term that
           describes the role played by the source earth material part (e.g., matrix,
           clast, overgrowth).
       targetRole:
-        oneOf:
-        - type: 'null'
-        - $ref: '#RelationRoleTerm'
+        $ref: '#RelationRoleTerm'
         description: The property targetRole:RelationRoleTerm contains a term describing
           the role played by the target earth material part (e.g., matrix, clast,
           overgrowth).

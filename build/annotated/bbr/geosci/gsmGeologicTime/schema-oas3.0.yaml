@@ -388,12 +388,10 @@ x-defs:
         $anchor: DescriptionPurpose
         description: 'Codes used for the specification of the intended purpose/level
           of abstraction for a given feature or object instance, ie the reason for
-          the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.'
+          the existence of the GeologicFeature. Values: instance, typicalNorm, definingNorm.  Allowed
+          labels: definingNorm, instance, typicalNorm.'
         type: string
-        enum:
-        - definingNorm
-        - instance
-        - typicalNorm
+        format: uri
       DeterminationMethodTerm:
         $anchor: DeterminationMethodTerm
         description: This class is an empty placeholder for a vocabulary of terms
@@ -2828,8 +2826,8 @@ x-defs:
 description: "Geologic time, age, and chronostratigraphy: TimeScale, GSSP boundary\npoints,
   TemporalReferenceSystem, plus the GeologicAgeDetails extension\n(which contributes
   GeologicEventDescription, the concrete description\nclass used by GeologicEvent.gaEventDescription).
-  The dispatcher\nadditionally exposes two hand-curated featureTypes \u2014\nGeochronologicEra
-  and GeochronologicBoundary \u2014 that align to W3C\nOWL-Time (https://www.w3.org/TR/owl-time/)
+  The dispatcher\nadditionally exposes two hand-curated featureTypes -\nGeochronologicEra
+  and GeochronologicBoundary - that align to W3C\nOWL-Time (https://www.w3.org/TR/owl-time/)
   per Cox & Richard 2015\n\"A formal model for the geologic timescale and GSSP\":
   Era \u2261\ntime:ProperInterval and Boundary \u2261 time:Instant, with start/end\nmapping
   to time:hasBeginning/time:hasEnd and member to\ntime:intervalContains. Both reference
@@ -2992,21 +2990,18 @@ $defs:
             member:
               description: Sub-eras contained within this era (time:intervalContains).
                 Array of by-reference links or inline GeochronologicEra Features.
-              oneOf:
-              - type: array
-                items:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicEra
-                uniqueItems: true
-              nullable: true
+              type: array
+              items:
+                oneOf:
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicEra
+              uniqueItems: true
             stratotype:
               description: Defining stratigraphic section for this era (the rock-record
                 anchor). Inline StratigraphicSection Feature or by-reference SCLinkObject.
               oneOf:
               - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
               - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#StratigraphicSection
-              nullable: true
           required:
           - rank
           - start
@@ -3037,30 +3032,24 @@ $defs:
       properties:
         olderGeochronologicEra:
           oneOf:
-          - oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicEra
+          - allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicEra
           description: Link to description of the GeochronologicEra that corresponds
             to the older estimated age of a geologic feature.
-          nullable: true
         youngerGeochronologicEra:
           oneOf:
-          - oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicEra
+          - allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#GeochronologicEra
           description: Link to description of the GeochronologicEra that corresponds
             to the younger estimated age of a geologic feature.
-          nullable: true
         prototype:
           oneOf:
-          - oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#StratigraphicPoint
+          - allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#StratigraphicPoint
           description: Reference stratigraphic point for stratigraphic events
-          nullable: true
   GeologicTimescale:
     $anchor: GeologicTimescale
     description: 'The classic "Geologic Timescale" (http://www.stratigraphy.org/index.php/ics-chart-timescale)
@@ -3124,29 +3113,23 @@ $defs:
           type: object
           properties:
             primaryGuidingCriterion:
-              oneOf:
-              - type: string
+              type: string
               description: The property primaryGuidingCriterion:Primitive::CharacterString
                 contains a description of the primary criterion used to establish
                 the stratigraphic point.
-              nullable: true
             additionalCorrelationProperty:
-              oneOf:
-              - type: array
-                items:
-                  type: string
-                uniqueItems: true
+              type: array
+              items:
+                type: string
+              uniqueItems: true
               description: The property additionnalCorrelationProperty:Primitive::CharacterString
                 contains any additional criteria used to establish the stratigraphic
                 point.
-              nullable: true
             status:
-              oneOf:
-              - type: string
+              type: string
               description: The property status:Primitive::CharacterString contains
                 a description of the status of stratigraphic point (e.g., formally
                 accepted, etc.).
-              nullable: true
     - required:
       - featureType
       - id
@@ -3166,31 +3149,23 @@ $defs:
           type: object
           properties:
             geologicSetting:
-              oneOf:
-              - type: string
+              type: string
               description: The property geologicSetting:Primitive::CharacterString
                 contains a description of the geologic setting of the stratigraphic
                 section.
-              nullable: true
             geologicDescription:
-              oneOf:
-              - type: string
+              type: string
               description: The geologicDescription:Primitive::CharacterString contains
                 a description of the geology of the stratigraphic section (e.g., lithology,
                 paleontology, paleogeography, etc.).
-              nullable: true
             accessibility:
-              oneOf:
-              - type: string
+              type: string
               description: The property accessibility:Primitive::CharacterString contains
                 a description of the ability to access the stratigraphic section.
-              nullable: true
             conservation:
-              oneOf:
-              - type: string
+              type: string
               description: The property conservation:Primitive::CharacterString contains
                 a description of measures to conserve the stratigraphic section.
-              nullable: true
     - required:
       - featureType
       - id
@@ -3210,31 +3185,25 @@ $defs:
     properties:
       end:
         oneOf:
-        - oneOf:
-          - allOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEraBoundary
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEraBoundary
         description: Younger time boundary of an era
-        nullable: true
       start:
         oneOf:
-        - oneOf:
+        - allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEraBoundary
+        description: Older time boundary of an era
+      member:
+        type: array
+        items:
+          oneOf:
           - allOf:
             - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEraBoundary
-        description: Older time boundary of an era
-        nullable: true
-      member:
-        oneOf:
-        - type: array
-          items:
-            oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEra
-          uniqueItems: true
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEra
+        uniqueItems: true
         description: Subdivisions of TimeOrdinalEra
-        nullable: true
   TimeOrdinalEraBoundary:
     $anchor: TimeOrdinalEraBoundary
     description: A point in Earth's history which bounds a TimeOrdinalEra.
@@ -3242,75 +3211,66 @@ $defs:
     properties:
       position:
         oneOf:
-        - oneOf:
-          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-          - type: object
-            properties:
-              inXSDDateTime:
-                type: string
-                format: date-time
-              inXSDDate:
-                type: string
-                format: date
-              inXSDgYearMonth:
-                type: string
-                pattern: ^-?\d{4}-\d{2}$
-              inXSDgYear:
-                type: string
-                pattern: ^-?\d{4}$
-            anyOf:
-            - required:
-              - inXSDDateTime
-            - required:
-              - inXSDDate
-            - required:
-              - inXSDgYearMonth
-            - required:
-              - inXSDgYear
-          - type: string
-            format: date-time
-          - type: string
-            format: date
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+        - type: object
+          properties:
+            inXSDDateTime:
+              type: string
+              format: date-time
+            inXSDDate:
+              type: string
+              format: date
+            inXSDgYearMonth:
+              type: string
+              pattern: ^-?\d{4}-\d{2}$
+            inXSDgYear:
+              type: string
+              pattern: ^-?\d{4}$
+          anyOf:
+          - required:
+            - inXSDDateTime
+          - required:
+            - inXSDDate
+          - required:
+            - inXSDgYearMonth
+          - required:
+            - inXSDgYear
+        - type: string
+          format: date-time
+        - type: string
+          format: date
         description: A point in time corresponding to the era boundary
-        nullable: true
       positionalUncertainty:
-        oneOf:
-        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/Quantity
         description: A measure of the uncertainty in the estimate of the point in
           time of the era boundary
-        nullable: true
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/x-defs/Quantity
       previousEra:
-        oneOf:
-        - type: array
-          items:
-            oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEra
-          uniqueItems: true
-        description: Preceding era
-        nullable: true
-      observationalBasis:
-        oneOf:
-        - type: array
-          items:
-            allOf:
+        type: array
+        items:
+          oneOf:
+          - allOf:
             - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-          uniqueItems: true
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEra
+        uniqueItems: true
+        description: Preceding era
+      observationalBasis:
+        type: array
+        items:
+          allOf:
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+        uniqueItems: true
         description: Observation supporting the existence of the boundary (geochronology,
           paleontology, etc.)
-        nullable: true
       nextEra:
-        oneOf:
-        - type: array
-          items:
-            oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEra
-          uniqueItems: true
+        type: array
+        items:
+          oneOf:
+          - allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEra
+        uniqueItems: true
         description: Succeeding era
-        nullable: true
   TimeOrdinalReferenceSystem:
     $anchor: TimeOrdinalReferenceSystem
     description: A time reference system comprised of an ordered set of time periods
@@ -3328,16 +3288,14 @@ $defs:
         uniqueItems: true
         description: Two reference points defining the extent of the system
       component:
-        oneOf:
-        - type: array
-          items:
-            oneOf:
-            - allOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEra
-          uniqueItems: true
+        type: array
+        items:
+          oneOf:
+          - allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#/$defs/SCLinkObject
+          - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicTime/schema-oas3.0.yaml#TimeOrdinalEra
+        uniqueItems: true
         description: TimeOrdinalEra composing the TimeOrdinalReferenceSystem
-        nullable: true
     required:
     - referencePoint
   SCLinkObject:

@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmGeologicUnitExtension - gsmGeologicUnitExtension
-Generated 2026-05-13T13:21:57.133308+00:00
+Generated 2026-05-13T15:09:23.025011+00:00
 === Files ===
 Using examples/examplegsmGeologicUnitExtensionMinimal.json from examples
 === End Files ===
