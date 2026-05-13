@@ -1,5 +1,5 @@
 {
-  "$comment": "SF_Specimen example — a drill-core segment from a borehole. Exercises the required SF_SamplingFeature inherited properties (sampledFeature, samplingTime, materialClass) plus optional own properties (samplingMethod, processingDetails, size, currentLocation, specimenType) and the relatedSamplingFeature self-association linking to the parent borehole interval that produced it.",
+  "$comment": "SF_Specimen example - a drill-core segment from a borehole. Exercises the required SF_SamplingFeature inherited properties (sampledFeature, samplingTime, materialClass) plus optional own properties (samplingMethod, processingDetails, size, currentLocation, specimenType) and the relatedSamplingFeature self-association linking to the parent borehole interval that produced it.",
   "type": "Feature",
   "featureType": "SF_Specimen",
   "id": "https://example.org/specimens/dc-2024-017-seg-3",
@@ -23,7 +23,7 @@
       {
         "href": "https://example.org/boreholeintervals/dc-2024-017/142.4-143.6",
         "rel": "child-of",
-        "title": "BoreholeInterval 142.4–143.6 m from which this core segment was retrieved"
+        "title": "BoreholeInterval 142.4-143.6 m from which this core segment was retrieved"
       }
     ],
     "relatedObservation": [
@@ -45,7 +45,7 @@
     },
     "samplingMethod": {
       "href": "https://example.org/methods/diamond-core-drilling",
-      "title": "Diamond core drilling (HQ size, triple tube) — referencing a GeologicSamplingMethod feature"
+      "title": "Diamond core drilling (HQ size, triple tube) - referencing a GeologicSamplingMethod feature"
     },
     "processingDetails": [
       {

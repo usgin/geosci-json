@@ -175,7 +175,7 @@ def _merge_allof_entries(schema: dict) -> dict:
             schema.setdefault("required", [])
             if req not in schema["required"]:
                 schema["required"].append(req)
-        # Merge other keys (type, description, etc.) — entry wins only if
+        # Merge other keys (type, description, etc.) - entry wins only if
         # the parent doesn't already have a value
         for k, v in entry.items():
             if k in ("properties", "required", "allOf"):
@@ -528,7 +528,7 @@ def simplify_anyof_conditions_of_access_items(schema: dict) -> dict:
     """Simplify schema:conditionsOfAccess items anyOf to LabeledLink (CreativeWork)."""
     return {
         "type": "object",
-        "description": "Access condition — provide a label and optional URL",
+        "description": "Access condition - provide a label and optional URL",
         "properties": {
             "@type": {
                 "type": "string",
@@ -672,7 +672,7 @@ def simplify_anyof_distribution_items_cdif(schema: dict) -> dict:
     # Merge properties from anyOf branches (e.g. fileDetail, schema:hasPart
     # from the inlined Files schema in technique profile distributions).
     # Branches may contain allOf (e.g. allOf: [Files, {@type override}])
-    # that hasn't been flattened yet — flatten each branch first.
+    # that hasn't been flattened yet - flatten each branch first.
     for branch in schema.get("anyOf", []):
         if not isinstance(branch, dict):
             continue
@@ -688,7 +688,7 @@ def simplify_anyof_distribution_items_cdif(schema: dict) -> dict:
 
     return {
         "type": "object",
-        "description": "Distribution — Data Download or Web API",
+        "description": "Distribution - Data Download or Web API",
         "properties": merged_props,
     }
 
@@ -699,7 +699,7 @@ def simplify_anyof_same_as_items(schema: dict) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Distribution simplification — preserve oneOf structure
+# Distribution simplification - preserve oneOf structure
 # ---------------------------------------------------------------------------
 
 def simplify_distribution_items(items_schema: dict) -> dict:
@@ -832,7 +832,7 @@ def simplify_file_detail_anyof(schema: dict) -> dict:
     The caller extracts it and merges the result's properties back into the
     parent object.
 
-    - All properties across all branches are merged (skip @type — inferred
+    - All properties across all branches are merged (skip @type - inferred
       from MIME type at save time)
     - componentType enums are collected from all branches and merged into a
       single flat enum list
@@ -849,7 +849,7 @@ def simplify_file_detail_anyof(schema: dict) -> dict:
             continue
         for pk, pv in option.get("properties", {}).items():
             if pk == "@type":
-                # Skip — fileDetail @type is inferred from MIME type on save
+                # Skip - fileDetail @type is inferred from MIME type on save
                 continue
             if pk == "componentType":
                 _collect_component_type_info(pv, all_ct_enums, all_ct_detail_props)
@@ -1181,12 +1181,12 @@ def flatten_remaining_allof(schema: Any) -> Any:
                     continue
                 if keys == {"anyOf"}:
                     # Distinguish file-type anyOf (branches have properties
-                    # including componentType — image/tabular/dataCube/document
+                    # including componentType - image/tabular/dataCube/document
                     # file-type branches) from conditional-required patterns
                     # (branches only have required).
                     branches = entry["anyOf"]
                     if _is_file_type_anyof(branches):
-                        # File-type anyOf — flatten into parent properties
+                        # File-type anyOf - flatten into parent properties
                         # now, since apply_anyof_simplifications already ran.
                         simplified = simplify_file_detail_anyof({"anyOf": branches})
                         for pk, pv in simplified.get("properties", {}).items():
@@ -1195,7 +1195,7 @@ def flatten_remaining_allof(schema: Any) -> Any:
                                 result["properties"][pk] = _deep_merge_dict(existing, pv)
                             else:
                                 result.setdefault("properties", {})[pk] = copy.deepcopy(pv)
-                    # else: conditional required — drop for form friendliness
+                    # else: conditional required - drop for form friendliness
                     continue
                 # Merge properties from the allOf entry into the parent
                 for pk, pv in entry.get("properties", {}).items():
@@ -1341,7 +1341,7 @@ def convert_profile_schema(
     schema = relax_min_items(schema)
     schema = convert_additional_type_to_oneof(schema)
 
-    # Strip enum from top-level @type items — the pick list values are provided
+    # Strip enum from top-level @type items - the pick list values are provided
     # via uischema suggestion option to avoid JSON Forms scope resolution issues
     if "properties" in schema and "@type" in schema["properties"]:
         at_type = schema["properties"]["@type"]

@@ -4,7 +4,7 @@
 
 examples:
   - title: examplegsmGeologicRelationExtensionMinimal
-    content: "Minimal GeologicFeatureRelation instance — no required properties"
+    content: "Minimal GeologicFeatureRelation instance - no required properties"
     snippets:
       - language: json
         ref: examples/examplegsmGeologicRelationExtensionMinimal.json

@@ -111,7 +111,7 @@ def parse_htaccess(path: Path) -> tuple[EnvVars, list[RewriteRule]]:
             pending_conds.append((cond_pattern, flags))
             continue
 
-        # Other RewriteCond (user-agent, etc.) — track but don't extract accept
+        # Other RewriteCond (user-agent, etc.) - track but don't extract accept
         if stripped.startswith("RewriteCond"):
             pending_conds.append(("", ""))
             continue
@@ -179,7 +179,7 @@ def instantiate_pattern(pattern: str) -> list[str]:
     # Try to fill capture groups with sample values
     results = []
     if len(groups) == 1:
-        # Single capture group — find matching samples from the path prefix
+        # Single capture group - find matching samples from the path prefix
         prefix = clean.split("(")[0].rstrip("/")
         for category, names in SAMPLE_CAPTURE_VALUES.items():
             if category in prefix:
@@ -192,7 +192,7 @@ def instantiate_pattern(pattern: str) -> list[str]:
             path = re.sub(r'\([^)]+\)', "testItem", clean, count=1)
             results.append(path)
     elif len(groups) == 2:
-        # Two capture groups — e.g., profiles/{family}/{name} or {category}/{name}
+        # Two capture groups - e.g., profiles/{family}/{name} or {category}/{name}
         prefix = clean.split("(")[0].rstrip("/")
         # For generic two-segment rules (bbr/metadata/cat/name), pick a few combos
         if "profiles" in prefix:
@@ -295,7 +295,7 @@ def build_test_cases(env: EnvVars, rules: list[RewriteRule]) -> list[TestCase]:
 def test_redirect(url: str, accept: str) -> tuple[int, str]:
     """Send a request to w3id.org and return (status_code, location_header).
 
-    Does NOT follow redirects — just captures the initial 303/302 response.
+    Does NOT follow redirects - just captures the initial 303/302 response.
     """
     cmd = [
         "curl", "-sI",
@@ -441,7 +441,7 @@ def run_tests(cases: list[TestCase], live: bool, follow: bool, outfile) -> None:
                     follow_label = "OK"
                     follow_ok += 1
                 elif final_code == 404 and is_bblock_viewer_url(location):
-                    follow_label = "OK (SPA viewer — 404 expected via curl, works in browser)"
+                    follow_label = "OK (SPA viewer - 404 expected via curl, works in browser)"
                     follow_ok += 1
                 elif final_code == 404:
                     follow_label = "NOT FOUND"
@@ -469,7 +469,7 @@ def run_tests(cases: list[TestCase], live: bool, follow: bool, outfile) -> None:
                 follow_label = "OK"
                 follow_ok += 1
             elif final_code == 404 and is_bblock_viewer_url(case.expected):
-                follow_label = "OK (SPA viewer — 404 expected via curl, works in browser)"
+                follow_label = "OK (SPA viewer - 404 expected via curl, works in browser)"
                 follow_ok += 1
             elif final_code == 404:
                 follow_label = "NOT FOUND"

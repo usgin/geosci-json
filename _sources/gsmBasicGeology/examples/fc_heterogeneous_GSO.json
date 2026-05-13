@@ -1,5 +1,5 @@
 {
-  "$comment": "Heterogeneous FeatureCollection example — collection has NO top-level featureType; each feature carries its own. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (else-branch dispatch). Members are the 5 single-feature examples in this directory, condensed inline.",
+  "$comment": "Heterogeneous FeatureCollection example - collection has NO top-level featureType; each feature carries its own. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (else-branch dispatch). Members are the 5 single-feature examples in this directory, condensed inline.",
   "type": "FeatureCollection",
   "conformsTo": [
     "https://ext.iide.dev/schemas/geosciml/basic/4.1/json/features.json/4.1/geosciml_basic_featurecollection.json"

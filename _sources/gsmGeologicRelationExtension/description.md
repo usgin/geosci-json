@@ -27,9 +27,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `relationship` | (oneOf — see schema) | 0..1 | The relationship:GeologicRelationshipTerm property contains a term from a controlled vocabulary to describe the geolo… |
-| `sourceRole` | (oneOf — see schema) | 0..1 | The property sourceRole:RelationRoleProperty contains a term from a controlled vocabulary describing the role played … |
-| `targetRole` | (oneOf — see schema) | 0..1 | The property targetRole:RelationRoleTerm contains a term from a controlled vocabulary describing the role played by t… |
+| `relationship` | (oneOf - see schema) | 0..1 | The relationship:GeologicRelationshipTerm property contains a term from a controlled vocabulary to describe the geolo… |
+| `sourceRole` | (oneOf - see schema) | 0..1 | The property sourceRole:RelationRoleProperty contains a term from a controlled vocabulary describing the role played … |
+| `targetRole` | (oneOf - see schema) | 0..1 | The property targetRole:RelationRoleTerm contains a term from a controlled vocabulary describing the role played by t… |
 
 ### `MaterialRelation`
 
@@ -39,16 +39,16 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `relationship` | (oneOf — see schema) | 0..1 | The property relationship:GeologicRelationshipTerm contains a term from a controlled vocabulary to describe the geolo… |
-| `sourceRole` | (oneOf — see schema) | 0..1 | The property sourceRole:RelationRoleTerm contains a term that describes the role played by the source earth material … |
-| `targetRole` | (oneOf — see schema) | 0..1 | The property targetRole:RelationRoleTerm contains a term describing the role played by the target earth material part… |
+| `relationship` | (oneOf - see schema) | 0..1 | The property relationship:GeologicRelationshipTerm contains a term from a controlled vocabulary to describe the geolo… |
+| `sourceRole` | (oneOf - see schema) | 0..1 | The property sourceRole:RelationRoleTerm contains a term that describes the role played by the source earth material … |
+| `targetRole` | (oneOf - see schema) | 0..1 | The property targetRole:RelationRoleTerm contains a term describing the role played by the target earth material part… |
 
 ## Code lists
 
 | Class | `codeList` vocab |
 | --- | --- |
-| `GeologicRelationshipTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `RelationRoleTerm` | `_(treat as open — no `codeList` annotation)_` |
+| `GeologicRelationshipTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `RelationRoleTerm` | `_(treat as open - no `codeList` annotation)_` |
 
 ## External dependencies
 

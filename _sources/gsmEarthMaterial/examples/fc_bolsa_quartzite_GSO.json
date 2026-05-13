@@ -21,7 +21,7 @@
         "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/arkose",
         "gbEarthMaterialDescription": [
           {
-            "$comment": "RockMaterialDescription — content shape, not strictly required by schema",
+            "$comment": "RockMaterialDescription - content shape, not strictly required by schema",
             "lithology": "http://resource.geosciml.org/classifier/cgi/simplelithology/arkose",
             "consolidationDegree": {
               "type": "Category",

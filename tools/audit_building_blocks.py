@@ -295,9 +295,9 @@ def check_resolved_schema(bb_dir, name):
         extra = existing_props - fresh_props
 
         if missing:
-            issues.append(f"resolvedSchema.json STALE — missing properties: {', '.join(sorted(missing))}")
+            issues.append(f"resolvedSchema.json STALE - missing properties: {', '.join(sorted(missing))}")
         if extra:
-            issues.append(f"resolvedSchema.json STALE — extra properties: {', '.join(sorted(extra))}")
+            issues.append(f"resolvedSchema.json STALE - extra properties: {', '.join(sorted(extra))}")
 
     except Exception as e:
         issues.append(f"resolvedSchema.json check error: {e}")
@@ -374,7 +374,7 @@ def check_example_validation(bb_dir, name, is_type_library=False):
             issues.append(f"{ex_path.name}: RecursionError during validation")
             continue
         except Exception as exc:
-            # Dangling $ref in pre-built resolvedSchema.json — retry with
+            # Dangling $ref in pre-built resolvedSchema.json - retry with
             # live resolution from the audit resolver
             try:
                 audit_resolved = _resolve_for_audit(schema_path)

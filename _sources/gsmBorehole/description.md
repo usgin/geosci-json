@@ -31,10 +31,10 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `logElement` | (oneOf — see schema) | 0..1 | The property logElement is an association between a Borehole and a BoreholeInterval instance to describe measured dow… |
-| `downholeDrillingDetails` | (oneOf — see schema) | 0..1 | The property downholeDrillingDetails:DrillingDetails specifies the drilling method and borehole diameter for interval… |
-| `referenceLocation` | (oneOf — see schema) | 0..1 | The property referenceLocation is an association between a Borehole and an OriginPosition corresponding to the start … |
-| `indexData` | (oneOf — see schema) | 0..1 | The property indexData:BoreholeDetails describes metadata about a borehole, such as the operator, the custodian, date… |
+| `logElement` | (oneOf - see schema) | 0..1 | The property logElement is an association between a Borehole and a BoreholeInterval instance to describe measured dow… |
+| `downholeDrillingDetails` | (oneOf - see schema) | 0..1 | The property downholeDrillingDetails:DrillingDetails specifies the drilling method and borehole diameter for interval… |
+| `referenceLocation` | (oneOf - see schema) | 0..1 | The property referenceLocation is an association between a Borehole and an OriginPosition corresponding to the start … |
+| `indexData` | (oneOf - see schema) | 0..1 | The property indexData:BoreholeDetails describes metadata about a borehole, such as the operator, the custodian, date… |
 
 ### `BoreholeDetails`
 
@@ -44,15 +44,15 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `operator` | (oneOf — see schema) | 0..1 | The operator property is an association between a BoreholeDetails and a CIT:CI_ResponsibleParty describing the organi… |
-| `driller` | (oneOf — see schema) | 0..1 | The driller property is an association between a BoreholeDetails and a CIT:CI_ResponsibleParty describing of the orga… |
-| `dateOfDrilling` | (oneOf — see schema) | 0..1 | The property dateOfDrilling:TM_Period describes the time period during which drilling of the borehole occurred. |
-| `startPoint` | (oneOf — see schema) | 0..1 | The property startPoint:BoreholeStartPointCode provides a term from a controlled vocabulary indicating the named posi… |
-| `inclinationType` | (oneOf — see schema) | 0..1 | The property inclinationType:BoreholeInclinationCode contains a term from a controlled vocabulary indicating the incl… |
-| `boreholeMaterialCustodian` | (oneOf — see schema) | 0..1 | The property boreholeMaterialCustodian is an association between BoreholeDetails and a CIT:CI_ResponsibleParty descri… |
-| `purpose` | (oneOf — see schema) | 0..1 | The property purpose:BoreholePurposeCode contains a term from a controlled vocabulary describing the purpose for whic… |
-| `dataCustodian` | (oneOf — see schema) | 0..1 | The dataCustodian is an association between a BoreholeDetails and a CIT:CI_ResponsibleParty describing the custodian … |
-| `boreholeLength` | (oneOf — see schema) | 0..1 | The property boreholeLength (SWE::Quantity) contains a measurement (a value and a unit of measurement) corresponding … |
+| `operator` | (oneOf - see schema) | 0..1 | The operator property is an association between a BoreholeDetails and a CIT:CI_ResponsibleParty describing the organi… |
+| `driller` | (oneOf - see schema) | 0..1 | The driller property is an association between a BoreholeDetails and a CIT:CI_ResponsibleParty describing of the orga… |
+| `dateOfDrilling` | (oneOf - see schema) | 0..1 | The property dateOfDrilling:TM_Period describes the time period during which drilling of the borehole occurred. |
+| `startPoint` | (oneOf - see schema) | 0..1 | The property startPoint:BoreholeStartPointCode provides a term from a controlled vocabulary indicating the named posi… |
+| `inclinationType` | (oneOf - see schema) | 0..1 | The property inclinationType:BoreholeInclinationCode contains a term from a controlled vocabulary indicating the incl… |
+| `boreholeMaterialCustodian` | (oneOf - see schema) | 0..1 | The property boreholeMaterialCustodian is an association between BoreholeDetails and a CIT:CI_ResponsibleParty descri… |
+| `purpose` | (oneOf - see schema) | 0..1 | The property purpose:BoreholePurposeCode contains a term from a controlled vocabulary describing the purpose for whic… |
+| `dataCustodian` | (oneOf - see schema) | 0..1 | The dataCustodian is an association between a BoreholeDetails and a CIT:CI_ResponsibleParty describing the custodian … |
+| `boreholeLength` | (oneOf - see schema) | 0..1 | The property boreholeLength (SWE::Quantity) contains a measurement (a value and a unit of measurement) corresponding … |
 
 ### `BoreholeInterval`
 
@@ -62,13 +62,13 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `observationMethod` | (oneOf — see schema) | 0..1 | The observationMethod property (SWE::Category) contains a term from a controlled vocabulary that describes the method… |
-| `specification` | (oneOf — see schema) | 0..1 | The specification property is an association between a BoreholeInterval and a GFI_Feature, a domain feature that is s… |
-| `mappedIntervalBegin` | (oneOf — see schema) | 0..1 | The property mappedIntervalBegin (SWE::Quantity) is a measurement (a value and a unit of measurement) corresponding t… |
-| `mappedIntervalEnd` | (oneOf — see schema) | 0..1 | The mappedIntervalEnd property (SWE::Quantity) is a measurement (a value and a unit of measure) corresponding to the … |
-| `collectionIdentifier` | (oneOf — see schema) | 0..1 | The collectionIdentifier:ScopedName is a string unique within a scope that identifies a collection which forms a set … |
-| `shape` | (oneOf — see schema) | 0..1 | The property shape:GM_Object is a 1-D interval (e.g., a "from" and "to", or "top" and "base" measurement) covering th… |
-| `parentBorehole` | (oneOf — see schema) | 0..1 | The property parentBorehole is an association between a BoreholeInterval and a Borehole to which the interval belongs. |
+| `observationMethod` | (oneOf - see schema) | 0..1 | The observationMethod property (SWE::Category) contains a term from a controlled vocabulary that describes the method… |
+| `specification` | (oneOf - see schema) | 0..1 | The specification property is an association between a BoreholeInterval and a GFI_Feature, a domain feature that is s… |
+| `mappedIntervalBegin` | (oneOf - see schema) | 0..1 | The property mappedIntervalBegin (SWE::Quantity) is a measurement (a value and a unit of measurement) corresponding t… |
+| `mappedIntervalEnd` | (oneOf - see schema) | 0..1 | The mappedIntervalEnd property (SWE::Quantity) is a measurement (a value and a unit of measure) corresponding to the … |
+| `collectionIdentifier` | (oneOf - see schema) | 0..1 | The collectionIdentifier:ScopedName is a string unique within a scope that identifies a collection which forms a set … |
+| `shape` | (oneOf - see schema) | 0..1 | The property shape:GM_Object is a 1-D interval (e.g., a "from" and "to", or "top" and "base" measurement) covering th… |
+| `parentBorehole` | (oneOf - see schema) | 0..1 | The property parentBorehole is an association between a BoreholeInterval and a Borehole to which the interval belongs. |
 
 ### `DrillingDetails`
 
@@ -78,10 +78,10 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `drillingMethod` | (oneOf — see schema) | 0..1 | The drillingMethod:BoreholeDrillingMethodCode property contains a term from a controlled vocabulary indicating the dr… |
-| `boreholeDiameter` | (oneOf — see schema) | 0..1 | The boreholeDiameter property (SWE::Quantity) contains a measurement (a value and a unit of measure) corresponding to… |
-| `intervalBegin` | (oneOf — see schema) | 0..1 | The intervalBegin property (SWE::Quantity) contains a measurement (a value and a unit of measurement) that correspond… |
-| `intervalEnd` | (oneOf — see schema) | 0..1 | The property intervalEnd (SWE::Quantity) contains a measurement (a value and a unit of measurement) of the measured d… |
+| `drillingMethod` | (oneOf - see schema) | 0..1 | The drillingMethod:BoreholeDrillingMethodCode property contains a term from a controlled vocabulary indicating the dr… |
+| `boreholeDiameter` | (oneOf - see schema) | 0..1 | The boreholeDiameter property (SWE::Quantity) contains a measurement (a value and a unit of measure) corresponding to… |
+| `intervalBegin` | (oneOf - see schema) | 0..1 | The intervalBegin property (SWE::Quantity) contains a measurement (a value and a unit of measurement) that correspond… |
+| `intervalEnd` | (oneOf - see schema) | 0..1 | The property intervalEnd (SWE::Quantity) contains a measurement (a value and a unit of measurement) of the measured d… |
 
 ### `OriginPosition`
 
@@ -91,9 +91,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `location` | (oneOf — see schema) | 0..1 | The property location contains a geometry corresponding to the location of the borehole collar. |
-| `elevation` | (oneOf — see schema) | 0..1 | The elevation:DirectPosition property is a compromise approach to supply elevation explicitly for location; this is t… |
-| `relatedBorehole` | (oneOf — see schema) | 0..1 | The hole that has this collar for its start point |
+| `location` | (oneOf - see schema) | 0..1 | The property location contains a geometry corresponding to the location of the borehole collar. |
+| `elevation` | (oneOf - see schema) | 0..1 | The elevation:DirectPosition property is a compromise approach to supply elevation explicitly for location; this is t… |
+| `relatedBorehole` | (oneOf - see schema) | 0..1 | The hole that has this collar for its start point |
 
 ### `_FeatureDispatch`
 
@@ -101,10 +101,10 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Class | `codeList` vocab |
 | --- | --- |
-| `BoreholeDrillingMethodCode` | `_(treat as open — no `codeList` annotation)_` |
-| `BoreholeInclinationCode` | `_(treat as open — no `codeList` annotation)_` |
-| `BoreholePurposeCode` | `_(treat as open — no `codeList` annotation)_` |
-| `BoreholeStartPointCode` | `_(treat as open — no `codeList` annotation)_` |
+| `BoreholeDrillingMethodCode` | `_(treat as open - no `codeList` annotation)_` |
+| `BoreholeInclinationCode` | `_(treat as open - no `codeList` annotation)_` |
+| `BoreholePurposeCode` | `_(treat as open - no `codeList` annotation)_` |
+| `BoreholeStartPointCode` | `_(treat as open - no `codeList` annotation)_` |
 
 ## External dependencies
 

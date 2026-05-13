@@ -88,13 +88,13 @@ def inject_ecrr_subject_of(data: dict, w3id_uri: str) -> dict:
         items = existing if isinstance(existing, list) else [existing]
         for item in items:
             if isinstance(item, dict) and "dcterms:conformsTo" in item:
-                # Already has conformsTo — update it (idempotent)
+                # Already has conformsTo - update it (idempotent)
                 item["dcterms:conformsTo"] = [
                     {"@id": CDIF_MANDATORY_URI},
                     {"@id": w3id_uri},
                 ]
                 return data
-        # Existing subjectOf without conformsTo — wrap both in an array
+        # Existing subjectOf without conformsTo - wrap both in an array
         if isinstance(existing, list):
             data["schema:subjectOf"] = existing + [catalog_record]
         else:
@@ -142,7 +142,7 @@ def ensure_context_has_keys(data: dict, is_ecrr: bool) -> None:
                 if "dcat" not in item:
                     item["dcat"] = "http://www.w3.org/ns/dcat#"
                 return
-        # No dict found — append one
+        # No dict found - append one
         ctx.append({
             "dcterms": "http://purl.org/dc/terms/",
             "dcat": "http://www.w3.org/ns/dcat#",

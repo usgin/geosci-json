@@ -44,11 +44,11 @@ Outputs: 23 BB directories under [_sources/](_sources/)
 
 - ✅ `$anchor` per class.
 - ✅ JSON-FG `Feature.json` allOf for FeatureType classes whose supertype isn't a FeatureType (entry point).
-- ✅ Cross-BB `$ref` for FeatureType subtypes — links to parent in sibling BB (e.g. `../geosciml_GeologyBasic/schema.json#GeologicFeature`).
+- ✅ Cross-BB `$ref` for FeatureType subtypes - links to parent in sibling BB (e.g. `../geosciml_GeologyBasic/schema.json#GeologicFeature`).
 - ✅ SWE 2.0 → 3.0 substitution (`Quantity`, `QuantityRange`, `DataRecord` → `https://schemas.opengis.net/sweCommon/3.0/json/*`).
 - ✅ `SWE::Category`-typed attributes resolve to `$ref` SWE 3.0 `Category.json` (vocab URLs travel in the instance object via `definition`/`codeSpace`/`value`).
-- ✅ `«CodeList»` classes emit `{type: string, format: uri}` with a conditional `codeList` annotation (added only when the source UML class carries an explicit `codeList` tagged value — none in GeoSciML 4.1, so the annotation is absent everywhere).
-- ✅ CodeList class URLs applied where matched against CGI catalog (21 classes) — 26 marked `treat as open`, emit no `codeList` annotation.
+- ✅ `«CodeList»` classes emit `{type: string, format: uri}` with a conditional `codeList` annotation (added only when the source UML class carries an explicit `codeList` tagged value - none in GeoSciML 4.1, so the annotation is absent everywhere).
+- ✅ CodeList class URLs applied where matched against CGI catalog (21 classes) - 26 marked `treat as open`, emit no `codeList` annotation.
 - ✅ Union `oneOf` encoding (1 case: `GSMLitem` in geosciml_Collection).
 - ✅ `inlineOrByReference` tag honoured: `byReference` → link object; `inlineOrByReference` → `oneOf [inline, link object]`; `inline` → inline ref.
 - ✅ Multiplicity wrapping: `upper>1` → `type: array, items: ..., uniqueItems: true`. `lower>=1` → required.
@@ -69,11 +69,11 @@ Outputs: 23 BB directories under [_sources/](_sources/)
 
 ### 1. `lax` wildcard (7 occurrences in `geosciml_GeoSciMLLite`)
 
-Five GeoSciMLLite FeatureTypes have an `any` attribute typed `lax` — the XSD wildcard pattern for vendor extensions. The generator emits `{$comment: "Unresolved type: lax", type: object}`. The right JSON encoding is `{type: object, additionalProperties: true}` (or omit the property entirely — the JSON object will accept additional members unless `additionalProperties: false` is declared). Easy fix: special-case `type=="lax"` in the resolver.
+Five GeoSciMLLite FeatureTypes have an `any` attribute typed `lax` - the XSD wildcard pattern for vendor extensions. The generator emits `{$comment: "Unresolved type: lax", type: object}`. The right JSON encoding is `{type: object, additionalProperties: true}` (or omit the property entirely - the JSON object will accept additional members unless `additionalProperties: false` is declared). Easy fix: special-case `type=="lax"` in the resolver.
 
 ### 2. 21 ISO placeholder `$ref` values
 
-These types are referenced via `$ref` strings like `"iso19115:CI_Citation"`, `"iso19108:TM_Period"` — not real URLs. Inventory:
+These types are referenced via `$ref` strings like `"iso19115:CI_Citation"`, `"iso19108:TM_Period"` - not real URLs. Inventory:
 
 | Placeholder | Count |
 | --- | ---: |
@@ -106,21 +106,21 @@ NonDirectionalStructureTypeTerm, PhysicalPropertyTerm, RelationRoleTerm,
 StatisticalMethodTerm
 ```
 
-If GeoSciML's vocabulary working group has registries for any of these (under a non-CGI namespace, e.g. `resource.geosciml.org/timescale/...`), add an explicit `codeList` UML tagged value on the CodeList class in the EA model and re-export the XMI — the generator will pick up the tag and emit the annotation automatically. [cgi-vocab-reference.yaml](cgi-vocab-reference.yaml) records the URLs we previously inferred, useful as a starting list for that enrichment.
+If GeoSciML's vocabulary working group has registries for any of these (under a non-CGI namespace, e.g. `resource.geosciml.org/timescale/...`), add an explicit `codeList` UML tagged value on the CodeList class in the EA model and re-export the XMI - the generator will pick up the tag and emit the annotation automatically. [cgi-vocab-reference.yaml](cgi-vocab-reference.yaml) records the URLs we previously inferred, useful as a starting list for that enrichment.
 
 ### 4. UML constructs the generator does NOT yet handle
 
 Not blockers for this run, but recorded for future hardening:
 
-- **Associations as properties** — **resolved.** EA stores some navigable association ends *only* as `UML:AssociationEnd` elements (not as `UML:Attribute`). The generator now walks both. All 63 navigable role names from 57 top-level associations have been merged onto their owning classes. The inventory table below remains for reference. ~~Missing-roles report previously listed 30 gaps; now 0.~~
-- **`voidable` attribute stereotype (81 occurrences).** Not relevant in JSON's open-world model — JSON values are nullable / omissible by default, and "void reasons" are not part of the OGC 24-017r1 encoding. No action needed.
+- **Associations as properties** - **resolved.** EA stores some navigable association ends *only* as `UML:AssociationEnd` elements (not as `UML:Attribute`). The generator now walks both. All 63 navigable role names from 57 top-level associations have been merged onto their owning classes. The inventory table below remains for reference. ~~Missing-roles report previously listed 30 gaps; now 0.~~
+- **`voidable` attribute stereotype (81 occurrences).** Not relevant in JSON's open-world model - JSON values are nullable / omissible by default, and "void reasons" are not part of the OGC 24-017r1 encoding. No action needed.
 - **OCL constraints (20 occurrences).** Now embedded into the `description` of the class or attribute they constrain (prefixed `Constraint:`). Validators don't enforce them, but they survive in documentation.
 - **Initial values (3 attributes).** OGC 24-017r1 spec says encode as `default`. Minor; defer.
 - **Association classes (0 in this XMI).** Not applicable.
 - **Multiple inheritance (0 in this XMI).** Not applicable.
 - **GeoSciML's `«estimatedProperty»` attribute stereotype (84 occurrences).** Not specified by OGC 24-017r1; could be emitted as an annotation extension if needed.
 
-### 5. `GSMLitem` Union — schema-validation note
+### 5. `GSMLitem` Union - schema-validation note
 
 `oneOf` requires exactly one branch to match. Of the 6 branches in `GSMLitem`, 4 resolve to the **same** SWE/OGC LinkObject `$ref`. A validator handed an arbitrary `LinkObject` JSON cannot pick *which* of those 4 conceptual types is intended; it will fail because more than one branch matches. This is the WARNING flagged in the `ogc-uml2json` skill for type-discriminator unions over by-reference types. Workarounds (later, if it bites):
 
@@ -129,27 +129,27 @@ Not blockers for this run, but recorded for future hardening:
 
 ### 6. Cross-BB `$ref` paths assume sibling-folder layout
 
-Every cross-BB `$ref` uses `../geosciml_<Package>/schema.json#<Class>`. Validation works only when the consuming process resolves refs against the local filesystem. Once the BB-postprocess pipeline publishes these under absolute URLs, those refs become URL refs — the OGC bblocks-postprocess workflow already handles that rewrite, so no action needed before publication.
+Every cross-BB `$ref` uses `../geosciml_<Package>/schema.json#<Class>`. Validation works only when the consuming process resolves refs against the local filesystem. Once the BB-postprocess pipeline publishes these under absolute URLs, those refs become URL refs - the OGC bblocks-postprocess workflow already handles that rewrite, so no action needed before publication.
 
 ## Files now in this repo
 
-- [tools/ea_uml_to_ogc_schema.py](tools/ea_uml_to_ogc_schema.py) — the generator (~700 lines).
-- [swe-mappings.yaml](swe-mappings.yaml) — Quantity, QuantityRange, DataRecord → SWE 3.0 URLs.
-- [cgi-vocab-reference.yaml](cgi-vocab-reference.yaml) — 35 Category attribute mappings + 47 CodeList class mappings. **Documentation only** (not consumed by the generator after the switch to SWE 3.0 `Category` for Category attributes + UML-tag-driven `codeList` annotation for CodeList classes).
-- [swe-types-used.md](swe-types-used.md) — decision record and 2.0/3.0 member diffs.
-- [_sources/geosciml_*/schema.json](_sources/) — 23 generated BB schemas.
-- [_sources/geosciml_*/bblock.json](_sources/) — 23 minimal BB metadata files.
+- [tools/ea_uml_to_ogc_schema.py](tools/ea_uml_to_ogc_schema.py) - the generator (~700 lines).
+- [swe-mappings.yaml](swe-mappings.yaml) - Quantity, QuantityRange, DataRecord → SWE 3.0 URLs.
+- [cgi-vocab-reference.yaml](cgi-vocab-reference.yaml) - 35 Category attribute mappings + 47 CodeList class mappings. **Documentation only** (not consumed by the generator after the switch to SWE 3.0 `Category` for Category attributes + UML-tag-driven `codeList` annotation for CodeList classes).
+- [swe-types-used.md](swe-types-used.md) - decision record and 2.0/3.0 member diffs.
+- [_sources/geosciml_*/schema.json](_sources/) - 23 generated BB schemas.
+- [_sources/geosciml_*/bblock.json](_sources/) - 23 minimal BB metadata files.
 
 ## Recommended next actions (when you return)
 
 1. **Spot-check one or two classes against EA** to gauge how much was missed by the attributes-only walk (the associations-as-properties gap).
 2. **Fix the `lax` wildcard** as a generator one-liner.
-3. **Decide the CodeList class URL policy for the 26 `treat as open` cases** — keep open, or extend CGI's catalog?
+3. **Decide the CodeList class URL policy for the 26 `treat as open` cases** - keep open, or extend CGI's catalog?
 4. **Run the OGC bblocks-postprocess workflow** locally via `build.sh` to confirm the generated BBs validate end-to-end and produce `register.json`/`bblocks.jsonld`/etc.
 5. **Decide on the `GSMLitem` Union encoding** if validation flags it.
 ### Full UML:Association inventory (57 total)
 
-Generated from `geosciml4.1.xmi` on the same run as the schemas. Each row shows one association: which class owns it, the navigable role(s) it carries, and the target class. Role names marked **bold** are navigable — those are the properties that should appear on the source class but currently do NOT, because the generator only walks `UML:Attribute`. Multiplicity column shows lower..upper.
+Generated from `geosciml4.1.xmi` on the same run as the schemas. Each row shows one association: which class owns it, the navigable role(s) it carries, and the target class. Role names marked **bold** are navigable - those are the properties that should appear on the source class but currently do NOT, because the generator only walks `UML:Attribute`. Multiplicity column shows lower..upper.
 
 | Source pkg | Source class | Role (target side) | Mult | Target class | Target pkg |
 | --- | --- | --- | --- | --- | --- |
@@ -203,7 +203,7 @@ Generated from `geosciml4.1.xmi` on the same run as the schemas. Each row shows 
 | LaboratoryAnalysis | AnalyticalSession | **instrument** | 0..1 | AnalyticalInstrument | LaboratoryAnalysis |
 | LaboratoryAnalysis | AnalyticalSession | **referenceAnalyses** | 0..* | ReferenceSpecimen | GeologicSpecimen |
 | TemporalReferenceSystem | TimeOrdinalEra | **member** | 0..* | TimeOrdinalEra | TemporalReferenceSystem |
-| TemporalReferenceSystem | TimeOrdinalEra | — | — | TimeOrdinalReferenceSystem | TemporalReferenceSystem |
+| TemporalReferenceSystem | TimeOrdinalEra | - | - | TimeOrdinalReferenceSystem | TemporalReferenceSystem |
 | TemporalReferenceSystem | TimeOrdinalEraBoundary | **observationalBasis** | 0..* | OM_Observation | ? |
 | TemporalReferenceSystem | TimeOrdinalEraBoundary | **previousEra** | 0..* | TimeOrdinalEra | TemporalReferenceSystem |
 | TemporalReferenceSystem | TimeOrdinalEraBoundary | **nextEra** | 0..* | TimeOrdinalEra | TemporalReferenceSystem |

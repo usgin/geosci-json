@@ -1,4 +1,4 @@
 # SHACL rules for gsmscimlLite.
-# Placeholder — populate with shape constraints as the model is profiled.
+# Placeholder - populate with shape constraints as the model is profiled.
 
 @prefix sh: <http://www.w3.org/ns/shacl#> .

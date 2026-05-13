@@ -44,9 +44,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `contactCharacter` | (oneOf — see schema) | 0..1 | The contactCharacter (SWE::Category) contains a term from a controlled vocabulary that describes the character of the… |
-| `orientation` | (oneOf — see schema) | 0..1 | The orientation:GSML_PlanarOrientation property reports the general orientation of the contact surface. |
-| `correlatesWith` | (oneOf — see schema) | 0..1 | The correlatesWith property is an association between ContactDescription and a GeochronologicBoundary describing a ge… |
+| `contactCharacter` | (oneOf - see schema) | 0..1 | The contactCharacter (SWE::Category) contains a term from a controlled vocabulary that describes the character of the… |
+| `orientation` | (oneOf - see schema) | 0..1 | The orientation:GSML_PlanarOrientation property reports the general orientation of the contact surface. |
+| `correlatesWith` | (oneOf - see schema) | 0..1 | The correlatesWith property is an association between ContactDescription and a GeochronologicBoundary describing a ge… |
 
 ### `DisplacementEvent`
 
@@ -58,7 +58,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `incrementalDisplacement` | (oneOf — see schema) | 0..1 | The incrementalDisplacement:DisplacementValue property contains a DisplacementValue reporting the parameters of the d… |
+| `incrementalDisplacement` | (oneOf - see schema) | 0..1 | The incrementalDisplacement:DisplacementValue property contains a DisplacementValue reporting the parameters of the d… |
 
 ### `DisplacementValue`
 
@@ -70,10 +70,10 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `hangingWallDirection` | (oneOf — see schema) | 0..1 | The property hangingWallDirection:GSML_LinearOrientation describes the direction of the hanging-wall side of the faul… |
-| `movementSense` | (oneOf — see schema) | 0..1 | The property movementSense:MovementSenseTerm contains a term from a controlled vocabulary that describes the movement… |
-| `movementType` | (oneOf — see schema) | 0..1 | The property movementType:MovementTypeTerm contains a term from a controlled vocabulary that defines the type of move… |
-| `displacementEvent` | (oneOf — see schema) | 0..1 | The property displacementEvent is an association between a Displacement and a GeologicEvent that contains a descripti… |
+| `hangingWallDirection` | (oneOf - see schema) | 0..1 | The property hangingWallDirection:GSML_LinearOrientation describes the direction of the hanging-wall side of the faul… |
+| `movementSense` | (oneOf - see schema) | 0..1 | The property movementSense:MovementSenseTerm contains a term from a controlled vocabulary that describes the movement… |
+| `movementType` | (oneOf - see schema) | 0..1 | The property movementType:MovementTypeTerm contains a term from a controlled vocabulary that defines the type of move… |
+| `displacementEvent` | (oneOf - see schema) | 0..1 | The property displacementEvent is an association between a Displacement and a GeologicEvent that contains a descripti… |
 
 ### `FoldDescription`
 
@@ -85,17 +85,17 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `amplitude` | (oneOf — see schema) | 0..1 | The amplitude property (SWE::QuantityRange) reports the length from line segment connecting inflection points on adja… |
-| `axialSurfaceOrientation` | (oneOf — see schema) | 0..1 | The property axialSurfaceOrientation:GSML_PlanarOrientation is used to characterize the geometry of a fold. The axial… |
-| `geneticModel` | (oneOf — see schema) | 0..1 | The property geneticModel (SWE::Category) contains a term from a controlled vocabulary describing the specification o… |
-| `hingeLineCurvature` | (oneOf — see schema) | 0..1 | The hingeLineCurvature property (SWE::Category) contains a term from a controlled vocabulary that describes the varia… |
-| `hingeLineOrientation` | (oneOf — see schema) | 0..1 | The property hingeLineOrientation:GSML_LinearOrientation reports the specification of the hinge line orientation for … |
-| `hingeShape` | (oneOf — see schema) | 0..1 | The property hingeShape (SWE::Category) reports a term from a controlled vocabulary describing the hinge shape, e.g. … |
-| `interLimbAngle` | (oneOf — see schema) | 0..1 | The property interLimbAngle (SWE::Category) contains a term from a controlled vocabulary describing the interlimb ang… |
-| `limbShape` | (oneOf — see schema) | 0..1 | The limbShape property (SWE::Category) contains a term from a controlled vocabulary describing the shape of the limb … |
-| `span` | (oneOf — see schema) | 0..1 | The span property (SWE::QuantityRange) reports a value describing the linear distance between inflection points in a … |
-| `symmetry` | (oneOf — see schema) | 0..1 | The symmetry property (SWE::Category) contains a term from a controlled vocabulary describing the concordance or disc… |
-| `system` | (oneOf — see schema) | 0..1 | The system property is an association between a FoldDescription and a FoldSystem that aggregates folds into a system. |
+| `amplitude` | (oneOf - see schema) | 0..1 | The amplitude property (SWE::QuantityRange) reports the length from line segment connecting inflection points on adja… |
+| `axialSurfaceOrientation` | (oneOf - see schema) | 0..1 | The property axialSurfaceOrientation:GSML_PlanarOrientation is used to characterize the geometry of a fold. The axial… |
+| `geneticModel` | (oneOf - see schema) | 0..1 | The property geneticModel (SWE::Category) contains a term from a controlled vocabulary describing the specification o… |
+| `hingeLineCurvature` | (oneOf - see schema) | 0..1 | The hingeLineCurvature property (SWE::Category) contains a term from a controlled vocabulary that describes the varia… |
+| `hingeLineOrientation` | (oneOf - see schema) | 0..1 | The property hingeLineOrientation:GSML_LinearOrientation reports the specification of the hinge line orientation for … |
+| `hingeShape` | (oneOf - see schema) | 0..1 | The property hingeShape (SWE::Category) reports a term from a controlled vocabulary describing the hinge shape, e.g. … |
+| `interLimbAngle` | (oneOf - see schema) | 0..1 | The property interLimbAngle (SWE::Category) contains a term from a controlled vocabulary describing the interlimb ang… |
+| `limbShape` | (oneOf - see schema) | 0..1 | The limbShape property (SWE::Category) contains a term from a controlled vocabulary describing the shape of the limb … |
+| `span` | (oneOf - see schema) | 0..1 | The span property (SWE::QuantityRange) reports a value describing the linear distance between inflection points in a … |
+| `symmetry` | (oneOf - see schema) | 0..1 | The symmetry property (SWE::Category) contains a term from a controlled vocabulary describing the concordance or disc… |
+| `system` | (oneOf - see schema) | 0..1 | The system property is an association between a FoldDescription and a FoldSystem that aggregates folds into a system. |
 
 ### `FoldSystem`
 
@@ -107,9 +107,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `periodic` | (oneOf — see schema) | 0..1 | The property periodic:Primitive::Boolean reports TRUE if the hinges in a train are regularly spaced, and FALSE otherw… |
-| `wavelength` | (oneOf — see schema) | 0..1 | The property wavelength (SWE::QuantityRange) contains a quantitative description of the length between adjacent antif… |
-| `foldSystemMember` | (oneOf — see schema) | 0..1 | The foldSystemMember is an association between a FoldSystem and the Folds that are members of that system. |
+| `periodic` | (oneOf - see schema) | 0..1 | The property periodic:Primitive::Boolean reports TRUE if the hinges in a train are regularly spaced, and FALSE otherw… |
+| `wavelength` | (oneOf - see schema) | 0..1 | The property wavelength (SWE::QuantityRange) contains a quantitative description of the length between adjacent antif… |
+| `foldSystemMember` | (oneOf - see schema) | 0..1 | The foldSystemMember is an association between a FoldSystem and the Folds that are members of that system. |
 
 ### `FoliationDescription`
 
@@ -121,12 +121,12 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `definingElement` | (oneOf — see schema) | 0..1 | The property definingElement (SWE::Category) contains a term from a controlled vocabulary describing the kinds of inh… |
-| `continuity` | (oneOf — see schema) | 0..1 | The continuity property (SWE::Category) reports a term from a controlled vocabulary to distinguish continuous vs. dis… |
-| `intensity` | (oneOf — see schema) | 0..1 | The intensity property (SWE::Category) contains a term from a controlled vocabulary to describe how well the foliatio… |
-| `mineralElement` | (oneOf — see schema) | 0..1 | The mineralElement property is an association between FoliationDescription and a Mineral that defines that foliation. |
-| `orientation` | (oneOf — see schema) | 0..1 | The orientation:GSML_PlanarOrientation contains an estimate of the planar orientation of the foliation structure. |
-| `spacing` | (oneOf — see schema) | 0..1 | The spacing property (SWE::QuantityRange) contains a linear dimension representing the thickness of foliation domains… |
+| `definingElement` | (oneOf - see schema) | 0..1 | The property definingElement (SWE::Category) contains a term from a controlled vocabulary describing the kinds of inh… |
+| `continuity` | (oneOf - see schema) | 0..1 | The continuity property (SWE::Category) reports a term from a controlled vocabulary to distinguish continuous vs. dis… |
+| `intensity` | (oneOf - see schema) | 0..1 | The intensity property (SWE::Category) contains a term from a controlled vocabulary to describe how well the foliatio… |
+| `mineralElement` | (oneOf - see schema) | 0..1 | The mineralElement property is an association between FoliationDescription and a Mineral that defines that foliation. |
+| `orientation` | (oneOf - see schema) | 0..1 | The orientation:GSML_PlanarOrientation contains an estimate of the planar orientation of the foliation structure. |
+| `spacing` | (oneOf - see schema) | 0..1 | The spacing property (SWE::QuantityRange) contains a linear dimension representing the thickness of foliation domains… |
 
 ### `Fracture`
 
@@ -150,7 +150,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `layerComposition` | (oneOf — see schema) | 0..1 | The layerComposition property is an association between a Layering and a RockMaterial that describes the rock materia… |
+| `layerComposition` | (oneOf - see schema) | 0..1 | The layerComposition property is an association between a Layering and a RockMaterial that describes the rock materia… |
 
 ### `Lineation`
 
@@ -162,11 +162,11 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `lineationType` | (oneOf — see schema) | 0..1 | Type of lineation. Examples include: flow lines, scratches, striae, slickenlines, linear arrangements of elongate com… |
-| `definingElement` | (oneOf — see schema) | 0..1 | Kinds of describable inhomogeneity in a rock body that may define a GeologicStructure. Examples include Oriented Part… |
-| `intensity` | (oneOf — see schema) | 0..1 | How well the lineation is developed. Terms such as weak, moderate, strong. |
-| `mineralElement` | (oneOf — see schema) | 0..1 | Mineral that defines the lineation |
-| `orientation` | (oneOf — see schema) | 0..1 | Orientation of the lineation |
+| `lineationType` | (oneOf - see schema) | 0..1 | Type of lineation. Examples include: flow lines, scratches, striae, slickenlines, linear arrangements of elongate com… |
+| `definingElement` | (oneOf - see schema) | 0..1 | Kinds of describable inhomogeneity in a rock body that may define a GeologicStructure. Examples include Oriented Part… |
+| `intensity` | (oneOf - see schema) | 0..1 | How well the lineation is developed. Terms such as weak, moderate, strong. |
+| `mineralElement` | (oneOf - see schema) | 0..1 | Mineral that defines the lineation |
+| `orientation` | (oneOf - see schema) | 0..1 | Orientation of the lineation |
 
 ### `NetSlipValue`
 
@@ -178,8 +178,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `netSlip` | (oneOf — see schema) | 0..1 | The property netSlip:GSML_Vector reports the value of the net slip, expressed as a vector. |
-| `slipComponent` | (oneOf — see schema) | 0..1 | The slipComponent:SlipComponents property associates the individual slip components with the net slip values. |
+| `netSlip` | (oneOf - see schema) | 0..1 | The property netSlip:GSML_Vector reports the value of the net slip, expressed as a vector. |
+| `slipComponent` | (oneOf - see schema) | 0..1 | The slipComponent:SlipComponents property associates the individual slip components with the net slip values. |
 
 ### `NonDirectionalStructure`
 
@@ -191,7 +191,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `structureType` | (oneOf — see schema) | 0..1 | The type of non oriented structure. Examples include miarolitic cavity, flame structure, load cast, shatter cone, tra… |
+| `structureType` | (oneOf - see schema) | 0..1 | The type of non oriented structure. Examples include miarolitic cavity, flame structure, load cast, shatter cone, tra… |
 
 ### `SeparationValue`
 
@@ -203,7 +203,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `separation` | (oneOf — see schema) | 0..1 | The property separation:GSML_Vector reports the apparent offset across a planar feature, reported as a vector. |
+| `separation` | (oneOf - see schema) | 0..1 | The property separation:GSML_Vector reports the apparent offset across a planar feature, reported as a vector. |
 
 ### `ShearDisplacementStructureDescription`
 
@@ -215,9 +215,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `deformationStyle` | (oneOf — see schema) | 0..1 | The deformationStyle:DeformationStyleTerm contains a term from a vocabulary to describe the style of deformation, i.e… |
-| `planeOrientation` | (oneOf — see schema) | 0..1 | The property planeOrientation:GSML_PlanarOrientation contains a description of the orientation of a structure’s plana… |
-| `stPhysicalProperty` | (oneOf — see schema) | 0..1 | The property stPhysicalProperty:PhysicalDescription contains a value of generic physical properties not addressed in … |
+| `deformationStyle` | (oneOf - see schema) | 0..1 | The deformationStyle:DeformationStyleTerm contains a term from a vocabulary to describe the style of deformation, i.e… |
+| `planeOrientation` | (oneOf - see schema) | 0..1 | The property planeOrientation:GSML_PlanarOrientation contains a description of the orientation of a structure’s plana… |
+| `stPhysicalProperty` | (oneOf - see schema) | 0..1 | The property stPhysicalProperty:PhysicalDescription contains a value of generic physical properties not addressed in … |
 
 ### `SlipComponents`
 
@@ -229,9 +229,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `heave` | (oneOf — see schema) | 0..1 | The property heave:GSML_Vector contains a component of slip in the horizontal, and perpendicular to the strike of the… |
-| `horizontalSlip` | (oneOf — see schema) | 0..1 | The property horizontalSlip:GSML_Vector contains a slip component that is horizontal and parallel to strike of the fa… |
-| `throw` | (oneOf — see schema) | 0..1 | The property throw:GSML_Vector contains the vertical component of slip. |
+| `heave` | (oneOf - see schema) | 0..1 | The property heave:GSML_Vector contains a component of slip in the horizontal, and perpendicular to the strike of the… |
+| `horizontalSlip` | (oneOf - see schema) | 0..1 | The property horizontalSlip:GSML_Vector contains a slip component that is horizontal and parallel to strike of the fa… |
+| `throw` | (oneOf - see schema) | 0..1 | The property throw:GSML_Vector contains the vertical component of slip. |
 
 ### `_FeatureDispatch`
 
@@ -239,11 +239,11 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Class | `codeList` vocab |
 | --- | --- |
-| `DeformationStyleTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `LineationTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `MovementSenseTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `MovementTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `NonDirectionalStructureTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
+| `DeformationStyleTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `LineationTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `MovementSenseTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `MovementTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `NonDirectionalStructureTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
 
 ## External dependencies
 

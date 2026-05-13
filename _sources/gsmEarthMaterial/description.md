@@ -43,11 +43,11 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `alterationType` | (oneOf — see schema) | 0..1 | The property alterationType:AlterationTypeTerm contains a term from a controlled vocabulary of alteration types (e.g.… |
-| `alterationProduct` | (oneOf — see schema) | 0..1 | The property alterationProduct is an association between the AlterationDescripton and EarthMaterial describing the ma… |
-| `alterationDistribution` | (oneOf — see schema) | 0..1 | The alterationDistribution (SWE::Category) property describes the spatial distribution or geometry of alteration zone… |
-| `alterationDegree` | (oneOf — see schema) | 0..1 | The property alterationDegree (SWE::Category) contains a term from a controlled vocabulary to indicate the magnitude … |
-| `alterationEvent` | (oneOf — see schema) | 0..1 | The property alterationEvent is an association between an AlterationDescription and a GeologicEvent describing the Ge… |
+| `alterationType` | (oneOf - see schema) | 0..1 | The property alterationType:AlterationTypeTerm contains a term from a controlled vocabulary of alteration types (e.g.… |
+| `alterationProduct` | (oneOf - see schema) | 0..1 | The property alterationProduct is an association between the AlterationDescripton and EarthMaterial describing the ma… |
+| `alterationDistribution` | (oneOf - see schema) | 0..1 | The alterationDistribution (SWE::Category) property describes the spatial distribution or geometry of alteration zone… |
+| `alterationDegree` | (oneOf - see schema) | 0..1 | The property alterationDegree (SWE::Category) contains a term from a controlled vocabulary to indicate the magnitude … |
+| `alterationEvent` | (oneOf - see schema) | 0..1 | The property alterationEvent is an association between an AlterationDescription and a GeologicEvent describing the Ge… |
 
 ### `ChemicalComposition`
 
@@ -59,7 +59,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `chemicalAnalysis` | (oneOf — see schema) | 0..1 | The chemicalAnalysis property (SWE:DataRecord) contains a collection of geochemical results in a form of a DataRecord… |
+| `chemicalAnalysis` | (oneOf - see schema) | 0..1 | The chemicalAnalysis property (SWE:DataRecord) contains a collection of geochemical results in a form of a DataRecord… |
 
 ### `CompoundMaterialDescription`
 
@@ -71,10 +71,10 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `compositionCategory` | (oneOf — see schema) | 0..1 | The compositionCategory property (SWE::Category) provides a term from a controlled vocabulary to specify the gross co… |
-| `geneticCategory` | (oneOf — see schema) | 0..1 | The property geneticCategory (SWE::Category) provides a term from a controlled vocabulary that represents a summary g… |
-| `particleGeometry` | (oneOf — see schema) | 0..1 | The particleGeometry:ParticleGeometryDescription contains an instance of ParticleGeometryDescription. |
-| `constituent` | (oneOf — see schema) | 0..1 | The property constituent is an association between a CompoundMaterialDescription and a ConstituentPart that makes up … |
+| `compositionCategory` | (oneOf - see schema) | 0..1 | The compositionCategory property (SWE::Category) provides a term from a controlled vocabulary to specify the gross co… |
+| `geneticCategory` | (oneOf - see schema) | 0..1 | The property geneticCategory (SWE::Category) provides a term from a controlled vocabulary that represents a summary g… |
+| `particleGeometry` | (oneOf - see schema) | 0..1 | The particleGeometry:ParticleGeometryDescription contains an instance of ParticleGeometryDescription. |
+| `constituent` | (oneOf - see schema) | 0..1 | The property constituent is an association between a CompoundMaterialDescription and a ConstituentPart that makes up … |
 
 ### `ConstituentPart`
 
@@ -84,11 +84,11 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `role` | (oneOf — see schema) | 0..1 | The role:ConstituentPartRoleTerm property contains a term from a controlled vocabulary that describes the role a Cons… |
-| `proportion` | (oneOf — see schema) | 0..1 | The proportion property (SWE::QuantityRange) reports the fraction of the whole that is formed by a ConstituentPart in… |
-| `constituentMaterial` | (oneOf — see schema) | 0..1 | The constituentMaterial property is an association between a ConstituentPart and an EarthMaterial that specifies the … |
-| `constituentParticleGeometry` | (oneOf — see schema) | 0..1 | Description of geometry of individual subset of particles |
-| `relatedMaterial` | (oneOf — see schema) | 0..1 | Specifies the ConstituentPart that is playing the target role in the MaterialRelation |
+| `role` | (oneOf - see schema) | 0..1 | The role:ConstituentPartRoleTerm property contains a term from a controlled vocabulary that describes the role a Cons… |
+| `proportion` | (oneOf - see schema) | 0..1 | The proportion property (SWE::QuantityRange) reports the fraction of the whole that is formed by a ConstituentPart in… |
+| `constituentMaterial` | (oneOf - see schema) | 0..1 | The constituentMaterial property is an association between a ConstituentPart and an EarthMaterial that specifies the … |
+| `constituentParticleGeometry` | (oneOf - see schema) | 0..1 | Description of geometry of individual subset of particles |
+| `relatedMaterial` | (oneOf - see schema) | 0..1 | Specifies the ConstituentPart that is playing the target role in the MaterialRelation |
 
 ### `FabricDescription`
 
@@ -100,7 +100,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `fabricType` | (oneOf — see schema) | 0..1 | The fabricType:FabricTypeTerm property contains a term from a controlled vocabulary to denote the type of fabric in t… |
+| `fabricType` | (oneOf - see schema) | 0..1 | The fabricType:FabricTypeTerm property contains a term from a controlled vocabulary to denote the type of fabric in t… |
 
 ### `InorganicFluid`
 
@@ -118,12 +118,12 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `metamorphicFacies` | (oneOf — see schema) | 0..1 | The metamorphicFacies property (SWE::Category) contains a term from a controlled vocabulary that describes a characte… |
-| `metamorphicGrade` | (oneOf — see schema) | 0..1 | The metamorphicGrade property (SWE::Category) contains a term from a controlled vocabulary that indicates the intensi… |
-| `peakPressureValue` | (oneOf — see schema) | 0..1 | The peakPressureValue property (SWE::Quantity) reports a numerical value to indicate the estimated pressure at peak m… |
-| `peakTemperatureValue` | (oneOf — see schema) | 0..1 | The peakTemperatureValue property (SWE::Quantity) reports a numerical value to indicate the estimated temperature at … |
-| `protolithLithology` | (oneOf — see schema) | 0..1 | The protolithLithology is an association between a MetamorphicDescription and an EarthMaterial that describes the pre… |
-| `metamorphicEvent` | (oneOf — see schema) | 0..1 | The metamorphicEvent property is an association between a MetamorphicDescription and a GeologicEvent that denotes the… |
+| `metamorphicFacies` | (oneOf - see schema) | 0..1 | The metamorphicFacies property (SWE::Category) contains a term from a controlled vocabulary that describes a characte… |
+| `metamorphicGrade` | (oneOf - see schema) | 0..1 | The metamorphicGrade property (SWE::Category) contains a term from a controlled vocabulary that indicates the intensi… |
+| `peakPressureValue` | (oneOf - see schema) | 0..1 | The peakPressureValue property (SWE::Quantity) reports a numerical value to indicate the estimated pressure at peak m… |
+| `peakTemperatureValue` | (oneOf - see schema) | 0..1 | The peakTemperatureValue property (SWE::Quantity) reports a numerical value to indicate the estimated temperature at … |
+| `protolithLithology` | (oneOf - see schema) | 0..1 | The protolithLithology is an association between a MetamorphicDescription and an EarthMaterial that describes the pre… |
+| `metamorphicEvent` | (oneOf - see schema) | 0..1 | The metamorphicEvent property is an association between a MetamorphicDescription and a GeologicEvent that denotes the… |
 
 ### `Mineral`
 
@@ -135,7 +135,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `mineralName` | (oneOf — see schema) | 0..1 | Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical As… |
+| `mineralName` | (oneOf - see schema) | 0..1 | Name of the mineral (eg: orthoclase) or mineral family (eg: feldspar), approved by the International Mineralogical As… |
 
 ### `OrganicMaterial`
 
@@ -155,12 +155,12 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `particleType` | (oneOf — see schema) | 0..1 | The particleType:ParticleTypeTerm provides a term from a controlled vocabulary to specify the nature of individual pa… |
-| `aspectRatio` | (oneOf — see schema) | 0..1 | The aspectRatio property (SWE::Category) contains a term from a controlled vocabulary describing the geometry of part… |
-| `shape` | (oneOf — see schema) | 0..1 | The shape property (SWE::Category) describes, &#x9;the development of crystal faces bounding particles in crystalline… |
-| `size` | (oneOf — see schema) | 0..1 | The property size (SWE::QuantityRange) reports the size that specifies particle grainsize. Values may be reported usi… |
-| `sorting` | (oneOf — see schema) | 0..1 | The sorting property (SWE::Category) contains a term from a vocabulary that specifies the size distribution of partic… |
-| `sourceOrganism` | (oneOf — see schema) | 0..1 | The sourceOrganism property is an association between a ParticleGeometryDescription and an Organism that is the sourc… |
+| `particleType` | (oneOf - see schema) | 0..1 | The particleType:ParticleTypeTerm provides a term from a controlled vocabulary to specify the nature of individual pa… |
+| `aspectRatio` | (oneOf - see schema) | 0..1 | The aspectRatio property (SWE::Category) contains a term from a controlled vocabulary describing the geometry of part… |
+| `shape` | (oneOf - see schema) | 0..1 | The shape property (SWE::Category) describes, &#x9;the development of crystal faces bounding particles in crystalline… |
+| `size` | (oneOf - see schema) | 0..1 | The property size (SWE::QuantityRange) reports the size that specifies particle grainsize. Values may be reported usi… |
+| `sorting` | (oneOf - see schema) | 0..1 | The sorting property (SWE::Category) contains a term from a vocabulary that specifies the size distribution of partic… |
+| `sourceOrganism` | (oneOf - see schema) | 0..1 | The sourceOrganism property is an association between a ParticleGeometryDescription and an Organism that is the sourc… |
 
 ### `PhysicalDescription`
 
@@ -172,8 +172,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `propertyName` | (oneOf — see schema) | 0..1 | The property propertyName:PhysicalPropertyTerm contains a term from a controlled vocabulary of physical properties of… |
-| `propertyMeasure` | (oneOf — see schema) | 0..1 | The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, uni… |
+| `propertyName` | (oneOf - see schema) | 0..1 | The property propertyName:PhysicalPropertyTerm contains a term from a controlled vocabulary of physical properties of… |
+| `propertyMeasure` | (oneOf - see schema) | 0..1 | The propertyMeasure property (SWE::Quantity) is a scalar measurement of the physical property of a rock material, uni… |
 
 ### `RockMaterialDescription`
 
@@ -185,7 +185,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `consolidationDegree` | (oneOf — see schema) | 0..1 | The consolidationDegree property (SWE::Category) contains a term from a controlled vocabulary that specifies the degr… |
+| `consolidationDegree` | (oneOf - see schema) | 0..1 | The consolidationDegree property (SWE::Category) contains a term from a controlled vocabulary that specifies the degr… |
 
 ### `_FeatureDispatch`
 
@@ -193,12 +193,12 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Class | `codeList` vocab |
 | --- | --- |
-| `AlterationTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `ConstituentPartRoleTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `FabricTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `MineralNameTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `ParticleTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `PhysicalPropertyTerm` | `_(treat as open — no `codeList` annotation)_` |
+| `AlterationTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `ConstituentPartRoleTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `FabricTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `MineralNameTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `ParticleTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `PhysicalPropertyTerm` | `_(treat as open - no `codeList` annotation)_` |
 
 ## External dependencies
 

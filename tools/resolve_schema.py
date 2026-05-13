@@ -3,7 +3,7 @@
 Resolve OGC Building Block schemas into a single complete JSON Schema.
 
 Recursively resolves ALL $ref references from the modular YAML/JSON source
-schemas into one fully-inlined schema — purely for validation and inspection,
+schemas into one fully-inlined schema - purely for validation and inspection,
 with no form simplifications.
 
 $ref patterns handled:
@@ -116,7 +116,7 @@ def _fetch_relative_in_cache(file_path: Path) -> Path | None:
 
     This handles the case where a URL-fetched schema contains a relative $ref
     (e.g. ``../organization/schema.yaml``).  The resolver resolves it relative
-    to the fetched file's cache location, producing a valid cache path — but
+    to the fetched file's cache location, producing a valid cache path - but
     the target hasn't been fetched yet.  We convert the cache path back to a
     URL and fetch on demand.
 
@@ -214,7 +214,7 @@ def deep_merge(base: dict, overlay: dict) -> dict:
     distribution (``anyOf``) and adaProduct's (``oneOf``) get combined.
 
     When the overlay is a partial constraint patch (no ``type`` or composition
-    keywords at the property level — just nested ``items.properties…``), it is
+    keywords at the property level - just nested ``items.properties…``), it is
     deep-merged so that the base structure (``type``, ``description``, ``oneOf``,
     etc.) is preserved alongside the new constraints.
     """
@@ -255,7 +255,7 @@ def _deep_merge_inner(base: dict, overlay: dict, in_properties: bool) -> dict:
             elif k == "properties":
                 result[k] = _deep_merge_inner(result[k], v, in_properties=True)
             elif k == "contains":
-                # Both base and overlay have contains — accumulate as allOf entries
+                # Both base and overlay have contains - accumulate as allOf entries
                 # so that both constraints are enforced (e.g., multiple conformsTo URIs)
                 base_contains = result.pop("contains")
                 overlay_contains = copy.deepcopy(v)
@@ -266,7 +266,7 @@ def _deep_merge_inner(base: dict, overlay: dict, in_properties: bool) -> dict:
             else:
                 result[k] = _deep_merge_inner(result[k], v, in_properties=False)
         elif k == "contains" and isinstance(v, dict):
-            # Base has no contains but overlay does — check if base already has
+            # Base has no contains but overlay does - check if base already has
             # accumulated contains in allOf from previous merges
             existing_allof = result.get("allOf", [])
             has_accumulated = any(
@@ -298,10 +298,10 @@ def resolve_file(path: Path, seen: set) -> dict:
 
     # Resolve $defs so fragment-only refs (#/$defs/X) can find them.
     # Two-pass strategy:
-    #   Pass 1 — resolve every def with an empty local-defs dict.  This expands
+    #   Pass 1 - resolve every def with an empty local-defs dict.  This expands
     #            all external file $refs but leaves cross-def fragment refs as
     #            "$comment: unresolved …" placeholders.
-    #   Pass 2 — re-resolve every def, this time with the fully-populated defs
+    #   Pass 2 - re-resolve every def, this time with the fully-populated defs
     #            dict so that cross-def fragment refs can be found.
     defs = {}
     if "$defs" in schema:
@@ -384,18 +384,18 @@ def _inline_unresolved_defs(node: Any, defs: dict, base_dir: Path, seen: set,
                     replacement = deep_merge(replacement, siblings)
                 return replacement
             if def_name in resolving:
-                # Cycle break — emit a typed stub so resolved schema is self-validating.
+                # Cycle break - emit a typed stub so resolved schema is self-validating.
                 # Preserves any sibling keys (e.g. description) and replaces the
                 # opaque placeholder with `type: object` and a clear cycle marker.
                 stub = {k: v for k, v in node.items() if k != "$comment"}
                 stub["type"] = "object"
                 stub["$comment"] = f"cycle: {def_name}"
                 return stub
-            # Unknown def — leave placeholder as-is so missing def stays visible
+            # Unknown def - leave placeholder as-is so missing def stays visible
         # Also resolve any leftover $ref
         if "$ref" in node:
             ref = node["$ref"]
-            # Handle same-document #/$defs/X refs with cycle protection — these
+            # Handle same-document #/$defs/X refs with cycle protection - these
             # can be self-recursive (e.g. StatisticalClassification.cdi:isVariantOf
             # → StatisticalClassification) and naive expansion blows up.
             if isinstance(ref, str) and ref.startswith("#/$defs/"):
@@ -463,7 +463,7 @@ def _resolve_ref(ref: str, base_dir: Path, defs: dict, seen: set) -> Any:
 
     if not file_path.exists():
         # If the path is inside the URL cache, the file just hasn't been
-        # fetched yet — reconstruct the URL and fetch it.
+        # fetched yet - reconstruct the URL and fetch it.
         fetched = _fetch_relative_in_cache(file_path)
         if fetched is not None:
             file_path = fetched
@@ -501,7 +501,7 @@ def _resolve_ref(ref: str, base_dir: Path, defs: dict, seen: set) -> Any:
             resolved = resolve_fragment(resolved, fragment)
         except KeyError as e:
             return {"$comment": f"could not resolve fragment {fragment} in {file_path}: {e}"}
-        # The fragment result might itself contain refs — resolve them
+        # The fragment result might itself contain refs - resolve them
         resolved = resolve_node(resolved, file_path.parent, {}, seen)
 
     return resolved
@@ -608,19 +608,19 @@ def _collect_defs_from_bb(bb_path: Path, global_defs: dict, file_to_def: dict,
             continue
         ref = def_schema.get("$ref")
         if ref and isinstance(ref, str) and not ref.startswith("#"):
-            # External file ref — this is a promotable $def
+            # External file ref - this is a promotable $def
             if _is_url(ref):
                 continue  # skip URL refs for structured mode
             ref_path = (canonical.parent / ref.split("#")[0]).resolve()
             if ref_path in file_to_def:
-                # Already registered — just ensure consistent name
+                # Already registered - just ensure consistent name
                 continue
             global_defs[def_name] = ref_path
             file_to_def[ref_path] = def_name
             # Recursively collect from the target file too
             if ref_path.exists():
                 _collect_defs_from_bb(ref_path, global_defs, file_to_def, visited)
-        # else: inline schema (like action's target_type) — skip
+        # else: inline schema (like action's target_type) - skip
 
     # Also scan the schema body for inline $refs to other BB files
     _scan_inline_refs(schema, canonical.parent, file_to_def, global_defs, visited)
@@ -811,13 +811,13 @@ def _resolve_ref_structured(ref: str, base_dir: Path, local_defs: dict,
                     if ref_path in file_to_def:
                         return {"$ref": f"#/$defs/{file_to_def[ref_path]}"}
             # Inline def: promote to global $defs and emit $ref. This is uniform
-            # whether or not the def participates in a cycle — `inline_low_use_defs`
+            # whether or not the def participates in a cycle - `inline_low_use_defs`
             # will later collapse non-cyclic, low-use defs back inline.
             if current_file is not None:
                 promoted = _promote_inline_def(current_file, def_name,
                                                inline_def_map, file_to_def)
                 return {"$ref": f"#/$defs/{promoted}"}
-            # No file context (shouldn't happen in structured mode) — fall back
+            # No file context (shouldn't happen in structured mode) - fall back
             # to inline expansion with cycle detection.
             if def_name in resolving_defs:
                 return {"$comment": f"self-referential: {def_name}"}
@@ -875,7 +875,7 @@ def _resolve_ref_structured(ref: str, base_dir: Path, local_defs: dict,
                     return {"$ref": f"#/$defs/{promoted}"}
             return {"$comment": f"could not resolve fragment {fragment} in {file_path}"}
 
-    # Not a known def — resolve fully with def-awareness
+    # Not a known def - resolve fully with def-awareness
     return resolve_def_aware(file_path, file_to_def, inline_def_map, seen)
 
 
@@ -989,8 +989,8 @@ def merge_profile_structured(profile_path: Path, global_defs: dict,
                             constraint_entries.append(constraint)
 
                     # Top-level keys other than the ones already handled
-                    # (`properties`, `allOf`, identity/metadata) — for example
-                    # `required`, `contains`, `minProperties` — must remain at
+                    # (`properties`, `allOf`, identity/metadata) - for example
+                    # `required`, `contains`, `minProperties` - must remain at
                     # schema level, not be stuffed into `properties`. Push each
                     # as its own allOf constraint so multiple composing BBs'
                     # required-lists (etc.) compose by intersection.
@@ -1337,7 +1337,7 @@ def main():
     parser.add_argument(
         "--structured",
         action="store_true",
-        help="(deprecated, ignored — structured form is now the only output mode)",
+        help="(deprecated, ignored - structured form is now the only output mode)",
     )
     args = parser.parse_args()
 

@@ -50,7 +50,7 @@ bbs:
     description: |
       Specimen building block. The wrapper dispatches two featureType
       values: SF_Specimen (hand-curated «FeatureType», ISO 19156:2011
-      §8.6 — inlines SF_SamplingFeature's inherited properties since ISO
+      §8.6 - inlines SF_SamplingFeature's inherited properties since ISO
       19156 isn't in the GeoSciML XMI) and ReferenceSpecimen (a GeoSciML
       «FeatureType» from the LaboratoryAnalysis-Specimen package, used
       for named reference / type specimens). The rest of the
@@ -137,8 +137,8 @@ bbs:
       points, TemporalReferenceSystem, plus the GeologicAgeDetails extension
       (which contributes GeologicEventDescription, the concrete description
       class used by GeologicEvent.gaEventDescription). The dispatcher
-      additionally exposes two hand-curated featureTypes —
-      GeochronologicEra and GeochronologicBoundary — that align to W3C
+      additionally exposes two hand-curated featureTypes -
+      GeochronologicEra and GeochronologicBoundary - that align to W3C
       OWL-Time (https://www.w3.org/TR/owl-time/) per Cox & Richard 2015
       "A formal model for the geologic timescale and GSSP": Era ≡
       time:ProperInterval and Boundary ≡ time:Instant, with start/end

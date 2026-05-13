@@ -83,10 +83,10 @@ def compare_dicts(yaml_dict, json_dict, path):
 
     # If one side has a $ref, skip deep comparison (different ref styles expected)
     if "$ref" in yaml_keys or "$ref" in json_keys:
-        # Both have $ref — that's fine, paths will differ
+        # Both have $ref - that's fine, paths will differ
         if "$ref" in yaml_keys and "$ref" in json_keys:
             return []
-        # One has $ref, other is expanded or uses $defs — note but don't error
+        # One has $ref, other is expanded or uses $defs - note but don't error
         if "$ref" in yaml_keys and "$ref" not in json_keys:
             diffs.append(f"  {path}: YAML has $ref, JSON has inline definition")
             return diffs

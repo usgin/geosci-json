@@ -164,7 +164,7 @@ def _parse_property(elem: ET.Element, owner_name: str = "") -> Property:
 
     # Recover a role name when the navigable end has no <name>: the assoc id
     # ends with `<Owner>_<role>_<Target>` (where role may contain underscores).
-    # The id may be prefixed with a path using dots and/or dashes — match the
+    # The id may be prefixed with a path using dots and/or dashes - match the
     # owner_role_target tail anchored at end-of-string.
     if not name and is_assoc and owner_name:
         assoc_id = assoc_el.get(XMI_IDREF, "") if assoc_el is not None else ""
@@ -327,7 +327,7 @@ class BuildContext:
 
 def collect_inherited_properties(class_id: str, model: Model) -> list[Property]:
     """Walk parent chain leaf-first. Within a single class, all properties are
-    kept (UCMIS overloads role names — e.g. CodeList has two `cdi:has`
+    kept (UCMIS overloads role names - e.g. CodeList has two `cdi:has`
     associations to different targets). Across inheritance, a subclass that
     redefines a name shadows ancestors of that name."""
     result: list[Property] = []
@@ -441,7 +441,7 @@ def _target_type_name(prop: Property, ctx: BuildContext) -> Optional[str]:
 def _has_distinct_named_targets(group: list[Property], ctx: BuildContext) -> bool:
     """True when the group has at least two properties resolving to distinct
     named targets (class / datatype / enum). Used to decide whether to
-    disambiguate same-named UML associations by suffixing the target class —
+    disambiguate same-named UML associations by suffixing the target class -
     UCMIS / DDI-CDI re-use bare role names like `has` / `uses` for several
     distinct targets within a single class, and emitting them as one anyOf
     key strips type information from the JSON-LD tree."""
@@ -700,7 +700,7 @@ def build_root_schema(
 ) -> dict:
     """Emit a BB schema.yaml whose root *is* the Node definition (single root)
     or an `anyOf` of Node $refs (multiple roots). The wrapper pattern that
-    accepts single/array/@graph forms is intentionally omitted — that wrapping
+    accepts single/array/@graph forms is intentionally omitted - that wrapping
     is applied by profile schemas that compose this BB."""
     # Build per-class node defs (registers them in ctx.local_defs)
     node_def_names: list[str] = []
@@ -794,10 +794,10 @@ def _quote_special_keys(obj: Any) -> Any:
     """JSON-LD keys (@type, @id, @graph) and prefixed keys (cdi:foo) need to be
     quoted in YAML. PyYAML quotes strings that *contain* `:` automatically when
     used as values, but as mapping keys it sometimes emits them unquoted. We
-    side-step that by ensuring every key is a plain str — the str representer
+    side-step that by ensuring every key is a plain str - the str representer
     above promotes any string with `:` or `@` to single-quoted form.
     """
-    return obj  # placeholder — handled at representer level below
+    return obj  # placeholder - handled at representer level below
 
 
 _IDENT_RE = re.compile(r"^[\w@$#./:-]+$")
@@ -979,7 +979,7 @@ def discover_external_class_refs(
 ) -> dict[str, str]:
     """Walk every other schema.yaml under sources_dir and return a map of
     {ClassName: $ref-target} pointing to the BB that "owns" each class.
-    A class is owned by a BB only when it is that BB's *root* class — i.e.,
+    A class is owned by a BB only when it is that BB's *root* class - i.e.,
     the schema's properties['@type'].contains.const is "<prefix>:<ClassName>".
     $defs entries are intentionally NOT registered: they can be private
     inlinings rather than canonical homes, and registering them introduces
@@ -989,7 +989,7 @@ def discover_external_class_refs(
     When a class name appears as a root in multiple BBs (e.g. when the same
     UML class has been cloned into a parallel directory like ddiProperties
     vs ddiCDIFProperties), prefer the BB whose parent directory matches
-    out_bb_dir's parent — i.e. don't leak a cross-package reference."""
+    out_bb_dir's parent - i.e. don't leak a cross-package reference."""
     import os
     out_resolved = out_bb_dir.resolve()
     out_parent = out_resolved.parent

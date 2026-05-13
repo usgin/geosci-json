@@ -8,10 +8,10 @@ JSON Schema building blocks for **GeoSciML 4.1**, generated from a UML model (`g
 
 The workflow is **generator-driven**, not hand-authored. The XMI plus `bb-grouping.yaml` are the source of truth:
 
-- `geosciml4.1.xmi` — classes, attributes, stereotypes, tagged values, associations from the UML.
-- `bb-grouping.yaml` — which UML packages map to which BB, and per-BB `dispatch:` config (with `wrapAsFeature` and extension constraints).
-- `swe-mappings.yaml` — SWE 2.0 → SWE 3.0 substitution table.
-- `cgi-vocab-reference.yaml` — reference documentation only; not consumed by the generator.
+- `geosciml4.1.xmi` - classes, attributes, stereotypes, tagged values, associations from the UML.
+- `bb-grouping.yaml` - which UML packages map to which BB, and per-BB `dispatch:` config (with `wrapAsFeature` and extension constraints).
+- `swe-mappings.yaml` - SWE 2.0 → SWE 3.0 substitution table.
+- `cgi-vocab-reference.yaml` - reference documentation only; not consumed by the generator.
 
 Everything under `_sources/` is **generator output**. Do not hand-edit it.
 
@@ -67,8 +67,8 @@ geosci-json/
 | `gsmSpecimen` | LaboratoryAnalysis-Specimen + 3 sub-packages | 2 FTs (SF_Specimen, ReferenceSpecimen) | `SF_Specimen` hand-curated (ISO 19156 §8.6). The other 7 LabAnalysis classes stay in `$defs` as `$ref` targets but aren't dispatched. |
 | `gsmEarthMaterial` | EarthMaterialDetails | 4 FTs via `wrapAsFeature` | Merged from former gsmEarthMaterialExtension + gsmEarthMaterialCollection. Mineral / OrganicMaterial / RockMaterial / CompoundMaterial are «Type» (not «FeatureType»); profile injects the JSON-FG envelope. |
 | `gsmGeologicStructureExtension` | GeologicStructureDetails | 6 FTs | DisplacementEvent, FoldSystem, Joint, Layering, Lineation, NonDirectionalStructure |
-| `gsmGeologicUnitExtension` | GeologicUnitDetails | — | DataType library (GeologicUnitDescription, BeddingDescription) |
-| `gsmGeologicRelationExtension` | GeologicRelation | — | DataType library (typed binary relations) |
+| `gsmGeologicUnitExtension` | GeologicUnitDetails | - | DataType library (GeologicUnitDescription, BeddingDescription) |
+| `gsmGeologicRelationExtension` | GeologicRelation | - | DataType library (typed binary relations) |
 | `gsmBorehole` | Borehole | 3 FTs | Borehole, BoreholeInterval, OriginPosition |
 | `gsmGeologicTime` | GeologicTime, GSSP, TemporalReferenceSystem, TimeScale, GeologicAgeDetails | 6 FTs | `GeochronologicEra` + `GeochronologicBoundary` hand-curated, Cox & Richard 2015 / OWL-Time aligned. |
 | `gsmExtendedGeologyCollection` | (FC profile, no packages) | 9 FTs | All 9 gsmBasicGeology FTs with applicable extension description-slot constraints. |
@@ -86,7 +86,7 @@ bbs:
       - GeoSciMLBasic
       - Collection
       # ...
-    dispatch:                              # OPTIONAL — overrides auto-discovery
+    dispatch:                              # OPTIONAL - overrides auto-discovery
       - name: Mineral                      # featureType discriminator value
         ref: "#Mineral"                    # local anchor (or cross-BB ref)
         wrapAsFeature: true                # inject JSON-FG envelope (for «Type» classes)
@@ -110,9 +110,9 @@ The `dispatch:` block and the `profiles[].featureTypes:` block use the same entr
 
 When deciding what featureType values to accept:
 
-1. **`bb-grouping.yaml` `dispatch:` block** (preferred — rich entries)
-2. **`DISPATCHER_OVERRIDES_PER_BB`** (Python constant in the generator — simple name list, used for narrow overrides like `gsmSpecimen: ["SF_Specimen", "ReferenceSpecimen"]`)
-3. **`dispatchable_fts(loader, pkgs)`** — auto-discovery from XMI («FeatureType»-stereotyped, non-abstract, not an FC-container)
+1. **`bb-grouping.yaml` `dispatch:` block** (preferred - rich entries)
+2. **`DISPATCHER_OVERRIDES_PER_BB`** (Python constant in the generator - simple name list, used for narrow overrides like `gsmSpecimen: ["SF_Specimen", "ReferenceSpecimen"]`)
+3. **`dispatchable_fts(loader, pkgs)`** - auto-discovery from XMI («FeatureType»-stereotyped, non-abstract, not an FC-container)
 
 ## Encoding rules
 
@@ -124,12 +124,12 @@ When deciding what featureType values to accept:
 | FeatureType envelope | `allOf [<parent ref>, <properties.properties.<own>>, <required featureType+id on root>]` |
 | Merged Feature/FC schema per BB | root `if/then/else` on `type`: FeatureCollection branch wraps json-fg/featurecollection with items dispatched via `_FeatureDispatch`; else-branch routes single Feature via same helper |
 | Optional values | `oneOf [{type:null}, <inner>]` (allows explicit null) |
-| By-reference encoding | local `$defs.SCLinkObject` (the [OGC API Link Object](https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json) shape per RFC 8288, ShapeChange-conventional name). Type-with-identity targets get `oneOf [SCLinkObject, $ref Class]`. UML `byReference` tag is overridden: emit oneOf (inline + ref) regardless — matches OGC code-sprint convention. |
+| By-reference encoding | local `$defs.SCLinkObject` (the [OGC API Link Object](https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json) shape per RFC 8288, ShapeChange-conventional name). Type-with-identity targets get `oneOf [SCLinkObject, $ref Class]`. UML `byReference` tag is overridden: emit oneOf (inline + ref) regardless - matches OGC code-sprint convention. |
 | Cross-BB refs | `../<bb>/<bb>Schema.json#<ClassName>` |
 | External ISO types | resolved via `EXTERNAL_TYPE_RESOLUTION` table in the generator. See "External types" below. |
 | SWE 2.0 substitution | SWE 3.0 URLs from `swe-mappings.yaml` |
 | SWE::Category | `$ref` to SWE 3.0 `Category.json` |
-| `entityType` discriminator | NOT used — `featureType` alone is the discriminator |
+| `entityType` discriminator | NOT used - `featureType` alone is the discriminator |
 | OCL constraints | embedded in `description`, prefixed `Constraint:` |
 
 ## External type resolution (`EXTERNAL_TYPE_RESOLUTION`)
@@ -153,7 +153,7 @@ The compact tuple is documented as a convenience alias; the OWL-Time object form
 | `iso19103:ScopedName` | `anyOf [SCLinkObject, CDIF definedTerm, CDIF skosConcept]` |
 | `iso19103:NamedValue` | `anyOf [SCLinkObject, CDIF variableMeasured]` |
 
-**Everything else** (CI_Citation, OM_Observation, GFI_Feature, SF_SamplingFeature, etc.): plain `$ref SCLinkObject` — by-reference only.
+**Everything else** (CI_Citation, OM_Observation, GFI_Feature, SF_SamplingFeature, etc.): plain `$ref SCLinkObject` - by-reference only.
 
 ## Hand-curated classes (`EXTRA_DEFS_PER_BB`)
 
@@ -171,9 +171,9 @@ Mechanism: the constants `SF_SPECIMEN_DEF`, `GEOCHRONOLOGIC_ERA_DEF`, etc., live
 
 `tools/ea_uml_to_ogc_schema.py` is a single-file Python script. Three phases:
 
-1. **`EaXmiLoader`** — regex-based reader for EA's UML 1.3 / XMI 1.1 (cp1252). Builds `UmlClass` objects, pre-passes harvest OCL constraints and `<UML:Association>` navigable ends.
-2. **`Resolver`** — classifies each attribute's type into primitive / geometry / SWE / Category / local / cross_bb / external_iso / unknown. Cross-BB refs use `../<bb>/<bb>Schema.json#X`.
-3. **`Emitter`** — applies OGC code-sprint conventions per stereotype:
+1. **`EaXmiLoader`** - regex-based reader for EA's UML 1.3 / XMI 1.1 (cp1252). Builds `UmlClass` objects, pre-passes harvest OCL constraints and `<UML:Association>` navigable ends.
+2. **`Resolver`** - classifies each attribute's type into primitive / geometry / SWE / Category / local / cross_bb / external_iso / unknown. Cross-BB refs use `../<bb>/<bb>Schema.json#X`.
+3. **`Emitter`** - applies OGC code-sprint conventions per stereotype:
    - `«FeatureType»` → `allOf [<parent ref>, <properties.properties.<own>>, <required featureType+id on root FT>]`
    - `«Type»` / `«DataType»` / unstereotyped → plain object with optional `allOf [<parent ref>, ...]`
    - `«CodeList»` → `{type: string, format: uri}` (or `{type: string, enum: [...]}` if UML has inline enum members)
@@ -209,10 +209,10 @@ properties:             # [A] JSON Schema keyword: "names allowed in the outer F
 
 Two workflows:
 
-- **`process-bblocks.yml`** — runs the OGC bblocks-postprocess action on push to `main`. Validates schemas + examples, builds `register.json`, commits build artifacts back. `fail_on_error: false` is set as a first-deploy bootstrap (cross-BB `$ref`s target gh-pages URLs that don't exist until the initial deploy publishes them — flip back to `true` once stable).
-- **`deploy-viewer.yml`** — cascades on process-bblocks success. Runs `augment_register.py` (adds `resolvedSchema` URLs to register entries; reads identifier-prefix from `bblocks-config.yaml` so it works in any repo with the OGC layout) and `generate_custom_report.py` (SHACL severity-coloured validation report). Deploys [smrgeoinfo/bblocks-viewer](https://github.com/smrgeoinfo/bblocks-viewer) — a fork of the OGC viewer with `resolvedSchema` links and orange/yellow SHACL severity flags.
+- **`process-bblocks.yml`** - runs the OGC bblocks-postprocess action on push to `main`. Validates schemas + examples, builds `register.json`, commits build artifacts back. `fail_on_error: false` is set as a first-deploy bootstrap (cross-BB `$ref`s target gh-pages URLs that don't exist until the initial deploy publishes them - flip back to `true` once stable).
+- **`deploy-viewer.yml`** - cascades on process-bblocks success. Runs `augment_register.py` (adds `resolvedSchema` URLs to register entries; reads identifier-prefix from `bblocks-config.yaml` so it works in any repo with the OGC layout) and `generate_custom_report.py` (SHACL severity-coloured validation report). Deploys [smrgeoinfo/bblocks-viewer](https://github.com/smrgeoinfo/bblocks-viewer) - a fork of the OGC viewer with `resolvedSchema` links and orange/yellow SHACL severity flags.
 
-CDIF-specific workflows (`update-validation-schemas.yml`, `generate-jsonforms.yml`) have been removed — they pushed to a separate CDIF validation repo and walked CDIF's `_sources/profiles/` layout, neither of which applies here.
+CDIF-specific workflows (`update-validation-schemas.yml`, `generate-jsonforms.yml`) have been removed - they pushed to a separate CDIF validation repo and walked CDIF's `_sources/profiles/` layout, neither of which applies here.
 
 ## Adding things
 
@@ -269,13 +269,13 @@ Current status: **61 / 61 examples validate clean**.
 
 - **Trust the XMI + `bb-grouping.yaml`.** When in doubt about a class, attribute, or BB grouping, those are authoritative.
 - **Don't edit `_sources/*` by hand.** Every commit there will be wiped on the next regen.
-- **Surface tradeoffs before coding** (per repo's [CLAUDE.md](CLAUDE.md) — "Think Before Coding").
+- **Surface tradeoffs before coding** (per repo's [CLAUDE.md](CLAUDE.md) - "Think Before Coding").
 - **Match the existing generator style.** Single file, regex-based, single-pass per concern. Resist the urge to introduce a class hierarchy or a "framework."
 - **Iterate on one BB first** before regenerating everything. `python tools/ea_uml_to_ogc_schema.py --bb gsmBasicGeology` is fast.
 
 ## Related skills and resources
 
-- **`/ogc-uml2json`** — user-global Claude skill: decision workflow for OGC 24-017r1, with bundled mapping tables.
+- **`/ogc-uml2json`** - user-global Claude skill: decision workflow for OGC 24-017r1, with bundled mapping tables.
 - **OGC 24-017r1 PDF**: `C:\Users\smrTu\OneDrive\Documents\Workspace\DataModel\OGC\UML2JSON-24-017r1.pdf`
 - **OWL-Time spec**: https://www.w3.org/TR/owl-time/
 - **Cox & Richard 2015**: "A formal model for the geologic timescale and GSSP" (geologic time concepts on top of OWL-Time)

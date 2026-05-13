@@ -95,7 +95,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `anthropogenicGeomorphologicFeatureType` | (oneOf — see schema) | 0..1 | The anthropogenicGeomorphologicFeatureType: AnthropogenicGeomorphologicFeatureTypeTerm is a reference from a controll… |
+| `anthropogenicGeomorphologicFeatureType` | (oneOf - see schema) | 0..1 | The anthropogenicGeomorphologicFeatureType: AnthropogenicGeomorphologicFeatureTypeTerm is a reference from a controll… |
 
 ### `CompositionPart`
 
@@ -105,9 +105,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `role` | (oneOf — see schema) | 0..1 | The property role:CompositionPartRoleTerm defines the relationship of the CompoundMaterial constituent in the geologi… |
-| `proportion` | (oneOf — see schema) | 0..1 | The proportion property (SWE::QuantityRange) specifies the fraction of the geologic unit composed of the compound mat… |
-| `material` | (oneOf — see schema) | 0..1 | The material:EarthMaterial property contains the material description of the composing part. |
+| `role` | (oneOf - see schema) | 0..1 | The property role:CompositionPartRoleTerm defines the relationship of the CompoundMaterial constituent in the geologi… |
+| `proportion` | (oneOf - see schema) | 0..1 | The proportion property (SWE::QuantityRange) specifies the fraction of the geologic unit composed of the compound mat… |
+| `material` | (oneOf - see schema) | 0..1 | The material:EarthMaterial property contains the material description of the composing part. |
 
 ### `CompoundMaterial`
 
@@ -125,8 +125,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `contactType` | (oneOf — see schema) | 0..1 | The property contactType:ContactTypeTerm classifies the contact (e.g. intrusive, unconformity, bedding surface, litho… |
-| `stContactDescription` | (oneOf — see schema) | 0..1 | The property stContactDescription:ContactAbstractDescription provides a detailed contact description. This is a stub … |
+| `contactType` | (oneOf - see schema) | 0..1 | The property contactType:ContactTypeTerm classifies the contact (e.g. intrusive, unconformity, bedding surface, litho… |
+| `stContactDescription` | (oneOf - see schema) | 0..1 | The property stContactDescription:ContactAbstractDescription provides a detailed contact description. This is a stub … |
 
 ### `ContactAbstractDescription`
 
@@ -140,9 +140,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `color` | (oneOf — see schema) | 0..1 | The color property (SWE::Category) is a term from a controlled vocabulary that specifies the colour of the earth mate… |
-| `purpose` | (oneOf — see schema) | 0..1 | The purpose:DescriptionPurpose property provides a specification of the intended purpose or level of abstraction for … |
-| `gbEarthMaterialDescription` | (oneOf — see schema) | 0..1 | The property gbEarthMaterialDescription:EarthMaterialAbstractDescription provides a detailed earth material descripti… |
+| `color` | (oneOf - see schema) | 0..1 | The color property (SWE::Category) is a term from a controlled vocabulary that specifies the colour of the earth mate… |
+| `purpose` | (oneOf - see schema) | 0..1 | The purpose:DescriptionPurpose property provides a specification of the intended purpose or level of abstraction for … |
+| `gbEarthMaterialDescription` | (oneOf - see schema) | 0..1 | The property gbEarthMaterialDescription:EarthMaterialAbstractDescription provides a detailed earth material descripti… |
 
 ### `EarthMaterialAbstractDescription`
 
@@ -158,8 +158,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `profileType` | (oneOf — see schema) | 0..1 | The property profileType:FoldProfileTypeTerm contains a term from a controlled vocabulary specifying the concave/conv… |
-| `stFoldDescription` | (oneOf — see schema) | 0..1 | The property stFoldDescription:FoldAbstractDescription provides a detailed fold description. This is a stub property … |
+| `profileType` | (oneOf - see schema) | 0..1 | The property profileType:FoldProfileTypeTerm contains a term from a controlled vocabulary specifying the concave/conv… |
+| `stFoldDescription` | (oneOf - see schema) | 0..1 | The property stFoldDescription:FoldAbstractDescription provides a detailed fold description. This is a stub property … |
 
 ### `FoldAbstractDescription`
 
@@ -175,8 +175,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `foliationType` | (oneOf — see schema) | 0..1 | The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples i… |
-| `stFoliationDescription` | (oneOf — see schema) | 0..1 | The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples i… |
+| `foliationType` | (oneOf - see schema) | 0..1 | The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples i… |
+| `stFoliationDescription` | (oneOf - see schema) | 0..1 | The foliationType:FoliationTypeTerm property specifies the type of foliation from a controlled vocabulary. Examples i… |
 
 ### `FoliationAbstractDescription`
 
@@ -190,7 +190,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `collectionType` | (oneOf — see schema) | 0..1 | The collectionType:CollectionTypeTerm property contains a term from a controlled vocabulary describing the type of co… |
+| `collectionType` | (oneOf - see schema) | 0..1 | The collectionType:CollectionTypeTerm property contains a term from a controlled vocabulary describing the type of co… |
 | `member` | `GSMLitem` | 1..* | The member property is an association that links a GSML instance to features and objects to be included as members of… |
 
 ### `GSML_GeometricDescriptionValue`
@@ -201,8 +201,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `determinationMethod` | (oneOf — see schema) | 0..1 | The determinationMethod:DeterminationMethodTerm property describes the way the orientation value was determined (e.g.… |
-| `descriptiveOrientation` | (oneOf — see schema) | 0..1 | The descriptionOrientation:Primitive::CharacterString contains a textual specification of orientation, possibly refer… |
+| `determinationMethod` | (oneOf - see schema) | 0..1 | The determinationMethod:DeterminationMethodTerm property describes the way the orientation value was determined (e.g.… |
+| `descriptiveOrientation` | (oneOf - see schema) | 0..1 | The descriptionOrientation:Primitive::CharacterString contains a textual specification of orientation, possibly refer… |
 
 ### `GSML_LinearOrientation`
 
@@ -214,9 +214,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `directed` | (oneOf — see schema) | 0..1 | The directed:LinearDirectedCode property indicates if the orientation represents a linear feature that is directed, e… |
-| `plunge` | (oneOf — see schema) | 0..1 | The property plunge (SWE::QuantityRange) reports the magnitude of the plunge as an angle from horizontal. |
-| `trend` | (oneOf — see schema) | 0..1 | The property trend (SWE::QuantityRange) reports the azimuth (compass bearing) value of the linear orientation. |
+| `directed` | (oneOf - see schema) | 0..1 | The directed:LinearDirectedCode property indicates if the orientation represents a linear feature that is directed, e… |
+| `plunge` | (oneOf - see schema) | 0..1 | The property plunge (SWE::QuantityRange) reports the magnitude of the plunge as an angle from horizontal. |
+| `trend` | (oneOf - see schema) | 0..1 | The property trend (SWE::QuantityRange) reports the azimuth (compass bearing) value of the linear orientation. |
 
 ### `GSML_PlanarOrientation`
 
@@ -228,14 +228,14 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `convention` | (oneOf — see schema) | 0..1 | The property convention:ConventionCode contains the convention used for the measurement from a controlled vocabulary. |
-| `azimuth` | (oneOf — see schema) | 0..1 | The azimuth (SWE::QuantityRange) property (compass point, bearing etc.) contains the value of the orientation. The co… |
-| `dip` | (oneOf — see schema) | 0..1 | The dip (SWE::QuantityRange) reports the angle that the structural surface (e.g. bedding, fault plane) makes with the… |
-| `polarity` | (oneOf — see schema) | 0..1 | The polarity:PolarityCode indicates whether the planar orientation is associated with a directed feature that is over… |
+| `convention` | (oneOf - see schema) | 0..1 | The property convention:ConventionCode contains the convention used for the measurement from a controlled vocabulary. |
+| `azimuth` | (oneOf - see schema) | 0..1 | The azimuth (SWE::QuantityRange) property (compass point, bearing etc.) contains the value of the orientation. The co… |
+| `dip` | (oneOf - see schema) | 0..1 | The dip (SWE::QuantityRange) reports the angle that the structural surface (e.g. bedding, fault plane) makes with the… |
+| `polarity` | (oneOf - see schema) | 0..1 | The polarity:PolarityCode indicates whether the planar orientation is associated with a directed feature that is over… |
 
 ### `GSML_QuantityRange`
 
-GSML_QuantityRange is a specialization of SWE Common QuantiytyRange (OGC 08-094r1, Clause 7.2.13) where lower and upper values are made explicit. SWE::QuantityRange uses an array of values (RealPair, see Clause 7.2.1) where the lowest value is the first element and the highest the second. This convenience data type has been created as an alternative encoding for implementations that do no support encoding of arrays in a single field (e.g. DBF) or reference to elements in string encoded arrays1 (eg. Filter Encoding Specification 2.0 – OGC 09-029r2). &nbsp;------------------------- 1 SWE RealPair is encoded as space delimited lists (&lt;swe:value&gt;10 300&lt;/swe:value&gt; in XML) , which demands that clients parse the string to extract each token. To build a WFS/FES query that tests the first element, it requires parsing the string either using string-before(swe:value,' ') or tokenize(swe:value,' '). This is cumbersome at best, or not even supported by the server at worst. 09-026r2 Clause 7.4.4 describes the minimal XPath supports and string parsing is not present.
+GSML_QuantityRange is a specialization of SWE Common QuantiytyRange (OGC 08-094r1, Clause 7.2.13) where lower and upper values are made explicit. SWE::QuantityRange uses an array of values (RealPair, see Clause 7.2.1) where the lowest value is the first element and the highest the second. This convenience data type has been created as an alternative encoding for implementations that do no support encoding of arrays in a single field (e.g. DBF) or reference to elements in string encoded arrays1 (eg. Filter Encoding Specification 2.0 - OGC 09-029r2). &nbsp;------------------------- 1 SWE RealPair is encoded as space delimited lists (&lt;swe:value&gt;10 300&lt;/swe:value&gt; in XML) , which demands that clients parse the string to extract each token. To build a WFS/FES query that tests the first element, it requires parsing the string either using string-before(swe:value,' ') or tokenize(swe:value,' '). This is cumbersome at best, or not even supported by the server at worst. 09-026r2 Clause 7.4.4 describes the minimal XPath supports and string parsing is not present.
 
 Properties (own; inherited properties listed in supertype's BB):
 
@@ -254,7 +254,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `magnitude` | (oneOf — see schema) | 0..1 | The magnitude property (SWE::QuantityRange) reports the magnitude of the vector. |
+| `magnitude` | (oneOf - see schema) | 0..1 | The magnitude property (SWE::QuantityRange) reports the magnitude of the vector. |
 
 ### `GeologicEvent`
 
@@ -266,12 +266,12 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `eventProcess` | (oneOf — see schema) | 0..1 | The eventProcess:EventProcessTerm property provides a term from a controlled vocabulary specifying the process or pro… |
-| `numericAge` | (oneOf — see schema) | 0..1 | The numericAge:NumericAgeRange property provides an age in absolute year before present (BP). Present is defined by c… |
-| `olderNamedAge` | (oneOf — see schema) | 0..1 | The property olderNamedAge:GeochronologicalEraTerm defines the older boundary of age of an event expressed using a ge… |
-| `youngerNamedAge` | (oneOf — see schema) | 0..1 | The property youngerNamedAge:GeochronologicalEraTerm defines the younger boundary of age of event expressed using a g… |
-| `eventEnvironment` | (oneOf — see schema) | 0..1 | The eventEnvironment property (SWE::Category) is a category from a controlled vocabulary identifying the physical set… |
-| `gaEventDescription` | (oneOf — see schema) | 0..1 | The property geEventDescription:GeologicEventAbstractDescription contains a detailed event description. This is a stu… |
+| `eventProcess` | (oneOf - see schema) | 0..1 | The eventProcess:EventProcessTerm property provides a term from a controlled vocabulary specifying the process or pro… |
+| `numericAge` | (oneOf - see schema) | 0..1 | The numericAge:NumericAgeRange property provides an age in absolute year before present (BP). Present is defined by c… |
+| `olderNamedAge` | (oneOf - see schema) | 0..1 | The property olderNamedAge:GeochronologicalEraTerm defines the older boundary of age of an event expressed using a ge… |
+| `youngerNamedAge` | (oneOf - see schema) | 0..1 | The property youngerNamedAge:GeochronologicalEraTerm defines the younger boundary of age of event expressed using a g… |
+| `eventEnvironment` | (oneOf - see schema) | 0..1 | The eventEnvironment property (SWE::Category) is a category from a controlled vocabulary identifying the physical set… |
+| `gaEventDescription` | (oneOf - see schema) | 0..1 | The property geEventDescription:GeologicEventAbstractDescription contains a detailed event description. This is a stu… |
 
 ### `GeologicEventAbstractDescription`
 
@@ -285,12 +285,12 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `observationMethod` | (oneOf — see schema) | 0..1 | The GeologicFeature observationMethod (SWE::Category) specifies the approach to acquiring the collection of attribute… |
-| `purpose` | (oneOf — see schema) | 0..1 | The property purpose:DescriptionPurpose specifies the intended purpose/level of abstraction for a given feature or ob… |
-| `classifier` | (oneOf — see schema) | 0..1 | The classifier (SWE::Category) contains a standard description or definition of the feature type (e.g., the definitio… |
-| `relatedFeature` | (oneOf — see schema) | 0..1 | A relatedFeature is a general structure used to define relationships between any features or objects within GeoSciML.… |
-| `geologicHistory` | (oneOf — see schema) | 0..1 | The geologicHistory is an association that relates one or more GeologicEvents to a GeologicFeature to describe their … |
-| `occurrence` | (oneOf — see schema) | 0..1 | The occurrence property is an association that links a notional geologic feature with any number of mapped features (… |
+| `observationMethod` | (oneOf - see schema) | 0..1 | The GeologicFeature observationMethod (SWE::Category) specifies the approach to acquiring the collection of attribute… |
+| `purpose` | (oneOf - see schema) | 0..1 | The property purpose:DescriptionPurpose specifies the intended purpose/level of abstraction for a given feature or ob… |
+| `classifier` | (oneOf - see schema) | 0..1 | The classifier (SWE::Category) contains a standard description or definition of the feature type (e.g., the definitio… |
+| `relatedFeature` | (oneOf - see schema) | 0..1 | A relatedFeature is a general structure used to define relationships between any features or objects within GeoSciML.… |
+| `geologicHistory` | (oneOf - see schema) | 0..1 | The geologicHistory is an association that relates one or more GeologicEvents to a GeologicFeature to describe their … |
+| `occurrence` | (oneOf - see schema) | 0..1 | The occurrence property is an association that links a notional geologic feature with any number of mapped features (… |
 
 ### `GeologicStructure`
 
@@ -308,12 +308,12 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `geologicUnitType` | (oneOf — see schema) | 0..1 | The property geologicUnitType:GeologicUnitTypeTerm provides a term from a controlled vocabulary defining the type of … |
-| `rank` | (oneOf — see schema) | 0..1 | The property rank:RankTerm contains a term that classifies the geologic unit in a generalization hierarchy from most … |
-| `gbMaterialDescription` | (oneOf — see schema) | 0..1 | The property gbMaterialDescription:EarthMaterialAbstractDescription is a placeholder that provides detailed material … |
-| `hierarchyLink` | (oneOf — see schema) | 0..1 | The property hierarchyLink is an association that links a GeologicUnit with a GeologicUnitHierarchy to represent cont… |
-| `gbUnitDescription` | (oneOf — see schema) | 0..1 | The property gbUnitDescription:GeologicUnitAbstractDescriptio is a placeholder that provides detailed material descri… |
-| `composition` | (oneOf — see schema) | 0..1 | The property composition is an association that links a GeologicUnit with CompositionParts to describe the material c… |
+| `geologicUnitType` | (oneOf - see schema) | 0..1 | The property geologicUnitType:GeologicUnitTypeTerm provides a term from a controlled vocabulary defining the type of … |
+| `rank` | (oneOf - see schema) | 0..1 | The property rank:RankTerm contains a term that classifies the geologic unit in a generalization hierarchy from most … |
+| `gbMaterialDescription` | (oneOf - see schema) | 0..1 | The property gbMaterialDescription:EarthMaterialAbstractDescription is a placeholder that provides detailed material … |
+| `hierarchyLink` | (oneOf - see schema) | 0..1 | The property hierarchyLink is an association that links a GeologicUnit with a GeologicUnitHierarchy to represent cont… |
+| `gbUnitDescription` | (oneOf - see schema) | 0..1 | The property gbUnitDescription:GeologicUnitAbstractDescriptio is a placeholder that provides detailed material descri… |
+| `composition` | (oneOf - see schema) | 0..1 | The property composition is an association that links a GeologicUnit with CompositionParts to describe the material c… |
 
 ### `GeologicUnitAbstractDescription`
 
@@ -327,9 +327,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `role` | (oneOf — see schema) | 0..1 | The role:GeologicUnitHierarchyRoleTerm property provides a term describing the nature of the parts, e.g. facies, stra… |
-| `proportion` | (oneOf — see schema) | 0..1 | The proportion property (SWE::QuantityRange) provides a quantity that represents the fraction of the geologic unit fo… |
-| `targetUnit` | (oneOf — see schema) | 1..1 | The property targetUnit is an association that specifies exactly one GeologicUnit that is a proper part of another Ge… |
+| `role` | (oneOf - see schema) | 0..1 | The role:GeologicUnitHierarchyRoleTerm property provides a term describing the nature of the parts, e.g. facies, stra… |
+| `proportion` | (oneOf - see schema) | 0..1 | The proportion property (SWE::QuantityRange) provides a quantity that represents the fraction of the geologic unit fo… |
+| `targetUnit` | (oneOf - see schema) | 1..1 | The property targetUnit is an association that specifies exactly one GeologicUnit that is a proper part of another Ge… |
 
 ### `GeomorphologicFeature`
 
@@ -341,8 +341,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `unitDescription` | (oneOf — see schema) | 0..1 | The unitDescription property is an association that links the geomorphologic feature to a geologic description (e.g.,… |
-| `gmFeatureDescription` | (oneOf — see schema) | 0..1 | The property gmFeatureDescription:GeomorphologicUnitAbstractDescription provides a detailed morphologic description. … |
+| `unitDescription` | (oneOf - see schema) | 0..1 | The unitDescription property is an association that links the geomorphologic feature to a geologic description (e.g.,… |
+| `gmFeatureDescription` | (oneOf - see schema) | 0..1 | The property gmFeatureDescription:GeomorphologicUnitAbstractDescription provides a detailed morphologic description. … |
 
 ### `GeomorphologicUnitAbstractDescription`
 
@@ -356,13 +356,13 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `observationMethod` | (oneOf — see schema) | 0..1 | The observationMethod property (SWE::Category) contains an element in a list of categories (a controlled vocabulary) … |
-| `positionalAccuracy` | (oneOf — see schema) | 0..1 | The positionalAccuracy property (SWE::Quantity) provides a quantitative value defining the radius of an uncertainty b… |
-| `resolutionRepresentativeFraction` | (oneOf — see schema) | 0..1 | The property resolutionRepresentativeFraction:Integer is an integer value representing the denominator of the represe… |
-| `mappingFrame` | (oneOf — see schema) | 0..1 | The mappingFrame:MappingFrameTerm provides a term from a vocabulary indicating the geometric frame on which the Mappe… |
-| `exposure` | (oneOf — see schema) | 0..1 | The exposure:ExposureTerm property provides a term for the nature of the expression of the mapped feature at the eart… |
-| `shape` | (oneOf — see schema) | 0..1 | The shape:GM_Object property contains the geometry delimiting the mapped feature. Note that while in most cases, the … |
-| `specification` | (oneOf — see schema) | 0..1 | The specification association links an instance of MappedFeature to the GFI_Feature being mapped. In a geological map… |
+| `observationMethod` | (oneOf - see schema) | 0..1 | The observationMethod property (SWE::Category) contains an element in a list of categories (a controlled vocabulary) … |
+| `positionalAccuracy` | (oneOf - see schema) | 0..1 | The positionalAccuracy property (SWE::Quantity) provides a quantitative value defining the radius of an uncertainty b… |
+| `resolutionRepresentativeFraction` | (oneOf - see schema) | 0..1 | The property resolutionRepresentativeFraction:Integer is an integer value representing the denominator of the represe… |
+| `mappingFrame` | (oneOf - see schema) | 0..1 | The mappingFrame:MappingFrameTerm provides a term from a vocabulary indicating the geometric frame on which the Mappe… |
+| `exposure` | (oneOf - see schema) | 0..1 | The exposure:ExposureTerm property provides a term for the nature of the expression of the mapped feature at the eart… |
+| `shape` | (oneOf - see schema) | 0..1 | The shape:GM_Object property contains the geometry delimiting the mapped feature. Note that while in most cases, the … |
+| `specification` | (oneOf - see schema) | 0..1 | The specification association links an instance of MappedFeature to the GFI_Feature being mapped. In a geological map… |
 
 ### `NaturalGeomorphologicFeature`
 
@@ -374,8 +374,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `naturalGeomorphologicFeatureType` | (oneOf — see schema) | 0..1 | The property naturalGeomorphologicFeatureType: NaturalGeomorphologicFeatureTypeTerm is a reference from a controlled … |
-| `activity` | (oneOf — see schema) | 0..1 | The activity property (SWE::Category) contains a category term from a controlled vocabulary describing the current ac… |
+| `naturalGeomorphologicFeatureType` | (oneOf - see schema) | 0..1 | The property naturalGeomorphologicFeatureType: NaturalGeomorphologicFeatureTypeTerm is a reference from a controlled … |
+| `activity` | (oneOf - see schema) | 0..1 | The activity property (SWE::Category) contains a category term from a controlled vocabulary describing the current ac… |
 
 ### `NumericAgeRange`
 
@@ -385,9 +385,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `reportingDate` | (oneOf — see schema) | 0..1 | The reportingDate (SWE::Quantity) property reports a single time coordinate value to report as representative for thi… |
-| `olderBoundDate` | (oneOf — see schema) | 0..1 | The olderBoundDate (SWE::Quantity) property reports the older bounding time coordinate in an age range. |
-| `youngerBoundDate` | (oneOf — see schema) | 0..1 | The youngerBoundDate (SWE::Quantity) property reports the younger bounding time coordinate in an age range. |
+| `reportingDate` | (oneOf - see schema) | 0..1 | The reportingDate (SWE::Quantity) property reports a single time coordinate value to report as representative for thi… |
+| `olderBoundDate` | (oneOf - see schema) | 0..1 | The olderBoundDate (SWE::Quantity) property reports the older bounding time coordinate in an age range. |
+| `youngerBoundDate` | (oneOf - see schema) | 0..1 | The youngerBoundDate (SWE::Quantity) property reports the younger bounding time coordinate in an age range. |
 
 ### `RockMaterial`
 
@@ -399,7 +399,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `lithology` | (oneOf — see schema) | 0..1 | The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary. |
+| `lithology` | (oneOf - see schema) | 0..1 | The lithology:LithologyTerm property provides a term identifying the lithology class from a controlled vocabulary. |
 
 ### `ShearDisplacementStructure`
 
@@ -411,8 +411,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `faultType` | (oneOf — see schema) | 0..1 | The faultType:FaultTypeTerm property contains a term from a controlled vocabulary describing the type of shear displa… |
-| `stStructureDescription` | (oneOf — see schema) | 0..1 | The property stStructureDescription:ShearDisplacementStructureAbstractDescription provides a detailed geologic struct… |
+| `faultType` | (oneOf - see schema) | 0..1 | The faultType:FaultTypeTerm property contains a term from a controlled vocabulary describing the type of shear displa… |
+| `stStructureDescription` | (oneOf - see schema) | 0..1 | The property stStructureDescription:ShearDisplacementStructureAbstractDescription provides a detailed geologic struct… |
 
 ### `ShearDisplacementStructureAbstractDescription`
 
@@ -424,28 +424,28 @@ An abstract class providing a link between classes in GeoSciMLBasic and GeoSciML
 
 | Class | `codeList` vocab |
 | --- | --- |
-| `AnthropogenicGeomorphologicFeatureTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `CollectionTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `CompositionPartRoleTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `ContactTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `ConventionCode` | `_(treat as open — no `codeList` annotation)_` |
-| `DescriptionPurpose` | `_(treat as open — no `codeList` annotation)_` |
-| `DeterminationMethodTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `EventProcessTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `ExposureTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `FaultTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `FoldProfileTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `FoliationTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `GeochronologicEraTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `GeologicUnitHierarchyRoleTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `GeologicUnitPartRoleTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `GeologicUnitTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `LinearDirectedCode` | `_(treat as open — no `codeList` annotation)_` |
-| `LithologyTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `MappingFrameTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `NaturalGeomorphologicFeatureTypeTerm` | `_(treat as open — no `codeList` annotation)_` |
-| `PlanarPolarityCode` | `_(treat as open — no `codeList` annotation)_` |
-| `RankTerm` | `_(treat as open — no `codeList` annotation)_` |
+| `AnthropogenicGeomorphologicFeatureTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `CollectionTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `CompositionPartRoleTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `ContactTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `ConventionCode` | `_(treat as open - no `codeList` annotation)_` |
+| `DescriptionPurpose` | `_(treat as open - no `codeList` annotation)_` |
+| `DeterminationMethodTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `EventProcessTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `ExposureTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `FaultTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `FoldProfileTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `FoliationTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `GeochronologicEraTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `GeologicUnitHierarchyRoleTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `GeologicUnitPartRoleTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `GeologicUnitTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `LinearDirectedCode` | `_(treat as open - no `codeList` annotation)_` |
+| `LithologyTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `MappingFrameTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `NaturalGeomorphologicFeatureTypeTerm` | `_(treat as open - no `codeList` annotation)_` |
+| `PlanarPolarityCode` | `_(treat as open - no `codeList` annotation)_` |
+| `RankTerm` | `_(treat as open - no `codeList` annotation)_` |
 
 ## Unions
 
@@ -459,7 +459,7 @@ Branches (`oneOf`):
 - `Geometry`
 - (branch 3)
 - (branch 4)
-- `/$defs/SCLinkObject` — External ISO 19156 SF_SamplingFeature — by-reference link
+- `/$defs/SCLinkObject` - External ISO 19156 SF_SamplingFeature - by-reference link
 
 ## External dependencies
 
@@ -585,11 +585,11 @@ Example instance: examplegsmscimlBasicMinimal
 
 
 ### fc contacts complex GSO
-Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contacts in the worked scenario. Geologic context: the Js Formation (Jurassic sediments) unconformably overlies tilted Paleozoic strata (Os, Ss Formations) that overlie Early Proterozoic Xm metamorphic basement. A Cretaceous granite (Kg) and a Cretaceous diorite dike (Kd) intrude Js and the older units. After igneous activity, erosion exhumed the section, and Late Miocene Ms sediment was deposited on top, sealing the unconformity. The 7 contact features below capture each rock-body interface with its inferred contact type. Homogeneous FeatureCollection (collection-level featureType="Contact"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).
+Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl - all 7 contacts in the worked scenario. Geologic context: the Js Formation (Jurassic sediments) unconformably overlies tilted Paleozoic strata (Os, Ss Formations) that overlie Early Proterozoic Xm metamorphic basement. A Cretaceous granite (Kg) and a Cretaceous diorite dike (Kd) intrude Js and the older units. After igneous activity, erosion exhumed the section, and Late Miocene Ms sediment was deposited on top, sealing the unconformity. The 7 contact features below capture each rock-body interface with its inferred contact type. Homogeneous FeatureCollection (collection-level featureType="Contact"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).
 #### json
 ```json
 {
-  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contacts in the worked scenario. Geologic context: the Js Formation (Jurassic sediments) unconformably overlies tilted Paleozoic strata (Os, Ss Formations) that overlie Early Proterozoic Xm metamorphic basement. A Cretaceous granite (Kg) and a Cretaceous diorite dike (Kd) intrude Js and the older units. After igneous activity, erosion exhumed the section, and Late Miocene Ms sediment was deposited on top, sealing the unconformity. The 7 contact features below capture each rock-body interface with its inferred contact type. Homogeneous FeatureCollection (collection-level featureType=\"Contact\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl - all 7 contacts in the worked scenario. Geologic context: the Js Formation (Jurassic sediments) unconformably overlies tilted Paleozoic strata (Os, Ss Formations) that overlie Early Proterozoic Xm metamorphic basement. A Cretaceous granite (Kg) and a Cretaceous diorite dike (Kd) intrude Js and the older units. After igneous activity, erosion exhumed the section, and Late Miocene Ms sediment was deposited on top, sealing the unconformity. The 7 contact features below capture each rock-body interface with its inferred contact type. Homogeneous FeatureCollection (collection-level featureType=\"Contact\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
   "type": "FeatureCollection",
   "featureType": "Contact",
   "conformsTo": [
@@ -602,7 +602,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Js overlies Os — angular unconformity",
+        "name": "Js overlies Os - angular unconformity",
         "description": "Angular unconformable contact: Jurassic Js Formation deposited on the erosional surface of Ordovician Os Formation (sedimentary). The OsBoundary-6_2 surface in the source ontology is an Erosional Surface; tilted Paleozoic strata are truncated and the Jurassic sediments rest with angular discordance on the eroded substrate.",
         "purpose": "instance",
         "geologicHistory": [
@@ -634,8 +634,8 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/OsFormation", "title": "Os Formation (Ordovician) — older host", "rel": "olderHost" }
+          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - younger host", "rel": "youngerHost" },
+          { "href": "https://example.org/loop3d/OsFormation", "title": "Os Formation (Ordovician) - older host", "rel": "olderHost" }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/angular_unconformity",
         "stContactDescription": null
@@ -647,7 +647,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Js overlies Ss — angular unconformity",
+        "name": "Js overlies Ss - angular unconformity",
         "description": "Angular unconformable contact: Jurassic Js Formation deposited on the erosional surface of Silurian Ss Formation (sedimentary). The SsBoundary-6_1 surface in the source ontology is an Erosional Surface.",
         "purpose": "instance",
         "geologicHistory": [
@@ -665,8 +665,8 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/SsFormation", "title": "Ss Formation (Silurian) — older host", "rel": "olderHost" }
+          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - younger host", "rel": "youngerHost" },
+          { "href": "https://example.org/loop3d/SsFormation", "title": "Ss Formation (Silurian) - older host", "rel": "olderHost" }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/angular_unconformity",
         "stContactDescription": null
@@ -696,8 +696,8 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/XmRockBody", "title": "Xm Rock Body (Early Proterozoic gneiss) — older host", "rel": "olderHost" }
+          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - younger host", "rel": "youngerHost" },
+          { "href": "https://example.org/loop3d/XmRockBody", "title": "Xm Rock Body (Early Proterozoic gneiss) - older host", "rel": "olderHost" }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/nonconformity",
         "stContactDescription": null
@@ -709,7 +709,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Kd dike intrudes Js — igneous intrusive contact",
+        "name": "Kd dike intrudes Js - igneous intrusive contact",
         "description": "Igneous intrusive contact: a Cretaceous diorite dike (Kd) cuts the Jurassic Js Formation. In the source ontology this contact is hosted on multiple rock-body boundaries (KdBoundaryInJs-3_1_4, KdBoundaryInJs-3_2_4, etc.) defining the upper and lower walls of the dike where it intrudes Js. Diorite grain size ~0.05 mm (mean).",
         "purpose": "instance",
         "geologicHistory": [
@@ -729,8 +729,8 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/KdDike",      "title": "Kd Mafic Dike (Cretaceous) — younger host (intrusive)", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — older host (country rock)", "rel": "olderHost" }
+          { "href": "https://example.org/loop3d/KdDike",      "title": "Kd Mafic Dike (Cretaceous) - younger host (intrusive)", "rel": "youngerHost" },
+          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - older host (country rock)", "rel": "olderHost" }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/igneous_intrusive_contact",
         "stContactDescription": null
@@ -742,7 +742,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Kg granite intrudes Js — igneous intrusive contact",
+        "name": "Kg granite intrudes Js - igneous intrusive contact",
         "description": "Igneous intrusive contact: a Cretaceous granite (Kg) pluton intrudes the Jurassic Js Formation. Source ontology hosts this contact on KgIntrusiveBoundary-4_2 and KgBoundaryIntrudesJs-4_2. Granite grain size ~5 mm (mean).",
         "purpose": "instance",
         "geologicHistory": [
@@ -762,8 +762,8 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/KgGranite",   "title": "Kg Granite (Cretaceous) — younger host (intrusive)", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — older host (country rock)", "rel": "olderHost" }
+          { "href": "https://example.org/loop3d/KgGranite",   "title": "Kg Granite (Cretaceous) - younger host (intrusive)", "rel": "youngerHost" },
+          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - older host (country rock)", "rel": "olderHost" }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/igneous_intrusive_contact",
         "stContactDescription": null
@@ -775,7 +775,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Ms overlies Js — disconformity",
+        "name": "Ms overlies Js - disconformity",
         "description": "Disconformable depositional contact: Late Miocene Ms Formation deposited on the eroded top surface of Jurassic Js Formation (topJs-2_1, an erosional surface). The two units are roughly parallel (no major angular discordance) but separated by a large hiatus from the Cretaceous through most of the Tertiary.",
         "purpose": "instance",
         "geologicHistory": [
@@ -807,8 +807,8 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/MsFormation", "title": "Ms Formation (Late Miocene) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) — older host", "rel": "olderHost" }
+          { "href": "https://example.org/loop3d/MsFormation", "title": "Ms Formation (Late Miocene) - younger host", "rel": "youngerHost" },
+          { "href": "https://example.org/loop3d/JsFormation", "title": "Js Formation (Jurassic) - older host", "rel": "olderHost" }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity",
         "stContactDescription": null
@@ -820,8 +820,8 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
       "featureType": "Contact",
       "geometry": null,
       "properties": {
-        "name": "Ms overlies Kg — nonconformity",
-        "description": "Nonconformable contact: Late Miocene Ms Formation deposited on an erosion surface developed across the Cretaceous Kg granite (KgBoundaryErosionSurface-2_3). Sedimentary on plutonic igneous — classical nonconformity.",
+        "name": "Ms overlies Kg - nonconformity",
+        "description": "Nonconformable contact: Late Miocene Ms Formation deposited on an erosion surface developed across the Cretaceous Kg granite (KgBoundaryErosionSurface-2_3). Sedimentary on plutonic igneous - classical nonconformity.",
         "purpose": "instance",
         "geologicHistory": [
           {
@@ -852,8 +852,8 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleComplexContacts.ttl — all 7 contac
           }
         ],
         "relatedFeature": [
-          { "href": "https://example.org/loop3d/MsFormation", "title": "Ms Formation (Late Miocene) — younger host", "rel": "youngerHost" },
-          { "href": "https://example.org/loop3d/KgGranite",   "title": "Kg Granite (Cretaceous) — older host", "rel": "olderHost" }
+          { "href": "https://example.org/loop3d/MsFormation", "title": "Ms Formation (Late Miocene) - younger host", "rel": "youngerHost" },
+          { "href": "https://example.org/loop3d/KgGranite",   "title": "Kg Granite (Cretaceous) - older host", "rel": "olderHost" }
         ],
         "contactType": "http://resource.geosciml.org/classifier/cgi/contacttype/nonconformity",
         "stContactDescription": null
@@ -999,11 +999,11 @@ Example instance: fc_geologicunit_from_OGC
 
 
 ### fc geologicunits BritishColumbia
-Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the Lardeau Group of the Kootenay Terrane (southeastern British Columbia), with its three known constituent formations (Akolkolex, Index, Jowett). The Lardeau Group is a Lower Paleozoic metasedimentary–metavolcanic assemblage that has been deformed and metamorphosed to greenschist facies. The source TTL is structurally simpler than the Isle of Wight TTL — it records unit type, label, list of constituent lithologies, and parent–child relationships, but not thickness, depositional setting, age, or bibliographic sources. The FeatureCollection therefore omits those slots. Constituent proportions are not recorded in the TTL (no qualitative Dominant/Subordinate terms either), so `proportion` is left null on every CompositionPart. Homogeneous FeatureCollection (collection-level featureType="GeologicUnit"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).
+Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl - the Lardeau Group of the Kootenay Terrane (southeastern British Columbia), with its three known constituent formations (Akolkolex, Index, Jowett). The Lardeau Group is a Lower Paleozoic metasedimentary-metavolcanic assemblage that has been deformed and metamorphosed to greenschist facies. The source TTL is structurally simpler than the Isle of Wight TTL - it records unit type, label, list of constituent lithologies, and parent-child relationships, but not thickness, depositional setting, age, or bibliographic sources. The FeatureCollection therefore omits those slots. Constituent proportions are not recorded in the TTL (no qualitative Dominant/Subordinate terms either), so `proportion` is left null on every CompositionPart. Homogeneous FeatureCollection (collection-level featureType="GeologicUnit"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).
 #### json
 ```json
 {
-  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the Lardeau Group of the Kootenay Terrane (southeastern British Columbia), with its three known constituent formations (Akolkolex, Index, Jowett). The Lardeau Group is a Lower Paleozoic metasedimentary–metavolcanic assemblage that has been deformed and metamorphosed to greenschist facies. The source TTL is structurally simpler than the Isle of Wight TTL — it records unit type, label, list of constituent lithologies, and parent–child relationships, but not thickness, depositional setting, age, or bibliographic sources. The FeatureCollection therefore omits those slots. Constituent proportions are not recorded in the TTL (no qualitative Dominant/Subordinate terms either), so `proportion` is left null on every CompositionPart. Homogeneous FeatureCollection (collection-level featureType=\"GeologicUnit\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl - the Lardeau Group of the Kootenay Terrane (southeastern British Columbia), with its three known constituent formations (Akolkolex, Index, Jowett). The Lardeau Group is a Lower Paleozoic metasedimentary-metavolcanic assemblage that has been deformed and metamorphosed to greenschist facies. The source TTL is structurally simpler than the Isle of Wight TTL - it records unit type, label, list of constituent lithologies, and parent-child relationships, but not thickness, depositional setting, age, or bibliographic sources. The FeatureCollection therefore omits those slots. Constituent proportions are not recorded in the TTL (no qualitative Dominant/Subordinate terms either), so `proportion` is left null on every CompositionPart. Homogeneous FeatureCollection (collection-level featureType=\"GeologicUnit\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
   "type": "FeatureCollection",
   "featureType": "GeologicUnit",
   "conformsTo": [
@@ -1017,7 +1017,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the 
       "geometry": null,
       "properties": {
         "name": "Lardeau Group",
-        "description": "A Lower Paleozoic metasedimentary–metavolcanic group of the Kootenay Terrane, southeastern British Columbia. Includes the Akolkolex, Index and Jowett Formations. Source: GSO Example British Columbia Stratigraphy v2 (Loop3D-GSO).",
+        "description": "A Lower Paleozoic metasedimentary-metavolcanic group of the Kootenay Terrane, southeastern British Columbia. Includes the Akolkolex, Index and Jowett Formations. Source: GSO Example British Columbia Stratigraphy v2 (Loop3D-GSO).",
         "purpose": "instance",
         "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
         "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/group",
@@ -1044,7 +1044,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the 
       "geometry": null,
       "properties": {
         "name": "Akolkolex Formation",
-        "description": "Constituent formation of the Lardeau Group. Quartzose clastic metasediments — arenite and quartzite lithologies. Source: GSO Example British Columbia Stratigraphy v2 (Loop3D-GSO).",
+        "description": "Constituent formation of the Lardeau Group. Quartzose clastic metasediments - arenite and quartzite lithologies. Source: GSO Example British Columbia Stratigraphy v2 (Loop3D-GSO).",
         "purpose": "instance",
         "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
         "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
@@ -1067,7 +1067,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the 
           }
         ],
         "relatedFeature": [
-          { "href": "#LardeauGroup", "title": "Lardeau Group — Akolkolex is a constituent formation", "rel": "isPartOf" }
+          { "href": "#LardeauGroup", "title": "Lardeau Group - Akolkolex is a constituent formation", "rel": "isPartOf" }
         ]
       }
     },
@@ -1078,7 +1078,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the 
       "geometry": null,
       "properties": {
         "name": "Index Formation",
-        "description": "Constituent formation of the Lardeau Group. Heterolithic metasedimentary unit with arenite, chemical sedimentary material, chlorite–actinolite–epidote metamorphic rock, limestone, marble, undifferentiated metamorphic rock, metasomatic rock, phyllite, quartzite and schist. The breadth of lithologies reflects greenschist-facies metamorphism of a mixed sedimentary–volcaniclastic protolith. Source: GSO Example British Columbia Stratigraphy v2 (Loop3D-GSO).",
+        "description": "Constituent formation of the Lardeau Group. Heterolithic metasedimentary unit with arenite, chemical sedimentary material, chlorite-actinolite-epidote metamorphic rock, limestone, marble, undifferentiated metamorphic rock, metasomatic rock, phyllite, quartzite and schist. The breadth of lithologies reflects greenschist-facies metamorphism of a mixed sedimentary-volcaniclastic protolith. Source: GSO Example British Columbia Stratigraphy v2 (Loop3D-GSO).",
         "purpose": "instance",
         "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
         "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
@@ -1157,7 +1157,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the 
           }
         ],
         "relatedFeature": [
-          { "href": "#LardeauGroup", "title": "Lardeau Group — Index is a constituent formation", "rel": "isPartOf" }
+          { "href": "#LardeauGroup", "title": "Lardeau Group - Index is a constituent formation", "rel": "isPartOf" }
         ]
       }
     },
@@ -1168,7 +1168,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the 
       "geometry": null,
       "properties": {
         "name": "Jowett Formation",
-        "description": "Constituent formation of the Lardeau Group. Metamorphosed pelitic and metasomatic rocks — schist and metasomatic rock lithologies. Source: GSO Example British Columbia Stratigraphy v2 (Loop3D-GSO).",
+        "description": "Constituent formation of the Lardeau Group. Metamorphosed pelitic and metasomatic rocks - schist and metasomatic rock lithologies. Source: GSO Example British Columbia Stratigraphy v2 (Loop3D-GSO).",
         "purpose": "instance",
         "geologicUnitType": "http://resource.geosciml.org/classifier/cgi/geologicunittype/lithostratigraphic_unit",
         "rank": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
@@ -1191,7 +1191,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the 
           }
         ],
         "relatedFeature": [
-          { "href": "#LardeauGroup", "title": "Lardeau Group — Jowett is a constituent formation", "rel": "isPartOf" }
+          { "href": "#LardeauGroup", "title": "Lardeau Group - Jowett is a constituent formation", "rel": "isPartOf" }
         ]
       }
     }
@@ -1202,11 +1202,11 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleBritishColumbiaStrat-v2.ttl — the 
 
 
 ### fc geologicunits IsleOfWight
-Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a subset of the BGS Isle of Wight stratigraphy showing the Solent Group (SOLT) with two constituent formations (BEL, BOUL) and one basal member (BMBG of BOUL). Demonstrates Group→Formation→Member hierarchy plus stratigraphic `overlies` relationships. Homogeneous FeatureCollection (collection-level featureType="GeologicUnit"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch). Qualitative proportions from the TTL (Dominant_Proportion / Subordinate_Proportion) are translated to approximate QuantityRange % values. Thickness measurements from the TTL are kept only as prose in `description` since Basic GeologicUnit has no thickness slot (that lives in GeoSciML Extension's GeologicUnitDescription).
+Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl - a subset of the BGS Isle of Wight stratigraphy showing the Solent Group (SOLT) with two constituent formations (BEL, BOUL) and one basal member (BMBG of BOUL). Demonstrates Group→Formation→Member hierarchy plus stratigraphic `overlies` relationships. Homogeneous FeatureCollection (collection-level featureType="GeologicUnit"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch). Qualitative proportions from the TTL (Dominant_Proportion / Subordinate_Proportion) are translated to approximate QuantityRange % values. Thickness measurements from the TTL are kept only as prose in `description` since Basic GeologicUnit has no thickness slot (that lives in GeoSciML Extension's GeologicUnitDescription).
 #### json
 ```json
 {
-  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a subset of the BGS Isle of Wight stratigraphy showing the Solent Group (SOLT) with two constituent formations (BEL, BOUL) and one basal member (BMBG of BOUL). Demonstrates Group→Formation→Member hierarchy plus stratigraphic `overlies` relationships. Homogeneous FeatureCollection (collection-level featureType=\"GeologicUnit\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch). Qualitative proportions from the TTL (Dominant_Proportion / Subordinate_Proportion) are translated to approximate QuantityRange % values. Thickness measurements from the TTL are kept only as prose in `description` since Basic GeologicUnit has no thickness slot (that lives in GeoSciML Extension's GeologicUnitDescription).",
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl - a subset of the BGS Isle of Wight stratigraphy showing the Solent Group (SOLT) with two constituent formations (BEL, BOUL) and one basal member (BMBG of BOUL). Demonstrates Group→Formation→Member hierarchy plus stratigraphic `overlies` relationships. Homogeneous FeatureCollection (collection-level featureType=\"GeologicUnit\"). Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch). Qualitative proportions from the TTL (Dominant_Proportion / Subordinate_Proportion) are translated to approximate QuantityRange % values. Thickness measurements from the TTL are kept only as prose in `description` since Basic GeologicUnit has no thickness slot (that lives in GeoSciML Extension's GeologicUnitDescription).",
   "type": "FeatureCollection",
   "featureType": "GeologicUnit",
   "conformsTo": [
@@ -1220,27 +1220,27 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
       "geometry": null,
       "properties": {
         "name": "Solent Group",
-        "description": "Interbedded silty clays, calcareous clays and limestone; predominantly non-marine, freshwater to brackish water, fluvial/terrestrial; locally fully marine. Regional Isle of Wight thickness 0–200 m (not proved in PM1 borehole). BGS Lexicon: https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SOLT. Sources: Hooker et al. (2009) doi:10.1130/2009.2452(12); BGS Geology of England and Wales Cookbook doi:10.1144/GOEWP; ISBN 9780751837773; ISBN 9780852727720.",
+        "description": "Interbedded silty clays, calcareous clays and limestone; predominantly non-marine, freshwater to brackish water, fluvial/terrestrial; locally fully marine. Regional Isle of Wight thickness 0-200 m (not proved in PM1 borehole). BGS Lexicon: https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SOLT. Sources: Hooker et al. (2009) doi:10.1130/2009.2452(12); BGS Geology of England and Wales Cookbook doi:10.1144/GOEWP; ISBN 9780751837773; ISBN 9780852727720.",
         "purpose": "instance",
         "classifier": [
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit",
-            "label": "BGS Lexicon NamedRockUnit — Solent Group (SOLT)",
+            "label": "BGS Lexicon NamedRockUnit - Solent Group (SOLT)",
             "codeSpace": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit",
             "value": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SOLT"
           },
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
-            "label": "BGS earth material class for dominant constituent — silty mudstone (SLMDST)",
+            "label": "BGS earth material class for dominant constituent - silty mudstone (SLMDST)",
             "codeSpace": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
             "value": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName/SLMDST"
           },
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
-            "label": "BGS earth material class for subordinate constituent — limestone (LMST)",
+            "label": "BGS earth material class for subordinate constituent - limestone (LMST)",
             "codeSpace": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
             "value": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName/LMST"
           }
@@ -1257,7 +1257,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/dominant",
-              "label": "qualitative — dominant proportion; numeric range 50–95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
+              "label": "qualitative - dominant proportion; numeric range 50-95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
               "uom": { "code": "%" },
               "value": [50, 95]
             }
@@ -1271,7 +1271,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/subordinate",
-              "label": "qualitative — subordinate proportion; numeric range 5–25 % is a placeholder. Source TTL records only the qualitative term gsoc:Subordinate_Proportion, with no measured percentage.",
+              "label": "qualitative - subordinate proportion; numeric range 5-25 % is a placeholder. Source TTL records only the qualitative term gsoc:Subordinate_Proportion, with no measured percentage.",
               "uom": { "code": "%" },
               "value": [5, 25]
             }
@@ -1298,7 +1298,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
         "relatedFeature": [
           {
             "href": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BA",
-            "title": "Barton Group (BA) — Solent Group overlies",
+            "title": "Barton Group (BA) - Solent Group overlies",
             "rel": "overlies"
           }
         ],
@@ -1350,27 +1350,27 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
       "geometry": null,
       "properties": {
         "name": "Bembridge Limestone Formation, Solent Group",
-        "description": "Shallow freshwater & subaerial; shelly limestone with interbedded mudstone. Regional IOW thickness 0–85 m (not proved in PM1). BGS Lexicon: https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BEL. Sources: Hooker et al. (2009) doi:10.1130/2009.2452(12); BGS Geology of England and Wales Cookbook doi:10.1144/GOEWP; ISBN 9780751837773; ISBN 9780852727720.",
+        "description": "Shallow freshwater & subaerial; shelly limestone with interbedded mudstone. Regional IOW thickness 0-85 m (not proved in PM1). BGS Lexicon: https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BEL. Sources: Hooker et al. (2009) doi:10.1130/2009.2452(12); BGS Geology of England and Wales Cookbook doi:10.1144/GOEWP; ISBN 9780751837773; ISBN 9780852727720.",
         "purpose": "instance",
         "classifier": [
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit",
-            "label": "BGS Lexicon NamedRockUnit — Bembridge Limestone Formation (BEL)",
+            "label": "BGS Lexicon NamedRockUnit - Bembridge Limestone Formation (BEL)",
             "codeSpace": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit",
             "value": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BEL"
           },
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
-            "label": "BGS earth material class for dominant constituent — limestone (LMST)",
+            "label": "BGS earth material class for dominant constituent - limestone (LMST)",
             "codeSpace": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
             "value": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName/LMST"
           },
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
-            "label": "BGS earth material class for subordinate constituent — silty mudstone (SLMDST)",
+            "label": "BGS earth material class for subordinate constituent - silty mudstone (SLMDST)",
             "codeSpace": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
             "value": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName/SLMDST"
           }
@@ -1387,7 +1387,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/dominant",
-              "label": "qualitative — dominant proportion; numeric range 50–95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
+              "label": "qualitative - dominant proportion; numeric range 50-95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
               "uom": { "code": "%" },
               "value": [50, 95]
             }
@@ -1401,7 +1401,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/subordinate",
-              "label": "qualitative — subordinate proportion; numeric range 5–25 % is a placeholder. Source TTL records only the qualitative term gsoc:Subordinate_Proportion, with no measured percentage.",
+              "label": "qualitative - subordinate proportion; numeric range 5-25 % is a placeholder. Source TTL records only the qualitative term gsoc:Subordinate_Proportion, with no measured percentage.",
               "uom": { "code": "%" },
               "value": [5, 25]
             }
@@ -1410,12 +1410,12 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
         "relatedFeature": [
           {
             "href": "#SOLT",
-            "title": "Solent Group — BEL is a constituent formation",
+            "title": "Solent Group - BEL is a constituent formation",
             "rel": "isPartOf"
           },
           {
             "href": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HEHI",
-            "title": "Headon Hill Formation (HEHI) — BEL overlies",
+            "title": "Headon Hill Formation (HEHI) - BEL overlies",
             "rel": "overlies"
           }
         ],
@@ -1460,20 +1460,20 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
       "geometry": null,
       "properties": {
         "name": "Bouldnor Formation, Solent Group",
-        "description": "Brackish/freshwater with pedogenized clays; interbedded clay and silt with organic beds. Swamp/marsh depositional setting. Regional IOW thickness 0–11 m (not proved in PM1). BGS Lexicon: https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOUL. Sources: Hooker et al. (2009) doi:10.1130/2009.2452(12); BGS Geology of England and Wales Cookbook doi:10.1144/GOEWP; ISBN 9780751837773; ISBN 9780852727720.",
+        "description": "Brackish/freshwater with pedogenized clays; interbedded clay and silt with organic beds. Swamp/marsh depositional setting. Regional IOW thickness 0-11 m (not proved in PM1). BGS Lexicon: https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOUL. Sources: Hooker et al. (2009) doi:10.1130/2009.2452(12); BGS Geology of England and Wales Cookbook doi:10.1144/GOEWP; ISBN 9780751837773; ISBN 9780852727720.",
         "purpose": "instance",
         "classifier": [
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit",
-            "label": "BGS Lexicon NamedRockUnit — Bouldnor Formation (BOUL)",
+            "label": "BGS Lexicon NamedRockUnit - Bouldnor Formation (BOUL)",
             "codeSpace": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit",
             "value": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOUL"
           },
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
-            "label": "BGS earth material class for main body constituent — silty mudstone (SLMDST)",
+            "label": "BGS earth material class for main body constituent - silty mudstone (SLMDST)",
             "codeSpace": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
             "value": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName/SLMDST"
           }
@@ -1490,7 +1490,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/dominant",
-              "label": "qualitative — dominant proportion; numeric range 50–95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
+              "label": "qualitative - dominant proportion; numeric range 50-95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
               "uom": { "code": "%" },
               "value": [50, 95]
             }
@@ -1509,12 +1509,12 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
         "relatedFeature": [
           {
             "href": "#SOLT",
-            "title": "Solent Group — BOUL is a constituent formation",
+            "title": "Solent Group - BOUL is a constituent formation",
             "rel": "isPartOf"
           },
           {
             "href": "#BEL",
-            "title": "Bembridge Limestone Formation — BOUL overlies",
+            "title": "Bembridge Limestone Formation - BOUL overlies",
             "rel": "overlies"
           }
         ],
@@ -1552,27 +1552,27 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
       "geometry": null,
       "properties": {
         "name": "Bembridge Marls Member of Bouldnor Formation, Solent Group",
-        "description": "Mudstone-dominated with subordinate limestone interbeds; includes sands and is shelly. Marginal-marine to non-marine, shoreline setting. Regional IOW thickness 0–34 m (not proved in PM1). BGS Lexicon: https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BMBG. Sources: Hooker et al. (2009) doi:10.1130/2009.2452(12); BGS Geology of England and Wales Cookbook doi:10.1144/GOEWP; ISBN 9780751837773; ISBN 9780852727720.",
+        "description": "Mudstone-dominated with subordinate limestone interbeds; includes sands and is shelly. Marginal-marine to non-marine, shoreline setting. Regional IOW thickness 0-34 m (not proved in PM1). BGS Lexicon: https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BMBG. Sources: Hooker et al. (2009) doi:10.1130/2009.2452(12); BGS Geology of England and Wales Cookbook doi:10.1144/GOEWP; ISBN 9780751837773; ISBN 9780852727720.",
         "purpose": "instance",
         "classifier": [
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit",
-            "label": "BGS Lexicon NamedRockUnit — Bembridge Marls Member (BMBG)",
+            "label": "BGS Lexicon NamedRockUnit - Bembridge Marls Member (BMBG)",
             "codeSpace": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit",
             "value": "https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BMBG"
           },
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
-            "label": "BGS earth material class for dominant constituent — silty mudstone (SLMDST)",
+            "label": "BGS earth material class for dominant constituent - silty mudstone (SLMDST)",
             "codeSpace": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
             "value": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName/SLMDST"
           },
           {
             "type": "Category",
             "definition": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
-            "label": "BGS earth material class for subordinate constituent — limestone (LMST)",
+            "label": "BGS earth material class for subordinate constituent - limestone (LMST)",
             "codeSpace": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName",
             "value": "https://data.bgs.ac.uk/id/EarthMaterialClass/RockName/LMST"
           }
@@ -1589,7 +1589,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/dominant",
-              "label": "qualitative — dominant proportion; numeric range 50–95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
+              "label": "qualitative - dominant proportion; numeric range 50-95 % is a placeholder. Source TTL records only the qualitative term gsoc:Dominant_Proportion, with no measured percentage.",
               "uom": { "code": "%" },
               "value": [50, 95]
             }
@@ -1603,7 +1603,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
             "proportion": {
               "type": "QuantityRange",
               "definition": "http://resource.geosciml.org/concept/proportion/subordinate",
-              "label": "qualitative — subordinate proportion; numeric range 5–25 % is a placeholder. Source TTL records only the qualitative term gsoc:Subordinate_Proportion, with no measured percentage.",
+              "label": "qualitative - subordinate proportion; numeric range 5-25 % is a placeholder. Source TTL records only the qualitative term gsoc:Subordinate_Proportion, with no measured percentage.",
               "uom": { "code": "%" },
               "value": [5, 25]
             }
@@ -1612,12 +1612,12 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
         "relatedFeature": [
           {
             "href": "#BOUL",
-            "title": "Bouldnor Formation — BMBG is a constituent member (basal)",
+            "title": "Bouldnor Formation - BMBG is a constituent member (basal)",
             "rel": "isPartOf"
           },
           {
             "href": "#BEL",
-            "title": "Bembridge Limestone Formation — BMBG overlies",
+            "title": "Bembridge Limestone Formation - BMBG overlies",
             "rel": "overlies"
           }
         ],
@@ -1655,11 +1655,11 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleIsleOfWightStrat-pm1-v2.ttl — a su
 
 
 ### fc heterogeneous GSO
-Heterogeneous FeatureCollection example — collection has NO top-level featureType; each feature carries its own. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (else-branch dispatch). Members are the 5 single-feature examples in this directory, condensed inline.
+Heterogeneous FeatureCollection example - collection has NO top-level featureType; each feature carries its own. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (else-branch dispatch). Members are the 5 single-feature examples in this directory, condensed inline.
 #### json
 ```json
 {
-  "$comment": "Heterogeneous FeatureCollection example — collection has NO top-level featureType; each feature carries its own. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (else-branch dispatch). Members are the 5 single-feature examples in this directory, condensed inline.",
+  "$comment": "Heterogeneous FeatureCollection example - collection has NO top-level featureType; each feature carries its own. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (else-branch dispatch). Members are the 5 single-feature examples in this directory, condensed inline.",
   "type": "FeatureCollection",
   "conformsTo": [
     "https://ext.iide.dev/schemas/geosciml/basic/4.1/json/features.json/4.1/geosciml_basic_featurecollection.json"
@@ -1735,11 +1735,11 @@ Heterogeneous FeatureCollection example — collection has NO top-level featureT
 
 
 ### fc homogeneous GSO
-Homogeneous FeatureCollection example — collection declares featureType="GeologicEvent" at the top level, so every member must be a GeologicEvent. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).
+Homogeneous FeatureCollection example - collection declares featureType="GeologicEvent" at the top level, so every member must be a GeologicEvent. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).
 #### json
 ```json
 {
-  "$comment": "Homogeneous FeatureCollection example — collection declares featureType=\"GeologicEvent\" at the top level, so every member must be a GeologicEvent. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
+  "$comment": "Homogeneous FeatureCollection example - collection declares featureType=\"GeologicEvent\" at the top level, so every member must be a GeologicEvent. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
   "type": "FeatureCollection",
   "featureType": "GeologicEvent",
   "conformsTo": [
@@ -2019,7 +2019,7 @@ Example instance: fold_complex
     "occurrence": [
       {
         "href": "http://data.geoscience.gov.au/mappedfeature/fold/anticline-mf-1",
-        "title": "Anticline trace – 1:50000 sheet"
+        "title": "Anticline trace - 1:50000 sheet"
       }
     ],
     "geologicHistory": [
@@ -2067,11 +2067,11 @@ Example instance: fold_simple
 
 
 ### geologic event from GSO
-Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicEvent.xml — Kanimblan Orogeny, a deformation event at 335 Ma (range 325–350 Ma), Tournaisian–Serpukhovian, deep crustal setting. Validates against schemas/json/4.1/geoscimlBasic.json#GeologicEvent.
+Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicEvent.xml - Kanimblan Orogeny, a deformation event at 335 Ma (range 325-350 Ma), Tournaisian-Serpukhovian, deep crustal setting. Validates against schemas/json/4.1/geoscimlBasic.json#GeologicEvent.
 #### json
 ```json
 {
-  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicEvent.xml — Kanimblan Orogeny, a deformation event at 335 Ma (range 325–350 Ma), Tournaisian–Serpukhovian, deep crustal setting. Validates against schemas/json/4.1/geoscimlBasic.json#GeologicEvent.",
+  "$comment": "Translated from https://geosciml.org/schemas/geosciml/4.0/examples/GSML4-GeologicEvent.xml - Kanimblan Orogeny, a deformation event at 335 Ma (range 325-350 Ma), Tournaisian-Serpukhovian, deep crustal setting. Validates against schemas/json/4.1/geoscimlBasic.json#GeologicEvent.",
   "type": "Feature",
   "id": "event.1",
   "featureType": "GeologicEvent",

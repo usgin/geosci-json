@@ -8,7 +8,7 @@ cross-BB $ref pointing to a sibling BB's schema (`../<bb>/<bb>.json#<Class>`)
 by pulling that class's definition into the local $defs.
 
 External public $refs (SWE 3.0, JSON-FG, GeoJSON, CDIF property BBs) are left
-untouched — they are stable URLs.
+untouched - they are stable URLs.
 
 Usage:
     python tools/resolve_geosci_schema.py path/to/<bb>.json -o resolvedSchema.json

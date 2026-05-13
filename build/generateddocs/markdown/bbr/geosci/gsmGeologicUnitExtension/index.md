@@ -34,9 +34,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `beddingPattern` | (oneOf — see schema) | 0..1 | The property beddingPattern (SWE::Category) provides a term from a controlled vocabulary specifying patterns of beddi… |
-| `beddingStyle` | (oneOf — see schema) | 0..1 | The property beddingStyle (SWE::Category) provides a term from a controlled vocabulary specifying the style of beddin… |
-| `beddingThickness` | (oneOf — see schema) | 0..1 | The property beddingThickness (SWE::Category) provides a term from a controlled vocabulary characterizing the thickne… |
+| `beddingPattern` | (oneOf - see schema) | 0..1 | The property beddingPattern (SWE::Category) provides a term from a controlled vocabulary specifying patterns of beddi… |
+| `beddingStyle` | (oneOf - see schema) | 0..1 | The property beddingStyle (SWE::Category) provides a term from a controlled vocabulary specifying the style of beddin… |
+| `beddingThickness` | (oneOf - see schema) | 0..1 | The property beddingThickness (SWE::Category) provides a term from a controlled vocabulary characterizing the thickne… |
 
 ### `GeologicUnitDescription`
 
@@ -48,11 +48,11 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `bodyMorphology` | (oneOf — see schema) | 0..1 | The bodyMorphology property (SWE::Category) provides a term from a controlled vocabulary describing the geometry or f… |
-| `unitComposition` | (oneOf — see schema) | 0..1 | The unitComposition property (SWE::Category) provides a term from a composition-based classification that requires su… |
-| `outcropCharacter` | (oneOf — see schema) | 0..1 | The property outcropCharacter (SWE::Category) provides a term that describes the nature of outcrops formed by a geolo… |
-| `unitThickness` | (oneOf — see schema) | 0..1 | The property unitThickness (SWE::QuantityRange) provides a value that represents the typical thickness of the geologi… |
-| `bedding` | (oneOf — see schema) | 0..1 | The bedding:BeddingDescription property reports a description of the bedding. |
+| `bodyMorphology` | (oneOf - see schema) | 0..1 | The bodyMorphology property (SWE::Category) provides a term from a controlled vocabulary describing the geometry or f… |
+| `unitComposition` | (oneOf - see schema) | 0..1 | The unitComposition property (SWE::Category) provides a term from a composition-based classification that requires su… |
+| `outcropCharacter` | (oneOf - see schema) | 0..1 | The property outcropCharacter (SWE::Category) provides a term that describes the nature of outcrops formed by a geolo… |
+| `unitThickness` | (oneOf - see schema) | 0..1 | The property unitThickness (SWE::QuantityRange) provides a value that represents the typical thickness of the geologi… |
+| `bedding` | (oneOf - see schema) | 0..1 | The bedding:BeddingDescription property reports a description of the bedding. |
 
 ## External dependencies
 
@@ -78,7 +78,7 @@ See [examples.yaml](examples.yaml) for the full manifest.
 ## Examples
 
 ### examplegsmGeologicUnitExtensionMinimal
-Minimal BeddingDescription instance — no required properties
+Minimal BeddingDescription instance - no required properties
 #### json
 ```json
 {
@@ -153,11 +153,11 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleGeosciAustraliaStratUnit.ttl. The so
 
 
 ### geologic unit lardeau group GSO
-Adapted from Loop3D-GSO/Examples/GSO-LardeauGroup.ttl. The source describes the Lardeau Group (Trout Lake area, British Columbia) — a stratigraphic group composed of Ajax fm and Sharon Creek fm (gsrl:stratUnderlies relationships) plus additional formations in the TTL. This example encodes the Group as a top-level GeologicUnit with hierarchyLink references to constituent Formation features (left as href stubs). Source reference: ResearchGate publication 237174271 (structural geology of Lardeau Group near Trout Lake).
+Adapted from Loop3D-GSO/Examples/GSO-LardeauGroup.ttl. The source describes the Lardeau Group (Trout Lake area, British Columbia) - a stratigraphic group composed of Ajax fm and Sharon Creek fm (gsrl:stratUnderlies relationships) plus additional formations in the TTL. This example encodes the Group as a top-level GeologicUnit with hierarchyLink references to constituent Formation features (left as href stubs). Source reference: ResearchGate publication 237174271 (structural geology of Lardeau Group near Trout Lake).
 #### json
 ```json
 {
-  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-LardeauGroup.ttl. The source describes the Lardeau Group (Trout Lake area, British Columbia) — a stratigraphic group composed of Ajax fm and Sharon Creek fm (gsrl:stratUnderlies relationships) plus additional formations in the TTL. This example encodes the Group as a top-level GeologicUnit with hierarchyLink references to constituent Formation features (left as href stubs). Source reference: ResearchGate publication 237174271 (structural geology of Lardeau Group near Trout Lake).",
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-LardeauGroup.ttl. The source describes the Lardeau Group (Trout Lake area, British Columbia) - a stratigraphic group composed of Ajax fm and Sharon Creek fm (gsrl:stratUnderlies relationships) plus additional formations in the TTL. This example encodes the Group as a top-level GeologicUnit with hierarchyLink references to constituent Formation features (left as href stubs). Source reference: ResearchGate publication 237174271 (structural geology of Lardeau Group near Trout Lake).",
   "type": "Feature",
   "featureType": "GeologicUnit",
   "id": "https://w3id.org/gso/1.0/ex-lardeaustrat#Lardeau_Group",

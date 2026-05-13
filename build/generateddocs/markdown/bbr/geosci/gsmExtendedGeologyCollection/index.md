@@ -61,11 +61,11 @@ Minimal Extended-profile FeatureCollection. The Extended profile dispatches on f
 
 
 ### fc hammersley fault traces GSO
-Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region, Western Australia). The source TTL distinguishes between fault STRUCTURES (Moona Fault, fault_A1, fault_A2, fault_3496 — typed as gsfa:High_Angle_Fault) and fault TRACES on the earth surface (faulttrace_11445, faulttrace_15546, faulttrace_3496, faulttrace_7439 — typed as gsfa:Fault and hosted by gsoc:earthsurface, isPartOf the parent fault structure). The traces correspond well to MappedFeature instances representing the surface expression of a buried/subsurface ShearDisplacementStructure. This FC encodes the four fault traces as MappedFeature features and notes the spatial-relationship attributes (gsrl:spatiallyTouches, gsrl:spatiallyTruncates) in comments. The Extended profile's MappedFeature branch is pass-through (no extension description slot), so this validates against the same dispatcher as the Basic profile would.
+Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region, Western Australia). The source TTL distinguishes between fault STRUCTURES (Moona Fault, fault_A1, fault_A2, fault_3496 - typed as gsfa:High_Angle_Fault) and fault TRACES on the earth surface (faulttrace_11445, faulttrace_15546, faulttrace_3496, faulttrace_7439 - typed as gsfa:Fault and hosted by gsoc:earthsurface, isPartOf the parent fault structure). The traces correspond well to MappedFeature instances representing the surface expression of a buried/subsurface ShearDisplacementStructure. This FC encodes the four fault traces as MappedFeature features and notes the spatial-relationship attributes (gsrl:spatiallyTouches, gsrl:spatiallyTruncates) in comments. The Extended profile's MappedFeature branch is pass-through (no extension description slot), so this validates against the same dispatcher as the Basic profile would.
 #### json
 ```json
 {
-  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region, Western Australia). The source TTL distinguishes between fault STRUCTURES (Moona Fault, fault_A1, fault_A2, fault_3496 — typed as gsfa:High_Angle_Fault) and fault TRACES on the earth surface (faulttrace_11445, faulttrace_15546, faulttrace_3496, faulttrace_7439 — typed as gsfa:Fault and hosted by gsoc:earthsurface, isPartOf the parent fault structure). The traces correspond well to MappedFeature instances representing the surface expression of a buried/subsurface ShearDisplacementStructure. This FC encodes the four fault traces as MappedFeature features and notes the spatial-relationship attributes (gsrl:spatiallyTouches, gsrl:spatiallyTruncates) in comments. The Extended profile's MappedFeature branch is pass-through (no extension description slot), so this validates against the same dispatcher as the Basic profile would.",
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region, Western Australia). The source TTL distinguishes between fault STRUCTURES (Moona Fault, fault_A1, fault_A2, fault_3496 - typed as gsfa:High_Angle_Fault) and fault TRACES on the earth surface (faulttrace_11445, faulttrace_15546, faulttrace_3496, faulttrace_7439 - typed as gsfa:Fault and hosted by gsoc:earthsurface, isPartOf the parent fault structure). The traces correspond well to MappedFeature instances representing the surface expression of a buried/subsurface ShearDisplacementStructure. This FC encodes the four fault traces as MappedFeature features and notes the spatial-relationship attributes (gsrl:spatiallyTouches, gsrl:spatiallyTruncates) in comments. The Extended profile's MappedFeature branch is pass-through (no extension description slot), so this validates against the same dispatcher as the Basic profile would.",
   "type": "FeatureCollection",
   "features": [
     {
@@ -80,7 +80,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region,
         "purpose": "instance",
         "specification": {
           "href": "https://w3id.org/gso/ex-hammersly#fault_A1",
-          "title": "Fault A1 (High_Angle_Fault) — buried structure this trace expresses"
+          "title": "Fault A1 (High_Angle_Fault) - buried structure this trace expresses"
         }
       }
     },
@@ -129,7 +129,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region,
         "purpose": "instance",
         "specification": {
           "href": "https://w3id.org/gso/ex-hammersly#MoonaFault",
-          "title": "Moona Fault (High_Angle_Fault) — truncates A1 and A2 traces per source"
+          "title": "Moona Fault (High_Angle_Fault) - truncates A1 and A2 traces per source"
         }
       }
     }
@@ -333,7 +333,7 @@ You can find the full JSON-LD context here:
 
 ## Sources
 
-* [GeoSciML 4.1 — FC profile composed across building blocks](https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml)
+* [GeoSciML 4.1 - FC profile composed across building blocks](https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml)
 
 # For developers
 

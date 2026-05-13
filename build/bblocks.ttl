@@ -14,7 +14,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml> rdfs:label "GeoSciML 4.1 — FC profile composed across building blocks" .
+<https://github.com/usgin/geosci-json/blob/main/bb-grouping.yaml> rdfs:label "GeoSciML 4.1 - FC profile composed across building blocks" .
 
 <https://usgin.github.io/geosci-json/build/bblocks.ttl> a prov:Entity ;
     dct:format "text/turtle" ;

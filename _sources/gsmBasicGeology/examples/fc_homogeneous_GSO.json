@@ -1,5 +1,5 @@
 {
-  "$comment": "Homogeneous FeatureCollection example — collection declares featureType=\"GeologicEvent\" at the top level, so every member must be a GeologicEvent. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
+  "$comment": "Homogeneous FeatureCollection example - collection declares featureType=\"GeologicEvent\" at the top level, so every member must be a GeologicEvent. Validates against schemas/json/4.1/geosciml_basic_featurecollection.json#FeatureCollection (then-branch dispatch).",
   "type": "FeatureCollection",
   "featureType": "GeologicEvent",
   "conformsTo": [

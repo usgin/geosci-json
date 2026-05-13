@@ -4,7 +4,7 @@ Generate description.md and a minimal example per BB from its <bb>.json.
 
 For each `_sources/gsm*/` directory:
   - Write `description.md` summarising classes, properties, encoding, deps.
-  - Write `examples/example<Bb>Minimal.json` — a bare valid instance
+  - Write `examples/example<Bb>Minimal.json` - a bare valid instance
     (only when one does not already exist).
 
 Does NOT touch existing examples/*.json files.
@@ -120,7 +120,7 @@ def write_stub_artifacts(bb_dir: Path, bb_name: str) -> list[str]:
     if not shacl_path.exists():
         shacl_path.write_text(
             f"# SHACL rules for {bb_name}.\n"
-            f"# Placeholder — populate with shape constraints as the model is profiled.\n"
+            f"# Placeholder - populate with shape constraints as the model is profiled.\n"
             f"\n"
             f"@prefix sh: <http://www.w3.org/ns/shacl#> .\n",
             encoding="utf-8",
@@ -272,7 +272,7 @@ def property_row(name: str, schema: dict, required: list[str]) -> str:
         else:
             type_str = f"`{ref}`"
     elif "oneOf" in items:
-        type_str = "(oneOf — see schema)"
+        type_str = "(oneOf - see schema)"
     elif items.get("codeList"):
         type_str = f"URI codelist · `{items['codeList']}`"
     elif items.get("type") == "string" and items.get("format"):
@@ -280,7 +280,7 @@ def property_row(name: str, schema: dict, required: list[str]) -> str:
     elif items.get("type"):
         type_str = f"`{items['type']}`"
     else:
-        type_str = "—"
+        type_str = "-"
     desc = schema.get("description", "")
     # Strip embedded Constraint: text from description for table compactness
     desc = re.sub(r"\s*Constraint:.*$", "", desc).strip()
@@ -291,7 +291,7 @@ def property_row(name: str, schema: dict, required: list[str]) -> str:
 
 def render_description(bb_name: str, schema: dict, packages: list[str] | None = None) -> str:
     defs = schema.get("$defs", {})
-    # Hide the local SCLinkObject helper from docs — it's not a UML class.
+    # Hide the local SCLinkObject helper from docs - it's not a UML class.
     class_names = sorted(c for c in defs.keys() if c != "SCLinkObject")
 
     # Classify each class
@@ -302,7 +302,7 @@ def render_description(bb_name: str, schema: dict, packages: list[str] | None = 
     n_u = sum(1 for v in classifications.values() if v == "union")
 
     if not class_names:
-        # Profile BB or empty umbrella — fall back to schema description
+        # Profile BB or empty umbrella - fall back to schema description
         return f"""# {bb_name}
 
 {schema.get("description", "GeoSciML 4.1 building block.")}
@@ -344,14 +344,14 @@ def render_description(bb_name: str, schema: dict, packages: list[str] | None = 
         "codelist":    "«CodeList»",
         "union":       "«Union»",
         "abstract":    "«DataType» (abstract)",
-        "unknown":     "—",
+        "unknown":     "-",
     }
     for c in class_names:
         kind = classifications[c]
         out.append(f"| `{c}` | {stereo_map[kind]} | {enc_map[kind]} |")
     out.append("")
 
-    # Per-class detail (only for FeatureType and DataType — skip CodeList table since they are atomic)
+    # Per-class detail (only for FeatureType and DataType - skip CodeList table since they are atomic)
     detail_classes = [c for c in class_names if classifications[c] in ("featuretype", "datatype")]
     if detail_classes:
         out.append("## Class details")
@@ -392,7 +392,7 @@ def render_description(bb_name: str, schema: dict, packages: list[str] | None = 
         out.append("| --- | --- |")
         for c in cls_codelists:
             body = defs[c]
-            cl = body.get("codeList", "_(treat as open — no `codeList` annotation)_")
+            cl = body.get("codeList", "_(treat as open - no `codeList` annotation)_")
             out.append(f"| `{c}` | `{cl}` |")
         out.append("")
 
@@ -415,7 +415,7 @@ def render_description(bb_name: str, schema: dict, packages: list[str] | None = 
                     if ref:
                         target = ref.rsplit("/", 1)[-1].replace(".json", "") if "://" in ref else ref.lstrip("#")
                         comment = branch.get("$comment", "")
-                        suffix = f" — {comment}" if comment else ""
+                        suffix = f" - {comment}" if comment else ""
                         out.append(f"- `{target}`{suffix}")
                     else:
                         out.append(f"- (branch {i})")
@@ -486,7 +486,7 @@ def render_minimal_example(bb_name: str, schema: dict) -> dict | None:
             ("properties", OrderedDict()),
         ])
     if datatype:
-        return OrderedDict([("$comment", f"Minimal {datatype} instance — no required properties")])
+        return OrderedDict([("$comment", f"Minimal {datatype} instance - no required properties")])
     if codelist:
         body = defs[codelist]
         cl = body.get("codeList", "")

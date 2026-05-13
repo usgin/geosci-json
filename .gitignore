@@ -12,5 +12,5 @@ __pycache__/
 *unversioned-local.qea
 _sources.zip
 
-# Schema cache populated by tools/validate_all.py — local-only
+# Schema cache populated by tools/validate_all.py - local-only
 .schema_cache/

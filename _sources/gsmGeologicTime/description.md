@@ -36,7 +36,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `stratotype` | (oneOf — see schema) | 0..1 | The StratigraphicPoint that defines this boundary in the rock record. Inline Feature or by-reference SCLinkObject. |
+| `stratotype` | (oneOf - see schema) | 0..1 | The StratigraphicPoint that defines this boundary in the rock record. Inline Feature or by-reference SCLinkObject. |
 
 ### `GeochronologicEra`
 
@@ -47,10 +47,10 @@ Properties (own; inherited properties listed in supertype's BB):
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
 | `rank` | `string(uri)` | 0..1 | Chronostratigraphic / geochronologic rank (URI from the ICS chart vocabulary or equivalent: Eon, Era, Period, Epoch, … |
-| `start` | (oneOf — see schema) | 0..1 | Lower boundary of this era (time:hasBeginning). Inline GeochronologicBoundary Feature or by-reference SCLinkObject. |
-| `end` | (oneOf — see schema) | 0..1 | Upper boundary of this era (time:hasEnd). Inline GeochronologicBoundary Feature or by-reference SCLinkObject. |
-| `member` | (oneOf — see schema) | 0..1 | Sub-eras contained within this era (time:intervalContains). Array of by-reference links or inline GeochronologicEra F… |
-| `stratotype` | (oneOf — see schema) | 0..1 | Defining stratigraphic section for this era (the rock-record anchor). Inline StratigraphicSection Feature or by-refer… |
+| `start` | (oneOf - see schema) | 0..1 | Lower boundary of this era (time:hasBeginning). Inline GeochronologicBoundary Feature or by-reference SCLinkObject. |
+| `end` | (oneOf - see schema) | 0..1 | Upper boundary of this era (time:hasEnd). Inline GeochronologicBoundary Feature or by-reference SCLinkObject. |
+| `member` | (oneOf - see schema) | 0..1 | Sub-eras contained within this era (time:intervalContains). Array of by-reference links or inline GeochronologicEra F… |
+| `stratotype` | (oneOf - see schema) | 0..1 | Defining stratigraphic section for this era (the rock-record anchor). Inline StratigraphicSection Feature or by-refer… |
 
 ### `GeologicEventDescription`
 
@@ -62,9 +62,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `olderGeochronologicEra` | (oneOf — see schema) | 0..1 | Link to description of the GeochronologicEra that corresponds to the older estimated age of a geologic feature. |
-| `youngerGeochronologicEra` | (oneOf — see schema) | 0..1 | Link to description of the GeochronologicEra that corresponds to the younger estimated age of a geologic feature. |
-| `prototype` | (oneOf — see schema) | 0..1 | Reference stratigraphic point for stratigraphic events |
+| `olderGeochronologicEra` | (oneOf - see schema) | 0..1 | Link to description of the GeochronologicEra that corresponds to the older estimated age of a geologic feature. |
+| `youngerGeochronologicEra` | (oneOf - see schema) | 0..1 | Link to description of the GeochronologicEra that corresponds to the younger estimated age of a geologic feature. |
+| `prototype` | (oneOf - see schema) | 0..1 | Reference stratigraphic point for stratigraphic events |
 
 ### `GeologicTimescale`
 
@@ -104,9 +104,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `primaryGuidingCriterion` | (oneOf — see schema) | 0..1 | The property primaryGuidingCriterion:Primitive::CharacterString contains a description of the primary criterion used … |
-| `additionalCorrelationProperty` | (oneOf — see schema) | 0..1 | The property additionnalCorrelationProperty:Primitive::CharacterString contains any additional criteria used to estab… |
-| `status` | (oneOf — see schema) | 0..1 | The property status:Primitive::CharacterString contains a description of the status of stratigraphic point (e.g., for… |
+| `primaryGuidingCriterion` | (oneOf - see schema) | 0..1 | The property primaryGuidingCriterion:Primitive::CharacterString contains a description of the primary criterion used … |
+| `additionalCorrelationProperty` | (oneOf - see schema) | 0..1 | The property additionnalCorrelationProperty:Primitive::CharacterString contains any additional criteria used to estab… |
+| `status` | (oneOf - see schema) | 0..1 | The property status:Primitive::CharacterString contains a description of the status of stratigraphic point (e.g., for… |
 
 ### `StratigraphicSection`
 
@@ -116,10 +116,10 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `geologicSetting` | (oneOf — see schema) | 0..1 | The property geologicSetting:Primitive::CharacterString contains a description of the geologic setting of the stratig… |
-| `geologicDescription` | (oneOf — see schema) | 0..1 | The geologicDescription:Primitive::CharacterString contains a description of the geology of the stratigraphic section… |
-| `accessibility` | (oneOf — see schema) | 0..1 | The property accessibility:Primitive::CharacterString contains a description of the ability to access the stratigraph… |
-| `conservation` | (oneOf — see schema) | 0..1 | The property conservation:Primitive::CharacterString contains a description of measures to conserve the stratigraphic… |
+| `geologicSetting` | (oneOf - see schema) | 0..1 | The property geologicSetting:Primitive::CharacterString contains a description of the geologic setting of the stratig… |
+| `geologicDescription` | (oneOf - see schema) | 0..1 | The geologicDescription:Primitive::CharacterString contains a description of the geology of the stratigraphic section… |
+| `accessibility` | (oneOf - see schema) | 0..1 | The property accessibility:Primitive::CharacterString contains a description of the ability to access the stratigraph… |
+| `conservation` | (oneOf - see schema) | 0..1 | The property conservation:Primitive::CharacterString contains a description of measures to conserve the stratigraphic… |
 
 ### `TimeOrdinalEra`
 
@@ -129,9 +129,9 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `end` | (oneOf — see schema) | 0..1 | Younger time boundary of an era |
-| `start` | (oneOf — see schema) | 0..1 | Older time boundary of an era |
-| `member` | (oneOf — see schema) | 0..1 | Subdivisions of TimeOrdinalEra |
+| `end` | (oneOf - see schema) | 0..1 | Younger time boundary of an era |
+| `start` | (oneOf - see schema) | 0..1 | Older time boundary of an era |
+| `member` | (oneOf - see schema) | 0..1 | Subdivisions of TimeOrdinalEra |
 
 ### `TimeOrdinalEraBoundary`
 
@@ -141,11 +141,11 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `position` | (oneOf — see schema) | 0..1 | A point in time corresponding to the era boundary |
-| `positionalUncertainty` | (oneOf — see schema) | 0..1 | A measure of the uncertainty in the estimate of the point in time of the era boundary |
-| `previousEra` | (oneOf — see schema) | 0..1 | Preceding era |
-| `observationalBasis` | (oneOf — see schema) | 0..1 | Observation supporting the existence of the boundary (geochronology, paleontology, etc.) |
-| `nextEra` | (oneOf — see schema) | 0..1 | Succeeding era |
+| `position` | (oneOf - see schema) | 0..1 | A point in time corresponding to the era boundary |
+| `positionalUncertainty` | (oneOf - see schema) | 0..1 | A measure of the uncertainty in the estimate of the point in time of the era boundary |
+| `previousEra` | (oneOf - see schema) | 0..1 | Preceding era |
+| `observationalBasis` | (oneOf - see schema) | 0..1 | Observation supporting the existence of the boundary (geochronology, paleontology, etc.) |
+| `nextEra` | (oneOf - see schema) | 0..1 | Succeeding era |
 
 ### `TimeOrdinalReferenceSystem`
 
@@ -155,8 +155,8 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Name | Type | Mult | Notes |
 | --- | --- | --- | --- |
-| `referencePoint` | (oneOf — see schema) | 2..* | Two reference points defining the extent of the system |
-| `component` | (oneOf — see schema) | 0..1 | TimeOrdinalEra composing the TimeOrdinalReferenceSystem |
+| `referencePoint` | (oneOf - see schema) | 2..* | Two reference points defining the extent of the system |
+| `component` | (oneOf - see schema) | 0..1 | TimeOrdinalEra composing the TimeOrdinalReferenceSystem |
 
 ### `_FeatureDispatch`
 
@@ -164,7 +164,7 @@ Properties (own; inherited properties listed in supertype's BB):
 
 | Class | `codeList` vocab |
 | --- | --- |
-| `GeochronologicEraRank` | `_(treat as open — no `codeList` annotation)_` |
+| `GeochronologicEraRank` | `_(treat as open - no `codeList` annotation)_` |
 
 ## External dependencies
 

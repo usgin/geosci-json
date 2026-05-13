@@ -67,7 +67,7 @@ def extract_shacl_paths(shacl_text):
 
     # Find property shape blocks
     # Pattern: cdifd:someName ... sh:path schema:something ...
-    # This is a rough parser — looks for sh:path and sh:severity in nearby context
+    # This is a rough parser - looks for sh:path and sh:severity in nearby context
 
     # Split into shape blocks (separated by blank lines or .)
     blocks = re.split(r'\n\s*\.\s*\n', shacl_text)
@@ -92,7 +92,7 @@ def extract_shacl_paths(shacl_text):
 
         for alt_paths, single_path in path_matches:
             if alt_paths:
-                # alternativePath — extract individual paths
+                # alternativePath - extract individual paths
                 paths = re.findall(r'(\w+:\w+)', alt_paths)
                 for p in paths:
                     shapes[p] = {"severity": severity, "minCount": min_count,

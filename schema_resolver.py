@@ -156,7 +156,7 @@ class SchemaResolver:
         if filename.endswith('Schema'):
             name = filename[:-6]
         elif filename.lower() == 'schema':
-            # Generic filename — use parent directory name instead
+            # Generic filename - use parent directory name instead
             name = schema_path.parent.name
         else:
             name = filename

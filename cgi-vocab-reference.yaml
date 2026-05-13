@@ -1,6 +1,6 @@
 # GeoSciML 4.1 CGI vocabulary reference (documentation only)
 #
-# STATUS: this file is reference material — it is NOT consumed by the schema
+# STATUS: this file is reference material - it is NOT consumed by the schema
 # generator. It records CGI vocabulary URLs we inferred for the 35
 # `SWE::Category`-typed attributes and the 47 `«CodeList»` classes during
 # initial analysis. Two reasons it's no longer read by the generator:
@@ -27,11 +27,11 @@
 # URL pattern: http://resource.geosciml.org/classifier/cgi/<vocab>
 #
 # Status values (per-entry, for human review):
-#   matched     — vocabulary slug clearly corresponds to attribute purpose
-#   checked, OK — match has been confirmed by review
-#   plausible   — closest available vocabulary, may not be exact fit
-#   treat as open — no fixed vocabulary; any URI accepted
-#   tbd         — no published CGI vocabulary matches; needs human decision
+#   matched     - vocabulary slug clearly corresponds to attribute purpose
+#   checked, OK - match has been confirmed by review
+#   plausible   - closest available vocabulary, may not be exact fit
+#   treat as open - no fixed vocabulary; any URI accepted
+#   tbd         - no published CGI vocabulary matches; needs human decision
 
 attributes:
 
@@ -259,7 +259,7 @@ codelist_classes:
   PlanarPolarityCode:        http://resource.geosciml.org/classifier/cgi/planarpolaritycode
   RankTerm:                  http://resource.geosciml.org/classifier/cgi/stratigraphicrank
 
-  # No CGI vocab published — treat as open (emit no codeList annotation)
+  # No CGI vocab published - treat as open (emit no codeList annotation)
   AnalyticalMethodTerm:                       treat as open
   AnthropogenicGeomorphologicFeatureTypeTerm: treat as open
   BoreholeInclinationCode:                    treat as open

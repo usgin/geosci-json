@@ -4,7 +4,7 @@
 
 examples:
   - title: examplegsmGeologicUnitExtensionMinimal
-    content: "Minimal BeddingDescription instance — no required properties"
+    content: "Minimal BeddingDescription instance - no required properties"
     snippets:
       - language: json
         ref: examples/examplegsmGeologicUnitExtensionMinimal.json
@@ -19,7 +19,7 @@ examples:
       - language: json
         ref: examples/geologic_unit_lake_holmes_coal_measures_GSO.json
   - title: geologic unit lardeau group GSO
-    content: "Adapted from Loop3D-GSO/Examples/GSO-LardeauGroup.ttl. The source describes the Lardeau Group (Trout Lake area, British Columbia) — a stratigraphic group composed of Ajax fm and Sharon Creek fm (gsrl:stratUnderlies relationships) plus additional formations in the TTL. This example encodes the Group as a top-level GeologicUnit with hierarchyLink references to constituent Formation features (left as href stubs). Source reference: ResearchGate publication 237174271 (structural geology of Lardeau Group near Trout Lake)."
+    content: "Adapted from Loop3D-GSO/Examples/GSO-LardeauGroup.ttl. The source describes the Lardeau Group (Trout Lake area, British Columbia) - a stratigraphic group composed of Ajax fm and Sharon Creek fm (gsrl:stratUnderlies relationships) plus additional formations in the TTL. This example encodes the Group as a top-level GeologicUnit with hierarchyLink references to constituent Formation features (left as href stubs). Source reference: ResearchGate publication 237174271 (structural geology of Lardeau Group near Trout Lake)."
     snippets:
       - language: json
         ref: examples/geologic_unit_lardeau_group_GSO.json

@@ -30,7 +30,7 @@ TOOLS = [
     "regenerate_schema_json.py",
 ]
 
-# Target repos — paths relative to this repo root
+# Target repos - paths relative to this repo root
 TARGETS = [
     ("../../usgin/ddeBuildingBlocks", "tools"),
     ("../../usgin/ecrrBuildingBlocks", "tools"),

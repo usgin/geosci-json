@@ -370,7 +370,7 @@ def emit_choice_option(opt, opts_col, depth, rows, visited_types):
                 emit_property(cname, cschema, depth + 1, rows, new_visited)
 
     elif kind == "object":
-        # untyped object — show its properties
+        # untyped object - show its properties
         row = make_row()
         row[opts_col] = "object"
         rows.append(row)
@@ -382,7 +382,7 @@ def emit_choice_option(opt, opts_col, depth, rows, visited_types):
                 emit_property(cname, cschema, depth + 1, rows, visited_types)
 
     elif kind == "array":
-        # array option — language tagged etc; just show "array"
+        # array option - language tagged etc; just show "array"
         row = make_row()
         row[opts_col] = "array"
         rows.append(row)
