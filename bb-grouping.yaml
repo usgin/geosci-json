@@ -193,7 +193,13 @@ profiles:
       Feature additionally requires its description slot(s) to be concrete
       Extension classes where one exists; FTs without an extension
       description slot (Anthropogenic / NaturalGeomorphologicFeature,
-      MappedFeature) are pass-through.
+      MappedFeature) are pass-through. The profile also narrows every
+      feature's relatedFeature[] items: where Basic accepts
+      `oneOf [SCLinkObject, AbstractFeatureRelation]`, the Extended profile
+      additionally requires each AbstractFeatureRelation instance to be one
+      of the two concrete subtypes from gsmGeologicRelationExtension
+      (GeologicFeatureRelation or MaterialRelation), while still allowing
+      by-reference SCLinkObject.
     featureTypes:
       - name: AnthropogenicGeomorphologicFeature
         ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#AnthropogenicGeomorphologicFeature
@@ -226,4 +232,15 @@ profiles:
         ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#ShearDisplacementStructure
         extensionConstraintsArray:
           stStructureDescription: ../gsmGeologicStructureExtension/gsmGeologicStructureExtensionSchema.json#ShearDisplacementStructureDescription
+    # Profile-level narrowing applied to every dispatched feature's
+    # relatedFeature[] slot. Basic emits items as
+    # `oneOf [SCLinkObject, AbstractFeatureRelation]`; in this Extended
+    # profile each AbstractFeatureRelation must be one of the concrete
+    # relation subtypes (GeologicFeatureRelation or MaterialRelation).
+    # SCLinkObject (by-reference link) remains allowed for the other arm.
+    featuresConstraintsArrayAnyOf:
+      relatedFeature:
+        - ../gsmBasicGeology/gsmBasicGeologySchema.json#/$defs/SCLinkObject
+        - ../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#GeologicFeatureRelation
+        - ../gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#MaterialRelation
 

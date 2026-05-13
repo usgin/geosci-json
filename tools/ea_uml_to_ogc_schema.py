@@ -605,6 +605,23 @@ DISPATCHER_OVERRIDES_PER_BB: dict[str, list[str]] = {
     "gsmSpecimen": ["SF_Specimen", "ReferenceSpecimen"],
 }
 
+# UML classes excluded from JSON Schema emission entirely (no $def, no
+# dispatch). Mirrors OGC's ShapeChange config tagged value
+#   <TaggedValue name="jsonEncodingRule" value="notEncoded"
+#                modelElementName="^(GSML|GSMLitem)$"/>
+# which treats the GSML collection container and the GSMLitem member-type
+# union as XSD-only constructs that have no JSON encoding. The corresponding
+# JSON-FG concepts are FeatureCollection (for GSML) and a featureType-
+# discriminated dispatch chain (for GSMLitem).
+NOT_ENCODED_CLASSES: set[str] = {"GSML", "GSMLitem"}
+
+# Map of (owning class, attribute name) -> overridden UML type name.
+# Reserved for cases the loader can't auto-detect (none currently — the
+# canonical GeologicFeature.relatedFeature -> AbstractFeatureRelation case is
+# now handled by the AssociationClassMapper logic in _merge_associations,
+# which mirrors the ShapeChange transformer of the same name).
+ATTRIBUTE_TYPE_OVERRIDES: dict[tuple[str, str], str] = {}
+
 
 def _resolve_external_type(key: str) -> dict:
     """Return the schema fragment for an external ISO type identifier
@@ -793,6 +810,26 @@ class EaXmiLoader:
             sub, sup = gm.group(1), gm.group(2)
             self.generalizations.setdefault(sub, []).append(sup)
 
+        # Pass 2.5: pull class-name lookups from sibling XMI files in the same
+        # directory so cross-XMI generalizations resolve. The canonical case is
+        # GSML_QuantityRange extends swe:QuantityRange, where the parent lives
+        # in SWECommon2.0.xmi, not the main GeoSciML XMI. Without this we'd
+        # store "__unresolved_<eaid>__" and lose the chance to emit a $ref to
+        # the external mapped JSON schema (sweCommon/3.0/json/QuantityRange.json).
+        ext_class_re = re.compile(
+            r'<UML:Class\s+name="([^"]+)"\s+xmi\.id="([^"]+)"'
+        )
+        for sibling in self.path.parent.glob("*.xmi"):
+            if sibling.resolve() == self.path.resolve():
+                continue
+            try:
+                sib_text = sibling.read_text(encoding="cp1252", errors="replace")
+            except Exception:
+                continue
+            for em in ext_class_re.finditer(sib_text):
+                ext_name, ext_id = em.group(1), em.group(2)
+                self.id_to_name.setdefault(ext_id, ext_name)
+
         # Stitch supertype class names onto each UmlClass
         for cls_id, uc in self.classes.items():
             for sup_id in self.generalizations.get(cls_id, []):
@@ -893,6 +930,15 @@ class EaXmiLoader:
             assoc_iob = re.search(
                 r'<UML:TaggedValue tag="inlineOrByReference" value="([^"]+)"', body)
             assoc_iob_val = assoc_iob.group(1) if assoc_iob else ""
+            # ShapeChange's AssociationClassMapper equivalent: if this Association
+            # carries an `associationclass` tagged value (EA XMI 1.1 marker),
+            # synthetic Attributes generated from navigable ends are re-typed to
+            # the association class itself, not the partner class. Mirrors OGC's
+            # geoscimlBasic.json shape where GeologicFeature.relatedFeature[].items
+            # references #AbstractFeatureRelation (the AC), not #GeologicFeature.
+            ac_m = re.search(
+                r'<UML:TaggedValue tag="associationclass" value="([^"]+)"', body)
+            ac_name = self.id_to_name.get(ac_m.group(1)) if ac_m else None
 
             ends: list[dict] = []
             for em in end_re.finditer(body):
@@ -935,15 +981,44 @@ class EaXmiLoader:
                 # Default for association role per OGC 24-017r1 = byReference,
                 # unless overridden by an explicit tag on the end or association.
                 iob_val = end["iob"] or assoc_iob_val or "byReference"
+                # AssociationClassMapper: when the Association carries an
+                # `associationclass` tag, the property's type is the AC itself,
+                # not the partner class. (`prop_type` is replaced; owner-class
+                # ends with a property typed by the relation class that mediates
+                # the link.)
+                effective_type = ac_name if ac_name else prop_type
                 owner.attributes.append(Attribute(
                     name=end["name"],
-                    type_name=prop_type,
+                    type_name=effective_type,
                     lower=lo,
                     upper=up,
                     doc=end["doc"],
                     stereotype="associationRole",
                     inline_or_byref=iob_val,
                 ))
+                # AssociationClassMapper second direction: emit the back-
+                # pointing property on the AC itself. Mirrors OGC's
+                # geoscimlBasic.json, where AbstractFeatureRelation carries a
+                # `relatedFeature` slot (singular, required) referencing the
+                # partner class via `oneOf [SCLinkObject, GeologicFeature]`.
+                # From the relation's perspective the target is exactly one
+                # partner-class instance, so lower=upper=1.
+                if ac_name:
+                    ac_id = self.name_to_id.get(ac_name)
+                    if ac_id is not None:
+                        ac_class = self.classes[ac_id]
+                        # Don't double-add if a UML:Attribute or earlier
+                        # association pass already created this slot.
+                        if not any(a.name == end["name"] for a in ac_class.attributes):
+                            ac_class.attributes.append(Attribute(
+                                name=end["name"],
+                                type_name=prop_type,
+                                lower=1,
+                                upper=1,
+                                doc=end["doc"],
+                                stereotype="associationRole",
+                                inline_or_byref=iob_val,
+                            ))
 
     @staticmethod
     def _parse_multiplicity(s: str) -> tuple[int, int]:
@@ -1079,7 +1154,9 @@ class Resolver:
         return self.codelists.get((class_name, attr_name))
 
     def resolve(self, owning_class: str, attr: Attribute) -> ResolvedType:
-        t = attr.type_name
+        # Honor any per-attribute type override before consulting the UML type.
+        # See ATTRIBUTE_TYPE_OVERRIDES for rationale.
+        t = ATTRIBUTE_TYPE_OVERRIDES.get((owning_class, attr.name), attr.type_name)
 
         # 1. ISO 19103 primitive
         if t in ISO_19103_PRIMITIVE_MAP:
@@ -1217,10 +1294,17 @@ class Emitter:
         return self._emit_object_type(cls)
 
     def _is_feature_like(self, cls: UmlClass) -> bool:
-        """True if cls should be emitted as a JSON-FG Feature: «FeatureType»
-        stereotype, an OCL `hierarchyLevel=feature` class constraint, or
-        transitive inheritance from such a class."""
-        if (cls.stereotype or "").lower() == "featuretype":
+        """True if cls should be emitted as a JSON-FG Feature.
+
+        Mirrors OGC's ShapeChange config (geoscimlBasic_jsonfg.xml) which sets
+        `baseJsonSchemaDefinitionForObjectTypes = feature.json` and applies it
+        to both FeatureType and Type stereotypes. So any UML class with
+        identity (FeatureType, Type) becomes a Feature; only DataType / Union /
+        CodeList classes stay flat. Also honored: legacy «type» classes that
+        carry an explicit `self.metadata.hierarchyLevel=feature` OCL constraint,
+        and transitive inheritance from any Feature-like class."""
+        s = (cls.stereotype or "").lower()
+        if s in ("featuretype", "type"):
             return True
         for c in self.loader.constraints_by_class.get(cls.name, []):
             lc = c.lower()
@@ -1318,32 +1402,94 @@ class Emitter:
         parent_ref = self._feature_supertype_ref(cls)
         if parent_ref is not None:
             d["allOf"] = [parent_ref, own_props_envelope]
-        else:
-            d["allOf"] = [
-                {"$ref": JSON_FG_FEATURE_REF},
-                own_props_envelope,
-                {
-                    "required": ["featureType", "id"],
-                    "properties": {"id": {"type": "string"}},
-                },
-            ]
+            return d
+
+        # No Feature-like UML supertype. Before falling back to JSON-FG
+        # Feature as the base, check whether the class has a supertype that
+        # resolves to an external mapped schema (e.g. SWE QuantityRange in
+        # swe-mappings.yaml, or an ISO 19103/19107 mapped type). If so, use
+        # that external schema as the parent and omit the JSON-FG
+        # featureType/id requirement (those don't apply to non-Feature
+        # parents like swe:QuantityRange). Mirrors ShapeChange's
+        # rule-json-cls-virtualGeneralization behaviour against MapEntries.
+        ext_ref = self._external_mapped_supertype_ref(cls)
+        if ext_ref is not None:
+            d["allOf"] = [ext_ref, own_props_envelope]
+            return d
+
+        d["allOf"] = [
+            {"$ref": JSON_FG_FEATURE_REF},
+            own_props_envelope,
+            {
+                "required": ["featureType", "id"],
+                "properties": {"id": {"type": "string"}},
+            },
+        ]
         return d
+
+    def _external_mapped_supertype_ref(self, cls: UmlClass) -> Optional[dict]:
+        """If cls has a UML supertype that resolves to an external mapped
+        schema (SWE, ISO 19103/107 composite/geometry), return a $ref to that
+        external schema. Used by _emit_feature_type when a class with a
+        non-local parent (e.g. GSML_QuantityRange extends swe:QuantityRange)
+        should hang off the external schema instead of being wrapped in
+        json-fg/feature.json."""
+        for sup_name in cls.supertypes:
+            if not sup_name or sup_name.startswith("__unresolved_"):
+                continue
+            # Local UML class -> handled by _feature_supertype_ref already
+            if sup_name in self.loader.name_to_id:
+                continue
+            # SWE 2.0 -> 3.0 substitution (swe-mappings.yaml)
+            if sup_name in self.r.swe:
+                return {"$ref": self.r.swe[sup_name]["ref"]}
+            # ISO 19107 geometry types
+            if sup_name in ISO_19107_GEOMETRY_MAP:
+                return {"$ref": ISO_19107_GEOMETRY_MAP[sup_name]}
+            # ISO 19103 composites (ScopedName, NamedValue, etc.)
+            if sup_name in ISO_19103_COMPOSITES:
+                ns = ISO_19103_COMPOSITES[sup_name]
+                return _resolve_external_type(f"{ns}:{sup_name}")
+        return None
 
     def _build_feature_type_own_envelope(self, cls: UmlClass) -> dict:
         """Build the {type: object, properties: { properties: { ... } } }
         envelope for a FeatureType - class-specific fields live inside the
-        JSON-FG `properties` member."""
+        JSON-FG `properties` member. Inner properties whose UML multiplicity
+        is lower>=1 are listed in `required` (matches OGC's emission, e.g.
+        AbstractFeatureRelation.required = [relatedFeature]).
+
+        UML attribute names that ShapeChange maps to JSON-FG root members
+        (`identifier` -> `id`, `entityType` -> `featureType`, `shape` ->
+        `geometry`/`place`) are excluded from the inner required list -
+        OGC's rule-json-cls-restrictExternalIdentifierMember /
+        rule-json-cls-restrictExternalEntityTypeMember do the equivalent.
+        We still emit them as inner properties (a partial divergence from
+        ShapeChange, which strips them entirely) but don't enforce them as
+        required since they're satisfied by the JSON-FG root slots."""
         inner_props: dict = OrderedDict()
+        required: list[str] = []
+        # JSON-FG-reserved name equivalents. UML lower>=1 on these slots is
+        # satisfied by the JSON-FG root member, not by an inner property.
+        FG_RESERVED_NAMES = {"identifier", "entityType", "shape"}
         for a in cls.attributes:
             inner_props[a.name] = self._build_attribute_schema(cls.name, a)
+            if a.lower >= 1 and a.name not in FG_RESERVED_NAMES:
+                required.append(a.name)
+        inner_obj: dict = OrderedDict()
+        inner_obj["type"] = "object"
+        inner_obj["properties"] = inner_props
+        if required:
+            inner_obj["required"] = required
         envelope: dict = OrderedDict()
         envelope["type"] = "object"
-        envelope["properties"] = {
-            "properties": {
-                "type": "object",
-                "properties": inner_props,
-            }
-        }
+        envelope["properties"] = {"properties": inner_obj}
+        # If any inner property is required, the outer `properties` envelope
+        # itself must exist on the instance. OGC's emission applies this
+        # consistently (e.g. AbstractFeatureRelation.required = ["properties"];
+        # GSML_QuantityRange.required = ["properties"]).
+        if required:
+            envelope["required"] = ["properties"]
         return envelope
 
     def _emit_object_type(self, cls: UmlClass) -> dict:
@@ -1453,6 +1599,8 @@ class Emitter:
 def collect_group_classes(loader: EaXmiLoader, packages: set[str]) -> list[UmlClass]:
     out: list[UmlClass] = []
     for cls in loader.classes.values():
+        if cls.name in NOT_ENCODED_CLASSES:
+            continue
         if cls.package_path and cls.package_path[-1] in packages:
             out.append(cls)
     out.sort(key=lambda c: c.name)
@@ -1739,6 +1887,7 @@ def load_grouping(config_path: Path) -> tuple[dict[str, dict], dict[str, str], d
         profiles[prof_name] = {
             "description": entry.get("description", "") or "",
             "featureTypes": list(entry["featureTypes"]),
+            "featuresConstraintsArrayAnyOf": entry.get("featuresConstraintsArrayAnyOf") or {},
         }
     return bbs, package_to_bb, profiles
 
@@ -1833,6 +1982,15 @@ def build_profile_schema(profile_name: str, info: dict) -> dict:
       extensionConstraints:       scalar slot -> $ref (applied to
                                   properties.properties.<slot>)
       extensionConstraintsArray:  array slot -> $ref (constrains items)
+
+    Profile-level options (apply to every dispatched feature regardless of
+    featureType):
+      featuresConstraintsArrayAnyOf: dict of slot -> list[$ref]. Emits a new
+        top-level allOf clause requiring every feature's
+        properties.<slot>.items to validate against `anyOf [{$ref: each}]`.
+        Use to narrow an abstract slot (e.g. relatedFeature whose Basic items
+        type is AbstractFeatureRelation) to a fixed set of concrete subtypes
+        in the profile.
     """
     ft_entries = info["featureTypes"]
     ft_names = [e["name"] for e in ft_entries]
@@ -1857,22 +2015,51 @@ def build_profile_schema(profile_name: str, info: dict) -> dict:
         "then": False,
     })
 
+    allof_items: list[dict] = [
+        {"$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"},
+        {
+            "type": "object",
+            "properties": {
+                "features": {
+                    "type": "array",
+                    "items": {"allOf": branches},
+                }
+            },
+        },
+    ]
+
+    # Optional profile-level slot narrowing applied to every feature.
+    extra = info.get("featuresConstraintsArrayAnyOf") or {}
+    if extra:
+        slot_props: dict = OrderedDict()
+        for slot, refs in extra.items():
+            slot_props[slot] = {
+                "type": "array",
+                "items": {"anyOf": [{"$ref": r} for r in refs]},
+            }
+        allof_items.append({
+            "type": "object",
+            "properties": {
+                "features": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "properties": {
+                                "type": "object",
+                                "properties": slot_props,
+                            }
+                        },
+                    },
+                }
+            },
+        })
+
     return OrderedDict([
         ("$schema", "https://json-schema.org/draft/2020-12/schema"),
         ("$id", f"https://schemas.usgin.org/geosci-json/{profile_name}/{profile_name}Schema.json"),
         ("description", info["description"].strip()),
-        ("allOf", [
-            {"$ref": "https://schemas.opengis.net/json-fg/featurecollection.json"},
-            {
-                "type": "object",
-                "properties": {
-                    "features": {
-                        "type": "array",
-                        "items": {"allOf": branches},
-                    }
-                },
-            },
-        ]),
+        ("allOf", allof_items),
     ])
 
 
