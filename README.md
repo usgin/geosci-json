@@ -4,20 +4,21 @@ JSON Schema building blocks for geoscience metadata, generated from the **GeoSci
 
 ## Status
 
-**10 building blocks** (consolidated from the XMI's 19 UML packages plus 1 hand-curated FC profile), **147 class definitions** preserved 1:1 from the source UML, **61 example instances** validating clean. Cross-BB `$ref` resolution and FC dispatch are exercised end-to-end.
+**11 building blocks** (9 UML-driven from the XMI's 19 UML packages + 2 hand-authored FC profiles), **145 class definitions** preserved 1:1 from the source UML (excluding `GSML` and `GSMLitem` which OGC's ShapeChange config marks as `notEncoded`), **62 example instances** validating clean. Cross-BB `$ref` resolution and FC dispatch are exercised end-to-end. `gsmBasicGeology`'s `$defs` is byte-equivalent to OGC's published `geoscimlBasic.json` (54 anchors, zero diff).
 
 | BB | Role | Dispatchable featureTypes |
 | --- | --- | --- |
 | `gsmBasicGeology` | Basic library + merged Feature/FC dispatcher | 9 (GeologicUnit, MappedFeature, Contact, Fold, Foliation, ShearDisplacementStructure, GeologicEvent, AnthropogenicGeomorphologicFeature, NaturalGeomorphologicFeature) |
 | `gsmscimlLite` | Lite views | 7 |
 | `gsmSpecimen` | Specimen | 2 (SF_Specimen [ISO 19156 §8.6, hand-curated], ReferenceSpecimen) |
-| `gsmEarthMaterial` | EarthMaterial library + merged dispatch via `wrapAsFeature` | 4 (Mineral, OrganicMaterial, RockMaterial, CompoundMaterial) |
+| `gsmEarthMaterial` | EarthMaterial library + merged dispatch | 4 (Mineral, OrganicMaterial, RockMaterial, CompoundMaterial) |
 | `gsmGeologicStructureExtension` | Structure Extension | 6 (DisplacementEvent, FoldSystem, Joint, Layering, Lineation, NonDirectionalStructure) |
 | `gsmGeologicUnitExtension` | GeologicUnit DataType library | - |
 | `gsmGeologicRelationExtension` | GeologicRelation DataType library | - |
 | `gsmBorehole` | Borehole | 3 (Borehole, BoreholeInterval, OriginPosition) |
 | `gsmGeologicTime` | Geologic time, OWL-Time aligned | 6 (GeochronologicEra [Cox & Richard 2015 ≡ time:ProperInterval], GeochronologicBoundary [≡ time:Instant], plus 4 stratotype FTs) |
-| `gsmExtendedGeologyCollection` | FC profile - all 9 Basic FTs with Extension description-slot constraints | 9 |
+| `gsmExtendedGeology` | FC profile - 9 Basic FTs (with Extension description-slot narrowing) + 6 Extension structure FTs. Functionally equivalent to OGC's `geosciml_extension_featurecollection.json`. | 15 |
+| `gsmCompleteGeology` | FC profile - superset of `gsmExtendedGeology` adding 2 Relations, 4 Materials, 6 Time FTs. Catch-all for any GeoSciML Feature class. | 27 |
 
 ## Per-BB layout (bblocks-template + CDIF extensions)
 
@@ -79,14 +80,22 @@ The generator reads `bb-grouping.yaml` for the BB→package mapping AND per-BB d
 
 Full rationale in [swe-types-used.md](swe-types-used.md) and [agents.md](agents.md).
 
-- **Base format**: JSON-FG for `«FeatureType»`; plain JSON object schemas for `«DataType»`/`«Type»`; `{type: string, format: uri}` for `«CodeList»` (or `{type: string, enum: [...]}` if the UML CodeList has inline enumeration members - currently only `DescriptionPurpose`).
-- **JSON-FG envelope**: FeatureType own properties live under `properties.properties.<x>` (the double-`properties` nesting is JSON-Schema syntax + GeoJSON envelope key, not redundancy - see agents.md).
+- **Base format**: JSON-FG for `«FeatureType»` **and `«Type»`** (matches OGC ShapeChange's `baseJsonSchemaDefinitionForObjectTypes = feature.json`); plain JSON object schemas for `«DataType»`/`«Union»`; `{type: string, format: uri}` for `«CodeList»` (or `{type: string, enum: [...]}` if the UML CodeList has inline enumeration members - currently only `DescriptionPurpose`). Feature-detection is implemented in `Emitter._is_feature_like`: stereotype, OCL `hierarchyLevel=feature`, OR transitive inheritance from a Feature-like class.
+- **JSON-FG envelope**: FeatureType own properties live under `properties.properties.<x>` (the double-`properties` nesting is JSON-Schema syntax + GeoJSON envelope key, not redundancy - see agents.md). Inner properties with UML `lower>=1` are listed in `required`, and the outer `properties` envelope is also required when any inner property is required (matches OGC's emission pattern for `AbstractFeatureRelation`, `GSML_QuantityRange`, etc.). JSON-FG-reserved UML names (`identifier`, `entityType`, `shape`) are emitted as inner properties but excluded from `required` (they map to JSON-FG root members `id`, `featureType`, `geometry`/`place`).
+- **AssociationClassMapper**: when a UML Association carries an `associationclass` tagged value (EA XMI 1.1 marker), the navigable end's synthetic property on the partner class is re-typed to the AC, AND the AC itself receives a back-pointing property typed by the partner (`lower=upper=1`). Mirrors ShapeChange's transformer of the same name. Canonical effect: `GeologicFeature.relatedFeature[].items` references `#AbstractFeatureRelation`, and `AbstractFeatureRelation` itself carries a required `relatedFeature` slot pointing to a `GeologicFeature`.
+- **External-mapped supertype**: when a class has a supertype that's an external mapped schema (SWE, ISO 19103/107) rather than a local UML class, `_emit_feature_type` uses the external schema as the parent ref (via `_external_mapped_supertype_ref`) instead of falling back to `json-fg/feature.json`. Sibling `*.xmi` files in the same directory (e.g. `SWECommon2.0.xmi`) are scanned at load time to populate the class-name lookup for cross-XMI generalizations. Canonical effect: `GSML_QuantityRange` extends SWE 3.0 `QuantityRange.json` directly, matching OGC.
+- **Optional attributes**: emitted bare (omit-when-not-present convention). No `oneOf [{type: null}, ...]` wrap. Matches OGC's explicit exclusion of `rule-json-prop-voidable`. Optionality is conveyed by absence from `required`.
+- **Not-encoded classes** (`NOT_ENCODED_CLASSES`): `GSML` and `GSMLitem` are excluded from `$defs` emission, matching OGC's `<TaggedValue name="jsonEncodingRule" value="notEncoded" modelElementName="^(GSML|GSMLitem)$"/>`. Their JSON-FG equivalents (`featurecollection.json` + featureType-discriminated dispatch chain) cover the same ground.
 - **Merged Feature/FC schema per BB**: each FT-bearing BB ships ONE `<bb>Schema.json` with a root `if/then/else` on `type` - `type=FeatureCollection` validates as JSON-FG FC with `features.items` dispatched via `_FeatureDispatch`, otherwise dispatched as a single Feature.
 - **SWE Common 2.0 → 3.0 substitution**: `Quantity`, `QuantityRange`, `DataRecord` → SWE 3.0 URLs via `swe-mappings.yaml`. SWE::Category → SWE 3.0 `Category.json`.
 - **By-reference encoding**: each schema has a local `$defs.SCLinkObject` (the ShapeChange-conventional implementation of [OGC API Link Object](https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json) per RFC 8288). Type-with-identity targets get `oneOf [SCLinkObject, $ref Class]` - accepting either inline content or a link reference.
 - **Hand-curated extensions** (added because the source XMI didn't include them): `SF_Specimen` (ISO 19156 §8.6), `GeochronologicEra` / `GeochronologicBoundary` (Cox & Richard 2015 - aligns to W3C OWL-Time `time:ProperInterval` / `time:Instant`). See `EXTRA_DEFS_PER_BB` in the generator.
 - **OWL-Time alignment for `iso19108:TM_Period` / `TM_Instant`**: accept SCLinkObject, OWL-Time object form (`hasBeginning`/`hasEnd` or `hasBeginningDateTime`/`hasEndDateTime`), or compact tuple `[start, end]`. Canonical encoding is the OWL-Time object form.
 - **CDIF cross-references for ISO 19115 metadata**: `CI_Responsibility` → `anyOf [SCLinkObject, CDIF agentInRole]`; `ScopedName` → `anyOf [SCLinkObject, CDIF definedTerm, CDIF skosConcept]`; `NamedValue` → `anyOf [SCLinkObject, CDIF variableMeasured]`.
+
+## Known modelling gaps
+
+- **EarthMaterial description properties are not captured in the JSON implementation** because the UML model does not fully capture the association of `CompoundMaterialDescription` to `CompoundMaterial`, or `RockMaterialDescription` to `RockMaterial`. The Extension `*Description` classes exist as standalone anchors (`gsmEarthMaterial#CompoundMaterialDescription`, `gsmEarthMaterial#RockMaterialDescription`) and can be carried via the `gbMaterialDescription` slot on `GeologicUnit` (narrowed in the `gsmExtendedGeology` / `gsmCompleteGeology` profiles to `CompoundMaterialDescription`), but the material classes themselves don't expose a typed description slot. Closing this gap requires a UML revision that re-introduces the association ends.
 
 ## CI / build
 

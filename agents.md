@@ -58,20 +58,21 @@ geosci-json/
 └── README.md, agents.md, USAGE.md, LICENSE
 ```
 
-## BB inventory (10 BBs, 147 class defs, 61 examples)
+## BB inventory (11 BBs - 9 UML-driven + 2 FC profiles - 145 class defs, 62 examples)
 
 | BB | UML packages | Dispatcher | Note |
 | --- | --- | --- | --- |
-| `gsmBasicGeology` | GeoSciMLBasic, Collection, GSML_DataTypes, GeologicEvent, GeologicStructure, GeologyBasic, Geomorphology | 9 FTs | Foundation; other BBs `$ref` here. |
+| `gsmBasicGeology` | GeoSciMLBasic, Collection, GSML_DataTypes, GeologicEvent, GeologicStructure, GeologyBasic, Geomorphology | 9 FTs | Foundation; other BBs `$ref` here. `$defs` byte-equivalent to OGC's geoscimlBasic.json (54 anchors). |
 | `gsmscimlLite` | GeoSciMLLite | 7 FTs | Flat Lite views |
 | `gsmSpecimen` | LaboratoryAnalysis-Specimen + 3 sub-packages | 2 FTs (SF_Specimen, ReferenceSpecimen) | `SF_Specimen` hand-curated (ISO 19156 §8.6). The other 7 LabAnalysis classes stay in `$defs` as `$ref` targets but aren't dispatched. |
-| `gsmEarthMaterial` | EarthMaterialDetails | 4 FTs via `wrapAsFeature` | Merged from former gsmEarthMaterialExtension + gsmEarthMaterialCollection. Mineral / OrganicMaterial / RockMaterial / CompoundMaterial are «Type» (not «FeatureType»); profile injects the JSON-FG envelope. |
+| `gsmEarthMaterial` | EarthMaterialDetails | 4 FTs (Mineral, OrganicMaterial, RockMaterial, CompoundMaterial) | The 4 materials are «Type» stereotype; `_is_feature_like` (Option 3) emits them as JSON-FG Features without needing `wrapAsFeature`. |
 | `gsmGeologicStructureExtension` | GeologicStructureDetails | 6 FTs | DisplacementEvent, FoldSystem, Joint, Layering, Lineation, NonDirectionalStructure |
 | `gsmGeologicUnitExtension` | GeologicUnitDetails | - | DataType library (GeologicUnitDescription, BeddingDescription) |
-| `gsmGeologicRelationExtension` | GeologicRelation | - | DataType library (typed binary relations) |
+| `gsmGeologicRelationExtension` | GeologicRelation | - | DataType library (typed binary relations: GeologicFeatureRelation, MaterialRelation, GeologicRelationshipTerm, RelationRoleTerm) |
 | `gsmBorehole` | Borehole | 3 FTs | Borehole, BoreholeInterval, OriginPosition |
 | `gsmGeologicTime` | GeologicTime, GSSP, TemporalReferenceSystem, TimeScale, GeologicAgeDetails | 6 FTs | `GeochronologicEra` + `GeochronologicBoundary` hand-curated, Cox & Richard 2015 / OWL-Time aligned. |
-| `gsmExtendedGeologyCollection` | (FC profile, no packages) | 9 FTs | All 9 gsmBasicGeology FTs with applicable extension description-slot constraints. |
+| `gsmExtendedGeology` | (FC profile, no packages) | 15 FTs | 9 Basic + 6 Extension structure FTs. Profile-level `relatedFeature[]` narrowing to anyOf [SCLinkObject, GeologicFeatureRelation, MaterialRelation]. Functionally equivalent to OGC's `geosciml_extension_featurecollection.json`. |
+| `gsmCompleteGeology` | (FC profile, no packages) | 27 FTs | Superset of gsmExtendedGeology adding 2 Relations + 4 Materials + 6 Time FTs. No profile-level relatedFeature narrowing (incompatible with singular target on relation features). Catch-all for any GeoSciML Feature class. |
 
 ## Generator config: `bb-grouping.yaml`
 
@@ -118,12 +119,16 @@ When deciding what featureType values to accept:
 
 | Topic | Decision |
 | --- | --- |
-| Base format | JSON-FG for «FeatureType»; plain JSON for «DataType»/«Type»; `{type: string, format: uri}` for «CodeList» |
-| «CodeList» with inline enum members | `{type: string, enum: [...]}` (only `DescriptionPurpose` in GeoSciML 4.1) |
-| «Union» encoding | `oneOf` over value types (only `GSMLitem`) |
-| FeatureType envelope | `allOf [<parent ref>, <properties.properties.<own>>, <required featureType+id on root>]` |
+| Base format | JSON-FG for «FeatureType» AND «Type» (Option 3, matches OGC's `baseJsonSchemaDefinitionForObjectTypes = feature.json`); plain JSON for «DataType»/«Union»; `{type: string, format: uri}` for «CodeList» |
+| Feature-like detection | `Emitter._is_feature_like(cls)` returns True if (a) stereotype is «FeatureType» or «Type», OR (b) OCL constraint `hierarchyLevel=feature` on the class, OR (c) transitive ancestry via UML supertype. Drives `emit_class` dispatch to `_emit_feature_type` vs `_emit_object_type`. |
+| «CodeList» with inline enum members | `{type: string, format: uri}` (`enum` dropped; inline UML enum members surfaced via description text only) |
+| «Union» encoding | `oneOf` over value types (none currently emitted; `GSMLitem` is `notEncoded`) |
+| Not-encoded classes | `NOT_ENCODED_CLASSES = {"GSML", "GSMLitem"}` - skipped at `collect_group_classes()` time. JSON analog of OGC's `<TaggedValue name="jsonEncodingRule" value="notEncoded" modelElementName="^(GSML|GSMLitem)$"/>`. |
+| FeatureType envelope | `allOf [<parent ref>, <properties.properties.<own>>, <required featureType+id on root>]`. Inner `required[]` populated from UML `lower>=1` attrs (excluding JSON-FG-reserved names `identifier`/`entityType`/`shape`); outer `required: [properties]` added when any inner property is required. |
+| External-mapped supertype | when a class's supertype is an external mapped schema (SWE/ISO/etc.) rather than a local UML class, `_external_mapped_supertype_ref()` returns that schema's URL as the parent ref instead of `json-fg/feature.json`. Sibling `*.xmi` files (e.g. `SWECommon2.0.xmi`) are scanned at load time for cross-XMI class-name resolution. Canonical case: `GSML_QuantityRange` extends SWE 3.0 `QuantityRange.json`. |
+| AssociationClassMapper | when `<UML:Association>` carries `<UML:TaggedValue tag="associationclass" value="<xid>">`, the navigable end's synthetic property on the partner is re-typed to the AC, AND the AC itself receives a back-pointing property typed by the partner (`lower=upper=1`). Mirrors ShapeChange's transformer. Effect: `GeologicFeature.relatedFeature[].items` references `#AbstractFeatureRelation`; `AbstractFeatureRelation.relatedFeature` (singleton, required) references `#GeologicFeature`. |
 | Merged Feature/FC schema per BB | root `if/then/else` on `type`: FeatureCollection branch wraps json-fg/featurecollection with items dispatched via `_FeatureDispatch`; else-branch routes single Feature via same helper |
-| Optional values | `oneOf [{type:null}, <inner>]` (allows explicit null) |
+| Optional values | inner schema directly (omit-when-not-present convention). NO `oneOf [{type: null}, ...]` wrap. Optionality is conveyed by absence from `required`. Matches OGC's exclusion of `rule-json-prop-voidable`. |
 | By-reference encoding | local `$defs.SCLinkObject` (the [OGC API Link Object](https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json) shape per RFC 8288, ShapeChange-conventional name). Type-with-identity targets get `oneOf [SCLinkObject, $ref Class]`. UML `byReference` tag is overridden: emit oneOf (inline + ref) regardless - matches OGC code-sprint convention. |
 | Cross-BB refs | `../<bb>/<bb>Schema.json#<ClassName>` |
 | External ISO types | resolved via `EXTERNAL_TYPE_RESOLUTION` table in the generator. See "External types" below. |
@@ -131,6 +136,7 @@ When deciding what featureType values to accept:
 | SWE::Category | `$ref` to SWE 3.0 `Category.json` |
 | `entityType` discriminator | NOT used - `featureType` alone is the discriminator |
 | OCL constraints | embedded in `description`, prefixed `Constraint:` |
+| Unicode dashes | em-dash (U+2014) and en-dash (U+2013) normalized to ASCII hyphen at XMI decode time (in `EaXmiLoader.__init__`) so generated schema/example strings stay pure ASCII. |
 
 ## External type resolution (`EXTERNAL_TYPE_RESOLUTION`)
 
@@ -253,9 +259,22 @@ profiles:
       - name: FooFeature
         ref: ../gsmBasicGeology/gsmBasicGeologySchema.json#FooFeature
         # optional extensionConstraints / extensionConstraintsArray / wrapAsFeature
+    # Optional profile-level slot narrowing applied to every feature in features[].
+    # Each slot's items get an additional `anyOf [<list of $refs>]` constraint.
+    # Used by gsmExtendedGeology to narrow relatedFeature[] items from the Basic
+    # `oneOf [SCLinkObject, AbstractFeatureRelation]` to the concrete relation
+    # subtypes. Don't combine with dispatch entries whose own schema uses the
+    # slot as a singleton (e.g. relation features) - the array constraint will
+    # conflict.
+    featuresConstraintsArrayAnyOf:
+      relatedFeature:
+        - ../gsmBasicGeology/gsmBasicGeologySchema.json#/$defs/SCLinkObject
+        - ../gsmGeologicRelationExtension/.../#GeologicFeatureRelation
 ```
 
 The generator emits `_sources/gsmMyProfile/gsmMyProfileSchema.json` + the standard layout.
+
+The two FC profiles in this repo (`gsmExtendedGeology`, `gsmCompleteGeology`) demonstrate the pattern. `gsmExtendedGeology` is the strict OGC-equivalent profile (15 FTs, with relatedFeature narrowing); `gsmCompleteGeology` is the catch-all (27 FTs, no profile-level narrowing because relations dispatch makes that incompatible).
 
 ## Validation
 
@@ -263,7 +282,7 @@ The generator emits `_sources/gsmMyProfile/gsmMyProfileSchema.json` + the standa
 
 Pre-fill the cache by running validate_all once; subsequent runs go from minutes to seconds.
 
-Current status: **61 / 61 examples validate clean**.
+Current status: **62 / 62 examples validate clean**. `gsmBasicGeology/resolvedSchema.json` is byte-equivalent to OGC's `geoscimlBasic.json` $defs library (54 anchors, zero diff). `gsmExtendedGeology` is functionally equivalent to OGC's `geosciml_extension_featurecollection.json` (37/37 example agreement). `gsmGeologicStructureExtension` matches OGC's Extension FC dispatch (6 FTs).
 
 ## Process notes for agents
 
