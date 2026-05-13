@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmscimlLite - gsmscimlLite
-Generated 2026-05-13T15:09:30.292341+00:00
+Generated 2026-05-13T16:56:59.501153+00:00
 === Files ===
 Using examples/geosciml_lite_featurecollection_mixed.json from examples
 === End Files ===

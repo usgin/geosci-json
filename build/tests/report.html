@@ -64,9 +64,9 @@
     <body>
         <div class="container">
             <h1 class="title">Building blocks validation report</h1>
-            <small class="datetime">Generated at 2026-05-13T15:09:30.332519+00:00</small>
+            <small class="datetime">Generated at 2026-05-13T16:56:59.536592+00:00</small>
                 <p class="summary fw-semibold text-danger">
-                    Number of passing building blocks: 8 / 10 (80%)
+                    Number of passing building blocks: 7 / 10 (70%)
                 </p>
             <div class="text-end small" id="expand-collapse">
                 <a href="#" class="expand-all">Expand all</a>
@@ -812,7 +812,7 @@
                         </div>
                         <div class="accordion-item bblock-report" data-bblock-id="usgin.bbr.geosci.gsmEarthMaterial" id="bblock-usgin.bbr.geosci.gsmEarthMaterial">
                             <h2 class="accordion-header bblock-title anchor-container">
-                                <button class="accordion-button collapsed" type="button"
+                                <button class="accordion-button " type="button"
                                     data-bs-toggle="collapse"
                                     data-bs-target="#bblock-collapse-usgin\.bbr\.geosci\.gsmEarthMaterial">
                                     <div class="flex-fill">
@@ -821,16 +821,16 @@
                                         <a class="anchor" href="#bblock-usgin.bbr.geosci.gsmEarthMaterial">¶</a>
                                     </div>
 
-                                    <span class="badge text-bg-success me-2">
-                                            Passed
-                                            (100% passed)
+                                    <span class="badge text-bg-danger me-2">
+                                            Tests Failed
+                                            (0% passed)
                                     </span>
                                 </button>
                             </h2>
-                            <div class="accordion-collapse collapse " id="bblock-collapse-usgin.bbr.geosci.gsmEarthMaterial">
+                            <div class="accordion-collapse collapse show" id="bblock-collapse-usgin.bbr.geosci.gsmEarthMaterial">
                                 <div class="accordion-body">
-                                        <p class="summary fw-semibold text-success">
-                                            Test passed: 1 / 1
+                                        <p class="summary fw-semibold text-danger">
+                                            Test passed: 0 / 1
                                         </p>
                                         <div class="card mb-2 validation-item " id="item-usgin.bbr.geosci.gsmEarthMaterial-1">
                                             <div class="card-body">
@@ -846,7 +846,7 @@
                                                     <span class="badge bg-secondary example">Example</span>
                                                     <a class="anchor" href="#item-usgin.bbr.geosci.gsmEarthMaterial-1">¶</a>
                                                     <div class="float-end">
-                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                            <span class="badge text-bg-danger me-2">Failed</span>
                                                     </div>
                                                 </div>
                                                 <div class="card-text mt-2 validation-text collapse" id="uid-26">
@@ -854,7 +854,27 @@
                                                                     <div class="font-monospace subsection-title mt-2">Files</div>
                                                                     <div class="font-monospace entry-message section-files ">Using examples/fc_bolsa_quartzite_GSO.json from examples</div>
                                                                     <div class="font-monospace subsection-title mt-2">JSON Schema</div>
-                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                                    <div class="font-monospace entry-message section-json_schema text-danger">ValidationError: &#x27;featureType&#x27; is a required property
+
+Failed validating &#x27;required&#x27; in schema[&#x27;then&#x27;][&#x27;allOf&#x27;][1][&#x27;properties&#x27;][&#x27;features&#x27;][&#x27;items&#x27;][&#x27;allOf&#x27;][2][&#x27;then&#x27;][&#x27;allOf&#x27;][2][&#x27;properties&#x27;][&#x27;properties&#x27;][&#x27;allOf&#x27;][0][&#x27;allOf&#x27;][0][&#x27;allOf&#x27;][0][&#x27;allOf&#x27;][2]:
+    {&#x27;properties&#x27;: {&#x27;id&#x27;: {&#x27;type&#x27;: &#x27;string&#x27;}},
+     &#x27;required&#x27;: [&#x27;featureType&#x27;, &#x27;id&#x27;]}
+
+On instance[&#x27;features&#x27;][0][&#x27;properties&#x27;]:
+    {&#x27;color&#x27;: [{&#x27;definition&#x27;: &#x27;http://example.org/cgi/color/light-grey&#x27;,
+                &#x27;label&#x27;: &#x27;light grey to white&#x27;,
+                &#x27;type&#x27;: &#x27;Category&#x27;}],
+     &#x27;gbEarthMaterialDescription&#x27;: [{&#x27;$comment&#x27;: &#x27;RockMaterialDescription &#x27;
+                                                 &#x27;- content shape, not &#x27;
+                                                 &#x27;strictly required by &#x27;
+                                                 &#x27;schema&#x27;,
+                                     &#x27;consolidationDegree&#x27;: {&#x27;definition&#x27;: &#x27;http://resource.geosciml.org/classifier/cgi/consolidationdegree&#x27;,
+                                                             &#x27;label&#x27;: &#x27;consolidated&#x27;,
+                                                             &#x27;type&#x27;: &#x27;Category&#x27;,
+                                                             &#x27;value&#x27;: &#x27;http://resource.geosciml.org/classifier/cgi/consolidationdegree/consolidated&#x27;},
+                                     &#x27;lithology&#x27;: &#x27;http://resource.geosciml.org/classifier/cgi/simplelithology/arkose&#x27;}],
+     &#x27;lithology&#x27;: &#x27;http://resource.geosciml.org/classifier/cgi/simplelithology/arkose&#x27;,
+     &#x27;purpose&#x27;: &#x27;typicalNorm&#x27;}</div>
                                                     </div>
                                                 </div>
                                             </div>

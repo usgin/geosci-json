@@ -2,8 +2,8 @@
   "title": "Validation report for usgin.bbr.geosci.gsmEarthMaterial - gsmEarthMaterial",
   "bblockName": "gsmEarthMaterial",
   "bblockId": "usgin.bbr.geosci.gsmEarthMaterial",
-  "generated": "2026-05-13T15:09:12.881772+00:00",
-  "result": true,
+  "generated": "2026-05-13T16:56:37.254258+00:00",
+  "result": false,
   "items": [
     {
       "source": {
@@ -15,7 +15,7 @@
         "snippetIndex": 1,
         "language": "application/json"
       },
-      "result": true,
+      "result": false,
       "sections": [
         {
           "name": "FILES",
@@ -33,9 +33,11 @@
           "entries": [
             {
               "op": "validation",
-              "result": true,
-              "isError": false,
-              "message": "Validation passed"
+              "result": false,
+              "exception": "ValidationError",
+              "errorMessage": "'featureType' is a required property",
+              "isError": true,
+              "message": "ValidationError: 'featureType' is a required property\n\nFailed validating 'required' in schema['then']['allOf'][1]['properties']['features']['items']['allOf'][2]['then']['allOf'][2]['properties']['properties']['allOf'][0]['allOf'][0]['allOf'][0]['allOf'][2]:\n    {'properties': {'id': {'type': 'string'}},\n     'required': ['featureType', 'id']}\n\nOn instance['features'][0]['properties']:\n    {'color': [{'definition': 'http://example.org/cgi/color/light-grey',\n                'label': 'light grey to white',\n                'type': 'Category'}],\n     'gbEarthMaterialDescription': [{'$comment': 'RockMaterialDescription '\n                                                 '- content shape, not '\n                                                 'strictly required by '\n                                                 'schema',\n                                     'consolidationDegree': {'definition': 'http://resource.geosciml.org/classifier/cgi/consolidationdegree',\n                                                             'label': 'consolidated',\n                                                             'type': 'Category',\n                                                             'value': 'http://resource.geosciml.org/classifier/cgi/consolidationdegree/consolidated'},\n                                     'lithology': 'http://resource.geosciml.org/classifier/cgi/simplelithology/arkose'}],\n     'lithology': 'http://resource.geosciml.org/classifier/cgi/simplelithology/arkose',\n     'purpose': 'typicalNorm'}"
             }
           ]
         }
@@ -45,7 +47,7 @@
   "globalErrors": {},
   "counts": {
     "total": 1,
-    "passed": 1,
-    "failed": 0
+    "passed": 0,
+    "failed": 1
   }
 }

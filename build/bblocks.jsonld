@@ -194,7 +194,7 @@
   "name": "Building Blocks - GeoSci JSON Building Blocks repository",
   "abstract": "Repository assembling building blocks for geoscience JSON metadata, using OGC building block patterns.\n",
   "description": "Modular JSON Schema building blocks for geoscience metadata and profiles.\n",
-  "modified": "2026-05-13T15:04:02.771929",
+  "modified": "2026-05-13T16:51:22.502762",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"6b01f188cc614cc2e65f4bf86a2623f98f101dfd",
@@ -494,7 +494,7 @@
       "sourceLdContext": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/context.jsonld",
       "resolvedSchemaProperties": "https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmEarthMaterial/resolvedProperties.json",
       "sourceFiles": "https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/",
-      "validationPassed": true,
+      "validationPassed": false,
       "testOutputs": "https://github.com/usgin/geosci-json/blob/main/build/tests/bbr/geosci/gsmEarthMaterial/",
       "documentation": {
         "json-full": {

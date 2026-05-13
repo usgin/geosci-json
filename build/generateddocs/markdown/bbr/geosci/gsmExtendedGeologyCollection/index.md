@@ -65,8 +65,11 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region,
 #### json
 ```json
 {
-  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region, Western Australia). The source TTL distinguishes between fault STRUCTURES (Moona Fault, fault_A1, fault_A2, fault_3496 - typed as gsfa:High_Angle_Fault) and fault TRACES on the earth surface (faulttrace_11445, faulttrace_15546, faulttrace_3496, faulttrace_7439 - typed as gsfa:Fault and hosted by gsoc:earthsurface, isPartOf the parent fault structure). The traces correspond well to MappedFeature instances representing the surface expression of a buried/subsurface ShearDisplacementStructure. This FC encodes the four fault traces as MappedFeature features and notes the spatial-relationship attributes (gsrl:spatiallyTouches, gsrl:spatiallyTruncates) in comments. The Extended profile's MappedFeature branch is pass-through (no extension description slot), so this validates against the same dispatcher as the Basic profile would.",
+  "$comment": "Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region, Western Australia). The source TTL distinguishes between fault STRUCTURES (Moona Fault, fault_A1, fault_A2, fault_3496 - typed as gsfa:High_Angle_Fault) and fault TRACES on the earth surface (faulttrace_11445, faulttrace_15546, faulttrace_3496, faulttrace_7439 - typed as gsfa:Fault and hosted by gsoc:earthsurface, isPartOf the parent fault structure). The traces correspond well to MappedFeature instances representing the surface expression of a buried/subsurface ShearDisplacementStructure. Spatial relations between traces (gsrl:spatiallyTouches, gsrl:spatiallyTruncates) and a fault-vs-contact crosscutting relation (gsrl:crosscuts) from the source TTL are encoded here as GeologicFeatureRelation Feature items in each source's relatedFeature[] array - which the gsmExtendedGeologyCollection profile narrows from the Basic AbstractFeatureRelation to anyOf [SCLinkObject, GeologicFeatureRelation, MaterialRelation]. The relation's `relatedFeature` property carries the target as an SCLinkObject (mirroring OGC's AbstractFeatureRelation shape). The Extended profile's MappedFeature branch is pass-through (no extension description slot).",
   "type": "FeatureCollection",
+  "conformsTo": [
+    "https://schemas.usgin.org/geosci-json/gsmExtendedGeologyCollection/gsmExtendedGeologyCollectionSchema.json"
+  ],
   "features": [
     {
       "type": "Feature",
@@ -101,6 +104,7 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region,
       }
     },
     {
+      "$comment": "Per source TTL: spatiallyTouches faulttrace_7439, spatiallyTruncates faulttrace_11445 and faulttrace_15546.",
       "type": "Feature",
       "featureType": "MappedFeature",
       "id": "https://w3id.org/gso/ex-hammersly#faulttrace_3496",
@@ -113,11 +117,52 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region,
         "specification": {
           "href": "https://w3id.org/gso/ex-hammersly#fault_3496",
           "title": "Fault 3496 (High_Angle_Fault)"
-        }
+        },
+        "relatedFeature": [
+          {
+            "type": "Feature",
+            "featureType": "GeologicFeatureRelation",
+            "id": "https://w3id.org/gso/ex-hammersly#faulttrace_3496-spatiallyTouches-faulttrace_7439",
+            "geometry": null,
+            "properties": {
+              "relationship": "https://w3id.org/gso/geologicrelation/spatiallyTouches",
+              "relatedFeature": {
+                "href": "https://w3id.org/gso/ex-hammersly#faulttrace_7439",
+                "title": "Fault trace 7439 (Moona Fault) - end-to-end contact with faulttrace_3496"
+              }
+            }
+          },
+          {
+            "type": "Feature",
+            "featureType": "GeologicFeatureRelation",
+            "id": "https://w3id.org/gso/ex-hammersly#faulttrace_3496-spatiallyTruncates-faulttrace_11445",
+            "geometry": null,
+            "properties": {
+              "relationship": "https://w3id.org/gso/geologicrelation/spatiallyTruncates",
+              "relatedFeature": {
+                "href": "https://w3id.org/gso/ex-hammersly#faulttrace_11445",
+                "title": "Fault trace 11445 (Fault A1) - truncated by faulttrace_3496"
+              }
+            }
+          },
+          {
+            "type": "Feature",
+            "featureType": "GeologicFeatureRelation",
+            "id": "https://w3id.org/gso/ex-hammersly#faulttrace_3496-spatiallyTruncates-faulttrace_15546",
+            "geometry": null,
+            "properties": {
+              "relationship": "https://w3id.org/gso/geologicrelation/spatiallyTruncates",
+              "relatedFeature": {
+                "href": "https://w3id.org/gso/ex-hammersly#faulttrace_15546",
+                "title": "Fault trace 15546 (Fault A2) - truncated by faulttrace_3496"
+              }
+            }
+          }
+        ]
       }
     },
     {
-      "$comment": "Moona Fault trace; per the source TTL it spatiallyTouches faulttrace_7439 (relationship not encoded here) and spatiallyTruncates faulttrace_11445 and faulttrace_15546.",
+      "$comment": "Moona Fault trace; per source TTL crosscuts basejeerinah (the base-of-Jeerinah-Formation contact).",
       "type": "Feature",
       "featureType": "MappedFeature",
       "id": "https://w3id.org/gso/ex-hammersly#faulttrace_7439",
@@ -129,8 +174,23 @@ Adapted from Loop3D-GSO/Examples/GSO-ExampleHammerslyData.ttl (Hamersley region,
         "purpose": "instance",
         "specification": {
           "href": "https://w3id.org/gso/ex-hammersly#MoonaFault",
-          "title": "Moona Fault (High_Angle_Fault) - truncates A1 and A2 traces per source"
-        }
+          "title": "Moona Fault (High_Angle_Fault)"
+        },
+        "relatedFeature": [
+          {
+            "type": "Feature",
+            "featureType": "GeologicFeatureRelation",
+            "id": "https://w3id.org/gso/ex-hammersly#faulttrace_7439-crosscuts-basejeerinah",
+            "geometry": null,
+            "properties": {
+              "relationship": "https://w3id.org/gso/geologicrelation/crosscuts",
+              "relatedFeature": {
+                "href": "https://w3id.org/gso/ex-hammersly#basejeerinah",
+                "title": "Base of Jeerinah Formation (contact crosscut by Moona Fault)"
+              }
+            }
+          }
+        ]
       }
     }
   ]
@@ -157,7 +217,19 @@ description: 'Extended-profile FeatureCollection. Accepts the full set of 9 Basi
 
   description slot (Anthropogenic / NaturalGeomorphologicFeature,
 
-  MappedFeature) are pass-through.'
+  MappedFeature) are pass-through. The profile also narrows every
+
+  feature''s relatedFeature[] items: where Basic accepts
+
+  `oneOf [SCLinkObject, AbstractFeatureRelation]`, the Extended profile
+
+  additionally requires each AbstractFeatureRelation instance to be one
+
+  of the two concrete subtypes from gsmGeologicRelationExtension
+
+  (GeologicFeatureRelation or MaterialRelation), while still allowing
+
+  by-reference SCLinkObject.'
 allOf:
 - $ref: https://schemas.opengis.net/json-fg/featurecollection.json
 - type: object
@@ -313,6 +385,23 @@ allOf:
                   - NaturalGeomorphologicFeature
                   - ShearDisplacementStructure
           then: false
+- type: object
+  properties:
+    features:
+      type: array
+      items:
+        type: object
+        properties:
+          properties:
+            type: object
+            properties:
+              relatedFeature:
+                type: array
+                items:
+                  anyOf:
+                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmBasicGeology/gsmBasicGeologySchema.json#/$defs/SCLinkObject
+                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#GeologicFeatureRelation
+                  - $ref: https://usgin.github.io/geosci-json/_sources/gsmGeologicRelationExtension/gsmGeologicRelationExtensionSchema.json#MaterialRelation
 
 ```
 

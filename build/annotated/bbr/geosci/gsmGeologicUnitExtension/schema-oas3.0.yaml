@@ -190,12 +190,11 @@ x-defs:
               type: object
               properties:
                 anthropogenicGeomorphologicFeatureType:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaAnthropogenicGeomorphologicFeatureTypeTerm
                   description: 'The anthropogenicGeomorphologicFeatureType: AnthropogenicGeomorphologicFeatureTypeTerm
                     is a reference from a controlled vocabulary describing the type
                     of geomorphologic feature.'
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaAnthropogenicGeomorphologicFeatureTypeTerm
       AnthropogenicGeomorphologicFeatureTypeTerm:
         $anchor: AnthropogenicGeomorphologicFeatureTypeTerm
         description: Refers to a vocabulary of terms describing the type of anthropogenic
@@ -217,27 +216,23 @@ x-defs:
         type: object
         properties:
           role:
-            oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCompositionPartRoleTerm
             description: The property role:CompositionPartRoleTerm defines the relationship
               of the CompoundMaterial constituent in the geologic unit, e.g. vein,
               interbedded constituent, layers, dominant constituent.
-            nullable: true
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCompositionPartRoleTerm
           proportion:
-            oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
             description: The proportion property (SWE::QuantityRange) specifies the
               fraction of the geologic unit composed of the compound material.
-            nullable: true
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
           material:
             oneOf:
-            - oneOf:
-              - allOf:
-                - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCompoundMaterial
+            - allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCompoundMaterial
             description: The material:EarthMaterial property contains the material
               description of the composing part.
-            nullable: true
       CompositionPartRoleTerm:
         $anchor: CompositionPartRoleTerm
         description: This class is a blank placeholder for a vocabulary of terms to
@@ -255,6 +250,10 @@ x-defs:
         allOf:
         - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterial
         - type: object
+          properties:
+            properties:
+              type: object
+              properties: {}
       Contact:
         $anchor: Contact
         description: A contact is a general concept representing any kind of surface
@@ -269,20 +268,18 @@ x-defs:
               type: object
               properties:
                 contactType:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaContactTypeTerm
                   description: The property contactType:ContactTypeTerm classifies
                     the contact (e.g. intrusive, unconformity, bedding surface, lithologic
                     boundary, phase boundary) and is a term from a controlled vocabulary.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaContactTypeTerm
                 stContactDescription:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaContactAbstractDescription
                   description: The property stContactDescription:ContactAbstractDescription
                     provides a detailed contact description. This is a stub property
                     in GeoSciML Basic since ContactAbstractDescription is an abstract
                     class with subtypes defined in GeoSciML Extension.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaContactAbstractDescription
       ContactAbstractDescription:
         $anchor: ContactAbstractDescription
         description: An abstract class providing a link between classes in GeoSciMLBasic
@@ -329,37 +326,45 @@ x-defs:
           are defined strictly based on physical properties, but because of standard
           geological usage, genetic interpretations enter into the description as
           well.  Constraint: self.metadata.hierarchyLevel=feature'
-        type: object
-        properties:
-          color:
-            oneOf:
-            - type: array
-              items:
-                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-              uniqueItems: true
-            description: The color property (SWE::Category) is a term from a controlled
-              vocabulary that specifies the colour of the earth material. Color schemes
-              such as the Munsell rock and soil color schemes may be used.
-            nullable: true
-          purpose:
-            oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaDescriptionPurpose
-            description: "The purpose:DescriptionPurpose property provides a specification
-              of the intended purpose or level of abstraction for the given EarthMaterial.
-              The intent is the same a GeologicFeature\u2019s purpose and it shares
-              the same vocabulary (instance, typicalNorm, definingNorm)."
-            nullable: true
-          gbEarthMaterialDescription:
-            oneOf:
-            - type: array
-              items:
-                $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
-              uniqueItems: true
-            description: The property gbEarthMaterialDescription:EarthMaterialAbstractDescription
-              provides a detailed earth material description of the part. This property
-              is a stub in GeoSciML Basic as EarthMaterialAbstractDescription is abstract
-              with subtypes defined in GeoSciML Extension.
-            nullable: true
+        allOf:
+        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/feature
+        - type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                color:
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+                  uniqueItems: true
+                  description: The color property (SWE::Category) is a term from a
+                    controlled vocabulary that specifies the colour of the earth material.
+                    Color schemes such as the Munsell rock and soil color schemes
+                    may be used.
+                purpose:
+                  description: "The purpose:DescriptionPurpose property provides a
+                    specification of the intended purpose or level of abstraction
+                    for the given EarthMaterial. The intent is the same a GeologicFeature\u2019s
+                    purpose and it shares the same vocabulary (instance, typicalNorm,
+                    definingNorm)."
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaDescriptionPurpose
+                gbEarthMaterialDescription:
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
+                  uniqueItems: true
+                  description: The property gbEarthMaterialDescription:EarthMaterialAbstractDescription
+                    provides a detailed earth material description of the part. This
+                    property is a stub in GeoSciML Basic as EarthMaterialAbstractDescription
+                    is abstract with subtypes defined in GeoSciML Extension.
+        - required:
+          - featureType
+          - id
+          properties:
+            id:
+              type: string
       EarthMaterialAbstractDescription:
         $anchor: EarthMaterialAbstractDescription
         description: Abstract description class for earth material. This class is
@@ -406,22 +411,20 @@ x-defs:
               type: object
               properties:
                 profileType:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFoldProfileTypeTerm
                   description: The property profileType:FoldProfileTypeTerm contains
                     a term from a controlled vocabulary specifying the concave/convex
                     geometry of fold relative to earth surface, and relationship to
                     younging direction in folded strata if known. (e.g., antiform,
                     synform, neutral, anticline, syncline, monocline, ptygmatic).
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFoldProfileTypeTerm
                 stFoldDescription:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFoldAbstractDescription
                   description: The property stFoldDescription:FoldAbstractDescription
                     provides a detailed fold description. This is a stub property
                     in GeoSciML Basic since FoldAbstractDescription is an abstract
                     class with subtypes defined in GeoSciML Extension.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFoldAbstractDescription
       FoldAbstractDescription:
         $anchor: FoldAbstractDescription
         description: An abstract class providing a link between classes in GeoSciMLBasic
@@ -452,19 +455,17 @@ x-defs:
               type: object
               properties:
                 foliationType:
-                  oneOf:
+                  description: The foliationType:FoliationTypeTerm property specifies
+                    the type of foliation from a controlled vocabulary. Examples include
+                    crenulation cleavage, slaty cleavage and schistosity.
+                  allOf:
                   - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFoliationTypeTerm
-                  description: The foliationType:FoliationTypeTerm property specifies
-                    the type of foliation from a controlled vocabulary. Examples include
-                    crenulation cleavage, slaty cleavage and schistosity.
-                  nullable: true
                 stFoliationDescription:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFoliationAbstractDescription
                   description: The foliationType:FoliationTypeTerm property specifies
                     the type of foliation from a controlled vocabulary. Examples include
                     crenulation cleavage, slaty cleavage and schistosity.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFoliationAbstractDescription
       FoliationAbstractDescription:
         $anchor: FoliationAbstractDescription
         description: 'An abstract class providing a link between classes in GeoSciMLBasic
@@ -491,12 +492,11 @@ x-defs:
               type: object
               properties:
                 collectionType:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCollectionTypeTerm
                   description: The collectionType:CollectionTypeTerm property contains
                     a term from a controlled vocabulary describing the type of collection,
                     such as Geologic Map, Boreholes, 3D models.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCollectionTypeTerm
                 member:
                   type: array
                   minItems: 1
@@ -522,19 +522,16 @@ x-defs:
         type: object
         properties:
           determinationMethod:
-            oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaDeterminationMethodTerm
             description: The determinationMethod:DeterminationMethodTerm property
               describes the way the orientation value was determined (e.g. measured,
               inferred from dip slope, etc.) using a reference to a controlled vocabulary.
-            nullable: true
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaDeterminationMethodTerm
           descriptiveOrientation:
-            oneOf:
-            - type: string
+            type: string
             description: The descriptionOrientation:Primitive::CharacterString contains
               a textual specification of orientation, possibly referencing some local
               geography (e.g. "toward fold hinge", "below").
-            nullable: true
       GSML_LinearOrientation:
         $anchor: GSML_LinearOrientation
         description: A linear orientation is composed of a trend (the compass orientation
@@ -545,8 +542,6 @@ x-defs:
         - type: object
           properties:
             directed:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaLinearDirectedCode
               description: The directed:LinearDirectedCode property indicates if the
                 orientation represents a linear feature that is directed, e.g. clast
                 imbrication, mylonitic lineation with sense of shear, slickenlines
@@ -554,19 +549,18 @@ x-defs:
                 line or intersection lineations). A code list will indicate which
                 is the directed end of the linear orientation. The value of the property
                 comes from a controlled vocabulary.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaLinearDirectedCode
             plunge:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
               description: The property plunge (SWE::QuantityRange) reports the magnitude
                 of the plunge as an angle from horizontal.
-              nullable: true
-            trend:
-              oneOf:
+              allOf:
               - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
+            trend:
               description: The property trend (SWE::QuantityRange) reports the azimuth
                 (compass bearing) value of the linear orientation.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
       GSML_PlanarOrientation:
         $anchor: GSML_PlanarOrientation
         description: A planar orientation is composed of two values; the azimuth (a
@@ -583,51 +577,47 @@ x-defs:
         - type: object
           properties:
             convention:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaConventionCode
               description: The property convention:ConventionCode contains the convention
                 used for the measurement from a controlled vocabulary.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaConventionCode
             azimuth:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
               description: The azimuth (SWE::QuantityRange) property (compass point,
                 bearing etc.) contains the value of the orientation. The convention
                 property reports how azimuth is interpreted (if it is relative to
                 a quadrant).
-              nullable: true
-            dip:
-              oneOf:
+              allOf:
               - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
+            dip:
               description: The dip (SWE::QuantityRange) reports the angle that the
                 structural surface (e.g. bedding, fault plane) makes with the horizontal
                 measured perpendicular to the strike of the structure and in the vertical
                 plane as a numeric value or term.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
             polarity:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaPlanarPolarityCode
               description: The polarity:PolarityCode indicates whether the planar
                 orientation is associated with a directed feature that is overturned,
                 upright, vertical etc., using a controlled vocabulary.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaPlanarPolarityCode
       GSML_QuantityRange:
         $anchor: GSML_QuantityRange
-        description: "GSML_QuantityRange is a specialization of SWE Common QuantiytyRange
+        description: GSML_QuantityRange is a specialization of SWE Common QuantiytyRange
           (OGC 08-094r1, Clause 7.2.13) where lower and upper values are made explicit.
           SWE::QuantityRange uses an array of values (RealPair, see Clause 7.2.1)
           where the lowest value is the first element and the highest the second.
           This convenience data type has been created as an alternative encoding for
           implementations that do no support encoding of arrays in a single field
           (e.g. DBF) or reference to elements in string encoded arrays1 (eg. Filter
-          Encoding Specification 2.0 \u2013 OGC 09-029r2). &nbsp;-------------------------
+          Encoding Specification 2.0 - OGC 09-029r2). &nbsp;-------------------------
           1 SWE RealPair is encoded as space delimited lists (&lt;swe:value&gt;10
           300&lt;/swe:value&gt; in XML) , which demands that clients parse the string
           to extract each token. To build a WFS/FES query that tests the first element,
           it requires parsing the string either using string-before(swe:value,' ')
           or tokenize(swe:value,' '). This is cumbersome at best, or not even supported
           by the server at worst. 09-026r2 Clause 7.4.4 describes the minimal XPath
-          supports and string parsing is not present."
+          supports and string parsing is not present.
         type: object
         properties:
           lowerValue:
@@ -651,11 +641,10 @@ x-defs:
         - type: object
           properties:
             magnitude:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
               description: The magnitude property (SWE::QuantityRange) reports the
                 magnitude of the vector.
-              nullable: true
+              allOf:
+              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
       GSMLitem:
         $anchor: GSMLitem
         description: GSMLItem constrains the collection members to instances of EarthMaterial,
@@ -700,48 +689,42 @@ x-defs:
               type: object
               properties:
                 eventProcess:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEventProcessTerm
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEventProcessTerm
+                  uniqueItems: true
                   description: The eventProcess:EventProcessTerm property provides
                     a term from a controlled vocabulary specifying the process or
                     processes that occurred during the event. Examples include deposition,
                     extrusion, intrusion, cooling.
-                  nullable: true
                 numericAge:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaNumericAgeRange
                   description: The numericAge:NumericAgeRange property provides an
                     age in absolute year before present (BP). Present is defined by
                     convention to be January 1st 1950 (although van der Plitch & Hogg
                     , suggests this convention to be restricted to radiocarbon estimations).
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaNumericAgeRange
                 olderNamedAge:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeochronologicEraTerm
                   description: The property olderNamedAge:GeochronologicalEraTerm
                     defines the older boundary of age of an event expressed using
                     a geochronologic era defined according to a geologic time scale
                     as per the GeologicTime schema (eg, the International Commission
                     on Stratigraphy Chronostratigraphic Chart - http://www.stratigraphy.org/index.php/ics-chart-timescale).
-                  nullable: true
-                youngerNamedAge:
-                  oneOf:
+                  allOf:
                   - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeochronologicEraTerm
+                youngerNamedAge:
                   description: The property youngerNamedAge:GeochronologicalEraTerm
                     defines the younger boundary of age of event expressed using a
                     geochronologic era defined according to a geologic time scale
                     per the GeologicTime schema. (eg, the International Commission
                     on Stratigraphy Chronostratigraphic Chart - http://www.stratigraphy.org/index.php/ics-chart-timescale).
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeochronologicEraTerm
                 eventEnvironment:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+                  uniqueItems: true
                   description: "The eventEnvironment property (SWE::Category) is a
                     category from a controlled vocabulary identifying the physical
                     setting within which a GeologicEvent takes place. Event environment
@@ -749,18 +732,15 @@ x-defs:
                     surface specified by climate, tectonics, physiography or geography,
                     and settings in the Earth\u2019s interior specified by pressure,
                     temperature, chemical environment, or tectonics."
-                  nullable: true
                 gaEventDescription:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicEventAbstractDescription
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicEventAbstractDescription
+                  uniqueItems: true
                   description: The property geEventDescription:GeologicEventAbstractDescription
                     contains a detailed event description. This is a stub property
                     in GeoSciML Basic since GeologicEventAbstractDescription is abstract
                     and with subtypes defined in GeoSciML Extension.
-                  nullable: true
       GeologicEventAbstractDescription:
         $anchor: GeologicEventAbstractDescription
         description: Stub property class to allow extended event related properties.
@@ -786,11 +766,10 @@ x-defs:
               type: object
               properties:
                 observationMethod:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+                  uniqueItems: true
                   description: The GeologicFeature observationMethod (SWE::Category)
                     specifies the approach to acquiring the collection of attribute
                     values that constitute an individual feature instance (e.g. point
@@ -800,34 +779,29 @@ x-defs:
                     provides a simple approach to observation metadata when data are
                     reported using a feature view (as opposed to observation view).
                     This property corresponds (loosely) to ISO19115 Lineage.
-                  nullable: true
                 purpose:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaDescriptionPurpose
                   description: 'The property purpose:DescriptionPurpose specifies
                     the intended purpose/level of abstraction for a given feature
                     or object instance. The possible values are: instance, typicalNorm,
                     and definingNorm.'
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaDescriptionPurpose
                 classifier:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+                  uniqueItems: true
                   description: The classifier (SWE::Category) contains a standard
                     description or definition of the feature type (e.g., the definition
                     of a particular geologic unit in a stratigraphic lexicon).
-                  nullable: true
                 relatedFeature:
-                  oneOf:
-                  - type: array
-                    items:
-                      oneOf:
-                      - allOf:
-                        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicFeature
-                    uniqueItems: true
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicFeature
+                  uniqueItems: true
                   description: A relatedFeature is a general structure used to define
                     relationships between any features or objects within GeoSciML.
                     Relationships are always binary and directional. There is always
@@ -835,16 +809,14 @@ x-defs:
                     (which is abstract in GeoSciML Basic). The relationship is always
                     defined from the perspective of the Source and is generally an
                     active verb.
-                  nullable: true
                 geologicHistory:
-                  oneOf:
-                  - type: array
-                    items:
-                      oneOf:
-                      - allOf:
-                        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicEvent
-                    uniqueItems: true
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicEvent
+                  uniqueItems: true
                   description: The geologicHistory is an association that relates
                     one or more GeologicEvents to a GeologicFeature to describe their
                     age or geologic history. Normally, GeoSciML uses the generic relatedFeature::GeologicRelation
@@ -852,21 +824,18 @@ x-defs:
                     GeologicEvent. However, this design was deemed too complex for
                     GeoSciML Basic and is therefore only available from the GeoSciML
                     Extension package.
-                  nullable: true
                 occurrence:
-                  oneOf:
-                  - type: array
-                    items:
-                      oneOf:
-                      - allOf:
-                        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaMappedFeature
-                    uniqueItems: true
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaMappedFeature
+                  uniqueItems: true
                   description: The occurrence property is an association that links
                     a notional geologic feature with any number of mapped features
                     (MappedFeature). A geologic feature, such as a geologic unit may
                     be linked to mapped features from a number of different maps.
-                  nullable: true
         - required:
           - featureType
           - id
@@ -913,40 +882,35 @@ x-defs:
               type: object
               properties:
                 geologicUnitType:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnitTypeTerm
                   description: The property geologicUnitType:GeologicUnitTypeTerm
                     provides a term from a controlled vocabulary defining the type
                     of geologic unit. Logical constraints of definition of unit and
                     valid property cardinalities should be contained in the definition.
                     Use of the CGI Geologic Unit Type vocabulary (e.g., http://resource.geosciml.org/classifierscheme/cgi/201211/geologicunittype)
                     is recommended.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnitTypeTerm
                 rank:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaRankTerm
                   description: 'The property rank:RankTerm contains a term that classifies
                     the geologic unit in a generalization hierarchy from most local/smallest
                     volume to most regional/largest. Examples: group, subgroup, formation,
                     member, bed, intrusion, complex, batholith'
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaRankTerm
                 gbMaterialDescription:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaEarthMaterialAbstractDescription
+                  uniqueItems: true
                   description: The property gbMaterialDescription:EarthMaterialAbstractDescription
                     is a placeholder that provides detailed material description.
                     This is a stub property in GeoSciML Basic as EarthMaterialAbstractDescription
                     is abstract with subtypes defined in GeoSciML Extension.
-                  nullable: true
                 hierarchyLink:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnitHierarchy
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnitHierarchy
+                  uniqueItems: true
                   description: The property hierarchyLink is an association that links
                     a GeologicUnit with a GeologicUnitHierarchy to represent containment
                     of a part GeologicUnit within another GeologicUnit. It indicates
@@ -954,29 +918,24 @@ x-defs:
                     the container unit. For example, members are described as part
                     of formations, or different facies can be described as parts of
                     a GeologicUnit.
-                  nullable: true
                 gbUnitDescription:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnitAbstractDescription
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnitAbstractDescription
+                  uniqueItems: true
                   description: The property gbUnitDescription:GeologicUnitAbstractDescriptio
                     is a placeholder that provides detailed material description.
                     This is a stub property in GeoSciML Basic as GeologicUnitAbstractDescription
                     is abstract with subtypes defined in GeoSciML Extension.
-                  nullable: true
                 composition:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCompositionPart
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCompositionPart
+                  uniqueItems: true
                   description: The property composition is an association that links
                     a GeologicUnit with CompositionParts to describe the material
                     composition of the GeologicUnit (e.g., a detailed, instance specific,
                     lithologic description)
-                  nullable: true
       GeologicUnitAbstractDescription:
         $anchor: GeologicUnitAbstractDescription
         description: Abstract description class for geologic units. This class is
@@ -994,18 +953,16 @@ x-defs:
         type: object
         properties:
           role:
-            oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnitHierarchyRoleTerm
             description: The role:GeologicUnitHierarchyRoleTerm property provides
               a term describing the nature of the parts, e.g. facies, stratigraphic,
               interbeds, geographic, eastern facies.
-            nullable: true
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnitHierarchyRoleTerm
           proportion:
-            oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
             description: The proportion property (SWE::QuantityRange) provides a quantity
               that represents the fraction of the geologic unit formed by the part.
-            nullable: true
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/QuantityRange
           targetUnit:
             oneOf:
             - allOf:
@@ -1056,29 +1013,25 @@ x-defs:
               type: object
               properties:
                 unitDescription:
-                  oneOf:
-                  - type: array
-                    items:
-                      oneOf:
-                      - allOf:
-                        - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
-                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnit
-                    uniqueItems: true
+                  type: array
+                  items:
+                    oneOf:
+                    - allOf:
+                      - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
+                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeologicUnit
+                  uniqueItems: true
                   description: The unitDescription property is an association that
                     links the geomorphologic feature to a geologic description (e.g.,
                     related stratigraphic units and earth materials).
-                  nullable: true
                 gmFeatureDescription:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeomorphologicUnitAbstractDescription
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaGeomorphologicUnitAbstractDescription
+                  uniqueItems: true
                   description: The property gmFeatureDescription:GeomorphologicUnitAbstractDescription
                     provides a detailed morphologic description. This is a stub property
                     in GeoSciML Basic since GeomorphologicUnitAbstractDescription
                     is an abstract class with no concrete subtype in GeoSciML Basic.
-                  nullable: true
       GeomorphologicUnitAbstractDescription:
         $anchor: GeomorphologicUnitAbstractDescription
         description: 'Detailed geomorphologic unit description placeholder (stub class)
@@ -1125,68 +1078,58 @@ x-defs:
               type: object
               properties:
                 observationMethod:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
+                  uniqueItems: true
                   description: The observationMethod property (SWE::Category) contains
                     an element in a list of categories (a controlled vocabulary) describing
                     how the spatial extent of the mapped feature was determined.
-                  nullable: true
                 positionalAccuracy:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Quantity
                   description: The positionalAccuracy property (SWE::Quantity) provides
                     a quantitative value defining the radius of an uncertainty buffer
                     around a MappedFeature (e.g., a positionalAccuracy of 100 m for
                     a line feature defines a buffer polygon of total width 200 m centred
                     on the line). The property is equivalent to ISO19115 DQ_PositionalAccuracy.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Quantity
                 resolutionRepresentativeFraction:
-                  oneOf:
-                  - type: integer
+                  type: integer
                   description: The property resolutionRepresentativeFraction:Integer
                     is an integer value representing the denominator of the representative
                     scale of the spatial feature. (i.e., 10000 = the spatial feature
                     is intended to be represented at 1:10,000 scale).
-                  nullable: true
                 mappingFrame:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaMappingFrameTerm
                   description: The mappingFrame:MappingFrameTerm provides a term from
                     a vocabulary indicating the geometric frame on which the MappedFeature
                     is projected. In most situations, mapped features are projected
                     on the earth surface, but there are other contexts, such as a
                     bedrock surface beneath surficial cover materials, a mine level,
                     or a cross section.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaMappingFrameTerm
                 exposure:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaExposureTerm
                   description: The exposure:ExposureTerm property provides a term
                     for the nature of the expression of the mapped feature at the
                     earth's surface (e.g., exposed, concealed).
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaExposureTerm
                 shape:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Geometry
                   description: The shape:GM_Object property contains the geometry
                     delimiting the mapped feature. Note that while in most cases,
                     the geometry will be a 2D polygon, it is not restricted to any
                     dimension. For instance, a lithological log can be represented
                     using of 1D geometries (expressed linearly from the borehole origin),
                     or a geologic unit can be represented using a 3D volume.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Geometry
                 specification:
-                  oneOf:
-                  - allOf:
-                    - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
                   description: The specification association links an instance of
                     MappedFeature to the GFI_Feature being mapped. In a geological
                     map, MappedFeatures are used to represent GeologicFeatures, but
                     other features from other domains could be represented.
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchema/$defs/SCLinkObject
         - required:
           - featureType
           - id
@@ -1212,20 +1155,18 @@ x-defs:
               type: object
               properties:
                 naturalGeomorphologicFeatureType:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaNaturalGeomorphologicFeatureTypeTerm
                   description: 'The property naturalGeomorphologicFeatureType: NaturalGeomorphologicFeatureTypeTerm
                     is a reference from a controlled vocabulary describing the type
                     of geomorphologic feature.'
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaNaturalGeomorphologicFeatureTypeTerm
                 activity:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
                   description: The activity property (SWE::Category) contains a category
                     term from a controlled vocabulary describing the current activity
                     status of the geomorphologic feature (e.g., currently active,
                     dormant, inactive, reactivated, etc.).
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Category
       NaturalGeomorphologicFeatureTypeTerm:
         $anchor: NaturalGeomorphologicFeatureTypeTerm
         description: Refers to a vocabulary of terms describing the type of natural
@@ -1239,24 +1180,21 @@ x-defs:
         type: object
         properties:
           reportingDate:
-            oneOf:
-            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Quantity
             description: The reportingDate (SWE::Quantity) property reports a single
               time coordinate value to report as representative for this NumericAge
               assignment.
-            nullable: true
-          olderBoundDate:
-            oneOf:
+            allOf:
             - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Quantity
+          olderBoundDate:
             description: The olderBoundDate (SWE::Quantity) property reports the older
               bounding time coordinate in an age range.
-            nullable: true
-          youngerBoundDate:
-            oneOf:
+            allOf:
             - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Quantity
+          youngerBoundDate:
             description: The youngerBoundDate (SWE::Quantity) property reports the
               younger bounding time coordinate in an age range.
-            nullable: true
+            allOf:
+            - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/Quantity
       PlanarPolarityCode:
         $anchor: PlanarPolarityCode
         description: 'eg: "upright", "overturned", "vertical" This list is an indicative
@@ -1284,12 +1222,14 @@ x-defs:
         - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaCompoundMaterial
         - type: object
           properties:
-            lithology:
-              oneOf:
-              - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaLithologyTerm
-              description: The lithology:LithologyTerm property provides a term identifying
-                the lithology class from a controlled vocabulary.
-              nullable: true
+            properties:
+              type: object
+              properties:
+                lithology:
+                  description: The lithology:LithologyTerm property provides a term
+                    identifying the lithology class from a controlled vocabulary.
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaLithologyTerm
       ShearDisplacementStructure:
         $anchor: ShearDisplacementStructure
         description: "A shear displacement structure includes all brittle to ductile
@@ -1308,23 +1248,20 @@ x-defs:
               type: object
               properties:
                 faultType:
-                  oneOf:
-                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFaultTypeTerm
                   description: The faultType:FaultTypeTerm property contains a term
                     from a controlled vocabulary describing the type of shear displacement
                     structure (e.g., thrust fault, normal fault or wrench fault).
-                  nullable: true
+                  allOf:
+                  - $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaFaultTypeTerm
                 stStructureDescription:
-                  oneOf:
-                  - type: array
-                    items:
-                      $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaShearDisplacementStructureAbstractDescription
-                    uniqueItems: true
+                  type: array
+                  items:
+                    $ref: https://usgin.github.io/geosci-json/build/annotated/bbr/geosci/gsmGeologicUnitExtension/schema-oas3.0.yaml#/x-defs/gsmBasicGeologySchemaShearDisplacementStructureAbstractDescription
+                  uniqueItems: true
                   description: The property stStructureDescription:ShearDisplacementStructureAbstractDescription
                     provides a detailed geologic structure description. This is a
                     stub property in GeoSciML Basic since ShearDisplacementStructureAbstractDescription
                     is an abstract class with subtypes defined in GeoSciML Extension.
-                  nullable: true
       ShearDisplacementStructureAbstractDescription:
         $anchor: ShearDisplacementStructureAbstractDescription
         description: An abstract class providing a link between classes in GeoSciMLBasic

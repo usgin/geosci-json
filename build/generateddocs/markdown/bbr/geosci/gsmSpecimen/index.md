@@ -508,19 +508,30 @@ $defs:
     $anchor: AnalyticalMethod
     description: The AnalyticalMethod provides the name, and published citation, of
       the analytical method used in an analytical session.
-    type: object
-    properties:
-      methodName:
-        $ref: '#AnalyticalMethodTerm'
-        description: The property methodName:AnalyticalMethodTerm contains a term
-          from a controlled vocabulary that describes an analytical method used in
-          a session (e.g., XRF mass spectrometry, ICPMS, SHRIMP geochronology).
-      citation:
-        $ref: '#/$defs/SCLinkObject'
-        $comment: External ISO 19115 CI_Citation - by-reference link only
-        description: The citation property is an association between an AnalyticalMethod
-          and a CIT:CI_Citation describing a published description of a particular
-          analytical method (e.g., a standard operating procedure document).
+    allOf:
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            methodName:
+              $ref: '#AnalyticalMethodTerm'
+              description: The property methodName:AnalyticalMethodTerm contains a
+                term from a controlled vocabulary that describes an analytical method
+                used in a session (e.g., XRF mass spectrometry, ICPMS, SHRIMP geochronology).
+            citation:
+              $ref: '#/$defs/SCLinkObject'
+              $comment: External ISO 19115 CI_Citation - by-reference link only
+              description: The citation property is an association between an AnalyticalMethod
+                and a CIT:CI_Citation describing a published description of a particular
+                analytical method (e.g., a standard operating procedure document).
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   AnalyticalMethodTerm:
     $anchor: AnalyticalMethodTerm
     description: Refers to a vocabulary of terms describing the analytical method

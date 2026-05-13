@@ -231,6 +231,10 @@ $defs:
     allOf:
     - $ref: '#TimeOrdinalReferenceSystem'
     - type: object
+      properties:
+        properties:
+          type: object
+          properties: {}
   GlobalStratotypePoint:
     $anchor: GlobalStratotypePoint
     description: 'A type of stratigraphic point used to define a globally agreed point
@@ -262,6 +266,10 @@ $defs:
     allOf:
     - $ref: '#TimeOrdinalEraBoundary'
     - type: object
+      properties:
+        properties:
+          type: object
+          properties: {}
   StandardGlobalNumericalAge:
     $anchor: StandardGlobalNumericalAge
     description: 'A standard numeric age point (a numeric analogue to a ''golden spike'')
@@ -272,6 +280,10 @@ $defs:
     allOf:
     - $ref: '#NumericEraBoundary'
     - type: object
+      properties:
+        properties:
+          type: object
+          properties: {}
   StratigraphicPoint:
     $anchor: StratigraphicPoint
     description: A point in the stratigraphic record used to define a geochronologic
@@ -352,126 +364,162 @@ $defs:
       tied to Stratotype Points, which occur within host Stratotype Sections. Note
       that the "German School" defines stratigraphic eras conceptually, without reference
       to stratotypes.
-    type: object
-    properties:
-      end:
-        oneOf:
-        - $ref: '#/$defs/SCLinkObject'
-          $comment: by-reference link to TimeOrdinalEraBoundary
-        - $ref: '#TimeOrdinalEraBoundary'
-        description: Younger time boundary of an era
-      start:
-        oneOf:
-        - $ref: '#/$defs/SCLinkObject'
-          $comment: by-reference link to TimeOrdinalEraBoundary
-        - $ref: '#TimeOrdinalEraBoundary'
-        description: Older time boundary of an era
-      member:
-        type: array
-        items:
-          oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-            $comment: by-reference link to TimeOrdinalEra
-          - $ref: '#TimeOrdinalEra'
-        uniqueItems: true
-        description: Subdivisions of TimeOrdinalEra
+    allOf:
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            end:
+              oneOf:
+              - $ref: '#/$defs/SCLinkObject'
+                $comment: by-reference link to TimeOrdinalEraBoundary
+              - $ref: '#TimeOrdinalEraBoundary'
+              description: Younger time boundary of an era
+            start:
+              oneOf:
+              - $ref: '#/$defs/SCLinkObject'
+                $comment: by-reference link to TimeOrdinalEraBoundary
+              - $ref: '#TimeOrdinalEraBoundary'
+              description: Older time boundary of an era
+            member:
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to TimeOrdinalEra
+                - $ref: '#TimeOrdinalEra'
+              uniqueItems: true
+              description: Subdivisions of TimeOrdinalEra
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   TimeOrdinalEraBoundary:
     $anchor: TimeOrdinalEraBoundary
     description: A point in Earth's history which bounds a TimeOrdinalEra.
-    type: object
-    properties:
-      position:
-        oneOf:
-        - $ref: '#/$defs/SCLinkObject'
-        - type: object
+    allOf:
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
+    - type: object
+      properties:
+        properties:
+          type: object
           properties:
-            inXSDDateTime:
-              type: string
-              format: date-time
-            inXSDDate:
-              type: string
-              format: date
-            inXSDgYearMonth:
-              type: string
-              pattern: ^-?\d{4}-\d{2}$
-            inXSDgYear:
-              type: string
-              pattern: ^-?\d{4}$
-          anyOf:
-          - required:
-            - inXSDDateTime
-          - required:
-            - inXSDDate
-          - required:
-            - inXSDgYearMonth
-          - required:
-            - inXSDgYear
-        - type: string
-          format: date-time
-        - type: string
-          format: date
-        $comment: ISO 19108 TM_Instant aligned to W3C OWL-Time time:Instant (https://www.w3.org/TR/owl-time/#time:Instant).
-          Accepts a SCLinkObject by-reference, an OWL-Time Instant object with one
-          of `inXSDDateTime` / `inXSDDate` / `inXSDgYearMonth` / `inXSDgYear`, or
-          a bare ISO 8601 string as a convenience alias.
-        description: A point in time corresponding to the era boundary
-      positionalUncertainty:
-        $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
-        description: A measure of the uncertainty in the estimate of the point in
-          time of the era boundary
-      previousEra:
-        type: array
-        items:
-          oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-            $comment: by-reference link to TimeOrdinalEra
-          - $ref: '#TimeOrdinalEra'
-        uniqueItems: true
-        description: Preceding era
-      observationalBasis:
-        type: array
-        items:
-          $ref: '#/$defs/SCLinkObject'
-          $comment: External ISO 19156 OM_Observation - by-reference link
-        uniqueItems: true
-        description: Observation supporting the existence of the boundary (geochronology,
-          paleontology, etc.)
-      nextEra:
-        type: array
-        items:
-          oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-            $comment: by-reference link to TimeOrdinalEra
-          - $ref: '#TimeOrdinalEra'
-        uniqueItems: true
-        description: Succeeding era
+            position:
+              oneOf:
+              - $ref: '#/$defs/SCLinkObject'
+              - type: object
+                properties:
+                  inXSDDateTime:
+                    type: string
+                    format: date-time
+                  inXSDDate:
+                    type: string
+                    format: date
+                  inXSDgYearMonth:
+                    type: string
+                    pattern: ^-?\d{4}-\d{2}$
+                  inXSDgYear:
+                    type: string
+                    pattern: ^-?\d{4}$
+                anyOf:
+                - required:
+                  - inXSDDateTime
+                - required:
+                  - inXSDDate
+                - required:
+                  - inXSDgYearMonth
+                - required:
+                  - inXSDgYear
+              - type: string
+                format: date-time
+              - type: string
+                format: date
+              $comment: ISO 19108 TM_Instant aligned to W3C OWL-Time time:Instant
+                (https://www.w3.org/TR/owl-time/#time:Instant). Accepts a SCLinkObject
+                by-reference, an OWL-Time Instant object with one of `inXSDDateTime`
+                / `inXSDDate` / `inXSDgYearMonth` / `inXSDgYear`, or a bare ISO 8601
+                string as a convenience alias.
+              description: A point in time corresponding to the era boundary
+            positionalUncertainty:
+              $ref: https://schemas.opengis.net/sweCommon/3.0/json/Quantity.json
+              description: A measure of the uncertainty in the estimate of the point
+                in time of the era boundary
+            previousEra:
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to TimeOrdinalEra
+                - $ref: '#TimeOrdinalEra'
+              uniqueItems: true
+              description: Preceding era
+            observationalBasis:
+              type: array
+              items:
+                $ref: '#/$defs/SCLinkObject'
+                $comment: External ISO 19156 OM_Observation - by-reference link
+              uniqueItems: true
+              description: Observation supporting the existence of the boundary (geochronology,
+                paleontology, etc.)
+            nextEra:
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to TimeOrdinalEra
+                - $ref: '#TimeOrdinalEra'
+              uniqueItems: true
+              description: Succeeding era
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   TimeOrdinalReferenceSystem:
     $anchor: TimeOrdinalReferenceSystem
     description: A time reference system comprised of an ordered set of time periods
       (time ordinal eras).
-    type: object
-    properties:
-      referencePoint:
-        type: array
-        minItems: 2
-        items:
-          oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-            $comment: by-reference link to TimeOrdinalEraBoundary
-          - $ref: '#TimeOrdinalEraBoundary'
-        uniqueItems: true
-        description: Two reference points defining the extent of the system
-      component:
-        type: array
-        items:
-          oneOf:
-          - $ref: '#/$defs/SCLinkObject'
-            $comment: by-reference link to TimeOrdinalEra
-          - $ref: '#TimeOrdinalEra'
-        uniqueItems: true
-        description: TimeOrdinalEra composing the TimeOrdinalReferenceSystem
-    required:
-    - referencePoint
+    allOf:
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            referencePoint:
+              type: array
+              minItems: 2
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to TimeOrdinalEraBoundary
+                - $ref: '#TimeOrdinalEraBoundary'
+              uniqueItems: true
+              description: Two reference points defining the extent of the system
+            component:
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/$defs/SCLinkObject'
+                  $comment: by-reference link to TimeOrdinalEra
+                - $ref: '#TimeOrdinalEra'
+              uniqueItems: true
+              description: TimeOrdinalEra composing the TimeOrdinalReferenceSystem
+          required:
+          - referencePoint
+      required:
+      - properties
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   SCLinkObject:
     title: link object
     description: SCLinkObject originates from ShapeChange implementation of https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json,

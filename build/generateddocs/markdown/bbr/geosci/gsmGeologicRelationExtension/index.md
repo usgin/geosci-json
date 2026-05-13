@@ -118,21 +118,25 @@ $defs:
       $comment: cross-BB supertype reference to AbstractFeatureRelation in BB gsmBasicGeology
     - type: object
       properties:
-        relationship:
-          $ref: '#GeologicRelationshipTerm'
-          description: The relationship:GeologicRelationshipTerm property contains
-            a term from a controlled vocabulary to describe the geologic relationship
-            (e.g., stratigraphic relation, structural relation, intrusive relation).
-        sourceRole:
-          $ref: '#RelationRoleTerm'
-          description: The property sourceRole:RelationRoleProperty contains a term
-            from a controlled vocabulary describing the role played by the source
-            geologic feature or object (e.g., overlying unit, underlying unit).
-        targetRole:
-          $ref: '#RelationRoleTerm'
-          description: The property targetRole:RelationRoleTerm contains a term from
-            a controlled vocabulary describing the role played by the target geologic
-            feature or object. (e.g., overlying unit, underlying unit)
+        properties:
+          type: object
+          properties:
+            relationship:
+              $ref: '#GeologicRelationshipTerm'
+              description: The relationship:GeologicRelationshipTerm property contains
+                a term from a controlled vocabulary to describe the geologic relationship
+                (e.g., stratigraphic relation, structural relation, intrusive relation).
+            sourceRole:
+              $ref: '#RelationRoleTerm'
+              description: The property sourceRole:RelationRoleProperty contains a
+                term from a controlled vocabulary describing the role played by the
+                source geologic feature or object (e.g., overlying unit, underlying
+                unit).
+            targetRole:
+              $ref: '#RelationRoleTerm'
+              description: The property targetRole:RelationRoleTerm contains a term
+                from a controlled vocabulary describing the role played by the target
+                geologic feature or object. (e.g., overlying unit, underlying unit)
   GeologicRelationshipTerm:
     $anchor: GeologicRelationshipTerm
     description: Refers to a vocabulary of terms describing a relationships between
@@ -150,23 +154,46 @@ $defs:
       ''overgrows''. Other appropriate role attributes might include: crosscuts, replaces,
       etc. for crosscutting and replacement relationships. Inverse relationships must
       be explicitly recorded.'
-    type: object
-    properties:
-      relationship:
-        $ref: '#GeologicRelationshipTerm'
-        description: The property relationship:GeologicRelationshipTerm contains a
-          term from a controlled vocabulary to describe the geologic relationship
-          (e.g., sedimentary relation, igneous relation).
-      sourceRole:
-        $ref: '#RelationRoleTerm'
-        description: The property sourceRole:RelationRoleTerm contains a term that
-          describes the role played by the source earth material part (e.g., matrix,
-          clast, overgrowth).
-      targetRole:
-        $ref: '#RelationRoleTerm'
-        description: The property targetRole:RelationRoleTerm contains a term describing
-          the role played by the target earth material part (e.g., matrix, clast,
-          overgrowth).
+    allOf:
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            relationship:
+              $ref: '#GeologicRelationshipTerm'
+              description: The property relationship:GeologicRelationshipTerm contains
+                a term from a controlled vocabulary to describe the geologic relationship
+                (e.g., sedimentary relation, igneous relation).
+            sourceRole:
+              $ref: '#RelationRoleTerm'
+              description: The property sourceRole:RelationRoleTerm contains a term
+                that describes the role played by the source earth material part (e.g.,
+                matrix, clast, overgrowth).
+            targetRole:
+              $ref: '#RelationRoleTerm'
+              description: The property targetRole:RelationRoleTerm contains a term
+                describing the role played by the target earth material part (e.g.,
+                matrix, clast, overgrowth).
+            relatedMaterial:
+              oneOf:
+              - $ref: '#/$defs/SCLinkObject'
+                $comment: by-reference link to ConstituentPart
+              - $ref: https://usgin.github.io/geosci-json/_sources/gsmEarthMaterial/gsmEarthMaterialSchema.json#ConstituentPart
+                $comment: cross-BB inline reference to ConstituentPart in BB gsmEarthMaterial
+              description: Specifies the ConstituentPart that is playing the target
+                role in the MaterialRelation
+          required:
+          - relatedMaterial
+      required:
+      - properties
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   RelationRoleTerm:
     $anchor: RelationRoleTerm
     description: Refers to a vocabulary of terms describing roles played by geologic

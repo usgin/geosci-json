@@ -2917,7 +2917,34 @@ $defs:
     $anchor: AbstractFeatureRelation
     description: Association class placeholder to implement relation between geologic
       features
-    type: object
+    allOf:
+    - $ref: https://schemas.opengis.net/json-fg/feature.json
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            relatedFeature:
+              oneOf:
+              - $ref: '#/$defs/SCLinkObject'
+                $comment: by-reference link to GeologicFeature
+              - $ref: '#GeologicFeature'
+              description: A relatedFeature is a general structure used to define
+                relationships between any features or objects within GeoSciML. Relationships
+                are always binary and directional. There is always a single source
+                and a single target for a given FeatureRelation (which is abstract
+                in GeoSciML Basic). The relationship is always defined from the perspective
+                of the Source and is generally an active verb.
+          required:
+          - relatedFeature
+      required:
+      - properties
+    - required:
+      - featureType
+      - id
+      properties:
+        id:
+          type: string
   AnthropogenicGeomorphologicFeature:
     $anchor: AnthropogenicGeomorphologicFeature
     description: An anthropogenic geomorphologic feature is a geomorphologic feature
@@ -3205,38 +3232,6 @@ $defs:
       crenulation cleavage, gneissic layering, slaty cleavage, schistosity, etc)
     type: string
     format: uri
-  GSML:
-    $anchor: GSML
-    description: 'GSML is a collection class grouping a set of features or types which
-      are members of this collection. A collectionType property provides context or
-      purpose.  Constraint: self.metadata.hierarchylevel=dataset'
-    allOf:
-    - $ref: https://schemas.opengis.net/json-fg/feature.json
-    - type: object
-      properties:
-        properties:
-          type: object
-          properties:
-            collectionType:
-              $ref: '#CollectionTypeTerm'
-              description: The collectionType:CollectionTypeTerm property contains
-                a term from a controlled vocabulary describing the type of collection,
-                such as Geologic Map, Boreholes, 3D models.
-            member:
-              type: array
-              minItems: 1
-              items:
-                $ref: '#GSMLitem'
-              uniqueItems: true
-              description: The member property is an association that links a GSML
-                instance to features and objects to be included as members of the
-                collection. A collection can be made of heterogeneous items.
-    - required:
-      - featureType
-      - id
-      properties:
-        id:
-          type: string
   GSML_GeometricDescriptionValue:
     $anchor: GSML_GeometricDescriptionValue
     description: GSML_GeometricDescriptionValue is a special abstract data type for
@@ -3331,19 +3326,26 @@ $defs:
       string-before(swe:value,' ') or tokenize(swe:value,' '). This is cumbersome
       at best, or not even supported by the server at worst. 09-026r2 Clause 7.4.4
       describes the minimal XPath supports and string parsing is not present.
-    type: object
-    properties:
-      lowerValue:
-        type: number
-        description: The property lowerValue:Real contains the lower bound of the
-          range. It shall be a copy of inherited SWE::QuantityRange::value[0].
-      upperValue:
-        type: number
-        description: The property upperValue:Real contains the upper bound of the
-          range. It shall be a copy of inherited SWE::QuantityRange::value[1].
-    required:
-    - lowerValue
-    - upperValue
+    allOf:
+    - $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
+    - type: object
+      properties:
+        properties:
+          type: object
+          properties:
+            lowerValue:
+              type: number
+              description: The property lowerValue:Real contains the lower bound of
+                the range. It shall be a copy of inherited SWE::QuantityRange::value[0].
+            upperValue:
+              type: number
+              description: The property upperValue:Real contains the upper bound of
+                the range. It shall be a copy of inherited SWE::QuantityRange::value[1].
+          required:
+          - lowerValue
+          - upperValue
+      required:
+      - properties
   GSML_Vector:
     $anchor: GSML_Vector
     description: A GSML_Vector is a data type representing a linear orientation with
@@ -3357,30 +3359,6 @@ $defs:
           $ref: https://schemas.opengis.net/sweCommon/3.0/json/QuantityRange.json
           description: The magnitude property (SWE::QuantityRange) reports the magnitude
             of the vector.
-  GSMLitem:
-    $anchor: GSMLitem
-    description: GSMLItem constrains the collection members to instances of EarthMaterial,
-      GeologicFeature, GM_Object, MappedFeature, AbstractFeatureRelation and OM::SF_SamplingFeature.
-    oneOf:
-    - oneOf:
-      - $ref: '#/$defs/SCLinkObject'
-        $comment: by-reference link to EarthMaterial
-      - $ref: '#EarthMaterial'
-    - oneOf:
-      - $ref: '#/$defs/SCLinkObject'
-        $comment: by-reference link to GeologicFeature
-      - $ref: '#GeologicFeature'
-    - $ref: https://geojson.org/schema/Geometry.json
-    - oneOf:
-      - $ref: '#/$defs/SCLinkObject'
-        $comment: by-reference link to MappedFeature
-      - $ref: '#MappedFeature'
-    - oneOf:
-      - $ref: '#/$defs/SCLinkObject'
-        $comment: by-reference link to AbstractFeatureRelation
-      - $ref: '#AbstractFeatureRelation'
-    - $ref: '#/$defs/SCLinkObject'
-      $comment: External ISO 19156 SF_SamplingFeature - by-reference link
   GeochronologicEraTerm:
     $anchor: GeochronologicEraTerm
     description: Term from a Geochronological vocabulary
@@ -3506,8 +3484,8 @@ $defs:
               items:
                 oneOf:
                 - $ref: '#/$defs/SCLinkObject'
-                  $comment: by-reference link to GeologicFeature
-                - $ref: '#GeologicFeature'
+                  $comment: by-reference link to AbstractFeatureRelation
+                - $ref: '#AbstractFeatureRelation'
               uniqueItems: true
               description: A relatedFeature is a general structure used to define
                 relationships between any features or objects within GeoSciML. Relationships

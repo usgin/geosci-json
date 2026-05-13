@@ -1,5 +1,5 @@
 Validation report for usgin.bbr.geosci.gsmBasicGeology - gsmBasicGeology
-Generated 2026-05-13T15:09:01.849334+00:00
+Generated 2026-05-13T16:56:25.418694+00:00
 === Files ===
 Using examples/mapped_feature_simple.json from examples
 === End Files ===
